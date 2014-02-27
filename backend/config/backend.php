@@ -29,7 +29,7 @@ return array(
 
 	// application modules
 	'modules' => array(
-        'user'=>array(
+        /*'user'=>array(
             'class'=>'backend.modules.user.UserModule',
             # encrypting method (php hash function)
             'hash' => 'md5',
@@ -60,7 +60,7 @@ return array(
 
             # page after logout
             'returnLogoutUrl' => array('/user/login'),
-        ),
+        ),*/
     ),
     
     'import'=>array(
