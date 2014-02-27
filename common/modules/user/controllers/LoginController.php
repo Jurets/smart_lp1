@@ -1,8 +1,9 @@
 <?php
 
-class LoginController extends CController
+class LoginController extends EController
 {
 	public $defaultAction = 'login';
+
 
 	/**
 	 * Displays the login page
@@ -35,5 +36,32 @@ class LoginController extends CController
 		$lastVisit->lastvisit_at = date('Y-m-d H:i:s');
 		$lastVisit->save();
 	}
-
+    
+//    public function filters() {
+//        return array(
+//            'accessControl',
+//        );
+//    }
+// 
+//    public function accessRules() {
+//        return array(
+//            // если используется проверка прав, не забывайте разрешить доступ к
+//            // действию, отвечающему за генерацию изображения
+//            array('allow',
+//                'actions'=>array('captcha'),
+//                'users'=>array('*'),
+//            ),
+//            array('deny',
+//                'users'=>array('*'),
+//            ),
+//        );
+//    }
+// 
+    public function actions(){
+        return array(
+            'captcha'=>array(
+                'class'=>'CCaptchaAction',
+            ),
+        );
+    }
 }

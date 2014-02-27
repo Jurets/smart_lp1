@@ -23,15 +23,26 @@ $this->breadcrumbs=array(
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 	
 	<?php echo CHtml::errorSummary($model); ?>
-	
+    
+    <div class="row">
+        <?php echo CHtml::activeLabelEx($model,'role'); ?>
+        <?php echo CHtml::activeDropDownList($model,'role',array( 'суперадмин', 'админ', 'модератор')) ?>
+    </div>
+    	
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'username'); ?>
 		<?php echo CHtml::activeTextField($model,'username') ?>
 	</div>
+    
+    <div class="row">
+        <?php echo CHtml::activeLabelEx($model,'password'); ?>
+        <?php echo CHtml::activePasswordField($model,'password') ?>
+    </div>
 	
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<?php echo CHtml::activePasswordField($model,'password') ?>
+        <?=CHtml::activeLabelEx($model, 'verifyCode')?>
+        <?php $this->widget('CCaptcha')?>
+        <?=CHtml::activeTextField($model, 'verifyCode')?>
 	</div>
 	
 	<div class="row">

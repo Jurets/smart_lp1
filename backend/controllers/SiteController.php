@@ -19,7 +19,7 @@ class SiteController extends EController
     * This is the action to handle external exceptions.
     */
     public function actionError()
-    {DebugBreak();
+    {
         if($error=Yii::app()->errorHandler->error)
         {
             if(Yii::app()->request->isAjaxRequest)

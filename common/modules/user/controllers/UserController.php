@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller
+class UserController extends EController
 {
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.

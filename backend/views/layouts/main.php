@@ -26,7 +26,7 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?=Yii::app()->createAbsoluteUrl('/')?>/css/bootstrap.min.css">
 	<style>
 		body {
 			padding-top: 60px;
@@ -34,9 +34,9 @@
 		}
 	</style>
 
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="<?=Yii::app()->createAbsoluteUrl('/')?>/css/main.css">
 
-	<script src="js/libs/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/libs/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -58,7 +58,20 @@
 			<a class="brand" href="#">Project name</a>
 
 			<div class="nav-collapse collapse">
-				<ul class="nav">
+            <?php
+                $this->widget('zii.widgets.CMenu', array(
+                'htmlOptions'=>array('class' => 'nav'),
+                'items'=>array(
+                    array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>Yii::app()->user->isGuest),
+                    array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
+                    array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
+                    array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
+                ),
+            ));
+             ?>
+<!--				<ul class="nav">
+                    <li class="<?=Yii::app()->user->isGuest ? ' ' : 'hide'?>"><a href="<?=Yii::app()->createAbsoluteUrl('user/login')?>">Login</a></li>
+                    <li class="<?=!Yii::app()->user->isGuest ? ' ' : 'hide'?>"><a href="<?=Yii::app()->createAbsoluteUrl('user/logout')?>">Logout</a></li>
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#about">About</a></li>
 					<li><a href="#contact">Contact</a></li>
@@ -74,24 +87,25 @@
 							<li><a href="#">One more separated link</a></li>
 						</ul>
 					</li>
-				</ul>
-				<form class="navbar-form pull-right">
+				</ul>-->
+<!--				<form class="navbar-form pull-right">
 					<input class="span2" type="text" placeholder="Email">
 					<input class="span2" type="password" placeholder="Password">
 					<button type="submit" class="btn">Sign in</button>
-				</form>
+				</form>-->
 			</div>
 			<!--/.nav-collapse -->
 		</div>
 	</div>
 </div>
-
+<div class="w-1000 m-center">
 <?php echo $content; ?>
+</div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="js/libs/bootstrap.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script><script>
+<script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/libs/bootstrap.min.js"></script>
+<script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/plugins.js"></script>
+<script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/main.js"></script><script>
 	var _gaq = [
 		['_setAccount', 'UA-XXXXX-X'],
 		['_trackPageview']
