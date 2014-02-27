@@ -18,5 +18,8 @@ return array(
 			'class' => 'system.cli.commands.MigrateCommand',
 			'migrationPath' => 'application.migrations'
 		)
-	)
+	),
+    'import' => array(
+        'application.migrations.ProjectMigration',
+    ),
 );
