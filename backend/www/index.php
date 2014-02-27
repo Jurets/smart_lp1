@@ -16,7 +16,6 @@ Yii::setPathOfAlias('Yiinitializr', './../../common/lib/Yiinitializr');
 
 use Yiinitializr\Helpers\Initializer;
 
-//DebugBreak();
 Initializer::create('./../', 'backend', array(
 	__DIR__ .'/../../common/config/main.php',
 	__DIR__ .'/../../common/config/env.php',

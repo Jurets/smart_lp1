@@ -38,25 +38,25 @@ class EController extends CController
 	 * @return CActiveRecord the model instance.
 	 * @throws CHttpException if the model cannot be found
 	 */
-	protected function loadModel($class, $id, $criteria = array(), $exceptionOnNull = true)
-	{
-		if (empty($criteria))
-			$model = CActiveRecord::model($class)->findByPk($id);
-		else
-		{
-			$finder = CActiveRecord::model($class);
-			$c = new CDbCriteria($criteria);
-			$c->mergeWith(array(
-				'condition' => $finder->tableSchema->primaryKey . '=:id',
-				'params' => array(':id' => $id),
-			));
-			$model = $finder->find($c);
-		}
-		if (isset($model))
-			return $model;
-		else if ($exceptionOnNull)
-			throw new CHttpException(404, 'Unable to find the requested object.');
-	}
+//	protected function loadModel($class, $id, $criteria = array(), $exceptionOnNull = true)
+//	{
+//		if (empty($criteria))
+//			$model = CActiveRecord::model($class)->findByPk($id);
+//		else
+//		{
+//			$finder = CActiveRecord::model($class);
+//			$c = new CDbCriteria($criteria);
+//			$c->mergeWith(array(
+//				'condition' => $finder->tableSchema->primaryKey . '=:id',
+//				'params' => array(':id' => $id),
+//			));
+//			$model = $finder->find($c);
+//		}
+//		if (isset($model))
+//			return $model;
+//		else if ($exceptionOnNull)
+//			throw new CHttpException(404, 'Unable to find the requested object.');
+//	}
 
 	/**
 	 * Performs the AJAX validation.

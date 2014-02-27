@@ -25,7 +25,10 @@ return array(
 		'application.controllers.*',
 		'application.extensions.*',
 		'application.helpers.*',
-		'application.models.*'
+		'application.models.*',
+        
+        'common.modules.user.models.*',
+        'common.modules.user.components.*',
 	),
 	'components' => array(
 //		'db'=>array(
@@ -54,6 +57,12 @@ return array(
 				),
 			),
 		),
+        'user'=>array(
+            // enable cookie-based authentication
+            'class' => 'WebUser',
+            'allowAutoLogin'=>true,
+            'loginUrl' => array('/user/login'),
+        ),
 	),
 	'params' => array(
 		// php configuration
@@ -64,7 +73,7 @@ return array(
     // application modules
     'modules' => array(
         'user'=>array(
-            'class'=>'common.modules.user.UserModule',
+            'class' => 'common.modules.user.UserModule',
             # encrypting method (php hash function)
             'hash' => 'md5',
 

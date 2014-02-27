@@ -58,10 +58,21 @@
 			<a class="brand" href="#">Project name</a>
 
 			<div class="nav-collapse collapse">
-				<ul class="nav">
+            <?php
+                $this->widget('zii.widgets.CMenu', array(
+                'htmlOptions'=>array('class' => 'nav'),
+                'items'=>array(
+                    array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>Yii::app()->user->isGuest),
+                    array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
+                    array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
+                    array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
+                ),
+            ));
+             ?>
+<!--				<ul class="nav">
                     <li class="<?=Yii::app()->user->isGuest ? ' ' : 'hide'?>"><a href="<?=Yii::app()->createAbsoluteUrl('user/login')?>">Login</a></li>
                     <li class="<?=!Yii::app()->user->isGuest ? ' ' : 'hide'?>"><a href="<?=Yii::app()->createAbsoluteUrl('user/logout')?>">Logout</a></li>
-<!--					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#about">About</a></li>
 					<li><a href="#contact">Contact</a></li>
 					<li class="dropdown">
@@ -75,8 +86,8 @@
 							<li><a href="#">Separated link</a></li>
 							<li><a href="#">One more separated link</a></li>
 						</ul>
-					</li>-->
-				</ul>
+					</li>
+				</ul>-->
 <!--				<form class="navbar-form pull-right">
 					<input class="span2" type="text" placeholder="Email">
 					<input class="span2" type="password" placeholder="Password">
