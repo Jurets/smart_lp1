@@ -38,6 +38,12 @@ $this->breadcrumbs=array(
         <?php echo CHtml::activeLabelEx($model,'password'); ?>
         <?php echo CHtml::activePasswordField($model,'password') ?>
     </div>
+    
+    <div class="row">
+        <?php echo CHtml::activeLabelEx($model,'temp_key'); ?>
+        <?php echo CHtml::link('Generate key'); ?>
+        <?php echo CHtml::textField('temp_key','',array('class'=>'hide')) ?>
+    </div>
 	
 	<div class="row">
         <?=CHtml::activeLabelEx($model, 'verifyCode')?>
