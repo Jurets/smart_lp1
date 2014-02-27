@@ -1,8 +1,9 @@
 <?php
 
-class LoginController extends CController
+class LoginController extends EController
 {
 	public $defaultAction = 'login';
+
 
 	/**
 	 * Displays the login page

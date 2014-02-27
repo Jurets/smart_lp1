@@ -1,9 +1,12 @@
 <?php
 
-class AdminController extends Controller
+class AdminController extends CController
 {
 	public $defaultAction = 'admin';
-	public $layout='//layouts/column2';
+    public $layout='//layouts/main';
+//	public $layout='//layouts/column2';
+    public $breadcrumbs;
+    public $menu;
 	
 	private $_model;
 
