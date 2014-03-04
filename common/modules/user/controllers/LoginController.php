@@ -64,4 +64,29 @@ class LoginController extends EController
             ),
         );
     }
+    
+    public function actionKeyGenerator(){
+        if(Yii::app()->request->isAjaxRequest){
+            $success = true;
+            $error = '';
+            //валидация имейла
+            $model = new User();
+            if(isset($_POST['email'])) $model->email = $_POST['email'];
+            $success &= $model->validate(array('email'));
+            
+            if($success){
+                $success &= $this->sendMail($model->email);  //послать письмо
+                $success ? null : $error[] = 'Ошибка при отправке почты.';
+            }else{
+                $error = $model->errors['email'];  //записать ошибки
+            }
+            echo CJSON::encode(array('success'=>$success, 'errorArr'=>$error));
+        }
+    }
+    
+    public function sendMail($email){
+        $headers="From: {$email}\r\nReply-To: {$email}";
+        Yii::app()->user->setState('activationCode', substr(time(),-8));
+        return mail($email,'Код активации','Ваш код активации: '.Yii::app()->user->getState('activationCode'),$headers);
+    }
 }

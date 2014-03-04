@@ -12,6 +12,7 @@ class UserLogin extends CFormModel
 	public $rememberMe;
     public $verifyCode;
     public $role;
+    public $temp_key;
 
 	/**
 	 * Declares the validation rules.
@@ -27,6 +28,7 @@ class UserLogin extends CFormModel
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
 			array('password', 'authenticate'),
+//            array('temp_key'),
             array(
                 'verifyCode',
                 'captcha',

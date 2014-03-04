@@ -38,6 +38,15 @@ $this->breadcrumbs=array(
         <?php echo CHtml::activeLabelEx($model,'password'); ?>
         <?php echo CHtml::activePasswordField($model,'password') ?>
     </div>
+    
+    <div class="row">
+        <?php echo CHtml::activeLabelEx($model,'temp_key'); ?>
+        <?php echo CHtml::link('Generate key', '#', array('id'=>'temp_key_link')); ?>
+        <br>
+        <div id="show-errors" class="error"></div>
+        <p class="invisible">Код был выслан вам на почту. Введите его в поле ниже:</p>
+        <?php echo CHtml::textField('temp_key','',array('class'=>'invisible temp-key')) ?>
+    </div>
 	
 	<div class="row">
         <?=CHtml::activeLabelEx($model, 'verifyCode')?>
