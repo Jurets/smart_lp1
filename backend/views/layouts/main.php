@@ -1,4 +1,5 @@
 <?php
+// test comment
 /**
  *
  * main.php layout
