@@ -14,6 +14,11 @@ class UserLogin extends CFormModel
     public $role;
     public $temp_key;
 
+    public $identity;
+    
+    public $activekey;
+    private $_logincode = null;
+    
 	/**
 	 * Declares the validation rules.
 	 * The rules state that username and password are required,
@@ -23,21 +28,50 @@ class UserLogin extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('username, password', 'required'),
+            array('username, password', 'required'),
+			array('username', 'email'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
-			array('password', 'authenticate'),
-//            array('temp_key'),
-            array(
-                'verifyCode',
-                'captcha',
+            array('activekey', 'checkActivekey'),
+            array('verifyCode', 'captcha',
                 // авторизованным пользователям код можно не вводить
                 'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
             ),
+			array('password', 'authenticate'),
 		);
 	}
 
+    /**
+    * проверка кода логина
+    * 
+    * @param mixed $attribute
+    * @param mixed $params
+    */
+    public function checkActivekey($attribute, $params) {
+        //$code = Yii::app()->user->getState('checkuser');
+        $logincode = $this->logincode;
+        if (empty($logincode)) {
+            $this->addError('activekey', UserModule::t("Login code not set"));
+        } else if ($logincode != $this->activekey) {
+            $this->addError('activekey', UserModule::t("Incorrect login code"));
+        }
+    }
+    
+    /**
+    * получить код логина для юзера (из БД)
+    * 
+    */
+    public function getLogincode() {
+        if (!isset($this->_logincode))
+            $this->_logincode = Yii::app()->db->createCommand()
+                ->select('logincode')
+                ->from(Yii::app()->getModule('user')->tableUsers)
+                ->where('username = :username OR email = :username')
+                ->queryScalar(array(':username'=>$this->username));
+        return $this->_logincode;
+    }
+    
 	/**
 	 * Declares attribute labels.
 	 */
@@ -48,6 +82,7 @@ class UserLogin extends CFormModel
 			'username'=>UserModule::t("username or email"),
 			'password'=>UserModule::t("password"),
             'verifyCode' => 'Код проверки',
+            'activekey' => 'Код входа',
 		);
 	}
 
@@ -59,13 +94,13 @@ class UserLogin extends CFormModel
 	{
 		if(!$this->hasErrors())  // we only want to authenticate when no input errors
 		{
-			$identity=new UserIdentity($this->username,$this->password);
-			$identity->authenticate();
-			switch($identity->errorCode)
+			$this->identity = new UserIdentity($this->username,$this->password);
+			$this->identity->authenticate();
+			switch($this->identity->errorCode)
 			{
 				case UserIdentity::ERROR_NONE:
 					$duration=$this->rememberMe ? Yii::app()->controller->module->rememberMeTime : 0;
-					Yii::app()->user->login($identity,$duration);
+					Yii::app()->user->login($this->identity,$duration);
 					break;
 				case UserIdentity::ERROR_EMAIL_INVALID:
 					$this->addError("username",UserModule::t("Email is incorrect."));
@@ -85,4 +120,16 @@ class UserLogin extends CFormModel
 			}
 		}
 	}
+    
+    /**
+    * очистить код входа для юзера
+    * 
+    */
+    public function clearLoginCode() {
+        if ($user = User::model()->byusername($this->username)->find()) {
+            $user->logincode = '';
+            $user->save(false);
+        }
+    }
+    
 }

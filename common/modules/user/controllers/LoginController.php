@@ -13,12 +13,12 @@ class LoginController extends EController
 		if (Yii::app()->user->isGuest) {
 			$model=new UserLogin;
 			// collect user input data
-			if(isset($_POST['UserLogin']))
-			{
+			if(isset($_POST['UserLogin'])) {
 				$model->attributes=$_POST['UserLogin'];
 				// validate user input and redirect to previous page if valid
 				if($model->validate()) {
 					$this->lastViset();
+                    $model->clearLoginCode();
 					if (Yii::app()->getBaseUrl()."/index.php" === Yii::app()->user->returnUrl)
 						$this->redirect(Yii::app()->controller->module->returnUrl);
 					else
@@ -65,28 +65,41 @@ class LoginController extends EController
         );
     }
     
+    /**
+    * генерация кода логина для юзера
+    * 
+    */
     public function actionKeyGenerator(){
-        if(Yii::app()->request->isAjaxRequest){
-            $success = true;
-            $error = '';
-            //валидация имейла
-            $model = new User();
-            if(isset($_POST['email'])) $model->email = $_POST['email'];
-            $success &= $model->validate(array('email'));
-            
-            if($success){
-                $success &= $this->sendMail($model->email);  //послать письмо
-                $success ? null : $error[] = 'Ошибка при отправке почты.';
-            }else{
-                $error = $model->errors['email'];  //записать ошибки
+        if(Yii::app()->request->isAjaxRequest && isset($_POST['UserLogin'])){
+            $model = new UserLogin;
+            $model->attributes=$_POST['UserLogin']; 
+            // validate user input and redirect to previous page if valid
+            if ($success = $model->validate(array('username', 'password'))) {
+                $user = $model->identity->user; //запомнить юзера
+                Yii::app()->user->logout();   //выход юзера, т.к. пока только проверка
+                if (!$success = $this->sendCodeToMail($user)) {
+                    $model->addErrors('Ошибка при отправке почты');
+                }
             }
-            echo CJSON::encode(array('success'=>$success, 'errorArr'=>$error));
+            echo CJSON::encode(array('success'=>$success, 'errorArr'=>$model->errors));
         }
     }
     
-    public function sendMail($email){
-        $headers="From: {$email}\r\nReply-To: {$email}";
-        Yii::app()->user->setState('activationCode', substr(time(),-8));
-        return mail($email,'Код активации','Ваш код активации: '.Yii::app()->user->getState('activationCode'),$headers);
+    /**
+    * отсылка кода логина на почту юзеру
+    * 
+    * @param mixed $user
+    */
+    private function sendCodeToMail($user){
+        $email = $user->email;
+        $logincode = substr(time(),-8); //генерить случайный код (для входа)
+        $headers = "From: {$email}\r\nReply-To: {$email}";
+        if ($success = mail($email, 'Код для входа', 'Ваш код для входа: '.$logincode, $headers)) {
+            //Yii::app()->user->setState('activationCode', $code);
+            //записать код входа в базу
+            Yii::app()->db->createCommand()->update(Yii::app()->getModule('user')->tableUsers, array('logincode'=>$logincode), 'id=:id', array(':id'=>$user->id));
+        }
+        return $success;
     }
+    
 }
