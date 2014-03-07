@@ -40,5 +40,5 @@ index
 /common/lib/Yiinitializr/config/env.lock
 
 # composer
-/common/lib/vendor
-composer.lock
+#/common/lib/vendor
+#composer.lock
