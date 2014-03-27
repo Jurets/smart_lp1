@@ -10,6 +10,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 return array(
+	//'language'=> 'ru',
 	'preload' => array('log'),
 	'aliases' => array(
 		'frontend' => dirname(__FILE__) . '/../..' . '/frontend',
@@ -103,6 +104,9 @@ return array(
 
             # page after logout
             'returnLogoutUrl' => array('/user/login'),
+        ),
+        'news' => array(
+        	'class' => 'backend.modules.news.NewsModule',
         ),
     ),
     
