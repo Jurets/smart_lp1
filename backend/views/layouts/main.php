@@ -1,3 +1,4 @@
+<?php Yii::app()->clientScript->registerCorescript('jquery') ?>
 <?php
 // test comment
 /**
@@ -105,8 +106,8 @@
 <div class="w-1000 m-center">
 <?php echo $content; ?>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<!--  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>  -->
 <script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/libs/bootstrap.min.js"></script>
 <script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/plugins.js"></script>
 <script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/main.js"></script><script>

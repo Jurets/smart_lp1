@@ -4,7 +4,7 @@
 
 <?php $this->widget('bootstrap.widgets.TbBreadcrumb', array(
     'links' => array(
-        'Back' => '/',
+        //'Back' => '/',
         'Data',
     ),
 )); ?>

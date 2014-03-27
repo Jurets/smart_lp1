@@ -15,6 +15,7 @@ class NewsController extends EController
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete',
 		);
 	}
 
