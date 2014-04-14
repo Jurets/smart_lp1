@@ -45,15 +45,15 @@ return array(
 		'bootstrap' => array(
 			'class' => 'bootstrap.components.TbApi',
 		),
-            'yiiwheels' => array(
+		'yiiwheels' => array(
 			'class' => 'yiiwheels.YiiWheels',
 		),
-
 		'clientScript' => array(
 			'scriptMap' => array(
 				'bootstrap.min.css' => false,
 				'bootstrap.min.js' => false,
-				'bootstrap-yii.css' => false
+				'bootstrap-yii.css' => false,
+// 				'jquery' => false
 			)
 		),
 		'urlManager' => array(

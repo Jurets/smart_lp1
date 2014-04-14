@@ -1,4 +1,5 @@
-<?php Yii::app()->clientScript->registerCorescript('jquery') ?>
+ <?php Yii::app()->clientScript->registerCorescript('jquery') ?>
+ <?php Yii::app()->clientScript->registerCorescript('jquery.ui') ?>
 <?php
 // test comment
 /**
@@ -39,6 +40,11 @@
 	<link rel="stylesheet" href="<?=Yii::app()->createAbsoluteUrl('/')?>/css/main.css">
 
 	<script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/libs/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	
+<script src="<?= Yii::app()->request->baseUrl; ?>/js/file-upload/jquery.ui.widget.js"></script>
+<script src="<?= Yii::app()->request->baseUrl; ?>/js/file-upload/jquery.iframe-transport.js"></script>
+<script src="<?= Yii::app()->request->baseUrl; ?>/js/file-upload/jquery.fileupload.js"></script>
+	
 </head>
 <body>
 <!--[if lt IE 7]>
