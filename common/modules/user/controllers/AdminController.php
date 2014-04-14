@@ -28,7 +28,7 @@ class AdminController extends CController
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','create','update','view'),
+				'actions'=>array('admin','delete','create','update','view','status'),
 				'users'=>UserModule::getAdmins(),
 			),
 			array('deny',  // deny all users
@@ -41,11 +41,14 @@ class AdminController extends CController
 	 */
 	public function actionAdmin()
 	{
-		$model=new User('search');
+        //$model=new User('search');
+		$model = new Participant('search');
         $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['User']))
-            $model->attributes=$_GET['User'];
-
+        if (isset($_GET['Participant'])) {
+            $model->attributes = $_GET['Participant'];
+        } else if (isset($_GET['User'])) {
+            $model->attributes = $_GET['User'];
+        }
         $this->render('index',array(
             'model'=>$model,
         ));
@@ -191,4 +194,11 @@ class AdminController extends CController
 		return $this->_model;
 	}
 	
+    /**
+    * put your comment there...
+    * 
+    */
+    public function actionStatus($id, $status) {
+        $this->loadModel()->setStatus($status);
+    }
 }
