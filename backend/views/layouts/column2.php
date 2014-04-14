@@ -15,10 +15,7 @@
 </div>
 <div class="span-5 last">
 	<div id="sidebar">
-	<?php
-	
-	echo Yii::getPathOfAlias('zii');
-	
+	<?php	
 		$this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'Operations',
 		));
