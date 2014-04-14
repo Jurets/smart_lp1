@@ -17,8 +17,9 @@ $this->menu=array(
 ?>
 
 <h1>View News #<?php echo $model->id; ?></h1>
+<img src="<?php echo $model->UploadImage;//echo Yii::app()->baseUrl . '/uploads/' . 'resized-' . $model->image ?>" />
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('yiiwheels.widgets.detail.WhDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
