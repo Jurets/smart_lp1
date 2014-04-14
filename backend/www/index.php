@@ -21,3 +21,5 @@ Initializer::create('./../', 'backend', array(
 	__DIR__ .'/../../common/config/env.php',
 	__DIR__ .'/../../common/config/local.php',
 ))->run();
+
+Yii::app()->
