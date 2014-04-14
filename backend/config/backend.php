@@ -36,6 +36,7 @@ return array(
         'application.components.*',
         'application.modules.user.models.*',
         'application.modules.user.components.*',
+        'bootstrap.helpers.TbHtml'
     ),
 
 	// application components
@@ -70,6 +71,10 @@ return array(
         ),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
-		)
+		),
+        
+        'format'=>array(
+             'dateFormat'=>'d.m.Y',   //формат по умолчанию для форматтера дат
+        ),
 	),
 );
