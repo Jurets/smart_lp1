@@ -1,25 +1,35 @@
 <?php
 
-class m140414_094237_create_faq_table extends CDbMigration
+class m140414_094237_create_faq_table extends ProjectMigration
 {
-	public function up()
-	{
-	}
 
-	public function down()
-	{
-		echo "m140414_094237_create_faq_table does not support migration down.\n";
-		return false;
-	}
+    public function up()
+    {
+        $this->createTable('faq', array(
+            'id' => 'int(11) NOT NULL AUTO_INCREMENT',
+            'question' => 'text',
+            'answer' => 'text',
+            'created' => 'date DEFAULT NULL',
+            'id_user' => 'int(11) DEFAULT NULL',
+            'category' => 'varchar(64) DEFAULT NULL',
+            'PRIMARY KEY (id)'
+        ),
+                $this->tableSqlOptions);
+    }
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
+    public function down()
+    {
+        $this->dropTable('faq');
+    }
 
-	public function safeDown()
-	{
-	}
-	*/
+    /*
+      // Use safeUp/safeDown to do migration with transaction
+      public function safeUp()
+      {
+      }
+
+      public function safeDown()
+      {
+      }
+     */
 }
