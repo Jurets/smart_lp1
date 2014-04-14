@@ -51,7 +51,7 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
-		<div class="container">
+		<div class="container" style="width: 1700px;">
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -70,8 +70,13 @@
                     array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
                     array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
                     array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
+
 					array('url'=>Yii::app()->getModule('news')->newsShow, 'label'=>Yii::app()->getModule('news')->t("News")),
                     array('url'=>Yii::app()->getModule('training')->trainingShow, 'label'=>Yii::app()->getModule('training')->t("Training")),
+
+                    array('url'=>Yii::app()->getModule('news')->newsShow, 'label'=>Yii::app()->getModule('news')->t("News")),
+                    array('url'=>Yii::app()->getModule('faq')->faqShow, 'label'=>Yii::app()->getModule('faq')->t("FAQ")),
+
                 ),
             ));
 
@@ -105,7 +110,7 @@
 		</div>
 	</div>
 </div>
-<div class="w-1000 m-center">
+<div class="w-1000 m-center" style="width: 1700px;">
 <?php echo $content; ?>
 </div>
 <!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->

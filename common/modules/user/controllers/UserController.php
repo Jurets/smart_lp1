@@ -13,7 +13,7 @@ class UserController extends EController
 	public function filters()
 	{
 		return CMap::mergeArray(parent::filters(),array(
-			'accessControl', // perform access control for CRUD operations
+			//'accessControl', // perform access control for CRUD operations
 		));
 	}
 	/**

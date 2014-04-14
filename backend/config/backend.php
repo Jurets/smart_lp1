@@ -36,6 +36,7 @@ return array(
         'application.components.*',
         'application.modules.user.models.*',
         'application.modules.user.components.*',
+        'bootstrap.helpers.TbHtml'
     ),
 
 	// application components
@@ -43,6 +44,9 @@ return array(
 
 		'bootstrap' => array(
 			'class' => 'bootstrap.components.TbApi',
+		),
+            'yiiwheels' => array(
+			'class' => 'yiiwheels.YiiWheels',
 		),
 
 		'clientScript' => array(
@@ -70,6 +74,10 @@ return array(
         ),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
-		)
+		),
+        
+        'format'=>array(
+             'dateFormat'=>'d.m.Y',   //формат по умолчанию для форматтера дат
+        ),
 	),
 );

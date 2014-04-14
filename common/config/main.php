@@ -108,6 +108,9 @@ return array(
         'news' => array(
         	'class' => 'backend.modules.news.NewsModule',
         ),
+        'faq' => array(
+            'class' => 'backend.modules.faq.FaqModule',
+        ),
         'training' => array(
             'class' => 'backend.modules.training.TrainingModule',
         ),

@@ -151,9 +151,9 @@ class User extends CActiveRecord
 	
 	public function defaultScope()
     {
-        return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope,array(
+        return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope, array(
             'alias'=>'user',
-            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.superuser, user.status, user.logincode',
+            //'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.superuser, user.status, user.logincode',
         ));
     }
 	
@@ -226,4 +226,43 @@ class User extends CActiveRecord
         }
         return parent::afterSave();
     }
+    
+    /**
+    * put your comment there...
+    * 
+    */
+    public function isActive() {
+        return $this->status == self::STATUS_ACTIVE;
+    }
+    public function isNonActive() {
+        return $this->status == self::STATUS_NOACTIVE;
+    }
+    public function isBanned() {
+        return $this->status == self::STATUS_BANNED;
+    }
+    
+    /**
+    *  поменять статус юзера
+    */
+    public function setStatus($status) {
+        if ($status != $this->status) {
+            $this->status = $status;
+            $this->save(false);
+        }
+    }
+    
+    public function getColor() {
+        $statuscolor='white';
+        //switch ($this->isBanned()) {//здесь указываете ваш аттрибут
+        switch ($this->status) {//здесь указываете ваш аттрибут
+            case self::STATUS_ACTIVE:
+                $statuscolor='green';//нужные вам классы в зависимости от значений
+                break;
+            case self::STATUS_NOACTIVE:
+                $statuscolor='pink';
+                break;
+        }
+        return $statuscolor;
+    }
+ 
 }
