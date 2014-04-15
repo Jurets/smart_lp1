@@ -57,11 +57,31 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-        'id',
-        'question',
-        'answer',
-        'created',
-        'id_user',
+        array(
+            'name' => 'id',
+            'filter'=>TbHtml::activeTextField($model, 'id', array('style'=>'width: 40px')),
+            'htmlOptions'=>array('style'=>'width: 40px'),
+            ),
+        array(
+            'name' => 'question',
+            'filter'=>TbHtml::activeTextField($model, 'question', array('style'=>'width: 200px')),
+           'htmlOptions'=>array('style'=>'width: 200px'),
+		),
+            
+        array(
+            'name' => 'answer',
+            'filter' => TbHtml::activeTelField($model, 'answer', array('style' => 'width: 200px')),
+            'htmlOptions'=>array('style'=>'width: 200px'),
+            ),
+        array(
+            'name' => 'created',
+             'filter' => TbHtml::activeTelField($model, 'created', array('style' => 'width: 50px')),
+            'htmlOptions'=>array('style'=>'width: 50px'),
+            ),
+        array('name' => 'id_user',
+            'filter' => TbHtml::activeTelField($model, 'id_user', array('style' => 'width: 50px')),
+            'htmlOptions'=>array('style'=>'width: 50px'),
+            ),
         array(
             'name' => 'category',
             'type' => 'raw',
