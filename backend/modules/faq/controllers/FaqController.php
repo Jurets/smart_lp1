@@ -70,6 +70,15 @@ class FaqController extends EController
 		if(isset($_POST['Faq']))
 		{
 			$model->attributes=$_POST['Faq'];
+                        
+                        //Converting "Creation time when FAQ was made" into MySQL format data https://dev.mysql.com/doc/refman/5.0/en/datetime.html
+                       $str = str_replace('.', '-',$model->created);
+                       $year = substr($str, 6, 4).'-';
+                       $day = substr($str, 0, 2);
+                       $month = substr($str, 3, 3);
+                       $time = substr($str, 10);
+                       $model->created = $year.$month.$day.$time;
+                       
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
