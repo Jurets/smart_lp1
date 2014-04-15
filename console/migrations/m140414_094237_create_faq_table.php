@@ -9,7 +9,7 @@ class m140414_094237_create_faq_table extends ProjectMigration
             'id' => 'int(11) NOT NULL AUTO_INCREMENT',
             'question' => 'text',
             'answer' => 'text',
-            'created' => 'date DEFAULT NULL',
+            'created' => 'datetime DEFAULT NULL',
             'id_user' => 'int(11) DEFAULT NULL',
             'category' => 'varchar(64) DEFAULT NULL',
             'PRIMARY KEY (id)'
