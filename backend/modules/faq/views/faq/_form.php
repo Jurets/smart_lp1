@@ -19,12 +19,12 @@
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-        <?php echo $form->errorSummary($model); ?>
+    <?php echo $form->errorSummary($model); ?>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'question'); ?>
-<?php echo $form->textArea($model, 'question', array('rows' => 6, 'cols' => 50)); ?>
-<?php echo $form->error($model, 'question'); ?>
+        <?php echo $form->textArea($model, 'question', array('rows' => 6, 'cols' => 50)); ?>
+        <?php echo $form->error($model, 'question'); ?>
     </div>
 
     <div class="row">
@@ -43,27 +43,34 @@
     </div>
 
     <div class="row">
-<?php echo $form->labelEx($model, 'created'); ?>
-        <?php echo $form->textField($model, 'created'); ?>
+        <?php echo $form->labelEx($model, 'created'); ?>
+        <?php
+        $this->widget('yiiwheels.widgets.datetimepicker.WhDateTimePicker', array(
+            'model' => $model,
+            'name' => 'created',
+            'attribute' => 'created',
+            'format' => 'yyyy-MM-dd hh:mm:ss',
+                ))
+        ?>
         <?php echo $form->error($model, 'created'); ?>
     </div>
 
     <div class="row">
-<?php echo $form->labelEx($model, 'id_user'); ?>
+        <?php echo $form->labelEx($model, 'id_user'); ?>
         <?php echo $form->textField($model, 'id_user'); ?>
         <?php echo $form->error($model, 'id_user'); ?>
     </div>
 
     <div class="row">
-<?php echo $form->labelEx($model, 'category'); ?>
-        <?php echo $form->textField($model, 'category', array('size' => 60, 'maxlength' => 64)); ?>
+        <?php echo $form->labelEx($model, 'category'); ?>
+        <?php echo $form->dropDownList($model, 'category', array('finance' => 'финансы', 'offer' => 'предложения', 'site' => 'работа сайта')); ?>
         <?php echo $form->error($model, 'category'); ?>
     </div>
 
     <div class="row buttons">
-<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
     </div>
 
-<?php $this->endWidget(); ?>
+    <?php $this->endWidget(); ?>
 
 </div><!-- form -->

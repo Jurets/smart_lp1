@@ -88,9 +88,7 @@ class Faq extends CActiveRecord
         $criteria->compare('answer', $this->answer, true);
         $criteria->compare('created', $this->created, true);
         $criteria->compare('id_user', $this->id_user);
-//        $criteria->compare('category', $this->category, true);
-        if ($this->category)
-            $criteria->compare('category', $this->category);
+        $criteria->compare('category', $this->category, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
