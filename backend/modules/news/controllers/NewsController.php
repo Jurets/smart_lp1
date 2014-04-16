@@ -8,6 +8,7 @@ class NewsController extends EController
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $path;
 	/**
 	 * @return array action filters
 	 */
@@ -28,7 +29,7 @@ class NewsController extends EController
 	{
 		return array(
  			array('allow',  // allow all users to perform 'index' and 'view' actions
- 				'actions'=>array('index','view', 'create', 'update', 'delete'),
+ 				'actions'=>array('index','view', 'create', 'update', 'delete', 'upload'),
  				'users'=>array('*'),
  			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -45,6 +46,19 @@ class NewsController extends EController
 		);
 	}
 
+	/*
+	 * addition methods and fields - temporary destinated here
+	 * if ok it returns natty file name (for example to model-implementation)
+	 * */
+	
+// 	private function getNattyFileUploadPath($instance){
+// 		if(! $instance instanceof CUploadedFile){
+// 			return -1;
+// 		}
+// 		$ext = '.' . substr($instance->type, strrpos($instance->type, '/')+1);
+// 		$fileUploadPath = 'news_' . substr(md5(time()), 0, 10) . $ext;
+// 		return $fileUploadPath;
+// 	}
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -60,19 +74,23 @@ class NewsController extends EController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
+	
 	public function actionCreate()
-	{
-		debug_backtrace();
+	{	
 		$model=new News;
-
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['News']))
 		{
+			debug_backtrace();
 			$model->attributes=$_POST['News'];
-			if($model->save())
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id));
+			}else
+				$model->callAfterFind();
+				
 		}
 
 		$this->render('create',array(
@@ -80,6 +98,55 @@ class NewsController extends EController
 		));
 	}
 
+	/*
+	 * Upload file action 
+	 * */
+	/* upploading additionaly */
+	public function actionUpload()
+	{
+// 		require('UploadHandler.php');
+// 		$options = array(
+// 				'script_url' => 'http://justmoney-admin.smart/',
+// 				'upload_url' => 'http://justmoney-admin.smart/files/',
+// 				'upload_dir' => '/home/servbat/smart_lp1/backend/www/files/',
+// 				'param_name' => 'files'
+// 		);
+// 		$upload_handler = new UploadHandler($options);
+
+		;
+		
+		debug_backtrace();
+		if ($_FILES['files']){
+			$ext = pathinfo($_FILES['files']['name'][0], PATHINFO_EXTENSION);
+			$filename = 'news-origin-'.substr(md5(uniqid()), 0, 8) . "." . $ext;
+			//$file_path = Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename;
+			$file_path = Yii::app()->getBasePath() . $this->module->params['uploadPath'] . $filename;
+			$result = move_uploaded_file($_FILES['files']['tmp_name'][0],  $file_path);
+			//$resized = ImageHelper::makeNewsThumb(Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename);
+			$resized = ImageHelper::makeNewsThumb($file_path);
+			//$resized = $file_path;
+			//unlink($file_path);
+			$json = array(
+					"files"=>array(
+							array(
+									"name"=>$filename,
+									"original"=>$resized,
+									//"url"=> Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $filename,
+									"url"=>$file_path,
+							)));
+		
+			if ($result)
+				echo json_encode($json);
+			else
+				echo  json_encode(array("error"=>"error"));
+		}
+		
+		
+		
+		
+		
+	}
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -87,6 +154,7 @@ class NewsController extends EController
 	 */
 	public function actionUpdate($id)
 	{
+		debug_backtrace();
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -94,9 +162,20 @@ class NewsController extends EController
 
 		if(isset($_POST['News']))
 		{
+			
 			$model->attributes=$_POST['News'];
+			//$model->illustration=CUploadedFile::getInstance($model, 'illustration');
+			//if(isset($model->illustration)){
+				//$this->path = $this->getNattyFileUploadPath($model->illustration);
+				//unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image);
+				//$model->illustration->saveAs(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $this->path);
+				//$model->image = $this->path;
+			//}
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
+			else
+				$model->callAfterFind();
 		}
 
 		$this->render('update',array(
@@ -111,7 +190,13 @@ class NewsController extends EController
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model=$this->loadModel($id);
+		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image))
+			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image);
+		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR .'resized-'. $model->image))
+			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . 'resized-' .$model->image);
+			
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
