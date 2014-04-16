@@ -111,6 +111,9 @@ return array(
         'faq' => array(
             'class' => 'backend.modules.faq.FaqModule',
         ),
+        'countries' => array(
+            'class' => 'backend.modules.countries.CountriesModule',
+        ),
     ),
     
 );
