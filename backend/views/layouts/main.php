@@ -80,6 +80,7 @@
                     array('url'=>Yii::app()->getModule('training')->trainingShow, 'label'=>Yii::app()->getModule('training')->t("Training")),
                     array('url'=>Yii::app()->getModule('cities')->citiesShow, 'label'=>Yii::app()->getModule('cities')->t("Cities")),
                     array('url'=>Yii::app()->getModule('faq')->faqShow, 'label'=>Yii::app()->getModule('faq')->t("FAQ")),
+                    array('url'=>Yii::app()->getModule('countries')->countriesShow, 'label'=>Yii::app()->getModule('countries')->t("Countries")),
 
                 ),
             ));
