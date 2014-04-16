@@ -251,18 +251,4 @@ class User extends CActiveRecord
         }
     }
     
-    public function getColor() {
-        $statuscolor='white';
-        //switch ($this->isBanned()) {//здесь указываете ваш аттрибут
-        switch ($this->status) {//здесь указываете ваш аттрибут
-            case self::STATUS_ACTIVE:
-                $statuscolor='green';//нужные вам классы в зависимости от значений
-                break;
-            case self::STATUS_NOACTIVE:
-                $statuscolor='pink';
-                break;
-        }
-        return $statuscolor;
-    }
- 
 }

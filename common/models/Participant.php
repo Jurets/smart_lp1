@@ -33,7 +33,7 @@ class Participant extends User
 		 //NOTE: you should only define rules for those attributes that
 		 //will receive user inputs.
 		 return CMap::mergeArray(parent::rules(), array(
-			 array('tariff_id, city_id, first_name, last_name', 'safe'),
+			 array('tariff_id, city_id, first_name, last_name, country_id', 'safe'),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
    		     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
@@ -48,9 +48,9 @@ class Participant extends User
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return CMap::mergeArray(parent::relations(), array(
+            'referal'=>array(self::BELONGS_TO, 'Participant', 'refer_id'),
             'tariff'=>array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
             'city'=>array(self::BELONGS_TO, 'Cities', 'city_id'),
-            'referal'=>array(self::BELONGS_TO, 'Participant', 'refer_id'),
 		));
 	}
 
@@ -85,10 +85,16 @@ class Participant extends User
             
 		$criteria=new CDbCriteria;
         
-        $criteria->compare('user.first_name',$this->first_name);
-        $criteria->compare('user.last_name',$this->last_name);
-		$criteria->compare('user.tariff_id',$this->tariff_id);
-
+        $criteria->compare('user.first_name', $this->first_name, true);
+        $criteria->compare('user.last_name', $this->last_name, true);
+		$criteria->compare('user.tariff_id', $this->tariff_id);
+        
+        if (!empty($this->country_id)) {
+            $criteria->with = array('city', 'city.country');
+            $criteria->compare('country.name', $this->country_id, true);
+            //$criteria->addCondition('country.name = :country_id');
+            //$criteria->params = array(':country_id'=>$this->country_id);
+        }
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;
                 
@@ -139,4 +145,26 @@ class Participant extends User
     public function getReferalName() {
         return isset($this->referal) ? $this->referal->username : null;
     }
+
+    /**
+    * цвет для юзера в сетке
+    * 
+    */
+    public function getColor() {
+        $statuscolor='white';
+        //switch ($this->isBanned()) {//здесь указываете ваш аттрибут
+        switch ($this->status) {//здесь указываете ваш аттрибут
+            case self::STATUS_ACTIVE:
+                $statuscolor='green';//нужные вам классы в зависимости от значений
+                break;
+            case self::STATUS_NOACTIVE:
+                $statuscolor='grey';
+                break;
+            case self::STATUS_BANNED:
+                $statuscolor = 'red';
+                break;
+        }
+        return $statuscolor;
+    }
+ 
 }
