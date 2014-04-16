@@ -69,7 +69,7 @@ return array(
 		// php configuration
 		'php.defaultCharset' => 'utf-8',
 		'php.timezone'       => 'UTC',
-		'uploadPath' => DIRECTORY_SEPARATOR .'www'.DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR, // local part to the common upload dir
+		'upload.path' => DIRECTORY_SEPARATOR .'www'.DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR,
 	),
     
     // application modules

@@ -15,7 +15,7 @@ class NewsModule extends CWebModule
 				'news.components.*',
 		));
 		//Yii::setPathOfAlias('news.uploads', Yii::app()->basePath .DIRECTORY_SEPARATOR.'www'.DIRECTORY_SEPARATOR. 'uploads');
-		$this->uploadDir = Yii::app()->params['uploadPath'];
+		$this->uploadDir = Yii::app()->params['upload.path'];
 	}
 
 	/**

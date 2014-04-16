@@ -84,7 +84,6 @@ class NewsController extends EController
 
 		if(isset($_POST['News']))
 		{
-			debug_backtrace();
 			$model->attributes=$_POST['News'];
 			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id));
@@ -113,14 +112,11 @@ class NewsController extends EController
 // 		);
 // 		$upload_handler = new UploadHandler($options);
 
-		;
-		
-		debug_backtrace();
 		if ($_FILES['files']){
 			$ext = pathinfo($_FILES['files']['name'][0], PATHINFO_EXTENSION);
 			$filename = 'news-origin-'.substr(md5(uniqid()), 0, 8) . "." . $ext;
 			//$file_path = Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename;
-			$file_path = Yii::app()->getBasePath() . $this->module->params['uploadPath'] . $filename;
+			$file_path = Yii::app()->getBasePath() . $this->module->uploadDir . $filename;
 			$result = move_uploaded_file($_FILES['files']['tmp_name'][0],  $file_path);
 			//$resized = ImageHelper::makeNewsThumb(Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename);
 			$resized = ImageHelper::makeNewsThumb($file_path);
