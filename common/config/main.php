@@ -114,6 +114,10 @@ return array(
         'training' => array(
             'class' => 'backend.modules.training.TrainingModule',
         ),
+
+        'cities' => array(
+            'class' => 'backend.modules.cities.CitiesModule',
+        ),
     ),
     
 );
