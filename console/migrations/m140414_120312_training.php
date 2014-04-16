@@ -4,7 +4,7 @@ class m140414_120312_training extends CDbMigration
 {
 	public function up()
 	{
-        $this->createTable('tbl_training',
+        $this->createTable('training',
             array(
                   'id'=> 'int(11) NOT NULL AUTO_INCREMENT',
                   'title'=> 'varchar(255) NOT NULL',
@@ -20,7 +20,7 @@ class m140414_120312_training extends CDbMigration
 
 	public function down()
 	{
-        $this->dropTable('tbl_training');
+        $this->dropTable('training');
 //		echo "m140414_120312_training does not support migration down.\n";
 //		return false;
 	}
