@@ -1,6 +1,6 @@
 <?php
 
-class FaqController extends EController
+class CountriesController extends EController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -62,23 +62,14 @@ class FaqController extends EController
 	 */
 	public function actionCreate()
 	{
-		$model=new Faq;
+		$model=new Countries;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Faq']))
+		if(isset($_POST['Countries']))
 		{
-			$model->attributes=$_POST['Faq'];
-                        
-                        //Converting "Creation time when FAQ was made" into MySQL format data https://dev.mysql.com/doc/refman/5.0/en/datetime.html
-                       $str = str_replace('.', '-',$model->created);
-                       $year = substr($str, 6, 4).'-';
-                       $day = substr($str, 0, 2);
-                       $month = substr($str, 3, 3);
-                       $time = substr($str, 10);
-                       $model->created = $year.$month.$day.$time;
-                       
+			$model->attributes=$_POST['Countries'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -100,9 +91,9 @@ class FaqController extends EController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Faq']))
+		if(isset($_POST['Countries']))
 		{
-			$model->attributes=$_POST['Faq'];
+			$model->attributes=$_POST['Countries'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -131,11 +122,10 @@ class FaqController extends EController
 	 */
 	public function actionIndex()
 	{
-
-            $model=new Faq('search');
+		$model=new Countries('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Faq']))
-			$model->attributes=$_GET['Faq'];
+		if(isset($_GET['Countries']))
+			$model->attributes=$_GET['Countries'];
 
 		$this->render('index',array(
 			'model'=>$model,
@@ -147,7 +137,8 @@ class FaqController extends EController
 	 */
 	public function actionAdmin()
 	{
-			$dataProvider=new CActiveDataProvider('Faq');
+		
+                $dataProvider=new CActiveDataProvider('Countries');
 		$this->render('admin',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -157,12 +148,12 @@ class FaqController extends EController
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Faq the loaded model
+	 * @return Countries the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Faq::model()->findByPk($id);
+		$model=Countries::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -170,20 +161,14 @@ class FaqController extends EController
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Faq $model the model to be validated
+	 * @param Countries $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='faq-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='countries-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-        
-        public function actionBan(){
-            
-        }
-        
-        
 }

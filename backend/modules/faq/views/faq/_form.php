@@ -49,7 +49,7 @@
             'model' => $model,
             'name' => 'created',
             'attribute' => 'created',
-            'format' => 'yyyy-MM-dd hh:mm:ss',
+            'format' => 'dd.MM.yyyy hh:mm:ss',
                 ))
         ?>
         <?php echo $form->error($model, 'created'); ?>

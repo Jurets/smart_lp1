@@ -51,6 +51,16 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php
+$dateFilter = $this->widget('yiiwheels.widgets.datepicker.WhDatePicker', array(
+    'name' => 'Faq[created]',
+    'value' => $model->created,
+    'pluginOptions' => array(
+        'format' => 'yyyy-mm-dd',
+    ),
+    'htmlOptions' => array(
+        'id' => 'created',
+    ),
+        ), true);
 //$this->widget('zii.widgets.grid.CGridView', array(
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'faq-grid',
@@ -59,29 +69,30 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'columns' => array(
         array(
             'name' => 'id',
-            'filter'=>TbHtml::activeTextField($model, 'id', array('style'=>'width: 40px')),
-            'htmlOptions'=>array('style'=>'width: 40px'),
-            ),
+            'filter' => TbHtml::activeTextField($model, 'id', array('style' => 'width: 40px')),
+            'htmlOptions' => array('style' => 'width: 40px'),
+        ),
         array(
             'name' => 'question',
-            'filter'=>TbHtml::activeTextField($model, 'question', array('style'=>'width: 200px')),
-           'htmlOptions'=>array('style'=>'width: 200px'),
-		),
-            
+            'filter' => TbHtml::activeTextField($model, 'question', array('style' => 'width: 200px')),
+            'htmlOptions' => array('style' => 'width: 200px'),
+        ),
         array(
             'name' => 'answer',
             'filter' => TbHtml::activeTelField($model, 'answer', array('style' => 'width: 200px')),
-            'htmlOptions'=>array('style'=>'width: 200px'),
-            ),
+            'htmlOptions' => array('style' => 'width: 200px'),
+        ),
         array(
             'name' => 'created',
-             'filter' => TbHtml::activeTelField($model, 'created', array('style' => 'width: 50px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
+            'filter' => $dateFilter,
+//            'filterInputOptions' => array('style' => 'width: 150px'),
+            'value' => '$data->created',
+//            'htmlOptions'=>array('style'=>'width: 50px'),
+        ),
         array('name' => 'id_user',
             'filter' => TbHtml::activeTelField($model, 'id_user', array('style' => 'width: 50px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
+            'htmlOptions' => array('style' => 'width: 50px'),
+        ),
         array(
             'name' => 'category',
             'type' => 'raw',
@@ -92,7 +103,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'template' => '{view}{update}{delete}{ban}',
             'buttons' => array
                 (
-                
                 'ban' => array
                     (
                     'label' => 'Ban',
@@ -100,7 +110,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     'url' => 'Yii::app()->createUrl("users/ban", array("id"=>$data->id))',
                     'options' => array('class' => 'ICON_LOCK'),
                 ),
-                
             ),
         ),
     ),
