@@ -122,7 +122,8 @@
               },
             done: function(e, data) {
                 $.each(data.result.files, function(index, file) {
-                	showOverlay(file.original, file.name);
+                	//showOverlay(file.original, file.name);
+                	showOverlay(file.resized, file.name);
                 });
                 $("#uploader-progress").empty().html("Изображение успешно загружено!");
             },
