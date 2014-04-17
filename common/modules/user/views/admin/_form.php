@@ -9,7 +9,7 @@
 
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 
-	<?php echo $form->errorSummary(array($model,$profile)); ?>
+	<?php echo $form->errorSummary(array($model/*,$profile*/)); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>
@@ -41,7 +41,7 @@
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 <?php 
-		$profileFields=Profile::getFields();
+		/*$profileFields=Profile::getFields();
 		if ($profileFields) {
 			foreach($profileFields as $field) {
 			?>
@@ -62,7 +62,7 @@
 	</div>
 			<?php
 			}
-		}
+		} */
 ?>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save')); ?>

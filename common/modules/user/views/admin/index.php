@@ -28,7 +28,10 @@ $('.search-form form').submit(function(){
 
 <style type="text/css">
     .green{
-        background-color: #CEFFE8;
+        background-color: #DFF0D8;
+    }
+    .red{
+        background-color: #F2DEDE;
     }
 </style>
 
@@ -56,7 +59,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'name' => 'id',
 			'type'=>'raw',
 			'value' => 'CHtml::link(CHtml::encode($data->id),array("admin/update","id"=>$data->id))',
-            'filter'=>TbHtml::activeTextField($model, 'id', array('style'=>'width: 40px')),
+            //'filter'=>TbHtml::activeTextField($model, 'id', array('style'=>'width: 40px')),
+            'filterInputOptions'=>array('style'=>'width: 40px'),
             //'headerHtmlOptions'=>array('style'=>'width: 50px'),
             //'filterHtmlOptions'=>array('style'=>'width: 50px'),
             'htmlOptions'=>array('style'=>'width: 40px'),
@@ -75,7 +79,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'create_at',
             'type'=>'date',
-            'filter'=>TbHtml::activeTextField($model, 'create_at', array('style'=>'width: 80px')),
+            'filterInputOptions'=>array('style'=>'width: 80px'),
         ),
 		array(
 			'name' => 'username',
@@ -86,27 +90,28 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'first_name',
             'type'=>'raw',
-            'filter'=>TbHtml::activeTextField($model, 'first_name', array('style'=>'width: 100px')),
+            'filterInputOptions'=>array('style'=>'width: 100px'),
             'htmlOptions'=>array('style'=>'width: 100px'),
         ),
 		
         array(
             'name' => 'last_name',
             'type'=>'raw',
-            'filter'=>TbHtml::activeTextField($model, 'last_name', array('style'=>'width: 150px')),
+            'filterInputOptions'=>array('style'=>'width: 150px'),
             'htmlOptions'=>array('style'=>'width: 150px'),
         ),
         array(
             'name' => 'country_id',
             'type'=>'raw',
-            'filter'=>TbHtml::activeTextField($model, 'country_id', array('style'=>'width: 100px')),
+            'filterInputOptions'=>array('style'=>'width: 100px'),
             'value' => '$data->countryName',
             'htmlOptions'=>array('style'=>'width: 100px'),
         ),
         array(
             'name' => 'city_id',
             'type'=>'raw',
-            'filter'=>TbHtml::activeTextField($model, 'city_id', array('style'=>'width: 100px')),
+            //'filter'=>TbHtml::activeTextField($model, 'city_id', array('style'=>'width: 100px')),
+            'filterInputOptions'=>array('style'=>'width: 100px'),
             'value' => '$data->cityName',
             'htmlOptions'=>array('style'=>'width: 100px'),
         ),
@@ -177,26 +182,21 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'template' => '{on} {off} {ban} {delete}',
             'buttons' => array(
                 'on' => array(
-                        //'labelExpression' => '$data->status == 1 ? Yii::t("main","Off"):Yii::t("main","On")',
                         'url' => 'Yii::app()->controller->createUrl("status", array("id" => $data->id, "status" => User::STATUS_ACTIVE))',
-                        //'cssClassExpression' => '$data->status == 1 ? "button on fl-l mr-5" : "button off fl-l mr-5"',
                         'label'=>'',
                         'options' => array(
                             'class'=>'icon-ok',
-                            //'href' => 'Yii::app()->controller->createUrl("status", array("id" => $data->id, "status" => User::STATUS_NOACTIVE))',
                             'rel' => 'nofollow',
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
+                                'beforeSend' => 'js: function() {return confirm("' . Yii::t('main', 'Are you sure to activate this user') . '?");}',
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
-                        //'htmlTemplate' => '<span><b></b></span>',
-                        //'visible' => '$data->status == User::STATUS_NOACTIVE && UserModule::isAdmin()',
                         'visible' => '$data->status == User::STATUS_NOACTIVE',
                        ),
                 'off' => array(
-                        //'url'   =>  'Yii::app()->controller->createUrl("admin", array("id" => $data->user_id, "on" => (!$data->status) ? 1:0))',
                         'url' => 'Yii::app()->controller->createUrl("status", array("id" => $data->id, "status" => User::STATUS_NOACTIVE))',
                         'label'=>'',
                         'options' => array(
@@ -205,10 +205,10 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
+                                'beforeSend' => 'js: function() {return confirm("' . Yii::t('main', 'Are you sure to deactivate this user') . '?");}',
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
-                        //'htmlTemplate' => '<span><b></b></span>',
                         'visible' => '$data->status == User::STATUS_ACTIVE',
                        ),
                 'ban' => array(
@@ -220,38 +220,19 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
+                                'beforeSend' => 'js:
+                                         function() {
+                                                //$("#div-loading").addClass("grid-loading");
+                                                isDel = confirm("' . Yii::t('main', 'Are you sure to ban this user') . '?");
+                                                //if (!isDel)
+                                                //    $("#div-loading").removeClass("grid-loading");
+                                                return isDel;
+                                         }',
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
-                        //'htmlTemplate' => '<span><b></b></span>',
                         'visible' => '$data->status != User::STATUS_BANNED',
                        ),
-               /*'delete'   => array(
-                               'label'=>Yii::t("main","Delete"),
-                               'url' => 'Yii::app()->controller->createUrl("delete", array("id" => $data->user_id))',
-                               'options' => array(
-                                    'class' => 'button delete fl-l mr-5', 'rel' => 'nofollow',
-                                    'ajax' => array(
-                                        'type' => 'post',
-                                        'url'=>'js:$(this).attr("href")',
-                                        'beforeSend' => 'js:
-                                                 function() {
-                                                        $("#div-loading").addClass("grid-loading");
-                                                        isDel = confirm("' . Yii::t('main', 'Are you sure to delete this item') . '?");
-                                                        if (!isDel)
-                                                            $("#div-loading").removeClass("grid-loading");
-                                                        return isDel;
-                                                 }',
-                                        'success' => 'js:function(data) {
-                                            $("#div-loading").removeClass("grid-loading");
-                                            alert("vvvv");
-                                            $.fn.yiiGridView.update("users-grid");
-                                        }'
-                                    ),
-                               ),
-                               'htmlTemplate' => '<span><b></b></span>',
-                               'visible' => '($data->user_id != Yii::app()->user->id) && UserModule::isAdmin()',
-                               ),*/
             )),            
 	),
 )); 

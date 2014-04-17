@@ -104,4 +104,50 @@ class EController extends CController
 		return $baseUrl . '/' . ltrim($url, '/');
 	}
 
+    public function actionUpload()
+    {
+//         require('UploadHandler.php');
+//         $options = array(
+//                 'script_url' => 'http://justmoney-admin.smart/',
+//                 'upload_url' => 'http://justmoney-admin.smart/files/',
+//                 'upload_dir' => '/home/servbat/smart_lp1/backend/www/files/',
+//                 'param_name' => 'files'
+//         );
+//         $upload_handler = new UploadHandler($options);
+
+        if ($_FILES['files']){
+            $ext = pathinfo($_FILES['files']['name'][0], PATHINFO_EXTENSION);
+            $filename = 'news-origin-'.substr(md5(uniqid()), 0, 8) . "." . $ext;
+            //$file_path = Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename;
+            $file_path = Yii::app()->getBasePath() . $this->module->uploadDir . $filename;
+            $file_url = $this->module->uploadUrl . $filename;
+            $file_url_resized = $this->module->uploadUrl .'resized-'. $filename;
+            $result = move_uploaded_file($_FILES['files']['tmp_name'][0],  $file_path);
+            //$resized = ImageHelper::makeNewsThumb(Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename);
+            $resized = ImageHelper::makeNewsThumb($file_path);
+            //$resized = $file_path;
+            //unlink($file_path);
+            $json = array(
+                    "files"=>array(
+                            array(
+                                    "name"=>$filename,
+                                    //"original"=>$resized,
+                                    "original"=>$file_url,
+                                    "resized"=>$file_url_resized,
+                                    //"url"=> Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $filename,
+                                    //"url"=>$file_url,
+                            )));
+        
+            if ($result)
+                echo json_encode($json);
+            else
+                echo  json_encode(array("error"=>"error"));
+        }
+        
+        
+        
+        
+        
+    }
+    
 }

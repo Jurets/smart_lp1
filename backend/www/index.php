@@ -17,6 +17,5 @@ Initializer::create('./../', 'backend', array(
 	__DIR__ .'/../../common/config/main.php',
     __DIR__ .'/../../common/config/env.php',
     __DIR__ .'/../../common/config/env/dev.php',
-	//__DIR__ .'/../../common/config/env/prod.php',
 	__DIR__ .'/../../common/config/local.php',
 ))->run();
