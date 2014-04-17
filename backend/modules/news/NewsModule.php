@@ -4,7 +4,7 @@ class NewsModule extends CWebModule
 	// path to directory for upload files
 	public $uploadDir;
 	public $uploadUrl;
-	public $newsShow = array('/news/news');
+	public $newsShow = array('/news');
 	public function init()
 	{
 		// this method is called when the module is being created
