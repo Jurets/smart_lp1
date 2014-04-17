@@ -124,6 +124,9 @@ return array(
         'invitation' => array(
             'class' => 'backend.modules.invitation.InvitationModule',
         ),
+        'requisites' => array(
+            'class' => 'backend.modules.requisites.RequisitesModule',
+        ),
     ),
     
 );
