@@ -3,6 +3,7 @@ class NewsModule extends CWebModule
 {
 	// path to directory for upload files
 	public $uploadDir;
+	public $uploadUrl;
 	public $newsShow = array('/news/news');
 	public function init()
 	{
@@ -16,6 +17,7 @@ class NewsModule extends CWebModule
 		));
 		//Yii::setPathOfAlias('news.uploads', Yii::app()->basePath .DIRECTORY_SEPARATOR.'www'.DIRECTORY_SEPARATOR. 'uploads');
 		$this->uploadDir = Yii::app()->params['upload.path'];
+		$this->uploadUrl = Yii::app()->params['upload.url'];
 	}
 
 	/**

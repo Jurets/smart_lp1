@@ -117,6 +117,8 @@ class NewsController extends EController
 			$filename = 'news-origin-'.substr(md5(uniqid()), 0, 8) . "." . $ext;
 			//$file_path = Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename;
 			$file_path = Yii::app()->getBasePath() . $this->module->uploadDir . $filename;
+			$file_url = $this->module->uploadUrl . $filename;
+			$file_url_resized = $this->module->uploadUrl .'resized-'. $filename;
 			$result = move_uploaded_file($_FILES['files']['tmp_name'][0],  $file_path);
 			//$resized = ImageHelper::makeNewsThumb(Yii::getPathOfAlias('news.uploads').DIRECTORY_SEPARATOR.$filename);
 			$resized = ImageHelper::makeNewsThumb($file_path);
@@ -126,9 +128,11 @@ class NewsController extends EController
 					"files"=>array(
 							array(
 									"name"=>$filename,
-									"original"=>$resized,
+									//"original"=>$resized,
+									"original"=>$file_url,
+									"resized"=>$file_url_resized,
 									//"url"=> Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $filename,
-									"url"=>$file_path,
+									//"url"=>$file_url,
 							)));
 		
 			if ($result)
