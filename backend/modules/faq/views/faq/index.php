@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'List Faq', 'url' => array('index')),
+    array('label' => 'List Faq', 'url' => array('admin')),
     array('label' => 'Create Faq', 'url' => array('create')),
 );
 

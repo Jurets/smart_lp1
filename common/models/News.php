@@ -16,6 +16,8 @@
  */
 class News extends CActiveRecord
 {
+	/* Image upload by standard equipment */
+	public $illustration;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,15 +34,17 @@ class News extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('author, created', 'required'),
-			array('author, activity', 'numerical', 'integerOnly'=>true),
+			array('title', 'required'),
+			//array('author, activity', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>75),
-			array('announcement', 'length', 'max'=>255),
+			//array('announcement', 'length', 'max'=>255),
 			array('image', 'length', 'max'=>255),
-			array('activated, content', 'safe'),
+			array('illustration', 'file', 'types'=>'jpg, jpeg, gif, png', 'allowEmpty'=>true),
+			array('activated, title,content', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
+			//array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
+			//array('title,content', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +73,7 @@ class News extends CActiveRecord
 			'announcement' => 'Announcement',
 			'content' => 'Content',
 			'image' => 'Image',
+			'illustration' => 'Illustration',
 			'activity' => 'Activity',
 		);
 	}
@@ -115,5 +120,27 @@ class News extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public function callAfterFind(){
+		$this->afterFind();
+	}
+	protected function afterFind(){
+		$this->activated = strtotime($this->activated);
+		$this->activated = date('H:i:s d-m-Y', $this->activated);
+		$this->created = strtotime($this->created);
+		$this->created = date('H:i:s d-m-Y', $this->created);
+		parent::afterFind();
+		return true;
+	}
+	protected function beforeValidate(){
+		$this->activated = strtotime($this->activated);
+		$this->activated = date('Y-d-m H:i:s' ,$this->activated);
+		parent::beforeValidate();
+		return true;
+	}
+	/*resized- & /upload/ can be changed this, if you wish*/
+	public function getUploadImage($pathToUploadDir = '/uploads/', $resizePrefix = 'resized-', $resized = TRUE){
+		return ($resized) ? $pathToUploadDir . $resizePrefix . $this->image : $pathToUploadDir . $this->image;  
 	}
 }

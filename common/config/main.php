@@ -69,6 +69,7 @@ return array(
 		// php configuration
 		'php.defaultCharset' => 'utf-8',
 		'php.timezone'       => 'UTC',
+		'upload.path' => DIRECTORY_SEPARATOR .'www'.DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR,
 	),
     
     // application modules
@@ -117,9 +118,11 @@ return array(
         'training' => array(
             'class' => 'backend.modules.training.TrainingModule',
         ),
-
         'cities' => array(
             'class' => 'backend.modules.cities.CitiesModule',
+        ),
+        'invitation' => array(
+            'class' => 'backend.modules.invitation.InvitationModule',
         ),
     ),
     

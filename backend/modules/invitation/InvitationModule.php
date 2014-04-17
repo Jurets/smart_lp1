@@ -1,9 +1,8 @@
 <?php
-class NewsModule extends CWebModule
+class InvitationModule extends CWebModule
 {
-	// path to directory for upload files
-	public $uploadDir;
-	public $newsShow = array('/news/news');
+	// path
+	public $invitationShow = array('/invitation/invitation');
 	public function init()
 	{
 		// this method is called when the module is being created
@@ -11,11 +10,9 @@ class NewsModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
-				'news.models.*',
-				'news.components.*',
+				'faq.models.*',
+				'faq.components.*',
 		));
-		//Yii::setPathOfAlias('news.uploads', Yii::app()->basePath .DIRECTORY_SEPARATOR.'www'.DIRECTORY_SEPARATOR. 'uploads');
-		$this->uploadDir = Yii::app()->params['upload.path'];
 	}
 
 	/**
@@ -24,11 +21,11 @@ class NewsModule extends CWebModule
 	 * @param $dic
 	 * @return string
 	 */
-	public static function t($str='',$params=array(),$dic='news') {
-		if (Yii::t("NewsModule", $str)==$str)
-			return Yii::t("NewsModule.".$dic, $str, $params);
+	public static function t($str='',$params=array(),$dic='faq') {
+		if (Yii::t("FaqModule", $str)==$str)
+			return Yii::t("FaqModule.".$dic, $str, $params);
 		else
-			return Yii::t("NewsModule", $str, $params);
+			return Yii::t("FaqModule", $str, $params);
 	}
 	
 	public function beforeControllerAction($controller, $action)
