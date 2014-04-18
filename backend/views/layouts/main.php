@@ -82,6 +82,7 @@
                     array('url'=>Yii::app()->getModule('faq')->faqShow, 'label'=>Yii::app()->getModule('faq')->t("FAQ")),
                     array('url'=>Yii::app()->getModule('countries')->countriesShow, 'label'=>Yii::app()->getModule('countries')->t("Countries")),
                     array('url'=>Yii::app()->getModule('invitation')->invitationShow, 'label'=>Yii::app()->getModule('invitation')->t("Invitation")),
+                    array('url'=>Yii::app()->getModule('requisites')->requisitesShow, 'label'=>Yii::app()->getModule('requisites')->t("Requisites")),
 
                 ),
             ));
