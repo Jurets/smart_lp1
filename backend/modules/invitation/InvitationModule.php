@@ -10,8 +10,8 @@ class InvitationModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
-				'faq.models.*',
-				'faq.components.*',
+				'invitation.models.*',
+				'invitation.components.*',
 		));
 	}
 
@@ -22,10 +22,10 @@ class InvitationModule extends CWebModule
 	 * @return string
 	 */
 	public static function t($str='',$params=array(),$dic='faq') {
-		if (Yii::t("FaqModule", $str)==$str)
-			return Yii::t("FaqModule.".$dic, $str, $params);
+		if (Yii::t("InvitationModule", $str)==$str)
+			return Yii::t("InvitationModule.".$dic, $str, $params);
 		else
-			return Yii::t("FaqModule", $str, $params);
+			return Yii::t("InvitationModule", $str, $params);
 	}
 	
 	public function beforeControllerAction($controller, $action)
