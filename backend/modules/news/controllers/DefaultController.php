@@ -46,6 +46,22 @@ class DefaultController extends EController
 		);
 	}
 
+    /**
+    * put your comment there...
+    * 
+    */
+    public function actions() {
+        return array(
+            'upload'=>array(
+                'class'=>'common.extensions.FileUpload.UploadAction',
+                'prefixOrigin'=>'news-origin-',
+                'prefixResized'=>'resized-news-origin-',
+                'uploadDir'=>$this->module->uploadDir,
+                'uploadUrl'=>$this->module->uploadUrl,
+            ),            
+        );
+    }
+    
 	/*
 	 * addition methods and fields - temporary destinated here
 	 * if ok it returns natty file name (for example to model-implementation)
@@ -104,7 +120,6 @@ class DefaultController extends EController
 	 */
 	public function actionUpdate($id)
 	{
-		debug_backtrace();
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed

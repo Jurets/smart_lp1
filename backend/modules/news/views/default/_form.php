@@ -70,15 +70,9 @@
 		<?php echo $form->error($model,'content'); ?>
 	</div>
 
-	<!-- <div class="row">
-		<?php //echo $form->labelEx($model,'image'); ?>
-		<?php //echo $form->textField($model,'image',array('size'=>15,'maxlength'=>255)); ?>
-		<?php //echo $form->error($model,'image'); ?>
-	</div>-->
-	
 	<div class="row buttons">
 	
-	<?php echo $form->hiddenField($model, 'image'); ?>
+<!--	<?php echo $form->hiddenField($model, 'image'); ?>
     <?php $form->label($model, 'Upload illustration') ?>
 
     <div class="news-image-preview" id="news-image-preview" style="width: 336px; height: 160px; border: 1px solid gray; background: url('<?php
@@ -88,19 +82,15 @@
     <br/>
     <span class="" id='select-image'>
     
-        <!-- The file input field used as target for the file upload widget -->
         <?php echo CHtml::activefileField($model, 'illustration', array('name'=>'files[]', 'id'=>'fileupload')); ?>
-        <?php //echo CHtml::button('illustration', array('name'=>'files[]', 'id'=>'fileupload')); ?>
     </span>
     <div id='uploader-progress'></div>
 	</div>
 
-	<!-- <div class="row">
-		<?php //echo $form->labelEx($model,'activity'); ?>
-		<?php //echo $form->textField($model,'activity'); ?>
-		<?php //echo $form->error($model,'activity'); ?>
-	</div> -->
-	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>-->
+    
+<?php $this->widget('common.extensions.FileUpload.widgets.UploadFileWidget.UploadFileWidget', array('model'=>$model)); ?>    
+    
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
@@ -109,7 +99,7 @@
 <!--  <img src="http://justmoney-admin.smart/files/apple-touch-icon.png" /> -->
 </div><!-- form -->
     
- <script>
+ <!--<script>
     $(function() {
         var url = "<?=$this->createAbsoluteUrl('upload')?>";
 
@@ -137,4 +127,4 @@
         //$("#News_image").val(imagePath);
         $("#News_image").val(imageName);
     }
-</script>
+</script>-->
