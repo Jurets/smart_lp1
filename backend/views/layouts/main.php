@@ -82,6 +82,7 @@
                     array('url'=>Yii::app()->getModule('faq')->faqShow, 'label'=>Yii::app()->getModule('faq')->t("FAQ")),
                     array('url'=>Yii::app()->getModule('countries')->countriesShow, 'label'=>Yii::app()->getModule('countries')->t("Countries")),
                     array('url'=>Yii::app()->getModule('invitation')->invitationShow, 'label'=>Yii::app()->getModule('invitation')->t("Invitation")),
+                    array('url'=>Yii::app()->getModule('chat')->show, 'label'=>Yii::app()->getModule('chat')->t("Chat")),
 
                 ),
             ));
@@ -123,7 +124,8 @@
 <!--  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>  -->
 <script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/libs/bootstrap.min.js"></script>
 <script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/plugins.js"></script>
-<script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/main.js"></script><script>
+<script src="<?=Yii::app()->createAbsoluteUrl('/')?>/js/main.js"></script>
+<script>
 	var _gaq = [
 		['_setAccount', 'UA-XXXXX-X'],
 		['_trackPageview']

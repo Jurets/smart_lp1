@@ -29,6 +29,27 @@ return array(
 
 	// application modules
 	'modules' => array(
+        'news' => array(
+            'class' => 'backend.modules.news.NewsModule',
+        ),
+        'faq' => array(
+            'class' => 'backend.modules.faq.FaqModule',
+        ),
+        'countries' => array(
+            'class' => 'backend.modules.countries.CountriesModule',
+        ),
+        'training' => array(
+            'class' => 'backend.modules.training.TrainingModule',
+        ),
+        'cities' => array(
+            'class' => 'backend.modules.cities.CitiesModule',
+        ),
+        'invitation' => array(
+            'class' => 'backend.modules.invitation.InvitationModule',
+        ),
+        'chat' => array(
+            'class' => 'backend.modules.chat.ChatModule',
+        ),
     ),
     
     'import'=>array(
