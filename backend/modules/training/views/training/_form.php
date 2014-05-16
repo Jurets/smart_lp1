@@ -97,7 +97,7 @@
 
 <script>
     $(function() {
-        var url = "<?=$this->createAbsoluteUrl('news/upload')?>";
+        var url = "<?=$this->createAbsoluteUrl('upload')?>";
 
         $('#fileupload').fileupload({
             url: url,

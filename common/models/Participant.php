@@ -33,7 +33,7 @@ class Participant extends User
 		 //NOTE: you should only define rules for those attributes that
 		 //will receive user inputs.
 		 return CMap::mergeArray(parent::rules(), array(
-			 array('tariff_id, city_id, first_name, last_name, country_id', 'safe'),
+			 array('tariff_id, city_id, first_name, last_name, country_id, city_id', 'safe'),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
    		     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
@@ -89,11 +89,12 @@ class Participant extends User
         $criteria->compare('user.last_name', $this->last_name, true);
 		$criteria->compare('user.tariff_id', $this->tariff_id);
         
+        $criteria->with = array('city', 'city.country');
         if (!empty($this->country_id)) {
-            $criteria->with = array('city', 'city.country');
             $criteria->compare('country.name', $this->country_id, true);
-            //$criteria->addCondition('country.name = :country_id');
-            //$criteria->params = array(':country_id'=>$this->country_id);
+        }
+        if (!empty($this->city_id)) {
+            $criteria->compare('city.name', $this->city_id, true);
         }
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;

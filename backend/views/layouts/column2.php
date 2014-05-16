@@ -19,11 +19,13 @@
 		$this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'Operations',
 		));
-		$this->widget('bootstrap.widgets.TbNav', array(
-		//$this->widget('bootstrap.widgets.TbListView', array(
-			'items'=>$this->menu,
-			'htmlOptions'=>array('class'=>'operations'),
-		));
+		if (isset($this->menu)) {
+            $this->widget('bootstrap.widgets.TbNav', array(
+		    //$this->widget('bootstrap.widgets.TbListView', array(
+			    'items'=>$this->menu,
+			    'htmlOptions'=>array('class'=>'operations'),
+		    ));
+        }
 		$this->endWidget();
 	?>
 	</div><!-- sidebar -->

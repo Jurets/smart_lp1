@@ -1,7 +1,7 @@
 <?php
 class ProjectMigration extends CDbMigration
 {
-    protected $tableSqlOptions = 'ENGINE=InnoDB CHARSET=utf8';
+    protected $tableSqlOptions = 'ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci';
     
     protected function importSqlDump($sqlDumpPath)
     {
