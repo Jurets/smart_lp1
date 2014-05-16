@@ -1,15 +1,15 @@
 <?php
-/* @var $this CitiesController */
-/* @var $model Cities */
+/* @var $this InvitationController */
+/* @var $model Invitation */
 
 $this->breadcrumbs=array(
-	'Cities'=>array('admin'),
+	'Invitations'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Cities', 'url'=>array('admin')),
-	array('label'=>'Create Cities', 'url'=>array('create')),
+	array('label'=>'List Invitation', 'url'=>array('index')),
+	array('label'=>'Create Invitation', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#cities-grid').yiiGridView('update', {
+	$('#invitation-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Cities</h1>
+<h1>Manage Invitations</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,32 +41,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
-	'id'=>'cities-grid',
-    'type'=>TbHtml::GRID_TYPE_STRIPED,
+	'id'=>'invitation-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-
-        array(
-            'name'=>'id',
-            'filter'=>TbHtml::activeTextField($model, 'id', array('style'=>'width: 50px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
-
-        array(
-            'name'=>'country_id',
-            'filter'=>TbHtml::activeTextField($model, 'country_id', array('style'=>'width: 50px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
-
-        array(
-            'name'=>'name',
-            'filter'=>TbHtml::activeTextField($model, 'name', array('style'=>'width: 150 px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
-
-
-
+		'id',
+		'video_link',
+		'file',
+		'file_link',
+		'created',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),

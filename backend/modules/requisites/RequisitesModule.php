@@ -1,8 +1,9 @@
 <?php
-class InvitationModule extends CWebModule
+
+class RequisitesModule extends CWebModule
 {
-	// path
-	public $invitationShow = array('/invitation/invitation');
+    public $requisitesShow = array('/requisites/requisites');
+
 	public function init()
 	{
 		// this method is called when the module is being created
@@ -10,24 +11,24 @@ class InvitationModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
-				'invitation.models.*',
-				'invitation.components.*',
+			'requisites.models.*',
+			'requisites.components.*',
 		));
 	}
 
-	/**
-	 * @param $str
-	 * @param $params
-	 * @param $dic
-	 * @return string
-	 */
-	public static function t($str='',$params=array(),$dic='faq') {
-		if (Yii::t("InvitationModule", $str)==$str)
-			return Yii::t("InvitationModule.".$dic, $str, $params);
-		else
-			return Yii::t("InvitationModule", $str, $params);
-	}
-	
+    /**
+     * @param $str
+     * @param $params
+     * @param $dic
+     * @return string
+     */
+    public static function t($str='',$params=array(),$dic='Requisites') {
+        if (Yii::t("RequisitesModule", $str)==$str)
+            return Yii::t("RequisitesModule.".$dic, $str, $params);
+        else
+            return Yii::t("RequisitesModule", $str, $params);
+    }
+
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))
