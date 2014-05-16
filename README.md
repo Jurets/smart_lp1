@@ -138,3 +138,4 @@ The following extensions are part of YIInitializr-basic template:
 
 
 11111111111111111111
+2222222222222222222222
