@@ -51,6 +51,8 @@ class Participant extends User
             'referal'=>array(self::BELONGS_TO, 'Participant', 'refer_id'),
             'tariff'=>array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
             'city'=>array(self::BELONGS_TO, 'Cities', 'city_id'),
+            'chatban'=>array(self::HAS_ONE, 'Chatban', 'user_id', 'condition'=>'active = 1'/*, 'limit'=>1*/),
+            'chatbanhistory'=>array(self::HAS_MANY, 'Chatban', 'user_id'),
 		));
 	}
 

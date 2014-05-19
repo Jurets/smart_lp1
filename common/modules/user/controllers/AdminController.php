@@ -13,18 +13,18 @@ class AdminController extends CController
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
+	/*public function filters()
 	{
 		return CMap::mergeArray(parent::filters(),array(
 			'accessControl', // perform access control for CRUD operations
 		));
-	}
+	}*/
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
+	/*public function accessRules()
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -35,7 +35,7 @@ class AdminController extends CController
 				'users'=>array('*'),
 			),
 		);
-	}
+	}*/
 	/**
 	 * Manages all models.
 	 */

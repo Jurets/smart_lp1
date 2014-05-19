@@ -31,7 +31,7 @@ class DefaultController extends EController
         $model = new User;
         if (isset($_GET['User'])) {
             if ($user = User::model()->findByAttributes(array('username'=>$_GET['User']['username']))) {
-                $this->redirect(array('userban','id'=>$user->id));
+                $this->redirect(array('chatban','id'=>$user->id));
             } else {
                 $model->addError('username', 'Пользователь не найден');
             }
@@ -45,11 +45,36 @@ class DefaultController extends EController
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionUserban($id)
+	public function actionChatban($id)
 	{
-        $user = User::model()->findByPk($id);
-		$this->render('userban',array(
+        if (!$user = Participant::model()->findByPk($id)) {
+            throw new CHttpException(404, 'Пользователь с таким ID не найден');
+        }
+        
+        if (!$chatban = $user->chatban) {
+            $chatban = New Chatban();
+        }
+        if (isset($_POST['Chatban'])) {
+            if (isset($_POST['submit_ban'])) {
+                $chatban->attributes = $_POST['Chatban'];
+                $chatban->user_id = $user->id;
+                $chatban->active = Chatban::STATUS_ACTIVE;
+            } else if (isset($_POST['submit_unban'])) {
+                $chatban->active = Chatban::STATUS_NONACTIVE;
+            } else
+                throw new CHttpException(404, 'Ошибка при бане юзера');
+            //проверка    
+            if ($chatban->validate()) {
+                if ($chatban->save()) {
+                    //$this->redirect(Yii::app()->createUrl('user/admin/view', array('id'=>$id)));
+                } else 
+                    throw new CHttpException(404, 'Ошибка при бане юзера');
+            }
+        }
+        
+		$this->render('chatban',array(
 			'user'=>$user,
+            'chatban'=>$chatban,
 		));
 	}
 

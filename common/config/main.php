@@ -108,5 +108,6 @@ return array(
             'returnLogoutUrl' => array('/user/login'),
         ),
     ),
-    
+    'language'=>'ru',
+    'timeZone'=>'Europe/Kiev',
 );
