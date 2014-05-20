@@ -35,11 +35,11 @@ $('.search-form form').submit(function(){
     }
 </style>
 
-<h1><?php echo UserModule::t("Manage Users"); ?></h1>
+<h1><?php echo UserModule::t("Unified database participants", array(), 'participant'); ?></h1>
 
-<p><?php echo UserModule::t("You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done."); ?></p>
 
-<?php echo CHtml::link(UserModule::t('Advanced Search'),'#',array('class'=>'search-button')); ?>
+<!--<p><?php echo UserModule::t("You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done."); ?></p>-->
+<?php //echo CHtml::link(UserModule::t('Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
     'model'=>$model,
@@ -122,7 +122,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		),
         array(
             'name'=>'structure',
-            'header'=>'structure',
+            'header'=>UserModule::t("Structure", array(), 'participant'),
             'type'=>'raw',
             'value'=>null,
             'filter'=>false,
@@ -130,7 +130,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name'=>'business',
-            'header'=>'business',
+            'header'=>UserModule::t("Business Club", array(), 'participant'),
             'type'=>'raw',
             'value'=>null,
             'filter'=>false,
@@ -144,7 +144,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name'=>'checks',
-            'header'=>'checks',
+            'header'=>UserModule::t("Checks", array(), 'participant'),
             'type'=>'raw',
             'value'=>null,
             'filter'=>false,
@@ -160,7 +160,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name'=>'time',
-            'header'=>'time',
+            'header'=>UserModule::t("Time", array(), 'participant'),
             'type'=>'raw',
             'value'=>null,
             'filter'=>false,
@@ -187,6 +187,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                         'options' => array(
                             'class'=>'icon-ok',
                             'rel' => 'nofollow',
+                            'title' => UserModule::t("Activate", array(), 'participant'),
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
@@ -194,7 +195,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
-                        'visible' => '$data->status == User::STATUS_NOACTIVE',
+                        'visible' => '$data->superuser != 1 && ($data->status == User::STATUS_NOACTIVE)',
                        ),
                 'off' => array(
                         'url' => 'Yii::app()->controller->createUrl("status", array("id" => $data->id, "status" => User::STATUS_NOACTIVE))',
@@ -202,6 +203,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                         'options' => array(
                             'class'=>'icon-off',
                             'rel' => 'nofollow',
+                            'title' => UserModule::t("Deactivate", array(), 'participant'),
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
@@ -209,7 +211,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
-                        'visible' => '$data->status == User::STATUS_ACTIVE',
+                        'visible' => '($data->superuser != 1) && ($data->status == User::STATUS_ACTIVE)',
                        ),
                 'ban' => array(
                         'url' => 'Yii::app()->controller->createUrl("status", array("id" => $data->id, "status" => User::STATUS_BANNED))',
@@ -217,6 +219,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                         'options' => array(
                             'class'=>'icon-ban-circle',
                             'rel' => 'nofollow',
+                            'title' => UserModule::t("Blacklist", array(), 'participant'),
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
@@ -231,8 +234,11 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
-                        'visible' => '$data->status != User::STATUS_BANNED',
+                        'visible' => '($data->superuser != 1) && ($data->status != User::STATUS_BANNED)',
                        ),
+                'delete' => array(
+                    'visible' => '($data->superuser != 1)',
+                )
             )),            
 	),
 )); 

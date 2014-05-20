@@ -62,7 +62,16 @@ class Participant extends User
 	public function attributeLabels()
 	{
 		return CMap::mergeArray(parent::attributeLabels(), array(
-			'create_at' => UserModule::t("Created"),
+            'create_at' => UserModule::t("Created"),
+            'username' => UserModule::t("Domain", array(), 'participant'),
+            'first_name' => UserModule::t("Firstname", array(), 'participant'),
+            'last_name' => UserModule::t("Lastname", array(), 'participant'),
+            'city_id' => UserModule::t("City", array(), 'participant'),
+            'country_id' => UserModule::t("Country", array(), 'participant'),
+            'structure' => UserModule::t("Structure", array(), 'participant'),
+            'business' => UserModule::t("Business Club", array(), 'participant'),
+            'refer_id' => UserModule::t("Referal", array(), 'participant'),
+            'tariff_id' => UserModule::t("Tariff", array(), 'participant'),
 		));
 	}
 
