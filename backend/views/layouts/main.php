@@ -84,6 +84,7 @@
                     array('url'=>Yii::app()->getModule('invitation')->invitationShow, 'label'=>Yii::app()->getModule('invitation')->t("Invitation")),
                     array('url'=>Yii::app()->getModule('chat')->show, 'label'=>Yii::app()->getModule('chat')->t("Chat")),
                     array('url'=>Yii::app()->getModule('requisites')->requisitesShow, 'label'=>Yii::app()->getModule('requisites')->t("Requisites")),
+                    array('url'=>Yii::app()->getModule('mp')->mpShow, 'label'=>Yii::app()->getModule('mp')->t('Marketings Plan')),
 
                 ),
             ));

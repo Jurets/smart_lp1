@@ -9,6 +9,15 @@
 .w-1000{
     width: 1000px;
 }
+ .green{
+        background-color: #DFF0D8;
+    }
+    .red{
+        background-color: #F2DEDE;
+    }
+    .mr{
+        padding-right: 5px;
+    }
 
 
 
