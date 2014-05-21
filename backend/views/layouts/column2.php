@@ -17,7 +17,7 @@
 	<div id="sidebar">
 	<?php	
 		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>MpModule::t('Operations'),
+			'title'=>'Operations',
 		));
 		if (isset($this->menu)) {
             $this->widget('bootstrap.widgets.TbNav', array(
