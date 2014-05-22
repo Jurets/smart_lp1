@@ -6,6 +6,7 @@ return array(
     
     'Domain' => 'Домен',
     'Tariff' => 'Статус',
+    'Created' => 'Создан',
     
     'Firstname' => 'Имя',
     'Lastname' => 'Фамилия',
@@ -16,6 +17,8 @@ return array(
     'Referal' => 'Реферал',
     'Checks' => 'Чеки',
     'Time' => 'Время',
+    'Phone' => 'Телефон',
+    'Skype' => 'Скайп',
 
     'Activate' => 'Запустить',
     'Deactivate' => 'Заблокировать',

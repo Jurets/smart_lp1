@@ -25,6 +25,8 @@ class Participant extends User
     public $fdl = null;
     public $time = null;
     
+    private $dict_participant = 'participant';
+    
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -34,6 +36,7 @@ class Participant extends User
 		 //will receive user inputs.
 		 return CMap::mergeArray(parent::rules(), array(
 			 array('tariff_id, city_id, first_name, last_name, country_id, city_id', 'safe'),
+             array('id', 'safe', 'on'=>array('search', 'seestructure')),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
    		     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
@@ -49,6 +52,8 @@ class Participant extends User
 		// class name for the relations automatically generated below.
 		return CMap::mergeArray(parent::relations(), array(
             'referal'=>array(self::BELONGS_TO, 'Participant', 'refer_id'),
+            //'subCount'=>array(self::STAT, 'Participant', 'id', 'index'=>'refer_id'),
+            'subCount'=>array(self::STAT, 'Participant', 'refer_id'),
             'tariff'=>array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
             'city'=>array(self::BELONGS_TO, 'Cities', 'city_id'),
             'chatban'=>array(self::HAS_ONE, 'Chatban', 'user_id', 'condition'=>'active = 1'/*, 'limit'=>1*/),
@@ -62,16 +67,18 @@ class Participant extends User
 	public function attributeLabels()
 	{
 		return CMap::mergeArray(parent::attributeLabels(), array(
-            'create_at' => UserModule::t("Created"),
-            'username' => UserModule::t("Domain", array(), 'participant'),
-            'first_name' => UserModule::t("Firstname", array(), 'participant'),
-            'last_name' => UserModule::t("Lastname", array(), 'participant'),
-            'city_id' => UserModule::t("City", array(), 'participant'),
-            'country_id' => UserModule::t("Country", array(), 'participant'),
-            'structure' => UserModule::t("Structure", array(), 'participant'),
-            'business' => UserModule::t("Business Club", array(), 'participant'),
-            'refer_id' => UserModule::t("Referal", array(), 'participant'),
-            'tariff_id' => UserModule::t("Tariff", array(), 'participant'),
+            'create_at' => UserModule::t("Created", array(), $this->dict_participant),
+            'username' => UserModule::t("Domain", array(), $this->dict_participant),
+            'first_name' => UserModule::t("Firstname", array(), $this->dict_participant),
+            'last_name' => UserModule::t("Lastname", array(), $this->dict_participant),
+            'city_id' => UserModule::t("City", array(), $this->dict_participant),
+            'country_id' => UserModule::t("Country", array(), $this->dict_participant),
+            'structure' => UserModule::t("Structure", array(), $this->dict_participant),
+            'business' => UserModule::t("Business Club", array(), $this->dict_participant),
+            'refer_id' => UserModule::t("Referal", array(), $this->dict_participant),
+            'tariff_id' => UserModule::t("Tariff", array(), $this->dict_participant),
+            'phone' => UserModule::t("Phone", array(), $this->dict_participant),
+            'skype' => UserModule::t("Skype", array(), $this->dict_participant),
 		));
 	}
 
@@ -96,23 +103,36 @@ class Participant extends User
             
 		$criteria=new CDbCriteria;
         
-        $criteria->compare('user.first_name', $this->first_name, true);
-        $criteria->compare('user.last_name', $this->last_name, true);
-		$criteria->compare('user.tariff_id', $this->tariff_id);
-        
-        $criteria->with = array('city', 'city.country');
-        if (!empty($this->country_id)) {
-            $criteria->compare('country.name', $this->country_id, true);
-        }
-        if (!empty($this->city_id)) {
-            $criteria->compare('city.name', $this->city_id, true);
-        }
+        if ($this->scenario == 'empty') {                      //пустой
+            //нужно получить заведомо пустой набор данных
+            $criteria->condition = '1=2';   //костыль!!!!
+            //$dataProvider = New CArrayDataProvider(array()); //тоже костыль!!!
+        } else {
+            $criteria->compare('user.first_name', $this->first_name, true);
+            $criteria->compare('user.last_name', $this->last_name, true);
+            $criteria->with = array('city', 'city.country');
+            if (!empty($this->country_id)) {
+                $criteria->compare('country.name', $this->country_id, true);
+            }
+            if (!empty($this->city_id)) {
+                $criteria->compare('city.name', $this->city_id, true);
+            }
+
+            //if ($this->scenario == 'seestructure') {        //структура рефера
+            if (isset($this->refer_id)) {
+                $criteria->addCondition('refer_id = :refer_id');
+                $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id'=>$this->refer_id));
+            }
+            if ($this->scenario == 'search') {                  //обычный поиск
+		        $criteria->compare('user.tariff_id', $this->tariff_id);
+            } else if ($this->scenario == 'structure') {        //поиск для структуры
+                $criteria->addCondition('superuser <> 1');         //исключаем суперпользователя
+                $criteria->compare('user.phone', $this->phone);
+                $criteria->compare('user.skype', $this->skype);
+            }
+        } 
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;
-                
-		/*return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));*/
 	}
 
 	/**

@@ -58,18 +58,34 @@ class AdminController extends EController
      */
     public function actionStructure()
     {
-        $model = new Participant('search');
+        $model = new Participant('empty');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Participant'])) {
+            $model->scenario = 'structure';
             $model->attributes = $_GET['Participant'];
-        } else if (isset($_GET['User'])) {
-            $model->attributes = $_GET['User'];
         }
         $this->render('structure',array(
             'model'=>$model,
         ));
     }
     
+    /**
+     * Manages all models.
+     */
+    public function actionSeestructure($id = null)
+    {
+        $model = new Participant('seestructure');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Participant'])) {
+            $model->attributes = $_GET['Participant'];
+        }
+        if (isset($id)) {
+            $model->refer_id = $id;
+        }
+        $this->render('seestructure',array(
+            'model'=>$model,
+        ));
+    }
 
 	/**
 	 * Displays a particular model.
