@@ -23,7 +23,7 @@
 
             <?php echo $form->textFieldControlGroup($model,'creationdate',array('span'=>5, 'disabled'=>'true')); ?>
 
-            <?php echo $form->checkBox($model,'activity',array('span'=>5)); ?>
+            <?php echo $form->checkBoxControlGroup($model,'activity',array('span'=>5)); ?>
     
             <?php echo $form->hiddenField($model, 'id'); ?>
     
@@ -37,8 +37,7 @@
             <?php echo $form->textField($mathparam, 'value', array('name'=>'Mathparams[value][]')); ?>
             <?php echo $form->error($mathparam, 'value'); ?>
             <?php echo $form->hiddenField($mathparam, 'id', array('name'=>'Mathparams[id][]')); ?>
-            <?php //echo CHtml::image('/testovichek/images/remover01.png', 'remove', array('onclick'=>'$(this).parent().remove(); return false;')); ?>
-            <span class="icon-trash" onclick="$(this).parent().remove(); return false;"> </span>
+            <span class="icon-trash" title="<?php echo MpModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
             <div></div>
             </div>
         <?php } ?>
@@ -49,17 +48,16 @@
                 <span class="mr"><?php echo MpModule::t('value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('id'=>'Mathparams_value', 'maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', ''); ?>
-                <span class="icon-trash" onclick="$(this).parent().remove(); return false;"> </span>
+                <span class="icon-trash" title="<?php echo MpModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
             </div>
             <?php } ?>
-        <div class="form-actions">
-         <?php // echo CHtml::button('button', array('id'=>'addMathParams', 'rel'=>'.copy', 'value'=>'add')); ?>
-        <?php echo TbHtml::button(MpModule::t('Add'), array(
-                    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
-		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
+    <?php echo TbHtml::button(MpModule::t('Add'), array(
+                    'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
+		    'size'=>TbHtml::BUTTON_SIZE_SMALL,
                     'rel'=>'.copy',
                     'id'=>'addMathParams',
                 )); ?>
+        <div class="form-actions">
         <?php echo TbHtml::submitButton($model->isNewRecord ? MpModule::t('Create') : MpModule::t('Save'),array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
