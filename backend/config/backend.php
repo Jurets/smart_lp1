@@ -56,6 +56,9 @@ return array(
         'mp' => array(
             'class' => 'backend.modules.mp.MpModule',
         ),
+        'im' => array(
+            'class' => 'backend.modules.im.ImModule',
+        ),
     ),
     
     'import'=>array(
