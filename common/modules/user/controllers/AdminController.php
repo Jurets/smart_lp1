@@ -1,10 +1,8 @@
 <?php
 
-class AdminController extends CController
+class AdminController extends EController
 {
 	public $defaultAction = 'admin';
-//    public $layout='//layouts/main';
-//	public $layout='//layouts/column2';
     public $breadcrumbs;
     public $menu;
 	
@@ -36,6 +34,7 @@ class AdminController extends CController
 			),
 		);
 	}*/
+    
 	/**
 	 * Manages all models.
 	 */
@@ -52,17 +51,25 @@ class AdminController extends CController
         $this->render('index',array(
             'model'=>$model,
         ));
-		/*$dataProvider=new CActiveDataProvider('User', array(
-			'pagination'=>array(
-				'pageSize'=>Yii::app()->controller->module->user_page_size,
-			),
-		));
-
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));//*/
 	}
 
+    /**
+     * Manages all models.
+     */
+    public function actionStructure()
+    {
+        $model = new Participant('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Participant'])) {
+            $model->attributes = $_GET['Participant'];
+        } else if (isset($_GET['User'])) {
+            $model->attributes = $_GET['User'];
+        }
+        $this->render('structure',array(
+            'model'=>$model,
+        ));
+    }
+    
 
 	/**
 	 * Displays a particular model.
