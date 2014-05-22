@@ -68,14 +68,15 @@
             ),
             'mail' => array(
                 'class' => 'common.extensions.yii-mail.YiiMail',
-                'transportType' => 'smtp',
-                'transportOptions' => array(
+                //'transportType' => 'smtp',
+                'transportType' => 'php',
+                /*'transportOptions' => array(
                     'host' => 'smtp.gmail.com',
                     'username' => 'richard.heineken12@gmail.com',
                     'password' => 'ask72bp43',
                     'port' => '465',
                     'encryption'=>'tls',
-                ),
+                ),*/
                 'viewPath' => 'common.views.mail',
                 'logging' => true,
                 'dryRun' => false

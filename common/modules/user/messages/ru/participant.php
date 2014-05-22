@@ -2,6 +2,7 @@
 
 return array(
     'Unified database participants' => 'Единая база участников',
+    'Participants structure' => 'Структура участников',
     
     'Domain' => 'Домен',
     'Tariff' => 'Статус',
@@ -18,6 +19,7 @@ return array(
 
     'Activate' => 'Запустить',
     'Deactivate' => 'Заблокировать',
-	'Blacklist' => 'В черный список',
+    'Blacklist' => 'В черный список',
+	'See structure' => 'Посмотреть структуру',
 );
 

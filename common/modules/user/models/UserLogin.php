@@ -33,7 +33,7 @@ class UserLogin extends CFormModel
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
-            array('activekey', 'checkActivekey'),
+/////временно отключаем            array('activekey', 'checkActivekey'),  
             array('verifyCode', 'captcha',
                 // авторизованным пользователям код можно не вводить
                 'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
