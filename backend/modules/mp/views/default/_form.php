@@ -23,7 +23,7 @@
 
             <?php echo $form->textFieldControlGroup($model,'creationdate',array('span'=>5, 'disabled'=>'true')); ?>
 
-            <?php echo $form->checkBox($model,'activity',array('span'=>5)); ?>
+            <?php echo $form->checkBoxControlGroup($model,'activity',array('span'=>5)); ?>
     
             <?php echo $form->hiddenField($model, 'id'); ?>
     
