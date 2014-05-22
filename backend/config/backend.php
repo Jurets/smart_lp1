@@ -53,6 +53,9 @@ return array(
         'chat' => array(
             'class' => 'backend.modules.chat.ChatModule',
         ),
+        'mp' => array(
+            'class' => 'backend.modules.mp.MpModule',
+        ),
     ),
     
     'import'=>array(

@@ -80,10 +80,11 @@
                             array('url'=>Yii::app()->getModule('faq')->faqShow, 'label'=>Yii::app()->getModule('faq')->t("FAQ"), 'visible'=>!$isGuest),
                             array('url'=>Yii::app()->getModule('invitation')->invitationShow, 'label'=>Yii::app()->getModule('invitation')->t("Invitation"), 'visible'=>!$isGuest),
                             array('url'=>Yii::app()->getModule('chat')->show, 'label'=>Yii::app()->getModule('chat')->t("Chat"), 'visible'=>!$isGuest),
-                            array('label'=>'Настройки', 'url'=>'#', 'visible'=>!$isGuest, 'items'=>array(
+                            array('label'=>Yii::t('common', 'Settings'), 'url'=>'#', 'visible'=>!$isGuest, 'items'=>array(
                                 array('url'=>Yii::app()->getModule('countries')->countriesShow, 'label'=>Yii::app()->getModule('countries')->t("Countries"), 'visible'=>!$isGuest),
                                 array('url'=>Yii::app()->getModule('cities')->citiesShow, 'label'=>Yii::app()->getModule('cities')->t("Cities"), 'visible'=>!$isGuest),
                                 array('url'=>Yii::app()->getModule('requisites')->requisitesShow, 'label'=>Yii::app()->getModule('requisites')->t("Requisites"), 'visible'=>!$isGuest),
+                    			array('url'=>Yii::app()->getModule('mp')->mpShow, 'label'=>Yii::app()->getModule('mp')->t('Marketings Plan')),
                                 ),
                             ),
                             array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!$isGuest),
