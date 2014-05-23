@@ -14,7 +14,9 @@ class DefaultController extends EController
     
 	public function actionIndex()
 	{
-		$this->render('index');
+                $model = new Indexmanager;
+                $model->LoadIndexManager(); // запрос к itemsstorage по параметру INDEX_MANAGER 
+		$this->render('index', array('model'=>$model));
 	}
      
     public function accessRules()

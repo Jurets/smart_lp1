@@ -15,7 +15,7 @@ class MpModule extends CWebModule
 		));
 	}
 
-        /* Элемент русификации*/
+        /* localisation`s element */
         public static function t($str='',$params=array(),$dic='mp') {
 		if (Yii::t("mp", $str)==$str)
 			return Yii::t("mpModule.".$dic, $str, $params);

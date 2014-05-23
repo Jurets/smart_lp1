@@ -15,7 +15,7 @@ class ImModule extends CWebModule
 		));
 	}
 
-        /* Элемент русификации*/
+        /* localisation`s element */
         public static function t($str='',$params=array(),$dic='im') {
 		if (Yii::t("im", $str)==$str)
 			return Yii::t("imModule.".$dic, $str, $params);

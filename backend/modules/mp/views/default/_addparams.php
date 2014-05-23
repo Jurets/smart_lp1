@@ -1,7 +1,7 @@
 <?php
 $this->widget('ext.jqrelcopy.JQRelcopy',
                  array(
-                       'id' => 'addMathParams',
+                       'id' => 'addMathParams', // target to add-control
                        'options' => array(
                                            'copyClass' => 'mathcopy',
                                          ),

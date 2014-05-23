@@ -31,12 +31,12 @@
             <?php foreach ($model->mathparams as $key=>$mathparam){ ?>
             <div class="copy">
                 <span class="mr"><?php echo MpModule::t('name') ; ?></span>
-            <?php echo $form->textField($mathparam, 'name', array('name'=>'Mathparams[name][]')); ?>
+            <?php echo $form->textField($mathparam, 'name', array('name'=>'Mathparams[name][]', 'id'=>false)); ?>
             <?php echo $form->error($mathparam, 'name'); ?>
             <span class="mr"><?php echo MpModule::t('value') ; ?></span>
-            <?php echo $form->textField($mathparam, 'value', array('name'=>'Mathparams[value][]')); ?>
+            <?php echo $form->textField($mathparam, 'value', array('name'=>'Mathparams[value][]', 'id'=>false)); ?>
             <?php echo $form->error($mathparam, 'value'); ?>
-            <?php echo $form->hiddenField($mathparam, 'id', array('name'=>'Mathparams[id][]')); ?>
+            <?php echo $form->hiddenField($mathparam, 'id', array('name'=>'Mathparams[id][]', 'id'=>false)); ?>
             <span class="icon-trash" title="<?php echo MpModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
             <div></div>
             </div>
@@ -44,10 +44,10 @@
             <?php }else{ ?>
             <div class="copy">
                 <span class="mr"><?php echo MpModule::t('name'); ?></span>
-                <?php echo CHtml::textField('Mathparams[name][]','',array('id'=>'Mathparams_name', 'maxlength'=>255)); ?>
+                <?php echo CHtml::textField('Mathparams[name][]','',array('maxlength'=>255)); ?>
                 <span class="mr"><?php echo MpModule::t('value'); ?></span>
-                <?php echo CHtml::textField('Mathparams[value][]','',array('id'=>'Mathparams_value', 'maxlength'=>255)); ?>
-                <?php echo CHtml::hiddenField('Mathparams[id][]', ''); ?>
+                <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
+                <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
                 <span class="icon-trash" title="<?php echo MpModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
             </div>
             <?php } ?>
@@ -62,7 +62,7 @@
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>
-    </div>
+        </div>
 
     <?php $this->endWidget(); ?>
 

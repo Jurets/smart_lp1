@@ -10,8 +10,53 @@
 )); ?>
 
 <?php echo $form->errorSummary($model); ?>
-  <?php // TO DO ?>  
-  <?php // TO DO ?>  
-  <?php // TO DO -array- ?>  
+    
+  <?php echo $form->textFieldControlGroup($model,'videolink',array('span'=>5,'maxlength'=>255)); ?>
+  <?php echo $form->textAreaControlGroup($model, 'about', array('span'=>5)); ?>  
+    
+  <?php if(isset($model) && is_array($model->sliderlist) && count($model->sliderlist) > 0) { ?>
+    
+    <?php foreach($model->sliderlist as $ind => $slider) { ?>
+    <div class="copy">
+        <div>
+        <span class="mr">leader</span><?php echo CHtml::textField("sliderlist[$ind][leader]", $slider['leader']); ?>
+        <span class="mr">photo</span><?php echo CHtml::textField("sliderlist[$ind][photo]", $slider['photo'], array('disabled'=>'true')); ?>
+        <?php echo CHtml::fileField("sliderlist[$ind][photo_source]"); ?>
+        <?php echo CHtml::label('Descriptio', NULL); ?>
+        <?php echo CHtml::textArea("sliderlist[$ind]['descriptio']", $model->sliderlist[$ind]['descriptio'], array('style'=>"width:600px;height:100px;")); ?>
+        <span class="icon-trash" title="<?php echo ImModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
+        </div>
+        <div></div>
+    </div>
+    <?php } ?>
+    
+  <?php }else{ ?>
+    
+    <div class="copy">
+        <div>
+        <span class="mr">leader</span><?php echo CHtml::textField("sliderlist[0][leader]"/*, $model->sliderlist[0]['leader']*/); ?>
+        <span class="mr">photo</span><?php echo CHtml::textField("sliderlist[0][photo]"/*, $model->sliderlist[0]['photo']*/,'', array('disabled'=>'true')); ?>
+        <?php echo CHtml::fileField("sliderlist[0][photo_source]"); ?>
+        <?php echo CHtml::label('Descriptio', NULL); ?>
+        <?php echo CHtml::textArea("sliderlist[0]['descriptio']",'', /*$model->sliderlist[0]['descriptio'],*/ array('style'=>"width:600px;height:100px;")); ?>
+        <span class="icon-trash" title="<?php echo ImModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
+        </div>
+        <div></div>
+    </div>
+    
+  <?php } ?>
+    <div></div>
+   <?php echo TbHtml::button(ImModule::t('Add'), array(
+                    'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
+		    'size'=>TbHtml::BUTTON_SIZE_SMALL,
+                    'rel'=>'.copy',
+                    'id'=>'addSlider',
+                )); ?>
+    <div class="form-actions">
+        <?php echo TbHtml::submitButton(ImModule::t('Create'), array(
+		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
+		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
+		)); ?>
+    </div>
 <?php $this->endWidget(); ?>
 </div>
