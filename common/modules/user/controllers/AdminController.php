@@ -74,6 +74,9 @@ class AdminController extends EController
      */
     public function actionSeestructure($id = null)
     {
+        if (!$participant = Participant::model()->findByPk($id))
+            throw New CHttpException("Участник с таким ИД не найден (#$id)");
+
         $model = new Participant('seestructure');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Participant'])) {
@@ -84,6 +87,7 @@ class AdminController extends EController
         }
         $this->render('seestructure',array(
             'model'=>$model,
+            'participant'=>$participant,
         ));
     }
 

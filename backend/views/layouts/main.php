@@ -73,7 +73,13 @@
                         'items'=>array(
                             array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>$isGuest),
                             array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>$isGuest),
-                            array('url'=>Yii::app()->getModule('user')->indexUrl, 'label'=>UserModule::t("Users"), 'visible'=>!$isGuest),
+                            
+                            array('label'=>UserModule::t("Participants", array(), 'participant'), 'url'=>'#', 'visible'=>!$isGuest, 'items'=>array(
+                                array('url'=>Yii::app()->getModule('user')->indexUrl, 'label'=>UserModule::t("Unified database participants", array(), 'participant'), 'visible'=>!$isGuest),
+                                array('url'=>Yii::app()->createAbsoluteUrl('user/admin/structure/'), 'label'=>UserModule::t("Participants structure", array(), 'participant'), 'visible'=>!$isGuest),
+                                array('url'=>Yii::app()->createAbsoluteUrl('user/admin/bcstructure/'), 'label'=>UserModule::t("BusinessClub structure", array(), 'participant'), 'visible'=>!$isGuest),
+                                ),
+                            ),
                             //array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>$isGuest),
                             array('url'=>Yii::app()->getModule('news')->newsShow, 'label'=>Yii::app()->getModule('news')->t("News"), 'visible'=>!$isGuest),
                             array('url'=>Yii::app()->getModule('training')->trainingShow, 'label'=>Yii::app()->getModule('training')->t("Training"), 'visible'=>!$isGuest),
@@ -84,7 +90,7 @@
                                 array('url'=>Yii::app()->getModule('countries')->countriesShow, 'label'=>Yii::app()->getModule('countries')->t("Countries"), 'visible'=>!$isGuest),
                                 array('url'=>Yii::app()->getModule('cities')->citiesShow, 'label'=>Yii::app()->getModule('cities')->t("Cities"), 'visible'=>!$isGuest),
                                 array('url'=>Yii::app()->getModule('requisites')->requisitesShow, 'label'=>Yii::app()->getModule('requisites')->t("Requisites"), 'visible'=>!$isGuest),
-                    		array('url'=>Yii::app()->getModule('mp')->mpShow, 'label'=>Yii::app()->getModule('mp')->t('Marketings Plan')),
+                    		    array('url'=>Yii::app()->getModule('mp')->mpShow, 'label'=>Yii::app()->getModule('mp')->t('Marketings Plan')),
                                 array('url'=>Yii::app()->getModule('im')->imShow, 'label'=>Yii::app()->getModule('im')->t('Index Management')),
                                 ),
                             ),

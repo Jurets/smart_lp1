@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'Participants' => 'Участники',
     'Unified database participants' => 'Единая база участников',
     'Participants structure' => 'Структура участников',
     'BusinessClub structure' => 'Структура БизнесКлуба',
