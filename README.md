@@ -129,3 +129,4 @@ The following extensions are part of YIInitializr-basic template:
 
 
 Тест!!!!
+тест2
