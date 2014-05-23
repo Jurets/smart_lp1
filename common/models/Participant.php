@@ -16,6 +16,9 @@
  */
 class Participant extends User
 {
+    //масив для бизнес-тарифов 
+    // * термин "тарифы" (вместо "статусы" как в ТЗ) здесь и далее применяется для того, чтобы отличить их от статуса активности/неактивности
+    private $_businessclubIDs = array(3,4,5,6);
     
     public $country_id;
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
@@ -51,12 +54,17 @@ class Participant extends User
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return CMap::mergeArray(parent::relations(), array(
+            //ссылка на объект-рефер для сабжа
             'referal'=>array(self::BELONGS_TO, 'Participant', 'refer_id'),
-            //'subCount'=>array(self::STAT, 'Participant', 'id', 'index'=>'refer_id'),
-            'subCount'=>array(self::STAT, 'Participant', 'refer_id'),
+            //кол-во подчинённых (т.е. тех, у которых сабж является рефером)
+            'subCount'=>array(self::STAT, 'Participant', 'refer_id'),   
+            //тариф (статус по ТЗ)
             'tariff'=>array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
+            //город
             'city'=>array(self::BELONGS_TO, 'Cities', 'city_id'),
+            //текущий бан в чате (его может и не быть!)
             'chatban'=>array(self::HAS_ONE, 'Chatban', 'user_id', 'condition'=>'active = 1'/*, 'limit'=>1*/),
+            //массив истории забанивания в чате
             'chatbanhistory'=>array(self::HAS_MANY, 'Chatban', 'user_id'),
 		));
 	}
@@ -82,6 +90,15 @@ class Participant extends User
 		));
 	}
 
+    /**
+    * геттер для массива бизнес-тарифов
+    * 
+    */
+    public function getBusinessclubIDs() {
+        return $this->_businessclubIDs;
+    }
+    
+    
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -101,36 +118,35 @@ class Participant extends User
         if (!isset($dataProvider)) 
             $dataProvider = New CActiveDataProvider($this);
             
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
+        $criteria->with = array('city', 'city.country');  //добавить страну и город (для поиска)
+        $criteria->addCondition('superuser <> 1'); //исключаем суперпользователя
         
         if ($this->scenario == 'empty') {                      //пустой
             //нужно получить заведомо пустой набор данных
             $criteria->condition = '1=2';   //костыль!!!!
             //$dataProvider = New CArrayDataProvider(array()); //тоже костыль!!!
-        } else {
-            $criteria->compare('user.first_name', $this->first_name, true);
-            $criteria->compare('user.last_name', $this->last_name, true);
-            $criteria->with = array('city', 'city.country');
-            if (!empty($this->country_id)) {
-                $criteria->compare('country.name', $this->country_id, true);
-            }
-            if (!empty($this->city_id)) {
-                $criteria->compare('city.name', $this->city_id, true);
-            }
-
-            //if ($this->scenario == 'seestructure') {        //структура рефера
-            if (isset($this->refer_id)) {
-                $criteria->addCondition('refer_id = :refer_id');
-                $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id'=>$this->refer_id));
-            }
-            if ($this->scenario == 'search') {                  //обычный поиск
-		        $criteria->compare('user.tariff_id', $this->tariff_id);
-            } else if ($this->scenario == 'structure') {        //поиск для структуры
-                $criteria->addCondition('superuser <> 1');         //исключаем суперпользователя
-                $criteria->compare('user.phone', $this->phone);
-                $criteria->compare('user.skype', $this->skype);
-            }
-        } 
+        } else if ($this->scenario == 'bcstructure') {
+            $criteria->addInCondition('tariff_id', $this->businessclubIDs);  //структура Бизнес Клуба
+        } else if ($this->scenario == 'structure') {        //поиск для структуры
+            $criteria->compare('user.phone', $this->phone);
+            $criteria->compare('user.skype', $this->skype);
+        }
+        //добавляем остальные критерии поиска
+        $criteria->compare('user.first_name', $this->first_name, true); //поиск по фамилии
+        $criteria->compare('user.last_name', $this->last_name, true);   //поиск по имени
+        $criteria->compare('user.tariff_id', $this->tariff_id);         //поиск по тарифу
+        if (!empty($this->country_id)) {                                
+            $criteria->compare('country.name', $this->country_id, true);//поиск по стране
+        }
+        if (!empty($this->city_id)) {
+            $criteria->compare('city.name', $this->city_id, true);      //поиск по городу
+        }
+        if (isset($this->refer_id)) {
+            $criteria->addCondition('refer_id = :refer_id');
+            $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id'=>$this->refer_id));
+        }
+        //мержим критерию с родительской и возвращаем набор данных 
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;
 	}
@@ -156,7 +172,6 @@ class Participant extends User
     
     /**
     * Выдаёт название города
-    * 
     */
     public function getCityName() {
         return isset($this->city) ? $this->city->name : null;
@@ -164,23 +179,27 @@ class Participant extends User
     
     /**
     * Выдаёт название страны
-    * 
     */
     public function getCountryName() {
         return isset($this->city) && isset($this->city->country) ? $this->city->country->name : null;
     }
     
     /**
-    * Выдаёт значение реферала
-    * 
+    * Выдаёт значение имени реферала
     */
     public function getReferalName() {
         return isset($this->referal) ? $this->referal->username : null;
     }
 
     /**
+    * Выдаёт значение ИД реферала
+    */
+    public function getReferalId() {
+        return isset($this->referal) ? $this->referal->id : null;
+    }
+
+    /**
     * цвет для юзера в сетке
-    * 
     */
     public function getColor() {
         $statuscolor='white';

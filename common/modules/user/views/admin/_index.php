@@ -1,4 +1,13 @@
 <?php
+/* @var $model Participant */
+
+//строим выпад. список из значений тарифов
+$criteria = New CDbCriteria();
+if ($model->scenario == 'bcstructure')
+    $criteria->addInCondition('id', $model->businessclubIDs);
+    
+$listData = TbHtml::listData(Tariff::model()->findAll($criteria), 'id', 'shortname');
+
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'user-grid',
     'type' => array(TbHtml::GRID_TYPE_CONDENSED, TbHtml::GRID_TYPE_BORDERED/*, TbHtml::GRID_TYPE_STRIPED*/),
@@ -17,7 +26,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'tariff_id',
             'type'=>'html',
-            'filter'=>TbHtml::activeDropDownList($model, 'tariff_id', TbHtml::listData(Tariff::model()->findAll(), 'id', 'shortname'), array(
+            'filter'=>TbHtml::activeDropDownList($model, 'tariff_id', $listData, array(
                 'style'=>'width: 90px',
                 'displaySize'=>'1',
                 'prompt'=>'<выбор>',
@@ -88,7 +97,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'name' => 'refer_id',
             'type'=>'raw',
             'filter'=>false,
-            'value' => '$data->referalName',
+            //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
+            'value' => 'TbHtml::link($data->referalName, array("admin/view","id"=>$data->referalId))',
         ),
         array(
             'name'=>'checks',

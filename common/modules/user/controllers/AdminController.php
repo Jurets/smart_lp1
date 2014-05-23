@@ -54,7 +54,7 @@ class AdminController extends EController
 	}
 
     /**
-     * Manages all models.
+     * Структура участников: 1) найти участника
      */
     public function actionStructure()
     {
@@ -70,7 +70,7 @@ class AdminController extends EController
     }
     
     /**
-     * Manages all models.
+     * Структура участников: 2) показать подчинённых
      */
     public function actionSeestructure($id = null)
     {
@@ -83,6 +83,24 @@ class AdminController extends EController
             $model->refer_id = $id;
         }
         $this->render('seestructure',array(
+            'model'=>$model,
+        ));
+    }
+
+    /**
+     * Структура Бизнес Клуба
+     */
+    public function actionBcstructure($id = null)
+    {
+        $model = new Participant('bcstructure');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Participant'])) {
+            $model->attributes = $_GET['Participant'];
+        }
+        if (isset($id)) {
+            $model->refer_id = $id;
+        }
+        $this->render('bcstructure',array(
             'model'=>$model,
         ));
     }

@@ -3,6 +3,7 @@
 return array(
     'Unified database participants' => 'Единая база участников',
     'Participants structure' => 'Структура участников',
+    'BusinessClub structure' => 'Структура БизнесКлуба',
     
     'Domain' => 'Домен',
     'Tariff' => 'Статус',
