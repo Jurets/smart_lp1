@@ -8,11 +8,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Invitation', 'url'=>array('index')),
-	array('label'=>'Manage Invitation', 'url'=>array('admin')),
+	//array('label'=>'List Invitation', 'url'=>array('index')),
+	array('label'=>Yii::t('common', 'Manage'), 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Invitation</h1>
+<h1><?php echo InvitationModule::t('Create Invitation'); ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

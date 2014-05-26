@@ -1,6 +1,6 @@
 <?php
 
-class InvitationController extends EController
+class DefaultController extends EController
 {
 
     /**
@@ -70,9 +70,9 @@ class InvitationController extends EController
 
         if (isset($_POST['Invitation'])) {
             $model->attributes = $_POST['Invitation'];
-            $model->file = CUploadedFile::getInstance($model, 'file');
+            //$model->file = CUploadedFile::getInstance($model, 'file');
             if ($model->save()) {
-                $model->file->saveAs(Yii::app()->getBasePath().'/www/uploads/files');
+                //$model->file->saveAs(Yii::app()->getBasePath().'/www/uploads/files');
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }

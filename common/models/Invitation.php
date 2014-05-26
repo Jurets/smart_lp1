@@ -54,11 +54,11 @@ class Invitation extends CActiveRecord
     public function attributeLabels() 
     { 
         return array( 
-            'id' => 'ID',
-            'video_link' => 'Video Link',
-            'file' => 'File',
-            'file_link' => 'File Link',
-            'created' => 'Created',
+            'id' => InvitationModule::t('Id'),
+            'video_link' => InvitationModule::t('Video Link'),
+            'file' => InvitationModule::t('File'),
+            'file_link' => InvitationModule::t('File Link'),
+            'created' => InvitationModule::t('Created'),
         ); 
     } 
 

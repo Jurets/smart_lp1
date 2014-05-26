@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Invitation', 'url'=>array('index')),
-	array('label'=>'Create Invitation', 'url'=>array('create')),
+    array('label'=>Yii::t('common', 'Create'), 'url'=>array('create')),
+    //array('label'=>Yii::t('common', 'Delete'), 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
