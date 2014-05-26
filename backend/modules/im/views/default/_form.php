@@ -23,7 +23,7 @@
         <span class="mr">photo</span><?php echo CHtml::textField("sliderlist[$ind][photo]", $slider['photo'], array('disabled'=>'true')); ?>
         <?php echo CHtml::fileField("sliderlist[$ind][photo_source]"); ?>
         <?php echo CHtml::label('Descriptio', NULL); ?>
-        <?php echo CHtml::textArea("sliderlist[$ind]['descriptio']", $model->sliderlist[$ind]['descriptio'], array('style'=>"width:600px;height:100px;")); ?>
+        <?php echo CHtml::textArea("sliderlist[$ind][descriptio]", $model->sliderlist[$ind]['descriptio'], array('style'=>"width:600px;height:100px;")); ?>
         <span class="icon-trash" title="<?php echo ImModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
         </div>
         <div></div>

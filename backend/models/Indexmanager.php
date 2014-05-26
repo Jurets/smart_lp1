@@ -1,5 +1,6 @@
 <?php
 class Indexmanager extends CFormModel {
+    const ITEM = 'INDEX_MANAGER';
     public $videolink; // линк на видеоролик в youtube
     public $about; // контейнер для текст-контента "О системе"
 //    public $sliderlist = array(
@@ -12,23 +13,43 @@ class Indexmanager extends CFormModel {
             array('videolink, about', 'safe' ),
         );
     }
+    public function setSliderList($arr){
+        foreach($arr as $elem){
+            $this->sliderlist[] = $elem;
+        }
+    }
     public function LoadIndexManager(){
         $dbc = Yii::app()->db;
         $load = $dbc->createCommand('SELECT content FROM itemsstorage WHERE item="INDEX_MANAGER"');
         $data = $load->query();
-        $decodedObject = json_decode($data->read());
-        $this->videolink = $decodedObject['videolink'];
-        $this->about = $decodedObject['about'];
-        $this->sliderlist = $decodedObject['sliderlist'];
+        $dump = $data->read();
+        $decodedObject = json_decode($dump['content']);
+        var_dump($decodedObject);die;
+        $this->videolink = (isset($decodedObject->videolink))? $decodedObject->videolink: '';
+        $this->about = (isset($decodedObject->about))? $decodedObject->about : '';
+        $this->sliderlist = (isset($decodedObject->sliderlist))?$decodedObject->sliderlist:array();
     }
     public function SaveIndexManager(){
-        $dbc = Yii::app()->db;
         $prepare = array(
             'videolink' => $this->videolink,
             'about' => $this->about,
             'sliderlist' => $this->sliderlist,
         );
-        //$save = $dbc->createCommand("REPLACE INTO itemsstorage (col1,col2) VALUES(15,col1*2);");
+        $prepare = json_encode($prepare);
+        var_dump($prepare);die;
+        $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
+        $saveCommand = Yii::app()->db->createCommand(
+                $saveKind . 
+                ' itemsstorage SET' . 
+                ' item="'.self::ITEM.'", ' .
+                "content='".$prepare."'"
+                );
+        $saveCommand->execute();
+    }
+    private function checkInstance(){
+        $checkCommand = Yii::app()->db->createCommand('SELECT content FROM itemsstorage WHERE item="INDEX_MANAGER"');
+        $result = $checkCommand->query();
+        return $result->read();
     }
 }
 

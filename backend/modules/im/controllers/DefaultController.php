@@ -15,7 +15,13 @@ class DefaultController extends EController
 	public function actionIndex()
 	{
                 $model = new Indexmanager;
-                $model->LoadIndexManager(); // запрос к itemsstorage по параметру INDEX_MANAGER 
+                $model->LoadIndexManager(); // запрос к itemsstorage по параметру INDEX_MANAGER
+                if(isset($_POST['Indexmanager'])){
+                    $model->attributes = $_POST['Indexmanager'];
+                    $model->setSliderList($_POST['sliderlist']);
+                    $model->SaveIndexManager();
+                }
+                    
 		$this->render('index', array('model'=>$model));
 	}
      
