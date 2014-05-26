@@ -14,20 +14,25 @@ class Indexmanager extends CFormModel {
         );
     }
     public function setSliderList($arr){
-        foreach($arr as $elem){
+        $this->sliderlist = array();
+        foreach($arr as $i=>$elem){
             $this->sliderlist[] = $elem;
+        }
+    }
+    public function setImages($arr){
+        foreach($arr as $i=>$elem){
+            $this->sliderlist[$i]['photo'] = $elem['url'];
         }
     }
     public function LoadIndexManager(){
         $dbc = Yii::app()->db;
-        $load = $dbc->createCommand('SELECT content FROM itemsstorage WHERE item="INDEX_MANAGER"');
+        $load = $dbc->createCommand('SELECT content FROM itemsstorage WHERE item="'.self::ITEM.'"');
         $data = $load->query();
         $dump = $data->read();
-        $decodedObject = json_decode($dump['content']);
-        var_dump($decodedObject);die;
-        $this->videolink = (isset($decodedObject->videolink))? $decodedObject->videolink: '';
-        $this->about = (isset($decodedObject->about))? $decodedObject->about : '';
-        $this->sliderlist = (isset($decodedObject->sliderlist))?$decodedObject->sliderlist:array();
+        $decodedObject = json_decode($dump['content'], true);
+        $this->videolink = $decodedObject['videolink'];
+        $this->about = $decodedObject['about'];
+        $this->sliderlist = $decodedObject['sliderlist'];
     }
     public function SaveIndexManager(){
         $prepare = array(
@@ -36,7 +41,6 @@ class Indexmanager extends CFormModel {
             'sliderlist' => $this->sliderlist,
         );
         $prepare = json_encode($prepare);
-        var_dump($prepare);die;
         $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
         $saveCommand = Yii::app()->db->createCommand(
                 $saveKind . 

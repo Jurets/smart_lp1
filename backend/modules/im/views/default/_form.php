@@ -7,6 +7,7 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+        'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
 <?php echo $form->errorSummary($model); ?>
@@ -19,8 +20,8 @@
     <?php foreach($model->sliderlist as $ind => $slider) { ?>
     <div class="copy">
         <div>
-        <span class="mr">leader</span><?php echo CHtml::textField("sliderlist[$ind][leader]", $slider['leader']); ?>
-        <span class="mr">photo</span><?php echo CHtml::textField("sliderlist[$ind][photo]", $slider['photo'], array('disabled'=>'true')); ?>
+        <span class="mr">leader</span><?php echo CHtml::textField("sliderlist[$ind][leader]", $slider['leader']);?>
+        <span class="mr">photo</span><?php echo CHtml::textField("sliderlist[$ind][photo]", $slider['photo'], array('readonly'=>1)); ?>
         <?php echo CHtml::fileField("sliderlist[$ind][photo_source]"); ?>
         <?php echo CHtml::label('Descriptio', NULL); ?>
         <?php echo CHtml::textArea("sliderlist[$ind][descriptio]", $model->sliderlist[$ind]['descriptio'], array('style'=>"width:600px;height:100px;")); ?>
@@ -34,11 +35,11 @@
     
     <div class="copy">
         <div>
-        <span class="mr">leader</span><?php echo CHtml::textField("sliderlist[0][leader]"/*, $model->sliderlist[0]['leader']*/); ?>
-        <span class="mr">photo</span><?php echo CHtml::textField("sliderlist[0][photo]"/*, $model->sliderlist[0]['photo']*/,'', array('disabled'=>'true')); ?>
+        <span class="mr">leader</span><?php echo CHtml::textField("sliderlist[0][leader]"); ?>
+        <span class="mr">photo</span><?php echo CHtml::textField("sliderlist[0][photo]", '', array('readonly'=>1)); ?>
         <?php echo CHtml::fileField("sliderlist[0][photo_source]"); ?>
         <?php echo CHtml::label('Descriptio', NULL); ?>
-        <?php echo CHtml::textArea("sliderlist[0]['descriptio']",'', /*$model->sliderlist[0]['descriptio'],*/ array('style'=>"width:600px;height:100px;")); ?>
+        <?php echo CHtml::textArea("sliderlist[0][descriptio]",'', array('style'=>"width:600px;height:100px;")); ?>
         <span class="icon-trash" title="<?php echo ImModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
         </div>
         <div></div>
