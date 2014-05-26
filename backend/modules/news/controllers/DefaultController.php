@@ -8,7 +8,7 @@ class DefaultController extends EController
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-	public $path;
+
 	/**
 	 * @return array action filters
 	 */
@@ -47,7 +47,7 @@ class DefaultController extends EController
 	}
 
     /**
-    * put your comment there...
+    * перечень внешних действий
     * 
     */
     public function actions() {

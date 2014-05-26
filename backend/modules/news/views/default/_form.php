@@ -17,7 +17,7 @@
 	)); 
 ?>
 
-	<!--  <p class="note">Fields with <span class="required">*</span> are required.</p>  -->
+	<p class="note"><?php echo Yii::t('common', 'Fields with {asteriks} are required', array('{asteriks}'=>'<span class="required">*</span>')); ?>.</p>  
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -72,24 +72,7 @@
 
 	<div class="row buttons">
 	
-<!--	<?php echo $form->hiddenField($model, 'image'); ?>
-    <?php $form->label($model, 'Upload illustration') ?>
-
-    <div class="news-image-preview" id="news-image-preview" style="width: 336px; height: 160px; border: 1px solid gray; background: url('<?php
-		echo (isset($model->image)) ? $model->UploadImage : '/img/img-gate.png';
-    ?>') no-repeat;">
-    </div>
-    <br/>
-    <span class="" id='select-image'>
-    
-        <?php echo CHtml::activefileField($model, 'illustration', array('name'=>'files[]', 'id'=>'fileupload')); ?>
-    </span>
-    <div id='uploader-progress'></div>
-	</div>
-
-	<div class="row">&nbsp;</div>-->
-    
-<?php $this->widget('common.extensions.FileUpload.widgets.UploadFileWidget.UploadFileWidget', array('model'=>$model)); ?>    
+    <?php $this->widget('common.extensions.FileUpload.widgets.UploadFileWidget.UploadFileWidget', array('model'=>$model)); ?>
     
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

@@ -1,5 +1,7 @@
 <?php
-
+/**
+* 
+*/
 class AdminController extends EController
 {
 	public $defaultAction = 'admin';
