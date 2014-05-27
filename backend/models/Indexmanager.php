@@ -13,6 +13,7 @@ class Indexmanager extends CFormModel {
             array('videolink, about', 'safe' ),
         );
     }
+        
     public function setSliderList($arr){
         $this->sliderlist = array();
         foreach($arr as $i=>$elem){
@@ -35,12 +36,14 @@ class Indexmanager extends CFormModel {
         $this->sliderlist = $decodedObject['sliderlist'];
     }
     public function SaveIndexManager(){
+        debug_backtrace();
         $prepare = array(
             'videolink' => $this->videolink,
             'about' => $this->about,
             'sliderlist' => $this->sliderlist,
         );
-        $prepare = json_encode($prepare);
+        
+        $prepare = json_encode($prepare, JSON_UNESCAPED_UNICODE);
         $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
         $saveCommand = Yii::app()->db->createCommand(
                 $saveKind . 
