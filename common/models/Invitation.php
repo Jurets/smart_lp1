@@ -30,10 +30,12 @@ class Invitation extends CActiveRecord
         return array( 
             array('video_link', 'required'),
             array('video_link, file, file_link', 'length', 'max'=>255),
+            //array('file', 'file', 'types'=>'zip', 'maxSize' => 1048576, 'allowEmpty' => true),
+            
             // The following rule is used by search(). 
             // @todo Please remove those attributes that should not be searched. 
-            array('id, video_link, file, file_link, created', 'safe', 'on'=>'search'), 
-             array('file', 'file', 'types'=>'zip', 'maxSize' => 1048576, 'allowEmpty' => true),
+            array('video_link, file, file_link', 'safe'), 
+            array('id, created', 'safe', 'on'=>'search'), 
         ); 
     } 
 

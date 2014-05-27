@@ -9,4 +9,6 @@ return array(
     
     'Create Invitation' => 'Создать приглашение',
     'Update Invitation' => 'Изменить приглашение',
+    'View Invitation' => 'Просмотреть приглашение',
+    'Manage Invitations' => 'Управление приглашениями',
 );
