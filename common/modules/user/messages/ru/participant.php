@@ -21,10 +21,12 @@ return array(
     'Time' => 'Время',
     'Phone' => 'Телефон',
     'Skype' => 'Скайп',
+    'Birthday' => 'Дата рождения',
 
     'Activate' => 'Запустить',
     'Deactivate' => 'Заблокировать',
     'Blacklist' => 'В черный список',
-	'See structure' => 'Посмотреть структуру',
+    'See structure' => 'Посмотреть структуру',
+	'New Participant' => 'Новый участник',
 );
 

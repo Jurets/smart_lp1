@@ -87,6 +87,7 @@ class Participant extends User
             'tariff_id' => UserModule::t("Tariff", array(), $this->dict_participant),
             'phone' => UserModule::t("Phone", array(), $this->dict_participant),
             'skype' => UserModule::t("Skype", array(), $this->dict_participant),
+            'dob' => UserModule::t("Birthday", array(), $this->dict_participant),
 		));
 	}
 

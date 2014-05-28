@@ -1,73 +1,55 @@
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'user-form',
-	'enableAjaxValidation'=>true,
-	'htmlOptions' => array('enctype'=>'multipart/form-data'),
-));
+<?php
+    /* @var $this UserController */
+    /* @var $model User */
+    /* @var $form bootstrap.widgets.TbActiveForm */
 ?>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 
-	<?php echo $form->errorSummary(array($model/*,$profile*/)); ?>
+<div class="wide form">
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
+    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+            'id'=>'user-form',
+            'enableAjaxValidation'=>true,
+            'htmlOptions' => array('enctype'=>'multipart/form-data'),
+            'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
+        ));
+      //вьюшка для сообщения о необходимых полях
+        echo $this->renderPartial('backend.views.site.required');
+        
+      //сборник ошибок
+        echo $form->errorSummary(array($model/*,$profile*/));
+        
+      //поля модели
+        echo $form->dropDownListControlGroup($model, 'status', User::itemAlias('UserStatus'), array('displaySize'=>'1', 'prompt'=>'<выбор>',));  //активность
+        echo $form->dropDownListControlGroup($model, 'superuser', User::itemAlias('AdminStatus'), array('displaySize'=>'1', 'prompt'=>'<выбор>',)); //суперадмин
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'password'); ?>
-	</div>
+        echo $form->textFieldControlGroup($model, 'username', array('class'=>'span3')); //логин
+        echo $form->textFieldControlGroup($model, 'password', array('class'=>'span3')); //пароль
+        echo $form->textFieldControlGroup($model, 'email', array('class'=>'span3'));    //эл.почта
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'email'); ?>
-	</div>
+        echo $form->textFieldControlGroup($model, 'first_name', array('class'=>'span5'));  //имя
+        echo $form->textFieldControlGroup($model, 'last_name', array('class'=>'span5'));   //фамилия
+        
+        //дата рождения
+        echo TbHtml::tag('div', array('class'=>'control-group'));
+            echo $form->labelEx($model, 'dob', array('class'=>"control-label"));
+            echo TbHtml::tag('div', array('class'=>'controls'));
+                $this->widget('yiiwheels.widgets.datetimepicker.WhDateTimePicker', array(
+                    'model' => $model,
+                    'name' => 'dob',
+                    'attribute' => 'dob',
+                    'format' => 'yyyy-MM-dd',
+                ));
+                echo $form->error($model, 'dob');
+            echo TbHtml::closeTag('div');
+        echo TbHtml::closeTag('div');
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'superuser'); ?>
-		<?php echo $form->dropDownList($model,'superuser',User::itemAlias('AdminStatus')); ?>
-		<?php echo $form->error($model,'superuser'); ?>
-	</div>
+        echo $form->textFieldControlGroup($model, 'phone', array('class'=>'span5'));   //телефон
+        echo $form->textFieldControlGroup($model, 'skype', array('class'=>'span5'));   //скайп
+        
+      //кнопка сохранения
+        echo TbHtml::submitButton($model->isNewRecord ? Yii::t('common', 'Create') : Yii::t('common', 'Save'), array('class'=>'primary'));
+        
+$this->endWidget(); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->dropDownList($model,'status',User::itemAlias('UserStatus')); ?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
-<?php 
-		/*$profileFields=Profile::getFields();
-		if ($profileFields) {
-			foreach($profileFields as $field) {
-			?>
-	<div class="row">
-		<?php echo $form->labelEx($profile,$field->varname); ?>
-		<?php 
-		if ($widgetEdit = $field->widgetEdit($profile)) {
-			echo $widgetEdit;
-		} elseif ($field->range) {
-			echo $form->dropDownList($profile,$field->varname,Profile::range($field->range));
-		} elseif ($field->field_type=="TEXT") {
-			echo CHtml::activeTextArea($profile,$field->varname,array('rows'=>6, 'cols'=>50));
-		} else {
-			echo $form->textField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
-		}
-		 ?>
-		<?php echo $form->error($profile,$field->varname); ?>
-	</div>
-			<?php
-			}
-		} */
-?>
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save')); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->
+</div>
