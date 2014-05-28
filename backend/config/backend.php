@@ -98,6 +98,9 @@ return array(
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 			),
 		),
+        'request' => array(
+            'baseUrl' => '/admin',
+        ),
         'user'=>array(
             // enable cookie-based authentication
             'class' => 'WebUser',

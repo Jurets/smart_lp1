@@ -338,7 +338,7 @@ FileETag None
 # If you are in a sub folder of your web root you
 # might have to enable something like this:
 #
-# RewriteBase /~antonio/app/frontend/www
+ #RewriteBase /backend/www
 
 # Yii rewrite
     RewriteCond %{REQUEST_FILENAME} !-f

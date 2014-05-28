@@ -56,6 +56,9 @@ return array(
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 			),
 		),
+        'request' => array(
+            'baseUrl' => '',
+        ),            
 		'user' => array(
 			'allowAutoLogin' => true,
 		),
