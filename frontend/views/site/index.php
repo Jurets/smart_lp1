@@ -1,50 +1,130 @@
-<div class="container">
+<?php
+    //CSS-file for main page
+    Yii::app()->clientScript->registerCssFile('/css/style.css');
+?>
 
-	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="hero-unit">
-		<h1>Hello, world!</h1>
+<BGDivs id="BGDivs">
+    <div id="topLineBG"> </div>
+    <div id="contentBG"> <div id="globe"></div></div>
+    <div id="whiteBG"></div>
+    <div id="darkBGG"></div>
+</BGDivs>
 
-		<p>This is a template for a simple marketing or informational website. It includes a large callout called the
-			hero unit and three supporting pieces of content. Use it as a starting point to create something more
-			unique.</p>
+<div id="wrapper">
 
-		<p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-	</div>
+    <div id="topLine">
+        <ul id="nav">
+            <li> <a href="#" class="flag">  </a> </li>
+            <li> <a href="#" class="in">  </a> </li>
+            <li> <a href="#"> ВОЗМОЖНОСТИ </a> </li>
+            <li> <a href="#"> ПРАВИЛА </a> </li>
+            <li> <a href="#"> ВОПРОСЫ И ОТВЕТЫ  </a> </li>
+            <li> <a href="#" class="moveRight1"> ЗАРЕГИСТРИРОВАТЬСЯ </a> </li>
+            <li> <a href="#" class="moveRight2 open-login"> ВОЙТИ </a> </li>
+        </ul>
+    </div>
 
-	<!-- Example row of columns -->
-	<div class="row">
-		<div class="span4">
-			<h2>Heading</h2>
+    <div id="content">
+        <div id="videoBG"></div>
+        <div>
+            <a id="logo" href="index.html"> </a>
+        </div>
 
-			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-				condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-				euismod. Donec sed odio dui. </p>
+        <iframe class="video"  src="https://www.youtube.com/embed/PRTFH3_Jo34?rel=0&disablekb=1&showinfo=0&wmode=opaque&autoplay=0&autohide=1&hd=1&vq=hd720" frameborder="0" allowfullscreen></iframe>
+        <a id="greenButton" href="#">            ПРИСОЕДИНИТЬСЯ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> </span> </a>
 
-			<p><a class="btn" href="#">View details &raquo;</a></p>
-		</div>
-		<div class="span4">
-			<h2>Heading</h2>
+    </div>
 
-			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-				condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-				euismod. Donec sed odio dui. </p>
+    <div id="white">
+        <a href="#"><div id="prev"></div></a>
+        <a href="#"><div id="next"></div></a>
 
-			<p><a class="btn" href="#">View details &raquo;</a></p>
-		</div>
-		<div class="span4">
-			<h2>Heading</h2>
+        <div id="photo"><div id="photoIn"></div></div>
 
-			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-				porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-				fermentum massa justo sit amet risus.</p>
+        <ul id="slideText">
+            <li class="slideText1">ЛИДЕРЫ </li>
+            <li class="slideText2">ОНИ ЗАРАБАТЫВАЮТ БОЛЬШЕ 1000 $ В ДЕНЬ! </li>
+            <li class="slideText3">ВАРЛАМ ГРИГОРЯН </li>
+            <li class="slideText4">Я НИКОГДА В ЖИЗНИ НЕ МОГ ПОДУМАТЬ, ЧТО ЧЕРЕЗ 10 МЕСЯЦЕВ <br> НАХОДЯСЬ В ОРГАНО ГОЛД, Я БУДУ СТОЯТЬ НА СЦЕНЕ В ЛАС ВЕГАСЕ<br> И 20.000 ЧЕЛОВЕК БУДУТ МНЕ АПЛОДИРОВАТЬ. И ЭТО ТОЛЬКО<br> НАЧАЛО.<br> ЭТО ЛЕГКО, ЭТО ПРОСТО, ЭТО КОФЕ!  </li>
+            <div id="ap">“</div>
+            <div id="ap2">“</div>
+        </ul>
 
-			<p><a class="btn" href="#">View details &raquo;</a></p>
-		</div>
-	</div>
+        <ul id="slide1">
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li></li> </a>
+            <a href="#"> <li class="slide1B"></li> </a>
+            <a href="#"> <li></li> </a>
+        </ul>
+    </div> 
 
-	<hr>
+    <div id="darkBG">
+        <div id="infoBlok1">
+            <p class="reg1">ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ</p>
+            <div id="numberDecor1"><p>00 652 427</p> <div id="test1"></div></div>
+            <p class="regB">ТЕКУЩИЕ РЕГИСТРАЦИИ</p>    
+            <ul class="li">
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+            </ul>
+        </div>
 
-	<footer>
-		<p>&copy; Company 2012</p>
-	</footer>
+        <div id="infoBlok2">
+            <p class="reg2">ВЫПЛАЧЕНО КОМИССИОННЫХ</p>
+            <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>
+            <p class="regB">ТЕКУЩИЕ ВЫПЛАТЫ</p>    
+            <ul class="li">
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+            </ul>
+
+        </div>
+
+        <div id="infoBlok3">
+            <p class="reg3">ОТДАНО НА БЛАГОТВОРИТЕЛЬНОСТЬ</p>
+            <div id="numberDecor3"><p>$00 652 427</p> <div id="test3"></div></div>
+            <p class="regB">ТЕКУЩИЕ ОТЧИСЛЕНИЯ</p>    
+            <ul class="li">
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+                <li id="tailand" >12:45 UTC Sergey Menshov</li>
+            </ul>
+        </div>
+
+    </div>
+
 </div>
+
+<div class="wrap"></div>

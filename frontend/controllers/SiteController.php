@@ -11,6 +11,10 @@
  */
 class SiteController extends EController
 {
+    //public $layout='//layouts/cabinet';
+    //public $layout='//layouts/main';
+    public $layout='//layouts/common';
+    
 	public function actionIndex()
 	{
 		$this->render('index');
@@ -29,4 +33,12 @@ class SiteController extends EController
 				$this->render('error', $error);
 		}
 	}
+    
+    /**
+    * Регистрация в системе
+    */
+    public function actionRegister() {
+        $this->layout = '//layouts/cabinet';
+        $this->render('register');
+    }
 }
