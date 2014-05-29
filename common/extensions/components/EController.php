@@ -105,4 +105,16 @@ class EController extends CController
 		return $baseUrl . '/' . ltrim($url, '/');
 	}
 
+    /**
+    * AJAX-действие: сформировать список городов страны
+    * 
+    */
+    public function actionDynamiccities() {
+        //$country_id = $_POST['Participant']['country_id'];
+        $country_id = Yii::app()->request->getParam('country_id');
+        $data = Cities::getCitiesListByCountry($country_id);
+        ViewHelper::selectOptions($data, ViewHelper::getPrompt('select city'));
+    }
+
+    
 }

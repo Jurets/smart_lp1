@@ -109,4 +109,21 @@ class Countries extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    /**
+    *  список всех стран
+    * 
+    */
+    public static function getListAll() {
+        return self::model()->findAll(array('order'=>'name ASC'));
+    }
+    
+    /**
+    *  список всех стран
+    * 
+    */
+    public static function getCountriesList() {
+        return CHtml::listData(self::model()->findAll(array('order'=>'name ASC')), 'id', 'name');
+    }
+    
 }

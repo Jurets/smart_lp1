@@ -44,6 +44,33 @@
             echo TbHtml::closeTag('div');
         echo TbHtml::closeTag('div');
 
+        //страна / город
+        echo $form->dropDownListControlGroup($model, 'country_id', Countries::getCountriesList(), array(
+                'id'=>'Participant_country_id',
+                'class'=>'span5',
+                'displaySize'=>'1',
+                'prompt'=>ViewHelper::getPrompt('select country'),
+                'ajax' => array(
+                    'type'=>'POST', //request type
+                    'url'=>CController::createUrl('dynamiccities'), //url to call.
+                    'data'=>array('country_id'=>'js:this.value'),
+                    'update'=>'#Participant_city_id',
+                 ),
+        ));
+        echo $form->dropDownListControlGroup($model, 'city_id', Cities::getCitiesListByCountry(), array(
+                'id'=>'Participant_city_id',
+                'class'=>'span5',
+                'displaySize'=>'1',
+                'prompt'=>ViewHelper::getPrompt('select city'),
+        ));
+        
+        //временная зона (часовой пояс)
+        echo $form->dropDownListControlGroup($model, 'gmt_id', Gmt::getTimezonesList(), array(
+                'class'=>'span5',
+                'displaySize'=>'1',
+                'prompt'=>ViewHelper::getPrompt('select timezone'),
+        )); 
+        
         echo $form->textFieldControlGroup($model, 'phone', array('class'=>'span5'));   //телефон
         echo $form->textFieldControlGroup($model, 'skype', array('class'=>'span5'));   //скайп
         

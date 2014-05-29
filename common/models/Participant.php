@@ -20,7 +20,9 @@ class Participant extends User
     // * термин "тарифы" (вместо "статусы" как в ТЗ) здесь и далее применяется для того, чтобы отличить их от статуса активности/неактивности
     private $_businessclubIDs = array(3,4,5,6);
     
+    //поле страны - нужно для помощи при выборе города (т.к. у юзера поля страны нет, а поле города - есть)
     public $country_id;
+    
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
     public $business = null;
@@ -38,7 +40,7 @@ class Participant extends User
 		 //NOTE: you should only define rules for those attributes that
 		 //will receive user inputs.
 		 return CMap::mergeArray(parent::rules(), array(
-			 array('tariff_id, city_id, first_name, last_name, country_id, city_id', 'safe'),
+			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id', 'safe'),
              array('id', 'safe', 'on'=>array('search', 'seestructure')),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
@@ -88,6 +90,7 @@ class Participant extends User
             'phone' => UserModule::t("Phone", array(), $this->dict_participant),
             'skype' => UserModule::t("Skype", array(), $this->dict_participant),
             'dob' => UserModule::t("Birthday", array(), $this->dict_participant),
+            'gmt_id' => UserModule::t("Gmt", array(), $this->dict_participant),
 		));
 	}
 

@@ -12,7 +12,7 @@
             echo $form->textFieldControlGroup($model, 'first_name', array('class'=>'span5'));
             echo $form->textFieldControlGroup($model, 'last_name', array('class'=>'span5'));
             //здесь будут город и страна
-            echo $form->dropDownListControlGroup($model, 'country_id', TbHtml::listData(Countries::model()->findAll(array('order'=>'name ASC')), 'name', 'name'), array(
+            echo $form->dropDownListControlGroup($model, 'country_id', Countries::getCountriesList(), array(
                 'class'=>'span5',
                 'displaySize'=>'1',
                 'prompt'=>'<выбрать страну>',

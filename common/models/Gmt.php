@@ -133,6 +133,7 @@ class Gmt extends CActiveRecord
            return $result;
        }
        
+       /////////////СТРАННАЯ функция! ОСТОРОЖНО!
         public static function getTimeByUtc($offset) {
 			date_default_timezone_set('Europe/Kiev');
             $timezone = $offset . ":00";

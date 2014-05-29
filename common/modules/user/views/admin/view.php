@@ -23,7 +23,7 @@ $this->menu=array(
 		'username',
 	);
 	
-	$profileFields=ProfileField::model()->forOwner()->sort()->findAll();
+	/*$profileFields=ProfileField::model()->forOwner()->sort()->findAll();
 	if ($profileFields) {
 		foreach($profileFields as $field) {
 			array_push($attributes,array(
@@ -33,7 +33,7 @@ $this->menu=array(
 					'value' => (($field->widgetView($model->profile))?$field->widgetView($model->profile):(($field->range)?Profile::range($field->range,$model->profile->getAttribute($field->varname)):$model->profile->getAttribute($field->varname))),
 				));
 		}
-	}
+	} */
 	
 	array_push($attributes,
 		'password',
