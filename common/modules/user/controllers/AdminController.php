@@ -129,27 +129,22 @@ class AdminController extends EController
 	public function actionCreate()
 	{
 		$model = new Participant;
-		//$profile=new Profile;
-		$this->performAjaxValidation(array($model/*,$profile*/));
+		$this->performAjaxValidation(array($model));
 		if(isset($_POST['Participant']))
 		{
 			$model->attributes = $_POST['Participant'];
 			$model->activkey = Yii::app()->controller->module->encrypting(microtime().$model->password);
-			//$profile->attributes=$_POST['Profile'];
-			//$profile->user_id=0;
-			if($model->validate() /*&& $profile->validate()*/) {
+			if($model->validate()) {
 				$model->password = Yii::app()->controller->module->encrypting($model->password);
 				if($model->save()) {
-					//$profile->user_id=$model->id;
-					//$profile->save();
+					//
 				}
 				$this->redirect(array('view','id'=>$model->id));
-			} //else $profile->validate();
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-			//'profile'=>$profile,
 		));
 	}
 
@@ -159,29 +154,24 @@ class AdminController extends EController
 	 */
 	public function actionUpdate()
 	{
-		$model=$this->loadModel();
-		//$profile=$model->profile;
-		$this->performAjaxValidation(array($model/*,$profile*/));
-		if(isset($_POST['User']))
+		$model = $this->loadModel();
+		$this->performAjaxValidation(array($model));
+		if(isset($_POST['Participant']))
 		{
-			$model->attributes=$_POST['User'];
-			//$profile->attributes=$_POST['Profile'];
-			
-			if($model->validate()/*&&$profile->validate()*/) {
-				$old_password = User::model()->notsafe()->findByPk($model->id);
-				if ($old_password->password!=$model->password) {
-					$model->password=Yii::app()->controller->module->encrypting($model->password);
-					$model->activkey=Yii::app()->controller->module->encrypting(microtime().$model->password);
+			$model->attributes = $_POST['Participant'];
+			if($model->validate()) {
+				$old_password = Participant::model()->notsafe()->findByPk($model->id);
+				if ($old_password->password != $model->password) {
+					$model->password = Yii::app()->controller->module->encrypting($model->password);
+					$model->activkey = Yii::app()->controller->module->encrypting(microtime().$model->password);
 				}
 				$model->save();
-				//$profile->save();
 				$this->redirect(array('view','id'=>$model->id));
-			} //else $profile->validate();
+			}
 		}
         
 		$this->render('update',array(
 			'model'=>$model,
-			//'profile'=>$profile,
 		));
 	}
 
@@ -231,12 +221,11 @@ class AdminController extends EController
 	 */
 	public function loadModel()
 	{
-		if($this->_model===null)
-		{
+		if($this->_model===null) {
 			if(isset($_GET['id']))
-				$this->_model=User::model()->notsafe()->findbyPk($_GET['id']);
-			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				$this->_model = Participant::model()->notsafe()->findbyPk($_GET['id']);
+			if($this->_model === null)
+				throw new CHttpException(404, 'The requested page does not exist.');
 		}
 		return $this->_model;
 	}

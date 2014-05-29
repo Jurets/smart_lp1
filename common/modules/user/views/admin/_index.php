@@ -48,7 +48,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'first_name',
             'type'=>'raw',
-            'filterInputOptions'=>array('style'=>'width: 100px'),
+            'filterInputOptions'=>array('style'=>'width: 80px'),
             'htmlOptions'=>array('style'=>'width: 100px'),
         ),
 		
@@ -127,7 +127,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         //кнопки
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
-            'template' => '{on} {off} {ban} {delete}',
+            'template' => '{on} {off} {ban} {update} {delete}',
             'buttons' => array(
                 'on' => array(
                         'url' => 'Yii::app()->controller->createUrl("status", array("id" => $data->id, "status" => User::STATUS_ACTIVE))',

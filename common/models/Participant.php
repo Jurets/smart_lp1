@@ -40,7 +40,7 @@ class Participant extends User
 		 //NOTE: you should only define rules for those attributes that
 		 //will receive user inputs.
 		 return CMap::mergeArray(parent::rules(), array(
-			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id', 'safe'),
+			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype', 'safe'),
              array('id', 'safe', 'on'=>array('search', 'seestructure')),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
@@ -165,6 +165,17 @@ class Participant extends User
 	{
 		return parent::model($className);
 	}
+    
+    /**
+    * процедура при выборке записи из БД
+    * 
+    */
+    public function afterFind() {
+        //присвоить значение полю "ид страны"
+        $this->country_id = isset($this->city) ? $this->city->country_id : null;
+        //скрыть пароль
+        $this->password = '';
+    }
     
     /**
     * Выдаёт значение Тарифа

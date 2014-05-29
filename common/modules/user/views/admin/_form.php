@@ -57,7 +57,7 @@
                     'update'=>'#Participant_city_id',
                  ),
         ));
-        echo $form->dropDownListControlGroup($model, 'city_id', Cities::getCitiesListByCountry(), array(
+        echo $form->dropDownListControlGroup($model, 'city_id', Cities::getCitiesListByCountry($model->country_id), array(
                 'id'=>'Participant_city_id',
                 'class'=>'span5',
                 'displaySize'=>'1',

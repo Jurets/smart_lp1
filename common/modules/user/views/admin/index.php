@@ -2,15 +2,16 @@
 /* @var $this AdminController */
 
 $this->breadcrumbs=array(
-	UserModule::t('Users')=>array('/user'),
-	UserModule::t('Manage'),
+	//UserModule::t('Users')=>array('/user'),
+    //UserModule::t('Participants') . ' /',
+	UserModule::t('Unified database participants', array(), 'participant'),
 );
 
 $this->menu=array(
-    array('label'=>UserModule::t('Create User'), 'url'=>array('create')),
+//    array('label'=>UserModule::t('Create User'), 'url'=>array('create')),
     //array('label'=>UserModule::t('Manage Users'), 'url'=>array('admin')),
     //array('label'=>UserModule::t('Manage Profile Field'), 'url'=>array('profileField/admin')),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+    //array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -39,5 +40,12 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php 
-$this->renderPartial('_index', array('model'=>$model));
+    echo TbHtml::link(UserModule::t('New Participant', array(), 'participant'), $this->createAbsoluteUrl('create'), array(
+        'color' => TbHtml::BUTTON_COLOR_PRIMARY,
+        //'href' => $this->createAbsoluteUrl('create'),
+    ));
+    echo '<br>';
+    echo '<br>';
+    
+    $this->renderPartial('_index', array('model'=>$model));
 ?>
