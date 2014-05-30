@@ -6,7 +6,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Mpversions'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
+	" ".$model->id=>array('view','id'=>$model->id),
 	'Update',
 );
 

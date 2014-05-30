@@ -54,8 +54,8 @@ class DefaultController extends EController
         return array(
             'upload'=>array(
                 'class'=>'common.extensions.FileUpload.UploadAction',
-                'prefixOrigin'=>'news-origin-',
-                'prefixResized'=>'resized-news-origin-',
+                'prefixOrigin'=>'news-',
+                'prefixResized'=>'resized-news-',
                 'uploadDir'=>$this->module->uploadDir,
                 'uploadUrl'=>$this->module->uploadUrl,
             ),            

@@ -81,7 +81,7 @@ class UploadAction extends CAction {
             if(empty($ext))  continue;
             $uniqid = substr(md5(uniqid()), 0, 8) . "." . $ext;
             $filename = $this->prefixOrigin . $uniqid;
-            $file_path = Yii::app()->getBasePath() . $this->uploadDir . $filename;
+            $file_path = Yii::app()->getBasePath() .(strpos($this->uploadDir,'www') ? '' : '/www/'). $this->uploadDir . $filename;
             $file_url = $this->uploadUrl . $filename;
             $file_url_resized = $this->uploadUrl . $this->prefixResized . $uniqid;
                         

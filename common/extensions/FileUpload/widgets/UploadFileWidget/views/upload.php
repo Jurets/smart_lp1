@@ -5,7 +5,7 @@
     <?php echo CHtml::activeLabel($model, 'Upload illustration') ?>
 
     <div class="news-image-preview" id="news-image-preview" style="width: 336px; height: 160px; border: 1px solid gray; background: url('<?php
-            echo (isset($model->image)) ? $model->UploadImage : '/img/img-gate.png';
+            echo (isset($model->image)) ? $model->UploadImage : '/admin/img/img-gate.png';
         ?>') no-repeat;">
     </div>
     <br/>
@@ -22,7 +22,6 @@
 <script>
     $(function() {
         var url = "<?=$this->controller->createAbsoluteUrl('upload')?>";
-
         $('#fileupload').fileupload({
             url: url,
             dataType: 'json',
@@ -41,7 +40,7 @@
     });
 
     function showOverlay(imagePath, imageName) {
-        var img = "<img id='cropbox'  src='" + imagePath + "'/>";
+        var img = "<img id='cropbox'  src='" +  '/admin' + imagePath + "'/>";
         //var img = '<img id="cronbox" src="/uploads/' + imagePath + '"/>';
         $("#news-image-preview").empty().append(img);
         //$("#News_image").val(imagePath);
