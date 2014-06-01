@@ -105,7 +105,8 @@ class DefaultController extends EController
                         $model->manageParameters(isset($_POST['Mathparams'])? $_POST['Mathparams'] : FALSE);
 			if($model->save())
 				//$this->redirect(array('view','id'=>$model->id));
-                            $this->redirect(array('update', 'id'=>$model->id));
+                            //$this->redirect(array('update', 'id'=>$model->id));
+                            $this->redirect (array('admin'));
 		}
 
 		$this->render('update',array(

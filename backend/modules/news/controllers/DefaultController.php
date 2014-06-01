@@ -173,6 +173,7 @@ class DefaultController extends EController
 	 */
 	public function actionIndex()
 	{
+                $this->redirect(array('admin'));
 		$dataProvider=new CActiveDataProvider('News');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
