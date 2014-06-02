@@ -1,10 +1,10 @@
 `<?php
 /* @var $this FaqController */
 /* @var $model Faq */
-
+$current_id = $model->id;
 $this->breadcrumbs=array(
 	'Faqs'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
+    ' ' . $model->id=>array('view','id'=>$model->id),
 	'Update',
 );
 

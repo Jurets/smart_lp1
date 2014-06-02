@@ -56,12 +56,6 @@
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'id_user'); ?>
-        <?php echo $form->textField($model, 'id_user'); ?>
-        <?php echo $form->error($model, 'id_user'); ?>
-    </div>
-
-    <div class="row">
         <?php echo $form->labelEx($model, 'category'); ?>
         <?php echo $form->dropDownList($model, 'category', array('finance' => 'финансы', 'offer' => 'предложения', 'site' => 'работа сайта')); ?>
         <?php echo $form->error($model, 'category'); ?>

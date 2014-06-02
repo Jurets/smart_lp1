@@ -89,10 +89,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value' => '$data->created',
 //            'htmlOptions'=>array('style'=>'width: 50px'),
         ),
-        array('name' => 'id_user',
-            'filter' => TbHtml::activeTelField($model, 'id_user', array('style' => 'width: 50px')),
-            'htmlOptions' => array('style' => 'width: 50px'),
-        ),
         array(
             'name' => 'category',
             'type' => 'raw',

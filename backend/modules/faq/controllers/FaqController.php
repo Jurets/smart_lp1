@@ -70,17 +70,23 @@ class FaqController extends EController
 		if(isset($_POST['Faq']))
 		{
 			$model->attributes=$_POST['Faq'];
-                        
-                        //Converting "Creation time when FAQ was made" into MySQL format data https://dev.mysql.com/doc/refman/5.0/en/datetime.html
+                      if($_POST['Faq']['created']!= '')
+                      {
+                       //Converting "Creation time when FAQ was made" into MySQL format data https://dev.mysql.com/doc/refman/5.0/en/datetime.html
                        $str = str_replace('.', '-',$model->created);
                        $year = substr($str, 6, 4).'-';
                        $day = substr($str, 0, 2);
                        $month = substr($str, 3, 3);
                        $time = substr($str, 10);
                        $model->created = $year.$month.$day.$time;
-                       
+                      }else
+                      {
+                          //MySQL format DATETIME
+                          $today = date("Y-m-d H:i:s");
+                          $model->created = $today;
+                      }
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect('index');
 		}
 
 		$this->render('create',array(
@@ -106,7 +112,6 @@ class FaqController extends EController
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
-
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -180,10 +185,12 @@ class FaqController extends EController
 			Yii::app()->end();
 		}
 	}
-        
-        public function actionBan(){
-            
-        }
-        
-        
+
+    //TODO: bun for user
+    public function actionBan()
+    {
+
+    }
+
+
 }

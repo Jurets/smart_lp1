@@ -25,7 +25,7 @@ $this->menu=array(
 		'question',
 		'answer',
 		'created',
-		'id_user',
+		//'id_user',
                 'category',
 	),
 )); ?>
