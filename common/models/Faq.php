@@ -10,6 +10,10 @@
  * @property string $created
  * @property integer $id_user
  * @property string $category
+ *
+ * $param string $text;
+ * $param string $purified_text;
+
  */
 class Faq extends CActiveRecord
 {
@@ -105,5 +109,6 @@ class Faq extends CActiveRecord
     {
         return parent::model($className);
     }
+
 
 }
