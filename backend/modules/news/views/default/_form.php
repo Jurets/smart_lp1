@@ -27,11 +27,11 @@
 		<?php //echo $form->error($model,'author'); ?>
 	</div>  -->
 
-	<!-- <div class="row">
-		<?php //echo $form->labelEx($model,'created'); ?>
-		<?php //echo $form->textField($model,'created'); ?>
-		<?php //echo $form->error($model,'created'); ?>
-	</div> -->
+	<div class="row">
+		<?php echo $form->labelEx($model,'created'); ?>
+		<?php echo $form->textField($model,'created', array('readonly'=>1)); ?>
+		<?php echo $form->error($model,'created'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'activated'); ?>

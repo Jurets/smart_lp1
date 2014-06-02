@@ -19,11 +19,11 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
+<!--	<div class="row">
+		<?php //echo $form->labelEx($model,'id'); ?>
+		<?php //echo $form->textField($model,'id',array('size'=>50,'maxlength'=>50)); ?>
+		<?php //echo $form->error($model,'id'); ?>
+	</div>-->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'details'); ?>

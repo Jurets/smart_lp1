@@ -5,7 +5,7 @@
     <?php echo CHtml::activeLabel($model, 'Upload illustration') ?>
 
     <div class="news-image-preview" id="news-image-preview" style="width: 336px; height: 160px; border: 1px solid gray; background: url('<?php
-            echo (isset($model->image)) ? $model->UploadImage : '/admin/img/img-gate.png';
+            echo (isset($model->image)) ? '/admin'.$model->UploadImage : '/admin/img/img-gate.png';
         ?>') no-repeat;">
     </div>
     <br/>

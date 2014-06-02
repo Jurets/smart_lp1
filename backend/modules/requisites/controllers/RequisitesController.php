@@ -70,8 +70,10 @@ class RequisitesController extends EController
 		if(isset($_POST['Requisites']))
 		{
 			$model->attributes=$_POST['Requisites'];
+                        $model->id = "JVMS";
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                            // вместо view - сразу на update
+				$this->redirect(array('update','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -84,7 +86,7 @@ class RequisitesController extends EController
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($id="JVMS") // для единственной записи
 	{
 		$model=$this->loadModel($id);
 
@@ -95,7 +97,8 @@ class RequisitesController extends EController
 		{
 			$model->attributes=$_POST['Requisites'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                            // вместо view - сразу на update
+				$this->redirect(array('update','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -133,6 +136,12 @@ class RequisitesController extends EController
 	 */
 	public function actionIndex()
 	{
+                $model = new Requisites;
+                if(is_null( $model->findByAttributes(array('id'=>'JVMS')) )){
+                    $this->redirect(array('create'));
+                }else{
+                    $this->redirect(array('update'));
+                }
 		$model=new Requisites('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Requisites']))

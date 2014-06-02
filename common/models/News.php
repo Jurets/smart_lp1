@@ -135,7 +135,9 @@ class News extends CActiveRecord
 	}
 	protected function beforeValidate(){
 		$this->activated = strtotime($this->activated);
-		$this->activated = date('Y-d-m H:i:s' ,$this->activated);
+		$this->activated = date('Y-m-d H:i:s' ,$this->activated);
+                $this->created = strtotime($this->created);
+                $this->created = date('Y-m-d H:i:s', $this->created);
 		parent::beforeValidate();
 		return true;
 	}

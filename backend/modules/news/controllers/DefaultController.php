@@ -101,8 +101,12 @@ class DefaultController extends EController
 		if(isset($_POST['News']))
 		{
 			$model->attributes=$_POST['News'];
+                        if($model->getAttribute('activated') == false)
+                            $model->setAttribute ('activated', date('H:i:s d-m-Y', time()));
+                            $model->setAttribute ('created', date('H:i:s d-m-Y', time()));
 			if($model->save()){
-				$this->redirect(array('view','id'=>$model->id));
+				//$this->redirect(array('view','id'=>$model->id));
+                                $this->redirect(array('admin'));
 			}else
 				$model->callAfterFind();
 				
@@ -127,7 +131,6 @@ class DefaultController extends EController
 
 		if(isset($_POST['News']))
 		{
-			
 			$model->attributes=$_POST['News'];
 			//$model->illustration=CUploadedFile::getInstance($model, 'illustration');
 			//if(isset($model->illustration)){
@@ -138,7 +141,8 @@ class DefaultController extends EController
 			//}
 			
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				//$this->redirect(array('view','id'=>$model->id));
+                                $this->redirect(array('admin'));
 			else
 				$model->callAfterFind();
 		}
