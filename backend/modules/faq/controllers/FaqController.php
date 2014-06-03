@@ -60,6 +60,7 @@ class FaqController extends EController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
+
 	public function actionCreate()
 	{
 		$model=new Faq;
@@ -187,6 +188,7 @@ class FaqController extends EController
 	}
 
     //TODO: bun for user
+    //test comment
     public function actionBan()
     {
 
