@@ -188,6 +188,7 @@ class FaqController extends EController
 	}
 
     //TODO: bun for user
+    //test comment
     public function actionBan()
     {
 
