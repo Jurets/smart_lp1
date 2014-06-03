@@ -17,6 +17,9 @@ class SiteController extends EController
     
 	public function actionIndex()
 	{
+            $model = new Indexmanager;
+            $model->LoadIndexManager();
+            
 		$this->render('index');
 	}
 

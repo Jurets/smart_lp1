@@ -3,10 +3,7 @@ class Indexmanager extends CFormModel {
     const ITEM = 'INDEX_MANAGER';
     public $videolink; // линк на видеоролик в youtube
     public $about; // контейнер для текст-контента "О системе"
-//    public $sliderlist = array(
-//        array('leader'=>'', 'photo' =>'no photo', 'photo_source'=>'', 'descriptio'=>'', ),
-//    ); // массив пар (пока пар):  [leader, photo, descriptio] линк на upload-фото и text-описание, может добавиться что-то еще
-    public $sliderlist = array();
+    public $sliderlist = array(); // тело слайдера
     
     public function rules(){
         return array(
@@ -20,9 +17,9 @@ class Indexmanager extends CFormModel {
             $this->sliderlist[] = $elem;
         }
     }
-    public function setImages($arr){
+    public function setImages($arr, $key="name"){ // ключом указываеи на запись в слайдер нужного ресурса (url, path, filename)
         foreach($arr as $i=>$elem){
-            $this->sliderlist[$i]['photo'] = $elem['url'];
+            $this->sliderlist[$i]['photo'] = $elem[$key];
         }
     }
     public function LoadIndexManager(){
