@@ -19,8 +19,8 @@ class SiteController extends EController
 	{
             $model = new Indexmanager;
             $model->LoadIndexManager();
-            
-		$this->render('index');
+            //var_dump($model);die;
+		$this->render('index', array('model'=>$model));
 	}
 
 	/**

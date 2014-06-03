@@ -1,15 +1,16 @@
+<?php Yii::app()->getClientScript()->registerscriptFile("/js/jquery.bxslider.min.js"); ?>
 <div id="content">
     <div id="videoBG"></div>
     <div>
         <a id="logo" href="index.html"> </a>
     </div>
 
-    <iframe class="video"  src="https://www.youtube.com/embed/PRTFH3_Jo34?rel=0&disablekb=1&showinfo=0&wmode=opaque&autoplay=0&autohide=1&hd=1&vq=hd720" frameborder="0" allowfullscreen></iframe>
+    <iframe class="video"  src="<?php echo $model->videolink; ?>" frameborder="0" allowfullscreen></iframe>
     <a id="greenButton" href="#">            ПРИСОЕДИНИТЬСЯ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> </span> </a>
 
 </div>
 
-<div id="white">
+<!--<div id="white">
     <a href="#"><div id="prev"></div></a>
     <a href="#"><div id="next"></div></a>
 
@@ -51,7 +52,18 @@
         <a href="#"> <li class="slide1B"></li> </a>
         <a href="#"> <li></li> </a>
     </ul>
-</div> 
+</div> -->
+
+<div id="white">
+    
+    <ul class="bxslider">
+        <?php foreach($model->sliderlist as $slider) { ?>
+        <li>
+            <img src="<?php echo '/admin/uploads/'.'resized-'.$slider['photo'] ?>" alt="портрет" />
+        </li>
+        <?php } ?>
+    </ul>
+</div>
 
 <div id="darkBG">
     <div id="infoBlok1">
