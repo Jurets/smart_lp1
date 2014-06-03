@@ -40,7 +40,7 @@ class Participant extends User
 		 //NOTE: you should only define rules for those attributes that
 		 //will receive user inputs.
 		 return CMap::mergeArray(parent::rules(), array(
-			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype', 'safe'),
+			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
              array('id', 'safe', 'on'=>array('search', 'seestructure')),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
@@ -94,6 +94,23 @@ class Participant extends User
 		));
 	}
 
+    /**
+    * скоупы
+    * 
+    */
+    public function scopes()
+    {
+        return CMap::mergeArray(parent::scopes(), array(
+            'participant'=>array(
+                'condition'=>'superuser = 0',
+            ),
+            'withoutself'=>array(
+                'condition'=>'id <> :self_id',
+                'params'=>array(':self_id'=>$this->id)
+            ),
+        ));
+    }
+    
     /**
     * геттер для массива бизнес-тарифов
     * 
@@ -213,6 +230,23 @@ class Participant extends User
         return isset($this->referal) ? $this->referal->id : null;
     }
 
+    /**
+    * выдать список для выбора реферала
+    * 
+    */
+    public function getListForReferalSelect() {//DebugBreak();
+        $criteria = New CDbCriteria(array(
+            'select'=>array('id', 'username'),
+            'scopes'=>'participant',
+        ));
+        if (!empty($this->id)) {
+            $criteria->scopes = 'withoutself';
+            $criteria->params = array(':self_id'=>$this->id);
+        }
+        $models = self::model()->findAll($criteria);
+        return CHtml::listData($models, 'id', 'username');
+    }
+    
     /**
     * цвет для юзера в сетке
     */

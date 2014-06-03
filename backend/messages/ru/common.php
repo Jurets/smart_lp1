@@ -20,5 +20,6 @@ return array(
     'select country' => 'выбрать страну',
     'select city' => 'выбрать город',
     'select timezone' => 'выбрать временную зону',
+    'select referal' => 'выбрать реферала',
 );
 ?>

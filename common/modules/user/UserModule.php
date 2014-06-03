@@ -99,7 +99,7 @@ class UserModule extends CWebModule
 	public $tableProfileFields = '{{profiles_fields}}';
 
     public $defaultScope = array(
-            'with'=>array('profile'),
+        //'with'=>array('profile'),   //убираем стыковку с таблицей профиля
     );
 	
 	static private $_user;

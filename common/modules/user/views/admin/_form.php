@@ -73,6 +73,13 @@
         
         echo $form->textFieldControlGroup($model, 'phone', array('class'=>'span5'));   //телефон
         echo $form->textFieldControlGroup($model, 'skype', array('class'=>'span5'));   //скайп
+
+        //участник-реферал (ссылка на того, кто пригласил)
+        echo $form->dropDownListControlGroup($model, 'refer_id', $model->listForReferalSelect, array(
+                'class'=>'span5',
+                'displaySize'=>'1',
+                'prompt'=>ViewHelper::getPrompt('select referal'),
+        )); 
         
       //кнопка сохранения
         echo TbHtml::submitButton($model->isNewRecord ? Yii::t('common', 'Create') : Yii::t('common', 'Save'), array('class'=>'primary'));
