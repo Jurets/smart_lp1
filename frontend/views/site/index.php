@@ -57,10 +57,12 @@
 <div id="white">
     
     <ul class="bxslider">
+        <?php if(isset($model->sliderlist)){ ?>
         <?php foreach($model->sliderlist as $slider) { ?>
         <li>
             <img src="<?php echo '/admin/uploads/'.'resized-'.$slider['photo'] ?>" alt="портрет" />
         </li>
+        <?php } ?>
         <?php } ?>
     </ul>
 </div>
