@@ -26,22 +26,14 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <!--<link rel="stylesheet" href="css/bootstrap.min.css">
-        <style>
-        body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-        }
-        </style>-->
         <!--<link rel="stylesheet" href="css/main.css">-->
-
         <!--<link rel="stylesheet" href="css/style-shags.css" >-->
 
-        <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
-
-        <?php
-                //CSS-file for main page
-                //Yii::app()->clientScript->registerCssFile('/css/style.css');
+        <?php 
+        //Подключаем JQUERY
+        Yii::app()->clientScript->registerCoreScript('jquery'); 
+        //!!! CSS-file подключаем не здесь, а в одном из подлэйаутов - в каждом свой (главстраница, регистрация, офис)
+        //Yii::app()->clientScript->registerCssFile('/css/style.css');
         ?>
         
         <!--<script src="js/libs/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
@@ -54,28 +46,17 @@
         <![endif]-->
 
         <div class="page">
-        
-            <div id="login" style="left: 1208px; top: 40px;font-family: 'Open Sans Condensed','sans-serif';">
-                <p class="sub1">ИМЯ ПОЛЬЗОВАТЕЛЯ:</p>
-                <input class="textbox1" type="text"> 
-                <p class="sub2">ПАРОЛЬ:</p>
-                <input class="textbox2" type="text">
-                <a href="#" id="captcha"></a>
-                <a href="#" id="refresh" > </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <p class="sub3">ВВЕДИТЕ КОД С КАРТИНКИ:</p> 
-                <input class="textbox3" type="text"> 
-                <a href="#"><input type="button" name="btn"  class="btn-style" value="ВОЙТИ" ></a>
-                <a href="#" id="sub4">ЗАБЫЛИ ПАРОЛЬ?</a>
-            </div>
-        
-            <!-- --- CONTENT --- -->
-            <?php echo $content; ?>
-
+            <?php 
+            //---------- ОСНОВНОЙ КОНТЕНТ
+            echo $content; 
+            ?>
         </div>
         
-        <!-- --- FOOTER --- -->
-        <?php $this->renderPartial('footer');  ?>
+        
+        <?php 
+        // --- FOOTER --- 
+        $this->renderPartial('footer');  
+        ?>
 
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
@@ -95,19 +76,6 @@
         s.parentNode.insertBefore(g, s)
         }(document, 'script'));
         </script>-->
-        
-        <script>
-            $('#login').hide();
-            $(document).ready(function() {
-                $('.open-login').on("click",function (){
-                    if($('#login').css('display')!='none'){
-                        $('#login').hide()
-                    } else {
-                        $('#login').show();
-                    }
-                })
-            });
-        </script>
         
     </body>
 </html>

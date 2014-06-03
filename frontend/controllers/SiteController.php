@@ -12,8 +12,8 @@
 class SiteController extends EController
 {
     //public $layout='//layouts/cabinet';
-    //public $layout='//layouts/main';
-    public $layout='//layouts/common';
+    public $layout='//layouts/main';
+    //public $layout='//layouts/common';
     
 	public function actionIndex()
 	{
