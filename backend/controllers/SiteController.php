@@ -13,7 +13,8 @@
     {
         public function actionIndex()
         {
-            $this->redirect('/user/login');
+            //$this->redirect('/user/login');
+            $this->redirect($this->createUrl('/user/login'));
             //$this->render('index');
         }
         /**
