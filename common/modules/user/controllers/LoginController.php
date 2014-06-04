@@ -22,7 +22,8 @@ class LoginController extends EController
 					if (Yii::app()->getBaseUrl()."/index.php" === Yii::app()->user->returnUrl)
 						$this->redirect(Yii::app()->controller->module->returnUrl);
 					else
-						$this->redirect(Yii::app()->user->returnUrl);
+						//$this->redirect(Yii::app()->user->returnUrl);
+                        $this->redirect(Yii::app()->createAbsoluteUrl('invitation'));
 				}
 			}
 			// display the login form
