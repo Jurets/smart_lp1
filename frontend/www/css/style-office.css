@@ -283,7 +283,7 @@ select {
     top: 129px;
     width: 1024px;
     height: 3px;
-    margin-bottom: 20px;
+    margin-bottom:0px;
     background-color: #167A91;
     z-index: 5;
 }
@@ -1462,9 +1462,9 @@ select {
 
 #office-5-post1{
     position: absolute;
-    top: 200px;
     width: 1028px;
     height: 210px;
+    top: 150px;
     text-align: justify;
 
 }
@@ -1570,7 +1570,7 @@ select {
     font: bold 25px 'Open Sans Condensed';
     color: #148ea8;
     top:150px;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 
@@ -4448,18 +4448,14 @@ select {
     z-index: 0;
 }
 
-
-
 #office-5-post1{
     position: absolute;
-    top: 200px;
+    top: 150px;
     width: 1028px;
     height: 210px;
     text-align: justify;
 
 }
-
-
 
 .btn-style-green1{
     height:39px;
@@ -4560,7 +4556,7 @@ select {
     font: bold 25px 'Open Sans Condensed';
     color: #007e97;
     top: 162px;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 

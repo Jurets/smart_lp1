@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Creator: Tkachenko Egor
+ * Created: 04/06/2014
+ * Class OfficeController
+ */
 class OfficeController extends EController
 {
     /**
@@ -15,7 +20,10 @@ class OfficeController extends EController
      */
     public function actionSpecification()
     {
-        $this->render('office-8');
+        $objRequqstes = new Requisites();
+        $message = $objRequqstes->model()->findAll();
+        $message = $message[0]['agreement'];
+        $this->render('office-8',array('message'=>$message));
     }
 
 
