@@ -50,8 +50,8 @@
             //---------- ОСНОВНОЙ КОНТЕНТ
             echo $content; 
             ?>
+            <div class="wrap"></div>
         </div>
-        
         
         <?php 
         // --- FOOTER --- 

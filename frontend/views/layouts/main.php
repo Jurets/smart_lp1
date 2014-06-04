@@ -31,7 +31,7 @@ $this->beginContent('//layouts/common');
             </ul>
         </div>
 
-        <div id="content">
+        <div id="content" style="height: auto !important;">
             <?php 
             // вывести част. вьюшку для входа 
             $this->renderPartial('login', array(), false, true);
