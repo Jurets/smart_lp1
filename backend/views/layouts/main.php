@@ -72,7 +72,7 @@
                         //'htmlOptions'=>array('class' => 'nav'),
                         'items'=>array(
                             array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>$isGuest),
-                            array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>$isGuest),
+                            //array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>$isGuest),
                             
                             array('label'=>UserModule::t("Participants", array(), 'participant'), 'url'=>'#', 'visible'=>!$isGuest, 'items'=>array(
                                 array('url'=>Yii::app()->getModule('user')->indexUrl, 'label'=>UserModule::t("Unified database participants", array(), 'participant'), 'visible'=>!$isGuest),

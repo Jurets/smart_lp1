@@ -13,7 +13,8 @@
     {
         public function actionIndex()
         {
-            $this->render('index');
+            $this->redirect('/user/login');
+            //$this->render('index');
         }
         /**
         * This is the action to handle external exceptions.
