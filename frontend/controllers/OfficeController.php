@@ -4,6 +4,7 @@
  * Creator: Tkachenko Egor
  * Created: 04/06/2014
  * Class OfficeController
+ *
  */
 class OfficeController extends EController
 {

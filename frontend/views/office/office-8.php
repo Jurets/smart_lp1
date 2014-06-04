@@ -1,7 +1,6 @@
 <?php
 /* @var $message */
 Yii::app()->clientScript->registerCssFile('/css/style-office.css');
-//,'itemOptions'=>array('class'=>'btn-style1')
 ?>
 <div id="divMenu">
     <?php $this->widget('zii.widgets.CMenu',array(
