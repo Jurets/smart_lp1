@@ -46,4 +46,5 @@ index
 # local settings #
 /common/config/local.php
 *~
+.htaccess
 .gitignore
