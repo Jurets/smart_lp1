@@ -30,6 +30,12 @@ return array(
 	// application modules
 	'modules' => array(),
 
+    'import'=>array(
+        'application.models.*',
+        'application.components.*',
+        'bootstrap.helpers.TbHtml',
+    ),
+    
 	// application components
 	'components' => array(
 
