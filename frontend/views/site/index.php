@@ -1,4 +1,7 @@
-<?php Yii::app()->getClientScript()->registerscriptFile("/js/jquery.bxslider.min.js"); ?>
+<?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.min.js"); ?>
+<?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.js"); ?>
+<?php Yii::app()->getClientScript()->registerCssFile("/css/jquery.bxslider.css"); ?>
+
 <div id="content">
     <div id="videoBG"></div>
     <div>
@@ -60,11 +63,24 @@
         <?php if(isset($model->sliderlist)){ ?>
         <?php foreach($model->sliderlist as $slider) { ?>
         <li>
-            <img src="<?php echo '/admin/uploads/'.'resized-'.$slider['photo'] ?>" alt="портрет" />
+            <div style="height: 400px; background: #eeeeee;">
+                <div id="photo">
+                    <img src="<?php echo '/admin/uploads/'./*'resized-'.*/$slider['photo'] ?>" alt="" style="width:266px; height:326px; padding-top:15px; padding-left:25px;">
+                </div>
+                <ul id="slideText">
+                    <li class="slideText1">ЛИДЕРЫ</li>
+                    <li class="slideText2"><?php echo $model->title ?></li>
+                    <li class="slideText3"><?php echo $slider['leader']; ?></li>
+                    <li class="slideText4"><?php echo $slider['descriptio']; ?></li>
+                    <div id="ap">“</div>
+                    <div id="ap2">“</div>
+                </ul>
+            </div>
         </li>
         <?php } ?>
         <?php } ?>
     </ul>
+   
 </div>
 
 <div id="darkBG">
@@ -112,3 +128,10 @@
     </div>
 
 </div>
+
+
+<script>
+$(document).ready(function(){
+$('.bxslider').bxSlider();
+});
+</script>

@@ -459,6 +459,7 @@ input {
     left: 450px;
     width: 577px;
    font-weight: bold;
+   text-transform: uppercase;
 }
 
 
@@ -493,7 +494,8 @@ input {
     line-height: 23px;
     margin-bottom: 32px;
     color: #6c816d;
-    font-size: 17px; 
+    font-size: 17px;
+    width: 500px;
 }
 
 

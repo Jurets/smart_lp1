@@ -13,7 +13,8 @@
 <?php echo $form->errorSummary($model); ?>
     
   <?php echo $form->textFieldControlGroup($model,'videolink',array('span'=>5,'maxlength'=>255)); ?>
-  <?php echo $form->textAreaControlGroup($model, 'about', array('span'=>5)); ?>  
+  <?php echo $form->textFieldControlGroup($model, 'title', array('span'=>5, 'maxlength'=>255)); ?>
+  <?php echo $form->textAreaControlGroup($model, 'about', array('span'=>5, 'maxlength'=>255)); ?>  
     
   <?php if(isset($model) && is_array($model->sliderlist) && count($model->sliderlist) > 0) { ?>
     

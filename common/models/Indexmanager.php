@@ -2,12 +2,13 @@
 class Indexmanager extends CFormModel {
     const ITEM = 'INDEX_MANAGER';
     public $videolink; // линк на видеоролик в youtube
+    public $title; // строка под словом ЛИДЕРЫ
     public $about; // контейнер для текст-контента "О системе"
     public $sliderlist = array(); // тело слайдера
     
     public function rules(){
         return array(
-            array('videolink, about', 'safe' ),
+            array('videolink, title, about', 'safe' ),
         );
     }
         
@@ -28,14 +29,16 @@ class Indexmanager extends CFormModel {
         $data = $load->query();
         $dump = $data->read();
         $decodedObject = json_decode($dump['content'], true);
-        $this->videolink = $decodedObject['videolink'];
-        $this->about = $decodedObject['about'];
+        $this->videolink = (isset($decodedObject['videolink'])) ? $decodedObject['videolink'] : '';
+        $this->title = (isset($decodedObject['title'])) ? $decodedObject['title'] : '';
+        $this->about = (isset($decodedObject['about'])) ? $decodedObject['about'] : '';
         $this->sliderlist = $decodedObject['sliderlist'];
     }
     public function SaveIndexManager(){
         debug_backtrace();
         $prepare = array(
             'videolink' => $this->videolink,
+            'title' => $this->title,
             'about' => $this->about,
             'sliderlist' => $this->sliderlist,
         );
