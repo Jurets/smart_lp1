@@ -22,6 +22,8 @@ class Participant extends User
     
     //поле страны - нужно для помощи при выборе города (т.к. у юзера поля страны нет, а поле города - есть)
     public $country_id;
+    //поле (логическое) согласия регистрируемого участника
+    public $rulesAgree;
     
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
@@ -42,6 +44,11 @@ class Participant extends User
 		 return CMap::mergeArray(parent::rules(), array(
 			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
              array('id', 'safe', 'on'=>array('search', 'seestructure')),
+             //регистрация
+             array('password', 'default', 'value' => $this->_generatePassword(), 'on'=>array('register')),
+             array('username, country_id, city_id, email, rulesAgree', 'safe', 'on'=>array('register')),
+             array('username, country_id, city_id, email, rulesAgree', 'required', 'on'=>array('register')),
+             array('rulesAgree', 'compare', 'compareValue'=>true, 'on'=>array('register'), 'message'=>'Необходимо принять Пользовательское Соглашение'),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
    		     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
@@ -192,6 +199,15 @@ class Participant extends User
         $this->country_id = isset($this->city) ? $this->city->country_id : null;
         //скрыть пароль
         $this->password = '';
+    }
+    
+    /**
+    * Сгенерировать пароль (числовой)
+    * 
+    */
+    private static function _generatePassword()
+    {
+        return rand(10000000, 99999999);
     }
     
     /**

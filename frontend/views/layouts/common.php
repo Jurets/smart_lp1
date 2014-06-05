@@ -55,7 +55,7 @@
         
         <?php 
         // --- FOOTER --- 
-        $this->renderPartial('footer');  
+        $this->renderPartial('application.views.layouts.footer');  
         ?>
 
 

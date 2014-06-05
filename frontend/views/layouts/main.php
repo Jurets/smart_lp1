@@ -26,7 +26,7 @@ $this->beginContent('//layouts/common');
                 <li> <a href="#"> ВОЗМОЖНОСТИ </a> </li>
                 <li> <a href="#"> ПРАВИЛА </a> </li>
                 <li> <a href="#"> ВОПРОСЫ И ОТВЕТЫ  </a> </li>
-                <li> <a class="moveRight1 open-login"> ЗАРЕГИСТРИРОВАТЬСЯ </a> </li>
+                <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> ЗАРЕГИСТРИРОВАТЬСЯ </a> </li>
                 <li> <a class="moveRight2 open-login" style="cursor: pointer;"> ВОЙТИ </a> </li>
             </ul>
         </div>
@@ -34,7 +34,7 @@ $this->beginContent('//layouts/common');
         <div id="content" style="height: auto !important;">
             <?php 
             // вывести част. вьюшку для входа 
-            $this->renderPartial('login', array(), false, true);
+            $this->renderPartial('login', array(), false, false);
             // вывести основной контент
             echo $content; 
             ?>

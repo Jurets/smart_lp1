@@ -10,7 +10,7 @@ class ViewHelper {
     * 
     */
     public static function getPrompt($prompt) {
-        return '<' . Yii::t('common', $prompt) . '>';
+        return '&lt;' . Yii::t('common', $prompt) . '&gt;';
     }
 
     /**
