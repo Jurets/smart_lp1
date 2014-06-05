@@ -83,8 +83,8 @@
    
 </div>
 
-<div id="darkBG">
-    <div id="infoBlok1">
+  <div id="darkBG">
+<!--    <div id="infoBlok1">
         <p class="reg1">ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ</p>
         <div id="numberDecor1"><p>00 652 427</p> <div id="test1"></div></div>
         <p class="regB">ТЕКУЩИЕ РЕГИСТРАЦИИ</p>    
@@ -96,7 +96,9 @@
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
         </ul>
-    </div>
+    </div>-->
+
+<?php $this->widget('application.widgets.UserContour.UserContour'); ?>
 
     <div id="infoBlok2">
         <p class="reg2">ВЫПЛАЧЕНО КОМИССИОННЫХ</p>
