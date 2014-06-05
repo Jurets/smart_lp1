@@ -24,19 +24,34 @@ $this->beginContent('//layouts/common');
                     <li> <a href="#"> &nbsp;ВОЗМОЖНОСТИ </a> </li>
                     <li> <a href="#"> ПРАВИЛА </a> </li>
                     <li> <a href="#" > ВОПРОСЫ И ОТВЕТЫ  </a> </li>
-
-
-
                 </ul>
-            </div>
 
-        <div id="office-5-content">
-            <div><a  id="logo" href="index.html"> </a></div>
+            </div>
 
             <div id="content">
+
+                <div id="divMenu">
+                    <?php $this->widget('zii.widgets.CMenu',array(
+                        'id'=>'nav2',
+                        'activeCssClass'=>'myitem-active',
+                        'items'=>array(
+                            array('label'=>'СТАТИСТИКА', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style1')),
+                            array('label'=>'СТРУКТУРА', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style2')),
+                            array('label'=>'НОВОСТИ', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style3')),
+                            array('label'=>'ЧАТ', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style4')),
+                            array('label'=>'ПРИГЛАШЕНИЕ', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style5')),
+                            array('label'=>'НАСТРОЙКИ', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style6')),
+                            array('label'=>'ПОМОЩЬ', 'url'=>array('office/help'),'itemOptions'=>array('class'=>'btn-style7')),
+                            array('label'=>'ПРАВИЛА', 'url'=>array('office/specification'),'itemOptions'=>array('class'=>'btn-style8'))
+
+                        ,)
+                    )); ?>
+                </div>
+                <div id="BottomOfficeLine"></div>
+
                 <?php echo $content; ?>
             </div>
+
         </div>
-    </div>
 </div>
 <?php $this->endContent(); ?>

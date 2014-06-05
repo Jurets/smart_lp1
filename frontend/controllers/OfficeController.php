@@ -16,16 +16,27 @@ class OfficeController extends EController
 
 
     /**
-     * Action rules for office
+     * Show rules
      */
     public function actionSpecification()
     {
         $objRequqstes = new Requisites();
         $message = $objRequqstes->model()->findAll();
         $message = $message[0]['agreement'];
-        $this->render('office-8',array('message'=>$message));
+        $this->render('office-8',array('content'=>$message));
     }
 
+
+    /**
+     * Show faq
+     */
+    public function actionHelp()
+    {
+        //$objFaq = new Faq();
+        //$categories = $objFaq->model()->findAll();
+
+        $this->render('help');
+    }
 
 
 }

@@ -3206,7 +3206,7 @@ select {
     margin-bottom: 20px;
     background-color: #167A91;
     z-index: 5;
-
+    
 }
 
 #nav2{
@@ -3500,9 +3500,9 @@ select {
 .myitem-active a{
     text-align: center;
     padding-top: 7px;
-    position: absolute;
-    left: 895px;
-    top: 92px;
+    //position: absolute;
+    //left: 895px;
+    //top: 92px;
     width: 104px;
     height: 28px;
     font-size: 19px;
@@ -3521,6 +3521,7 @@ select {
     position: absolute;
     top: -9px;
     text-align: center;
+    z-index: +1;
 }
 
 /*TABLE*/
@@ -6066,6 +6067,7 @@ html, body {
     position: absolute;
     width: 100%;
 }
+
 <!-- acardion -->
 #accordion h3 {
     height: 40px;
@@ -6076,24 +6078,29 @@ html, body {
     background-color: white;
 }
 
-.ui-accordion-header {
-    background-color: #d2d2d2;
+.ui-accordion-header a {
+
     font-size: 25px;
-    color: black;
+    color: black !important;
     /* border: 3px solid #edebeb; */
     border-radius: 3px;
-    margin: 3px;
-    padding: 12px 0px 12px 18px;
+    margin: 0px;
+    padding: 0;
 }
-.ui-accordion-header-active {
-    background-color: white;
-    color: #0c7d95;
+.ui-accordion-header-active a {
+    background-color: white !important;
+    color: #0c7d95 !important;
 }
-.ui-accordion .ui-accordion-header{
-    font: bold 20px 'Open Sans Condensed';
+.ui-accordion a .ui-accordion-header a{
+    font: bold 20px 'Open Sans Condensed' !important;
     display: block;
     cursor: pointer;
     position: relative;
+}
+.ui-accordion div{
+    font: bold 20px 'Open Sans Condensed' !important;
+    //display: block;
+    //margin: 0 auto;
 }
 
 .ui-accordion-content {
@@ -6102,10 +6109,12 @@ html, body {
     width: 964px;
     margin-left: 3px;
 }
+
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon {
     position: absolute;
+    left: 930px !important;
     right: 33px;
-    top: 37%;
+    top: 37% !important;
     margin-top: -8px;
     height: 30px;
     width: 30px;
@@ -6116,12 +6125,12 @@ html, body {
     overflow: auto;
 }
 .ui-state-default .ui-icon {
-    background: url(../images/acardion-arrow-right.png) no-repeat;
+    background: url(../images/acardion-arrow-right.png) no-repeat !important;
     background-size: 25px 30px;
 }
 
 .ui-state-active .ui-icon {
-    background: url(../images/acardion-arrow-down.png) no-repeat;
+    background: url(../images/acardion-arrow-down.png) no-repeat !important;
     background-size: 30px 28px;
     height: 28px;
     width: 30px;
@@ -6197,9 +6206,40 @@ html, body {
 }
 
 #office7-1-content {
-    height: 235px;
+    //height: 235px;
     width: 1000px;
     min-width: 1000px;
     position: relative;
     text-align: left;
 }
+
+<!-- ownAccordion -->
+
+
+.ui-accordion-header a:visited {
+    color: black !important;
+}
+
+#insideAccordion span {
+    background: url(../images/acardion-arrow-right.png) no-repeat;
+    background-size: 25px 30px;
+}
+
+#insideAccordion span .ui-icon-triangle-1-s {
+    background: url(../images/acardion-arrow-down.png) no-repeat;
+    background-size: 30px 28px;
+    height: 28px;
+    width: 30px;
+}
+.ui-widget
+{
+    position: absolute;
+    top:220px;
+    width:1000px;
+}
+.ui-widget div
+{
+    word-break: break-all;
+    width:910px !important;
+}
+<!-- END ownAccordion -->
