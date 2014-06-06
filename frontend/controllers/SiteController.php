@@ -42,4 +42,8 @@ class SiteController extends EController
         $this->layout = '//layouts/cabinet';
         $this->render('register');
     }*/
+    
+    public function actionUsrcontour(){
+        $this->renderPartial('_usrcontour');
+    }
 }

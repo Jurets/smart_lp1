@@ -97,14 +97,14 @@
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
         </ul>
     </div>-->
-
+<div id="usrcontour">
 <?php $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array( 
         'cssID' => 1,
         'head' => 'ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ',
         'title'=> 'ТЕКУЩИЕ РЕГИСТРАЦИИ',
     ))); ?>
-
+</div>
     <div id="infoBlok2">
         <p class="reg2">ВЫПЛАЧЕНО КОМИССИОННЫХ</p>
         <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>
@@ -142,3 +142,25 @@ $(document).ready(function(){
 $('.bxslider').bxSlider();
 });
 </script>
+
+<script>
+var usrContour = setTimeout(
+  function run(){
+      $.ajax({
+        type: "POST",
+            url: "<?php echo $this->createAbsoluteUrl('site/usrcontour')?>",
+            dataType: 'html',
+            success: function(res){
+                $('#usrcontour').html(res);
+            },
+            error: function(){
+                alert("ERROR");
+            },
+            
+});
+      timer = setTimeout(run, 5000);
+  }
+, 5000);
+</script>
+
+
