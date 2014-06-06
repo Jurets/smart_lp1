@@ -21,6 +21,7 @@ class OfficeController extends EController
     public function actionSpecification()
     {
         $objRequqstes = new Requisites();
+        //$message - form admin panel.  Requqstes->Agreement
         $message = $objRequqstes->model()->findAll();
         $message = $message[0]['agreement'];
         $this->render('office-8',array('content'=>$message));
@@ -32,10 +33,10 @@ class OfficeController extends EController
      */
     public function actionHelp()
     {
-        //$objFaq = new Faq();
-        //$categories = $objFaq->model()->findAll();
-
-        $this->render('help');
+        $objFaq = new Faq();
+        // $categories - sorted faq(array) by categories
+        $categories = $objFaq->model()->showAllFaq();
+        $this->render('help',array('arrCategories'=>$categories));
     }
 
 

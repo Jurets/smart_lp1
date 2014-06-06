@@ -110,5 +110,42 @@ class Faq extends CActiveRecord
         return parent::model($className);
     }
 
+    public function showAllFaq()
+    {
+        $arrFaq = $this->model()->findAll();
+        $arrSortCategoryFaq = array();
+        foreach($arrFaq as $faq)
+        {
+           if($faq['category'] == 'finance')
+           {
+               $arrCategoryFaqFinance['question'] = $faq['question'];
+               $arrCategoryFaqFinance['answer'] = $faq['answer'];
+               $arrCategoryFaqFinance['category'] = $faq['category'];
+               $arrFinance[] = $arrCategoryFaqFinance;
+               $arrSortCategoryFaq['finance'] = $arrFinance;
+           }
+           elseif($faq['category'] == 'site')
+           {
+               $arrCategoryFaqSite['question'] = $faq['question'];
+               $arrCategoryFaqSite['answer'] = $faq['answer'];
+               $arrCategoryFaqSite['category'] = $faq['category'];
+               $arrSite[] = $arrCategoryFaqSite;
+               $arrSortCategoryFaq['site'] = $arrSite;
+           }
+           else
+           {
+               $arrCategoryFaqOffer['question'] = $faq['question'];
+               $arrCategoryFaqOffer['answer'] = $faq['answer'];
+               $arrCategoryFaqOffer['category'] = $faq['category'];
+               $arrOffer[] = $arrCategoryFaqOffer;
+               $arrSortCategoryFaq['offer'] = $arrOffer;
+           }
+        }
+        return $arrSortCategoryFaq;
+    }
+
+
+
+
 
 }

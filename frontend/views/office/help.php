@@ -1,30 +1,63 @@
 <?php
 /**
  * $this OfficeController
- * @var $categories
+ * @var $arrCategories
  */
 Yii::app()->clientScript->registerCssFile('/css/style-office.css');
+Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
 ?>
 <div id="office7-1-content">
     <div><a  id="logo" href="index.html"> </a></div>
     <a href="#" id='popupbtn' ><input type="button" name="btn"  class="btn-style-green-7-1" value="ЗАДАТЬ ВОПРОС" /></a>
 </div>
-    <div id ="ownAccordion">
-    <?php
-        $this->widget('zii.widgets.jui.CJuiAccordion',array(
-        'id' =>'insideAccordion',
-        'panels'=>array(
-        'Финансы'=>$categories[0],
-        'Предложения'=>$categories[1],
-        'Работа сайта'=>'content for panel 3',
-        // panel 3 contains the content rendered by a partial view
-        //'panel 3'=>$this->renderPartial('_partial',null,true),
-        ),
-        // additional javascript options for the accordion plugin
-        'options'=>array('active'=>0,'animated'=>'bounceslide',
-                         'autoHeight'=>true,
-        ),
-        'htmlOptions'=>array('class'=>'accordion'),
-        ));
-    ?>
+
+<div id="accordion">
+    <h3>Финансы</h3>
+    <div class="accordionContent">
+        <?php  foreach($arrCategories['finance'] as $finance)
+        {
+            echo $finance['question'];
+            echo $finance['answer'];
+            echo '<hr>';
+        }
+        ?>
+    </div>
+    <h3>Предложения</h3>
+    <div class="accordionContent">
+        <?php  foreach($arrCategories['offer'] as $finance)
+        {
+            echo $finance['question'];
+            echo $finance['answer'];
+            echo '<hr>';
+        }
+        ?>
+    </div>
+    <h3>Работа сайта</h3>
+    <div class="accordionContent">
+        <?php  foreach($arrCategories['site'] as $finance)
+        {
+            echo $finance['question'];
+            echo $finance['answer'];
+            echo '<hr>';
+        }
+        ?>
+    </div>
 </div>
+
+
+<script>
+$( "#accordion" ).accordion();
+$('#popup').hide()
+$( document ).ready(function() {
+$('#popupbtn').on("click",function (){
+
+$('#popup').show()
+$('#close-popup').on('click',function(){
+
+$('#popup').hide()
+
+})
+})
+
+});
+</script>
