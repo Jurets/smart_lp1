@@ -44,7 +44,7 @@ input {
     left: 769px;
     z-index: 5;
     position: absolute;
-    box-shadow: 1px 1px 26px rgba(0, 0, 0, 0.49);
+    box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.2)
 } 
 
 
@@ -52,7 +52,7 @@ input {
 
 
 .textbox1 { 
-   border: 6px solid #F7F9FA; 
+   border: 6px solid #fff; 
         border-radius: 1px; 
         height:30px; 
         width: 190px;
@@ -64,7 +64,7 @@ input {
 
 
 .textbox2 { 
-   border: 6px solid #F7F9FA; 
+   border: 6px solid #fff;
         border-radius: 1px; 
         height:30px; 
         width: 190px;
@@ -76,7 +76,7 @@ input {
 
 
 .textbox3 { 
-   border: 6px solid #F7F9FA; 
+   border: 6px solid #fff; 
         border-radius: 1px; 
         height:30px; 
         width: 190px;

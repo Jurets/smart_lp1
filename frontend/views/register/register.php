@@ -47,7 +47,7 @@
 <?php //$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 $form = $this->beginWidget('CActiveForm', array(
     'id'=>'register-form',
-    'enableAjaxValidation'=>true,
+    'enableAjaxValidation'=>false,
     'htmlOptions' => array('enctype'=>'multipart/form-data'),
     //'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
 ));
