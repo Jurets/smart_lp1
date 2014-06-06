@@ -98,7 +98,12 @@
         </ul>
     </div>-->
 
-<?php $this->widget('application.widgets.UserContour.UserContour'); ?>
+<?php $this->widget('application.widgets.UserContour.UserContour',
+        array( 'params' => array( 
+        'cssID' => 1,
+        'head' => 'ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ',
+        'title'=> 'ТЕКУЩИЕ РЕГИСТРАЦИИ',
+    ))); ?>
 
     <div id="infoBlok2">
         <p class="reg2">ВЫПЛАЧЕНО КОМИССИОННЫХ</p>
