@@ -53,7 +53,7 @@ class UserContour extends CWidget {
         
         foreach($usersDump->readAll() as $index=>$li){
            $this->dataPull['userList'][$index]['country'] = $li['code'];
-           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' UTC'. $li['first_name'] .' '. $li['last_name'];
+           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' UTC '. $li['first_name'] .' '. $li['last_name'];
             
         }
        
