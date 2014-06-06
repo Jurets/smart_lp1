@@ -4,10 +4,10 @@
  */
 class UserContour extends CWidget {
     public $params = array(
-        'action' => 'index',
-        'cssID' => 1,
-        'head' => 'ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ',
-        'title'=> 'ТЕКУЩИЕ РЕГИСТРАЦИИ',
+        //'action' => 'index', // не обязательный
+        //'cssID' => 1,
+        //'head' => 'ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ',
+        //'title'=> 'ТЕКУЩИЕ РЕГИСТРАЦИИ',
     );
     private $dataPull = array(
         'numberField' => '00 000 000', // поле с цифрами (должно быть отформатировано)
@@ -35,27 +35,28 @@ class UserContour extends CWidget {
     /**/
     private function registeredPartipiants(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ
-        /* Приблизительно хардкод  выполнить запрос и произвести соответствующее форматирование форматирование*/
-        $this->dataPull['numberField'] = '11 222 333';
+        $db_connector = Yii::app()->db;
+        $usersDumpCommand = $db_connector->createCommand(
+                'SELECT u.first_name, u.last_name, u.create_at, co.code, co.name
+                 FROM tbl_users u
+                 INNER JOIN cities c
+                 ON u.city_id = c.id
+                 INNER JOIN countries co
+                 ON co.id = c.country_id
+                 ORDER BY u.create_at DESC
+                 LIMIT 6');
+        $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser <> 1 ');
+        $usersDump = $usersDumpCommand->query();
+        $usersCount = $usersCountCommand->query();
         
-        $this->dataPull['userList'][0]['country'] = 'tailand';
-        $this->dataPull['userList'][0]['content'] = '00:06 UTC Человек раз';
+        $this->dataPull['numberField'] = $this->jmws_money_converter(($usersCount->read()['count(id)']));
         
-        $this->dataPull['userList'][1]['country'] = 'UA';
-        $this->dataPull['userList'][1]['content'] = '00:05 UTC Человек два';
-        
-        $this->dataPull['userList'][2]['country'] = 'RU';
-        $this->dataPull['userList'][2]['content'] = '00:04 UTC Человек три';
-        
-        $this->dataPull['userList'][3]['country'] = 'UK';
-        $this->dataPull['userList'][3]['content'] = '00:03 UTC Человек четыре';
-        
-        $this->dataPull['userList'][4]['country'] = 'AU';
-        $this->dataPull['userList'][4]['content'] = '00:02 UTC Человек пять';
-        
-        $this->dataPull['userList'][5]['country'] = 'PL';
-        $this->dataPull['userList'][5]['content'] = '00:01 UTC Человек шесть';
-        
+        foreach($usersDump->readAll() as $index=>$li){
+           $this->dataPull['userList'][$index]['country'] = $li['code'];
+           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' UTC '. $li['first_name'] .' '. $li['last_name'];
+            
+        }
+       
     }
     private function freePaid(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ВЫПЛАЧЕНО КОМИССИОННЫХ 
@@ -63,4 +64,25 @@ class UserContour extends CWidget {
     private function givenOncharity(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ОТДАНО НА БЛАГОТВОРИТЕЛЬНОСТЬ
     }
+    
+    /*addons special srevices*/
+    private function jmws_money_converter($in) {
+        $result = '';
+        $input = strrev((string) $in);
+        if (strlen($input) > 8) {
+            return 'OV ERF ULL';
+        } else {
+            for ($i = 0; $i < 8; $i++) {
+                if ($i >= strlen($input))
+                    $result .= '0';
+                else
+                    $result .= $input[$i];
+
+                if (($i + 1) % 3 == 0)
+                    $result .= ' ';
+            }
+        }
+        return strrev($result);
+    }
+
 }
