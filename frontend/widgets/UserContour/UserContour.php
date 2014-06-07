@@ -45,7 +45,7 @@ class UserContour extends CWidget {
                  ON co.id = c.country_id
                  ORDER BY u.create_at DESC
                  LIMIT 6');
-        $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser <> 1 ');
+        $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 ');
         $usersDump = $usersDumpCommand->query();
         $usersCount = $usersCountCommand->query();
         
