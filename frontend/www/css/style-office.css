@@ -3215,15 +3215,12 @@ select {
 }
 
 
-
-
-.btn-style1 a{
+.btn-style a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 0px;
-    top: 92px;
-    width: 129px;
+    top: 0;
+    width: 127px;
     height: 28px;
     font-size: 19px;
     border: 1px solid rgba(201, 201, 201, 0);
@@ -3232,14 +3229,27 @@ select {
     transition-duration: .5s;
 }
 
-
+.btn-style1 a{
+    text-align: center;
+    padding-top: 7px;
+    position: absolute;
+    left: 0;
+    top: 92px;
+    width: 127px;
+    height: 28px;
+    font-size: 19px;
+    border: 1px solid rgba(201, 201, 201, 0);
+    transition-property: all;
+    transition-timing-function: ease;
+    transition-duration: .5s;
+}
 .btn-style1 a:hover{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 0px;
+    left: 0;
     top: 92px;
-    width: 129px;
+    width: 127px;
     height: 28px;
     font-size: 19px;
     border: 1px solid #c9c9c9;
@@ -3248,73 +3258,57 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
-
-
 .btn-style2 a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 131px;
+    left: 129px;
     top: 92px;
-    width: 140px;
+    width: 127px;
     height: 28px;
     font-size: 19px;
     border: 1px solid rgba(201, 201, 201, 0);
     transition-property: all;
     transition-timing-function: ease;
     transition-duration: .5s;
-
 }
 
 .btn-style2 a:hover{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 131px;
     top: 92px;
-    width: 140px;
+    width: 127px;
     height: 28px;
     font-size: 19px;
     border: 1px solid #c9c9c9;
     background-color: #FFFFFF;
-    transition-property: all
+    transition-property: all;
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
-
 
 .btn-style3 a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 273px;
+    left: 258px;
     top: 92px;
-    width: 117px;
     height: 28px;
+    width: 127px;
     font-size: 19px;
     border: 1px solid rgba(201, 201, 201, 0);
     transition-property: all;
-
-
-
-
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
 .btn-style3 a:hover{
-
-
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 273px;
+    left: 258px;
     top: 92px;
-    width: 117px;
+    width: 127px;
     height: 28px;
     font-size: 19px;
     border: 1px solid #c9c9c9;
@@ -3323,49 +3317,42 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
-
-
 
 .btn-style4 a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 392px;
+    left: 387px;
     top: 92px;
     width: 83px;
     height: 28px;
-    font-size:19px ;
+    font-size: 19px;
     border: 1px solid rgba(201, 201, 201, 0);
     transition-property: all;
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
 .btn-style4 a:hover{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-
-    left: 392px;
+//left: 390px;
     top: 92px;
     width: 83px;
     height: 28px;
-    font-size:19px ;
+    font-size: 19px;
     border: 1px solid #c9c9c9;
     background-color: #FFFFFF;
     transition-property: all;
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
 
 .btn-style5 a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 477px;
+    left: 472px;
     top: 92px;
     width: 159px;
     height: 28px;
@@ -3375,12 +3362,11 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
 .btn-style5 a:hover{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 477px;
+//left: 485px;
     top: 92px;
     width: 159px;
     height: 28px;
@@ -3391,16 +3377,12 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
-
 
 .btn-style6 a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-
-    left: 638px;
+    left: 633px;
     top: 92px;
     width: 131px;
     height: 28px;
@@ -3410,13 +3392,11 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
 .btn-style6 a:hover{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 638px;
+    left: 633px;
     top: 92px;
     width: 131px;
     height: 28px;
@@ -3427,18 +3407,13 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
-
-
-
 .btn-style7 a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 771px;
+    left: 765px;
     top: 92px;
-    width: 122px;
+    width: 123px;
     height: 28px;
     font-size: 19px;
     border: 1px solid rgba(201, 201, 201, 0);
@@ -3446,15 +3421,13 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
 .btn-style7 a:hover{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 771px;
+    left: 765px;
     top: 92px;
-    width: 122px;
+    width: 123px;
     height: 28px;
     font-size: 19px;
     border: 1px solid #c9c9c9;
@@ -3463,15 +3436,11 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-
-
-
 .btn-style8 a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 895px;
+    left: 890px;
     top: 92px;
     width: 104px;
     height: 28px;
@@ -3481,12 +3450,11 @@ select {
     transition-timing-function: ease;
     transition-duration: .5s;
 }
-
-.btn-style8 a:hover {
+.btn-style8 a:hover{
     text-align: center;
     padding-top: 7px;
     position: absolute;
-    left: 895px;
+    left: 890px;
     top: 92px;
     width: 104px;
     height: 28px;
@@ -3494,15 +3462,17 @@ select {
     border: 1px solid #c9c9c9;
     background-color: #FFFFFF;
     transition-property: all;
-    transition-timing-function: ease ;
+    transition-timing-function: ease;
     transition-duration: .5s;
 }
+
+
 .myitem-active a{
     text-align: center;
     padding-top: 7px;
     position: absolute;
     top: 92px;
-    width: 122px;
+    /*width: 122px;*/
     height: 28px;
     font-size: 19px;
     border: 1px solid #c9c9c9;
@@ -3510,6 +3480,7 @@ select {
     color:#838383;
 
 }
+
 .myitem-active li a,
 {
     z-index: 5;
@@ -4255,8 +4226,6 @@ select {
 }
 
 
-
-
 #office3-content{
     height: 1692px;
     width: 1000px;
@@ -4430,10 +4399,12 @@ select {
 /*office-5*/
 
 #office-5-content{
-    height: 1177px;
+    /*height: 1177px;*/
+
+    height: auto !important ;
+
     width: 1000px;
     position: relative;
-    z-index: 0;
 }
 
 
@@ -4444,12 +4415,13 @@ select {
     background-image: url(../images/photo1.png);
     background-repeat: no-repeat;
     float: left;
-    margin-top: 1px;
+    margin-top: 47px;
     z-index: 0;
 }
 
 #office-5-post1{
     position: absolute;
+    display: block;
     top: 150px;
     width: 1028px;
     height: 210px;
@@ -4556,9 +4528,12 @@ select {
     font: bold 25px 'Open Sans Condensed';
     color: #007e97;
     top: 162px;
-    /*position: absolute;*/
+    //position: absolute;
 }
-
+.h2ContentOffice5 {
+    top: 120px;
+    position: absolute;
+}
 
 
 
@@ -4567,7 +4542,7 @@ select {
     font-size: 23px ;
     padding-bottom: 11px;
     text-transform: uppercase;
-
+    margin-top: 45px;
 }
 
 
@@ -6062,7 +6037,8 @@ html, body {
 .footer {
     min-width: 1000px;
     height: 260px;
-    margin-top: -260px;
+    /*margin-top: -260px; */
+    margin-top: 0;
     background: #232323;
 }
 #BGDivs {
@@ -6081,7 +6057,7 @@ html, body {
 
 .accordionContent
 {
-    height: 350px !important;
+    height: 250px !important;
 }
 .ui-accordion-header {
     background-color: #d2d2d2;

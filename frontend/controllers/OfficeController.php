@@ -39,5 +39,11 @@ class OfficeController extends EController
         $this->render('help',array('arrCategories'=>$categories));
     }
 
-
+    /**
+     * Show invitation
+     */
+    public function actionInvitation()
+    {
+        $this->render('invitation');
+    }
 }

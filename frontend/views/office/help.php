@@ -7,7 +7,6 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
 ?>
 <div id="office7-1-content">
-    <div><a  id="logo" href="index.html"> </a></div>
     <a href="#" id='popupbtn' ><input type="button" name="btn"  class="btn-style-green-7-1" value="ЗАДАТЬ ВОПРОС" /></a>
 </div>
 
