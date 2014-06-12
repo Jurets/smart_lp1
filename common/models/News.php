@@ -145,4 +145,9 @@ class News extends CActiveRecord
 	public function getUploadImage($pathToUploadDir = '/uploads/', $resizePrefix = 'resized-', $resized = TRUE){
 		return ($resized) ? $pathToUploadDir . $resizePrefix . $this->image : $pathToUploadDir . $this->image;  
 	}
+        public function getPrew(){
+            $first = strpos($this->content, '.');
+            $first += 1;
+            return substr($this->content, 0, strpos($this->content, '.', $first)) . '.';
+        }
 }

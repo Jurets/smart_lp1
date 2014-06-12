@@ -35,7 +35,6 @@ class Indexmanager extends CFormModel {
         $this->sliderlist = $decodedObject['sliderlist'];
     }
     public function SaveIndexManager(){
-        debug_backtrace();
         $prepare = array(
             'videolink' => $this->videolink,
             'title' => $this->title,

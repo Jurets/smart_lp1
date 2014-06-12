@@ -7,7 +7,7 @@
  */
 class OfficeController extends EController
 {
-
+    
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -15,7 +15,9 @@ class OfficeController extends EController
     public $layout='//layouts/office';
 
 
-
+    public function actionIndex(){
+      $this->render('cap', array('service_msg'=>'Заглушка'));   
+    }
     /**
      * Show rules
      */
@@ -48,5 +50,24 @@ class OfficeController extends EController
         $inviteInformation = Invitation::model()->findAll();
         $youTubeUrlUniqueId = $inviteInformation[0]['video_link'];
         $this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId));
+    }
+    
+    /* News */
+    public function actionNews()
+    {
+        if(isset($_GET['id'])){
+            $model = News::model()->findByPk($_GET['id']);
+            
+            $this->render('newsone', array('model'=>$model));
+        }else{
+            $criteria = new CDbCriteria();
+            $criteria->addCondition('activity = 1');
+            $count = News::model()->count($criteria); // количество активных записей новостей
+            $pages = new CPagination($count);
+            $pages->pageSize = 6;
+            $pages->applyLimit($criteria);
+            $models = News::model()->findAll($criteria); // новости
+            $this->render('news', array('models'=>$models, 'pages'=>$pages));
+        }
     }
 }

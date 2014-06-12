@@ -3101,7 +3101,7 @@ select {
 }
 
 #content{
-    height: 880px;
+    /*height: 880px;*/
     width: 1000px;
 
     min-width: 1000px;

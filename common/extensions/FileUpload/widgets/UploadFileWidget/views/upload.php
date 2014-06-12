@@ -4,8 +4,8 @@
     <?php //$form->label($model, 'Upload illustration') ?>
     <?php echo CHtml::activeLabel($model, 'Upload illustration') ?>
 
-    <div class="news-image-preview" id="news-image-preview" style="width: 336px; height: 160px; border: 1px solid gray; background: url('<?php
-            echo (isset($model->image)) ? '/admin'.$model->UploadImage : '/admin/img/img-gate.png';
+    <div class="news-image-preview" id="news-image-preview" style="width: <?php echo $params['width'];?>px; height: <?php echo $params['height'];?>px; border: 1px solid gray; background: url('<?php
+            echo (isset($model->image)) ? '/admin'.$model->UploadImage : '' /*/admin/img/img-gate.png';*/
         ?>') no-repeat;">
     </div>
     <br/>
@@ -21,9 +21,10 @@
 
 <script>
     $(function() {
-        var url = "<?=$this->controller->createAbsoluteUrl('upload')?>";
+        var url = "<?=$this->controller->createAbsoluteUrl('upload', array('w'=>$params['width'], 'h'=>$params['height'], 'org_w'=>$re_org['width'], 'org_h'=>$re_org['height']))?>";
         $('#fileupload').fileupload({
             url: url,
+            //data: ['w':<?=$params['width']?>, 'h':$params['height'], 'org_w'=>$re_org['width'], 'org_h'=>$re_org['height']],
             dataType: 'json',
             send: function(e, data) {
                 //$("#select-image").hide();

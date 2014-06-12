@@ -66,6 +66,10 @@
                 'allowAutoLogin'=>true,
                 'loginUrl' => array('/user/login'),
             ),
+            'dateFormatter' => array(
+                'class' => 'common.components.EDateFormatter',
+                //'locale' => 'en_US',
+            ),
             'mail' => array(
                 'class' => 'common.extensions.yii-mail.YiiMail',
                 'transportType' => 'smtp',

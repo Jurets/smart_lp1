@@ -72,7 +72,10 @@
 
 	<div class="row buttons">
 	
-    <?php $this->widget('common.extensions.FileUpload.widgets.UploadFileWidget.UploadFileWidget', array('model'=>$model)); ?>
+    <?php $this->widget('common.extensions.FileUpload.widgets.UploadFileWidget.UploadFileWidget',
+                        array('model'=>$model, 'params'=>array('width'=>377, 'height'=>191), 
+                              're_org'=>array('width'=>554, 'height'=>281),
+                            )); ?>
     
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

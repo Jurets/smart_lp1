@@ -182,7 +182,8 @@ class ImageHelper {
         return $relative_path;
     }
     
-    public static function makeNewsThumb($img)
+    /* signature по умолчанию пустая - для возможности ресайза оригинала, если это необходимо */
+    public static function makeNewsThumb($img, $signature='', $re_width=336, $re_height=160)
     {
         if(!file_exists($img)){
             $img = str_replace('\\', '/', YiiBase::getPathOfAlias('webroot').$img);
@@ -192,8 +193,8 @@ class ImageHelper {
             }
         }
         $options = null;
-        $width = 336;
-        $height = 160;
+        $width = $re_width;
+        $height = $re_height;
         // Jpeg quality
         $quality = 100;
         // Method for resizing
@@ -207,7 +208,7 @@ class ImageHelper {
 
         $pathinfo = pathinfo($img);
         //$thumb_name = "news_".$pathinfo['filename'].'_'.$width.'_'.$height.'.'.$pathinfo['extension'];
-        $thumb_name = "resized-".$pathinfo['filename'].'.'.$pathinfo['extension'];
+        $thumb_name = $signature . $pathinfo['filename'].'.'.$pathinfo['extension']; // заменено, , было resized- . ...
         $thumb_path = $pathinfo['dirname'].'/';
         if(!file_exists($thumb_path)){
             mkdir($thumb_path);

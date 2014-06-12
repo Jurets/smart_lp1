@@ -18,10 +18,14 @@
 */
 class UploadAction extends CAction {
 
+    /* не используется, оставлено для совместимости */
     public $prefixOrigin = 'origin-';
     public $prefixResized = 'resized-';
+    
     public $uploadDir = '/uploads/';
     public $uploadUrl = '/uploads/';
+    public $resize = array('width'=>336, 'height'=>160);
+    public $re_org = array('width'=>0, 'height'=>0); // по умолчанию - нули, - не надо ресайзить оригинал
     
     // выходные точки для дальнейшего использования в вызывающем файле
     public $images = array();
@@ -61,6 +65,16 @@ class UploadAction extends CAction {
      *  3. Возвращается массив с настройками доступа к загруженным файлам (PATH, URL RESIZED-URL)
      */
      public function run(){
+         if(isset($_GET['w']) && isset($_GET['h']) && isset($_GET['org_w']) && isset($_GET['org_h'])){
+            if(!is_null($_GET['w']) && !is_null($_GET['h'])){
+                 $this->resize['width'] = $_GET['w'];
+                 $this->resize['height'] = $_GET['h'];
+            }
+            if(!is_null($_GET['org_w']) && !is_null($_GET['org_h'])){
+                 $this->re_org['width'] = $_GET['org_w'];
+                 $this->re_org['height'] = $_GET['org_h'];
+            }
+         }
         if ($_FILES){
             //var_dump($_FILES);die;
         $look = $_FILES;
@@ -91,7 +105,10 @@ class UploadAction extends CAction {
             
             $result = move_uploaded_file($namesSource, $file_path);
            // $result = move_uploaded_file($_FILES[$target]['tmp_name'][$num][key($_FILES[$target]['tmp_name'][$num])], $file_path);
-            $resized = ImageHelper::makeNewsThumb($file_path);
+            $resized = ImageHelper::makeNewsThumb($file_path, 'resized-',  $this->resize['width'], $this->resize['height']);
+            if($this->re_org['width'] !=0 && $this->re_org['height'] !=0){
+                $resized_org = ImageHelper::makeNewsThumb($file_path, 'origin-', $this->re_org['width'], $this->re_org['height']);
+            }
 
             $json = array(
                 $target=>array(
