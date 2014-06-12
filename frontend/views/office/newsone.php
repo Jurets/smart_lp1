@@ -1,5 +1,5 @@
 <div id="office3-content">
-<a href="office-3.html"><input type="button" name="btn"  class="btn-style-green" value="НАЗАД" /></a>
+    <a href="/office/news/<?php echo $page ?>"><input type="button" name="btn"  class="btn-style-green" value="НАЗАД" /></a>
          
         <div id="office-3-1post1">
             <?php echo TbHtml::tag('div', array('style'=>'background-image: url(/admin/uploads/'.'origin-'.$model->image, 'id'=>'blogImg1'), '&nbsp;'); ?>
@@ -10,3 +10,5 @@
             </p>   
       </div>
 </div>
+
+<?php $model->attendedUpdate($model->id) ?>

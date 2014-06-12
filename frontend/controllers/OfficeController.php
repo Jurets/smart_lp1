@@ -54,11 +54,15 @@ class OfficeController extends EController
     
     /* News */
     public function actionNews()
-    {
+    {  
+        if(!isset(Yii::app()->request->cookies['attended']->value )){
+            Yii::app()->request->cookies['cookie_name'] = new CHttpCookie('attended', json_encode(array(0)));
+        }
+        
+        isset($_GET['page']) ? $page = sprintf('?page=%d', $_GET['page']) : $page = '';
         if(isset($_GET['id'])){
             $model = News::model()->findByPk($_GET['id']);
-            
-            $this->render('newsone', array('model'=>$model));
+            $this->render('newsone', array('model'=>$model, 'page'=>$page));
         }else{
             $criteria = new CDbCriteria();
             $criteria->addCondition('activity = 1');
@@ -67,7 +71,11 @@ class OfficeController extends EController
             $pages->pageSize = 6;
             $pages->applyLimit($criteria);
             $models = News::model()->findAll($criteria); // новости
-            $this->render('news', array('models'=>$models, 'pages'=>$pages));
+            $models = News::model()->attendedScan($models);                        
+            $renderProperties = array('models'=>$models, 'pages'=>$pages);
+            $this->render('news', array('models'=>$models, 'pages'=>$pages, 'page'=>$page));
+            
+            
         }
     }
 }
