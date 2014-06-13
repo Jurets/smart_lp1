@@ -3,7 +3,6 @@
  * $this OfficeController
  */
 Yii::app()->clientScript->registerCssFile('/css/style-office.css');
-//Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
 $form = $this->beginWidget('CActiveForm', array(
     'id'=>'settings-form',
     'enableAjaxValidation'=>false,
