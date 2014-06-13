@@ -47,7 +47,9 @@ class OfficeController extends EController
      */
     public function actionSettings()
     {
-        $this->render('settings');
+        $participant = New Participant('settings');
+
+        $this->render('settings',array('participant'=>$participant));
     }
     /**
      * Show invitation
