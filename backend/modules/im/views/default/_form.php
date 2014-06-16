@@ -19,6 +19,7 @@
   <?php if(isset($model) && is_array($model->sliderlist) && count($model->sliderlist) > 0) { ?>
     
     <?php foreach($model->sliderlist as $ind => $slider) { ?>
+    <?php if(!isset($slider['leader'])) {echo '-==- '.$ind; continue;} ?>
     <div class="copy">
         <div>
         <span class="mr">leader</span><?php echo CHtml::textField("sliderlist[$ind][leader]", $slider['leader']);?>

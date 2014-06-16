@@ -20,7 +20,7 @@ class Invitation extends CFormModel
     public function setBannerList($arr){
          $this->bannerFiles = array();
             foreach($arr as $i=>$elem){
-                $this->bannerFiles[] = $elem;
+                $this->bannerFiles[$i] = $elem;
             }
     }
     public function checkChangesArrFiles($arrPostFiles)
@@ -45,6 +45,13 @@ class Invitation extends CFormModel
         $this->bannerFiles = (isset($this->decodedObject['bannerFiles'])) ? $this->decodedObject['bannerFiles'] : '';
     }
     public function saveInvitationManager(){
+        /*модуль приведения к нормальному виду - будущий вспомогательный метод модели -> bgiin */
+        $reorg_buffer = array();
+        foreach ($this->bannerFiles as $reorganisation){
+            $reorg_buffer[] = $reorganisation;
+        }
+        $this->bannerFiles = $reorg_buffer;
+        /*-> end */
         $prepare = array(
             'videoLink' => $this->videoLink,
             'fileLink' => $this->fileLink,

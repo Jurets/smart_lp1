@@ -15,12 +15,12 @@ class Indexmanager extends CFormModel {
     public function setSliderList($arr){
         $this->sliderlist = array();
         foreach($arr as $i=>$elem){
-            $this->sliderlist[] = $elem;
+            $this->sliderlist[$i] = $elem;
         }
     }
     public function setImages($arr, $key="name"){ // ключом указываеи на запись в слайдер нужного ресурса (url, path, filename)
         foreach($arr as $i=>$elem){
-            $this->sliderlist[$i]['photo'] = $elem[$key];
+           $this->sliderlist[$i]['photo'] = $elem[$key];
         }
     }
     public function LoadIndexManager(){
@@ -35,13 +35,20 @@ class Indexmanager extends CFormModel {
         $this->sliderlist = $decodedObject['sliderlist'];
     }
     public function SaveIndexManager(){
+        /*модуль приведения к нормальному виду - будущий вспомогательный метод модели -> bgiin */
+        $reorg_buffer = array();
+        foreach ($this->sliderlist as $reorganisation){
+            $reorg_buffer[] = $reorganisation;
+        }
+        $this->sliderlist = $reorg_buffer;
+        /*-> end */
         $prepare = array(
             'videolink' => $this->videolink,
             'title' => $this->title,
             'about' => $this->about,
             'sliderlist' => $this->sliderlist,
         );
-        
+  
         $prepare = json_encode($prepare, JSON_UNESCAPED_UNICODE);
         $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
         $variant1 = ' itemsstorage SET item = "'.self::ITEM.'", content = \'' . $prepare . '\''; // insert

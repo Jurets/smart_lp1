@@ -26,7 +26,6 @@ class DefaultController extends EController
 //    }
 	public function actionIndex()
 	{
-           // print_r($_FILES);die;
                 $model = new Indexmanager;
                 $model->LoadIndexManager(); // запрос к itemsstorage по параметру INDEX_MANAGER
                 if(isset($_POST['Indexmanager'])){
@@ -45,7 +44,7 @@ class DefaultController extends EController
                     $images = $upload->run();
                     $model->setImages($images);
                     }
-                    
+                                       
                     $model->SaveIndexManager();
                     $this->redirect(array('index'));
                 }

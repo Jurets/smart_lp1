@@ -63,6 +63,8 @@ class UploadAction extends CAction {
      *  2. Расширено восприятие служебных ключей массива $_FILES
      *     ('name', 'tmp_name') теперь видимы как в строке, так и в составе массива
      *  3. Возвращается массив с настройками доступа к загруженным файлам (PATH, URL RESIZED-URL)
+     *  4. Доработан под непоследовательные массивы файлов с произвольным шагом индекса)
+     *  5. Ajax-upload часть теперь поддерживает массив файлов также.
      */
      public function run(){
          if(isset($_GET['w']) && isset($_GET['h']) && isset($_GET['org_w']) && isset($_GET['org_h'])){
@@ -76,12 +78,11 @@ class UploadAction extends CAction {
             }
          }
         if ($_FILES){
-            //var_dump($_FILES);die;
         $look = $_FILES;
         reset($look);
         $target = key($look);
-        //foreach($_FILES[$target]['name'] as $num=>$file){ // перебираем в цикле все подгружаемые файлы и для каждого из них найдется место
-        for($num = key($_FILES[$target]['name']); $num < count($_FILES[$target]['name']); $num++){
+        $json = array();
+        for($num = key($_FILES[$target]['name']); $num <= max(array_keys($_FILES[$target]['name'])); $num++){
             
             if (!isset($_FILES[$target]['name'][$num])){
                 continue;
@@ -101,7 +102,7 @@ class UploadAction extends CAction {
                         
             $namesSource = (is_array($_FILES[$target]['tmp_name'][$num])) ?
                     $_FILES[$target]['tmp_name'][$num][key($_FILES[$target]['tmp_name'][$num])] : 
-                    $_FILES[$target][$target][$num];
+                    $_FILES[$target]['tmp_name'][$num];
             
             $result = move_uploaded_file($namesSource, $file_path);
            // $result = move_uploaded_file($_FILES[$target]['tmp_name'][$num][key($_FILES[$target]['tmp_name'][$num])], $file_path);
@@ -110,20 +111,11 @@ class UploadAction extends CAction {
                 $resized_org = ImageHelper::makeNewsThumb($file_path, 'origin-', $this->re_org['width'], $this->re_org['height']);
             }
 
-            $json = array(
-                $target=>array(
-                    array(
+            $json[$target][$num] = array(
                         "name"=>$filename,
                         "original"=>$file_url,
-                        "resized"=>$file_url_resized,
-            )));
-
-            if(Yii::app()->request->isAjaxRequest){
-            if ($result)
-                echo json_encode($json);
-            else
-                echo json_encode(array("error"=>"error"));
-            }
+                        "resized"=>$file_url_resized,);
+            
             $this->images[$num] = array(
                 'name'=>$filename,
                 'path'=>$file_path,
@@ -131,6 +123,12 @@ class UploadAction extends CAction {
                 'resized-url'=>$file_url_resized,
             );
         }
+        if(Yii::app()->request->isAjaxRequest){
+            if ($result)
+                echo json_encode($json);
+            else
+                echo json_encode(array("error"=>"error"));
+            }
         return $this->images;
       } 
       
