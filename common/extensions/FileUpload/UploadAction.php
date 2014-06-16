@@ -25,7 +25,7 @@ class UploadAction extends CAction {
     public $uploadDir = '/uploads/';
     public $uploadUrl = '/uploads/';
     public $resize = array('width'=>336, 'height'=>160);
-    public $re_org = array('width'=>0, 'height'=>0); // по умолчанию - нули, - не надо ресайзить оригинал
+    public $re_org = array('width'=>0, 'height'=>0); // по умолчанию - нули, - оригинал не ресайзится
     
     // выходные точки для дальнейшего использования в вызывающем файле
     public $images = array();

@@ -44,18 +44,14 @@ class Indexmanager extends CFormModel {
         
         $prepare = json_encode($prepare, JSON_UNESCAPED_UNICODE);
         $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
-        $saveCommand = Yii::app()->db->createCommand(
-                $saveKind . 
-                ' itemsstorage SET ' .
-                // throw exeption Syntax error or access violation: 1064 You have an error in your SQL syntax;
-                //' item="'.self::ITEM.'", ' .
-                "content='".$prepare."'" .
-                ' WHERE item=' ."'". self::ITEM ."'"
-                );
+        $variant1 = ' itemsstorage SET item = "'.self::ITEM.'", content = \'' . $prepare . '\''; // insert
+        $variant2 = ' itemsstorage SET content = \''.$prepare.'\' where item = "'.self::ITEM . '"'; // update
+        $command = ($this->checkInstance() == false) ? $variant1 : $variant2;
+        $saveCommand = Yii::app()->db->createCommand($saveKind . $command . ';');
         $saveCommand->execute();
     }
     private function checkInstance(){
-        $checkCommand = Yii::app()->db->createCommand('SELECT content FROM itemsstorage WHERE item="INDEX_MANAGER"');
+        $checkCommand = Yii::app()->db->createCommand('SELECT content FROM itemsstorage WHERE item="'.self::ITEM.'"');
         $result = $checkCommand->query();
         return $result->read();
     }

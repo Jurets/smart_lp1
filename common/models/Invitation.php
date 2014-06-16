@@ -16,26 +16,12 @@ class Invitation extends CFormModel
             array('videoLink, fileLink, bannerFiles', 'safe' ),
         );
     }
-
+    
     public function setBannerList($arr){
-        if(empty($this->bannerFiles))
-            $this->bannerFiles = array();
-        $uploadFiles= array();
-            foreach($arr as  $value){
-                $uploadFiles[] = $value;
+         $this->bannerFiles = array();
+            foreach($arr as $i=>$elem){
+                $this->bannerFiles[] = $elem;
             }
-     //   $tempArrays = array_diff($this->bannerFiles, $uploadFiles);
-       // $temp = array_diff($this->bannerFiles, $tempArrays);
-        if(count($this->bannerFiles) <= count($uploadFiles)) {
-            $this->bannerFiles = array_merge($this->bannerFiles, $uploadFiles);
-        } else {
-            foreach($this->bannerFiles as $key => $file){
-                if(!array_search($file['name'],$uploadFiles))
-                {
-                    unset($this->bannerFiles[$key]);
-                }
-            }
-        }
     }
     public function checkChangesArrFiles($arrPostFiles)
     {
@@ -47,7 +33,7 @@ class Invitation extends CFormModel
         }
         return $arrPostFiles;
     }
-    public function LoadIndexManager(){
+    public function loadInvitationManager(){
         $dbc = Yii::app()->db;
         $load = $dbc->createCommand('SELECT content FROM itemsstorage WHERE item="'.self::ITEM.'"');
         $data = $load->query();
@@ -58,30 +44,22 @@ class Invitation extends CFormModel
         $this->fileLink = (isset($this->decodedObject['fileLink'])) ? $this->decodedObject['fileLink'] : '';
         $this->bannerFiles = (isset($this->decodedObject['bannerFiles'])) ? $this->decodedObject['bannerFiles'] : '';
     }
-    public function SaveIndexManager(){
+    public function saveInvitationManager(){
         $prepare = array(
             'videoLink' => $this->videoLink,
             'fileLink' => $this->fileLink,
             'bannerFiles' => $this->bannerFiles,
         );
-
         $prepare = json_encode($prepare, JSON_UNESCAPED_UNICODE);
         $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
-        if($saveKind == 'UPDATE')
-        {
-            $query = $saveKind .' itemsstorage SET content=' . "'".$prepare. "'" . ' WHERE item=' ."'". self::ITEM ."'";
-        }else
-        {
-            $query =  $saveKind .
-                ' itemsstorage SET' .
-                ' item="'.self::ITEM.'", ' .
-                "content='".$prepare."'";
-        }
-        $saveCommand = Yii::app()->db->createCommand($query);
+        $variant1 = ' itemsstorage SET item = "'.self::ITEM.'", content = \'' . $prepare . '\''; // insert
+        $variant2 = ' itemsstorage SET content = \''.$prepare.'\' where item = "'.self::ITEM . '"'; // update
+        $command = ($this->checkInstance() == false) ? $variant1 : $variant2;
+        $saveCommand = Yii::app()->db->createCommand($saveKind . $command . ';');
         $saveCommand->execute();
     }
     private function checkInstance(){
-        $checkCommand = Yii::app()->db->createCommand('SELECT content FROM itemsstorage WHERE item="INVITATION"');
+        $checkCommand = Yii::app()->db->createCommand('SELECT content FROM itemsstorage WHERE item="'.self::ITEM.'"');
         $result = $checkCommand->query();
         return $result->read();
     }
@@ -105,5 +83,11 @@ class Invitation extends CFormModel
         }
         }
         return $arrImages;
+    }
+    
+    public function setImages($arr, $key="name"){ // ключом указываеи на запись в слайдер нужного ресурса (url, path, filename)
+        foreach($arr as $i=>$elem){
+            $this->bannerFiles[$i]['name'] = $elem[$key];
+        }
     }
 } 

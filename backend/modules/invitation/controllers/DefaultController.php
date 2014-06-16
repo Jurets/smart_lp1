@@ -52,36 +52,28 @@ class DefaultController extends EController
      */
     public function actionIndex()
     {
+        //print_r($_FILES);die;
         $model = new Invitation;
-        $model->LoadIndexManager(); // запрос к itemsstorage по параметру INVITATION
-        if (isset($_POST['Invitation'])) {
-            $arrFilesPost = $_POST['bannerFiles'];
-            $model->attributes = $_POST['Invitation'];
-            $newImages = array();
-            $arrFilesPost = $model->checkChangesArrFiles($arrFilesPost);
-            $bannerFilesLength = count($model->bannerFiles);
-            if($model->bannerFiles == ''){
-                $bannerFilesLength = 0;
-            }
-
-            if(count($arrFilesPost) > $bannerFilesLength){
-                if (isset($_FILES['bannerFiles'])){
-                    Yii::import('common.extensions.FileUpload.UploadAction');
-                    $upload = new UploadAction('invitation/default', NULL);
-                    $upload->prefixOrigin = 'invitation-';
-                    //$upload->prefixResized = 'resized-invitation-';
-                    $images = $upload->run();
-                    $newImages = $model->deletePathToPc($images,'path');
-                }
-            } else {
-                $newImages = $arrFilesPost;
-            }
-
-                $model->setBannerList($newImages);
-                $model->SaveIndexManager();
-                $this->redirect(array('index'));
-            }
-
+        $model->loadInvitationManager();
+        if(isset($_POST['Invitation'])){
+           $model->attributes = $_POST['Invitation'];
+           
+           if (isset($_POST['bannerFiles']))
+               $model->setBannerList($_POST['bannerFiles']);
+           else 
+               $model->bannerFiles = array();
+           
+           if(isset($_FILES['bannerFiles'])){
+               Yii::import('common.extensions.FileUpload.UploadAction');
+               $upload = new UploadAction('invitation/default', NULL);
+               $upload->prefixOrigin = 'invitation-';
+               $upload->prefixResized = 'resized-invitation-';
+               $images = $upload->run();
+               $model->setImages($images);
+           }
+           $model->saveInvitationManager();
+           $this->redirect(array('index'));
+        }
         $this->render('index', array('model' => $model));
     }
 

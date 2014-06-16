@@ -20,29 +20,22 @@
         <?php foreach($model->bannerFiles as $key => $image) { ?>
             <div class="copy">
                 <div>
-                   <span class="mr">банер</span><?php echo CHtml::textField("bannerFiles[$key][name]" ,"$image[name]", array('readonly'=>1)); ?>
-                    <?php echo CHtml::fileField("bannerFiles[$key]"); ?>
+                   <span class="mr">банер</span><?php echo CHtml::textField("bannerFiles[$key][name]" ,$image['name'], array('readonly'=>1)); ?>
+                    <?php echo CHtml::fileField("bannerFiles[$key]['photo_s']"); ?>
                     <span class="icon-trash" title="<?php echo InvitationModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
                 </div>
                 <div></div>
             </div>
 
         <?php } ?>
-        <div class="copy">
-            <div>
-                <span class="mr">банер</span><?php echo CHtml::textField("bannerFiles[][name]", '', array('readonly'=>1)); ?>
-                <?php echo CHtml::fileField("bannerFiles[]"); ?>
-                <span class="icon-trash" title="<?php echo InvitationModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
-            </div>
-            <div></div>
-        </div>
+        
 
     <?php }else{ ?>
 
         <div class="copy">
             <div>
-                <span class="mr">банер</span><?php echo CHtml::textField("bannerFiles[][name]", '', array('readonly'=>1)); ?>
-                <?php echo CHtml::fileField("bannerFiles[]"); ?>
+                <span class="mr">банер</span><?php echo CHtml::textField("bannerFiles[0][name]", '', array('readonly'=>1)); ?>
+                <?php echo CHtml::fileField("bannerFiles[0]['photo_s']"); ?>
                <span class="icon-trash" title="<?php echo InvitationModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
             </div>
             <div></div>
