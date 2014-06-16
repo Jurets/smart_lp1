@@ -36,7 +36,7 @@
                     showOverlay(file.resized, file.name);
                 });
                 $("#uploader-progress").empty().html("Изображение успешно загружено!");
-            },
+            }
         });
     });
 

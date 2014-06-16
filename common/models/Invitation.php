@@ -1,106 +1,109 @@
 <?php
 
 /** 
- * This is the model class for table "invitation". 
- * 
- * The followings are the available columns in table 'invitation': 
- * @property integer $id
- * @property string $video_link
- * @property string $file
- * @property string $file_link
- * @property string $created
+ * This is the model class for table "invitation".
  */ 
-class Invitation extends CActiveRecord
-{ 
-    /** 
-     * @return string the associated database table name 
-     */ 
-    public function tableName() 
-    { 
-        return 'invitation'; 
-    } 
+class Invitation extends CFormModel
+{
+    const ITEM = 'INVITATION';
+    public $videoLink; // линк на видеоролик в youtube
+    public $fileLink; // линк на скачивание файлов
+    public $bannerFiles = array(); // Баннеры
+    public $decodedObject;
 
-    /** 
-     * @return array validation rules for model attributes. 
-     */ 
-    public function rules() 
-    { 
-        // NOTE: you should only define rules for those attributes that 
-        // will receive user inputs. 
-        return array( 
-            array('video_link', 'required'),
-            array('video_link, file, file_link', 'length', 'max'=>255),
-            //array('file', 'file', 'types'=>'zip', 'maxSize' => 1048576, 'allowEmpty' => true),
-            
-            // The following rule is used by search(). 
-            // @todo Please remove those attributes that should not be searched. 
-            array('video_link, file, file_link', 'safe'), 
-            array('id, created', 'safe', 'on'=>'search'), 
-        ); 
-    } 
+    public function rules(){
+        return array(
+            array('videoLink, fileLink, bannerFiles', 'safe' ),
+        );
+    }
 
-    /** 
-     * @return array relational rules. 
-     */ 
-    public function relations() 
-    { 
-        // NOTE: you may need to adjust the relation name and the related 
-        // class name for the relations automatically generated below. 
-        return array( 
-        ); 
-    } 
+    public function setBannerList($arr){
+        if(empty($this->bannerFiles))
+            $this->bannerFiles = array();
+        $uploadFiles= array();
+            foreach($arr as  $value){
+                $uploadFiles[] = $value;
+            }
+     //   $tempArrays = array_diff($this->bannerFiles, $uploadFiles);
+       // $temp = array_diff($this->bannerFiles, $tempArrays);
+        if(count($this->bannerFiles) <= count($uploadFiles)) {
+            $this->bannerFiles = array_merge($this->bannerFiles, $uploadFiles);
+        } else {
+            foreach($this->bannerFiles as $key => $file){
+                if(!array_search($file['name'],$uploadFiles))
+                {
+                    unset($this->bannerFiles[$key]);
+                }
+            }
+        }
+    }
+    public function checkChangesArrFiles($arrPostFiles)
+    {
+        foreach ($arrPostFiles as $key=>$name) {
+            if($arrPostFiles[$key]['name'] == '')
+            {
+                unset($arrPostFiles[$key]);
+            }
+        }
+        return $arrPostFiles;
+    }
+    public function LoadIndexManager(){
+        $dbc = Yii::app()->db;
+        $load = $dbc->createCommand('SELECT content FROM itemsstorage WHERE item="'.self::ITEM.'"');
+        $data = $load->query();
+        $dump = $data->read();
+        $this->decodedObject = json_decode($dump['content'],true);
+        $errorJsonMessage =  json_last_error();
+        $this->videoLink = (isset($this->decodedObject['videoLink'])) ? $this->decodedObject['videoLink'] : '';
+        $this->fileLink = (isset($this->decodedObject['fileLink'])) ? $this->decodedObject['fileLink'] : '';
+        $this->bannerFiles = (isset($this->decodedObject['bannerFiles'])) ? $this->decodedObject['bannerFiles'] : '';
+    }
+    public function SaveIndexManager(){
+        $prepare = array(
+            'videoLink' => $this->videoLink,
+            'fileLink' => $this->fileLink,
+            'bannerFiles' => $this->bannerFiles,
+        );
 
-    /** 
-     * @return array customized attribute labels (name=>label) 
-     */ 
-    public function attributeLabels() 
-    { 
-        return array( 
-            'id' => InvitationModule::t('Id'),
-            'video_link' => InvitationModule::t('Video Link'),
-            'file' => InvitationModule::t('File'),
-            'file_link' => InvitationModule::t('File Link'),
-            'created' => InvitationModule::t('Created'),
-        ); 
-    } 
+        $prepare = json_encode($prepare, JSON_UNESCAPED_UNICODE);
+        $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
+        if($saveKind == 'UPDATE')
+        {
+            $query = $saveKind .' itemsstorage SET content=' . "'".$prepare. "'" . ' WHERE item=' ."'". self::ITEM ."'";
+        }else
+        {
+            $query =  $saveKind .
+                ' itemsstorage SET' .
+                ' item="'.self::ITEM.'", ' .
+                "content='".$prepare."'";
+        }
+        $saveCommand = Yii::app()->db->createCommand($query);
+        $saveCommand->execute();
+    }
+    private function checkInstance(){
+        $checkCommand = Yii::app()->db->createCommand('SELECT content FROM itemsstorage WHERE item="INVITATION"');
+        $result = $checkCommand->query();
+        return $result->read();
+    }
 
-    /** 
-     * Retrieves a list of models based on the current search/filter conditions. 
-     * 
-     * Typical usecase: 
-     * - Initialize the model fields with values from filter form. 
-     * - Execute this method to get CActiveDataProvider instance which will filter 
-     * models according to data in model fields. 
-     * - Pass data provider to CGridView, CListView or any similar widget. 
-     * 
-     * @return CActiveDataProvider the data provider that can return the models 
-     * based on the search/filter conditions. 
-     */ 
-    public function search() 
-    { 
-        // @todo Please modify the following code to remove attributes that should not be searched. 
 
-        $criteria=new CDbCriteria; 
-
-        $criteria->compare('id',$this->id);
-        $criteria->compare('video_link',$this->video_link,true);
-        $criteria->compare('file',$this->file,true);
-        $criteria->compare('file_link',$this->file_link,true);
-        $criteria->compare('created',$this->created,true);
-
-        return new CActiveDataProvider($this, array( 
-            'criteria'=>$criteria, 
-        )); 
-    } 
-
-    /** 
-     * Returns the static model of the specified AR class. 
-     * Please note that you should have this exact method in all your CActiveRecord descendants! 
-     * @param string $className active record class name. 
-     * @return Invitation the static model class 
-     */ 
-    public static function model($className=__CLASS__) 
-    { 
-        return parent::model($className); 
-    } 
+    public function deletePathToPc($arrImages,$operation)
+    {
+        if($operation == 'tmp_name')
+        {
+        foreach($arrImages as $key => $image)
+        {
+            $str=strpos($image['tmp_name'], "php");
+            $arrImages[$key]['tmp_name'] = substr($image['tmp_name'], $str);
+        }
+        }else
+        {
+        foreach($arrImages as $key => $image)
+        {
+            $str=strpos($image['path'], "inv");
+            $arrImages[$key]['path'] = substr($image['path'], $str);
+        }
+        }
+        return $arrImages;
+    }
 } 

@@ -89,7 +89,7 @@ class UploadAction extends CAction {
             
             $ext = (is_array($_FILES[$target]['name'][$num])) ?
                     pathinfo($_FILES[$target]['name'][$num][key($_FILES[$target]['name'][$num])], PATHINFO_EXTENSION) 
-                    : pathinfo($_FILES['files']['name'][$num], PATHINFO_EXTENSION);
+                    : pathinfo($_FILES[$target]['name'][$num], PATHINFO_EXTENSION);
             
             //$ext = pathinfo($_FILES[$target]['name'][$num][key($_FILES[$target]['name'][$num])], PATHINFO_EXTENSION);
             if(empty($ext))  continue;
@@ -101,7 +101,7 @@ class UploadAction extends CAction {
                         
             $namesSource = (is_array($_FILES[$target]['tmp_name'][$num])) ?
                     $_FILES[$target]['tmp_name'][$num][key($_FILES[$target]['tmp_name'][$num])] : 
-                    $_FILES['files']['tmp_name'][$num];
+                    $_FILES[$target][$target][$num];
             
             $result = move_uploaded_file($namesSource, $file_path);
            // $result = move_uploaded_file($_FILES[$target]['tmp_name'][$num][key($_FILES[$target]['tmp_name'][$num])], $file_path);

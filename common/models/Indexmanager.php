@@ -46,9 +46,11 @@ class Indexmanager extends CFormModel {
         $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
         $saveCommand = Yii::app()->db->createCommand(
                 $saveKind . 
-                ' itemsstorage SET' . 
-                ' item="'.self::ITEM.'", ' .
-                "content='".$prepare."'"
+                ' itemsstorage SET ' .
+                // throw exeption Syntax error or access violation: 1064 You have an error in your SQL syntax;
+                //' item="'.self::ITEM.'", ' .
+                "content='".$prepare."'" .
+                ' WHERE item=' ."'". self::ITEM ."'"
                 );
         $saveCommand->execute();
     }

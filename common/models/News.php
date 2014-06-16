@@ -18,6 +18,7 @@ class News extends CActiveRecord
 {
 	/* Image upload by standard equipment */
 	public $illustration;
+        public $attended = 'attended'; // сигнатура (имя класса) непрочитанной статьи
 	/**
 	 * @return string the associated database table name
 	 */
@@ -150,4 +151,37 @@ class News extends CActiveRecord
             $first += 1;
             return substr($this->content, 0, strpos($this->content, '.', $first)) . '.';
         }
+        public function attendedUpdate($id) //работает с cookie. создает-дописывает json-объект с массивом прочитанных id статей
+        {
+            $attended = array();
+            // переход от списка к единице
+            if(isset(Yii::app()->request->cookies['attended']->value)){
+                $attended = Yii::app()->request->cookies['attended']->value;
+                $attended = json_decode($attended, true);
+                if(array_search($id, $attended) === false){
+                    $attended [] = $id;
+                }                        
+            
+            }
+            
+            $attended = json_encode($attended);
+            Yii::app()->request->cookies['cookie_name'] = new CHttpCookie('attended', $attended);
+            
+        }
+        public function attendedScan($models) // получает текущий id, json-объект прочитанных id статей (из cookie)
+        {
+                if( isset(Yii::app()->request->cookies['attended']->value) ){
+                $target = json_decode(Yii::app()->request->cookies['attended']->value, true);
+                            
+                foreach($models as $model){
+                    if(array_search($model->id, $target) != false){
+                        $model->attended = '';
+                    }
+                }
+            
+            }
+            return $models;
+        }
+        
+        
 }
