@@ -16,17 +16,17 @@ $this->menu=array(
 			'username',
 	);
 	
-	$profileFields=ProfileField::model()->forAll()->sort()->findAll();
-	if ($profileFields) {
-		foreach($profileFields as $field) {
-			array_push($attributes,array(
-					'label' => UserModule::t($field->title),
-					'name' => $field->varname,
-					'value' => (($field->widgetView($model->profile))?$field->widgetView($model->profile):(($field->range)?Profile::range($field->range,$model->profile->getAttribute($field->varname)):$model->profile->getAttribute($field->varname))),
-
-				));
-		}
-	}
+//	$profileFields=ProfileField::model()->forAll()->sort()->findAll();
+//	if ($profileFields) {
+//		foreach($profileFields as $field) {
+//			array_push($attributes,array(
+//					'label' => UserModule::t($field->title),
+//					'name' => $field->varname,
+//					'value' => (($field->widgetView($model->profile))?$field->widgetView($model->profile):(($field->range)?Profile::range($field->range,$model->profile->getAttribute($field->varname)):$model->profile->getAttribute($field->varname))),
+//
+//				));
+//		}
+//	}
 	array_push($attributes,
 		'create_at',
 		array(

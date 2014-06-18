@@ -6186,3 +6186,6 @@ html, body {
     position: relative;
     text-align: left;
 }
+.img-circle {
+    border-radius: 500px;
+}

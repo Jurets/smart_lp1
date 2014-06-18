@@ -32,6 +32,8 @@ class Participant extends User
     public $fdl = null;
     public $time = null;
     
+    public $structureMembers =  null; // для массива моделей тех пользователей, для которых текущий (авторизованный) пользователь есть реферал
+    
     private $dict_participant = 'participant';
     
 	/**
@@ -66,7 +68,8 @@ class Participant extends User
             //ссылка на объект-рефер для сабжа
             'referal'=>array(self::BELONGS_TO, 'Participant', 'refer_id'),
             //кол-во подчинённых (т.е. тех, у которых сабж является рефером)
-            'subCount'=>array(self::STAT, 'Participant', 'refer_id'),   
+            'subCount'=>array(self::STAT, 'Participant', 'refer_id'),
+            'structure'=>array(self::STAT, 'Participant', 'id'),
             //тариф (статус по ТЗ)
             'tariff'=>array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
             //город
@@ -283,4 +286,7 @@ class Participant extends User
         return $statuscolor;
     }
  
+    public function userStructureProcess(){
+        $this->structureMembers = $this->findAllByAttributes(array('refer_id'=>$this->id));
+    }
 }
