@@ -91,6 +91,7 @@ class OfficeController extends EController
         $model = Participant::model()->findByPk(17);
         $model->userStructureProcess(); // делаем "хвост"
         //var_dump($model->structureMembers); die;
-        $this->render('structure', array('model'=>$model));
+        //$this->render('structure', array('model'=>$model));
+        $this->render('test', array('model'=>$model));
     }
 }
