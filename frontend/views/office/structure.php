@@ -1,3 +1,17 @@
+<style>
+    .bx-prev {
+    display: block;
+    width: 34 !important;
+    height: 189 !important;
+}
+
+.bx-next {
+    display: block;
+    width: 34;
+    height: 189;
+}
+</style>
+
 <?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.min.js"); ?>
 <?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.js"); ?>
 <?php Yii::app()->getClientScript()->registerCssFile("/css/jquery.bxslider.css"); ?>    
