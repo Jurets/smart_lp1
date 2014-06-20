@@ -8,6 +8,23 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 $this->beginContent('//layouts/common');
 ?>
 
+<style type="text/css">
+    .moveRight1 {
+        background-image: url("../images/profil.png");
+        background-position: 162px 4px;
+        background-repeat: no-repeat;
+        height: 27px;
+        padding-right: 30px;
+        padding-top: 4px;
+        position: absolute;
+        right: 0;
+        left: 554px;
+        text-align: right;
+        top: -6px;
+        width: 151px;
+    }
+</style>
+
 <div class="page">
     <BGDivs id="BGDivs">
         <div id="topLineBG"> </div>
@@ -15,17 +32,20 @@ $this->beginContent('//layouts/common');
         <!-- <div id="contentDOWN7-1"></div> !-->
     </BGDivs>
         <div id="wrapper">
-
             <div id="topLine">
-
+                
                 <ul id="nav">
                     <div id="bgIn"></div>
-                    <li > <a href="#" class="flag">  </a> </li>
+                    <li> <a href="#" class="flag">  </a> </li>
+                    <li> <a class="in" style="cursor: pointer;">  </a> </li>
                     <li> <a href="#"> &nbsp;ВОЗМОЖНОСТИ </a> </li>
                     <li> <a href="#"> ПРАВИЛА </a> </li>
-                    <li> <a href="#" > ВОПРОСЫ И ОТВЕТЫ  </a> </li>
-                </ul>
+                    <li> <a href="#"> ВОПРОСЫ И ОТВЕТЫ  </a> </li>
 
+                    <li> <a href="#"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
+                    <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;Настройки </a> </li>
+                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('site/logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выход</a> </li>
+                </ul>
             </div>
 
             <div id="content">
