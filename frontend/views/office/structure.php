@@ -1,77 +1,186 @@
-<style>
-    .bx-prev {
-    display: block;
-    width: 34 !important;
-    height: 189 !important;
-}
-
-.bx-next {
-    display: block;
-    width: 34;
-    height: 189;
-}
-</style>
-
 <?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.min.js"); ?>
 <?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.js"); ?>
-<?php Yii::app()->getClientScript()->registerCssFile("/css/jquery.bxslider.css"); ?>    
-<div style="height:700px;">  
-        
-              <p class="office-2-text-1">СТРУКТУРА ЛИЧНОЙ КОМАНДЫ</p>
-              <p class="office-2-text-2">ГЛОБАЛЬНАЯ СТРУКТУРА БИЗНЕСКЛУБА </p>
-             
-        
-       <div id="office-2-structure1">
-       
-        <div class="prevGreen" href="" id="prev1"></div>
-        <div class="nextGreen" href="" id="next1"></div>
-        <!--<ul>
-            <li><a class="profilLogo1" href="#"><p>Василий кузец1</p><img width="23" src="/images/witharrow.png" id="arrow-1-1"></a></li>
-            <li><a class="profilLogo2" href="#"><p>Василий кузец2</p><img width="23" src="/images/witharrow.png" id="arrow-1-2"></a></li>
-            <li><a class="profilLogo3" href="#"><p>Василий кузец3</p><img width="23" src="/images/witharrow.png" id="arrow-1-3"></a></li>
-            <li><a class="profilLogo4" href="#"><p>Василий кузец4</p><img width="23" src="/images/witharrow.png" id="arrow-1-4"></a></li>
-            <li><a class="profilLogo5" href="#"><p>Василий кузец5</p><img width="23" src="/images/witharrow.png" id="arrow-1-5"></a></li>
-            <li><a class="profilLogo6" href="#"><p>Василий кузец6</p><img width="23" src="/images/witharrow.png" id="arrow-1-6"></a></li>
-        </ul>-->
-       
-        <a class="profilLogo1" style="background: none;" href="#"><img class="img-circle" src="/admin/uploads/<?=$model->photo?>"><p><?=$model->first_name .' '.$model->last_name?></p><img width="23" src="/images/witharrow.png" id="arrow-1-1"></a>
-            <ul class="bxslider1"><li>
-                    <div style="height:100px;">
-<?php $gexagon = 2; ?>
-                <?php foreach($model->structureMembers as $member) { ?>
-                
-                    
-                        <a class="profilLogo<?=$gexagon?>" style="background: none;" href="#"><img class="img-circle" src="/admin/uploads/<?=$member->photo?>"><p><?=$member->first_name .' '.$member->last_name?></p><img width="23" src="/images/witharrow.png" id="arrow-1-<?=$gexagon?>"></a>
-                   
-                
-                <?php if($gexagon == 6) $gexagon = 1; ?>
-                <?php $gexagon ++ ; ?>
-                <?php } ?>
-             </div>
-                </li></ul>
-       </div>     
-        
-        <div id="office-2-structure2">
-       
-        <a class="prevGreen2" href="#"></a>
-        <a class="nextGreen2" href="#"></a>
-        
-        <a class="profilLogo1" href="#"><p>Василий кузец1</p><img width="23" src="/images/witharrow.png" id="arrow-1-1"></a>
-        <a class="profilLogo2" href="#"><p>Василий кузец2</p><img width="23" src="/images/witharrow.png" id="arrow-1-2"></a>
-        <a class="profilLogo3" href="#"><p>Василий кузец3</p><img width="23" src="/images/witharrow.png" id="arrow-1-3"></a>
-        <a class="profilLogo4" href="#"><p>Василий кузец4</p><img width="23" src="/images/witharrow.png" id="arrow-1-4"></a>
-        <a class="profilLogo5" href="#"><p>Василий кузец5</p><img width="23" src="/images/witharrow.png" id="arrow-1-5"></a>
-        <a class="profilLogo6" href="#"><p>Василий кузец6</p><img width="23" src="/images/witharrow.png" id="arrow-1-6"></a>
-        
+<?php Yii::app()->getClientScript()->registerCssFile("/css/jquery.bxslider.css"); ?>
+
+<div class="main_wrapper">
+   
+<div class='structure_title'>СТРУКТУРА ЛИЧНОЙ КОМАНДЫ</div>
+    
+    <div class="slider_wrapper">
+        <div class='segmentate module1' id="prev1"></div>
+        <div class='segmentate module2'>
+            <a style="background: none;" href="#">
+            <div class="photo_wrap">
+              <img class="img-circle" src="/admin/uploads/<?=$model->photo?>">
+              <img class="right_arrow" src="/images/witharrow.png">
+            </div>
+            <div class="phototext_wrap">
+                <p style="margin-left:0px;"><?=$model->first_name .' '.$model->last_name?></p>
+            </div>
+            </a>
         </div>
-              
+        
+        <div class='segmentate module3'>
+            <ul class="bxslider1">
+<?php $penta = 1; ?> 
+                <li>
+                <?php foreach($model->structureMembers as $member) { ?>
+                    <a style="background: none" href="">
+                        <div class="photo_wrap">
+                    <div>
+                        <img class="img-circle" src="/admin/uploads/<?=$member->photo?>">
+                        <img class="right_arrow" src="/images/witharrow.png">
+                    </div>
+                        <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
+                        </div>
+                    </a>
+<?php if($penta == 5){ $penta = 0; echo '</li><li>';}?>    
+<?php $penta ++; } ?>
+               </li>
+            </ul>
+        </div>
+        <div class='segmentate module4' id="next1" onclick="cl_del(this);"></div>
     </div>
+<div style="height:100px;">&nbsp;</div>
+<div class='structure_title'>ГЛОБАЛЬНАЯ СТРУКТУРА БИЗНЕСКЛУБА</div>
+    <div class="test-green">
+        <div class='segmentate module1' id="prev2"></div>
+        <div class='segmentate module2'>
+            <a style="background: none;" href="#">
+            <div class="photo_wrap">
+              <img class="img-circle" src="/admin/uploads/<?=$model->photo?>">
+              <img class="right_arrow" src="/images/witharrow.png">
+            </div>
+            <div class="phototext_wrap">
+                <p style="margin-left:0px;"><?=$model->first_name .' '.$model->last_name?></p>
+            </div>
+            </a>
+        </div>
+        <div class='segmentate module3'>
+            <ul class="bxslider2">
+<?php $penta = 1; ?> 
+                <li>
+                <?php foreach($model->clubMembers as $member) { ?>
+                    <a style="background: none" href="">
+                        <div class="photo_wrap">
+                    <div>
+                        <img class="img-circle" src="<?=(is_null($member->photo))? '/images/profilLogo.png': '/admin/uploads/'.$member->photo?>">
+                        <img class="right_arrow" src="/images/witharrow.png">
+                    </div>
+                        <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
+                        </div>
+                    </a>
+<?php if($penta == 5){ $penta = 0; echo '</li><li>';}?>    
+<?php $penta ++; } ?>
+               </li>
+            </ul>
+        </div>
+        <div class='segmentate module4' id="next2"></div>
+    </div>
+    
+</div>
+
+
 <script>
-$(document).ready(function(){
+$(document).ready(function(){ 
+    
 $('.bxslider1').bxSlider({
     prevSelector: '#prev1',
     nextSelector: '#next1',
+    prevText: '&nbsp;',
+    nextText: '&nbsp;',
     pager: false,
 });
+
+$('.bxslider2').bxSlider({
+    prevSelector: '#prev2',
+    nextSelector: '#next2',
+    prevText: '&nbsp;',
+    nextText: '&nbsp;',
+    pager: false,
+});
+
 });
 </script>
+
+<style>
+    .main_wrapper{
+        /*height: 200px;*/
+        width: 1000px;
+        padding-top: 5px;
+        position: relative;
+        padding-top: 135px;
+    }
+    .slider_wrapper{
+        margin: 0px 0px 100px 0px;
+        position: relative;
+    }
+    .segmentate {
+        float: left;
+        /*border: 1px solid black;*/
+        height: 189px;
+        background-color: #D0D0D0;
+    }
+    .module1{
+        width:33px;
+        background: url(../images/prevGreen.png);
+    }
+    .module2{
+        width:140px;
+    }
+    .module3{
+        width:793px;
+        background: #D0D0D0;
+    }
+    .module4{
+        width:33px;
+        background: url(../images/nextGreen.png);
+    }
+    
+    .bx-wrapper img {
+        display: inline;
+    }
+    
+    .bx-wrapper .bx-prev {
+	/*left: 0px;
+	background: url(/img/controls.png) no-repeat 0 -32px;*/
+}
+
+.bx-wrapper .bx-next {
+	/*right: 0px;
+	background: url(/img/controls.png) no-repeat -43px -32px;*/
+}
+.phototext_wrap {
+    margin-left: 6px !important;
+}
+.phototext_wrap p {
+    font-family: "Open Sans Condensed";
+    font-size: 15px;
+    color: #31414d;
+    margin-left:-30px;width:130px;text-align:center;
+}
+.photo_wrap {
+    width: 130px;
+    margin: 47px 0px 0px 27px;
+    float: left;
+}
+
+.right_arrow {
+    margin: 2px 0px 0px 20px;
+}
+.bx-wrapper .bx-viewport {
+    border: none;
+    background: none;
+}
+.structure_title {
+    color: #007E97;
+    font-size: 25px;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+.bx-prev, .bx-next {
+    display: block;
+    width: 34px;
+    height: 189px;
+}
+</style>

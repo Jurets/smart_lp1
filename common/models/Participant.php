@@ -33,6 +33,7 @@ class Participant extends User
     public $time = null;
     
     public $structureMembers =  null; // для массива моделей тех пользователей, для которых текущий (авторизованный) пользователь есть реферал
+    public $clubMembers = null; // здесь лежат пользователи, которые попали в куб
     
     private $dict_participant = 'participant';
     
@@ -288,5 +289,7 @@ class Participant extends User
  
     public function userStructureProcess(){
         $this->structureMembers = $this->findAllByAttributes(array('refer_id'=>$this->id));
+        $this->clubMembers = $this->findAll('tariff_id > 2 AND id <>'.'17');
+        //var_dump($this->clubMembers);die;
     }
 }
