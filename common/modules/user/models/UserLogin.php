@@ -19,6 +19,12 @@ class UserLogin extends CFormModel
     public $activekey;
     private $_logincode = null;
     
+    private $_formId = 'login';
+    
+    public function getFormId() {
+        return $this->_formId;
+    }
+    
 	/**
 	 * Declares the validation rules.
 	 * The rules state that username and password are required,
@@ -100,7 +106,9 @@ class UserLogin extends CFormModel
 			{
 				case UserIdentity::ERROR_NONE:
 					$duration=$this->rememberMe ? Yii::app()->controller->module->rememberMeTime : 0;
-					Yii::app()->user->login($this->identity,$duration);
+					if (!Yii::app()->request->isAjaxRequest) {
+                        Yii::app()->user->login($this->identity,$duration);
+                    }
 					break;
 				case UserIdentity::ERROR_EMAIL_INVALID:
 					$this->addError("username",UserModule::t("Email is incorrect."));

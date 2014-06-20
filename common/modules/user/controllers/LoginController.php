@@ -12,6 +12,7 @@ class LoginController extends EController
 	{
 		if (Yii::app()->user->isGuest) {
 			$model=new UserLogin;
+            $this->performAjaxValidation($model);
 			// collect user input data
 			if(isset($_POST['UserLogin'])) {
 				$model->attributes=$_POST['UserLogin'];
@@ -32,7 +33,7 @@ class LoginController extends EController
 			$this->redirect(Yii::app()->controller->module->returnUrl);
 	}
 	
-	private function lastViset() {
+	protected function lastViset() {
 		$lastVisit = User::model()->notsafe()->findByPk(Yii::app()->user->id);
 		$lastVisit->lastvisit_at = date('Y-m-d H:i:s');
 		$lastVisit->save();

@@ -57,8 +57,9 @@ class OfficeController extends EController
     public function actionInvitation()
     {
         //$inviteInformation = Invitation::model()->findAll();
-        //$youTubeUrlUniqueId = $inviteInformation[0]['video_link'];
-        //$this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId));
+        $inviteInformation = New Invitation();
+        $youTubeUrlUniqueId = 'LUt9KFgFO8M';//$inviteInformation[0]['video_link'];
+        $this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId));
     }
     
     /* News */

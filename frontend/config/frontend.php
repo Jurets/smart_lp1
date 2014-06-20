@@ -34,6 +34,7 @@ return array(
         'application.models.*',
         'application.components.*',
         'bootstrap.helpers.TbHtml',
+        'common.modules.user.UserModule',
     ),
     
 	// application components

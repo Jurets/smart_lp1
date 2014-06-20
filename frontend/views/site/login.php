@@ -3,22 +3,64 @@
 *  Частичное представление для авторизованного входа
 */
 ?>
-<!--<div id="login" style="left: 1208px; top: 40px;font-family: 'Open Sans Condensed','sans-serif';">-->
-<div id="login" style="font-family: 'Open Sans Condensed','sans-serif';">
-    <p class="sub1">ИМЯ ПОЛЬЗОВАТЕЛЯ:</p>
-    <input class="textbox1" type="text"> 
-    <p class="sub2">ПАРОЛЬ:</p>
-    <input class="textbox2" type="text">
-    <a href="#" id="captcha"></a>
-    <a href="#" id="refresh" > </a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <p class="sub3">ВВЕДИТЕ КОД С КАРТИНКИ:</p> 
-    <input class="textbox3" type="text"> 
-    <a href="#"><input type="button" name="btn"  class="btn-style" value="ВОЙТИ" ></a>
-    <a href="#" id="sub4">ЗАБЫЛИ ПАРОЛЬ?</a>
-</div>
 
-<script>
+<style type="text/css">
+    .errorMessage {
+        background-color: red;/*background-color: #F2DEDE;*/
+        border-color: #EED3D7;
+        color: white;/*#B94A48;*/
+        border-radius: 4px;
+        border-width: 6px;
+        font-size: medium;
+        height: 37px;
+        left: 238px;
+        padding-top: 0;
+        position: relative;
+        /*top: 33px;*/
+        transition: opacity 0.15s linear 0s;
+        width: 187px;
+    }
+</style>
+
+
+<?php $form = $this->beginWidget('CActiveForm', array(
+    'id'=>'login',
+    'action'=>Yii::app()->createAbsoluteUrl('site/login'),
+    'enableAjaxValidation'=>true,
+    //'enableClientValidation'=>true,
+    'focus'=>'input:visible:enabled:first',//array($userLogin, 'username'),
+    'clientOptions'=>array(
+        'validateOnChange'=>false,
+        'validateOnSubmit'=>true,
+    ),
+    'htmlOptions'=>array(
+        'style'=>"font-family: 'Open Sans Condensed','sans-serif'; position: absolute;"
+    ),
+)); ?>
+
+    <p class="sub1">ИМЯ ПОЛЬЗОВАТЕЛЯ:</p>
+    <?php echo CHtml::activeTextField($userLogin, 'username', array('class'=>'textbox1')); ?>
+    <?php echo $form->error($userLogin, 'username', array('style'=>'top: 15px;')); ?>
+
+    <p class="sub2">ПАРОЛЬ:</p>
+    <?php echo CHtml::activeTextField($userLogin, 'password', array('class'=>'textbox2')); ?>
+    <?php echo $form->error($userLogin, 'password', array('style'=>'top: 82px;')); ?>
+
+    <?php $this->widget('CCaptcha', array(
+        'imageOptions'=>array('id'=>'captcha'),
+        'buttonOptions'=>array('id'=>'refresh'),
+    ))?>
+    
+    <p class="sub3">ВВЕДИТЕ КОД С КАРТИНКИ:</p> 
+    <?php echo CHtml::activeTextField($userLogin, 'verifyCode', array('class'=>'textbox3')); ?>
+    <?php echo $form->error($userLogin, 'verifyCode', array('style'=>'top: 202px;')); ?>
+
+    <?php echo CHtml::submitButton('ВОЙТИ', array('name'=>'btn', 'class'=>'btn-style')); ?>
+
+    <a href="#" id="sub4">ЗАБЫЛИ ПАРОЛЬ?</a>
+<?php $this->endWidget(); ?>
+
+<script type="text/javascript">
     $('#login').hide();
     $(document).ready(function() {
         $('.open-login, .in').on("click",function (){

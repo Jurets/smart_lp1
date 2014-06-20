@@ -1,4 +1,5 @@
 <?php
+// TODO Переделать форму
 $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
 $this->breadcrumbs=array(
 	UserModule::t("Login"),
@@ -18,7 +19,17 @@ $this->breadcrumbs=array(
 <p><?php echo UserModule::t("Please fill out the following form with your login credentials:"); ?></p>
 
 <div class="form">
-<?php echo CHtml::beginForm(); ?>
+<?php $this->beginWidget('CActiveForm', array(
+    'id'=>'login',
+    //'action'=>Yii::app()->createAbsoluteUrl('site/login'),
+    'enableAjaxValidation'=>true,
+    //'enableClientValidation'=>true,
+    //'focus'=>'input:visible:enabled:first',//array($userLogin, 'username'),
+    'clientOptions'=>array(
+        'validateOnChange'=>false,
+        'validateOnSubmit'=>true,
+    ),
+)); ?>
 
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 	
@@ -31,7 +42,8 @@ $this->breadcrumbs=array(
     	
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'username'); ?>
-		<?php echo CHtml::activeTextField($model,'username') ?>
+        <?php echo CHtml::activeTextField($model,'username') ?>
+		<?php echo CHtml::error($model,'username') ?>
 	</div>
     
     <div class="row">
@@ -71,7 +83,7 @@ $this->breadcrumbs=array(
 		<?php echo CHtml::submitButton(UserModule::t("Login")); ?>
 	</div>
 	
-<?php echo CHtml::endForm(); ?>
+<?php $this->endWidget(); ?>
 </div><!-- form -->
 
 

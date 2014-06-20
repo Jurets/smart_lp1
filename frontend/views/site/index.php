@@ -98,11 +98,12 @@ var usrContour = setTimeout(
                 $('#usrcontour').html(res);
             },
             error: function(){
-                alert("ERROR");
+                //alert("ERROR");
+                console.log('Счётчики: Ошибка при посылке AJAX-запроса');
             },
             
 });
-      timer = setTimeout(run, 5000);
+      timer = setTimeout(run, 60000);
   }
 , 5000);
 </script>
