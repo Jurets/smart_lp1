@@ -56,7 +56,7 @@ $this->beginContent('//layouts/common');
                         'activeCssClass'=>'myitem-active',
                         'items'=>array(
                             array('label'=>'СТАТИСТИКА', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style btn-style1 ')),
-                            array('label'=>'СТРУКТУРА', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style btn-style2')),
+                            array('label'=>'СТРУКТУРА', 'url'=>array('office/structure'),'itemOptions'=>array('class'=>'btn-style btn-style2')),
                             array('label'=>'НОВОСТИ', 'url'=>array('news'),'itemOptions'=>array('class'=>'btn-style btn-style3')),
                             array('label'=>'ЧАТ', 'url'=>array(''),'itemOptions'=>array('class'=>'btn-style btn-style4')),
                             array('label'=>'ПРИГЛАШЕНИЕ', 'url'=>array('office/invitation'),'itemOptions'=>array('class'=>'btn-style btn-style5')),

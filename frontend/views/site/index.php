@@ -83,7 +83,10 @@
 
 <script>
 $(document).ready(function(){
-$('.bxslider').bxSlider();
+$('.bxslider').bxSlider({
+//    prevSelector: '#prevS',
+//    nextSelector: '#nextS'
+});
 });
 </script>
 
