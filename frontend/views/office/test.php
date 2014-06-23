@@ -2,11 +2,11 @@
 <?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.js"); ?>
 <?php Yii::app()->getClientScript()->registerCssFile("/css/jquery.bxslider.css"); ?>
 
-<div class="test-red">
+<div class="main_wrapper">
    
 <div class='structure_title'>СТРУКТУРА ЛИЧНОЙ КОМАНДЫ</div>
     
-    <div class="test-green">
+    <div class="slider_wrapper">
         <div class='segmentate module1' id="prev1"></div>
         <div class='segmentate module2'>
             <a style="background: none;" href="#">
@@ -15,42 +15,28 @@
               <img class="right_arrow" src="/images/witharrow.png">
             </div>
             <div class="phototext_wrap">
-                <p><?=$model->first_name .' '.$model->last_name?></p>
+                <p style="margin-left:0px;"><?=$model->first_name .' '.$model->last_name?></p>
             </div>
             </a>
         </div>
         
         <div class='segmentate module3'>
             <ul class="bxslider1">
+<?php $penta = 1; ?> 
                 <li>
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
+                <?php foreach($model->structureMembers as $member) { ?>
+                    <a style="background: none" href="">
+                        <div class="photo_wrap">
+                    <div>
+                        <img class="img-circle" src="/admin/uploads/<?=$member->photo?>">
                         <img class="right_arrow" src="/images/witharrow.png">
-                    </div>  
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                </li>
-                <li>
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                </li>
+                    </div>
+                        <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
+                        </div>
+                    </a>
+<?php if($penta == 5){ $penta = 0; echo '</li><li>';}?>    
+<?php $penta ++; } ?>
+               </li>
             </ul>
         </div>
         <div class='segmentate module4' id="next1" onclick="cl_del(this);"></div>
@@ -66,42 +52,27 @@
               <img class="right_arrow" src="/images/witharrow.png">
             </div>
             <div class="phototext_wrap">
-                <p><?=$model->first_name .' '.$model->last_name?></p>
+                <p style="margin-left:0px;"><?=$model->first_name .' '.$model->last_name?></p>
             </div>
             </a>
         </div>
-        
         <div class='segmentate module3'>
             <ul class="bxslider2">
+<?php $penta = 1; ?> 
                 <li>
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
+                <?php foreach($model->clubMembers as $member) { ?>
+                    <a style="background: none" href="">
+                        <div class="photo_wrap">
+                    <div>
+                        <img class="img-circle" src="<?=(is_null($member->photo))? '/images/profilLogo.png': '/admin/uploads/'.$member->photo?>">
                         <img class="right_arrow" src="/images/witharrow.png">
-                    </div>  
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                    <div class="photo_wrap">
-                        <img class="img-circle" src="/admin/uploads/tessa_testovichek.jpeg">
-                        <img class="right_arrow" src="/images/witharrow.png">
-                    </div> 
-                </li>
-                <li>
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                    <img src="/admin/uploads/volk_zubastiuy.jpeg">
-                </li>
+                    </div>
+                        <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
+                        </div>
+                    </a>
+<?php if($penta == 5){ $penta = 0; echo '</li><li>';}?>    
+<?php $penta ++; } ?>
+               </li>
             </ul>
         </div>
         <div class='segmentate module4' id="next2"></div>
@@ -133,14 +104,14 @@ $('.bxslider2').bxSlider({
 </script>
 
 <style>
-    .test-red{
+    .main_wrapper{
         /*height: 200px;*/
         width: 1000px;
         padding-top: 5px;
         position: relative;
         padding-top: 135px;
     }
-    .test-green{
+    .slider_wrapper{
         margin: 0px 0px 100px 0px;
         position: relative;
     }
@@ -180,12 +151,13 @@ $('.bxslider2').bxSlider({
 	background: url(/img/controls.png) no-repeat -43px -32px;*/
 }
 .phototext_wrap {
-    margin-left: 6px; /* !important;*/
+    margin-left: 6px !important;
 }
 .phototext_wrap p {
     font-family: "Open Sans Condensed";
     font-size: 15px;
     color: #31414d;
+    margin-left:-30px;width:130px;text-align:center;
 }
 .photo_wrap {
     width: 130px;
