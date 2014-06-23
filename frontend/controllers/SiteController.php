@@ -61,7 +61,7 @@ class SiteController extends LoginController
                         $this->redirect(Yii::app()->controller->module->returnUrl);
                     else
                         //$this->redirect(Yii::app()->user->returnUrl);
-                        $this->redirect(Yii::app()->createAbsoluteUrl('office/invitation'));
+                        $this->redirect(Yii::app()->createAbsoluteUrl('office'));
                 } 
             }
             // display the login form
@@ -70,7 +70,7 @@ class SiteController extends LoginController
             if (Yii::app()->request->urlReferrer != Yii::app()->request->url)
                 $this->redirect(Yii::app()->request->urlReferrer);
             else 
-                $this->redirect(Yii::app()->createAbsoluteUrl('office/invitation'));
+                $this->redirect(Yii::app()->createAbsoluteUrl('office'));
         }
     }
     

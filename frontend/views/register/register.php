@@ -1,55 +1,8 @@
-<!--<style type="text/css">
-    .btn-style1 {
-        width: 249px; 
-        height: 41px;
-        position: absolute;
-        top: 173px;
-        background-color: #838383;
-        text-align: center;
-        padding-top: 6px;
-        font-size: 25px;
-        text-shadow: 1px 1px 1px #4d4d4d;
-        font-weight: bold;
-        color: #f2f2f2;
-        border: 1px solid #bebebe;
-    }
-
-    .error {
-        border-color: #FF0000;
-        border-width: medium;
-    }  
-    
-    .error-message {
-        color: #FF0000;
-        font-size: medium;
-        font-weight: lighter;
-        /*top: 411px;*/
-        width: 400px;
-        height: 22px;
-        position: absolute;
-    }  
-    
-    .em-1 { top: 318px; }  
-    .em-2 { top: 411px; }  
-    .em-3 { top: 501px; }  
-    .em-4 { top: 594px; }  
-    .em-5 { top: 680px; }  
-    
-</style>
-
-<h2 id="shag-1-1-h3" >РЕГИСТРАЦИЯ НОВОГО УЧАСТНИКА СИСТЕМЫ</h2>
-<div id="topShagLine"></div>
-<div  class="btn-style1"> ШАГ 1</div>
-<div class="btn-style2"> ШАГ 2</div>
-<div class="btn-style3"> ШАГ 3</div>
-<div class="btn-style4"> ШАГ 4</div>-->
-
-<?php //$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+<?php 
 $form = $this->beginWidget('CActiveForm', array(
     'id'=>'register-form',
     'enableAjaxValidation'=>false,
     'htmlOptions' => array('enctype'=>'multipart/form-data'),
-    //'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
 ));
 ?>
 
@@ -110,13 +63,9 @@ $form = $this->beginWidget('CActiveForm', array(
     <a id="open-btn" href="#">пользовательское соглашение</a>
 </p>
 <?php echo $form->checkBox($participant, 'rulesAgree', array('class'=>'css-checkbox', 'readonly'=>true)); //согласие с ПользСоглашением ?>
-<!--<input type="checkbox" name="checkboxG5" id="checkboxG5" class="css-checkbox" checked="checked"/>-->
-<!--<input type="checkbox" name="checkboxG5" id="checkboxG5" class="css-checkbox" checked="checked"/>-->
-<!--<label for="checkboxG5" class="css-label"></label>-->
 <label for="Participant_rulesAgree" class="css-label"></label>
 <?php echo $form->error($participant, 'rulesAgree', array('class'=>'error-message em-5')); //логин ?>
 
-<!--<a href="shag-1-3.html"><input type="button" name="btn"  class="btn-style-green" value="ДАЛЕЕ" /></a>-->
 <?php echo CHtml::submitButton(Yii::t('common', 'Next'), array('class'=>'btn-style-green')); ?>
 
 <?php $this->endWidget(); ?>
