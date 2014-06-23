@@ -35,10 +35,10 @@
 
         <h2 id="shag-1-1-h3" >РЕГИСТРАЦИЯ НОВОГО УЧАСТНИКА СИСТЕМЫ</h2>
         <div id="topShagLine"></div>
-        <div  class="btn-style1"> ШАГ 1</div>
-        <div class="btn-style2"> ШАГ 2</div>
-        <div class="btn-style3"> ШАГ 3</div>
-        <div class="btn-style4"> ШАГ 4</div>
+        <div class="btn-style1 <?=($this->step==1)?'active-step':''?>"> ШАГ 1</div>
+        <div class="btn-style2 <?=($this->step==2)?'active-step':''?>"> ШАГ 2</div>
+        <div class="btn-style3 <?=($this->step==3)?'active-step':''?>"> ШАГ 3</div>
+        <div class="btn-style4 <?=($this->step==4)?'active-step':''?>"> ШАГ 4</div>
 
         <?php echo $content; ?>
     </div>
@@ -55,13 +55,13 @@
         height: 41px;
         position: absolute;
         top: 173px;
-        background-color: #838383;
+        background-color: #d2d2d2;
         text-align: center;
         padding-top: 6px;
         font-size: 25px;
-        text-shadow: 1px 1px 1px #4d4d4d;
+        text-shadow: 1px 1px 1px #e8e8e8;
         font-weight: bold;
-        color: #f2f2f2;
+        color: #b7b7b7;
         border: 1px solid #bebebe;
     }
 
@@ -95,5 +95,21 @@
     #close-btn {
        right: 21px;
        top: 235px;
+    }
+    
+    .active-step {
+        width: 246px;
+        height: 41px;
+        position: absolute;
+        top: 173px;
+       
+        background-color: #838383;
+        text-align: center;
+        padding-top: 6px;
+        font-size: 25px;
+        text-shadow: 1px 1px 1px #4d4d4d;
+        font-weight: bold;
+        color: #f2f2f2;
+        border: 1px solid #bebebe;
     }
 </style>

@@ -13,17 +13,42 @@
  * @property string $content
  * @property string $image
  * @property integer $activity
+     * @var integer $id
+     * @var string $username
+     * @var string $password
+     * @var string $email
+     * @var string $activkey
+     * @var integer $createtime
+     * @var integer $lastvisit
+     * @var integer $superuser
+     * @property integer $status
+     * @var timestamp $create_at
+     * @var timestamp $lastvisit_at
+     * @var string $logincode
  */
 class Participant extends User
 {
+    //константы для обозначения тарифа участника
+    const TARIFF_START = 0;
+    const TARIFF_20 = 1;
+    const TARIFF_50 = 2;
+    const TARIFF_BC = 3;
+    const TARIFF_BC_BRONZE = 4;
+    const TARIFF_BC_SILVER = 5;
+    const TARIFF_BC_GOLD = 6;
+    
     //масив для бизнес-тарифов 
     // * термин "тарифы" (вместо "статусы" как в ТЗ) здесь и далее применяется для того, чтобы отличить их от статуса активности/неактивности
-    private $_businessclubIDs = array(3,4,5,6);
+    private $_businessclubIDs = array(self::TARIFF_BC, self::TARIFF_BC_BRONZE, self::TARIFF_BC_SILVER, self::TARIFF_BC_GOLD);
     
     //поле страны - нужно для помощи при выборе города (т.к. у юзера поля страны нет, а поле города - есть)
     public $country_id;
     //поле (логическое) согласия регистрируемого участника
     public $rulesAgree;
+    //поле новый тариф (используется на формах регистрации)
+    public $newTariff = null;
+    //переданный постом код активации (используетсяна формах регистрации для контроля)
+    public $postedActivKey = null;
     
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
@@ -47,13 +72,16 @@ class Participant extends User
 			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
              array('id', 'safe', 'on'=>array('search', 'seestructure')),
              //регистрация
-             array('password', 'default', 'value' => $this->_generatePassword(), 'on'=>array('register')),
-             array('username, country_id, city_id, email, rulesAgree', 'safe', 'on'=>array('register')),
+             array('password', 'default', 'value' => $this->_generatePassword(), 'on'=>array('activate')),
+             array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on'=>array('register')),
              array('username, country_id, city_id, email, rulesAgree', 'required', 'on'=>array('register')),
              array('rulesAgree', 'compare', 'compareValue'=>true, 'on'=>array('register'), 'message'=>'Необходимо принять Пользовательское Соглашение'),
 			 //The following rule is used by search().
 			 //@todo Please remove those attributes that should not be searched.
    		     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
+              array('purse', 'safe', 'on'=>array('setpurse')),
+              array('purse', 'required', 'on'=>array('setpurse')),
+              array('purse', 'unique'),
 		));
 	}
 
@@ -192,6 +220,17 @@ class Participant extends User
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Sets the scenario for the model.
+     * @param string $value the scenario that this model is in.
+     * @see getScenario
+     */
+    /*public function setScenario($value)
+    {
+        parent::setScenario($value);
+        return $this;
+    }*/
     
     /**
     * процедура при выборке записи из БД
@@ -200,8 +239,10 @@ class Participant extends User
     public function afterFind() {
         //присвоить значение полю "ид страны"
         $this->country_id = isset($this->city) ? $this->city->country_id : null;
-        //скрыть пароль
-        $this->password = '';
+        //если сценарий не активация
+        //if ($this->scenario != 'activate') {
+        //    $this->password = ''; //скрыть пароль
+        //}
     }
     
     /**
@@ -211,6 +252,14 @@ class Participant extends User
     private static function _generatePassword()
     {
         return rand(10000000, 99999999);
+    }
+    
+    //глобальная функция для присвоения пароля (не хешируем пока что)
+    public function generatePassword()
+    {
+        $this->password = $this->_generatePassword();  //сгенерить
+        //$this->password = Yii::app()->getModule('user')->encrypting($this->password);
+        $this->save(false, array('password')); //сохранить (без валидации)
     }
     
     /**
@@ -288,5 +337,22 @@ class Participant extends User
  
     public function userStructureProcess(){
         $this->structureMembers = $this->findAllByAttributes(array('refer_id'=>$this->id));
+    }
+    
+    /**
+    * активация стартового тарифа
+    */
+    public function activateStart() {
+        $this->tariff_id = self::TARIFF_20;
+        $this->status = parent::STATUS_ACTIVE;
+        $this->save(false, array('tariff_id', 'status'));
+    }  
+    
+    /**
+    * активация бизнес-статуса (стать бизнес-участником / покупка бизнес-старта)
+    */
+    public function activateBuisness() {
+        $this->tariff_id = self::TARIFF_50;
+        $this->save(false, array('tariff_id'));
     }
 }
