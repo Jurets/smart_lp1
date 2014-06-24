@@ -4,7 +4,6 @@
  * @var $youTubeUrlUniqueId
  * @var $downloadFile
  * @var $arrBannerFiles
- * @var $iFrameText
  */
 ?>
 
@@ -29,7 +28,7 @@
                     echo CHtml::numberField('heightBanner','100',array('class'=>'handler'));
 
                     echo '<br>';
-                    echo CHtml::textArea('iframeText',$iFrameText,array('readonly'=>true));
+                    echo CHtml::textArea('iframeText','',array('readonly'=>true));
 
                 ?>
                 <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/>
@@ -58,11 +57,13 @@
 </div>
 
 <script>
+var url = window.location.protocol + '//' + window.location.host + '/';
+$('#iframeText').empty();
 $(".handler").change(function() {
     var path = $("input:radio:checked").val();
     var width =  $("#widthBanner").val();
     var height = $("#heightBanner").val();
-    $('#iframeText').html('<iframe src="admin/www/uploads/' + path +
+    $('#iframeText').html('<iframe src="' + url  + 'admin/uploads/' + path +
         '" width="' + width + '" height="' + height +
         '" align="center"></iframe>');
     $('#iframeText').select();
