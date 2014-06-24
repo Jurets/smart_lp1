@@ -21,13 +21,17 @@
     <div id="office-5-bannerMainDiv">
 
         <div id="office-5-bannerListDiv">
-            <?php foreach($arrBannerFiles as $bannerPath){ ?>
+            <?php
+            if(!empty($arrBannerFiles)){
+            foreach($arrBannerFiles as $bannerPath){
+
+             ?>
                 <div class="office-5-eachBannerDiv">
                     <img src="/admin/uploads/<?php echo $bannerPath['name'];?>"  width="150" height="100"  />
                     <?php echo CHtml::radioButton('bannerRadioButton',false,array('class'=>'handler', 'value'=>$bannerPath['name'])); ?>
 
                 </div>
-            <?php } ?>
+            <?php }} ?>
         </div>
             <div id="office-5-bannerSettingsDiv">
                 <?php
