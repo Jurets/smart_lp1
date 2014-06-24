@@ -4399,13 +4399,106 @@ select {
 /*office-5*/
 
 #office-5-content{
-    /*height: 1177px;*/
-
-    height: auto !important ;
-
+    height: 1177px;
     width: 1000px;
     position: relative;
 }
+
+/* Add banner div and settings */
+
+#office-5-bannerMainDiv{
+    display:block;
+    border: solid;
+    border-color: #5c9ccc;
+    background-color: #ffffff;
+    padding: 5px 5px 5px 5px;
+    height: 500px;
+    width: 700px;
+    position: absolute;
+    top: 200px;
+    left:50px;
+    z-index: 2;
+}
+/*
+.office-5-checkBox{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+
+}
+.office-5-checkBox input{
+    height: 15px !important;
+    width: 20px;
+    margin: 0;
+    padding: 0;
+
+}
+*/
+.office-5-eachBannerDiv{
+    display:inline;
+    float:left;
+    padding:5px 5px 0 5px;
+    margin: 5px 5px 5px 5px;
+    border: solid;
+    border-color: #5c9ccc;
+}
+
+#heightBanner{
+    text-align: center;
+    align-content: center;
+    width:100px;
+}
+#widthBanner{
+    text-align: center;
+    align-content: center;
+    margin-right: 40px;
+    width:100px;
+}
+.settings-buttons{
+    /*position: absolute;
+    right:0;
+    top:350px;
+    left:600px;
+    width: 80px;*/
+    width:120px !important;
+
+}
+#office-5-bannerListDiv{
+    height: 480px;
+    overflow-y:scroll;
+    width: 200px;
+    display: block;
+    position: relative;
+    border:solid;
+    border-color: #5c9ccc;
+}
+#office-5-bannerSettingsDiv{
+    height: 200px;
+    margin-top: 45px;
+    padding-top: 15px;
+    display: block;
+    position: absolute;
+    top: 20px;
+    left:230px;
+    float: inherit;
+}
+#bannerRadioButton{
+    margin: 0 auto;
+    width: 50px;
+    height: 15px !important;
+}
+#iframeText{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height:100px;
+    width: 400px;
+    top:50px;
+}
+
+
+
+
+/* END: banner div and settings */
 
 
 

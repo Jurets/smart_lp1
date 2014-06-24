@@ -56,10 +56,16 @@ class OfficeController extends EController
      */
     public function actionInvitation()
     {
-        //$inviteInformation = Invitation::model()->findAll();
+        $iFrameText = '<iframe src="admin/www/uploads/" width="150" height="100" align="center"></iframe>';
         $inviteInformation = New Invitation();
-        $youTubeUrlUniqueId = 'LUt9KFgFO8M';//$inviteInformation[0]['video_link'];
-        $this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId));
+        $inviteInformation->loadInvitationManager();
+        $downloadFile = $inviteInformation->fileLink;
+        $youTubeUrlUniqueId = $inviteInformation->videoLink;
+        $arrBannerFiles = $inviteInformation->bannerFiles;
+        $this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId,
+                      'downloadFile'=>$downloadFile,'arrBannerFiles'=>$arrBannerFiles,
+                      'iFrameText'=>$iFrameText
+                     ));
     }
     
     /* News */
