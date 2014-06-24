@@ -6,15 +6,6 @@
  * @var $arrBannerFiles
  * @var $iFrameText
  */
-//CHtml::image('/admin/uploads/'. $bannerPath['name']);
-//CHtml::label('Высота: ','heightBanner');
-//CHtml::numberField('heightBanner');
-//
-//CHtml::label('Ширина: ','widthBanner');
-//CHtml::numberField('widthBanner');
-//echo '<br>';
-//bannerRadioButton
-// echo CHtml::radioButton($bannerPath['name'],false,array('class'=>'bannerRadioButton'));
 ?>
 
 <div id="office-5-content">
