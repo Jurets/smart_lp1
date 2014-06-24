@@ -40,10 +40,7 @@
                     echo '<br>';
                     echo CHtml::textArea('iframeText',$iFrameText,array('readonly'=>true));
 
-                    //echo CHtml::button('Скопировать',array('class'=>'settings-buttons'));
-
                 ?>
-                <input class="settings-buttons" type="button" value="Скопировать" onclick=""/>
                 <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/>
             </div>
 
