@@ -48,6 +48,10 @@
                 echo 'Успешная отсылка!';
             else
                 echo '---Ошибка при отсылке';
-            mail('jurets75@rambler.ru', 'test theme', 'test message');
+            
+            if (mail('jurets75@rambler.ru', 'test theme', 'test message'))
+                echo 'Успешная отсылка функцией mail!';
+            else
+                echo '---Ошибка при отсылке функцией mail';
         }
 }
