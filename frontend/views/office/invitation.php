@@ -6,27 +6,18 @@
  * @var $arrBannerFiles
  * @var $iFrameText
  */
-//CHtml::image('/admin/uploads/'. $bannerPath['name']);
-//CHtml::label('Высота: ','heightBanner');
-//CHtml::numberField('heightBanner');
-//
-//CHtml::label('Ширина: ','widthBanner');
-//CHtml::numberField('widthBanner');
-//echo '<br>';
-//bannerRadioButton
-// echo CHtml::radioButton($bannerPath['name'],false,array('class'=>'bannerRadioButton'));
 ?>
 
 <div id="office-5-content">
     <div id="office-5-bannerMainDiv">
-
+        <?php   if(!empty($arrBannerFiles)){?>
         <div id="office-5-bannerListDiv">
             <?php foreach($arrBannerFiles as $bannerPath){ ?>
-                <div class="office-5-eachBannerDiv">
-                    <img src="/admin/uploads/<?php echo $bannerPath['name'];?>"  width="150" height="100"  />
-                    <?php echo CHtml::radioButton('bannerRadioButton',false,array('class'=>'handler', 'value'=>$bannerPath['name'])); ?>
+            <div class="office-5-eachBannerDiv">
+                <img src="/admin/uploads/<?php echo $bannerPath['name'];?>"  width="150" height="100"  />
+                <?php echo CHtml::radioButton('bannerRadioButton',false,array('class'=>'handler', 'value'=>$bannerPath['name'])); ?>
 
-                </div>
+            </div>
             <?php } ?>
         </div>
             <div id="office-5-bannerSettingsDiv">
@@ -44,7 +35,9 @@
                 <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/>
             </div>
 
-
+            <?php }else{ echo 'Добавьте баннеры в админ панели.';
+            ?> <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/> <?php
+        }?>
     </div>
     <h2 class="h2ContentOffice5">ПРИГЛАШЕНИЕ</h2>
     <a href="<?php echo $downloadFile; ?>"><input type="button" name="btn"  class="btn-style-green1" value="СКАЧАТЬ" /></a>
