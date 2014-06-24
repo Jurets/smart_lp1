@@ -49,9 +49,9 @@
             else
                 echo '---Ошибка при отсылке';
             
-            if (mail('jurets75@rambler.ru', 'test theme', 'test message'))
+            /*if (mail('jurets75@rambler.ru', 'test theme', 'test message'))
                 echo 'Успешная отсылка функцией mail!';
             else
-                echo '---Ошибка при отсылке функцией mail';
+                echo '---Ошибка при отсылке функцией mail';*/
         }
 }
