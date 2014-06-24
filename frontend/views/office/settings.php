@@ -45,9 +45,11 @@ $form = $this->beginWidget('CActiveForm', array(
                    <p class="shag-1-1-option1text">  СТРАНА*:</p>
                    <input type="checkbox" name="checkboxG51" id="checkboxG51" class="css-checkbox1" checked="checked"/><label for="checkboxG51" class="css-label1"></label>
                <a href="#"  class="vopros1" title="разрешить показывать всем пользователям"></a>
+        <?php ?>
         <select class="shag-1-1-option1">
-                  <option value="volvo">РОССИЯ</option>
-                  <option value="saab">РОССИЯ2</option>
+                      <option value="none" disabled selected>Выберите страну</option>
+<!--                  <option value="volvo">РОССИЯ</option>-->
+<!--                  <option value="saab">РОССИЯ2</option>-->
 
         </select>
 
@@ -56,8 +58,8 @@ $form = $this->beginWidget('CActiveForm', array(
                <p class="shag-1-1-option2text">ГОРОД*: </p>
               <a href="#" class="vopros2" title="разрешить показывать всем пользователям"></a>
          <select  class="shag-1-1-option2">
-              <option value="saab">МОСКВА</option>
-              <option value="saab">МОСКВА2</option>
+<!--              <option value="saab">МОСКВА</option>-->
+<!--              <option value="saab">МОСКВА2</option>-->
 
          </select>
 
@@ -153,3 +155,24 @@ $form = $this->beginWidget('CActiveForm', array(
         <div class="wrap"></div>
 
     </div>
+<script>
+    $.getJSON( 'country', function( data ) {
+        $.each( data, function( key, val ) {
+            $('.shag-1-1-option1').append( "<option value='" + key + "'>" + val + "</option>" );
+        });
+    });
+    $('.shag-1-1-option2').prop('disabled', true);
+    $('.shag-1-1-option1').change(function(){
+        if ($(this).val() !== 'none') {
+        $.getJSON( 'city', {
+            countryId: $('.shag-1-1-option1').val()
+        }).done(function( data ) {
+            $('.shag-1-1-option2').empty();
+            $.each( data, function( key, val ) {
+                $('.shag-1-1-option2').append( "<option value='" + key + "'>" + val + "</option>" );
+            });
+            $('.shag-1-1-option2').prop('disabled', false);
+            });
+        }
+    });
+</script>

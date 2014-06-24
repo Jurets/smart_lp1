@@ -47,8 +47,8 @@ class OfficeController extends EController
      */
     public function actionSettings()
     {
-        $participant = New Participant('settings');
 
+        $participant = New Participant('settings');
         $this->render('settings',array('participant'=>$participant));
     }
     /**
@@ -56,15 +56,13 @@ class OfficeController extends EController
      */
     public function actionInvitation()
     {
-        $iFrameText = '<iframe src="admin/www/uploads/" width="150" height="100" align="center"></iframe>';
         $inviteInformation = New Invitation();
         $inviteInformation->loadInvitationManager();
         $downloadFile = $inviteInformation->fileLink;
         $youTubeUrlUniqueId = $inviteInformation->videoLink;
         $arrBannerFiles = $inviteInformation->bannerFiles;
         $this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId,
-                      'downloadFile'=>$downloadFile,'arrBannerFiles'=>$arrBannerFiles,
-                      'iFrameText'=>$iFrameText
+                      'downloadFile'=>$downloadFile,'arrBannerFiles'=>$arrBannerFiles
                      ));
     }
     
@@ -100,4 +98,16 @@ class OfficeController extends EController
         //$this->render('test', array('model'=>$model));
         $this->render('structure', array('model'=>$model));
     }
+
+    public function actionCountry()
+    {
+        echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
+    }
+    public function actionCity()
+    {
+        $countryId = $_GET['countryId'];
+        echo json_encode(Cities::getCitiesListByCountry($countryId),JSON_UNESCAPED_UNICODE);
+    }
 }
+
+
