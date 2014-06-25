@@ -50,7 +50,7 @@
         $this->widget('ext.Yiitube', array('v' => $youTubeUrlUniqueId,'size'=>'mine'));
         ?>
         </div>
-        <h4 class="office-5-miniZagolovok">Автоматизированная система непрямого интернет<br> рекрутинга</h4>
+<!--        <h4 class="office-5-miniZagolovok">Автоматизированная система непрямого интернет<br> рекрутинга</h4>-->
         <p class="office-3-text"><?php echo $content ?></p>
 
     </div>
