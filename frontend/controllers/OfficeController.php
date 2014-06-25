@@ -61,8 +61,10 @@ class OfficeController extends EController
         $downloadFile = $inviteInformation->fileLink;
         $youTubeUrlUniqueId = $inviteInformation->videoLink;
         $arrBannerFiles = $inviteInformation->bannerFiles;
+        $text = $inviteInformation->text;
         $this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId,
-                      'downloadFile'=>$downloadFile,'arrBannerFiles'=>$arrBannerFiles
+                      'downloadFile'=>$downloadFile,'arrBannerFiles'=>$arrBannerFiles,
+                      'content'=>$text,
                      ));
     }
     
@@ -107,6 +109,10 @@ class OfficeController extends EController
     {
         $countryId = $_GET['countryId'];
         echo json_encode(Cities::getCitiesListByCountry($countryId),JSON_UNESCAPED_UNICODE);
+    }
+    public function actionTimezone(){
+
+        echo json_encode(Gmt::getTimezonesList(),JSON_UNESCAPED_UNICODE);
     }
 }
 
