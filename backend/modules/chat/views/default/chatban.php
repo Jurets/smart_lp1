@@ -4,21 +4,25 @@
 /* @var $form TbActiveForm */
 
 $this->breadcrumbs=array(
-    'Chat'=>array('admin'),
-    'Search'=>array('search'),
+    'Чат'=>array('admin'),
+    'Поиск'=>array('search'),
     $user->username,
 );
 
 $this->menu=array(
-    array('label'=>'Chat Messages', 'url'=>array('admin')),
-    array('label'=>'User search', 'url'=>array('search')),
+    array('label'=>'Сообщения', 'url'=>array('admin')),
+    //array('label'=>'Поиск', 'url'=>array('search')),
 );
 ?>
 
+<?php $this->widget('bootstrap.widgets.TbAlert', array(
+    'block'=>true,
+)); ?>
+
 <?php if (isset($chatban->id)) { ?>
-    <h1>Юзер забанен</h1>
+    <h1>Участник заблокирован</h1>
 <?php } else { ?>
-    <h1>Забанить юзера <?php //echo $user->id; ?></h1>
+    <h1>Заблокировать участника <?php //echo $user->id; ?></h1>
 <?php } ?>
     
 <?php $this->widget('yiiwheels.widgets.detail.WhDetailView', array(
@@ -53,7 +57,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         echo $form->dropDownListControlGroup($chatban, 'bantype_id', TbHtml::listData(BanType::getBanTypes(), 'id', 'name'), array('class'=>'span5', 'displaySize'=>'1', 'prompt'=>'<выбор>'));
         //информация о причине бана
         echo $form->textFieldControlGroup($chatban, 'comment', array('class'=>'span8'));
-        echo TbHtml::submitButton('Забанить', array('name'=>'submit_ban', 'color' => TbHtml::BUTTON_COLOR_PRIMARY));
+        echo TbHtml::submitButton('Заблокировать', array('name'=>'submit_ban', 'color' => TbHtml::BUTTON_COLOR_PRIMARY));
     }
 $this->endWidget();
 ?>

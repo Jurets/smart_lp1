@@ -20,6 +20,11 @@
         transition: opacity 0.15s linear 0s;
         width: 187px;
     }
+    
+    #refresh {
+        overflow: hidden;
+        text-indent: -200px;
+    }    
 </style>
 
 
@@ -43,7 +48,7 @@
     <?php echo $form->error($userLogin, 'username', array('style'=>'top: 15px;')); ?>
 
     <p class="sub2">ПАРОЛЬ:</p>
-    <?php echo CHtml::activeTextField($userLogin, 'password', array('class'=>'textbox2')); ?>
+    <?php echo CHtml::activePasswordField($userLogin, 'password', array('class'=>'textbox2')); ?>
     <?php echo $form->error($userLogin, 'password', array('style'=>'top: 82px;')); ?>
 
     <?php $this->widget('CCaptcha', array(

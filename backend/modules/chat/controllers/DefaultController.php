@@ -2,7 +2,9 @@
 
 class DefaultController extends EController
 {
-	public $defaultAction = 'admin';
+	public $defaultAction = 'search';
+    
+    private $mode = 'view';
     
     /**
      * Manages all models.
@@ -50,32 +52,41 @@ class DefaultController extends EController
         if (!$user = Participant::model()->findByPk($id)) {
             throw new CHttpException(404, 'Пользователь с таким ID не найден');
         }
-        
         if (!$chatban = $user->chatban) {
             $chatban = New Chatban();
         }
         if (isset($_POST['Chatban'])) {
             if (isset($_POST['submit_ban'])) {
+                $this->mode = 'ban';
+            } else if (isset($_POST['submit_unban'])) {
+                $this->mode = 'unban';
+            }
+            if ($this->mode == 'ban') {
                 $chatban->attributes = $_POST['Chatban'];
                 $chatban->user_id = $user->id;
                 $chatban->active = Chatban::STATUS_ACTIVE;
-            } else if (isset($_POST['submit_unban'])) {
+            } else if ($this->mode == 'unban') {
                 $chatban->active = Chatban::STATUS_NONACTIVE;
             } else
                 throw new CHttpException(404, 'Ошибка при бане юзера');
             //проверка    
             if ($chatban->validate()) {
                 if ($chatban->save()) {
+                    $message = $this->mode == 'ban' ? 'Участник успешно заблокирован в чате' : 'Участник успешно разблокирован';
+                    Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, $message);
                     //$this->redirect(Yii::app()->createUrl('user/admin/view', array('id'=>$id)));
                 } else 
                     throw new CHttpException(404, 'Ошибка при бане юзера');
             }
         }
-        
-		$this->render('chatban',array(
-			'user'=>$user,
-            'chatban'=>$chatban,
-		));
+        if ($this->mode == 'unban') {
+            $this->redirect(array('search'));
+        } else {
+            $this->render('chatban',array(
+                'user'=>$user,
+                'chatban'=>$chatban,
+            ));
+        }
 	}
 
 	/**

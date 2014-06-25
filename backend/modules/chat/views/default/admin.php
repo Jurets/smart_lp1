@@ -3,11 +3,13 @@
 /* @var $model Chatmessage */
 
 $this->breadcrumbs=array(
-	'Чат',
+    'Чат'=>array('admin'),
+    'Сообщения',
 );
 
 $this->menu=array(
-	array('label'=>'Создать', 'url'=>array('create')),
+	//array('label'=>'Создать', 'url'=>array('create')),
+    array('label'=>'Блокировка', 'url'=>array('search')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -51,8 +53,10 @@ $dateFilter = $this->widget('zii.widgets.jui.CJuiDatePicker',array(
     ),
 ), true);
                 
-$this->widget('yiiwheels.widgets.grid.WhGridView', array(
+//$this->widget('yiiwheels.widgets.grid.WhGridView', array(
+$this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'chat-grid',
+    'type' => array(TbHtml::GRID_TYPE_CONDENSED, TbHtml::GRID_TYPE_BORDERED, TbHtml::GRID_TYPE_STRIPED),
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
     'afterAjaxUpdate' => 'reinstallDatePicker',
@@ -64,13 +68,12 @@ $this->widget('yiiwheels.widgets.grid.WhGridView', array(
             //'type' => 'raw',
             //'value' => 'DataHelper::formattedDate($data->created)',
             'filter' => $dateFilter, //CHtml::listData(ActivcationTypes::model()->findAll(), 'id', 'name'),
-            'headerHtmlOptions'=>array(
-                'width'=>'90px',
-            ),
+            //'headerHtmlOptions'=>array('width'=>'70px'),
             'htmlOptions'=>array(
-                'nowrap'=>'nowrap',
-                'width'=>'90px',
+                //'nowrap'=>'nowrap',
+                'width'=>'70px',
             ),
+            'filterInputOptions'=>array('style'=>'width: 70px'),
         ),
         array(
             'name' => 'text',
@@ -78,7 +81,7 @@ $this->widget('yiiwheels.widgets.grid.WhGridView', array(
         array(
             'name' => 'post_identity',
             'headerHtmlOptions'=>array(
-                'width'=>'90px',
+                'width'=>'50px',
             ),
             'htmlOptions'=>array(
                 'nowrap'=>'nowrap',
