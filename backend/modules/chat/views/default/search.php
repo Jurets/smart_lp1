@@ -4,17 +4,22 @@
 /* @var $form CActiveForm */
 
 $this->breadcrumbs=array(
-    'Chat'=>array('admin'),
-    'Search'=>array('search'),
+    'Чат'=>array('admin'),
+    'Поиск'=>array('search'),
     $model->username,
 );
 
 $this->menu=array(
-    array('label'=>'Chat Messages', 'url'=>array('admin')),
-    array('label'=>'User search', 'url'=>array('search')),
+    array('label'=>'Сообщения', 'url'=>array('admin')),
+    //array('label'=>'Поиск', 'url'=>array('search')),
 );
-
 ?>
+
+<?php $this->widget('bootstrap.widgets.TbAlert', array(
+    'block'=>true,
+)); ?>
+
+<h1>Найти и заблокировать участника</h1>
 
 <div class="wide form">
 
@@ -24,12 +29,12 @@ $this->menu=array(
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model, 'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo TbHtml::label('Введите логин участника', 'username_id'); //echo $form->label($model, 'username'); ?>
+		<?php echo $form->textField($model,'username',array('size'=>60,'maxlength'=>255, 'id'=>'username_id')); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo TbHtml::submitButton('Найти', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
