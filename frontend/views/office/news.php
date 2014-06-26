@@ -43,7 +43,7 @@
     <a href="/office/news/<?php echo $model->id . $page?>">
    <div id="office-3-post<?php echo $ind + 1; ?>" class='<?=$model->attended?>'>
        
-   <?php echo TbHtml::tag('div', array('style'=>'background-image: url(/admin/uploads/'.'resized-'.$model->image, 'id'=>'blogImg'.($ind+1)), '&nbsp;'); ?>
+   <?php echo TbHtml::tag('div', array('style'=>'background-image: url('.UrlHelper::getImageUrl('resized-'.$model->image), 'id'=>'blogImg'.($ind+1)), '&nbsp;'); ?>
        <h4 class="office-3-miniZagolovok"><?php echo Yii::app()->dateFormatter->formatDateTime($model->created, 'medium', null) .', '. Yii::app()->dateFormatter->formatDayInWeek('EEEE', array('wday'=>date('N', strtotime($model->created))));?></h4>
     <a href="/office/news/<?php echo $model->id . $page?>" class="office-3-zagolovok"><span style="text-transform:uppercase;"><?php echo $model->title ?></span></a>
        <p class="office-3-text">

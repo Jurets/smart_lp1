@@ -93,7 +93,7 @@ class OfficeController extends EController
         }
     }
     public function actionStructure(){
-        $model = Participant::model()->findByPk(17);
+        $model = Participant::model()->findByPk(Yii::app()->user->id);
         $model->userStructureProcess(); // делаем "хвост"
         //$this->render('test', array('model'=>$model));
         $this->render('structure', array('model'=>$model));

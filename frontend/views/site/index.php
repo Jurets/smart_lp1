@@ -21,7 +21,7 @@
         <li>
             <div style="height: 400px; background: #eeeeee;">
                 <div id="photo">
-                    <img src="<?php echo '/admin/uploads/'./*'resized-'.*/$slider['photo'] ?>" alt="" style="width:266px; height:326px; padding-top:15px; padding-left:25px;">
+                    <img src="<?php echo UrlHelper::getImageUrl($slider['photo']) ?>" alt="" style="width:266px; height:326px; padding-top:15px; padding-left:25px;">
                 </div>
                 <ul id="slideText">
                     <li class="slideText1">ЛИДЕРЫ</li>

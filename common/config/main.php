@@ -82,6 +82,7 @@ return array(
         'php.timezone'       => 'UTC',
         'upload.path' => DIRECTORY_SEPARATOR .'www'.DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR,
         'upload.url' => '/uploads/',
+        'photo.default' => '/img/default.jpg',
     ),
 
     // application modules
