@@ -80,7 +80,7 @@ return array(
         // php configuration
         'php.defaultCharset' => 'utf-8',
         'php.timezone'       => 'UTC',
-        'upload.path' => DIRECTORY_SEPARATOR .'www'.DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR,
+        'upload.path' => '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR .'www'.DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR,
         'upload.url' => '/admin/uploads/',
         'photo.default' => '/img/default.jpg',
     ),
