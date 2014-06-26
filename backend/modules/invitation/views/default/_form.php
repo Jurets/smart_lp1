@@ -15,6 +15,21 @@
     <?php echo $form->textFieldControlGroup($model,'videoLink',array('span'=>5,'maxlength'=>255)); ?>
     <?php echo $form->textFieldControlGroup($model, 'fileLink', array('span'=>5, 'maxlength'=>255)); ?>
 
+    <div class="row">
+        <?php echo $form->labelEx($model, 'text'); ?>
+        <?php
+        $this->widget('yiiwheels.widgets.redactor.WhRedactor', array(
+            'model' => $model,
+            'attribute' => 'text',
+            'pluginOptions' => array(
+                'lang' => 'ru',
+                'toolbar' => true,
+                'iframe' => true,
+            ),));
+        ?>
+        <?php echo $form->error($model, 'text'); ?>
+    </div>
+
     <?php if(isset($model) && is_array($model->bannerFiles) && count($model->bannerFiles) > 0) { ?>
 
         <?php foreach($model->bannerFiles as $key => $image) { ?>
@@ -53,7 +68,17 @@
         <?php echo TbHtml::submitButton(InvitationModule::t('Применить'), array(
             'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
             'size'=>TbHtml::BUTTON_SIZE_LARGE,
+            'name'=>'invitationSubmit'
         )); ?>
     </div>
     <?php $this->endWidget(); ?>
 </div>
+
+<script>
+    $('[name="invitationSubmit"]').click(function(){
+        var text = $('#Invitation_text').val();
+        text = text.replace(/[(\s{2,})(\n)]/g,' ');
+        $('#Invitation_text').val(text);
+        $(this).submit();
+    });
+</script>

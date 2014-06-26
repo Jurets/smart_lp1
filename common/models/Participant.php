@@ -13,18 +13,18 @@
  * @property string $content
  * @property string $image
  * @property integer $activity
-     * @var integer $id
-     * @var string $username
-     * @var string $password
-     * @var string $email
-     * @var string $activkey
-     * @var integer $createtime
-     * @var integer $lastvisit
-     * @var integer $superuser
-     * @property integer $status
-     * @var timestamp $create_at
-     * @var timestamp $lastvisit_at
-     * @var string $logincode
+ * @var integer $id
+ * @var string $username
+ * @var string $password
+ * @var string $email
+ * @var string $activkey
+ * @var integer $createtime
+ * @var integer $lastvisit
+ * @var integer $superuser
+ * @property integer $status
+ * @var timestamp $create_at
+ * @var timestamp $lastvisit_at
+ * @var string $logincode
  */
 class Participant extends User
 {
@@ -36,11 +36,11 @@ class Participant extends User
     const TARIFF_BC_BRONZE = 4;
     const TARIFF_BC_SILVER = 5;
     const TARIFF_BC_GOLD = 6;
-    
+
     //масив для бизнес-тарифов 
     // * термин "тарифы" (вместо "статусы" как в ТЗ) здесь и далее применяется для того, чтобы отличить их от статуса активности/неактивности
     private $_businessclubIDs = array(self::TARIFF_BC, self::TARIFF_BC_BRONZE, self::TARIFF_BC_SILVER, self::TARIFF_BC_GOLD);
-    
+
     //поле страны - нужно для помощи при выборе города (т.к. у юзера поля страны нет, а поле города - есть)
     public $country_id;
     //поле (логическое) согласия регистрируемого участника
@@ -49,73 +49,77 @@ class Participant extends User
     public $newTariff = null;
     //переданный постом код активации (используетсяна формах регистрации для контроля)
     public $postedActivKey = null;
-    
+    //поле изображение
+    public $picture;
+
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
     public $business = null;
     public $checks = null;
     public $fdl = null;
     public $time = null;
-    
-    public $structureMembers =  null; // для массива моделей тех пользователей, для которых текущий (авторизованный) пользователь есть реферал
+
+    public $structureMembers = null; // для массива моделей тех пользователей, для которых текущий (авторизованный) пользователь есть реферал
     public $clubMembers = null; // здесь лежат пользователи, которые попали в куб
-    
+
     private $dict_participant = 'participant';
-    
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		 //NOTE: you should only define rules for those attributes that
-		 //will receive user inputs.
-		 return CMap::mergeArray(parent::rules(), array(
-			 array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
-             array('id', 'safe', 'on'=>array('search', 'seestructure')),
-             //регистрация
-             array('password', 'default', 'value' => $this->_generatePassword(), 'on'=>array('activate')),
-             array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on'=>array('register')),
-             array('username, country_id, city_id, email, rulesAgree', 'required', 'on'=>array('register')),
-             array('rulesAgree', 'compare', 'compareValue'=>true, 'on'=>array('register'), 'message'=>'Необходимо принять Пользовательское Соглашение'),
-			 //The following rule is used by search().
-			 //@todo Please remove those attributes that should not be searched.
-   		     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
-              array('purse', 'safe', 'on'=>array('setpurse')),
-              array('purse', 'required', 'on'=>array('setpurse')),
-              array('purse', 'unique'),
-		));
-	}
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return CMap::mergeArray(parent::relations(), array(
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        //NOTE: you should only define rules for those attributes that
+        //will receive user inputs.
+        return CMap::mergeArray(parent::rules(), array(
+            array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
+            array('id', 'safe', 'on' => array('search', 'seestructure')),
+            //регистрация
+            array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
+            array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
+            array('username, country_id, city_id, email, rulesAgree', 'required', 'on' => array('register')),
+            array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => 'Необходимо принять Пользовательское Соглашение'),
+            //The following rule is used by search().
+            //@todo Please remove those attributes that should not be searched.
+            //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
+            array('purse', 'safe', 'on' => array('setpurse')),
+            array('purse', 'required', 'on' => array('setpurse')),
+            array('purse', 'unique'),
+            array('picture', 'length', 'max' => 255, 'tooLong' => '{attribute} is too long (max {max} chars).', 'on' => 'upload'),
+            array('picture', 'file', 'types' => 'jpg,jpeg,gif,png', 'maxSize' => 1024 * 1024 * 2, 'tooLarge' => 'Size should be less then 2MB !!!', 'on' => 'upload'),
+        ));
+    }
+
+    /**
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return CMap::mergeArray(parent::relations(), array(
             //ссылка на объект-рефер для сабжа
-            'referal'=>array(self::BELONGS_TO, 'Participant', 'refer_id'),
+            'referal' => array(self::BELONGS_TO, 'Participant', 'refer_id'),
             //кол-во подчинённых (т.е. тех, у которых сабж является рефером)
-            'subCount'=>array(self::STAT, 'Participant', 'refer_id'),
-            'structure'=>array(self::STAT, 'Participant', 'id'),
+            'subCount' => array(self::STAT, 'Participant', 'refer_id'),
+            'structure' => array(self::STAT, 'Participant', 'id'),
             //тариф (статус по ТЗ)
-            'tariff'=>array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
+            'tariff' => array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
             //город
-            'city'=>array(self::BELONGS_TO, 'Cities', 'city_id'),
+            'city' => array(self::BELONGS_TO, 'Cities', 'city_id'),
             //текущий бан в чате (его может и не быть!)
-            'chatban'=>array(self::HAS_ONE, 'Chatban', 'user_id', 'condition'=>'active = 1'/*, 'limit'=>1*/),
+            'chatban' => array(self::HAS_ONE, 'Chatban', 'user_id', 'condition' => 'active = 1' /*, 'limit'=>1*/),
             //массив истории забанивания в чате
-            'chatbanhistory'=>array(self::HAS_MANY, 'Chatban', 'user_id'),
-		));
-	}
+            'chatbanhistory' => array(self::HAS_MANY, 'Chatban', 'user_id'),
+        ));
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return CMap::mergeArray(parent::attributeLabels(), array(
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return CMap::mergeArray(parent::attributeLabels(), array(
             'create_at' => UserModule::t("Created", array(), $this->dict_participant),
             'username' => UserModule::t("Domain", array(), $this->dict_participant),
             'first_name' => UserModule::t("Firstname", array(), $this->dict_participant),
@@ -130,97 +134,98 @@ class Participant extends User
             'skype' => UserModule::t("Skype", array(), $this->dict_participant),
             'dob' => UserModule::t("Birthday", array(), $this->dict_participant),
             'gmt_id' => UserModule::t("Gmt", array(), $this->dict_participant),
-		));
-	}
+        ));
+    }
 
     /**
-    * скоупы
-    * 
-    */
+     * скоупы
+     *
+     */
     public function scopes()
     {
         return CMap::mergeArray(parent::scopes(), array(
-            'participant'=>array(
-                'condition'=>'superuser = 0',
+            'participant' => array(
+                'condition' => 'superuser = 0',
             ),
-            'withoutself'=>array(
-                'condition'=>'id <> :self_id',
-                'params'=>array(':self_id'=>$this->id)
+            'withoutself' => array(
+                'condition' => 'id <> :self_id',
+                'params' => array(':self_id' => $this->id)
             ),
         ));
     }
-    
+
     /**
-    * геттер для массива бизнес-тарифов
-    * 
-    */
-    public function getBusinessclubIDs() {
+     * геттер для массива бизнес-тарифов
+     *
+     */
+    public function getBusinessclubIDs()
+    {
         return $this->_businessclubIDs;
     }
-    
-    
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+
+
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     *
+     * Typical usecase:
+     * - Initialize the model fields with values from filter form.
+     * - Execute this method to get CActiveDataProvider instance which will filter
+     * models according to data in model fields.
+     * - Pass data provider to CGridView, CListView or any similar widget.
+     *
+     * @return CActiveDataProvider the data provider that can return the models
+     * based on the search/filter conditions.
+     */
+    public function search()
+    {
+        // @todo Please modify the following code to remove attributes that should not be searched.
         $dataProvider = parent::search();
-        if (!isset($dataProvider)) 
+        if (!isset($dataProvider))
             $dataProvider = New CActiveDataProvider($this);
-            
-		$criteria = new CDbCriteria;
-        $criteria->with = array('city', 'city.country');  //добавить страну и город (для поиска)
+
+        $criteria = new CDbCriteria;
+        $criteria->with = array('city', 'city.country'); //добавить страну и город (для поиска)
         $criteria->addCondition('superuser <> 1'); //исключаем суперпользователя
-        
-        if ($this->scenario == 'empty') {                      //пустой
+
+        if ($this->scenario == 'empty') { //пустой
             //нужно получить заведомо пустой набор данных
-            $criteria->condition = '1=2';   //костыль!!!!
+            $criteria->condition = '1=2'; //костыль!!!!
             //$dataProvider = New CArrayDataProvider(array()); //тоже костыль!!!
         } else if ($this->scenario == 'bcstructure') {
-            $criteria->addInCondition('tariff_id', $this->businessclubIDs);  //структура Бизнес Клуба
-        } else if ($this->scenario == 'structure') {        //поиск для структуры
+            $criteria->addInCondition('tariff_id', $this->businessclubIDs); //структура Бизнес Клуба
+        } else if ($this->scenario == 'structure') { //поиск для структуры
             $criteria->compare('user.phone', $this->phone);
             $criteria->compare('user.skype', $this->skype);
         }
         //добавляем остальные критерии поиска
         $criteria->compare('user.first_name', $this->first_name, true); //поиск по фамилии
-        $criteria->compare('user.last_name', $this->last_name, true);   //поиск по имени
-        $criteria->compare('user.tariff_id', $this->tariff_id);         //поиск по тарифу
-        if (!empty($this->country_id)) {                                
-            $criteria->compare('country.name', $this->country_id, true);//поиск по стране
+        $criteria->compare('user.last_name', $this->last_name, true); //поиск по имени
+        $criteria->compare('user.tariff_id', $this->tariff_id); //поиск по тарифу
+        if (!empty($this->country_id)) {
+            $criteria->compare('country.name', $this->country_id, true); //поиск по стране
         }
         if (!empty($this->city_id)) {
-            $criteria->compare('city.name', $this->city_id, true);      //поиск по городу
+            $criteria->compare('city.name', $this->city_id, true); //поиск по городу
         }
         if (isset($this->refer_id)) {
             $criteria->addCondition('refer_id = :refer_id');
-            $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id'=>$this->refer_id));
+            $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id' => $this->refer_id));
         }
         //мержим критерию с родительской и возвращаем набор данных 
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;
-	}
+    }
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return News the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+    /**
+     * Returns the static model of the specified AR class.
+     * Please note that you should have this exact method in all your CActiveRecord descendants!
+     * @param string $className active record class name.
+     * @return News the static model class
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
 
     /**
      * Sets the scenario for the model.
@@ -232,12 +237,13 @@ class Participant extends User
         parent::setScenario($value);
         return $this;
     }*/
-    
+
     /**
-    * процедура при выборке записи из БД
-    * 
-    */
-    public function afterFind() {
+     * процедура при выборке записи из БД
+     *
+     */
+    public function afterFind()
+    {
         //присвоить значение полю "ид страны"
         $this->country_id = isset($this->city) ? $this->city->country_id : null;
         //если сценарий не активация
@@ -245,89 +251,96 @@ class Participant extends User
         //    $this->password = ''; //скрыть пароль
         //}
     }
-    
+
     /**
-    * Сгенерировать пароль (числовой)
-    * 
-    */
+     * Сгенерировать пароль (числовой)
+     *
+     */
     private static function _generatePassword()
     {
         return rand(10000000, 99999999);
     }
-    
+
     //глобальная функция для присвоения пароля (не хешируем пока что)
     public function generatePassword()
     {
-        $this->password = $this->_generatePassword();  //сгенерить
+        $this->password = $this->_generatePassword(); //сгенерить
         //$this->password = Yii::app()->getModule('user')->encrypting($this->password);
         $this->save(false, array('password')); //сохранить (без валидации)
     }
-    
+
     /**
-    * Выдаёт значение Тарифа
-    * 
-    */
-    public function getTariffShortValue() {
+     * Выдаёт значение Тарифа
+     *
+     */
+    public function getTariffShortValue()
+    {
         return isset($this->tariff) ? $this->tariff->shortname : null;
     }
-    
+
     /**
-    * Выдаёт название города
-    */
-    public function getCityName() {
+     * Выдаёт название города
+     */
+    public function getCityName()
+    {
         return isset($this->city) ? $this->city->name : null;
     }
-    
+
     /**
-    * Выдаёт название страны
-    */
-    public function getCountryName() {
+     * Выдаёт название страны
+     */
+    public function getCountryName()
+    {
         return isset($this->city) && isset($this->city->country) ? $this->city->country->name : null;
     }
-    
+
     /**
-    * Выдаёт значение имени реферала
-    */
-    public function getReferalName() {
+     * Выдаёт значение имени реферала
+     */
+    public function getReferalName()
+    {
         return isset($this->referal) ? $this->referal->username : null;
     }
 
     /**
-    * Выдаёт значение ИД реферала
-    */
-    public function getReferalId() {
+     * Выдаёт значение ИД реферала
+     */
+    public function getReferalId()
+    {
         return isset($this->referal) ? $this->referal->id : null;
     }
 
     /**
-    * выдать список для выбора реферала
-    * 
-    */
-    public function getListForReferalSelect() {//DebugBreak();
+     * выдать список для выбора реферала
+     *
+     */
+    public function getListForReferalSelect()
+    { //DebugBreak();
         $criteria = New CDbCriteria(array(
-            'select'=>array('id', 'username'),
-            'scopes'=>'participant',
+            'select' => array('id', 'username'),
+            'scopes' => 'participant',
         ));
         if (!empty($this->id)) {
             $criteria->scopes = 'withoutself';
-            $criteria->params = array(':self_id'=>$this->id);
+            $criteria->params = array(':self_id' => $this->id);
         }
         $models = self::model()->findAll($criteria);
         return CHtml::listData($models, 'id', 'username');
     }
-    
+
     /**
-    * цвет для юзера в сетке
-    */
-    public function getColor() {
-        $statuscolor='white';
+     * цвет для юзера в сетке
+     */
+    public function getColor()
+    {
+        $statuscolor = 'white';
         //switch ($this->isBanned()) {//здесь указываете ваш аттрибут
-        switch ($this->status) {//здесь указываете ваш аттрибут
+        switch ($this->status) { //здесь указываете ваш аттрибут
             case self::STATUS_ACTIVE:
-                $statuscolor='green';//нужные вам классы в зависимости от значений
+                $statuscolor = 'green'; //нужные вам классы в зависимости от значений
                 break;
             case self::STATUS_NOACTIVE:
-                $statuscolor='grey';
+                $statuscolor = 'grey';
                 break;
             case self::STATUS_BANNED:
                 $statuscolor = 'red';
@@ -335,26 +348,29 @@ class Participant extends User
         }
         return $statuscolor;
     }
- 
-    public function userStructureProcess(){
-        $this->structureMembers = $this->findAllByAttributes(array('refer_id'=>$this->id));
-        $this->clubMembers = $this->findAll('tariff_id > 2 AND id <>'.'17');
+
+    public function userStructureProcess()
+    {
+        $this->structureMembers = $this->findAllByAttributes(array('refer_id' => $this->id));
+        $this->clubMembers = $this->findAll('tariff_id > 2 AND id <>' . '17');
         //var_dump($this->clubMembers);die;
     }
-    
+
     /**
-    * активация стартового тарифа
-    */
-    public function activateStart() {
+     * активация стартового тарифа
+     */
+    public function activateStart()
+    {
         $this->tariff_id = self::TARIFF_20;
         $this->status = parent::STATUS_ACTIVE;
         $this->save(false, array('tariff_id', 'status'));
-    }  
-    
+    }
+
     /**
-    * активация бизнес-статуса (стать бизнес-участником / покупка бизнес-старта)
-    */
-    public function activateBuisness() {
+     * активация бизнес-статуса (стать бизнес-участником / покупка бизнес-старта)
+     */
+    public function activateBuisness()
+    {
         $this->tariff_id = self::TARIFF_50;
         $this->save(false, array('tariff_id'));
     }

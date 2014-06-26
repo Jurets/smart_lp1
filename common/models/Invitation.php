@@ -9,11 +9,12 @@ class Invitation extends CFormModel
     public $videoLink; // линк на видеоролик в youtube
     public $fileLink; // линк на скачивание файлов
     public $bannerFiles = array(); // Баннеры
+    public $text; // Контент страницы
     public $decodedObject;
 
     public function rules(){
         return array(
-            array('videoLink, fileLink, bannerFiles', 'safe' ),
+            array('videoLink, fileLink, bannerFiles,text', 'safe' ),
         );
     }
     
@@ -43,6 +44,8 @@ class Invitation extends CFormModel
         $this->videoLink = (isset($this->decodedObject['videoLink'])) ? $this->decodedObject['videoLink'] : '';
         $this->fileLink = (isset($this->decodedObject['fileLink'])) ? $this->decodedObject['fileLink'] : '';
         $this->bannerFiles = (isset($this->decodedObject['bannerFiles'])) ? $this->decodedObject['bannerFiles'] : '';
+        $this->text = (isset($this->decodedObject['text'])) ? htmlspecialchars_decode($this->decodedObject['text']) : '';
+
     }
     public function saveInvitationManager(){
         /*модуль приведения к нормальному виду - будущий вспомогательный метод модели -> bgiin */
@@ -56,8 +59,10 @@ class Invitation extends CFormModel
             'videoLink' => $this->videoLink,
             'fileLink' => $this->fileLink,
             'bannerFiles' => $this->bannerFiles,
+            'text'=> htmlspecialchars($this->text),
         );
         $prepare = json_encode($prepare, JSON_UNESCAPED_UNICODE);
+        $errorJsonMessage =  json_last_error();
         $saveKind = ($this->checkInstance() == false) ? 'INSERT INTO' : 'UPDATE';
         $variant1 = ' itemsstorage SET item = "'.self::ITEM.'", content = \'' . $prepare . '\''; // insert
         $variant2 = ' itemsstorage SET content = \''.$prepare.'\' where item = "'.self::ITEM . '"'; // update
