@@ -94,6 +94,11 @@ class OfficeController extends EController
             
         }
     }
+    
+    /**
+    * Структура команды
+    * 
+    */
     public function actionStructure(){
         $model = Participant::model()->findByPk(Yii::app()->user->id);
         $model->userStructureProcess(); // делаем "хвост"
@@ -101,6 +106,24 @@ class OfficeController extends EController
         $this->render('structure', array('model'=>$model));
     }
 
+    
+    /**
+    *  вызов чата
+    */
+    public function actionChat() {//DebugBreak();
+        //текущий юзер
+        $user = Participant::model()->findByPk(Yii::app()->user->id);
+        //юзеры онлайн
+        $onlineusers = Participant::getOnlineUsers(false); //true - не показывать себя
+        $this->render('chat', array(
+            'onlineusers'=>$onlineusers,
+            'smileys'=>$this->getSmileNamesSet(),
+            'isActivated'=>$user->status,   //активен ли юзер
+            //'isWebinar' => $this->isWebinar(),  //идёт ли вебинар
+        ), false, true);
+    }
+    
+    
     public function actionCountry()
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);

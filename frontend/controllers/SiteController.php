@@ -26,6 +26,9 @@ class SiteController extends LoginController
                 'class'=>'CCaptchaAction',
                 'testLimit'=>0,    //делаем неограниченное кол-во попыток ввода капчи
             ),
+            'yiichat'=>array(
+                'class'=>'YiiChatAction'
+            ), // YII-CHAT: добавка действия YiiChatAction
         );
     }
     

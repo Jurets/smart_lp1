@@ -35,6 +35,9 @@ return array(
         'application.components.*',
         'bootstrap.helpers.TbHtml',
         'common.modules.user.UserModule',
+        
+        'common.extensions.yiichat.*',
+        
     ),
     
 	// application components
