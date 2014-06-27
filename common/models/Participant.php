@@ -49,8 +49,6 @@ class Participant extends User
     public $newTariff = null;
     //переданный постом код активации (используетсяна формах регистрации для контроля)
     public $postedActivKey = null;
-    //поле изображение
-    public $picture;
 
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
@@ -74,7 +72,7 @@ class Participant extends User
         return CMap::mergeArray(parent::rules(), array(
             array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
             array('id', 'safe', 'on' => array('search', 'seestructure')),
-            //регистрация
+            //регистрация 'required'
             array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
             array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
             array('username, country_id, city_id, email, rulesAgree', 'required', 'on' => array('register')),
@@ -85,11 +83,13 @@ class Participant extends User
             array('purse', 'safe', 'on' => array('setpurse')),
             array('purse', 'required', 'on' => array('setpurse')),
             array('purse', 'unique'),
-            array('picture', 'length', 'max' => 255, 'tooLong' => '{attribute} is too long (max {max} chars).', 'on' => 'upload'),
-            array('picture', 'file', 'types' => 'jpg,jpeg,gif,png', 'maxSize' => 1024 * 1024 * 2, 'tooLarge' => 'Size should be less then 2MB !!!', 'on' => 'upload'),
+            // Scenario for settings(update information)
+            array('username,password,city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe' ,'on'=>array('settings')),
+            array('username,city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'required' ,'on'=>array('settings')),
+            array('photo', 'file','safe'=>true , 'types'=>'jpg, gif, png' ,
+                  'allowEmpty'=>false,'maxSize'=>1024 * 1024 * 3,'tooLarge'=>'Файл весит больше 3 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
         ));
     }
-
     /**
      * @return array relational rules.
      */
@@ -374,6 +374,34 @@ class Participant extends User
         $this->tariff_id = self::TARIFF_50;
         $this->save(false, array('tariff_id'));
     }
+
+
+    protected function beforeSave(){
+        if(!parent::beforeSave())
+            return false;
+        if(($this->scenario=='insert' || $this->scenario=='update') &&
+            ($photo=CUploadedFile::getInstance($this,'photo'))){
+            $this->deleteDocument(); // старый документ удалим, потому что загружаем новый
+
+            $this->photo=$photo;
+            $this->photo->saveAs('admin/www/uploads/');
+        }
+        return true;
+    }
+
+    protected function beforeDelete(){
+        if(!parent::beforeDelete())
+            return false;
+        $this->deleteDocument(); // удалили модель? удаляем и файл
+        return true;
+    }
+
+    public function deleteDocument(){
+        $documentPath= "admin/www/uploads/";
+        if(is_file($documentPath))
+            unlink($documentPath);
+    }
+
     
     /**
     * получить список юзеров которые ОНЛАЙН
@@ -390,6 +418,7 @@ class Participant extends User
             $command->where = 'onlineusers.userid <> :self_id';
             $command->params = array(':self_id'=>Yii::app()->user->id->id);
         }
+
         $rows = $command->queryAll();
         return $rows;
     }
@@ -437,5 +466,5 @@ class Participant extends User
             return $command->insert('onlineusers', array('userid'=>$this->id, 'lastvisit'=>time()));
         }
     }
-        
+
 }

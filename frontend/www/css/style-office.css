@@ -5493,6 +5493,7 @@ select {
 #office-6-content  #shag-1-1-vibrat{
     background-image: url(../images/vibrat.png);
     position: absolute;
+    display:inline-block;
     height:40px;
     width: 251px;
     top: 448px;

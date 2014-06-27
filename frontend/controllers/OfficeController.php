@@ -15,9 +15,11 @@ class OfficeController extends EController
     public $layout='//layouts/office';
 
 
-    public function actionIndex(){
+    public function actionIndex()
+    {
       $this->render('cap', array('service_msg'=>'Заглушка'));   
     }
+
     /**
      * Show rules
      */
@@ -47,10 +49,25 @@ class OfficeController extends EController
      */
     public function actionSettings()
     {
-
-        $participant = New Participant('settings');
+        //Yii::app()->user->id
+        $participant = Participant::model()->findByPk(1);
+        $participant->setScenario('settings');
+        if (isset($_POST['Participant'])) {
+            $participant->attributes = $_POST['Participant'];
+            if ($participant->validate() && isset($_FILES['Participant'])) {
+                if($participant->validate()) {//DebugBreak();
+                    $participant->save();
+                     if ($participant->email != $_POST['Participant']['email']) {
+                        //отсылка почты для повторного подтверждения почты
+                        EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'regconfirm', array('participant'=>$participant));
+                    }
+                    $this->refresh();
+                }
+            }
+        }
         $this->render('settings',array('participant'=>$participant));
     }
+
     /**
      * Show invitation
      */
@@ -124,19 +141,32 @@ class OfficeController extends EController
     }
     
     
+    /**
+     * Functions(actionCountry(),actionCity(),actionTimezone()) for Invitation
+     */
     public function actionCountry()
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
+    
+    public function actionPlace()
+    {
+        echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
+    }
+
     public function actionCity()
     {
         $countryId = $_GET['countryId'];
         echo json_encode(Cities::getCitiesListByCountry($countryId),JSON_UNESCAPED_UNICODE);
     }
-    public function actionTimezone(){
+
+    public function actionTimezone()
+    {
 
         echo json_encode(Gmt::getTimezonesList(),JSON_UNESCAPED_UNICODE);
     }
+
+
 }
 
 

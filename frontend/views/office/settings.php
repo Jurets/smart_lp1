@@ -42,41 +42,34 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <p class="shag-1-1-option1text"> СТРАНА*:</p>
-        <input type="checkbox" name="checkboxG51" id="checkboxG51" class="css-checkbox1" checked="checked"/>
-        <label for="checkboxG51" class="css-label1"></label>
+        <input type="checkbox" name="city_access" id="city_access" class="css-checkbox1" checked="checked"/>
+        <label for="city_access" class="css-label1"></label>
         <a href="#" name="label-1" class="vopros1" title="разрешить показывать всем пользователям"></a>
-        <?php ?>
         <select class="shag-1-1-option1">
             <option value="none" disabled selected>Выберите страну</option>
         </select>
 
 
-        <input type="checkbox" name="checkboxG52" id="checkboxG52" class="css-checkbox2" checked="checked"/>
-        <label for="checkboxG52" class="css-label2"></label>
+        <input type="checkbox" name="country_access" id="country_access" class="css-checkbox2" checked="checked"/>
+        <label for="country_access" class="css-label2"></label>
 
         <p class="shag-1-1-option2text">ГОРОД*: </p>
         <a href="#" name="label-2" class="vopros2" title="разрешить показывать всем пользователям"></a>
-        <select class="shag-1-1-option2">
-
-
-        </select>
+        <select class="shag-1-1-option2"> </select>
 
 
         <p class="shag-1-1-option1-1text"> SKYPE:</p>
-        <input type="checkbox" name="checkboxG5" id="checkboxG53" class="css-checkbox3" checked="checked"/>
-        <label for="checkboxG53" class="css-label3"></label>
+        <input type="checkbox" name="skype_access" id="skype_access" class="css-checkbox3" checked="checked"/>
+        <label for="skype_access" class="css-label3"></label>
         <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всем пользователям"></a>
         <?php echo $form->textField($participant, 'skype', array('class' => 'shag-1-1-option1-1')); //skype ?>
         <?php echo $form->error($participant, 'skype', array('class' => 'error-message em-0')); //skype ?>
-        <!--          <input class="shag-1-1-option1-1" type="text">-->
 
 
         <p class="sub1-1">VIBER / МОБИЛЬНЫЙ*:</p>
-        <!--            <input class="textbox1-1" type="text">-->
         <?php echo $form->textField($participant, 'phone', array('class' => 'textbox1-1')); //VIBER / МОБИЛЬНЫЙ ?>
         <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-0')); //VIBER / МОБИЛЬНЫЙ ?>
         <p class="sub2-3">ТЕКУЩИЙ ПАРОЛЬ*:</p>
-        <!--            <input class="textbox2-3" type="password">-->
         <?php echo $form->textField($participant, 'password', array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'password', array('class' => 'error-message em-0')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <p class="sub2-4">НОВЫЙ ПАРОЛЬ*:</p>
@@ -88,8 +81,8 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <p class="shag-1-1-option2-1text">EMAIL*: </p>
-        <input type="checkbox" name="checkboxG5" id="checkboxG54" class="css-checkbox4" checked="checked"/>
-        <label for="checkboxG54" class="css-label4"></label>
+        <input type="checkbox" name="email_access" id="email_access" class="css-checkbox4" checked="checked"/>
+        <label for="email_access" class="css-label4"></label>
         <a href="#" name="label-4" class="vopros2-1" title="разрешить показывать всем пользователям"></a>
         <input class="shag-1-1-option2-1" type="text" value="">
 
@@ -116,27 +109,27 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option4text"> АВАТАР:</p>
 
-        <div id="shag-1-1-avatar"></div>
-        <a href="#">
-            <?php //echo CHtml::fileField('shag-1-1-vibrat','ВЫБРАТЬ ИЗОБРАЖЕНИЕ') ?>
-            <div id="shag-1-1-vibrat"> <input type="file" style="margin-top: -50px;  -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; font-size: 150px; height: 100px;"> ВЫБРАТЬ ИЗОБРАЖЕНИЕ</div>
-        </a>
 
+        <div id="shag-1-1-avatar"></div>
+        <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image">ВЫБРАТЬ ИЗОБРАЖЕНИЕ</span>
+            <?php echo $form->fileField($participant, 'photo',array('class'=>'shag-fileFiled')); ?>
+        </div>
+        <?php echo $form->error($participant, 'photo'); ?>
         <?php echo CHTML::submitButton('СОХРАНИТЬ', array('class' => 'btn-style-green', 'name' => 'btn')) ?>
 
 
         <?php $this->endWidget(); ?>
-        <!--          <a href="#"><input type="button" name="btn"  class="btn-style-green" value="СОХРАНИТЬ" /></a>-->
-        <div id="popup-1" class="p-6-popup"><span>wddwdw fd fd df df</span><img class="stick"
+
+        <div id="popup-1"  class="p-6-popup"><span>wddwdw fd fd df df</span><img class="stick"
                                                                                 src="images/popupstick.png" width="13">
         </div>
-        <div id="popup-2" class="p-6-popup"><span>wddwdw gfgfgfd ffgfd df df</span><img class="stick"
+        <div id="popup-2"  class="p-6-popup"><span>wddwdw gfgfgfd ffgfd df df</span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
-        <div id="popup-3" class="p-6-popup"><span>wddwdw fd fdfgffg df dfgfgfgf</span><img class="stick"
+        <div id="popup-3"  class="p-6-popup"><span>wddwdw fd fdfgffg df dfgfgfgf</span><img class="stick"
                                                                                            src="images/popupstick.png"
                                                                                            width="13"></div>
-        <div id="popup-4" class="p-6-popup"><span>wddwdw ffgfgd fgfgfd df df</span><img class="stick"
+        <div id="popup-4"  class="p-6-popup"><span>wddwdw ffgfgd fgfgfd df df</span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
 
@@ -152,7 +145,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 </div>
 <script>
-    $.getJSON('country', function (data) {
+    $.getJSON('place', function (data) {
         $.each(data, function (key, val) {
             $('.shag-1-1-option1').append("<option value='" + key + "'>" + val + "</option>");
         });
@@ -183,4 +176,29 @@ $form = $this->beginWidget('CActiveForm', array(
     }, function () {
         $('[id="popup-' + $(this).attr('name')[6] + '"]').hide();
     });
+
+
+    $('.shag-fileFiled').change(function() {
+        var fileName = $(this).val();
+        if(fileName.length > 30) {
+            fileName = fileName.substr(0, 29) + '...';
+        }
+        $('#shag-1-1-vibrat-image').html(fileName);
+    });
+
+
 </script>
+
+<style>
+    #shag-1-1-vibrat input{
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        font-size:199px !important;
+        cursor:pointer;
+        border:none;
+    }
+</style>
