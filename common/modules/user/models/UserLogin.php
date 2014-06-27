@@ -9,7 +9,7 @@ class UserLogin extends CFormModel
 {
 	public $username;
 	public $password;
-	public $rememberMe;
+	public $rememberMe = true;
     public $verifyCode;
     public $role;
     public $temp_key;
@@ -105,7 +105,7 @@ class UserLogin extends CFormModel
 			switch($this->identity->errorCode)
 			{
 				case UserIdentity::ERROR_NONE:
-					$duration=$this->rememberMe ? Yii::app()->controller->module->rememberMeTime : 0;
+					$duration=$this->rememberMe ? Yii::app()->getModule('user')->rememberMeTime : 0;
 					if (!Yii::app()->request->isAjaxRequest) {
                         Yii::app()->user->login($this->identity,$duration);
                     }
