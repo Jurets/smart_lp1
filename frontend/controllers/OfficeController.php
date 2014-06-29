@@ -165,8 +165,16 @@ class OfficeController extends EController
 
         echo json_encode(Gmt::getTimezonesList(),JSON_UNESCAPED_UNICODE);
     }
+//<<<<<<< c20e89e341acb2407e8b80db68bf66a6b3c1aec2
 
 
+//=======
+    /* Test */
+    public function actionTest(){
+        $pmAPI = new PerfectMoney(22);
+        $this->render('test', array('test'=>$pmAPI->showTest()));
+    }
+//>>>>>>> c1e2469ba368df93d42c42eab573a19c1f009816
 }
 
 
