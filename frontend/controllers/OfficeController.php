@@ -225,8 +225,8 @@ class OfficeController extends EController
 //=======
     /* Test */
     public function actionTest(){
-        $pmAPI = new PerfectMoney(22);
-        $this->render('test', array('test'=>$pmAPI->showTest()));
+        $test = Yii::app()->perfectmoney; // настоящий компонент
+        var_dump($test->show());die;
     }
 //>>>>>>> c1e2469ba368df93d42c42eab573a19c1f009816
 }

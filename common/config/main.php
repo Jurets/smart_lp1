@@ -30,6 +30,7 @@ return array(
         'application.models.*',
 
         'common.extensions.yii-mail.YiiMailMessage',
+        'common.extensions.PerfectMoney',
         
         'common.modules.user.models.*',
         'common.modules.user.components.*',
@@ -74,6 +75,15 @@ return array(
             'viewPath' => 'common.views.mail',
             'logging' => true,
             'dryRun' => false,
+        ),
+       'perfectmoney' => array(
+           'class' => 'common.extensions.PerfectMoney.PerfectMoneyApiWrapper',
+           'interfaces' => array(
+               /* в случае изменений ссылок на интерфейсы url можно отредактировать здесь */
+               'confirm' => 'https://perfectmoney.is/acct/confirm.asp', // интерфейс передачи денег с кошелька на кошелек (тестировано)
+               'balance' => 'https://perfectmoney.is/acct/balance.asp', // интерфейс отображения текущего состояния кошельков (тестировано)
+               'acc_name' => 'https://perfectmoney.is/acct/acc_name.asp', // (не тестировано)
+           ),
         ),
     ),
     'params' => array(
