@@ -26,6 +26,9 @@ class SiteController extends LoginController
                 'class'=>'CCaptchaAction',
                 'testLimit'=>0,    //делаем неограниченное кол-во попыток ввода капчи
             ),
+            'yiichat'=>array(
+                'class'=>'YiiChatAction'
+            ), // YII-CHAT: добавка действия YiiChatAction
         );
     }
     
@@ -101,4 +104,27 @@ class SiteController extends LoginController
     public function actionUsrcontour(){
         $this->renderPartial('_usrcontour');
     }
+    
+    // возврат кол-ва онлайн-юзеров (для главной страницы)
+    public function actionGetonlineuserscount() {
+        $count = Yii::app()->cache->get('cache_common_usersonline');
+        if ($count === false) {
+            $count = Participant::getOnlineUsersCount();
+            Yii::app()->cache->set('cache_common_usersonline', $count, 15);
+        }
+        $response = array();
+        $response['onlinecount'] = $count;
+        echo CJSON::encode($response);
+    }
+        
+    // возврат списка онлайн-юзеров
+    public function actionGetonlineusers() {
+        $onlineusers = Participant::getOnlineUsers(false); //true - не показывать себя
+        $response = array();
+        $response['onlinecount'] = count($onlineusers);
+        $response['html'] = $this->renderPartial('application.views.office._buddies', array('onlineusers'=>$onlineusers), true);
+        echo CJSON::encode($response);
+    }
+    
+    
 }

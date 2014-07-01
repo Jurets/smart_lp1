@@ -116,5 +116,23 @@ class EController extends CController
         ViewHelper::selectOptions($data, ViewHelper::getPrompt('select city'));
     }
 
+    //
+    protected function getSmilesArray($path = '/images/smiles/') {
+        $smileys_dir = getcwd() . $path;
+        $pngs = glob($smileys_dir . "*.png");
+        $ret_val = array();
+        $count = 0;
+        foreach($pngs as $png) { //print each file name
+            if ($count++ < 80)
+                $ret_val[] = str_replace($smileys_dir, '', $png);
+        }
+        return $ret_val;
+        //return json_encode($ret_val);
+    }
+
+    protected function getSmileNamesSet($path = '/images/smiles/') {
+        $ret_val = $this->getSmilesArray($path);
+        return json_encode($ret_val);
+    }
     
 }

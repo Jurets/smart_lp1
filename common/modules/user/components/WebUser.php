@@ -46,16 +46,14 @@ class WebUser extends CWebUser
         $this->updateSession();
 	}
 
+    /**
+    * обновить данные по юзеру в сессии
+    * 
+    */
     public function updateSession() {
-        if ($user = Yii::app()->getModule('user')->user($this->id)) {
+        if ($user = Participant::model()->findByPk($this->id)) {
             $this->name = $user->username;
-            $userAttributes = CMap::mergeArray(array(
-                                                    'email'=>$user->email,
-                                                    'username'=>$user->username,
-                                                    'create_at'=>$user->create_at,
-                                                    'lastvisit_at'=>$user->lastvisit_at,
-                                               ), array()/*,$user->profile->getAttributes()*/);
-            foreach ($userAttributes as $attrName=>$attrValue) {
+            foreach ($user->attributes as $attrName=>$attrValue) {
                 $this->setState($attrName,$attrValue);
             }
         }

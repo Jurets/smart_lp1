@@ -376,4 +376,48 @@ class Participant extends User
     }
 
 
+    /**
+    * построить полное имя (ФИО)
+    * 
+    */
+    public static function getFullname() {
+        return implode(' ', array($this->first_name, $this->last_name));
+    } 
+    
+    /**
+    * получить ссылку на аватар (или плашка - если нет)
+    * 
+    */
+    public function getUrlAvatar() {
+        return self::buildUrlAvatar($this->ava);
+    }
+
+    public static function buildUrlAvatar($ava) {
+        $file = Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $ava;
+        if (!is_file($file)) { //если нет файла аватарки - определяем плашку (по полу)
+            $file = Yii::app()->baseUrl . '/img/nophotom.jpg';
+        } else {
+            $file = Yii::app()->createAbsoluteUrl($ava);
+        }
+        return $file;
+    }    
+    
+    /**
+    * добавить юзера в список ОНЛАЙН
+    * 
+    */
+    public function putUserToOnline() {
+        $command = Yii::app()->db->createCommand();
+        $user_id = $command  //сначала проверить: не занесён ли он уже в онлайн-список
+            ->select('userid')
+            ->from('onlineusers')
+            ->where('userid = :userid', array(':userid'=>$this->id))
+            ->queryScalar();
+        if ($user_id) {   //если да - обновить дату/время последнего действия
+            return $command->update('onlineusers', array('lastvisit'=>time()), 'userid = :userid', array(':userid'=>$this->id));
+        } else {          //если нет - добавить строку в таблицу
+            return $command->insert('onlineusers', array('userid'=>$this->id, 'lastvisit'=>time()));
+        }
+    }
+
 }
