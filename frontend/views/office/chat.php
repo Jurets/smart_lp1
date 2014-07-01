@@ -419,14 +419,14 @@ var emoticons = {
         var launchTimer = function(){
             setTimeout(function() {
                 $.ajax({
-                    url: 'getonlineusers',
+                    url: '<?=Yii::app()->createAbsoluteUrl('site/getonlineusers')?>',
                     dataType: 'json', //'text',
                     type: 'get',
                     success: function(data) {
                         if (data && !data.error) {
                             $("#online-counter").text(data.onlinecount);
+                            $("#buddy-list").empty();
                             if (data.html) {
-                                $("#buddy-list").empty();
                                 $("#buddy-list").append(data.html);
                             }
                         }

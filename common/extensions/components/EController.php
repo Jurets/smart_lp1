@@ -116,28 +116,7 @@ class EController extends CController
         ViewHelper::selectOptions($data, ViewHelper::getPrompt('select city'));
     }
 
-    
-    // возврат кол-ва онлайн-юзеров (для главной страницы)
-    public function actionGetonlineuserscount() {
-        $count = Yii::app()->cache->get('cache_common_usersonline');
-        if ($count === false) {
-            $count = Participant::getOnlineUsersCount();
-            Yii::app()->cache->set('cache_common_usersonline', $count, 15);
-        }
-        $response = array();
-        $response['onlinecount'] = $count;
-        echo CJSON::encode($response);
-    }
-        
-    // возврат списка онлайн-юзеров
-    public function actionGetonlineusers() {
-        $onlineusers = Participant::getOnlineUsers(false); //true - не показывать себя
-        $response = array();
-        $response['onlinecount'] = count($onlineusers);
-        $response['html'] = $this->renderPartial('application.views.office._buddies', array('onlineusers'=>$onlineusers), true);
-        echo CJSON::encode($response);
-    }
-    
+    //
     protected function getSmilesArray($path = '/images/smiles/') {
         $smileys_dir = getcwd() . $path;
         $pngs = glob($smileys_dir . "*.png");

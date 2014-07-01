@@ -15,6 +15,28 @@ class OfficeController extends EController
     public $layout='//layouts/office';
 
 
+    /**
+    * процедура перед любым действием в Офисе
+    * 
+    * @param mixed $action
+    * @return boolean
+    */
+    protected function beforeAction($action) {
+        if (parent::beforeAction($action)){
+            if (!Yii::app()->user->isGuest) { //если юзер не гость
+                $user = New Participant('update');
+                $user->id = Yii::app()->user->id;
+                //добавить юзера в список онлайн  - любая активность юзера (обращение к контроллеру) 
+                $user->putUserToOnline();
+            }
+            return true;
+        }
+    }
+    
+    /**
+    * главная страница ОФиса
+    *     
+    */
     public function actionIndex()
     {
       $this->render('cap', array('service_msg'=>'Заглушка'));   
