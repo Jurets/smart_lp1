@@ -72,22 +72,69 @@ class OfficeController extends EController
     public function actionSettings()
     {
         //Yii::app()->user->id
-        $participant = Participant::model()->findByPk(1);
+        $participant = Participant::model()->findByPk(2);
         $participant->setScenario('settings');
+        $date = explode('-', $participant->dob);
+        $day = $date[2];
+        $month = $date[1];
+        $year = $date[0];
+
+        $places = Countries::getCountriesList();
+        $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
+        $gmtZone = Gmt::getTimezonesList();
+
+
+        $path = 'D:/xampp/htdocs/smart_lp1.git/backend/www/uploads/';
         if (isset($_POST['Participant'])) {
+            $day = Yii::app()->getRequest()->getPost('date_ofb');
+            $month = Yii::app()->getRequest()->getPost('month_ofb');
+            $year = Yii::app()->getRequest()->getPost('year_ofb');
+            $timeZone = Yii::app()->getRequest()->getPost('timeZoneSelect');
+            $city_id = Yii::app()->getRequest()->getPost('citySelect');
+            $country_id = Yii::app()->getRequest()->getPost('countrySelect');
+            $oldPassword = Yii::app()->getRequest()->getPost('password');
+            $newPassword  = Yii::app()->getRequest()->getPost('newPassword');
+            $participant->gmt_id = $timeZone;
+            $participant->country_id = $country_id;
+            $participant->city_id = $city_id;
+            $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
+            if ($day != '' && $month != '' && $year != '') {
+                if (checkdate($month, $day, $year)) {
+                    $dob = $year . '-' . $month . '-' . $day;
+                    $participant->dob = $dob;
+                } else {
+                    $participant->dob = '';
+                }
+            }
+            if($participant->password == md5($oldPassword) && $newPassword != ''){
+                $participant->password = md5($newPassword);
+            }
+            $oldPhoto = $participant->photo;
+            $oldEmail = $participant->email;
             $participant->attributes = $_POST['Participant'];
-            if ($participant->validate() && isset($_FILES['Participant'])) {
-                if($participant->validate()) {//DebugBreak();
-                    $participant->save();
-                     if ($participant->email != $_POST['Participant']['email']) {
-                        //отсылка почты для повторного подтверждения почты
-                        EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'regconfirm', array('participant'=>$participant));
-                    }
-                    $this->refresh();
+            if ($participant->validate()) {
+                if ($_FILES['Participant']['name']['photo'] != '') {
+                    $participant->photo = CUploadedFile::getInstance($participant,'photo');
+                    $nameImage = $participant->photo->name;
+                    $url_photo = $path . $nameImage;
+                    $participant->photo->saveAs($url_photo);//сохраняем картинку
+                }else{
+                    $participant->photo = $oldPhoto;
+                }
+                $participant->country_access = isset($_POST['country_access']) ? 1 : 0;
+                $participant->city_access = isset($_POST['city_access']) ? 1 : 0;
+                $participant->skype_access = isset($_POST['skype_access']) ? 1 : 0;
+                $participant->email_access = isset($_POST['email_access']) ? 1 : 0;
+                $participant->save();
+
+                if ($oldEmail != $_POST['Participant']['email']) {
+                    //отсылка почты для повторного подтверждения почты
+                    EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'settings', array('participant' => $participant));
                 }
             }
         }
-        $this->render('settings',array('participant'=>$participant));
+        $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
+            'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
     }
 
     /**
@@ -175,21 +222,6 @@ class OfficeController extends EController
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
-
-    public function actionCity()
-    {
-        $countryId = $_GET['countryId'];
-        echo json_encode(Cities::getCitiesListByCountry($countryId),JSON_UNESCAPED_UNICODE);
-    }
-
-    public function actionTimezone()
-    {
-
-        echo json_encode(Gmt::getTimezonesList(),JSON_UNESCAPED_UNICODE);
-    }
-//<<<<<<< c20e89e341acb2407e8b80db68bf66a6b3c1aec2
-
-
 //=======
     /* Test */
     public function actionTest(){

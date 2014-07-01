@@ -106,7 +106,9 @@ class Cities extends CActiveRecord
      */
     public static function getCitiesListByCountry($country_id = null)
     {
-        return CHtml::listData(self::model()->findAllByAttributes(array('country_id' => $country_id), array('order'=>'name ASC')), 'id', 'name');
+        $listCites = Cities::model()->findAllByAttributes(array('country_id' => $country_id), array('order'=>'name ASC'));
+        return CHtml::listData($listCites,'id', 'name');
+        //return CHtml::listData(self::model()->findAllByAttributes(array('country_id' => $country_id), array('order'=>'name ASC')), 'id', 'name');
     }
         
 }

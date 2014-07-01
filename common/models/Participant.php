@@ -84,10 +84,10 @@ class Participant extends User
             array('purse', 'required', 'on' => array('setpurse')),
             array('purse', 'unique'),
             // Scenario for settings(update information)
-            array('username,password,city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe' ,'on'=>array('settings')),
-            array('username,city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'required' ,'on'=>array('settings')),
+            array('username,password,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype ', 'safe' ,'on'=>array('settings')),
+            array('username,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype', 'required' ,'on'=>array('settings')),
             array('photo', 'file','safe'=>true , 'types'=>'jpg, gif, png' ,
-                  'allowEmpty'=>false,'maxSize'=>1024 * 1024 * 3,'tooLarge'=>'Файл весит больше 3 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
+                  'allowEmpty'=>true,'maxSize'=>1920 * 1080 * 3,'tooLarge'=>'Файл весит больше 3 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
         ));
     }
     /**
@@ -375,53 +375,6 @@ class Participant extends User
         $this->save(false, array('tariff_id'));
     }
 
-
-    protected function beforeSave(){
-        if(!parent::beforeSave())
-            return false;
-        if(($this->scenario=='insert' || $this->scenario=='update') &&
-            ($photo=CUploadedFile::getInstance($this,'photo'))){
-            $this->deleteDocument(); // старый документ удалим, потому что загружаем новый
-
-            $this->photo=$photo;
-            $this->photo->saveAs('admin/www/uploads/');
-        }
-        return true;
-    }
-
-    protected function beforeDelete(){
-        if(!parent::beforeDelete())
-            return false;
-        $this->deleteDocument(); // удалили модель? удаляем и файл
-        return true;
-    }
-
-    public function deleteDocument(){
-        $documentPath= "admin/www/uploads/";
-        if(is_file($documentPath))
-            unlink($documentPath);
-    }
-
-    
-    /**
-    * получить список юзеров которые ОНЛАЙН
-    * 
-    */
-    public static function getOnlineUsers($withoutSelf = false) {
-        $command = Yii::app()->db->createCommand()
-            ->select('onlineusers.userid, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
-            ->from('onlineusers')
-            ->leftJoin('{{users}}', '{{users}}.id = onlineusers.userid')
-            ->leftJoin('cities', 'cities.id = {{users}}.city_id')
-            ->leftJoin('countries', 'countries.id = cities.country_id');
-        if ($withoutSelf && isset(Yii::app()->user->id->id)) {
-            $command->where = 'onlineusers.userid <> :self_id';
-            $command->params = array(':self_id'=>Yii::app()->user->id->id);
-        }
-
-        $rows = $command->queryAll();
-        return $rows;
-    }
 
     /**
     * построить полное имя (ФИО)
