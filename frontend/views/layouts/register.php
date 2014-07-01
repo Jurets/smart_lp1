@@ -1,12 +1,11 @@
+<?php /* @var $this Controller */ ?>
 <?php
-    /* @var $this Controller */ ?>
-<?php 
-    //CSS-file for main page
-    Yii::app()->clientScript->registerCssFile('/css/style-shags.css');
-    //Yii::app()->clientScript->registerCssFile('/css/login.css');
-
-    //upper layout
-    $this->beginContent('//layouts/common'); ?>
+//CSS-file for main page
+Yii::app()->clientScript->registerCssFile('/css/style-shags.css');
+//Yii::app()->clientScript->registerCssFile('/css/login.css');
+//upper layout
+$this->beginContent('//layouts/common');
+?>
 
 <!--<div style="height: 57px;">
 <a id="logo" href="#" style="top: 46px; left: 0px;"></a>
@@ -24,21 +23,21 @@
         <ul id="nav">
             <li> <a href="#" class="flag">  </a> </li>
             <li> <a href="#" class="in">  </a> </li>
-            <li> <a href="#"> ВОЗМОЖНОСТИ </a> </li>
-            <li> <a href="#"> ПРАВИЛА </a> </li>
-            <li> <a href="#"> ВОПРОСЫ И ОТВЕТЫ  </a> </li>
-            <li> <a href="#" class="moveRight"> ВОЙТИ </a> </li>
+            <li> <a href="#"> <?php echo Yii::t('common', 'OPPORTUNITIES'); ?> </a> </li>
+            <li> <a href="#"> <?php echo Yii::t('common', 'RULES'); ?> </a> </li>
+            <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+            <li> <a href="#" class="moveRight"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
         </ul>
     </div>
 
     <div id="content">
 
-        <h2 id="shag-1-1-h3" >РЕГИСТРАЦИЯ НОВОГО УЧАСТНИКА СИСТЕМЫ</h2>
+        <h2 id="shag-1-1-h3" ><?php echo Yii::t('common', 'REGISTER NEW USER') ?></h2>
         <div id="topShagLine"></div>
-        <div class="btn-style1 <?=($this->step==1)?'active-step':''?>"> ШАГ 1</div>
-        <div class="btn-style2 <?=($this->step==2)?'active-step':''?>"> ШАГ 2</div>
-        <div class="btn-style3 <?=($this->step==3)?'active-step':''?>"> ШАГ 3</div>
-        <div class="btn-style4 <?=($this->step==4)?'active-step':''?>"> ШАГ 4</div>
+        <div class="btn-style1 <?= ($this->step == 1) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 1'); ?></div>
+        <div class="btn-style2 <?= ($this->step == 2) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 2'); ?></div>
+        <div class="btn-style3 <?= ($this->step == 3) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 3'); ?></div>
+        <div class="btn-style4 <?= ($this->step == 4) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 4'); ?></div>
 
         <?php echo $content; ?>
     </div>
@@ -91,18 +90,18 @@
         height: 357px;
         width: 952px;
     }
-    
+
     #close-btn {
-       right: 21px;
-       top: 235px;
+        right: 21px;
+        top: 235px;
     }
-    
+
     .active-step {
         width: 246px;
         height: 41px;
         position: absolute;
         top: 173px;
-       
+
         background-color: #838383;
         text-align: center;
         padding-top: 6px;
