@@ -74,7 +74,11 @@ class OfficeController extends EController
         //Yii::app()->user->id
         $participant = Participant::model()->findByPk(2);
         $participant->setScenario('settings');
-        $date = explode('-', $participant->dob);
+        if($participant->dob != ''){
+            $date = explode('-', $participant->dob);
+        }else{
+            $date = explode('-', date('Y-m-d'));
+        }
         $day = $date[2];
         $month = $date[1];
         $year = $date[0];
