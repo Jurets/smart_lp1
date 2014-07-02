@@ -45,7 +45,11 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->error($participant, 'dob' , array('class' => 'error-message em-4')); //День рождения ?>
 
         <p class="shag-1-1-option1text"> СТРАНА*:</p>
-        <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" checked="checked"/>
+        <?php if($participant->country_access == 1){ ?>
+            <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" checked="checked"/>
+        <?php }else { ?>
+            <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1"/>
+        <?php } ?>
         <label for="checkboxG51" class="css-label1"></label>
         <a href="#" name="label-1" class="vopros1" title="разрешить показывать всем пользователям"></a>
 
@@ -60,7 +64,11 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->error($participant, 'country' , array('class' => 'error-message em-5')); //Страна ?>
 
 
-        <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" checked="checked"/>
+        <?php if($participant->city_access == 1){ ?>
+            <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" checked="checked"/>
+        <?php }else { ?>
+            <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" />
+        <?php } ?>
         <label for="checkboxG52" class="css-label2"></label>
         <p class="shag-1-1-option2text">ГОРОД*: </p>
         <a href="#" name="label-2" class="vopros2" title="разрешить показывать всем пользователям"></a>
@@ -78,7 +86,11 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
             <p class="shag-1-1-option1-1text"> SKYPE:</p>
-            <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3" checked="checked"/>
+            <?php if($participant->skype_access == 1){ ?>
+                <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3" checked="checked"/>
+            <?php }else { ?>
+                <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3"/>
+            <?php } ?>
             <label for="checkboxG53" class="css-label3"></label>
 
         <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всем пользователям"></a>
@@ -104,7 +116,11 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <p class="shag-1-1-option2-1text">EMAIL*: </p>
-            <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" checked="checked"/>
+            <?php if($participant->email_access == 1){ ?>
+                <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" checked="checked"/>
+            <?php }else { ?>
+                <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" />
+            <?php } ?>
             <label for="checkboxG54" class="css-label4"></label>
         <a href="#" name="label-4" class="vopros2-1" title="разрешить показывать всем пользователям"></a>
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
