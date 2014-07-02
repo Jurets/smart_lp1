@@ -122,7 +122,6 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php } ?>
             <?php } ?>
         </select>
-<!--        --><?php //echo $form->error($participant, 'gmt', array('class' => 'error-message em-11')); //gmt ?>
 
 
         <p class="shag-1-1-option3-1text"> ЯЗЫК:</p>
@@ -157,16 +156,16 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <?php $this->endWidget(); ?>
 
-        <div id="popup-1"  class="p-6-popup"><span>wddwdw fd fd df df</span><img class="stick"
+        <div id="popup-1"  class="p-6-popup"><span>показывать страну всем пользователям</span><img class="stick"
                                                                                 src="images/popupstick.png" width="13">
         </div>
-        <div id="popup-2"  class="p-6-popup"><span>wddwdw gfgfgfd ffgfd df df</span><img class="stick"
+        <div id="popup-2"  class="p-6-popup"><span>показывать город всем пользователям</span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
-        <div id="popup-3"  class="p-6-popup"><span>wddwdw fd fdfgffg df dfgfgfgf</span><img class="stick"
+        <div id="popup-3"  class="p-6-popup"><span>показывать skype всем пользователям</span><img class="stick"
                                                                                            src="images/popupstick.png"
                                                                                            width="13"></div>
-        <div id="popup-4"  class="p-6-popup"><span>wddwdw ffgfgd fgfgfd df df</span><img class="stick"
+        <div id="popup-4"  class="p-6-popup"><span>показывать email всем пользователям</span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
 
