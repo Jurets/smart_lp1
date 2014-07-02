@@ -74,7 +74,11 @@ class OfficeController extends EController
         //Yii::app()->user->id
         $participant = Participant::model()->findByPk(2);
         $participant->setScenario('settings');
-        $date = explode('-', $participant->dob);
+        if($participant->dob != ''){
+            $date = explode('-', $participant->dob);
+        }else{
+            $date = explode('-', date('Y-m-d'));
+        }
         $day = $date[2];
         $month = $date[1];
         $year = $date[0];
@@ -83,8 +87,8 @@ class OfficeController extends EController
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
         $gmtZone = Gmt::getTimezonesList();
 
-
-        $path = 'D:/xampp/htdocs/smart_lp1.git/backend/www/uploads/';
+        // путь для сохранения файла
+        $path = Yii::app()->params['upload.path'];
         if (isset($_POST['Participant'])) {
             $day = Yii::app()->getRequest()->getPost('date_ofb');
             $month = Yii::app()->getRequest()->getPost('month_ofb');
@@ -106,6 +110,7 @@ class OfficeController extends EController
                     $participant->dob = '';
                 }
             }
+
             if($participant->password == md5($oldPassword) && $newPassword != ''){
                 $participant->password = md5($newPassword);
             }
@@ -121,6 +126,12 @@ class OfficeController extends EController
                 }else{
                     $participant->photo = $oldPhoto;
                 }
+                if($participant->purse != $participant->newPurse)
+                {
+                    $participant->purse = $participant->newPurse;
+                    $participant->newPurse = '';
+                }
+
                 $participant->country_access = isset($_POST['country_access']) ? 1 : 0;
                 $participant->city_access = isset($_POST['city_access']) ? 1 : 0;
                 $participant->skype_access = isset($_POST['skype_access']) ? 1 : 0;
@@ -129,7 +140,7 @@ class OfficeController extends EController
 
                 if ($oldEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
-                    EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'settings', array('participant' => $participant));
+                    EmailHelper::send(array($participant->email), 'Подтверждение почты', 'settings', array('participant' => $participant));
                 }
             }
         }
@@ -225,8 +236,8 @@ class OfficeController extends EController
 //=======
     /* Test */
     public function actionTest(){
-        $pmAPI = new PerfectMoney(22);
-        $this->render('test', array('test'=>$pmAPI->showTest()));
+        $test = Yii::app()->perfectmoney; // настоящий компонент
+        var_dump($test->show());die;
     }
 //>>>>>>> c1e2469ba368df93d42c42eab573a19c1f009816
 }

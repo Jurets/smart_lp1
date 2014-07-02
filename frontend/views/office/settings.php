@@ -45,7 +45,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->error($participant, 'dob' , array('class' => 'error-message em-4')); //День рождения ?>
 
         <p class="shag-1-1-option1text"> СТРАНА*:</p>
-        <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" checked="checked"/>
+        <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" <?php if($participant->country_access == 1){echo 'checked="checked"';} ?>/>
         <label for="checkboxG51" class="css-label1"></label>
         <a href="#" name="label-1" class="vopros1" title="разрешить показывать всем пользователям"></a>
 
@@ -60,7 +60,8 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->error($participant, 'country' , array('class' => 'error-message em-5')); //Страна ?>
 
 
-        <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" checked="checked"/>
+
+        <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" <?php if($participant->city_access == 1){echo 'checked="checked"';} ?>/>
         <label for="checkboxG52" class="css-label2"></label>
         <p class="shag-1-1-option2text">ГОРОД*: </p>
         <a href="#" name="label-2" class="vopros2" title="разрешить показывать всем пользователям"></a>
@@ -78,10 +79,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
             <p class="shag-1-1-option1-1text"> SKYPE:</p>
-            <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3" checked="checked"/>
+            <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3"  <?php if($participant->skype_access == 1){echo 'checked="checked"';} ?> />
             <label for="checkboxG53" class="css-label3"></label>
 
-        <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всем пользователям"></a>
+        <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>
         <?php echo $form->textField($participant, 'skype', array('class' => 'shag-1-1-option1-1')); //skype ?>
         <?php echo $form->error($participant, 'skype', array('class' => 'error-message em-7')); //skype ?>
 
@@ -99,13 +100,15 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <p class="sub2-5">НОВЫЙ КОШЕЛЕК:</p>
-        <input class="textbox2-5" type="text">
+        <?php echo $form->textField($participant, 'newPurse', array('class' => 'textbox2-5')); //НОВЫЙ КОШЕЛЕК ?>
+        <?php echo $form->error($participant, 'newPurse', array('class' => 'error-message em-14')); //НОВЫЙ КОШЕЛЕК ?>
+
         <a href="#" class="pm1"></a>
 
 
         <p class="shag-1-1-option2-1text">EMAIL*: </p>
-            <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" checked="checked"/>
-            <label for="checkboxG54" class="css-label4"></label>
+        <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" <?php if($participant->email_access == 1){echo 'checked="checked"';} ?>/>
+        <label for="checkboxG54" class="css-label4"></label>
         <a href="#" name="label-4" class="vopros2-1" title="разрешить показывать всем пользователям"></a>
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
         <?php echo $form->error($participant, 'email',array('class' => 'error-message em-11')); //Email ?>
@@ -121,7 +124,6 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php } ?>
             <?php } ?>
         </select>
-<!--        --><?php //echo $form->error($participant, 'gmt', array('class' => 'error-message em-11')); //gmt ?>
 
 
         <p class="shag-1-1-option3-1text"> ЯЗЫК:</p>
@@ -134,7 +136,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <p class="shag-1-1-option5text"> ВАШ КОШЕЛЕК</p>
 
         <p class="dannie"> ПЛАТЕЖНЫЕ ДАННЫЕ:</p>
-        <?php echo $form->textField($participant, 'purse', array('class' => 'textbox5')); //Кошелек ?>
+        <?php echo $form->textField($participant, 'purse', array('class' => 'textbox5','readonly'=>true)); //Кошелек ?>
         <?php echo $form->error($participant, 'purse' ,array('class'=>'error-message em-10')); //Кошелек ?>
         <a href="#" class="pm2"></a>
 
@@ -156,16 +158,16 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <?php $this->endWidget(); ?>
 
-        <div id="popup-1"  class="p-6-popup"><span>wddwdw fd fd df df</span><img class="stick"
+        <div id="popup-1"  class="p-6-popup"><span>показывать страну всем пользователям</span><img class="stick"
                                                                                 src="images/popupstick.png" width="13">
         </div>
-        <div id="popup-2"  class="p-6-popup"><span>wddwdw gfgfgfd ffgfd df df</span><img class="stick"
+        <div id="popup-2"  class="p-6-popup"><span>показывать город всем пользователям</span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
-        <div id="popup-3"  class="p-6-popup"><span>wddwdw fd fdfgffg df dfgfgfgf</span><img class="stick"
+        <div id="popup-3"  class="p-6-popup"><span>показывать skype всем пользователям</span><img class="stick"
                                                                                            src="images/popupstick.png"
                                                                                            width="13"></div>
-        <div id="popup-4"  class="p-6-popup"><span>wddwdw ffgfgd fgfgfd df df</span><img class="stick"
+        <div id="popup-4"  class="p-6-popup"><span>показывать email всем пользователям</span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
 
@@ -268,12 +270,13 @@ $form = $this->beginWidget('CActiveForm', array(
     /* purse */
     .em-10{ top: 575px; left:625px; }
     /* email */
-    .em-11{ top: 730px; left:625px; }
+    .em-11{ top: 760px; left:625px; }
     /* password */
     .em-12{ top: 830px; left:625px; }
     /* newPassword */
     .em-13{ top: 925px; left:625px; }
-
+    /* newPurse */
+    .em-14{ top: 575px; left:625px; }
 
 
 </style>
