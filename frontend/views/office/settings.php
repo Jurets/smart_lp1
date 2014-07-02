@@ -100,7 +100,9 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <p class="sub2-5">НОВЫЙ КОШЕЛЕК:</p>
-        <input class="textbox2-5" type="text">
+        <?php echo $form->textField($participant, 'newPurse', array('class' => 'textbox2-5')); //НОВЫЙ КОШЕЛЕК ?>
+        <?php echo $form->error($participant, 'newPurse', array('class' => 'error-message em-14')); //НОВЫЙ КОШЕЛЕК ?>
+
         <a href="#" class="pm1"></a>
 
 
@@ -134,7 +136,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <p class="shag-1-1-option5text"> ВАШ КОШЕЛЕК</p>
 
         <p class="dannie"> ПЛАТЕЖНЫЕ ДАННЫЕ:</p>
-        <?php echo $form->textField($participant, 'purse', array('class' => 'textbox5')); //Кошелек ?>
+        <?php echo $form->textField($participant, 'purse', array('class' => 'textbox5','readonly'=>true)); //Кошелек ?>
         <?php echo $form->error($participant, 'purse' ,array('class'=>'error-message em-10')); //Кошелек ?>
         <a href="#" class="pm2"></a>
 
@@ -268,12 +270,13 @@ $form = $this->beginWidget('CActiveForm', array(
     /* purse */
     .em-10{ top: 575px; left:625px; }
     /* email */
-    .em-11{ top: 730px; left:625px; }
+    .em-11{ top: 760px; left:625px; }
     /* password */
     .em-12{ top: 830px; left:625px; }
     /* newPassword */
     .em-13{ top: 925px; left:625px; }
-
+    /* newPurse */
+    .em-14{ top: 575px; left:625px; }
 
 
 </style>

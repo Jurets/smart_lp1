@@ -110,6 +110,7 @@ class OfficeController extends EController
                     $participant->dob = '';
                 }
             }
+
             if($participant->password == md5($oldPassword) && $newPassword != ''){
                 $participant->password = md5($newPassword);
             }
@@ -125,6 +126,12 @@ class OfficeController extends EController
                 }else{
                     $participant->photo = $oldPhoto;
                 }
+                if($participant->purse != $participant->newPurse)
+                {
+                    $participant->purse = $participant->newPurse;
+                    $participant->newPurse = '';
+                }
+
                 $participant->country_access = isset($_POST['country_access']) ? 1 : 0;
                 $participant->city_access = isset($_POST['city_access']) ? 1 : 0;
                 $participant->skype_access = isset($_POST['skype_access']) ? 1 : 0;
@@ -133,7 +140,7 @@ class OfficeController extends EController
 
                 if ($oldEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
-                    EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'settings', array('participant' => $participant));
+                    EmailHelper::send(array($participant->email), 'Подтверждение почты', 'settings', array('participant' => $participant));
                 }
             }
         }
