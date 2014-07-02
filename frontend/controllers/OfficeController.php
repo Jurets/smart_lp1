@@ -83,8 +83,8 @@ class OfficeController extends EController
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
         $gmtZone = Gmt::getTimezonesList();
 
-
-        $path = 'D:/xampp/htdocs/smart_lp1.git/backend/www/uploads/';
+        // путь для сохранения файла
+        $path = Yii::app()->params['upload.path'];
         if (isset($_POST['Participant'])) {
             $day = Yii::app()->getRequest()->getPost('date_ofb');
             $month = Yii::app()->getRequest()->getPost('month_ofb');
