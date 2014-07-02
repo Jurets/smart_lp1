@@ -66,5 +66,49 @@ return array(
     //-----office-----
     'PERSONAL TEAM STRUCTURE' => 'СТРУКТУРА ЛИЧНОЙ КОМАНДЫ',
     'GLOBAL STRUCTURE OF BUSINESS CLUB' => 'ГЛОБАЛЬНАЯ СТРУКТУРА БИЗНЕСКЛУБА',
+    
+    //-----help-----
+    'Finance'=>'Финансы',
+    'Offers'=>'Предложения',
+    'Site work'=>'Работа сайта',
+    
+    //-----invitation-----
+    'Add banners to admin panel.'=>'Добавьте баннеры в админ панели.',
+    'INVITATION'=>'ПРИГЛАШЕНИЕ',
+    'DOWNLOAD'=>'СКАЧАТЬ',
+    'INTERNET ADVERTISING'=>'ИНТЕРНЕТ РЕКЛАМА',
+    'Width: '=>'Ширина: ',
+    'Height: '=>'Высота: ',
+    
+    //-----settings-----
+    'ACCOUNT SETTINGS'=>'НАСТРОЙКА АККАУНТА',
+    'USERNAME'=>'ИМЯ ПОЛЬЗОВАТЕЛЯ',
+    'NAME'=>'ИМЯ',
+    'SURNAME'=>'ФАМИЛИЯ',
+    'DATE OF BIRTH'=>'ДАТА РОЖДЕНИЯ',
+    'CITY'=>'ГОРОД',
+    'COUNTRY'=>'СТРАНА',
+    'allow to show to all users'=>'разрешить показывать всем пользователям',
+    'VIBER / MOBILE'=>'VIBER / МОБИЛЬНЫЙ',
+    'CURRENT PASSWORD'=>'ТЕКУЩИЙ ПАРОЛЬ',
+    'NEW PASSWORD'=>'НОВЫЙ ПАРОЛЬ',
+    'NEW PURSE'=>'НОВЫЙ КОШЕЛЕК',
+    'MY TIME'=>'МОЕ ВРЕМЯ',
+    'LANGUAGE'=>'ЯЗЫК',
+    'RUSSIAN'=>'РУССКИЙ',
+    'RUSSIAN2'=>'РУССКИЙ2',
+    'YOUR PURSE'=>'ВАШ КОШЕЛЕК',
+    'PAYMENT DETAILS'=>'ПЛАТЕЖНЫЕ ДАННЫЕ',
+    'AVATAR'=>'АВАТАР',
+    'SELECT IMAGE'=>'ВЫБРАТЬ ИЗОБРАЖЕНИЕ',
+    'show country to everyone user'=>'показывать страну всем пользователям',
+    'show city to everyone user'=>'показывать город всем пользователям',
+    'show skype to everyone user'=>'показывать skype всем пользователям',
+    'show email to everyone user'=>'показывать email всем пользователям',
+    'All fields except your profile skype and social networks are required'=>'Все поля твоего профайла кроме skype и соцсети обязательны для заполнения',
+    'The selected name of your account will be reserved for you until it is activated'=>'Выбранное имя твоего аккаунта, будет закреплено за тобой, пока он активирован',
+    'But even up to 30 days after deactivation, yours choosen name will be fixed'=>'Но даже до 30 дней после деактивации, за тобой будет закреплено выбранное имя',
+    'SAVE' => 'СОХРАНИТЬ'
+    
 );
 ?>
