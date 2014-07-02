@@ -24,10 +24,10 @@
         <ul id="nav">
             <li> <a href="#" class="flag">  </a> </li>
             <li> <a href="#" class="in">  </a> </li>
-            <li> <a href="#"> ВОЗМОЖНОСТИ </a> </li>
-            <li> <a href="#"> ПРАВИЛА </a> </li>
-            <li> <a href="#"> ВОПРОСЫ И ОТВЕТЫ  </a> </li>
-            <li> <a href="#" class="moveRight"> ВОЙТИ </a> </li>
+            <li> <a href="#"> <?php echo Yii::t('common', 'OPPORTUNITIES'); ?> </a> </li>
+            <li> <a href="#"> <?php echo Yii::t('common', 'RULES'); ?> </a> </li>
+            <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+            <li> <a href="#" class="moveRight"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
         </ul>
     </div>
 
