@@ -233,13 +233,20 @@ class OfficeController extends EController
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
-//=======
+
     /* Test */
     public function actionTest(){
         $test = Yii::app()->perfectmoney; // настоящий компонент
-        var_dump($test->show());die;
+        $test->onSuccess = function($event){
+            var_dump('событие на успешность наступило', $event);
+        };
+        $test->onFailure = function($event){
+            var_dump('событие на обвал работы системы наступило', $event);
+        };
+        $test->trigger = true;
+        $test->show();
     }
-//>>>>>>> c1e2469ba368df93d42c42eab573a19c1f009816
+   
 }
 
 
