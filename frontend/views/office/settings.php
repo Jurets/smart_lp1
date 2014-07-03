@@ -92,11 +92,11 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
 
         <p class="sub2-3">ТЕКУЩИЙ ПАРОЛЬ*:</p>
-        <?php echo CHtml::textField('password','', array('class' => 'textbox2-3','type'=>'password')); //ТЕКУЩИЙ ПАРОЛЬ ?>
-        <?php echo $form->error($participant, 'password', array('class' => 'error-message em-12')); //ТЕКУЩИЙ ПАРОЛЬ ?>
+        <?php echo CHtml::passwordField('currentPassword','', array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
+        <?php echo $form->error($participant, 'currentPassword', array('class' => 'error-message em-12')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <p class="sub2-4">НОВЫЙ ПАРОЛЬ*:</p>
-        <?php echo CHtml::textField('newPassword','', array('class' => 'textbox2-4','type'=>'password')); //НОВЫЙ ПАРОЛЬ ?>
-        <?php echo $form->error($participant, 'password', array('class' => 'error-message em-13')); //НОВЫЙ ПАРОЛЬ ?>
+        <?php echo CHtml::textField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
+        <?php echo $form->error($participant, 'newPassword', array('class' => 'error-message em-13')); //НОВЫЙ ПАРОЛЬ ?>
 
 
         <p class="sub2-5">НОВЫЙ КОШЕЛЕК:</p>
@@ -144,7 +144,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <p class="shag-1-1-option4text"> АВАТАР:</p>
         <?php if($participant->photo != '') { ?>
             <div id="shag-1-1-photo-db">
-        <?php echo CHtml::image(UrlHelper::getImageUrl($participant->photo),'',array('style' => 'width:250px; height: 190px')); ?>
+        <?php echo CHtml::image(UrlHelper::getImageUrl($participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
             </div>
         <?php } else{ ?>
             <div id="shag-1-1-avatar"></div>
@@ -272,9 +272,9 @@ $form = $this->beginWidget('CActiveForm', array(
     /* email */
     .em-11{ top: 760px; left:625px; }
     /* password */
-    .em-12{ top: 830px; left:625px; }
+    .em-12{ top: 855px; left:625px; }
     /* newPassword */
-    .em-13{ top: 925px; left:625px; }
+    .em-13{ top: 950px; left:625px; }
     /* newPurse */
     .em-14{ top: 575px; left:625px; }
 

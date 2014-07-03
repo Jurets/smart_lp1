@@ -50,6 +50,10 @@ class Participant extends User
     public $newTariff = null;
     //поле новый кошелек (используется на форме настройки при изменении старого кошелька)
     public $newPurse;
+    //поле для сравнения текущего пароля
+    public $currentPassword;
+    //поле для сравнения текущего пароля
+    public $newPassword;
     //переданный постом код активации (используетсяна формах регистрации для контроля)
     public $postedActivKey = null;
 
@@ -90,6 +94,8 @@ class Participant extends User
             array('username,newPurse,password,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype ', 'safe' ,'on'=>array('settings')),
             array('email','email', 'on'=>array('settings')),
             array('username,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype', 'required' ,'on'=>array('settings')),
+            array('currentPassword', 'passwordRule', 'allowEmpty'=>true, 'on'=>array('settings')),
+            array('newPassword', 'newPasswordRule', 'allowEmpty'=>true, 'on'=>array('settings')),
             array('photo', 'file','safe'=>true , 'types'=>'jpg, gif, png' ,
                   'allowEmpty'=>true,'maxSize'=>1920 * 1080 * 3,'tooLarge'=>'Файл весит больше 3 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
         ));
@@ -156,6 +162,19 @@ class Participant extends User
                 'params' => array(':self_id' => $this->id)
             ),
         ));
+    }
+
+    public function passwordRule()
+    {
+        if(!empty($this->currentPassword) && $this->password != md5($this->currentPassword)){
+            $this->addError('currentPassword','Неправильно введен текущий пароль.');
+        }
+    }
+    public function newPasswordRule()
+    {
+        if(!empty($this->currentPassword) && empty($this->newPassword)){
+            $this->addError('newPassword','Введите новый пароль.');
+        }
     }
 
     /**

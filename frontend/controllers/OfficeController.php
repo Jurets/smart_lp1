@@ -76,12 +76,10 @@ class OfficeController extends EController
         $participant->setScenario('settings');
         if($participant->dob != ''){
             $date = explode('-', $participant->dob);
-        }else{
-            $date = explode('-', date('Y-m-d'));
         }
-        $day = $date[2];
-        $month = $date[1];
-        $year = $date[0];
+        $day = $participant->dob != '' ?   $date[2] : '';
+        $month = $participant->dob != '' ?   $date[1] : '';
+        $year = $participant->dob != '' ?   $date[0] : '';
 
         $places = Countries::getCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
@@ -96,8 +94,10 @@ class OfficeController extends EController
             $timeZone = Yii::app()->getRequest()->getPost('timeZoneSelect');
             $city_id = Yii::app()->getRequest()->getPost('citySelect');
             $country_id = Yii::app()->getRequest()->getPost('countrySelect');
-            $oldPassword = Yii::app()->getRequest()->getPost('password');
+            $currentPassword = Yii::app()->getRequest()->getPost('currentPassword');
             $newPassword  = Yii::app()->getRequest()->getPost('newPassword');
+            $participant->currentPassword = $currentPassword;
+            $participant->newPassword = $newPassword;
             $participant->gmt_id = $timeZone;
             $participant->country_id = $country_id;
             $participant->city_id = $city_id;
@@ -109,15 +109,17 @@ class OfficeController extends EController
                 } else {
                     $participant->dob = '';
                 }
-            }
-
-            if($participant->password == md5($oldPassword) && $newPassword != ''){
-                $participant->password = md5($newPassword);
+            }else{
+                $participant->dob = '';
             }
             $oldPhoto = $participant->photo;
-            $oldEmail = $participant->email;
+            $currentEmail = $participant->email;
             $participant->attributes = $_POST['Participant'];
+            $newEmail = $participant->email;
             if ($participant->validate()) {
+                if($participant->password == md5($participant->currentPassword) && $newPassword != ''){
+                    $participant->password = md5($newPassword);
+                }
                 if ($_FILES['Participant']['name']['photo'] != '') {
                     $participant->photo = CUploadedFile::getInstance($participant,'photo');
                     $nameImage = $participant->photo->name;
@@ -136,12 +138,18 @@ class OfficeController extends EController
                 $participant->city_access = isset($_POST['city_access']) ? 1 : 0;
                 $participant->skype_access = isset($_POST['skype_access']) ? 1 : 0;
                 $participant->email_access = isset($_POST['email_access']) ? 1 : 0;
+
+                $participant->email = $currentEmail;
+                $participant->new_email = $newEmail;
+                $participant->activkey = UserModule::encrypting(microtime().$participant->password);
                 $participant->save();
 
-                if ($oldEmail != $_POST['Participant']['email']) {
+                if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
-                    EmailHelper::send(array($participant->email), 'Подтверждение почты', 'settings', array('participant' => $participant));
+                    EmailHelper::send($participant->new_email, 'Подтверждение почты', 'updateEmail',array('participant'=>$participant));
                 }
+            }else{
+                $participant->photo = $oldPhoto;
             }
         }
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
@@ -232,6 +240,21 @@ class OfficeController extends EController
     public function actionPlace()
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     *  Check activation code and save new email
+     */
+    public function actionEmail(){
+        $getActivityKey = Yii::app()->getRequest()->getQuery('activkey');
+        $participatnObj = Participant::model()->findByPk(2);
+        if($participatnObj->activkey == $getActivityKey ){
+            $participatnObj->activkey = '';
+            $participatnObj->email = $participatnObj->new_email;
+            $participatnObj->new_email = '';
+            $participatnObj->save();
+        }
+        $this->redirect('settings');
     }
 //=======
     /* Test */
