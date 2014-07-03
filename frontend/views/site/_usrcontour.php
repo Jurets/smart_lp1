@@ -2,7 +2,7 @@
 $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array( 
         'cssID' => 1,
-        'head' => 'ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ',
-        'title'=> 'ТЕКУЩИЕ РЕГИСТРАЦИИ',
+        'head' => Yii::t('common', 'REGISTERED MEMBERS'),
+        'title'=> Yii::t('common', 'CURRENT REGISTRATION'),
     )));
 

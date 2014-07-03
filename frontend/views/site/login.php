@@ -43,11 +43,11 @@
     ),
 )); ?>
 
-    <p class="sub1">ИМЯ ПОЛЬЗОВАТЕЛЯ:</p>
+<p class="sub1"><?php echo Yii::t('common', 'USERNAME')?>:</p>
     <?php echo CHtml::activeTextField($userLogin, 'username', array('class'=>'textbox1')); ?>
     <?php echo $form->error($userLogin, 'username', array('style'=>'top: 15px;')); ?>
 
-    <p class="sub2">ПАРОЛЬ:</p>
+    <p class="sub2"><?php echo Yii::t('common', 'PASSWORD')?>:</p>
     <?php echo CHtml::activePasswordField($userLogin, 'password', array('class'=>'textbox2')); ?>
     <?php echo $form->error($userLogin, 'password', array('style'=>'top: 82px;')); ?>
 
@@ -56,13 +56,13 @@
         'buttonOptions'=>array('id'=>'refresh'),
     ))?>
     
-    <p class="sub3">ВВЕДИТЕ КОД С КАРТИНКИ:</p> 
+    <p class="sub3"><?php echo Yii::t('common', 'ENTER THE CODE')?>:</p> 
     <?php echo CHtml::activeTextField($userLogin, 'verifyCode', array('class'=>'textbox3')); ?>
     <?php echo $form->error($userLogin, 'verifyCode', array('style'=>'top: 202px;')); ?>
 
-    <?php echo CHtml::submitButton('ВОЙТИ', array('name'=>'btn', 'class'=>'btn-style')); ?>
+    <?php echo CHtml::submitButton(Yii::t('common', 'LOGIN'), array('name'=>'btn', 'class'=>'btn-style')); ?>
 
-    <a href="#" id="sub4">ЗАБЫЛИ ПАРОЛЬ?</a>
+    <a href="#" id="sub4"><?php echo Yii::t('common', 'FORGOT YOUR PASSWORD?')?></a>
 <?php $this->endWidget(); ?>
 
 <script type="text/javascript">

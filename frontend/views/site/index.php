@@ -9,7 +9,7 @@
     </div>
 
     <iframe class="video"  src="<?php echo $model->videolink; ?>" frameborder="0" allowfullscreen></iframe>
-    <a id="greenButton" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>">            ПРИСОЕДИНИТЬСЯ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> </span> </a>
+    <a id="greenButton" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"><?php echo Yii::t('common', 'JOIN') ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> </span> </a>
 
 </div>
 
@@ -24,7 +24,7 @@
                     <img src="<?php echo UrlHelper::getImageUrl($slider['photo']) ?>" alt="" style="width:266px; height:326px; padding-top:15px; padding-left:25px;">
                 </div>
                 <ul id="slideText">
-                    <li class="slideText1">ЛИДЕРЫ</li>
+                    <li class="slideText1"><?php echo Yii::t('common', 'LEADERS') ?></li>
                     <li class="slideText2"><?php echo $model->title ?></li>
                     <li class="slideText3"><?php echo $slider['leader']; ?></li>
                     <li class="slideText4"><?php echo $slider['descriptio']; ?></li>
@@ -45,14 +45,14 @@
 <?php $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array( 
         'cssID' => 1,
-        'head' => 'ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ',
-        'title'=> 'ТЕКУЩИЕ РЕГИСТРАЦИИ',
+        'head' => Yii::t('common', 'REGISTERED MEMBERS'),
+        'title'=> Yii::t('common', 'CURRENT REGISTRATION'),
     ))); ?>
 </div>
     <div id="infoBlok2">
-        <p class="reg2">ВЫПЛАЧЕНО КОМИССИОННЫХ</p>
+        <p class="reg2"><?php echo Yii::t('common', 'FEE PAID') ?></p>
         <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>
-        <p class="regB">ТЕКУЩИЕ ВЫПЛАТЫ</p>    
+        <p class="regB"><?php echo Yii::t('common', 'CURRENT PAYMENTS') ?></p>    
         <ul class="li">
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
@@ -65,9 +65,9 @@
     </div>
 
     <div id="infoBlok3">
-        <p class="reg3">ОТДАНО НА БЛАГОТВОРИТЕЛЬНОСТЬ</p>
+        <p class="reg3"><?php echo Yii::t('common', 'GIVEN ON CHARITY') ?></p>
         <div id="numberDecor3"><p>$00 652 427</p> <div id="test3"></div></div>
-        <p class="regB">ТЕКУЩИЕ ОТЧИСЛЕНИЯ</p>    
+        <p class="regB"><?php echo Yii::t('common', 'CURRENT fEES') ?></p>    
         <ul class="li">
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
