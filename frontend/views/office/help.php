@@ -11,7 +11,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
 </div>
 
 <div id="accordion">
-    <h3>Финансы</h3>
+    <h3><?php echo Yii::t('common', 'Finance') ?></h3>
     <div class="accordionContent">
         <?php  foreach($arrCategories['finance'] as $finance)
         {
@@ -21,7 +21,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
         }
         ?>
     </div>
-    <h3>Предложения</h3>
+    <h3><?php echo Yii::t('common', 'Offers') ?></h3>
     <div class="accordionContent">
         <?php  foreach($arrCategories['offer'] as $finance)
         {
@@ -31,7 +31,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
         }
         ?>
     </div>
-    <h3>Работа сайта</h3>
+    <h3><?php echo Yii::t('common', 'Site work') ?></h3>
     <div class="accordionContent">
         <?php  foreach($arrCategories['site'] as $finance)
         {

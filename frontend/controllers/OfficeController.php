@@ -76,11 +76,10 @@ class OfficeController extends EController
         $participant->setScenario('settings');
         if($participant->dob != ''){
             $date = explode('-', $participant->dob);
-        }
-        $day = $participant->dob != '' ?   $date[2] : '';
+		}        
+		$day = $participant->dob != '' ?   $date[2] : '';
         $month = $participant->dob != '' ?   $date[1] : '';
         $year = $participant->dob != '' ?   $date[0] : '';
-
         $places = Countries::getCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
         $gmtZone = Gmt::getTimezonesList();
@@ -112,7 +111,9 @@ class OfficeController extends EController
             }else{
                 $participant->dob = '';
             }
+            }
             $oldPhoto = $participant->photo;
+
             $currentEmail = $participant->email;
             $participant->attributes = $_POST['Participant'];
             $newEmail = $participant->email;
@@ -144,8 +145,10 @@ class OfficeController extends EController
                 $participant->activkey = UserModule::encrypting(microtime().$participant->password);
                 $participant->save();
 
+
                 if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
+
                     EmailHelper::send($participant->new_email, 'Подтверждение почты', 'updateEmail',array('participant'=>$participant));
                 }
             }else{
@@ -242,27 +245,21 @@ class OfficeController extends EController
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
 
-    /**
-     *  Check activation code and save new email
-     */
-    public function actionEmail(){
-        $getActivityKey = Yii::app()->getRequest()->getQuery('activkey');
-        $participatnObj = Participant::model()->findByPk(2);
-        if($participatnObj->activkey == $getActivityKey ){
-            $participatnObj->activkey = '';
-            $participatnObj->email = $participatnObj->new_email;
-            $participatnObj->new_email = '';
-            $participatnObj->save();
-        }
-        $this->redirect('settings');
-    }
-//=======
     /* Test */
     public function actionTest(){
         $test = Yii::app()->perfectmoney; // настоящий компонент
-        var_dump($test->show());die;
+
+        $test->onSuccess = function($event){
+            var_dump('событие на успешность наступило', $event);
+        };
+        $test->onFailure = function($event){
+            var_dump('событие на обвал работы системы наступило', $event);
+        };
+        $test->trigger = true;
+        $test->show();
     }
-//>>>>>>> c1e2469ba368df93d42c42eab573a19c1f009816
+
+   
 }
 
 

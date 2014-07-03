@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ));
 ?>
 
-<p class="sub1">ИМЯ ПОЛЬЗОВАТЕЛЯ:</p>
+<p class="sub1"><?php echo Yii::t('common', 'USERNAME') ?>:</p>
 <?php echo $form->textField($participant, 'username', array('class'=>'textbox1')); //логин ?>
 <?php echo $form->error($participant, 'username', array('class'=>'error-message em-1')); //логин ?>
 
@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo $form->textField($participant, 'email', array('class'=>'textbox2')); //email ?>
 <?php echo $form->error($participant, 'email', array('class'=>'error-message em-2')); //логин ?>
 
-<p class="shag-1-1-option2text">СТРАНА: </p>
+<p class="shag-1-1-option2text"><?php echo Yii::t('common', 'COUNTRY') ?>: </p>
 <?php echo $form->dropDownList($participant, 'country_id', Countries::getCountriesList(), array(
     'id'=>'Participant_country_id',
     'class'=>'shag-1-1-option2',
@@ -30,7 +30,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo $form->error($participant, 'country_id', array('class'=>'error-message em-3')); //логин ?>
 
 
-<p class="shag-1-1-option1text">  ГОРОД:</p>
+<p class="shag-1-1-option1text">  <?php echo Yii::t('common', 'CITY') ?>:</p>
 <?php echo $form->dropDownList($participant, 'city_id', Cities::getCitiesListByCountry($participant->country_id), array(
     'id'=>'Participant_city_id',
     'class'=>'shag-1-1-option1',
@@ -39,19 +39,19 @@ $form = $this->beginWidget('CActiveForm', array(
 )); ?>
 <?php echo $form->error($participant, 'city_id', array('class'=>'error-message em-4')); //логин ?>
 
-<p class="shag-1-1-option3text">  ЯЗЫК:</p>
+<p class="shag-1-1-option3text">  <?php echo Yii::t('common', 'LANGUAGE') ?>:</p>
 <select class="shag-1-1-option3">
-    <option value="volvo">РУССКИЙ</option>
-    <option value="saab">РУССКИЙ2</option>
+    <option value="volvo"><?php echo Yii::t('common', 'RUSSIAN') ?></option>
+    <option value="saab"><?php echo Yii::t('common', 'RUSSIAN2') ?></option>
 </select>                          
 
-<p class="shag-1-1-option4text">  АВАТАР:</p>
+<p class="shag-1-1-option4text">  <?php echo Yii::t('common', 'AVATAR') ?>:</p>
 
 <div id="shag-1-1-avatar"></div>
-<a href="#"><span id="shag-1-1-vibrat">ВЫБРАТЬ ИЗОБРАЖЕНИЕ</span></a> 
+<a href="#"><span id="shag-1-1-vibrat"><?php echo Yii::t('common', 'SELECT IMAGE') ?></span></a> 
 
 <p class="sub3">
-    Я согласен с правилами и принимаю 
+    <?php echo Yii::t('common', 'I agree with the rules and accept') ?>
     <?php 
    /* echo TbHtml::linkButton('пользовательское соглашение', array(
 //'style' => TbHtml::BUTTON_COLOR_PRIMARY,
@@ -60,7 +60,7 @@ $form = $this->beginWidget('CActiveForm', array(
 //'data-target' => '#sogloshenie',
     'onclick'=>'js:$("sogloshenie").show',
 ));*/ ?>
-    <a id="open-btn" href="#">пользовательское соглашение</a>
+    <a id="open-btn" href="#"><?php echo Yii::t('common', 'Terms and conditions') ?></a>
 </p>
 <?php echo $form->checkBox($participant, 'rulesAgree', array('class'=>'css-checkbox', 'readonly'=>true)); //согласие с ПользСоглашением ?>
 <label for="Participant_rulesAgree" class="css-label"></label>
@@ -88,7 +88,7 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
    
 <div id='sogloshenie' style="display: none;">
     <p id='shag-1-2-textArea' > 
-        <span>Ползовательское соглашение</span><br><br>
+        <span><?php echo Yii::t('common', 'Terms and conditions') ?></span><br><br>
 
         Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для  текстов на латинице с начала XVI века. В то время некий
         безымянный печатник со<br>здал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изм<br>енений пять

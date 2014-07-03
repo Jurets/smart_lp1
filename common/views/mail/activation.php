@@ -1,19 +1,22 @@
 <?php
-    $urlRegister = Yii::app()->createAbsoluteUrl('register/activate?activkey=' . $participant->activkey);
-    $urlLogin = Yii::app()->createAbsoluteUrl('/');
+$urlRegister = Yii::app()->createAbsoluteUrl('register/activate?activkey=' . $participant->activkey);
+$urlLogin = Yii::app()->createAbsoluteUrl('/');
 ?>
 <p style="color: #000; font-size: medium;">
-    Здравствуйте!<br/>
-    Ваш аккаунт активирован, в системе создан офис для Вас, также Вы подписаны на почтовую рассылку всех новостей системы
-    Чтобы зайти в офис, перейдите по ссылке <a href="<?php echo $urlLogin; ?>" target="_blank"><?php echo $urlLogin; ?></a>,
-    нажмите <strong>Вход</strong> и введите свои данные для входа:<br>
-    логин - <strong><?php echo $participant->email; ?></strong><br>
-    пароль - <strong><?php echo $participant->password; ?></strong><br>
+    <?php echo Yii::t('common', 'Hello!') ?><br/>
+    <?php echo Yii::t('common', 'Your account is activated, the system set up an office for you, as you are subscribed to the mailing list of all the news system') ?>
+    <?php echo Yii::t('common', 'To go to the office, follow the link') ?> <a href="<?php echo $urlLogin; ?>" target="_blank"><?php echo $urlLogin; ?></a>,
+    <?php echo Yii::t('common', 'enter') ?> 
+    <strong><?php echo Yii::t('common', 'Login') ?></strong>
+    <?php echo Yii::t('common', 'and enter your login information') ?><br>
+    <?php echo Yii::t('common', 'login') ?> - <strong><?php echo $participant->email; ?></strong><br>
+    <?php echo Yii::t('common', 'password') ?> - <strong><?php echo $participant->password; ?></strong><br>
     <br>
-    Для продолжения регистрации перейдите по ссылке <a href="<?php echo $urlRegister; ?>" target="_blank"><?php echo $urlRegister; ?></a><br/>
-    Не даляйте это письмо, пока окончательно не зарегистрируетесь.
-    Эта ссылка уникальна и будет действовать, пока вы не пройдете все этапы регистрации
+    <?php echo Yii::t('common', 'In order to proceedfollow the link') ?> 
+    <a href="<?php echo $urlRegister; ?>" target="_blank"><?php echo $urlRegister; ?></a><br/>
+    <?php echo Yii::t('common', 'Do not remove this message until you finally registered.') ?>
+    <?php echo Yii::t('common', 'This link is unique and will operate until you pass all registration steps') ?>
 </p>
-<p>С уважением, <br/>
-администрация сайта <br/>
-<a target="_blank" href=""><?=CHtml::encode(Yii::app()->name)?></a></p>
+<p><?php echo Yii::t('common', 'Best Regards') ?>,<br/>
+    <?php echo Yii::t('common', 'administration site') ?> <br/>
+    <a target="_blank" href=""><?= CHtml::encode(Yii::app()->name) ?></a></p>

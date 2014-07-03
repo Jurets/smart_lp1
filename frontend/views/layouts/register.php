@@ -32,7 +32,7 @@ $this->beginContent('//layouts/common');
 
     <div id="content">
 
-        <h2 id="shag-1-1-h3" ><?php echo Yii::t('common', 'REGISTER NEW USER') ?></h2>
+        <h2 id="shag-1-1-h3" ><?php echo Yii::t('common', 'NEW MEMBER REGISTRATION') ?></h2>
         <div id="topShagLine"></div>
         <div class="btn-style1 <?= ($this->step == 1) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 1'); ?></div>
         <div class="btn-style2 <?= ($this->step == 2) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 2'); ?></div>

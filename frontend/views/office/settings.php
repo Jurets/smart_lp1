@@ -16,38 +16,46 @@ $form = $this->beginWidget('CActiveForm', array(
 <div id="office-6-content">
     <div><a id="logo" href="index.html"> </a></div>
     <div id="FORMA">
-        <p class="zagolovok">НАСТРОЙКА АККАУНТА</p>
+        <p class="zagolovok"><?php echo Yii::t('common', 'ACCOUNT SETTINGS') ?></p>
 
-        <p class="zagolovok2">Все поля твоего профайла кроме skype и соцсети обязательны для заполнения.<br>Выбранное
-            имя твоего аккаунта, будет закреплено за тобой, пока он активирован.<br> Но даже до 30 дней после
-            деактивации, за тобой будет закреплено выбранное имя.</p>
+        <p class="zagolovok2">
+            <?php echo Yii::t('common', 'All fields except your profile skype and social networks are required') ?>.<br>
+            <?php echo Yii::t('common', 'The selected name of your account will be reserved for you until it is activated') ?>.<br>
+            <?php echo Yii::t('common', 'But even up to 30 days after deactivation, yours choosen name will be fixed') ?>.<br>
+           </p>
         <a href="#" class="zagolovok3"></a>
 
 
-        <p class="sub1">ИМЯ ПОЛЬЗОВАТЕЛЯ:</p>
+
+        <p class="sub1"><?php echo Yii::t('common', 'USERNAME') ?>:</p>
         <?php echo $form->textField($participant, 'username', array('class' => 'textbox1')); //ИМЯ ПОЛЬЗОВАТЕЛЯ ?>
         <?php echo $form->error($participant, 'username', array('class' => 'error-message em-1')); //ИМЯ ПОЛЬЗОВАТЕЛЯ ?>
 
-        <p class="sub2">ИМЯ*:</p>
+
+        <p class="sub2"><?php echo Yii::t('common', 'NAME') ?>*:</p>
         <?php echo $form->textField($participant, 'first_name', array('class' => 'textbox2')); //ИМЯ ?>
         <?php echo $form->error($participant, 'first_name', array('class' => 'error-message em-2')); //ИМЯ ?>
 
-        <p class="sub2-1">ФАМИЛИЯ*:</p>
+
+        <p class="sub2-1"><?php echo Yii::t('common', 'SURNAME') ?>*:</p>
         <?php echo $form->textField($participant, 'last_name', array('class' => 'textbox2-1')); //ФАМИЛИЯ ?>
         <?php echo $form->error($participant, 'last_name', array('class' => 'error-message em-3')); //ФАМИЛИЯ ?>
 
 
 
-        <p class="sub3-1">ДАТА РОЖДЕНИЯ*:</p>
+
+        <p class="sub3-1"><?php echo Yii::t('common', 'DATE OF BIRTH') ?>*:</p>
         <?php echo CHtml::textField('date_ofb',$day, array('class' => 'textbox3-1')); //День рождения ?>
         <?php echo CHtml::textField('month_ofb',$month, array('class' => 'textbox3-2')); //Месяц рождения ?>
         <?php echo CHtml::textField('year_ofb',$year, array('class' => 'textbox3-3')); //Год рождения ?>
         <?php echo $form->error($participant, 'dob' , array('class' => 'error-message em-4')); //День рождения ?>
 
-        <p class="shag-1-1-option1text"> СТРАНА*:</p>
+
+        <p class="shag-1-1-option1text"> <?php echo Yii::t('common', 'COUNTRY') ?>*:</p>
         <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" <?php if($participant->country_access == 1){echo 'checked="checked"';} ?>/>
         <label for="checkboxG51" class="css-label1"></label>
-        <a href="#" name="label-1" class="vopros1" title="разрешить показывать всем пользователям"></a>
+
+        <a href="#" name="label-1" class="vopros1" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
 
         <select name="countrySelect" class="shag-1-1-option1">
             <?php foreach($places as $key=>$place) {?>
@@ -63,8 +71,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" <?php if($participant->city_access == 1){echo 'checked="checked"';} ?>/>
         <label for="checkboxG52" class="css-label2"></label>
-        <p class="shag-1-1-option2text">ГОРОД*: </p>
-        <a href="#" name="label-2" class="vopros2" title="разрешить показывать всем пользователям"></a>
+
+
+        <p class="shag-1-1-option2text"><?php echo Yii::t('common', 'CITY') ?>*: </p>
+        <a href="#" name="label-2" class="vopros2" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
         <select name="citySelect" class="shag-1-1-option2">
             <?php foreach($citesByCountryId as $key=>$city) {?>
                 <?php if($participant->city_id == $key) {?>
@@ -82,24 +92,33 @@ $form = $this->beginWidget('CActiveForm', array(
             <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3"  <?php if($participant->skype_access == 1){echo 'checked="checked"';} ?> />
             <label for="checkboxG53" class="css-label3"></label>
 
-        <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>
+       <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>
+        <a href="#" name="label-3" class="vopros1-1" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
         <?php echo $form->textField($participant, 'skype', array('class' => 'shag-1-1-option1-1')); //skype ?>
         <?php echo $form->error($participant, 'skype', array('class' => 'error-message em-7')); //skype ?>
 
 
-        <p class="sub1-1">VIBER / МОБИЛЬНЫЙ*:</p>
+
+        <p class="sub1-1"><?php echo Yii::t('common', 'VIBER / MOBILE') ?>*:</p>
         <?php echo $form->textField($participant, 'phone', array('class' => 'textbox1-1')); //VIBER / МОБИЛЬНЫЙ ?>
         <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
 
-        <p class="sub2-3">ТЕКУЩИЙ ПАРОЛЬ*:</p>
+
+        <p class="sub2-3"><?php echo Yii::t('common', 'CURRENT PASSWORD') ?>*:</p>
+
+
         <?php echo CHtml::passwordField('currentPassword','', array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'currentPassword', array('class' => 'error-message em-12')); //ТЕКУЩИЙ ПАРОЛЬ ?>
-        <p class="sub2-4">НОВЫЙ ПАРОЛЬ*:</p>
+
+        <p class="sub2-4"><?php echo Yii::t('common', 'NEW PASSWORD') ?>*:</p>
+
+
         <?php echo CHtml::textField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'newPassword', array('class' => 'error-message em-13')); //НОВЫЙ ПАРОЛЬ ?>
 
 
-        <p class="sub2-5">НОВЫЙ КОШЕЛЕК:</p>
+
+        <p class="sub2-5"><?php echo Yii::t('common', 'NEW PURSE') ?>:</p>
         <?php echo $form->textField($participant, 'newPurse', array('class' => 'textbox2-5')); //НОВЫЙ КОШЕЛЕК ?>
         <?php echo $form->error($participant, 'newPurse', array('class' => 'error-message em-14')); //НОВЫЙ КОШЕЛЕК ?>
 
@@ -109,12 +128,14 @@ $form = $this->beginWidget('CActiveForm', array(
         <p class="shag-1-1-option2-1text">EMAIL*: </p>
         <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" <?php if($participant->email_access == 1){echo 'checked="checked"';} ?>/>
         <label for="checkboxG54" class="css-label4"></label>
-        <a href="#" name="label-4" class="vopros2-1" title="разрешить показывать всем пользователям"></a>
+
+        <a href="#" name="label-4" class="vopros2-1" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
         <?php echo $form->error($participant, 'email',array('class' => 'error-message em-11')); //Email ?>
 
 
-        <p class="shag-1-1-option3text"> МОЕ ВРЕМЯ:</p>
+       <p class="shag-1-1-option3text"> МОЕ ВРЕМЯ:</p>
+        <p class="shag-1-1-option3text"> <?php echo Yii::t('common', 'MY TIME') ?>:</p>
             <select name="timeZoneSelect" class="shag-1-1-option3">
             <?php foreach($gmtZone as $key=>$currentGmt) {?>
                 <?php if($participant->gmt_id == $key) {?>
@@ -126,48 +147,60 @@ $form = $this->beginWidget('CActiveForm', array(
         </select>
 
 
-        <p class="shag-1-1-option3-1text"> ЯЗЫК:</p>
+
+        <p class="shag-1-1-option3-1text">  <?php echo Yii::t('common', 'LANGUAGE') ?>:</p>
         <select class="shag-1-1-option3-1">
-            <option value="volvo">РУССКИЙ</option>
-            <option value="saab">РУССКИЙ2</option>
+
+
+            <option value="volvo"><?php echo Yii::t('common', 'RUSSIAN') ?></option>
+            <option value="saab"><?php echo Yii::t('common', 'RUSSIAN2') ?></option>
 
         </select>
 
-        <p class="shag-1-1-option5text"> ВАШ КОШЕЛЕК</p>
+        <p class="shag-1-1-option5text"><?php echo Yii::t('common', 'YOUR PURSE') ?></p>
 
-        <p class="dannie"> ПЛАТЕЖНЫЕ ДАННЫЕ:</p>
+
+        <p class="dannie"> <?php echo Yii::t('common', 'PAYMENT DETAILS') ?>:</p>
         <?php echo $form->textField($participant, 'purse', array('class' => 'textbox5','readonly'=>true)); //Кошелек ?>
         <?php echo $form->error($participant, 'purse' ,array('class'=>'error-message em-10')); //Кошелек ?>
         <a href="#" class="pm2"></a>
 
 
-        <p class="shag-1-1-option4text"> АВАТАР:</p>
+
+        <p class="shag-1-1-option4text"> <?php echo Yii::t('common', 'AVATAR') ?>:</p>
         <?php if($participant->photo != '') { ?>
             <div id="shag-1-1-photo-db">
+
         <?php echo CHtml::image(UrlHelper::getImageUrl($participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
             </div>
         <?php } else{ ?>
             <div id="shag-1-1-avatar"></div>
         <?php } ?>
-        <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image">ВЫБРАТЬ ИЗОБРАЖЕНИЕ</span>
+
+        <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo Yii::t('common', 'SELECT IMAGE') ?></span>
             <?php echo $form->fileField($participant, 'photo',array('class'=>'shag-fileFiled')); ?>
         </div>
         <?php echo $form->error($participant, 'photo',array('class'=>'error-message em-9')); ?>
-        <?php echo CHTML::submitButton('СОХРАНИТЬ', array('class' => 'btn-style-green', 'name' => 'btn')) ?>
+
+        <?php echo CHTML::submitButton(Yii::t('common', 'SAVE'), array('class' => 'btn-style-green', 'name' => 'btn')) ?>
 
 
         <?php $this->endWidget(); ?>
 
-        <div id="popup-1"  class="p-6-popup"><span>показывать страну всем пользователям</span><img class="stick"
+
+        <div id="popup-1"  class="p-6-popup"><span><?php echo Yii::t('common', 'show country to everyone user') ?></span><img class="stick"
                                                                                 src="images/popupstick.png" width="13">
         </div>
-        <div id="popup-2"  class="p-6-popup"><span>показывать город всем пользователям</span><img class="stick"
+
+        <div id="popup-2"  class="p-6-popup"><span><?php echo Yii::t('common', 'show city to everyone user') ?></span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
-        <div id="popup-3"  class="p-6-popup"><span>показывать skype всем пользователям</span><img class="stick"
+
+        <div id="popup-3"  class="p-6-popup"><span><?php echo Yii::t('common', 'show skype to everyone user') ?></span><img class="stick"
                                                                                            src="images/popupstick.png"
                                                                                            width="13"></div>
-        <div id="popup-4"  class="p-6-popup"><span>показывать email всем пользователям</span><img class="stick"
+       <div id="popup-4"  class="p-6-popup"><span>показывать email всем пользователям</span><img class="stick"
+        <div id="popup-4"  class="p-6-popup"><span><?php echo Yii::t('common', 'show email to everyone user') ?></span><img class="stick"
                                                                                         src="images/popupstick.png"
                                                                                         width="13"></div>
 
@@ -272,8 +305,10 @@ $form = $this->beginWidget('CActiveForm', array(
     /* email */
     .em-11{ top: 760px; left:625px; }
     /* password */
+
     .em-12{ top: 855px; left:625px; }
     /* newPassword */
+
     .em-13{ top: 950px; left:625px; }
     /* newPurse */
     .em-14{ top: 575px; left:625px; }
