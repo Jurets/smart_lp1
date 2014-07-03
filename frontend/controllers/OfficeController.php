@@ -154,7 +154,7 @@ class OfficeController extends EController
             }else{
                 $participant->photo = $oldPhoto;
             }
-        }
+       
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
     }
