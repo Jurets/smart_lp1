@@ -141,7 +141,7 @@ class OfficeController extends EController
                 $participant->email = $currentEmail;
                 $participant->new_email = $newEmail;
                 $participant->activkey = UserModule::encrypting(microtime().$participant->password);
-                $participant->save();
+                $participant->save(false);
 
                 if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
