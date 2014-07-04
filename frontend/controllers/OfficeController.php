@@ -76,10 +76,11 @@ class OfficeController extends EController
         $participant->setScenario('settings');
         if($participant->dob != ''){
             $date = explode('-', $participant->dob);
-		}        
-		$day = $participant->dob != '' ?   $date[2] : '';
+        }
+        $day = $participant->dob != '' ?   $date[2] : '';
         $month = $participant->dob != '' ?   $date[1] : '';
         $year = $participant->dob != '' ?   $date[0] : '';
+
         $places = Countries::getCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
         $gmtZone = Gmt::getTimezonesList();
@@ -111,9 +112,7 @@ class OfficeController extends EController
             }else{
                 $participant->dob = '';
             }
-            }
             $oldPhoto = $participant->photo;
-
             $currentEmail = $participant->email;
             $participant->attributes = $_POST['Participant'];
             $newEmail = $participant->email;
@@ -145,10 +144,8 @@ class OfficeController extends EController
                 $participant->activkey = UserModule::encrypting(microtime().$participant->password);
                 $participant->save();
 
-
                 if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
-
                     EmailHelper::send($participant->new_email, 'Подтверждение почты', 'updateEmail',array('participant'=>$participant));
                 }
             }else{
@@ -158,6 +155,7 @@ class OfficeController extends EController
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
     }
+
 
     /**
      * Show invitation
@@ -261,5 +259,6 @@ class OfficeController extends EController
 
    
 }
+
 
 
