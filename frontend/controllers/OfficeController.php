@@ -71,8 +71,7 @@ class OfficeController extends EController
      */
     public function actionSettings()
     {
-        //Yii::app()->user->id
-        $participant = Participant::model()->findByPk(2);
+        $participant = Participant::model()->findByPk(Yii::app()->user->id);
         $participant->setScenario('settings');
         if($participant->dob != ''){
             $date = explode('-', $participant->dob);
@@ -228,8 +227,8 @@ class OfficeController extends EController
             //'isWebinar' => $this->isWebinar(),  //идёт ли вебинар
         ), false, true);
     }
-    
-    
+
+
     /**
      * Functions(actionCountry(),actionCity(),actionTimezone()) for Invitation
      */
@@ -272,6 +271,21 @@ class OfficeController extends EController
        
     }
 
+
+    /**
+     *  Check activation code and save new email
+     */
+    public function actionEmail(){
+        $getActivityKey = Yii::app()->getRequest()->getQuery('activkey');
+        $participatnObj = Participant::model()->findByPk(Yii::app()->user->id);
+        if($participatnObj->activkey == $getActivityKey ){
+            $participatnObj->activkey = '';
+            $participatnObj->email = $participatnObj->new_email;
+            $participatnObj->new_email = '';
+            $participatnObj->save();
+        }
+        $this->redirect('settings');
+    }
    
 }
 
