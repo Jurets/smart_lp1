@@ -30,7 +30,10 @@ return array(
         'application.models.*',
 
         'common.extensions.yii-mail.YiiMailMessage',
-        'common.extensions.PerfectMoney',
+        
+        'common.extensions.PerfectMoney.*',
+        'common.extensions.PerfectMoney.models.*',
+        'common.extemsions.PerfectMoney.views.*',
         
         'common.modules.user.models.*',
         'common.modules.user.components.*',
@@ -84,6 +87,7 @@ return array(
                'balance' => 'https://perfectmoney.is/acct/balance.asp', // интерфейс отображения текущего состояния кошельков (тестировано)
                'acc_name' => 'https://perfectmoney.is/acct/acc_name.asp', // (не тестировано)
            ),
+           'choise'=>'confirm', // по умолчанию будет выбираться ключ для api для передачи денег с кошелька на кошелек
         ),
     ),
     'params' => array(

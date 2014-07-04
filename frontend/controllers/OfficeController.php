@@ -151,7 +151,7 @@ class OfficeController extends EController
             }else{
                 $participant->photo = $oldPhoto;
             }
-        }
+       
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
     }
@@ -248,13 +248,28 @@ class OfficeController extends EController
         $test = Yii::app()->perfectmoney; // настоящий компонент
 
         $test->onSuccess = function($event){
-            var_dump('событие на успешность наступило', $event);
+            $model = new PerfectMoney();
+            // TO DO [логика Success]
+            var_dump('-=onSuccess=-',$event->sender->dataOut());die;
+            
         };
         $test->onFailure = function($event){
-            var_dump('событие на обвал работы системы наступило', $event);
+            // TO DO [логика Failure]
+            var_dump('-=onFailure=-',$event->sender->dataOut());die;
+            
         };
-        $test->trigger = true;
-        $test->show();
+       //$test->choise = 'balance';
+        $test->choise = 'confirm';
+       $test_input = array(
+           'AccountID'=>'6416431',
+           'PassPhrase'=>'uhaha322re423e',
+           'Payer_Account'=>'U6840713',
+           'Payee_Account'=>'U3627324',
+           'Amount'=>'0.01',
+           );
+       $test->dataLoad($test_input);
+       $test->dataProcess();
+       
     }
 
    
