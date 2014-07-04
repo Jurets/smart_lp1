@@ -242,33 +242,22 @@ class OfficeController extends EController
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
 
-    /* Test */
-    public function actionTest(){
-        $test = Yii::app()->perfectmoney; // настоящий компонент
 
-        $test->onSuccess = function($event){
-            $model = new PerfectMoney();
-            // TO DO [логика Success]
-            var_dump('-=onSuccess=-',$event->sender->dataOut());die;
-            
-        };
-        $test->onFailure = function($event){
-            // TO DO [логика Failure]
-            var_dump('-=onFailure=-',$event->sender->dataOut());die;
-            
-        };
-       //$test->choise = 'balance';
-        $test->choise = 'confirm';
-       $test_input = array(
-           'AccountID'=>'6416431',
-           'PassPhrase'=>'uhaha322re423e',
-           'Payer_Account'=>'U6840713',
-           'Payee_Account'=>'U3627324',
-           'Amount'=>'0.01',
-           );
-       $test->dataLoad($test_input);
-       $test->dataProcess();
+   /* Perfect Money test */
+   public function actionTest(){
+       $model = new PerfectMoney();
+       $model->login = '6416431';
+       $model->password = 'uhaha322re423e';
+       $model->payerAccount = 'U6840713';
+       $model->payeeAccount = 'U3627324';
+       $model->amount = '0.00';
+       //$model->Run('confirm');
+       $model->Run('balance');
        
+       echo $model->getError('paymentTransactionStatus').'<br>';
+       echo $model->notation.'<br>';
+       var_dump($model->getErrors());
+
     }
 
 

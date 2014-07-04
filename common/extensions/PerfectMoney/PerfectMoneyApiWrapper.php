@@ -37,13 +37,16 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
         $this->API_analyse();
     }
 
-    public function dataOut(){ // выгрузка массива ответа api
-        return $this->outputStructure;
+    public function dataOut($param=NULL){ // выгрузка массива ответа api
+        return (is_null($param)) ? $this->outputStructure : $this->outputStructure[$param];
     }
     
     /* ключевой элемент компонента: осуществляет взаимодействие с api Perfect Money */
     protected function API_make(){
         $curlHandle = curl_init();
+        if (!isset($this->interfaces[$this->choise])){
+            throw new Exception('Perfect Money(...) Parameter choise not exists');
+        }
 	curl_setopt($curlHandle, CURLOPT_URL, $this->interfaces[$this->choise]); // задаем url
 	curl_setopt($curlHandle, CURLOPT_HEADER, 0); // "прячем" заголовки
 	curl_setopt($curlHandle, CURLOPT_POST, 1); // настраиваем метод передачи данных (POST)
@@ -64,7 +67,7 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
     /* Выбор и генерация нужного события */
     protected function API_analyse(){
         if(isset($this->outputStructure['ERROR'])){ // Стандарт API PM по возврату ошибок (кодов нету длинный шмель, хоть в кибитку не ходи)
-           $this->onFailure($this->eventFailure); // генерация события безуспешной работы api 
+           $this->onFailure($this->eventFailure); // генерация события безуспешной работы api
         }else{
             $this->onSuccess($this->eventSuccess); // генерация события, когда api отработал успешно
         }
