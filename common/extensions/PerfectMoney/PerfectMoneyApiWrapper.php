@@ -24,9 +24,6 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
     public function onFailure($event){
         $this->raiseEvent('onFailure', $this->eventFailure);
     }
-    public function onEmergency($event){
-        $this->raiseEvent('onEmergency', $this->eventEmergency);
-    }
     public function dataFlush(){ // установка компонента в исходное состояние
         $this->init();
     }

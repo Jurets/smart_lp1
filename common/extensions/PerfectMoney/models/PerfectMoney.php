@@ -4,14 +4,19 @@ class PerfectMoney extends CFormModel {
    public $login; // PM accaunt login
    public $password; // PM Usr acc password
    
-   public $payerId = NULL; // id пользователя-плательщика
-   public $payerAccount = NULL; // кошелек, с которого осуществляется оплата
-   public $payeeId = NULL; // id пользователя-получателя
-   public $payeeAccount = NULL; // кошелек получателя
-   public $amount = NULL; // сумма для передачи с кошелька на кошелек
+   public $payerId; // id пользователя-плательщика
+   public $payerAccount; // кошелек, с которого осуществляется оплата
+   public $payeeId; // id пользователя-получателя
+   public $payeeAccount; // кошелек получателя
+   public $amount; // сумма для передачи с кошелька на кошелек
    public $transactionKind = ''; // вид транзакции - передается в справочник видов транзакций
    public $notation=''; // комментарии
-      
+   
+   protected $output; // данные от PM интерфейса
+   public function getOutput(){  // извлечение данных PM интерфейса
+       return $this->output;
+   }
+   
    private $paymentTransactionStatus; // записываем текст для пользователя в зависимости от вызванного события
    public $message; //сюда  передать нужный текст (в init() - default в качестве примера )
    
@@ -27,14 +32,15 @@ class PerfectMoney extends CFormModel {
   }
   
   public function successBusinessLogic($event){ // Обработчик события для компонентва API "ОПЛАТА ОКЕЮШКИ"
-      //var_dump('S U C C E S S = ', $event->sender->dataOut());
+      $this->output = $event->sender->dataOut();
       if($event->sender->choise === 'confirm'){
           $this->confirmSuccessHelper($event);
-      }                  
+      }
+      
       $this->addError('paymentTransactionStatus', $this->message['success']);
   }
   public function failureBusinessLogic($event){ // Обработчик события для компонента API "ОПЛАТА НЕ ПРОШЛА"
-      //var_dump('F A I L U R E = ', $event->sender->dataOut('ERROR'));
+      $this->output = $event->sender->dataOut('ERROR');
       if($event->sender->choise === 'confirm'){
           $this->confirmFailureHelper($event);
       }         

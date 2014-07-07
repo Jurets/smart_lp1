@@ -244,25 +244,27 @@ class OfficeController extends EController
 
 
    /* Perfect Money test */
-   public function actionTest(){
-       $model = new PerfectMoney();
-       $model->login = '6416431';
-       $model->password = 'uhaha322re423e';
-       $model->payerAccount = 'U6840713';
-       $model->payeeAccount = 'U3627324';
-       $model->amount = 'f0.00';
-       
-       $model->payerId = '2';
-       $model->payeeId = '1';
-       $model->transactionKind = 'трансфер живьем';
-       
-       //$model->Run('balance');
-       $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
-       
-       echo $model->getError('paymentTransactionStatus').'<br>';
-       echo $model->notation.'<br>';
-       var_dump($model->getErrors());
-    }
+//   public function actionTest(){
+//       $model = new PerfectMoney();
+//       /* обязательные параметры */
+//       $model->login = '6416431';
+//       $model->password = 'uhaha322re423e';
+//       $model->payerAccount = 'U6840713';
+//       $model->payeeAccount = 'U3627324';
+//       $model->amount = '0.01';
+//       $model->payerId = '17';
+//       $model->payeeId = '18';
+//       /* необязательные параметры */  
+//       $model->transactionKind = 'Тест 23';
+//       $model->notation = 'Дополнительные сведения.';
+//       //$model->Run('balance');
+//       $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
+//       
+//       echo $model->getError('paymentTransactionStatus').'<br>';
+//       echo $model->notation.'<br>';
+//       var_dump('Сообщения', $model->getErrors());
+//       var_dump('Данные от perfectmoney.is как есть', $model->getOutput());
+//    }
 
 
     /**
