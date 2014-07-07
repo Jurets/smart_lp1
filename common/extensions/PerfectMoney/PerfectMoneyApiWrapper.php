@@ -24,7 +24,12 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
     public function onFailure($event){
         $this->raiseEvent('onFailure', $this->eventFailure);
     }
-    
+    public function onEmergency($event){
+        $this->raiseEvent('onEmergency', $this->eventEmergency);
+    }
+    public function dataFlush(){ // установка компонента в исходное состояние
+        $this->init();
+    }
     public function dataLoad($input=array()){ // загрузка исходных данных (должен быть массив для передачи на api постом)
         if(!is_array($input) || empty($input)){
             throw new Exception("PerfectMoney(...) API -in data must be an array and not empty");
@@ -35,9 +40,10 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
     public function dataProcess(){ // проведение процесса передачи данных на api и получение ответных даннных
         $this->API_make();
         $this->API_analyse();
+        //$this->API_analyse_test();
     }
 
-    public function dataOut($param=NULL){ // выгрузка массива ответа api
+    public function dataOut($param=NULL){ // выгрузка массива ответа api либо конкретно указанного значения
         return (is_null($param)) ? $this->outputStructure : $this->outputStructure[$param];
     }
     
@@ -56,23 +62,32 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
 	curl_close($curlHandle);
 	
 	/* Парсим ответ сервера и получаем нужную структуру данных */
-	$outputStructure = array();
 	$domStructure = new DOMDocument();
 	$domStructure->loadHTML($apiAnswer);
 	$nodes = $domStructure->getElementsByTagName('input');
 	foreach($nodes as $node){
 		$this->outputStructure[$node->getAttribute('name')] = $node->getAttribute('value');
         }
+        if(empty($this->outputStructure)){
+            $this->outputStructure['ERROR'] = 'Perfect Money servise not available';
+        }
     }
     /* Выбор и генерация нужного события */
-    protected function API_analyse(){
+    protected function API_analyse(){  
         if(isset($this->outputStructure['ERROR'])){ // Стандарт API PM по возврату ошибок (кодов нету длинный шмель, хоть в кибитку не ходи)
            $this->onFailure($this->eventFailure); // генерация события безуспешной работы api
         }else{
             $this->onSuccess($this->eventSuccess); // генерация события, когда api отработал успешно
         }
     }
-    
+    protected function API_analyse_test(){
+        /* тестовый метод принудительная генерация событий.
+         * Удалить после финального тестирования.
+         * Точка запуска метода: в теле метода dataProcess(); 
+         *  */
+        //$this->outputStructure['ERROR']='(Test 2) ';$this->onFailure($this->eventFailure);
+        //$this->outputStructure['ERROR']=NULL;$this->onSuccess($this->eventSuccess);
+    }
     
 }
 

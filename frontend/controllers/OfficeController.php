@@ -250,14 +250,18 @@ class OfficeController extends EController
        $model->password = 'uhaha322re423e';
        $model->payerAccount = 'U6840713';
        $model->payeeAccount = 'U3627324';
-       $model->amount = '0.00';
-       //$model->Run('confirm');
-       $model->Run('balance');
+       $model->amount = 'f0.00';
+       
+       $model->payerId = '2';
+       $model->payeeId = '1';
+       $model->transactionKind = 'трансфер живьем';
+       
+       //$model->Run('balance');
+       $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
        
        echo $model->getError('paymentTransactionStatus').'<br>';
        echo $model->notation.'<br>';
        var_dump($model->getErrors());
-
     }
 
 
