@@ -4,13 +4,14 @@
         <div id="numberDecor<?php echo $features['cssID'];?>"><p><?php echo $dataPull['numberField'];?></p> <div id="test<?php echo $features['cssID'];?>"></div></div>
         <p class="regB">ТЕКУЩИЕ <?php echo $operation; ?></p>
         <ul class="li">
-            <?php 
+            <?php
+            if(!empty($dataPull['userList'])){
             foreach ($dataPull['userList'] as $user) {
                 echo TbHtml::tag('li',array(
                     'id'=>$user['country'],
                     ), $user['content'],
                             'li');
-            }
+            }}
             ?>
         </ul>
 </div>

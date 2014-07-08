@@ -82,12 +82,15 @@ class UserContour extends CWidget {
              LIMIT 6  ');
         $listCommission = $list->query();
         $listCommission = $listCommission->read();
+        if($amountCommissionCount['sum(amount)'] != null){
         $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($amountCommissionCount['sum(amount)']);
         foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
             $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
         }
-
+        }else{
+            $this->dataPull['numberField'] = '$00 000 000';
+        }
 
     }
     private function givenOncharity(){
@@ -110,10 +113,15 @@ class UserContour extends CWidget {
              LIMIT 6  ');
         $listCommission = $list->query();
         $listCommission = $listCommission->read();
+        if($amountCommissionCount['sum(amount)'] != null){
         $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($amountCommissionCount['sum(amount)']);
         foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
             $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
+        }
+        }else
+        {
+            $this->dataPull['numberField'] = '$00 000 000';
         }
 
     }
