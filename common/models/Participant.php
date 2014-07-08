@@ -97,7 +97,7 @@ class Participant extends User
             array('currentPassword', 'passwordRule', 'allowEmpty'=>true, 'on'=>array('settings')),
             array('newPassword', 'newPasswordRule', 'allowEmpty'=>true, 'on'=>array('settings')),
             array('photo', 'file','safe'=>true , 'types'=>'jpg, gif, png' ,
-                  'allowEmpty'=>true,'maxSize'=>1920 * 1080 * 3,'tooLarge'=>'Файл весит больше 3 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
+                  'allowEmpty'=>true,'maxSize'=>2 * 1024 * 1024,'tooLarge'=>'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
         ));
     }
     /**
@@ -166,7 +166,7 @@ class Participant extends User
 
     public function passwordRule()
     {
-        if(!empty($this->currentPassword) && $this->password != md5($this->currentPassword)){
+        if(!empty($this->currentPassword) && $this->password != UserModule::encrypting($this->currentPassword)){
             $this->addError('currentPassword','Неправильно введен текущий пароль.');
         }
     }

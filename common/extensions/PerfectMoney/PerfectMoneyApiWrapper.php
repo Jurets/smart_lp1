@@ -24,7 +24,9 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
     public function onFailure($event){
         $this->raiseEvent('onFailure', $this->eventFailure);
     }
-    
+    public function dataFlush(){ // установка компонента в исходное состояние
+        $this->init();
+    }
     public function dataLoad($input=array()){ // загрузка исходных данных (должен быть массив для передачи на api постом)
         if(!is_array($input) || empty($input)){
             throw new Exception("PerfectMoney(...) API -in data must be an array and not empty");
@@ -35,15 +37,19 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
     public function dataProcess(){ // проведение процесса передачи данных на api и получение ответных даннных
         $this->API_make();
         $this->API_analyse();
+        //$this->API_analyse_test();
     }
 
-    public function dataOut(){ // выгрузка массива ответа api
-        return $this->outputStructure;
+    public function dataOut($param=NULL){ // выгрузка массива ответа api либо конкретно указанного значения
+        return (is_null($param)) ? $this->outputStructure : $this->outputStructure[$param];
     }
     
     /* ключевой элемент компонента: осуществляет взаимодействие с api Perfect Money */
     protected function API_make(){
         $curlHandle = curl_init();
+        if (!isset($this->interfaces[$this->choise])){
+            throw new Exception('Perfect Money(...) Parameter choise not exists');
+        }
 	curl_setopt($curlHandle, CURLOPT_URL, $this->interfaces[$this->choise]); // задаем url
 	curl_setopt($curlHandle, CURLOPT_HEADER, 0); // "прячем" заголовки
 	curl_setopt($curlHandle, CURLOPT_POST, 1); // настраиваем метод передачи данных (POST)
@@ -53,23 +59,32 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
 	curl_close($curlHandle);
 	
 	/* Парсим ответ сервера и получаем нужную структуру данных */
-	$outputStructure = array();
 	$domStructure = new DOMDocument();
 	$domStructure->loadHTML($apiAnswer);
 	$nodes = $domStructure->getElementsByTagName('input');
 	foreach($nodes as $node){
 		$this->outputStructure[$node->getAttribute('name')] = $node->getAttribute('value');
         }
+        if(empty($this->outputStructure)){
+            $this->outputStructure['ERROR'] = 'Perfect Money servise not available';
+        }
     }
     /* Выбор и генерация нужного события */
-    protected function API_analyse(){
+    protected function API_analyse(){  
         if(isset($this->outputStructure['ERROR'])){ // Стандарт API PM по возврату ошибок (кодов нету длинный шмель, хоть в кибитку не ходи)
-           $this->onFailure($this->eventFailure); // генерация события безуспешной работы api 
+           $this->onFailure($this->eventFailure); // генерация события безуспешной работы api
         }else{
             $this->onSuccess($this->eventSuccess); // генерация события, когда api отработал успешно
         }
     }
-    
+    protected function API_analyse_test(){
+        /* тестовый метод принудительная генерация событий.
+         * Удалить после финального тестирования.
+         * Точка запуска метода: в теле метода dataProcess(); 
+         *  */
+        //$this->outputStructure['ERROR']='(Test 33333) ';$this->onFailure($this->eventFailure);
+        //$this->outputStructure['ERROR']=NULL;$this->onSuccess($this->eventSuccess);
+    }
     
 }
 

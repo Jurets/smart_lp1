@@ -71,8 +71,7 @@ class OfficeController extends EController
      */
     public function actionSettings()
     {
-        //Yii::app()->user->id
-        $participant = Participant::model()->findByPk(2);
+        $participant = Participant::model()->findByPk(Yii::app()->user->id);
         $participant->setScenario('settings');
         if($participant->dob != ''){
             $date = explode('-', $participant->dob);
@@ -142,7 +141,7 @@ class OfficeController extends EController
                 $participant->email = $currentEmail;
                 $participant->new_email = $newEmail;
                 $participant->activkey = UserModule::encrypting(microtime().$participant->password);
-                $participant->save();
+                $participant->save(false);
 
                 if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
@@ -151,7 +150,7 @@ class OfficeController extends EController
             }else{
                 $participant->photo = $oldPhoto;
             }
-       
+        }
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
     }
@@ -228,8 +227,8 @@ class OfficeController extends EController
             //'isWebinar' => $this->isWebinar(),  //идёт ли вебинар
         ), false, true);
     }
-    
-    
+
+
     /**
      * Functions(actionCountry(),actionCity(),actionTimezone()) for Invitation
      */
@@ -243,35 +242,47 @@ class OfficeController extends EController
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
 
-    /* Test */
-    public function actionTest(){
-        $test = Yii::app()->perfectmoney; // настоящий компонент
 
-        $test->onSuccess = function($event){
-            $model = new PerfectMoney();
-            // TO DO [логика Success]
-            var_dump('-=onSuccess=-',$event->sender->dataOut());die;
-            
-        };
-        $test->onFailure = function($event){
-            // TO DO [логика Failure]
-            var_dump('-=onFailure=-',$event->sender->dataOut());die;
-            
-        };
-       //$test->choise = 'balance';
-        $test->choise = 'confirm';
-       $test_input = array(
-           'AccountID'=>'6416431',
-           'PassPhrase'=>'uhaha322re423e',
-           'Payer_Account'=>'U6840713',
-           'Payee_Account'=>'U3627324',
-           'Amount'=>'0.01',
-           );
-       $test->dataLoad($test_input);
-       $test->dataProcess();
+   /* Perfect Money test */
+   public function actionTest(){
+       $model = new PerfectMoney();
+       /* обязательные параметры */
+       $model->login = '6416431';
+       $model->password = 'uhaha322re423e';
+       $model->payerAccount = 'U6840713';
+       $model->payeeAccount = 'U3627324';
+       $model->amount = '0.01';
+       /* необязательные параметры */  
+       $model->payerId = '17';
+       $model->payeeId = '18';
+       //$model->transactionKind = 'Тест 23';
+       $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
        
+       $model->notation = 'Дополнительные сведения.';
+       //$model->Run('balance');
+       $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
+       
+       echo $model->getError('paymentTransactionStatus').'<br>';
+       echo $model->notation.'<br>';
+       var_dump('Сообщения', $model->getErrors());
+       var_dump('Данные от perfectmoney.is как есть', $model->getOutput());
     }
 
+
+    /**
+     *  Check activation code and save new email
+     */
+    public function actionEmail(){
+        $getActivityKey = Yii::app()->getRequest()->getQuery('activkey');
+        $participatnObj = Participant::model()->findByPk(Yii::app()->user->id);
+        if($participatnObj->activkey == $getActivityKey ){
+            $participatnObj->activkey = '';
+            $participatnObj->email = $participatnObj->new_email;
+            $participatnObj->new_email = '';
+            $participatnObj->save();
+        }
+        $this->redirect('settings');
+    }
    
 }
 

@@ -113,7 +113,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <p class="sub2-4"><?php echo Yii::t('common', 'NEW PASSWORD') ?>*:</p>
 
 
-        <?php echo CHtml::textField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
+        <?php echo CHtml::passwordField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'newPassword', array('class' => 'error-message em-13')); //НОВЫЙ ПАРОЛЬ ?>
 
 
