@@ -52,6 +52,7 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
         }
 	curl_setopt($curlHandle, CURLOPT_URL, $this->interfaces[$this->choise]); // задаем url
 	curl_setopt($curlHandle, CURLOPT_HEADER, 0); // "прячем" заголовки
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, FALSE);
 	curl_setopt($curlHandle, CURLOPT_POST, 1); // настраиваем метод передачи данных (POST)
 	curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $this->inputStructure); // определяем данные для передачи POST-ом на сервер
 	curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1); // настраиваем вывод ответа сервера не в браузер а в переменную
