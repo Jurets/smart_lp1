@@ -9,7 +9,8 @@ class PerfectMoney extends CFormModel {
    public $payeeId; // id пользователя-получателя
    public $payeeAccount; // кошелек получателя
    public $amount; // сумма для передачи с кошелька на кошелек
-   public $transactionKind = ''; // вид транзакции - передается в справочник видов транзакций
+   public $transactionKind = ''; // вид транзакции - передается в справочник видов транзакций // id транзакции определяется автоматически
+   public $transactionId; // id транзакции "как есть" - для передачи вручную
    public $notation=''; // комментарии
    
    protected $output; // данные от PM интерфейса
@@ -70,8 +71,7 @@ class PerfectMoney extends CFormModel {
   public function rules(){
        return array(
            array('login, password', 'required'),
-           //array('payerAccount, payeeAccount', 'checkPurseFormat'),
-           array('payerId, payeeId', 'type', 'type'=>'integer'),
+           array('payerId, payeeId, transactionId', 'type', 'type'=>'integer'),
            array('notation', 'length', 'max'=>255),
            array('transactionKind', 'length', 'max'=>255),
        );
@@ -89,19 +89,24 @@ class PerfectMoney extends CFormModel {
   private function confirmSuccessHelper($event){
       $dbObject = Yii::app()->db;
       $kind_id = false;
-          $isExist = $dbObject->createCommand()
-          ->select('kind_id')
-          ->from('pm_transaction_kind')
-          ->where('description=:desc', array(':desc'=>$this->transactionKind))
-          ;
-      $read = $isExist->query();
-      $kind_id = $read->read();
-      if($kind_id == false){
-         $dbObject->createCommand()
-          ->insert('pm_transaction_kind', array('description'=>$this->transactionKind));
-         $act_id = Yii::app()->db->getLastInsertID();
-      }else{
-         $act_id = $kind_id['kind_id'];
+      if(isset($this->transactionId) && is_int($this->transactionId)){ //установка поля tr_kind_id вручную
+          $act_id = $this->transactionId;
+      }else{ // установка поля tr_kind_id автоматически
+            $isExist = $dbObject->createCommand()
+            ->select('kind_id')
+            ->from('pm_transaction_kind')
+           ->where('description=:desc', array(':desc'=>$this->transactionKind))
+            ;
+        $read = $isExist->query();
+        $kind_id = $read->read();
+        if($kind_id == false){
+             $dbObject->createCommand()
+             ->insert('pm_transaction_kind', array('description'=>$this->transactionKind));
+             $act_id = Yii::app()->db->getLastInsertID();
+        }else{
+             $act_id = $kind_id['kind_id'];
+        }
+      
       }
       $dbObject->createCommand()
         ->insert('pm_transaction_log', array(
@@ -117,21 +122,27 @@ class PerfectMoney extends CFormModel {
   }
   private function confirmFailureHelper($event){
       $dbObject = Yii::app()->db;
-      $kind_id = false;      
-      $isExist = $dbObject->createCommand()
-        ->select('kind_id')
-        ->from('pm_transaction_kind')
-        ->where('description=:desc', array(':desc'=>$this->transactionKind))
-        ;
-      $read = $isExist->query();
-      $kind_id = $read->read();
-      if($kind_id == false){
-         $dbObject->createCommand()
-          ->insert('pm_transaction_kind', array('description'=>$this->transactionKind));
-         $act_id = Yii::app()->db->getLastInsertID();
+      $kind_id = false;
+      if(isset($this->transactionId) && is_int($this->transactionId)){
+          $act_id = $this->transactionId;
       }else{
-         $act_id = $kind_id['kind_id'];
+        $isExist = $dbObject->createCommand()
+          ->select('kind_id')
+          ->from('pm_transaction_kind')
+          ->where('description=:desc', array(':desc'=>$this->transactionKind))
+          ;
+        $read = $isExist->query();
+        $kind_id = $read->read();
+        if($kind_id == false){
+           $dbObject->createCommand()
+            ->insert('pm_transaction_kind', array('description'=>$this->transactionKind));
+           $act_id = Yii::app()->db->getLastInsertID();
+        }else{
+           $act_id = $kind_id['kind_id'];
+        }
       }
+      
+      
       $isExist = $dbObject->createCommand()
           ->select('err_id')
           ->from('pm_transaction_error')

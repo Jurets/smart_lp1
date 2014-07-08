@@ -18,7 +18,7 @@ class UserContour extends CWidget {
            ),
         ), 
     );
-  
+    private $operation;
     public function run(){
         switch($this->params['cssID']){
             case 1:
@@ -31,12 +31,13 @@ class UserContour extends CWidget {
                 $this->givenOncharity();
                 break;
         }
-       $this->render('UserContour', array('features'=>$this->params, 'dataPull'=>$this->dataPull));
+       $this->render('UserContour', array('features'=>$this->params, 'dataPull'=>$this->dataPull,'operation'=>$this->operation));
     }
     
     /**/
     private function registeredPartipiants(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ
+        $this->operation = 'РЕГИСТРАЦИИ';
         $db_connector = Yii::app()->db;
         $usersDumpCommand = $db_connector->createCommand(
                 'SELECT u.first_name, u.last_name, u.create_at, co.code, co.name
@@ -63,8 +64,9 @@ class UserContour extends CWidget {
     private function freePaid(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ВЫПЛАЧЕНО КОМИССИОННЫХ
         // Выплаченные комиссионные
+        $this->operation = 'КОМИССИОННЫЕ';
         $db_connector = Yii::app()->db;
-        $amountCommission = $db_connector->createCommand('SELECT count(amount) FROM pm_transaction_log');
+        $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=1');
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read();
         $list = $db_connector->createCommand(
@@ -80,16 +82,40 @@ class UserContour extends CWidget {
              LIMIT 6  ');
         $listCommission = $list->query();
         $listCommission = $listCommission->read();
-        $this->dataPull['numberField'] = $this->jmws_money_converter($amountCommissionCount['count(amount)']);
+        $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($amountCommissionCount['sum(amount)']);
         foreach ($listCommission as $commision) {
-            $this->dataPull['userList']['country'] = $commision['code'];
-            $this->dataPull['userList']['content'] = date('H:i', strtotime($commision['create_at'])). ' UTC '. $commision['first_name'] .' '. $commision['last_name'];
+            $this->dataPull['userList'][0]['country'] = $listCommission['code'];
+            $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
         }
 
 
     }
     private function givenOncharity(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ОТДАНО НА БЛАГОТВОРИТЕЛЬНОСТЬ
+        $this->operation = 'ОТЧИСЛЕНИЯ';
+        $db_connector = Yii::app()->db;
+        $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=2');
+        $amountCommissionCount = $amountCommission->query();
+        $amountCommissionCount = $amountCommissionCount->read();
+        $list = $db_connector->createCommand(
+            'SELECT to_user_id tr_kind_id,date,first_name,last_name,code
+             FROM pm_transaction_log
+             JOIN tbl_users
+             ON to_user_id = id
+             JOIN cities c
+             ON city_id = c.id
+             JOIN countries co
+             ON co.id = c.country_id
+             WHERE tr_kind_id = 2
+             LIMIT 6  ');
+        $listCommission = $list->query();
+        $listCommission = $listCommission->read();
+        $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($amountCommissionCount['sum(amount)']);
+        foreach ($listCommission as $commision) {
+            $this->dataPull['userList'][0]['country'] = $listCommission['code'];
+            $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
+        }
+
     }
     
     /*addons special srevices*/
