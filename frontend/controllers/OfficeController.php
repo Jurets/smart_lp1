@@ -254,12 +254,11 @@ class OfficeController extends EController
 //       $model->amount = '0.01';
 //       $model->payerId = '17';
 //       $model->payeeId = '18';
-//       /* необязательные параметры */  
+       /* необязательные параметры */
 //       $model->transactionKind = 'Тест 23';
 //       $model->notation = 'Дополнительные сведения.';
 //       //$model->Run('balance');
 //       $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
-//       
 //       echo $model->getError('paymentTransactionStatus').'<br>';
 //       echo $model->notation.'<br>';
 //       var_dump('Сообщения', $model->getErrors());

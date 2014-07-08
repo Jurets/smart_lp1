@@ -25,8 +25,10 @@ class UserContour extends CWidget {
                 $this->registeredPartipiants();
                 break;
             case 2:
+                $this->freePaid();
                 break;
             case 3:
+                $this->givenOncharity();
                 break;
         }
        $this->render('UserContour', array('features'=>$this->params, 'dataPull'=>$this->dataPull));
@@ -59,7 +61,32 @@ class UserContour extends CWidget {
        
     }
     private function freePaid(){
-        // TO DO - получить, отформатировать и записать в dataPull ответ для ВЫПЛАЧЕНО КОМИССИОННЫХ 
+        // TO DO - получить, отформатировать и записать в dataPull ответ для ВЫПЛАЧЕНО КОМИССИОННЫХ
+        // Выплаченные комиссионные
+        $db_connector = Yii::app()->db;
+        $amountCommission = $db_connector->createCommand('SELECT count(amount) FROM pm_transaction_log');
+        $amountCommissionCount = $amountCommission->query();
+        $amountCommissionCount = $amountCommissionCount->read();
+        $list = $db_connector->createCommand(
+            'SELECT to_user_id tr_kind_id,date,first_name,last_name,code
+             FROM pm_transaction_log
+             JOIN tbl_users
+             ON to_user_id = id
+             JOIN cities c
+             ON city_id = c.id
+             JOIN countries co
+             ON co.id = c.country_id
+             WHERE tr_kind_id = 1
+             LIMIT 6  ');
+        $listCommission = $list->query();
+        $listCommission = $listCommission->read();
+        $this->dataPull['numberField'] = $this->jmws_money_converter($amountCommissionCount['count(amount)']);
+        foreach ($listCommission as $commision) {
+            $this->dataPull['userList']['country'] = $commision['code'];
+            $this->dataPull['userList']['content'] = date('H:i', strtotime($commision['create_at'])). ' UTC '. $commision['first_name'] .' '. $commision['last_name'];
+        }
+
+
     }
     private function givenOncharity(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ОТДАНО НА БЛАГОТВОРИТЕЛЬНОСТЬ

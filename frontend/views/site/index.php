@@ -42,32 +42,39 @@
 <div id="darkBG">
      
 <div id="usrcontour">
+<?php //$this->widget('application.widgets.UserContour.UserContour',
+//        array( 'params' => array(
+//        'cssID' => 1,
+//        'head' => Yii::t('common', 'REGISTERED MEMBERS'),
+//        'title'=> Yii::t('common', 'CURRENT REGISTRATION'),
+//    ))); ?>
 <?php $this->widget('application.widgets.UserContour.UserContour',
-        array( 'params' => array( 
-        'cssID' => 1,
-        'head' => Yii::t('common', 'REGISTERED MEMBERS'),
-        'title'=> Yii::t('common', 'CURRENT REGISTRATION'),
+    array( 'params' => array(
+        'cssID' => 2,
+        'head' => Yii::t('common', 'FEE PAID'),
+        'title'=> Yii::t('common', 'CURRENT PAYMENTS'),
     ))); ?>
 </div>
-    <div id="infoBlok2">
-        <p class="reg2"><?php echo Yii::t('common', 'FEE PAID') ?></p>
-        <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>
-        <p class="regB"><?php echo Yii::t('common', 'CURRENT PAYMENTS') ?></p>    
-        <ul class="li">
-            <li id="tailand" >12:45 UTC Sergey Menshov</li>
-            <li id="tailand" >12:45 UTC Sergey Menshov</li>
-            <li id="tailand" >12:45 UTC Sergey Menshov</li>
-            <li id="tailand" >12:45 UTC Sergey Menshov</li>
-            <li id="tailand" >12:45 UTC Sergey Menshov</li>
-            <li id="tailand" >12:45 UTC Sergey Menshov</li>
-        </ul>
 
-    </div>
+<!--    <div id="infoBlok2">-->
+<!--        <p class="reg2">--><?php //echo Yii::t('common', 'FEE PAID') ?><!--</p>-->
+<!--        <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>-->
+<!--        <p class="regB">--><?php //echo Yii::t('common', 'CURRENT PAYMENTS') ?><!--</p>-->
+<!--        <ul class="li">-->
+<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
+<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
+<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
+<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
+<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
+<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
+<!--        </ul>-->
+<!---->
+<!--    </div>-->
 
     <div id="infoBlok3">
         <p class="reg3"><?php echo Yii::t('common', 'GIVEN ON CHARITY') ?></p>
         <div id="numberDecor3"><p>$00 652 427</p> <div id="test3"></div></div>
-        <p class="regB"><?php echo Yii::t('common', 'CURRENT fEES') ?></p>    
+        <p class="regB"><?php echo Yii::t('common', 'CURRENT fEES') ?></p>
         <ul class="li">
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
             <li id="tailand" >12:45 UTC Sergey Menshov</li>
@@ -103,7 +110,7 @@ var usrContour = setTimeout(
             error: function(){
                 //alert("ERROR");
                 console.log('Счётчики: Ошибка при посылке AJAX-запроса');
-            },
+            }
             
 });
       timer = setTimeout(run, 60000);
