@@ -27,7 +27,7 @@
             <li> <a href="#"> <?php echo Yii::t('common', 'OPPORTUNITIES'); ?> </a> </li>
             <li> <a href="#"> <?php echo Yii::t('common', 'RULES'); ?> </a> </li>
             <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
-            <li> <a href="#" class="moveRight"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
+            <li> <a  href="#" class="moveRight"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
         </ul>
     </div>
 

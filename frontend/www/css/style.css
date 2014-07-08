@@ -3,20 +3,20 @@
 
 #wrapper{
     width: 1000px;
-     margin: 0 auto;
-   font-family: 'Open Sans Condensed', 'sans-serif';
- 
+    margin: 0 auto;
+    font-family: 'Open Sans Condensed', 'sans-serif';
+
     padding-right: 25px;
 }
 
 body{
-  
-  min-width: 1080px;
-   height: 100%;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-   
+
+    min-width: 1080px;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+
 }
 
 input {
@@ -27,15 +27,15 @@ input {
     color: #3b3b3b; 
     font-family: 'Open Sans Condensed', 'sans-serif';
     font-size: 21px;
-   
+
 }
 
 #BGDivs{
-    
+
 }
 
 
-            /*HEADER START*/
+/*HEADER START*/
 
 #login{
     background-color: #282828;
@@ -52,38 +52,38 @@ input {
 
 
 .textbox1 { 
-   border: 6px solid #fff; 
-        border-radius: 1px; 
-        height:30px; 
-        width: 190px;
-        top:29px;
-        left: 24px;
-        display: block; 
-        position: absolute;
+    border: 6px solid #fff; 
+    border-radius: 1px; 
+    height:30px; 
+    width: 190px;
+    top:29px;
+    left: 24px;
+    display: block; 
+    position: absolute;
 } 
 
 
 .textbox2 { 
-   border: 6px solid #fff;
-        border-radius: 1px; 
-        height:30px; 
-        width: 190px;
-        top:94px;
-        left: 24px;
-        display: block; 
-        position: absolute;
+    border: 6px solid #fff;
+    border-radius: 1px; 
+    height:30px; 
+    width: 190px;
+    top:94px;
+    left: 24px;
+    display: block; 
+    position: absolute;
 } 
 
 
 .textbox3 { 
-   border: 6px solid #fff; 
-        border-radius: 1px; 
-        height:30px; 
-        width: 190px;
-        top:215px;
-        left: 24px;
-        display: block; 
-        position: absolute;
+    border: 6px solid #fff; 
+    border-radius: 1px; 
+    height:30px; 
+    width: 190px;
+    top:215px;
+    left: 24px;
+    display: block; 
+    position: absolute;
 } 
 
 
@@ -93,12 +93,12 @@ input {
     height: 30px !important;
     top:269px;
     left: 24px;
-	border : solid 0px #000000;
-	border-radius : 1px;
-	font-size : 20px;
-	color : #ffffff;
-	padding : 1px 17px;
-	background-color : #30c70a;
+    border : solid 0px #000000;
+    border-radius : 1px;
+    font-size : 20px;
+    color : #ffffff;
+    padding : 1px 17px;
+    background-color : #30c70a;
     cursor: pointer;
     box-shadow: 0px 1px 1px #2d500a;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -114,12 +114,12 @@ input {
     height: 30px !important;
     top:269px;
     left: 24px;
-	border : solid 0px #000000;
-	border-radius : 1px;
-	font-size : 20px;
-	color : #ffffff;
-	padding : 1px 17px;
-	background-color : #4dde29;
+    border : solid 0px #000000;
+    border-radius : 1px;
+    font-size : 20px;
+    color : #ffffff;
+    padding : 1px 17px;
+    background-color : #4dde29;
     cursor: pointer;
     box-shadow: 0px 1px 1px #2d500a;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -137,7 +137,7 @@ input {
     left: 22px;
     display: block;
     position: absolute;
-   
+
 }
 
 
@@ -150,7 +150,7 @@ input {
     left: 200px;
     display: block;
     position: absolute;
-   
+
 }
 
 
@@ -158,18 +158,18 @@ input {
     color: #879092;
     height:0px; 
     position: absolute;
-   font-weight: bold;
+    font-weight: bold;
     top:15px;
     left: 22px;
     font-size: 14px;
-    
+
 }
 
 #login .sub2{
     color: #879092;
     height:0px; 
     position: absolute;
-   font-weight: bold;
+    font-weight: bold;
     top:81px;
     left: 22px;
     font-size: 14px;
@@ -181,7 +181,7 @@ input {
     color: #879092;
     height:0px; 
     position: absolute;
-   font-weight: bold;
+    font-weight: bold;
     top:201px;
     left: 22px;
     font-size: 14px;
@@ -191,7 +191,7 @@ input {
     color: #32c745;
     height:0px; 
     position: absolute;
-   text-decoration: underline;
+    text-decoration: underline;
     top:318px;
     left: 22px;
     font-size: 14px;
@@ -242,15 +242,15 @@ input {
     top:11px;
     left: 75px;
     margin-right: 14px;
-   
-    
-    }
-    
+
+
+}
+
 #nav li{
     float: left;
     outline: 0px solid #cc0000;
     margin-right: 14px;
-   
+
 }
 
 #nav li a{
@@ -258,7 +258,7 @@ input {
     font-size: 14px;
     color: #ababab;
     font-weight: normal;
-    }
+}
 
 #nav .flag{
     background-image: url(../images/flag.png);
@@ -297,9 +297,9 @@ input {
     color: #168714 !important;
     text-decoration: underline !important;
 }
-            
+
 /*HEADER END*/
-        
+
 /*PEOPLE START*/
 
 
@@ -307,7 +307,7 @@ input {
     width: 100% ;
     height: 872px; 
     position: relative;
-    
+
 }
 
 #contentBG{
@@ -328,8 +328,8 @@ input {
     background-repeat: no-repeat;
     background-position:right;
     z-index: 0;
-    
-    
+
+
 }
 
 #content #videoBG{
@@ -340,7 +340,7 @@ input {
     background-image: url(../images/videoBG.png);
     background-repeat: no-repeat;
     position: absolute;
-    
+
 }
 
 
@@ -372,7 +372,7 @@ input {
     left: 12px;
     top: 743px;
     background-image: url(../images/greenButton.png);
-   background-repeat: repeat-x;
+    background-repeat: repeat-x;
     text-align: center;
     padding-top: 25px;
     font-size: 52px;
@@ -407,16 +407,16 @@ input {
     position: absolute;
     background-image: url(../images/rightArrow.png);
     background-repeat: no-repeat;
-   
-    
+
+
 }
 
 
 #white{
-    
+
     position: relative;
     height: 480px;
-    
+
     /* left: 20px; */
     text-align: left;
 }
@@ -458,7 +458,7 @@ input {
     top: 78px;
     left: 450px;
     width: 577px;
-   font-weight: bold;
+    font-weight: bold;
 }
 
 
@@ -508,7 +508,7 @@ input {
     font-size:  85px; 
     font-family: "Segoe UI",sans-serif;
     font-weight: normal;
-  }
+}
 
 #ap2{
     position: absolute;
@@ -519,7 +519,7 @@ input {
     font-size:  85px; 
     font-family: "Segoe UI",sans-serif;
     font-weight: normal;
-   }
+}
 
 
 
@@ -531,7 +531,7 @@ input {
     left: 13px;
     background-image: url(../images/prev.png);
     background-repeat: no-repeat;
-    }
+}
 
 
 
@@ -548,14 +548,14 @@ input {
 
 
 #slide1{
-   position: absolute;
-    
-   width: 585px;
+    position: absolute;
+
+    width: 585px;
     height: 14px;
     top: 397px;
-    
-   left: 443px; 
-    
+
+    left: 443px; 
+
 }
 
 #slide1 li{
@@ -632,7 +632,7 @@ input {
     font-weight: bold;
     text-align: center;
     margin: 16px 0px 0px 0px;
-    
+
 }
 
 #darkBG .reg2{
@@ -640,7 +640,7 @@ input {
     font-weight: bold;
     text-align: center;
     margin: 16px 0px 0px 0px;
-    
+
 }
 
 
@@ -649,7 +649,7 @@ input {
     font-weight: bold;
     text-align: center;
     margin: 16px 0px 0px 0px;
-    
+
 }
 
 
@@ -660,8 +660,8 @@ input {
     font-weight: bold;
     font-size: 18px;
     margin: 66px 0px 0px 13px;
-    
-    
+
+
 }
 
 #darkBG .li{
@@ -671,8 +671,8 @@ input {
     line-height: 31px;
     font-size: 14px;
     position: absolute;
-    
-   
+
+
 }
 
 #darkBG ul  #tailand{
@@ -704,15 +704,15 @@ input {
     color: #e5e5e5;
     margin-top: 1px;
 }
- #test1{
-     position: absolute;
-     height: 2px;
-     width: 260px;
-     left: 1px;
-     top:21px;
-     z-index: 20;
-     background-image: url(../images/test1.png);
- }
+#test1{
+    position: absolute;
+    height: 2px;
+    width: 260px;
+    left: 1px;
+    top:21px;
+    z-index: 20;
+    background-image: url(../images/test1.png);
+}
 
 
 #numberDecor2{
@@ -736,15 +736,15 @@ input {
     color: #e5e5e5;
     margin-top: 1px;
 }
- #test2{ 
-     position: absolute;
-     height: 2px;
-     width: 288px;
-     left: 4px;
-     top:21px;
-     z-index: 20;
-     background-image: url(../images/test1.png);
- }
+#test2{ 
+    position: absolute;
+    height: 2px;
+    width: 288px;
+    left: 4px;
+    top:21px;
+    z-index: 20;
+    background-image: url(../images/test1.png);
+}
 
 #numberDecor3{
     background-image: url(../images/numberDecor3.png);
@@ -765,15 +765,15 @@ input {
     color: #e5e5e5;
     margin-top: 1px;
 }
- #test3{
-     position: absolute;
-     height: 2px;
-     width: 285px;
-     left: 3px;
-     top:21px;
-     z-index: 20;
-     background-image: url(../images/test1.png);
- }
+#test3{
+    position: absolute;
+    height: 2px;
+    width: 285px;
+    left: 3px;
+    top:21px;
+    z-index: 20;
+    background-image: url(../images/test1.png);
+}
 
 
 
@@ -790,7 +790,7 @@ input {
     margin: 0 auto;
     position: relative;
     z-index: 1;
-    
+
     top: 57px;
 }
 
@@ -801,7 +801,7 @@ input {
     position:absolute;
     background-color: #232323;
     z-index: 1;
-    
+
     padding-top: 100px;
 }
 
@@ -812,7 +812,7 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG3-1{
@@ -822,7 +822,7 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 
@@ -833,7 +833,7 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG5{
@@ -843,7 +843,7 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG6{
@@ -853,7 +853,7 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG7-1{
@@ -863,7 +863,7 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG7-2{
@@ -873,7 +873,7 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG8{
@@ -883,26 +883,26 @@ input {
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerUL1, #footerUL2, #footerUL3, #footerUL4, #footerUL5 {
     top: 115px;
     left: 141px;
-        
-   
-    
+
+
+
 }
 
 
- a{ 
+a{ 
 
     text-decoration: none;
     color: #000;
     font-size: 12px;
 
- 
-    
+
+
 
 }
 
@@ -912,13 +912,13 @@ input {
     color: #959292;
     font-size: 15px;
     font-weight: 100;
- 
+
 }
 
 #footerUL1, #footerUL2, #footerUL3, #footerUL4, #footerUL5, #footerUL6   li{
-     line-height: 15px;
-    
-    
+    line-height: 15px;
+
+
 }
 
 li #zagolovok{
@@ -926,7 +926,7 @@ li #zagolovok{
     line-height: 45px;
     font-weight: bold;
     font-size: 19px;
-   
+
 }
 
 
@@ -994,34 +994,34 @@ li #zagolovok{
 #endText{
 
     position: absolute;
-    
+
 
     /* height:39px ; */
     width:731px ;
-    
+
 
     top: 198px;
-    
+
 
     color: #4b4646;
-    
+
 
     left: -44px;
-    
-    
+
+
 
     font-size: 16px;
-    
+
 
     font-family: 'Open Sans Condensed';
 
 }
 #fofovi{
-	opacity: 0.5;
-	position:absolute;
-	z-index: 1;
-	top: 0;
-	margin-left: 12px;
+    opacity: 0.5;
+    position:absolute;
+    z-index: 1;
+    top: 0;
+    margin-left: 12px;
 }
 
 html, body {
@@ -1030,23 +1030,23 @@ html, body {
     margin: 0px;
     padding: 0px;
     text-align: center;
-  }
-  .page {
+}
+.page {
     min-height: 100%;
     height: auto !important;
     height: 100%;
     background: #e6e6e6;
-  }
-  .wrap {
+}
+.wrap {
     padding-bottom: 260px;
-	 background: #e6e6e6;
-  }
-  .footer {
+    background: #e6e6e6;
+}
+.footer {
     height: 298px;
     margin-top: -290px;
     background: #232323;
-  }
-  #footer-bark-bg {
+}
+#footer-bark-bg {
     height: 67px;
     width: 100%;
     position: relative;

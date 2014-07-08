@@ -31,7 +31,7 @@ $this->beginContent('//layouts/common');
                 <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo Yii::t('common', 'SIGN UP'); ?> </a> </li>
-                    <li> <a class="moveRight2 open-login" style="cursor: pointer;"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
+                    <li> <a class="moveRight2 open-login" style="cursor: pointer;" href="#"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
                 <?php } else { ?>
                     <style type="text/css">
                         .moveRight1 {
@@ -93,7 +93,7 @@ $this->beginContent('//layouts/common');
             //модель для авторизации юзера
             $userLogin = New UserLogin();
             // вывести част. вьюшку для входа 
-            $this->renderPartial('login', array('userLogin'=>$userLogin), false, false);
+            $this->renderPartial('//layouts/login', array('userLogin'=>$userLogin), false, false);
             // вывести основной контент
             echo $content; 
             ?>

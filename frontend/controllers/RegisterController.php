@@ -18,6 +18,18 @@ class RegisterController extends EController
     
     public $step = 1; //№ шага регистрации
     
+    
+      /**
+    * Добавлить действие для капчи
+    */
+    public function actions(){
+        return array(
+            'captcha'=>array(
+                'class'=>'CCaptchaAction',
+                'testLimit'=>0,    //делаем неограниченное кол-во попыток ввода капчи
+            ),
+        );
+    }
     /**
     * Регистрация в системе
     */

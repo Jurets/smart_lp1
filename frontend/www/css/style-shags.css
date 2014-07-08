@@ -7,9 +7,9 @@
     margin: 0 auto;
     position: relative;
     font: 20px 'Open Sans Condensed' !important;
-    
 
- }
+
+}
 input {
     padding-left:5px;
     height: 37px !important;
@@ -17,7 +17,7 @@ input {
     margin-top: -2px;
     color: #343434; 
     font: 26px 'Open Sans Condensed' !important;
-   
+
 }
 
 select {
@@ -33,7 +33,7 @@ select {
 
 
 
-            /*HEADER START*/
+/*HEADER START*/
 
 
 #topLine{
@@ -79,15 +79,15 @@ select {
     left: 68px;
     float: left;
     margin-right: 14px;
-    
-    }
-    
+
+}
+
 #nav li{
     float: left;
     outline: 0px solid #cc0000;
     margin-right: 14px;
     display: inline-block;
-       
+
     margin-top: -8px;
 }
 
@@ -96,7 +96,7 @@ select {
     font-size: 14px;
     color: #ababab;
     font-weight: normal;
-    }
+}
 
 #nav .flag{
     background-image: url(../images/flag.png);
@@ -125,9 +125,9 @@ select {
     left: 858px;
 }
 
-            
+
 /*HEADER END*/
-        
+
 
 
 
@@ -138,7 +138,7 @@ select {
 #content{
     height: 945px;
     position: relative;
-    
+
     text-align: left;
 }
 
@@ -149,8 +149,8 @@ select {
     height: 54px;
     background-color: #0c7d95;
     position: absolute;
-    
-    
+
+
 }
 
 #miniGlobe{
@@ -169,8 +169,8 @@ select {
     height: 889px;
     background-color: #E6E6E6;
     position: absolute;
-    
-    
+
+
 }
 
 
@@ -209,7 +209,7 @@ select {
     height: 41px;
     top: 173px;
     position: absolute;
-   
+
     background-color: #d2d2d2;
     text-align: center;
     padding-top: 6px;
@@ -228,7 +228,7 @@ select {
     position: absolute;
     left: 249px;
     top: 173px;
-   
+
     background-color: #d2d2d2;
     text-align: center;
     padding-top: 6px;
@@ -249,7 +249,7 @@ select {
 
 
 
-    
+
     background-color: #d2d2d2;
     text-align: center;
     padding-top: 6px;
@@ -266,7 +266,7 @@ select {
     position: absolute;
     left: 749px;
     top: 173px;
-   
+
     background-color: #d2d2d2;
     text-align: center;
     padding-top: 6px;
@@ -285,13 +285,13 @@ select {
     position: absolute;
     width: 253px;
     top:727px;
-	border : solid 0px #000000;
-	font-size : 25px !important;
-	color : #ffffff;
-	padding : 1px 17px;
+    border : solid 0px #000000;
+    font-size : 25px !important;
+    color : #ffffff;
+    padding : 1px 17px;
     padding-bottom: 5px;
     font-weight: bold;
-	cursor: pointer;
+    cursor: pointer;
     background-color : #30c70a;
     box-shadow: 0px 1px 1px #2d500a;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -308,13 +308,13 @@ select {
     position: absolute;
     width: 253px;
     top:727px;
-	border : solid 0px #000000;
-	font-size : 25px !important;
-	color : #ffffff;
-	padding : 1px 17px;
+    border : solid 0px #000000;
+    font-size : 25px !important;
+    color : #ffffff;
+    padding : 1px 17px;
     padding-bottom: 5px;
     font-weight: bold;
-	cursor: pointer;
+    cursor: pointer;
     background-color : #51de2d;
     box-shadow: 0px 1px 1px #2d500a;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -330,13 +330,13 @@ select {
     position: absolute;
     width: 253px;
     top:727px;
-	border : solid 0px #000000;
-	font-size : 25px !important;
-	color : #ffffff;
-	padding : 1px 17px;
+    border : solid 0px #000000;
+    font-size : 25px !important;
+    color : #ffffff;
+    padding : 1px 17px;
     padding-bottom: 5px;
     font-weight: bold;
-	cursor: pointer;
+    cursor: pointer;
     background-color : #0c7d95;
     box-shadow: 0px 1px 1px #074653;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -353,13 +353,13 @@ select {
     position: absolute;
     width: 253px;
     top:727px;
-	border : solid 0px #000000;
-	font-size : 25px !important;
-	color : #ffffff;
-	padding : 1px 17px;
+    border : solid 0px #000000;
+    font-size : 25px !important;
+    color : #ffffff;
+    padding : 1px 17px;
     padding-bottom: 5px;
     font-weight: bold;
-	cursor: pointer;
+    cursor: pointer;
     background-color : #2e9aab;
     box-shadow: 0px 1px 1px #074653;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -385,108 +385,108 @@ select {
 
 
 .sub1 { 
-  
-        height:38px; 
-        width: 251px;
-        top:249px;
-        left: 1px;
-        color:  #007e97;
-        display: block; 
-        position: absolute;
-        font: bold 19px 'Open Sans Condensed';
+
+    height:38px; 
+    width: 251px;
+    top:249px;
+    left: 1px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
 } 
 
 
 .textbox1 { 
-   border: 1px solid #d8d8d8; 
-        border-radius: 1px; 
-        height:38px; 
-        width: 251px;
-        top:277px;
-        
-   left: 1px;
-        display: block; 
-        position: absolute;
+    border: 1px solid #d8d8d8; 
+    border-radius: 1px; 
+    height:38px; 
+    width: 251px;
+    top:277px;
+
+    left: 1px;
+    display: block; 
+    position: absolute;
 }
 
 .sub2{ 
-  
-        height:38px; 
-        width: 251px;
-        top:341px;
-        left: 1px;
-        color:  #007e97;
-        display: block; 
-        position: absolute;
-        font: bold 19px 'Open Sans Condensed';
+
+    height:38px; 
+    width: 251px;
+    top:341px;
+    left: 1px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
 } 
 
 
 
 
 .textbox2 { 
-   border: 1px solid #d8d8d8; 
-        border-radius: 1px; 
-        height:38px; 
-        width: 251px;
-        top:370px;
-        
-   left: 1px;
-        display: block; 
-        position: absolute;
+    border: 1px solid #d8d8d8; 
+    border-radius: 1px; 
+    height:38px; 
+    width: 251px;
+    top:370px;
+
+    left: 1px;
+    display: block; 
+    position: absolute;
 } 
 
 
 .shag-1-1-option2text { 
-  
-        height:38px; 
-        width: 251px;
-        top:434px;
-        left: 1px;
-        color:  #007e97;
-        display: block; 
-        position: absolute;
-        font: bold 19px 'Open Sans Condensed';
+
+    height:38px; 
+    width: 251px;
+    top:434px;
+    left: 1px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
 } 
 
 
 .shag-1-1-option2 { 
-   border: 1px solid #d8d8d8; 
-        border-radius: 1px; 
-        height:38px; 
-        width: 251px;
-        top:464px;
-        
-   left: 1px;
-        display: block; 
-        position: absolute;
-        font-size: 13px;
+    border: 1px solid #d8d8d8; 
+    border-radius: 1px; 
+    height:38px; 
+    width: 251px;
+    top:464px;
+
+    left: 1px;
+    display: block; 
+    position: absolute;
+    font-size: 13px;
 } 
 
 .shag-1-1-option3text { 
-  
-        height:38px; 
-        width: 251px;
-        top:251px;
-        left: 426px;
-        color:  #007e97;
-        display: block; 
-        position: absolute;
-        font: bold 19px 'Open Sans Condensed';
+
+    height:38px; 
+    width: 251px;
+    top:251px;
+    left: 426px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
 } 
 
 
 .shag-1-1-option3 { 
-   border: 1px solid #d8d8d8; 
-        border-radius: 1px; 
-        height:38px; 
-        width: 251px;
-        top:277px;
-        
-   left: 425px;
-        display: block; 
-        position: absolute;
-        font-size: 13px;
+    border: 1px solid #d8d8d8; 
+    border-radius: 1px; 
+    height:38px; 
+    width: 251px;
+    top:277px;
+
+    left: 425px;
+    display: block; 
+    position: absolute;
+    font-size: 13px;
 } 
 
 
@@ -494,98 +494,98 @@ select {
 
 
 .shag-1-1-option1text { 
-  
-        height:38px; 
-        width: 251px;
-        top:530px;
-        left: 1px;
-        color:  #007e97;
-        display: block; 
-        position: absolute;
-        font: bold 19px 'Open Sans Condensed';
+
+    height:38px; 
+    width: 251px;
+    top:530px;
+    left: 1px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
 } 
 
 
 .shag-1-1-option1 { 
-   border: 1px solid #d8d8d8; 
-        border-radius: 1px; 
-        height:38px; 
-        width: 251px;
-        top:557px;
-        
-   left: 1px;
-        display: block; 
-        position: absolute;
-        font-size: 17px;
+    border: 1px solid #d8d8d8; 
+    border-radius: 1px; 
+    height:38px; 
+    width: 251px;
+    top:557px;
+
+    left: 1px;
+    display: block; 
+    position: absolute;
+    font-size: 17px;
 } 
 
 
 
 
 input[type=checkbox].css-checkbox {
-							display:none;
-						}
+    display:none;
+}
 
-						input[type=checkbox].css-checkbox + label.css-label {
-							padding-left:55px;
-							height:44px; 
-							display:inline-block;
-							line-height:50px;
-							background-repeat:no-repeat;
-							background-position: 0 0;
-							font-size:50px;
-							vertical-align:middle;
-							cursor:pointer;
-                            top: 637px;
-                            
-                            position: absolute;
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left:55px;
+    height:44px; 
+    display:inline-block;
+    line-height:50px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:50px;
+    vertical-align:middle;
+    cursor:pointer;
+    top: 637px;
 
-						}
+    position: absolute;
 
-						input[type=checkbox].css-checkbox:checked + label.css-label {
-							background-position: 0 -44px;
-						}
-						label.css-label {
-				background-image:url(../images/check.png);
-				user-select: none;
-                            background-size: 44px;
-			}
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -44px;
+}
+label.css-label {
+    background-image:url(../images/check.png);
+    user-select: none;
+    background-size: 44px;
+}
 
 
 
 
 .sub3{ 
-  
-        height:38px; 
-        width: 851px;
-        top:645px;
-        left: 53px;
-        color:  #848484;
-        display: block; 
-        position: absolute;
-        font: bold 19px 'Open Sans Condensed';
+
+    height:38px; 
+    width: 851px;
+    top:645px;
+    left: 53px;
+    color:  #848484;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
 } 
 
 
 .sub3 a{ 
-   
-        text-decoration: underline;
-        color:  #007e97;
-        font: bold 20px 'Open Sans Condensed';
+
+    text-decoration: underline;
+    color:  #007e97;
+    font: bold 20px 'Open Sans Condensed';
 } 
 
 
 
 .shag-1-1-option4text { 
-  
-        height:38px; 
-        width: 251px;
-        top: 341px;
-        left: 423px;
-        color:  #007e97;
-        display: block; 
-        position: absolute;
-        font: bold 19px 'Open Sans Condensed';
+
+    height:38px; 
+    width: 251px;
+    top: 341px;
+    left: 423px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
 } 
 
 
@@ -620,20 +620,20 @@ input[type=checkbox].css-checkbox {
     color: #ccc;
     height:0px; 
     position: absolute;
-   
+
     top:21px;
     left: 17px;
-    
+
 }
 
 #login .sub2{
     color: #ccc;
     height:0px; 
     position: absolute;
-   
+
     top:92px;
     left: 17px;
-    
+
 }
 
 
@@ -660,7 +660,7 @@ input[type=checkbox].css-checkbox {
 
 
 #shag-1-2-textArea span{
-   font-size: 30px;
+    font-size: 30px;
     font-weight: bold ;
     color: #848484;
 }
@@ -669,7 +669,7 @@ input[type=checkbox].css-checkbox {
 /*  SHAG 1-3*/
 
 #shag-1-3-text{
-    
+
     top:245px;
     position: absolute;
     font:bold 18px 'Open Sans Condensed';
@@ -688,13 +688,13 @@ input[type=checkbox].css-checkbox {
     position: absolute;
     width: 253px;
     top:490px;
-	border : solid 0px #000000;
-	font-size : 25px !important;
-	color : #ffffff;
-	padding : 1px 17px;
+    border : solid 0px #000000;
+    font-size : 25px !important;
+    color : #ffffff;
+    padding : 1px 17px;
     padding-bottom: 5px;
     font-weight: bold;
-	
+
     background-color : #B2B2B2;
     box-shadow: 0px 1px 1px #414141;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -710,13 +710,13 @@ input[type=checkbox].css-checkbox {
     width: 253px;
     top:490px;
     left: 135px;
-	border : solid 0px #000000;
-	font-size : 25px !important;
-	color : #ffffff;
-	padding : 1px 17px;
+    border : solid 0px #000000;
+    font-size : 25px !important;
+    color : #ffffff;
+    padding : 1px 17px;
     padding-bottom: 5px;
     font-weight: bold;
-	
+
     background-color : #c6c6c6;
     box-shadow: 0px 1px 1px #414141;
     font-family: 'Open Sans Condensed', 'sans-serif';
@@ -727,7 +727,7 @@ input[type=checkbox].css-checkbox {
 /*  SHAG 1-4*/
 
 #shag-1-4-text{
-    
+
     top:245px;
 
 
@@ -750,7 +750,7 @@ input[type=checkbox].css-checkbox {
 
 
 #shag-2-1-text{
-    
+
     top:245px;
     position: absolute;
     font:bold 18px 'Open Sans Condensed';
@@ -759,77 +759,77 @@ input[type=checkbox].css-checkbox {
 
 
 .shag-2-1-sub1 { 
-  
-        height:26px; 
-        width: 137px;
-        top:301px;
-        display: block; 
-        position: absolute;
-        font: bold 18px 'Open Sans Condensed';
-        
+
+    height:26px; 
+    width: 137px;
+    top:301px;
+    display: block; 
+    position: absolute;
+    font: bold 18px 'Open Sans Condensed';
+
 } 
 
 
 .shag-2-1-sub2 { 
-  
-        height:26px; 
-        width: 247px;
-        top:340px;
-        left: 132px;
-        color:  #909090;
-        display: block; 
-        position: absolute;
-        font:18px 'Open Sans Condensed';
-        
+
+    height:26px; 
+    width: 247px;
+    top:340px;
+    left: 132px;
+    color:  #909090;
+    display: block; 
+    position: absolute;
+    font:18px 'Open Sans Condensed';
+
 } 
 
 .shag-2-1-sub1 .pm { 
-   
-        top: 0px;
-        left: 98px;
-        position: absolute;
-      
+
+    top: 0px;
+    left: 98px;
+    position: absolute;
+
 } 
 
 .shag-2-1-textbox1 { 
-   border: 1px solid #d8d8d8; 
-        border-radius: 1px; 
-        height:38px; 
-        width: 251px;
-        top:297px;
-        
-   left: 132px;
-        display: block; 
-        position: absolute;
+    border: 1px solid #d8d8d8; 
+    border-radius: 1px; 
+    height:38px; 
+    width: 251px;
+    top:297px;
+
+    left: 132px;
+    display: block; 
+    position: absolute;
 }
 
 
 .shag-2-1-sub3 { 
-  
-        height:26px; 
-        width: 113px;
-        top:301px;
-        left: 435px;
-        color:  #007e97;
-        display: block; 
-        position: absolute;
-        font: bold 18px 'Open Sans Condensed';
-        
+
+    height:26px; 
+    width: 113px;
+    top:301px;
+    left: 435px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 18px 'Open Sans Condensed';
+
 } 
 
 
 .shag-2-1-sub4 { 
-  
-        height:65px; 
-        width: 273px;
-        top:338px;
-        left: 535px;
-        color:  #909090;
-        display: block; 
-        position: absolute;
-        font:18px 'Open Sans Condensed';
-        word-spacing: -1px;
-        
+
+    height:65px; 
+    width: 273px;
+    top:338px;
+    left: 535px;
+    color:  #909090;
+    display: block; 
+    position: absolute;
+    font:18px 'Open Sans Condensed';
+    word-spacing: -1px;
+
 } 
 
 
@@ -842,7 +842,7 @@ input[type=checkbox].css-checkbox {
     left: 535px;
     background-image: url(../images/sozdatB.png);
     background-repeat: no-repeat;
-	cursor: pointer;
+    cursor: pointer;
     transition: .3s;
 
 }
@@ -856,7 +856,7 @@ input[type=checkbox].css-checkbox {
     left: 535px;
     background-image: url(../images/sozdatBH.png);
     background-repeat: no-repeat;
-	cursor: pointer;
+    cursor: pointer;
     transition: .3s;
 
 }
@@ -874,61 +874,61 @@ input[type=checkbox].css-checkbox {
 .btn-style-blue-2-1{
     top: 298px;
     left: 536px;
-	background-image:url(../images/alpha-arrow.png);
-	background-repeat:no-repeat;
-	
+    background-image:url(../images/alpha-arrow.png);
+    background-repeat:no-repeat;
+
     background-position: 231px 11px;
     padding-left: 0px;
 }
 
 
 .btn-style-blue-2-1:hover{
-   top: 298px;
+    top: 298px;
     left: 536px;
-padding-left: 0px;
+    padding-left: 0px;
 }
 
 .btn-style-blue-3-1{
     top: 298px;
     left: 0px;
-	background-image:url(../images/alpha-arrow.png);
-	background-repeat:no-repeat;
-	
+    background-image:url(../images/alpha-arrow.png);
+    background-repeat:no-repeat;
+
     background-position: 231px 11px;
     padding-left: 0px;
 }
 
 
 .btn-style-blue-3-1:hover{
-   top: 298px;
-    
-   left: 0px;
-padding-left: 0px;
+    top: 298px;
+
+    left: 0px;
+    padding-left: 0px;
 }
 
 .btn-style-blue-4-1{
     top: 360px;
     left: 0px;
-	background-image:url(../images/alpha-arrow.png);
-	background-repeat:no-repeat;
-	
+    background-image:url(../images/alpha-arrow.png);
+    background-repeat:no-repeat;
+
     background-position: 231px 11px;
     padding-left: 0px;
 }
 
 
 .btn-style-blue-4-1:hover{
-   top: 360px;
-    
-   left: 0px;
-padding-left: 0px;
+    top: 360px;
+
+    left: 0px;
+    padding-left: 0px;
 }
 /*  SHAG 3-1*/
 
 
 
 #shag-3-1-text{
-    
+
     top:245px;
     position: absolute;
     font:bold 18px 'Open Sans Condensed';
@@ -939,16 +939,16 @@ padding-left: 0px;
 
 
 .shag-3-1-sub4 { 
-  
-        height:65px; 
-        width: 253px;
-        top:346px;
-        color:  #909090;
-        display: block; 
-        position: absolute;
-        font:18px 'Open Sans Condensed';
-        word-spacing: -1px;
-        
+
+    height:65px; 
+    width: 253px;
+    top:346px;
+    color:  #909090;
+    display: block; 
+    position: absolute;
+    font:18px 'Open Sans Condensed';
+    word-spacing: -1px;
+
 } 
 
 
@@ -962,7 +962,7 @@ padding-left: 0px;
     top:300px;
     background-image: url(../images/oplatit20.png);
     background-repeat: no-repeat;
-	cursor: pointer;
+    cursor: pointer;
     transition-timing-function:ease;
     transition-property: all;
     transition-duration: 0.3s;
@@ -978,7 +978,7 @@ padding-left: 0px;
     left: 138px;
     background-image: url(../images/oplatit20H.png);
     background-repeat: no-repeat;
-	cursor: pointer;
+    cursor: pointer;
     transition-timing-function:ease;
     transition-property: all;
     transition-duration: 0.3s;
@@ -992,7 +992,7 @@ padding-left: 0px;
 
 
 #shag-4-1-text{
-    
+
     top:239px;
     position: absolute;
     font:bold 18px 'Open Sans Condensed';
@@ -1003,16 +1003,16 @@ padding-left: 0px;
 
 
 .shag-4-1-sub4 { 
-  
-        height:65px; 
-        width: 266px;
-        top:403px;
-        color:  #909090;
-        display: block; 
-        position: absolute;
-        font:18px 'Open Sans Condensed';
-        word-spacing: -1px;
-        
+
+    height:65px; 
+    width: 266px;
+    top:403px;
+    color:  #909090;
+    display: block; 
+    position: absolute;
+    font:18px 'Open Sans Condensed';
+    word-spacing: -1px;
+
 } 
 
 
@@ -1025,7 +1025,7 @@ padding-left: 0px;
     top:364px;
     background-image: url(../images/oplatit50.png);
     background-repeat: no-repeat;
-	cursor: pointer;
+    cursor: pointer;
     transition-timing-function:ease;
     transition-property: all;
     transition-duration: 0.3s;
@@ -1038,7 +1038,7 @@ padding-left: 0px;
     top:364px;
     background-image: url(../images/oplatit50H.png);
     background-repeat: no-repeat;
-	cursor: pointer;
+    cursor: pointer;
     transition-timing-function:ease;
     transition-property: all;
     transition-duration: 0.3s;
@@ -1065,7 +1065,7 @@ padding-left: 0px;
 
 
 #shag-4-2-text{
-    
+
     top:245px;
     position: absolute;
     font:bold 21px 'Open Sans Condensed';
@@ -1093,7 +1093,7 @@ padding-left: 0px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
-    
+
     top: -9px;
 }
 
@@ -1104,7 +1104,7 @@ padding-left: 0px;
     position:absolute;
     background-color: #232323;
     z-index: 1;
-    
+
     padding-top: 100px;
 }
 
@@ -1115,7 +1115,7 @@ padding-left: 0px;
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG3-1{
@@ -1125,7 +1125,7 @@ padding-left: 0px;
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 
@@ -1136,7 +1136,7 @@ padding-left: 0px;
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG5{
@@ -1146,7 +1146,7 @@ padding-left: 0px;
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG6{
@@ -1156,7 +1156,7 @@ padding-left: 0px;
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG7-1{
@@ -1166,7 +1166,7 @@ padding-left: 0px;
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG7-2{
@@ -1177,7 +1177,7 @@ padding-left: 0px;
 
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerBG8{
@@ -1187,26 +1187,26 @@ padding-left: 0px;
     position:absolute;
     background-image: url(../images/footerBG.png);
     z-index: 1;
-    
+
 }
 
 #footerUL1, #footerUL2, #footerUL3, #footerUL4, #footerUL5 {
     top: 115px;
     left: 141px;
-        
-   
-    
+
+
+
 }
 
 
- a{ 
+a{ 
 
     text-decoration: none;
     color: #000;
     font-size: 12px;
 
- 
-    
+
+
 
 }
 
@@ -1216,14 +1216,14 @@ padding-left: 0px;
     color: #959292;
     font-size: 15px;
     font-weight: 100;
- 
+
 }
 
 #footerUL1, #footerUL2, #footerUL3, #footerUL4, #footerUL5, #footerUL6   li{
-     line-height: 15px;
-    
-    
-     width: 155px;
+    line-height: 15px;
+
+
+    width: 155px;
 }
 
 li #zagolovok{
@@ -1231,7 +1231,7 @@ li #zagolovok{
     line-height: 45px;
     font-weight: bold;
     font-size: 19px;
-   
+
 }
 
 
@@ -1302,16 +1302,16 @@ li #zagolovok{
 
     height:39px ;
     width:731px ;
-    
+
 
     top: 225px;
     color: #4b4646;
-    
+
 
     left: 139px;
     font-size: 15px;
     font-weight: 100;
-    
+
 
     font-family: 'Open Sans Condensed';
 
@@ -1319,11 +1319,11 @@ li #zagolovok{
 
 }
 #fofovi{
-	opacity: 0.5;
-	position:absolute;
-	z-index: 1;
-	left: 171px;
-	top: 0;
+    opacity: 0.5;
+    position:absolute;
+    z-index: 1;
+    left: 171px;
+    top: 0;
 }
 
 html, body {
@@ -1333,32 +1333,32 @@ html, body {
     margin: 0px;
     padding: 0px;
     text-align: center;
-  }
-  .page {
+}
+.page {
     min-height: 100%;
     height: auto !important;
     height: 100%;
     background: #e6e6e6;
-  }
-  .wrap {
+}
+.wrap {
     padding-bottom: 260px;
-	 background: #e6e6e6;
-  }
-  .footer {
+    background: #e6e6e6;
+}
+.footer {
     height: 260px;
     margin-top: -260px;
     background: #232323;
-  
+
     min-width: 1000px;
 }
-  
-  #close-btn {
+
+#close-btn {
     position: absolute;
     top: 301px;
     right: 14px;
 }
 
- #footer-bark-bg {
+#footer-bark-bg {
     height: 67px;
     width: 100%;
     position: relative;

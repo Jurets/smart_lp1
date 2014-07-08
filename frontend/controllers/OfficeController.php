@@ -155,7 +155,7 @@ class OfficeController extends EController
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
     }
-
+  }
 
     /**
      * Show invitation
