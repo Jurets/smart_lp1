@@ -1,8 +1,12 @@
 <?php /* @var $this Controller */ ?>
 <?php
 //CSS-file for main page
+
+Yii::app()->clientScript->registerCssFile('css/style.css');
 Yii::app()->clientScript->registerCssFile('/css/style-shags.css');
-//Yii::app()->clientScript->registerCssFile('/css/login.css');
+Yii::app()->clientScript->registerCssFile('/css/login.css');
+
+
 //upper layout
 $this->beginContent('//layouts/common');
 ?>
@@ -26,8 +30,19 @@ $this->beginContent('//layouts/common');
             <li> <a href="#"> <?php echo Yii::t('common', 'OPPORTUNITIES'); ?> </a> </li>
             <li> <a href="#"> <?php echo Yii::t('common', 'RULES'); ?> </a> </li>
             <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
-            <li> <a href="#" class="moveRight"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
+            <li> <a href="#" class="moveRight open-login"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
+            
         </ul>
+    </div>
+    <div id="content" style="height: auto !important;">
+        <?php
+//            //модель для авторизации юзера
+//        $userLogin = New UserLogin();
+//            // вывести част. вьюшку для входа 
+//        $this->renderPartial('//layouts/login', array('userLogin' => $userLogin), false, false);
+//            // вывести основной контент
+//        echo $content;
+        ?>
     </div>
 
     <div id="content">
@@ -38,8 +53,13 @@ $this->beginContent('//layouts/common');
         <div class="btn-style2 <?= ($this->step == 2) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 2'); ?></div>
         <div class="btn-style3 <?= ($this->step == 3) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 3'); ?></div>
         <div class="btn-style4 <?= ($this->step == 4) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 4'); ?></div>
-
-        <?php echo $content; ?>
+        <?php
+//            //модель для авторизации юзера
+        $userLogin = New UserLogin();
+//            // вывести част. вьюшку для входа 
+        $this->renderPartial('//layouts/login', array('userLogin' => $userLogin), false, false);
+        echo $content;
+        ?>
     </div>
 </div>
 

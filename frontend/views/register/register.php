@@ -82,7 +82,7 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
 ));*/?>
 
 <div>
-    <a id="logo" href="index.html"> </a>
+    <a id="logo" href="<?php echo Yii::app()->createAbsoluteUrl(''); ?>"> </a>
 </div>
    
    

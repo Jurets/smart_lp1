@@ -68,7 +68,7 @@ class SiteController extends LoginController
                 } 
             }
             // display the login form
-            $this->render('site/login',array('model'=>$model));
+            $this->render('//layouts/login',array('model'=>$model));
         } else {
             if (Yii::app()->request->urlReferrer != Yii::app()->request->url)
                 $this->redirect(Yii::app()->request->urlReferrer);

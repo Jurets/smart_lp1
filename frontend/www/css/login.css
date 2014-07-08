@@ -1,0 +1,73 @@
+#textbox1-login{
+    border: 6px solid #fff; 
+    border-radius: 1px; 
+    height:20px !important; 
+    width: 190px;
+    top:47px;
+    left: 24px;
+    display: block; 
+    position: absolute;
+    font-size: 20px !important;
+    font-family: 'Open Sans Condensed', 'sans-serif' !important;
+}
+
+#textbox2-login { 
+     border: 6px solid #fff; 
+    border-radius: 1px; 
+    height:20px !important; 
+    width: 190px;
+    top:115px;
+    left: 24px;
+    display: block; 
+    position: absolute;
+    font-size: 20px !important;
+    font-family: 'Open Sans Condensed', 'sans-serif' !important;
+} 
+
+
+#textbox3-login { 
+    border: 6px solid #fff; 
+    border-radius: 1px; 
+    height:20px !important; 
+    width: 190px;
+    top:227px;
+    left: 24px;
+    display: block; 
+    position: absolute;
+    font-size: 20px !important;
+    font-family: 'Open Sans Condensed', 'sans-serif' !important;
+}
+
+#sub1-login{
+    color: #879092;
+    height:0px; 
+    position: absolute;
+    font-weight: bold;
+    top:15px;
+    left: 22px;
+    font-size: 14px;
+
+}
+
+#sub2-login{
+    color: #879092;
+    height:0px; 
+    position: absolute;
+    font-weight: bold;
+    top:81px;
+    left: 22px;
+    font-size: 14px;
+}
+
+
+
+#sub3-login{
+    color: #879092;
+    height:0px; 
+    position: absolute;
+    font-weight: bold;
+    top:201px;
+    left: 22px;
+    font-size: 14px;
+}
+
