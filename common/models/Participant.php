@@ -426,6 +426,26 @@ class Participant extends User
     }    
     
     /**
+    * получить список юзеров которые ОНЛАЙН
+    * 
+    */
+    public static function getOnlineUsers($withoutSelf = false) {
+        $command = Yii::app()->db->createCommand()
+            ->select('onlineusers.userid, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
+            ->from('onlineusers')
+            ->leftJoin('{{users}}', '{{users}}.id = onlineusers.userid')
+            ->leftJoin('cities', 'cities.id = {{users}}.city_id')
+            ->leftJoin('countries', 'countries.id = cities.country_id');
+        if ($withoutSelf && isset(Yii::app()->user->id->id)) {
+            $command->where = 'onlineusers.userid <> :self_id';
+            $command->params = array(':self_id'=>Yii::app()->user->id->id);
+        }
+
+        $rows = $command->queryAll();
+        return $rows;
+    }
+        
+    /**
     * добавить юзера в список ОНЛАЙН
     * 
     */
