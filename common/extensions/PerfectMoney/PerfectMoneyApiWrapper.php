@@ -82,7 +82,7 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
          * Удалить после финального тестирования.
          * Точка запуска метода: в теле метода dataProcess(); 
          *  */
-        //$this->outputStructure['ERROR']='(Test 2) ';$this->onFailure($this->eventFailure);
+        //$this->outputStructure['ERROR']='(Test 33333) ';$this->onFailure($this->eventFailure);
         //$this->outputStructure['ERROR']=NULL;$this->onSuccess($this->eventSuccess);
     }
     
