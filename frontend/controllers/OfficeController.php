@@ -258,9 +258,6 @@ class OfficeController extends EController
        $model->notation = 'Дополнительные сведения.';
        //$model->Run('balance');
        $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
-       $model->notation = 'Дополнительные сведения.';
-       //$model->Run('balance');
-       $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
        echo $model->getError('paymentTransactionStatus').'<br>';
        echo $model->notation.'<br>';
        var_dump('Сообщения', $model->getErrors());
