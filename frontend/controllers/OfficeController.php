@@ -120,10 +120,25 @@ class OfficeController extends EController
                     $participant->password = md5($newPassword);
                 }
                 if ($_FILES['Participant']['name']['photo'] != '') {
-                    $participant->photo = CUploadedFile::getInstance($participant,'photo');
-                    $nameImage = $participant->photo->name;
-                    $url_photo = $path . $nameImage;
-                    $participant->photo->saveAs($url_photo);//сохраняем картинку
+
+                    Yii::import('common.extensions.FileUpload.UploadAction');
+                    $upload = new UploadAction('im/default', NULL);
+                    $upload->path_to_file = $path;
+                    $upload->resize = array('width'=>250,'height'=>175);
+                    $upload->re_org = array('width'=>67,'height'=>67);
+                    $upload->prefixOrigin = 'settings-';
+                    $upload->prefixResized = 'avatar-settings-';
+                    $images = $upload->run();
+                    $participant->photo = $images['photo']['name'];
+
+
+//                    $participant->photo = CUploadedFile::getInstance($participant,'photo');
+//                    $nameImage = $participant->photo->name;
+//                    $url_photo = $path . $nameImage;
+//                    $participant->photo->saveAs($url_photo);//сохраняем картинку
+//                    ImageHelper::makeNewsThumb($url_photo,'settings-','250','175');
+//                    ImageHelper::makeNewsThumb($url_photo,'resized-settings-','67','67');
+
                 }else{
                     $participant->photo = $oldPhoto;
                 }
