@@ -9,7 +9,7 @@ class PerfectMoney extends CFormModel {
    public $payeeId; // id пользователя-получателя
    public $payeeAccount; // кошелек получателя
    public $amount; // сумма для передачи с кошелька на кошелек
-   public $transactionKind = ''; // вид транзакции - передается в справочник видов транзакций // id транзакции определяется автоматически
+   private $transactionKind = ''; // вид транзакции - передается в справочник видов транзакций // id транзакции определяется автоматически ЗАПРЕЩЕНО
    public $transactionId; // id транзакции "как есть" - для передачи вручную
    public $notation=''; // комментарии
    
@@ -24,6 +24,7 @@ class PerfectMoney extends CFormModel {
    private $API; // The Component
    
   public function init(){
+      $this->transactionKind = 0;
       $this->API = Yii::app()->perfectmoney;
       $this->API->onSuccess = array($this, 'successBusinessLogic');
       $this->API->onFailure = array($this, 'failureBusinessLogic');
@@ -73,7 +74,7 @@ class PerfectMoney extends CFormModel {
            array('login, password', 'required'),
            array('payerId, payeeId, transactionId', 'type', 'type'=>'integer'),
            array('notation', 'length', 'max'=>255),
-           array('transactionKind', 'length', 'max'=>255),
+           //array('transactionKind', 'length', 'max'=>255), // параметр запрещен к использованию
        );
    }
       

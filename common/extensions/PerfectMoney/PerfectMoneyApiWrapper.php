@@ -58,7 +58,10 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
 	curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1); // настраиваем вывод ответа сервера не в браузер а в переменную
 	$apiAnswer =  curl_exec($curlHandle); // выполнение запроса и сохранение ответа в переменную (в случае неуспеха сохранится FALSE и тогда завершить функцию и выбросить какой-нибудь exception)
 	curl_close($curlHandle);
-	
+        if($apiAnswer === FALSE){
+            $this->outputStructure['ERROR'] = 'Perfect Money service not available';
+            return 0;
+        }
 	/* Парсим ответ сервера и получаем нужную структуру данных */
 	$domStructure = new DOMDocument();
 	$domStructure->loadHTML($apiAnswer);
@@ -67,7 +70,7 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
 		$this->outputStructure[$node->getAttribute('name')] = $node->getAttribute('value');
         }
         if(empty($this->outputStructure)){
-            $this->outputStructure['ERROR'] = 'Perfect Money servise not available';
+            $this->outputStructure['ERROR'] = 'API Connection Wrong';
         }
     }
     /* Выбор и генерация нужного события */

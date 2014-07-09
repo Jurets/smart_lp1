@@ -269,7 +269,7 @@ class OfficeController extends EController
        /* необязательные параметры */
        $model->payerId = '17';
        $model->payeeId = '18';
-       //$model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
+       $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
        $model->notation = 'Дополнительные сведения.';
        //$model->Run('balance');
        $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
