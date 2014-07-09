@@ -19,6 +19,7 @@ class PerfectMoney extends CFormModel {
    }
    
    private $paymentTransactionStatus; // записываем текст для пользователя в зависимости от вызванного события
+   private $errorText; // Текст ошибки, как есть
    public $message; //сюда  передать нужный текст (в init() - default в качестве примера )
    
    private $API; // The Component
@@ -28,9 +29,10 @@ class PerfectMoney extends CFormModel {
       $this->API = Yii::app()->perfectmoney;
       $this->API->onSuccess = array($this, 'successBusinessLogic');
       $this->API->onFailure = array($this, 'failureBusinessLogic');
-      /*Соглашение о выводе информации пользователю - образец*/
+      /*Соглашение о выводе информации пользователю - умолчание*/
       $this->message['success'] = 'Оплата произведена успешно';
       $this->message['failure'] = 'В процессе оплаты произошла ошибка. Для разъяснений обратитесь к администратору сайта';
+      $this->message['errorText'] = '';
   }
   
   public function successBusinessLogic($event){ // Обработчик события для компонентва API "ОПЛАТА ОКЕЮШКИ"
@@ -38,8 +40,6 @@ class PerfectMoney extends CFormModel {
       if($event->sender->choise === 'confirm'){
           $this->confirmSuccessHelper($event);
       }
-      
-      $this->addError('paymentTransactionStatus', $this->message['success']);
   }
   public function failureBusinessLogic($event){ // Обработчик события для компонента API "ОПЛАТА НЕ ПРОШЛА"
       $this->output = $event->sender->dataOut('ERROR');
@@ -47,6 +47,7 @@ class PerfectMoney extends CFormModel {
           $this->confirmFailureHelper($event);
       }         
       $this->addError('paymentTransactionStatus',$this->message['failure']);
+      $this->addError('errorText', $this->message['errorText']);
   }
 
   /* Сердце Модели */
