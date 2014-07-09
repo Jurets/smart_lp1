@@ -66,7 +66,7 @@ class UserContour extends CWidget {
         // Выплаченные комиссионные
         $this->operation = 'КОМИССИОННЫЕ';
         $db_connector = Yii::app()->db;
-        $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=1');
+        $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=6');
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read();
         $list = $db_connector->createCommand(
@@ -78,7 +78,7 @@ class UserContour extends CWidget {
              ON city_id = c.id
              JOIN countries co
              ON co.id = c.country_id
-             WHERE tr_kind_id = 1
+             WHERE tr_kind_id = 6
              LIMIT 6  ');
         $listCommission = $list->query();
         $listCommission = $listCommission->read();
@@ -97,7 +97,7 @@ class UserContour extends CWidget {
         // TO DO - получить, отформатировать и записать в dataPull ответ для ОТДАНО НА БЛАГОТВОРИТЕЛЬНОСТЬ
         $this->operation = 'ОТЧИСЛЕНИЯ';
         $db_connector = Yii::app()->db;
-        $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=2');
+        $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=7');
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read();
         $list = $db_connector->createCommand(
@@ -109,7 +109,7 @@ class UserContour extends CWidget {
              ON city_id = c.id
              JOIN countries co
              ON co.id = c.country_id
-             WHERE tr_kind_id = 2
+             WHERE tr_kind_id = 7
              LIMIT 6  ');
         $listCommission = $list->query();
         $listCommission = $listCommission->read();
