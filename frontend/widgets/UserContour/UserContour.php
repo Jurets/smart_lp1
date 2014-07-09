@@ -51,7 +51,7 @@ class UserContour extends CWidget {
         $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 ');
         $usersDump = $usersDumpCommand->query();
         $usersCount = $usersCountCommand->query();
-        
+
         $this->dataPull['numberField'] = $this->jmws_money_converter(($usersCount->read()['count(id)']));
         
         foreach($usersDump->readAll() as $index=>$li){
@@ -62,8 +62,6 @@ class UserContour extends CWidget {
        
     }
     private function freePaid(){
-        // TO DO - получить, отформатировать и записать в dataPull ответ для ВЫПЛАЧЕНО КОМИССИОННЫХ
-        // Выплаченные комиссионные
         $this->operation = 'КОМИССИОННЫЕ';
         $db_connector = Yii::app()->db;
         $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=6');
@@ -83,7 +81,8 @@ class UserContour extends CWidget {
         $listCommission = $list->query();
         $listCommission = $listCommission->read();
         if($amountCommissionCount['sum(amount)'] != null){
-        $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($amountCommissionCount['sum(amount)']);
+        $finalCount = floor($amountCommissionCount['sum(amount)']);
+        $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
         foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
             $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
@@ -94,7 +93,6 @@ class UserContour extends CWidget {
 
     }
     private function givenOncharity(){
-        // TO DO - получить, отформатировать и записать в dataPull ответ для ОТДАНО НА БЛАГОТВОРИТЕЛЬНОСТЬ
         $this->operation = 'ОТЧИСЛЕНИЯ';
         $db_connector = Yii::app()->db;
         $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=7');
@@ -114,7 +112,8 @@ class UserContour extends CWidget {
         $listCommission = $list->query();
         $listCommission = $listCommission->read();
         if($amountCommissionCount['sum(amount)'] != null){
-        $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($amountCommissionCount['sum(amount)']);
+        $finalCount = floor($amountCommissionCount['sum(amount)']);
+        $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
         foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
             $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
