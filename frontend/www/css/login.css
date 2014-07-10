@@ -1,4 +1,4 @@
-#textbox1-login{
+.textbox1{
     border: 6px solid #fff; 
     border-radius: 1px; 
     height:20px !important; 
@@ -11,7 +11,7 @@
     font-family: 'Open Sans Condensed', 'sans-serif' !important;
 }
 
-#textbox2-login { 
+.textbox2 { 
      border: 6px solid #fff; 
     border-radius: 1px; 
     height:20px !important; 
@@ -25,7 +25,7 @@
 } 
 
 
-#textbox3-login { 
+.textbox3 { 
     border: 6px solid #fff; 
     border-radius: 1px; 
     height:20px !important; 
@@ -39,7 +39,7 @@
 }
 
 #sub1-login{
-    color: #879092;
+    color: #879092 !important;
     height:0px; 
     position: absolute;
     font-weight: bold;
@@ -50,7 +50,7 @@
 }
 
 #sub2-login{
-    color: #879092;
+    color: #879092 !important;
     height:0px; 
     position: absolute;
     font-weight: bold;
@@ -62,7 +62,7 @@
 
 
 #sub3-login{
-    color: #879092;
+    color: #879092 !important;
     height:0px; 
     position: absolute;
     font-weight: bold;
@@ -71,3 +71,7 @@
     font-size: 14px;
 }
 
+#captcha{
+    top:158px;
+    left:24px;
+}
