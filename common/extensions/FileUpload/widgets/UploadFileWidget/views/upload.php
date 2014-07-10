@@ -41,7 +41,7 @@
     });
 
     function showOverlay(imagePath, imageName) {
-        var img = "<img id='cropbox'  src='" +  '/admin' + imagePath + "'/>";
+        var img = "<img id='cropbox'  src='" + imagePath + "'/>";
         //var img = '<img id="cronbox" src="/uploads/' + imagePath + '"/>';
         $("#news-image-preview").empty().append(img);
         //$("#News_image").val(imagePath);

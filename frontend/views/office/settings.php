@@ -171,7 +171,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php if($participant->photo != '') { ?>
             <div id="shag-1-1-photo-db">
 
-        <?php echo CHtml::image(UrlHelper::getImageUrl($participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
+        <?php echo CHtml::image(UrlHelper::getImageUrl('resized-'.$participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
             </div>
         <?php } else{ ?>
             <div id="shag-1-1-avatar"></div>

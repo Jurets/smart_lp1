@@ -21,7 +21,8 @@ class UploadAction extends CAction {
     /* не используется, оставлено для совместимости */
     public $prefixOrigin = 'origin-';
     public $prefixResized = 'resized-';
-    
+
+    public $path_to_file = '';
     public $uploadDir = '/uploads/';
     public $uploadUrl = '/uploads/';
     public $resize = array('width'=>336, 'height'=>160);
@@ -96,10 +97,18 @@ class UploadAction extends CAction {
             if(empty($ext))  continue;
             $uniqid = substr(md5(uniqid()), 0, 8) . "." . $ext;
             $filename = $this->prefixOrigin . $uniqid;
-            $file_path = Yii::app()->getBasePath() .(strpos($this->uploadDir,'www') ? '' : '/www/'). $this->uploadDir . $filename;
+            // путь для сохранения файла
+            $path = Yii::app()->params['upload.path'];
+            if($this->path_to_file  == ''){
+                $file_path = $path . $filename;
+                //Yii::app()->getBasePath()
+            }else{
+            /* asdasd */
+                $file_path = $this->path_to_file . $filename;
+            }
             $file_url = $this->uploadUrl . $filename;
             $file_url_resized = $this->uploadUrl . $this->prefixResized . $uniqid;
-                        
+
             $namesSource = (is_array($_FILES[$target]['tmp_name'][$num])) ?
                     $_FILES[$target]['tmp_name'][$num][key($_FILES[$target]['tmp_name'][$num])] : 
                     $_FILES[$target]['tmp_name'][$num];

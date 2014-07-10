@@ -120,10 +120,25 @@ class OfficeController extends EController
                     $participant->password = md5($newPassword);
                 }
                 if ($_FILES['Participant']['name']['photo'] != '') {
-                    $participant->photo = CUploadedFile::getInstance($participant,'photo');
-                    $nameImage = $participant->photo->name;
-                    $url_photo = $path . $nameImage;
-                    $participant->photo->saveAs($url_photo);//сохраняем картинку
+
+                    Yii::import('common.extensions.FileUpload.UploadAction');
+                    $upload = new UploadAction('im/default', NULL);
+                    $upload->path_to_file = $path;
+                    $upload->resize = array('width'=>250,'height'=>175);
+                    $upload->re_org = array('width'=>67,'height'=>67);
+                    $upload->prefixOrigin = 'settings-';
+                    $upload->prefixResized = 'avatar-settings-';
+                    $images = $upload->run();
+                    $participant->photo = $images['photo']['name'];
+
+
+//                    $participant->photo = CUploadedFile::getInstance($participant,'photo');
+//                    $nameImage = $participant->photo->name;
+//                    $url_photo = $path . $nameImage;
+//                    $participant->photo->saveAs($url_photo);//сохраняем картинку
+//                    ImageHelper::makeNewsThumb($url_photo,'settings-','250','175');
+//                    ImageHelper::makeNewsThumb($url_photo,'resized-settings-','67','67');
+
                 }else{
                     $participant->photo = $oldPhoto;
                 }
@@ -254,13 +269,10 @@ class OfficeController extends EController
        /* необязательные параметры */
        $model->payerId = '17';
        $model->payeeId = '18';
-       $model->transactionKind = 'Тест 1';
-       //$model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
-
+       $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
        $model->notation = 'Дополнительные сведения.';
        //$model->Run('balance');
        $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
-
        echo $model->getError('paymentTransactionStatus').'<br>';
        echo $model->notation.'<br>';
        var_dump('Сообщения', $model->getErrors());
