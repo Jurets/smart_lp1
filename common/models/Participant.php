@@ -374,10 +374,17 @@ class Participant extends User
 
     public function userStructureProcess()
     {
-        //$this->structureMembers = $this->findAllByAttributes(array('refer_id' => $this->refer_id));
-        $this->structureMembers = $this->findAll('refer_id =' . $this->refer_id . ' AND id <>' . $this->id);
-        $this->clubMembers = $this->findAll('tariff_id > 2 AND id <>' . $this->id);
-        //var_dump($this->clubMembers);die;
+
+        $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id', array(':refer_id'=>$this->id, ':id'=>$this->id));
+        $isBusinessClub = $this->isBusinessclub();
+        if($isBusinessClub)
+        {
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('tariff_id', $this->_businessclubIDs);
+            $criteria->addCondition( 'id <>  :id');
+            $criteria->params[':id'] = $this->id;
+            $this->clubMembers = $this->findAll($criteria);
+        }
     }
 
     /**
