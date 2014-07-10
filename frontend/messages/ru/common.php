@@ -138,5 +138,10 @@ return array(
     'ENTER THE CODE' => 'ВВЕДИТЕ КОД С КАРТИНКИ',
     'FORGOT YOUR PASSWORD?' => 'ЗАБЫЛИ ПАРОЛЬ?',
     'PASSWORD' => 'ПАРОЛЬ',
+    
+    //-----_buddies-----
+    'Information' => 'Информация',
+    'Add user to list' => 'Добавить в список',
+    'Send message' => 'Отправить сообщение'
 );
 ?>
