@@ -45,6 +45,10 @@ class OfficeController extends EController
     /**
      * Show rules
      */
+    public function actionStatistics(){
+        
+        $this->render('statistics', array());
+    }
     public function actionSpecification()
     {
         $objRequqstes = new Requisites();

@@ -42,16 +42,16 @@ class UserContour extends CWidget {
         $usersDumpCommand = $db_connector->createCommand(
                 'SELECT u.first_name, u.last_name, u.create_at, co.code, co.name
                  FROM tbl_users u
-                 INNER JOIN cities c
+                 LEFT JOIN cities c
                  ON u.city_id = c.id
-                 INNER JOIN countries co
+                 LEFT JOIN countries co
                  ON co.id = c.country_id
+                 WHERE superuser = 0 AND status = 1
                  ORDER BY u.create_at DESC
                  LIMIT 6');
-        $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 ');
+        $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 AND status = 1 ');
         $usersDump = $usersDumpCommand->query();
         $usersCount = $usersCountCommand->query();
-
         $this->dataPull['numberField'] = $this->jmws_money_converter(($usersCount->read()['count(id)']));
         
         foreach($usersDump->readAll() as $index=>$li){

@@ -37,7 +37,6 @@ class m140326_144543_add_cities extends ProjectMigration
     private function clearTables() {
         $this->execute('DROP TABLE IF EXISTS cities');
         $this->execute('DROP TABLE IF EXISTS countries');
-        $this->execute('DROP TABLE IF EXISTS requisites');
     }
     
 	public function safeDown()
