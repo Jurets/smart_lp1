@@ -374,8 +374,9 @@ class Participant extends User
 
     public function userStructureProcess()
     {
-        $this->structureMembers = $this->findAllByAttributes(array('refer_id' => $this->id));
-        $this->clubMembers = $this->findAll('tariff_id > 2 AND id <>' . '17');
+        //$this->structureMembers = $this->findAllByAttributes(array('refer_id' => $this->refer_id));
+        $this->structureMembers = $this->findAll('refer_id =' . $this->refer_id . ' AND id <>' . $this->id);
+        $this->clubMembers = $this->findAll('tariff_id > 2 AND id <>' . $this->id);
         //var_dump($this->clubMembers);die;
     }
 
@@ -405,8 +406,17 @@ class Participant extends User
     */
     public static function getFullname() {
         return implode(' ', array($this->first_name, $this->last_name));
-    } 
-    
+    }
+
+    /**
+     * состоит ли участник в бизнес-клубе
+     */
+    public  function isBusinessclub()
+    {
+        return in_array($this->tariff_id, $this->_businessclubIDs);
+    }
+
+
     /**
     * получить ссылку на аватар (или плашка - если нет)
     * 

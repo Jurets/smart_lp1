@@ -221,8 +221,9 @@ class OfficeController extends EController
     public function actionStructure(){
         $model = Participant::model()->findByPk(Yii::app()->user->id);
         $model->userStructureProcess(); // делаем "хвост"
+        $isBusinessClub = $model->isBusinessclub();
         //$this->render('test', array('model'=>$model));
-        $this->render('structure', array('model'=>$model));
+        $this->render('structure', array('model'=>$model,'isBusinessClub'=>$isBusinessClub));
     }
 
     
