@@ -138,14 +138,14 @@ class PmTransactionLog extends CActiveRecord
             $date = date('d.m.Y H:i:s', $date);
             list($short, $long) = explode(' ', $date);
             $format = array('short'=>$short, 'long'=>$short.' '.$long);
-            return $format[$choise];
+                return $format[$choise];
         }
         public function dateConvertToDb($date_from_site, $choise='short'){
             $date = strtotime($date_from_site);
             $date = date('Y-m-d H:i:s', $date);
             list($short, $long) = explode(' ', $date);
             $format = array('short'=>$short, 'long'=>$short.' '.$long);
-            return $format[$choise];
+                return $format[$choise];
         }
         public function dateInit(){ // инициализация даты в зависимости от ее наличия/отсутствия в $_POST
             if(!is_null($date = Yii::app()->request->getParam('date'))){

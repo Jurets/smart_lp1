@@ -43,66 +43,49 @@
           <div class="scroll_window">
           <table height="160" class="tg22" id="tg22">
               <tr>
-                  <td width="234">1</td>
-                  <td width="308">2</td>
-                  <td width="293">3</td>
+                <td class="tg-s6l6">24.02.14 18:57</td>
+                <td class="tg-2n7d">+50$</td>
+                <td class="tg-84pk">Новый личный в команде</td>
               </tr>
               <tr>
-                  <td width="234">1</td>
-                  <td width="308">2</td>
-                  <td width="293">3</td>
+                <td width="234">24.02.14 18:57</td>
+                <td width="308">+50$</td>
+                <td width="308">Новый чужой в команде</td>
               </tr>
               <tr>
-                  <td width="234">1</td>
-                  <td width="308">2</td>
-                  <td width="293">3</td>
+                <td class="tg-s6l6">24.02.14 18:57</td>
+                <td class="tg-2n7d">+50$</td>
+                <td class="tg-84pk">Новый личный в команде</td>
+              </tr>
+              <tr >
+                <td class="tg-k776">24.02.14 18:57</td>
+                <td class="tg-amld">+50$</td>
+                <td class="tg-f6s0">Новый чужой в команде</td>
               </tr>
               <tr>
-                  <td width="234">1</td>
-                  <td width="308">2</td>
-                  <td width="293">3</td>
+                <td class="tg-s6l6">24.02.14 18:57</td>
+                <td class="tg-2n7d">+50$</td>
+                <td class="tg-84pk">Новый личный в команде</td>
               </tr>
               <tr>
-                  <td width="">1</td>
-                  <td width="">2</td>
-                  <td width="">3</td>
+                <td width="234">24.02.14 18:57</td>
+                <td width="308">+50$</td>
+                <td width="308">Новый чужой в команде</td>
               </tr>
               <tr>
-                  <td width="">1</td>
-                  <td width="">2</td>
-                  <td width="">3</td>
+                <td class="tg-s6l6">24.02.14 18:57</td>
+                <td class="tg-2n7d">+50$</td>
+                <td class="tg-84pk">Новый личный в команде</td>
               </tr>
-              <tr>
-                  <td width="">1</td>
-                  <td width="">2</td>
-                  <td width="">3</td>
+              <tr >
+                <td class="tg-k776">24.02.14 18:57</td>
+                <td class="tg-amld">+50$</td>
+                <td class="tg-f6s0">Новый чужой в команде</td>
               </tr>
-              <tr>
-                  <td width="">1</td>
-                  <td width="">2</td>
-                  <td width="">3</td>
-              </tr>
-
           </table>
           </div>
       </td>
   </tr>
-<!--  <tr>
-    <td class="tg-k776">24.02.14 18:57</td>
-    <td class="tg-amld">+50$</td>
-    <td class="tg-f6s0">Новый чужой в команде</td>
-  </tr>
-  <tr>
-    <td class="tg-s6l6">24.02.14 18:57</td>
-    <td class="tg-2n7d">+50$</td>
-    <td class="tg-84pk">Новый личный в команде</td>
-  </tr>
-  <tr >
-    <td class="tg-k776">24.02.14 18:57</td>
-    <td class="tg-amld">+50$</td>
-    <td class="tg-f6s0">Новый чужой в команде</td>
-  </tr>
-  -->
   <tr class="last-rows">
     <td class="tg-auz7" colspan="3"><p>Всего за сегодня: <span>200 $</span></p></td>
   </tr>
@@ -128,10 +111,10 @@
         
         <table id="tg3">
     <tr>
-    <td class="tg-ll1" colspan="3">Личная команда сегодня: <span>&nbsp;&nbsp;14 $</span></td>
+    <td class="tg-ll1" colspan="3">Личная команда сегодня: <span>&nbsp;&nbsp;14</span></td>
       </tr>
       <tr>
-    <td class="tg-ll2" colspan="3">БизнесКлуб сегодня: <span>245 $</span></td>
+    <td class="tg-ll2" colspan="3">Бизнес-Клуб сегодня: <span>245</span></td>
       </tr>
      
     </table> 
