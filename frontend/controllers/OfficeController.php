@@ -299,7 +299,15 @@ class OfficeController extends EController
         }
         $this->redirect('settings');
     }
-   
+
+   /**
+    *  Change up status
+    */
+    public function actionStatus(){
+        //:TODO Делаем запрос,проверяем какой статус у пользователя и отображаем страницуы
+        $this->render('status_form');
+    }
+
 }
 
 

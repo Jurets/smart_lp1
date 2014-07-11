@@ -154,5 +154,21 @@ class SiteController extends LoginController
             'skype' => $user->skype
         ));
     }
+    /**
+     *  Change up status
+     */
+    public function actionStatus(){
+        $model = Participant::model()->findByPk(Yii::app()->user->id);
+        $status = Tariff::model()->findByPk($model->tariff_id);
+
+        $criteria = new CDbCriteria();
+        $criteria->addCondition( 'id >  :id');
+        $criteria->params[':id'] = 3;
+        $tariffListData = Tariff::model()->findAll($criteria);
+
+        //Par
+        //:TODO Делаем запрос,проверяем какой статус у пользователя и отображаем страницуы
+        $this->render('status_form', array('model'=>$model,'status'=>$status,'tariffListData'=>$tariffListData));
+    }
 
 }
