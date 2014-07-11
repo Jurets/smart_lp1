@@ -46,8 +46,14 @@ class OfficeController extends EController
      * Show rules
      */
     public function actionStatistics(){
+        $model = new PmTransactionLog;
+        if(!$model->validate()){
+            throw new CHttpException(404, 'date mus be on dd.mm.yy format');
+        }
         
-        $this->render('statistics', array());
+        // TO DO - вызов логики
+        
+        $this->render('statistics', array('model'=>$model));
     }
     public function actionSpecification()
     {

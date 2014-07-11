@@ -12,9 +12,30 @@
        <div id="table1">
         
 <table class="tg1"  >
-  <tr >
+  <tr>
     <th  class="tg-st61" rowspan="7"><br><br>Чеки за сегодня:</th>
-    <th class="tg-asav">24.02.14 <a href="#"> <img src="calc.png" style="position: absolute; top: 11px;left: 366px;"></a></th>
+    <th class="tg-asav">
+        <a href="#" id="callCalendar">
+        <div id="callCalendar">
+            <?php
+            echo TbHtml::beginForm(NULL, 'post', array('id'=>'dateChanger'));
+            $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                'name'=>'date',
+                'id'=>'dateToAct',
+                'value'=>$model->date,
+                'options'=>array(
+                  'dateFormat'=>'dd.mm.y'  
+                ),
+                'htmlOptions'=>array(
+                    'style'=>'height:25px;width: 86px;margin-top:-6px;font-size:22px !important; font-weight:bold !important; color:#656565; border:none;'
+                ),
+                ));
+             echo TbHtml::endForm();
+            ?>
+        </div>
+         <img src="/images/calc.png" style="position: absolute; top: 11px;left: 366px;">
+        </a>
+    </th>
     <th class="tg-oyj1" colspan="2"><a href="#" id="showAllRec">Показать все</a></th>
   </tr>
   <tr>
@@ -178,5 +199,12 @@
        $("#tg22 tr:nth-child(odd)").addClass('strip');
        $("#tg22 tr:nth-child(even)").addClass('nostrip');
        
+       $('#callCalendar').click(function(){
+            $('#dateToAct').datepicker( "show" );
+            return false;
+       });
+       $('#dateToAct').change(function(){
+           $("form").submit();
+       });
    }); 
  </script>
