@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 204-2
- * Date: 11.07.14
- * Time: 16:57
- */
-
-
 echo CHtml::beginForm('','post');
-echo CHtml::label('Login: ','login');
-echo CHtml::textField('login');
+echo CHtml::label('Введите данные из Perfect Money','');
 echo '<br>';
-echo CHtml::label('Password: ','password');
+echo CHtml::label('Аккаунт: ','account');
+echo CHtml::textField('account');
+echo '<br>';
+echo CHtml::label('Пароль: ','password');
 echo CHtml::textField('password');
 echo '<br>';?>
     <input type="hidden" name="purse_from" value="<?php //От куда пересылаем ?>">
