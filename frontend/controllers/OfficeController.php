@@ -45,6 +45,16 @@ class OfficeController extends EController
     /**
      * Show rules
      */
+    public function actionStatistics(){
+        $model = new PmTransactionLog;
+        if(!$model->validate()){
+            throw new CHttpException(404, 'date mus be on dd.mm.yy format');
+        }
+        
+        // TO DO - вызов логики
+        
+        $this->render('statistics', array('model'=>$model));
+    }
     public function actionSpecification()
     {
         $objRequqstes = new Requisites();
@@ -218,8 +228,9 @@ class OfficeController extends EController
     {
         $model = Participant::model()->findByPk(Yii::app()->user->id);
         $model->userStructureProcess(); // делаем "хвост"
+        $isBusinessClub = $model->isBusinessclub();
         //$this->render('test', array('model'=>$model));
-        $this->render('structure', array('model' => $model));
+        $this->render('structure', array('model'=>$model,'isBusinessClub'=>$isBusinessClub));
     }
 
     /**
@@ -318,6 +329,14 @@ class OfficeController extends EController
             $participatnObj->save();
         }
         $this->redirect('settings');
+    }
+
+   /**
+    *  Change up status
+    */
+    public function actionStatus(){
+        //:TODO Делаем запрос,проверяем какой статус у пользователя и отображаем страницуы
+        $this->render('status_form');
     }
 
 }
