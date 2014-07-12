@@ -29,6 +29,7 @@
  */
 class Participant extends User
 {
+
     //константы для обозначения тарифа участника
     const TARIFF_START = 0;
     const TARIFF_20 = 1;
@@ -41,7 +42,6 @@ class Participant extends User
     //масив для бизнес-тарифов 
     // * термин "тарифы" (вместо "статусы" как в ТЗ) здесь и далее применяется для того, чтобы отличить их от статуса активности/неактивности
     private $_businessclubIDs = array(self::TARIFF_BC, self::TARIFF_BC_BRONZE, self::TARIFF_BC_SILVER, self::TARIFF_BC_GOLD);
-
     //поле страны - нужно для помощи при выборе города (т.к. у юзера поля страны нет, а поле города - есть)
     public $country_id;
     //поле (логическое) согласия регистрируемого участника
@@ -56,17 +56,14 @@ class Participant extends User
     public $newPassword;
     //переданный постом код активации (используетсяна формах регистрации для контроля)
     public $postedActivKey = null;
-
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
     public $business = null;
     public $checks = null;
     public $fdl = null;
     public $time = null;
-
     public $structureMembers = null; // для массива моделей тех пользователей, для которых текущий (авторизованный) пользователь есть реферал
     public $clubMembers = null; // здесь лежат пользователи, которые попали в куб
-
     private $dict_participant = 'participant';
 
     /**
@@ -77,29 +74,30 @@ class Participant extends User
         //NOTE: you should only define rules for those attributes that
         //will receive user inputs.
         return CMap::mergeArray(parent::rules(), array(
-            array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
-            array('id', 'safe', 'on' => array('search', 'seestructure')),
-            //регистрация 'required'
-            array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
-            array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
-            array('username, country_id, city_id, email, rulesAgree', 'required', 'on' => array('register')),
-            array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => 'Необходимо принять Пользовательское Соглашение'),
-            //The following rule is used by search().
-            //@todo Please remove those attributes that should not be searched.
-            //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
-            array('purse', 'safe', 'on' => array('setpurse')),
-            array('purse', 'required', 'on' => array('setpurse')),
-            array('purse', 'unique'),
-            // Scenario for settings(update information)
-            array('username,newPurse,password,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype ', 'safe' ,'on'=>array('settings')),
-            array('email','email', 'on'=>array('settings')),
-            array('username,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype', 'required' ,'on'=>array('settings')),
-            array('currentPassword', 'passwordRule', 'allowEmpty'=>true, 'on'=>array('settings')),
-            array('newPassword', 'newPasswordRule', 'allowEmpty'=>true, 'on'=>array('settings')),
-            array('photo', 'file','safe'=>true , 'types'=>'jpg, gif, png' ,
-                  'allowEmpty'=>true,'maxSize'=>2 * 1024 * 1024,'tooLarge'=>'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
+                    array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
+                    array('id', 'safe', 'on' => array('search', 'seestructure')),
+                    //регистрация 'required'
+                    array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
+                    array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
+                    array('username, country_id, city_id, email, rulesAgree', 'required', 'on' => array('register')),
+                    array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => 'Необходимо принять Пользовательское Соглашение'),
+                    //The following rule is used by search().
+                    //@todo Please remove those attributes that should not be searched.
+                    //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
+                    array('purse', 'safe', 'on' => array('setpurse')),
+                    array('purse', 'required', 'on' => array('setpurse')),
+                    array('purse', 'unique'),
+                    // Scenario for settings(update information)
+                    array('username,newPurse,password,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype ', 'safe', 'on' => array('settings')),
+                    array('email', 'email', 'on' => array('settings')),
+                    array('username,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype', 'required', 'on' => array('settings')),
+                    array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
+                    array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
+                    array('photo', 'file', 'safe' => true, 'types' => 'jpg, gif, png',
+                        'allowEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'tooLarge' => 'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера.', 'on' => array('settings')),
         ));
     }
+
     /**
      * @return array relational rules.
      */
@@ -108,19 +106,19 @@ class Participant extends User
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return CMap::mergeArray(parent::relations(), array(
-            //ссылка на объект-рефер для сабжа
-            'referal' => array(self::BELONGS_TO, 'Participant', 'refer_id'),
-            //кол-во подчинённых (т.е. тех, у которых сабж является рефером)
-            'subCount' => array(self::STAT, 'Participant', 'refer_id'),
-            'structure' => array(self::STAT, 'Participant', 'id'),
-            //тариф (статус по ТЗ)
-            'tariff' => array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
-            //город
-            'city' => array(self::BELONGS_TO, 'Cities', 'city_id'),
-            //текущий бан в чате (его может и не быть!)
-            'chatban' => array(self::HAS_ONE, 'Chatban', 'user_id', 'condition' => 'active = 1' /*, 'limit'=>1*/),
-            //массив истории забанивания в чате
-            'chatbanhistory' => array(self::HAS_MANY, 'Chatban', 'user_id'),
+                    //ссылка на объект-рефер для сабжа
+                    'referal' => array(self::BELONGS_TO, 'Participant', 'refer_id'),
+                    //кол-во подчинённых (т.е. тех, у которых сабж является рефером)
+                    'subCount' => array(self::STAT, 'Participant', 'refer_id'),
+                    'structure' => array(self::STAT, 'Participant', 'id'),
+                    //тариф (статус по ТЗ)
+                    'tariff' => array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
+                    //город
+                    'city' => array(self::BELONGS_TO, 'Cities', 'city_id'),
+                    //текущий бан в чате (его может и не быть!)
+                    'chatban' => array(self::HAS_ONE, 'Chatban', 'user_id', 'condition' => 'active = 1' /* , 'limit'=>1 */),
+                    //массив истории забанивания в чате
+                    'chatbanhistory' => array(self::HAS_MANY, 'Chatban', 'user_id'),
         ));
     }
 
@@ -130,20 +128,20 @@ class Participant extends User
     public function attributeLabels()
     {
         return CMap::mergeArray(parent::attributeLabels(), array(
-            'create_at' => UserModule::t("Created", array(), $this->dict_participant),
-            'username' => UserModule::t("Domain", array(), $this->dict_participant),
-            'first_name' => UserModule::t("Firstname", array(), $this->dict_participant),
-            'last_name' => UserModule::t("Lastname", array(), $this->dict_participant),
-            'city_id' => UserModule::t("City", array(), $this->dict_participant),
-            'country_id' => UserModule::t("Country", array(), $this->dict_participant),
-            'structure' => UserModule::t("Structure", array(), $this->dict_participant),
-            'business' => UserModule::t("Business Club", array(), $this->dict_participant),
-            'refer_id' => UserModule::t("Referal", array(), $this->dict_participant),
-            'tariff_id' => UserModule::t("Tariff", array(), $this->dict_participant),
-            'phone' => UserModule::t("Phone", array(), $this->dict_participant),
-            'skype' => UserModule::t("Skype", array(), $this->dict_participant),
-            'dob' => UserModule::t("Birthday", array(), $this->dict_participant),
-            'gmt_id' => UserModule::t("Gmt", array(), $this->dict_participant),
+                    'create_at' => UserModule::t("Created", array(), $this->dict_participant),
+                    'username' => UserModule::t("Domain", array(), $this->dict_participant),
+                    'first_name' => UserModule::t("Firstname", array(), $this->dict_participant),
+                    'last_name' => UserModule::t("Lastname", array(), $this->dict_participant),
+                    'city_id' => UserModule::t("City", array(), $this->dict_participant),
+                    'country_id' => UserModule::t("Country", array(), $this->dict_participant),
+                    'structure' => UserModule::t("Structure", array(), $this->dict_participant),
+                    'business' => UserModule::t("Business Club", array(), $this->dict_participant),
+                    'refer_id' => UserModule::t("Referal", array(), $this->dict_participant),
+                    'tariff_id' => UserModule::t("Tariff", array(), $this->dict_participant),
+                    'phone' => UserModule::t("Phone", array(), $this->dict_participant),
+                    'skype' => UserModule::t("Skype", array(), $this->dict_participant),
+                    'dob' => UserModule::t("Birthday", array(), $this->dict_participant),
+                    'gmt_id' => UserModule::t("Gmt", array(), $this->dict_participant),
         ));
     }
 
@@ -154,26 +152,27 @@ class Participant extends User
     public function scopes()
     {
         return CMap::mergeArray(parent::scopes(), array(
-            'participant' => array(
-                'condition' => 'superuser = 0',
-            ),
-            'withoutself' => array(
-                'condition' => 'id <> :self_id',
-                'params' => array(':self_id' => $this->id)
-            ),
+                    'participant' => array(
+                        'condition' => 'superuser = 0',
+                    ),
+                    'withoutself' => array(
+                        'condition' => 'id <> :self_id',
+                        'params' => array(':self_id' => $this->id)
+                    ),
         ));
     }
 
     public function passwordRule()
     {
-        if(!empty($this->currentPassword) && $this->password != UserModule::encrypting($this->currentPassword)){
-            $this->addError('currentPassword','Неправильно введен текущий пароль.');
+        if (!empty($this->currentPassword) && $this->password != UserModule::encrypting($this->currentPassword)) {
+            $this->addError('currentPassword', 'Неправильно введен текущий пароль.');
         }
     }
+
     public function newPasswordRule()
     {
-        if(!empty($this->currentPassword) && empty($this->newPassword)){
-            $this->addError('newPassword','Введите новый пароль.');
+        if (!empty($this->currentPassword) && empty($this->newPassword)) {
+            $this->addError('newPassword', 'Введите новый пароль.');
         }
     }
 
@@ -185,7 +184,6 @@ class Participant extends User
     {
         return $this->_businessclubIDs;
     }
-
 
     /**
      * Retrieves a list of models based on the current search/filter conditions.
@@ -255,11 +253,11 @@ class Participant extends User
      * @param string $value the scenario that this model is in.
      * @see getScenario
      */
-    /*public function setScenario($value)
-    {
-        parent::setScenario($value);
-        return $this;
-    }*/
+    /* public function setScenario($value)
+      {
+      parent::setScenario($value);
+      return $this;
+      } */
 
     /**
      * процедура при выборке записи из БД
@@ -398,24 +396,26 @@ class Participant extends User
         $this->save(false, array('tariff_id'));
     }
 
+    /**
+     * построить полное имя (ФИО)
+     * 
+     */
+    public static function getFullname()
+    {
+        return implode(' ', array($this->first_name, $this->last_name));
+    }
 
     /**
-    * построить полное имя (ФИО)
-    * 
-    */
-    public static function getFullname() {
-        return implode(' ', array($this->first_name, $this->last_name));
-    } 
-    
-    /**
-    * получить ссылку на аватар (или плашка - если нет)
-    * 
-    */
-    public function getUrlAvatar() {
+     * получить ссылку на аватар (или плашка - если нет)
+     * 
+     */
+    public function getUrlAvatar()
+    {
         return self::buildUrlAvatar($this->ava);
     }
 
-    public static function buildUrlAvatar($ava) {
+    public static function buildUrlAvatar($ava)
+    {
         $file = Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $ava;
         if (!is_file($file)) { //если нет файла аватарки - определяем плашку (по полу)
             $file = Yii::app()->baseUrl . '/img/nophotom.jpg';
@@ -423,44 +423,75 @@ class Participant extends User
             $file = Yii::app()->createAbsoluteUrl($ava);
         }
         return $file;
-    }    
-    
+    }
+
     /**
-    * получить список юзеров которые ОНЛАЙН
-    * 
-    */
-    public static function getOnlineUsers($withoutSelf = false) {
+     * получить список юзеров которые ОНЛАЙН
+     * 
+     */
+    public static function getOnlineUsers($withoutSelf = false)
+    {
         $command = Yii::app()->db->createCommand()
-            ->select('onlineusers.userid, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
-            ->from('onlineusers')
-            ->leftJoin('{{users}}', '{{users}}.id = onlineusers.userid')
-            ->leftJoin('cities', 'cities.id = {{users}}.city_id')
-            ->leftJoin('countries', 'countries.id = cities.country_id');
+                ->select('onlineusers.userid, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
+                ->from('onlineusers')
+                ->leftJoin('{{users}}', '{{users}}.id = onlineusers.userid')
+                ->leftJoin('cities', 'cities.id = {{users}}.city_id')
+                ->leftJoin('countries', 'countries.id = cities.country_id');
         if ($withoutSelf && isset(Yii::app()->user->id->id)) {
             $command->where = 'onlineusers.userid <> :self_id';
-            $command->params = array(':self_id'=>Yii::app()->user->id->id);
+            $command->params = array(':self_id' => Yii::app()->user->id->id);
         }
 
         $rows = $command->queryAll();
         return $rows;
     }
-        
+
     /**
-    * добавить юзера в список ОНЛАЙН
-    * 
-    */
-    public function putUserToOnline() {
+     * добавить юзера в список ОНЛАЙН
+     * 
+     */
+    public function putUserToOnline()
+    {
         $command = Yii::app()->db->createCommand();
         $user_id = $command  //сначала проверить: не занесён ли он уже в онлайн-список
-            ->select('userid')
-            ->from('onlineusers')
-            ->where('userid = :userid', array(':userid'=>$this->id))
-            ->queryScalar();
+                ->select('userid')
+                ->from('onlineusers')
+                ->where('userid = :userid', array(':userid' => $this->id))
+                ->queryScalar();
         if ($user_id) {   //если да - обновить дату/время последнего действия
-            return $command->update('onlineusers', array('lastvisit'=>time()), 'userid = :userid', array(':userid'=>$this->id));
+            return $command->update('onlineusers', array('lastvisit' => time()), 'userid = :userid', array(':userid' => $this->id));
         } else {          //если нет - добавить строку в таблицу
-            return $command->insert('onlineusers', array('userid'=>$this->id, 'lastvisit'=>time()));
+            return $command->insert('onlineusers', array('userid' => $this->id, 'lastvisit' => time()));
         }
+    }
+
+    //Получить всех юзеров, кто в твоей команде
+    public static function getTeamUsers($withoutSelf = false)
+    {
+//         $command = Yii::app()->db->createCommand()
+//                 ->select('id,username')
+//                 ->from('tbl_users')
+//                 ->where("refer_id =". Yii::app()->user->id)
+//                 ->queryAll();
+//         return $command;
+        $command = Yii::app()->db->createCommand()
+                ->select('{{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
+                ->from('{{users}}')
+                ->leftJoin('cities', 'cities.id = {{users}}.city_id')
+                ->leftJoin('countries', 'countries.id = cities.country_id');
+        if (isset(Yii::app()->user->id)) {
+            $command->andWhere("{{users}}.refer_id =" . Yii::app()->user->id);
+        }
+        if (isset(Yii::app()->user->refer_id)) {
+            $command->orWhere("{{users}}.id = " . Yii::app()->user->refer_id . " and " . Yii::app()->user->refer_id . " is not null");
+        }
+        if ($withoutSelf && isset(Yii::app()->user->id->id)) {
+            $command->where = 'onlineusers.userid <> :self_id';
+            $command->params = array(':self_id' => Yii::app()->user->id->id);
+        }
+
+        $rows = $command->queryAll();
+        return $rows;
     }
 
 }

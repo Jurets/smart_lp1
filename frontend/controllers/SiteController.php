@@ -154,5 +154,16 @@ class SiteController extends LoginController
             'skype' => $user->skype
         ));
     }
+    
+    // возврат списка онлайн-юзеров
+    public function actionGetTeamUsers()
+    {
+        $onlineusers = Participant::getTeamUsers(false); //true - не показывать себя
+
+        $response = array();
+        $response['onlinecount'] = count($onlineusers);
+        $response['html'] = $this->renderPartial('application.views.office._buddies', array('onlineusers' => $onlineusers), true);
+        echo CJSON::encode($response);
+    }
 
 }

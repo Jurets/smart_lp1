@@ -186,30 +186,42 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
         </div>
 
 
-        <div id="buddy-list" class="buddy-wrapper">
-            <?php $this->renderPartial('_buddies', array('onlineusers' => $onlineusers)); ?>
+        <div class="buddy-wrapper">
+            <div id="buddy-list" > 
+                <?php
+                $this->renderPartial('_buddies', array(
+                    'onlineusers' => $onlineusers,
+                    'interlocutor' => $interlocutor));
+                ?>
+            </div>
+            <div id="hidden-user-info"  >
+                <p> <span><?php echo Yii::t('common', 'Information') ?>:</span></p>
+                <div id="for-avatar"></div>
+                <p><span>phone:<span id="phone"></span></p>
+                <p><span>skype:</span><span id="skype"></span></p>
+                <p id="link-send-message"></p>
+                <a href="#">
+                    <img id="close-btn" src="/images/Х.png" width="22">
+                </a>
+            </div>
         </div>
 
-        <div id="hidden-user-info"  >
-            <p> <span><?php echo Yii::t('common', 'Information') ?>:</span></p>
-            <div id="for-avatar"></div>
-            <p><span>phone:<span id="phone"></span></p>
-            <p><span>skype:</span><span id="skype"></span></p>
-            <p><a href="<?= Yii::app()->createAbsoluteUrl('site/addUserToList') ?>" target="blank"><?php echo Yii::t('common', 'Add user to list') ?></a></p>
-            <p><a href="<?= Yii::app()->createAbsoluteUrl('site/sendMessage') ?>" target="blank"><?php echo Yii::t('common', 'Send message') ?></a></p>
-            <a href="#">
-                <img id="close-btn" src="/images/Х.png" width="22">
-            </a>
-        </div>
+
 
         <div id="chat-log-wrapper" class="chat-log-wrapper">
         </div>
         <?php
+        if (isset($_GET['interlocutor'])) {
+            $interlocutor = $_GET['interlocutor'];
+        }
+        if ($interlocutor == 0) {
+            $isActivated = false;
+        }
         $identity = is_object(Yii::app()->user->id) ? Yii::app()->user->id->id : Yii::app()->user->id;
         //$module = Yii::app()->getModule('chatmobile');
         //$messageBlock = $isWebinar ? $module->messageBlockWeb : $module->messageNonActive;
         $this->widget('YiiChatWidget', array(
-            'chat_id' => 'vogteam_chat', // a chat identificator
+            'chat_id' => $chat_id, // a chat identificator
             'identity' => $identity, // the user, Yii::app()->user->id ? YES
             'selector' => '#chat-log-wrapper', //'#chat',                // were it will be inserted
             'minPostLen' => 1, // min and
@@ -385,11 +397,18 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
 
     //Процедура при загрузке страницы
     $(document).ready(function() {
+
         $('.buddy').live('click', function() {
+            $('.info-image').click(function() {
+                $('#hidden-user-info').show();
+                return false;
+            });
             $('#close-btn').click(function() {
                 $('#hidden-user-info').hide();
                 return false;
             });
+
+
             var id = $(this).attr('data');
             $.ajax({
                 url: '<?= Yii::app()->createAbsoluteUrl('site/GetUserInfo') ?>',
@@ -400,6 +419,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                     $('#for-avatar').empty();
                     $('#phone').empty();
                     $('#skype').empty();
+                    $('#link-send-message').empty();
                     if (data && data.photo) {
                         $('#for-avatar').append('<img src="/admin/uploads/' + data.photo + '" alt="" width="67px" height="67px">');
                     }
@@ -409,7 +429,9 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                     if (data && data.skype) {
                         $('#skype').text(data.skype);
                     }
-                    $('#hidden-user-info').show();
+//                    $('#link-send-message').append
+//                            ('<a href="<?php // echo Yii::app()->createAbsoluteUrl('office/chat/')    ?>' + '?interlocutor=' + id + ' "><?php // echo Yii::t('common', 'Send message')    ?></a>');
+
                     return false;
                 }
             });
@@ -467,7 +489,11 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
         var launchTimer = function() {
             setTimeout(function() {
                 $.ajax({
-                    url: '<?= Yii::app()->createAbsoluteUrl('site/getonlineusers') ?>',
+                    url: '<?=
+        Yii::app()->createAbsoluteUrl('site/getTeamUsers', array(
+            'interlocutor' => $interlocutor
+        ))
+        ?>',
                     dataType: 'json', //'text',
                     type: 'get',
                     success: function(data) {

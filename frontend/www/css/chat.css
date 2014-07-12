@@ -78,6 +78,9 @@ ul.history-buttons li.active {
     height: 16px;
     cursor: pointer;
 }
+.buddy:hover{
+    background: #007e97;
+}
 
 .buddy div.flag {
     width: 24px;
@@ -91,6 +94,7 @@ ul.history-buttons li.active {
     margin-left: 6px;
     margin-top: -3px;
     padding-bottom:0px;
+    width: 143px;
 }
 
 .chat-log-wrapper {
@@ -388,7 +392,7 @@ ul.history-buttons li.active {
     overflow: hidden;
     float: top;
     border: 1px solid #cdcada;
-    padding: 37px;
+    padding: 0px;
 }
 #hidden-user-info span{
     font-size: 16px;
@@ -408,7 +412,33 @@ ul.history-buttons li.active {
     color: #007e97;
 }
 #close-btn {
-right: 10px;
-top: 10px;
-position: absolute;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+}
+.buddy-bold{
+    font-weight: bolder;
+}
+.buddy-highlighted{
+    background: #007e97;
+}
+#buddy-list{
+    height: 288px;
+}
+.info-image{
+    width: 24px;
+    height: 24px;
+    float: left;
+    position: absolute;
+    left: 189px;
+    margin-left: 6px;
+    margin-top: -3px;
+    padding-bottom:0px;
+}
+.info-image img{
+    position: absolute;
+    top:-3px;
+}
+.username a{
+    display: block;
 }

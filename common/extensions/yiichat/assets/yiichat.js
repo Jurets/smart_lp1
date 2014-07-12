@@ -281,7 +281,7 @@ var YiiChat = function(options){
                         options.onError('timer_rejected',text);
                     } else {
                         //проверка на активность и текущий вебинар
-                        setMode(_posts.iswebinar, _posts.isactivated);
+//                        setMode(_posts.iswebinar, _posts.isactivated);
 
                         // _posts.chat_id, _posts.identity, _posts.posts
                         var hasPosts=false;
