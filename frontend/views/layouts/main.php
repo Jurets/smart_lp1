@@ -29,7 +29,7 @@ $this->beginContent('//layouts/common');
                 <li> <a href="#">  <?php echo Yii::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
                 <li> <a href="#"> <?php echo Yii::t('common', 'RULES'); ?> </a> </li>
                 <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
-                <li> <a href="<?php $this->createUrl('site/status'); ?>" class="mark">ПОДНЯТЬ СТАТУС</a>
+                <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark">ПОДНЯТЬ СТАТУС</a>
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo Yii::t('common', 'SIGN UP'); ?> </a> </li>
                     <li> <a class="moveRight2 open-login" style="cursor: pointer;" href="#"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
