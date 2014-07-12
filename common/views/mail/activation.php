@@ -10,7 +10,7 @@ $urlLogin = Yii::app()->createAbsoluteUrl('/');
     <strong><?php echo Yii::t('common', 'Login') ?></strong>
     <?php echo Yii::t('common', 'and enter your login information') ?><br>
     <?php echo Yii::t('common', 'login') ?> - <strong><?php echo $participant->email; ?></strong><br>
-    <?php echo Yii::t('common', 'password') ?> - <strong><?php echo $participant->password; ?></strong><br>
+    <?php echo Yii::t('common', 'password') ?> - <strong><?php echo $pw_original; ?></strong><br>
     <br>
     <?php echo Yii::t('common', 'In order to proceedfollow the link') ?> 
     <a href="<?php echo $urlRegister; ?>" target="_blank"><?php echo $urlRegister; ?></a><br/>

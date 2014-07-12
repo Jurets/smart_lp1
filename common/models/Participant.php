@@ -388,25 +388,46 @@ class Participant extends User
     }
 
     /**
-     * активация стартового тарифа
-     */
+    * активация стартового тарифа
+    */
     public function activateStart()
     {
-        $this->tariff_id = self::TARIFF_20;
-        $this->status = parent::STATUS_ACTIVE;
-        $this->save(false, array('tariff_id', 'status'));
+        $this->tariff_id = self::TARIFF_20;       //ставим статус 20$
+        $this->status = parent::STATUS_ACTIVE;    //ставим активность
+        $this->password = Yii::app()->getModule('user')->encrypting($this->password); //хэшируем пароль
+        //$this->activkey = null;      //убираем ключ активации (он больше не нужен)
+        $this->save(false, array('tariff_id', 'status', 'password', 'activkey'));
     }
 
     /**
-     * активация бизнес-статуса (стать бизнес-участником / покупка бизнес-старта)
+     * активация участия в клубе
      */
-    public function activateBuisness()
+    public function activateParticipation()
     {
         $this->tariff_id = self::TARIFF_50;
         $this->save(false, array('tariff_id'));
     }
 
+    /**
+     * активация бизнес-участия
+     */
+    public function activateBusiness()
+    {
+        $this->tariff_id = self::TARIFF_BC;
+        $this->save(false, array('tariff_id'));
+    }
 
+    /**
+    *  пополнить кошелёк
+    */
+    public function depositPurse($amount = 0) {
+        Yii::app()->db
+            ->createCommand('UPDATE ' . $this->tableName() . ' SET balance = balance + :amount WHERE id = :id')
+            ->bindValues(array(':id' => $this->id, ':amount' => $amount))
+            ->execute();
+        return $this;
+    }    
+        
     /**
     * построить полное имя (ФИО)
     * 

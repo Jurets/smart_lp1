@@ -1,9 +1,21 @@
+<style type="text/css">
+
+    .errorpay {
+        color: red;
+        position: absolute;
+        top: 400px;
+    }
+
+</style>
+
 <?php $form = $this->beginWidget('CActiveForm', array(
     'id'=>'pay-form',
     'enableAjaxValidation'=>false,
 )); ?>
-    <?php echo CHtml::activeHiddenField($participant, 'postedActivKey'); ?>
+    <?php echo CHtml::activeHiddenField($participant, 'postedActivKey', array('value'=>$participant->activkey)); ?>
     <?php echo CHtml::activeHiddenField($participant, 'tariff_id', array('value'=>$tariff)); ?>
+ 
+    <?php echo $form->error($participant, 'tariff_id', array('class'=>'errorpay')); ?>
     
     <a href="">
         <?php echo CHtml::submitButton(Yii::t('common', 'Next'), array(
@@ -22,7 +34,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#btn_pay').click(function(){
-            alert('ЭТО ТЕСТОВЫЙ РЕЖИМ! Оплата произведена успешно!');
+            alert('ЭТО ТЕСТОВЫЙ РЕЖИМ! Нажмите "Далее" для оплаты!');
             $('#btn_next').attr('class', 'btn-style-green btn-style-green-2-1');
             $('#btn_next').attr('readonly', false);
         });

@@ -1,3 +1,26 @@
+<style type="text/css">
+    .textbox1 {
+        border: 1px solid #d8d8d8;
+        border-radius: 1px;
+        display: block;
+        height: 38px !important;
+        left: 1px;
+        position: absolute;
+        top: 277px;
+        width: 251px;
+    }
+    .textbox2 {
+        border: 1px solid #d8d8d8;
+        border-radius: 1px;
+        display: block;
+        height: 38px !important;
+        left: 1px;
+        position: absolute;
+        top: 370px;
+        width: 251px;
+    }
+</style>
+
 <?php 
 $form = $this->beginWidget('CActiveForm', array(
     'id'=>'register-form',

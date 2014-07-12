@@ -19,6 +19,8 @@
  */
 class Requisites extends CActiveRecord
 {
+    const INSTANCE_NAME = 'JVMS';
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -123,4 +125,52 @@ class Requisites extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    /**
+    * получить строку с реквизитами системы
+    * 
+    */
+    private static function getInstance() {
+        return self::model()->findByPk(self::INSTANCE_NAME);
+    }
+    
+    /**
+    *  получить кошелёк активаций
+    */
+    public static function purseActivation() {
+        if ($instance = self::getInstance()) 
+            return $instance->purse_activation;
+        else
+            return false;
+    }    
+    
+    /**
+    *  получить кошелёк бизнес-клуба
+    */
+    public static function purseClub() {
+        if ($instance = self::getInstance()) 
+            return $instance->purse_club;
+        else
+            return false;
+    }
+    
+    /**
+    *  пополнить кошелёк активаций
+    */
+    public static function depositActivation($amount = 0) {
+        Yii::app()->db
+            ->createCommand("UPDATE requisites SET balance_activation = balance_activation + :amount WHERE id = :instance")
+            ->bindValues(array(':instance' => self::INSTANCE_NAME, ':amount' => $amount))
+            ->execute();
+    }    
+    
+    /**
+    *  пополнить кошелёк клуба
+    */
+    public static function depositClub($amount = 0) {
+        Yii::app()->db
+            ->createCommand("UPDATE requisites SET balance_club = balance_club + :amount WHERE id = :instance")
+            ->bindValues(array(':instance' => self::INSTANCE_NAME, ':amount' => $amount))
+            ->execute();
+    }  
 }

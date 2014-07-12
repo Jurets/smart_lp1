@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "status".
+ * This is the model class for table "tariff".
  *
- * The followings are the available columns in table 'status':
+ * The followings are the available columns in table 'tariff':
  * @property string $id
  * @property string $name
  * @property string $shortname
@@ -47,7 +47,7 @@ class Tariff extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'users' => array(self::HAS_MANY, 'Users', 'status_id'),
+			//'users' => array(self::HAS_MANY, 'Participant', 'tariff_id'),
 		);
 	}
 
@@ -94,10 +94,21 @@ class Tariff extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Status the static model class
+	 * @return Tariff the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
+    
+    /**
+    * выборка суммы для тарифа
+    */
+    public static function getTariffAmount($id) {
+        if ($tariff = self::model()->findByPk($id)) {
+            return $tariff->shortname;
+        } else {
+            return 0;
+        }
+    }
 }

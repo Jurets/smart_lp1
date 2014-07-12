@@ -36,4 +36,4 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php $this->endWidget(); ?>
 
 
-<a href="https://perfectmoney.com/?lang=ru_RU" target="_blank"><input type="button" name="btn"  class="btn-style-blue btn-style-blue-2-1" value="СОЗДАТЬ КОШЕЛЕК" /></a>
+<a href="https://perfectmoney.is/signup.html" target="_blank"><input type="button" name="btn"  class="btn-style-blue btn-style-blue-2-1" value="СОЗДАТЬ КОШЕЛЕК" /></a>

@@ -38,6 +38,7 @@ echo CHtml::endForm();
             var valueList = $('#dropDownId :selected').text();
             document.getElementById('amount').value = valueList;
         });
+        $('#dropDownId').change();
     }
     else{
         $('#amount').val($('#sum').val());
