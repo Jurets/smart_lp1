@@ -35,9 +35,9 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
         }
     }
     public function dataProcess(){ // проведение процесса передачи данных на api и получение ответных даннных
-        $this->API_make();
-        $this->API_analyse();
-        //$this->API_analyse_test();
+        //$this->API_make();
+        //$this->API_analyse();
+        $this->API_analyse_test();
     }
 
     public function dataOut($param=NULL){ // выгрузка массива ответа api либо конкретно указанного значения
@@ -87,7 +87,7 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
          * Точка запуска метода: в теле метода dataProcess(); 
          *  */
         //$this->outputStructure['ERROR']='(Test 33333) ';$this->onFailure($this->eventFailure);
-        //$this->outputStructure['ERROR']=NULL;$this->onSuccess($this->eventSuccess);
+        $this->outputStructure['ERROR']=NULL;$this->onSuccess($this->eventSuccess);
     }
     
 }

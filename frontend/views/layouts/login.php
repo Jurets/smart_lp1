@@ -46,11 +46,11 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
 
 <p class="sub1" id ="sub1-login"><?php echo Yii::t('common', 'USERNAME') ?>:</p>
-<?php echo CHtml::activeTextField($userLogin, 'username', array('class' => 'textbox1')); ?>
+<?php echo CHtml::activeTextField($userLogin, 'username', array('class' => 'textbox1 textbox1-login')); ?>
 <?php echo $form->error($userLogin, 'username', array('style' => 'top: 15px;')); ?>
 
 <p class="sub2" id="sub2-login"><?php echo Yii::t('common', 'PASSWORD') ?>:</p>
-<?php echo CHtml::activePasswordField($userLogin, 'password', array('class' => 'textbox2')); ?>
+<?php echo CHtml::activePasswordField($userLogin, 'password', array('class' => 'textbox2 textbox2-login')); ?>
 <?php echo $form->error($userLogin, 'password', array('style' => 'top: 82px;')); ?>
 
 <?php
@@ -62,7 +62,7 @@ $this->widget('CCaptcha', array(
 ?>
 
 <p class="sub3" id="sub3-login"><?php echo Yii::t('common', 'ENTER THE CODE') ?>:</p> 
-<?php echo CHtml::activeTextField($userLogin, 'verifyCode', array('class' => 'textbox3')); ?>
+<?php echo CHtml::activeTextField($userLogin, 'verifyCode', array('class' => 'textbox3 textbox3-login')); ?>
 <?php echo $form->error($userLogin, 'verifyCode', array('style' => 'top: 202px;')); ?>
 
 <?php echo CHtml::submitButton(Yii::t('common', 'LOGIN'), array('name' => 'btn', 'class' => 'btn-style')); ?>

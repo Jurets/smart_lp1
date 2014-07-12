@@ -1,4 +1,4 @@
-.textbox1{
+.textbox1-login{
     border: 6px solid #fff; 
     border-radius: 1px; 
     height:20px !important; 
@@ -11,7 +11,7 @@
     font-family: 'Open Sans Condensed', 'sans-serif' !important;
 }
 
-.textbox2 { 
+.textbox2-login { 
      border: 6px solid #fff; 
     border-radius: 1px; 
     height:20px !important; 
@@ -25,7 +25,7 @@
 } 
 
 
-.textbox3 { 
+.textbox3-login { 
     border: 6px solid #fff; 
     border-radius: 1px; 
     height:20px !important; 

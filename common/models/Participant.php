@@ -29,6 +29,7 @@
  */
 class Participant extends User
 {
+
     //константы для обозначения тарифа участника
     const TARIFF_START = 0;
     const TARIFF_20 = 1;
@@ -41,7 +42,6 @@ class Participant extends User
     //масив для бизнес-тарифов 
     // * термин "тарифы" (вместо "статусы" как в ТЗ) здесь и далее применяется для того, чтобы отличить их от статуса активности/неактивности
     private $_businessclubIDs = array(self::TARIFF_BC, self::TARIFF_BC_BRONZE, self::TARIFF_BC_SILVER, self::TARIFF_BC_GOLD);
-
     //поле страны - нужно для помощи при выборе города (т.к. у юзера поля страны нет, а поле города - есть)
     public $country_id;
     //поле (логическое) согласия регистрируемого участника
@@ -56,17 +56,14 @@ class Participant extends User
     public $newPassword;
     //переданный постом код активации (используетсяна формах регистрации для контроля)
     public $postedActivKey = null;
-
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
     public $business = null;
     public $checks = null;
     public $fdl = null;
     public $time = null;
-
     public $structureMembers = null; // для массива моделей тех пользователей, для которых текущий (авторизованный) пользователь есть реферал
     public $clubMembers = null; // здесь лежат пользователи, которые попали в куб
-
     private $dict_participant = 'participant';
 
     /**
@@ -100,6 +97,7 @@ class Participant extends User
                   'allowEmpty'=>true,'maxSize'=>2 * 1024 * 1024,'tooLarge'=>'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера.','on'=>array('settings')),
         ));
     }
+
     /**
      * @return array relational rules.
      */
@@ -170,6 +168,7 @@ class Participant extends User
             $this->addError('currentPassword','Неправильно введен текущий пароль.');
         }
     }
+
     public function newPasswordRule()
     {
         if(!empty($this->currentPassword) && empty($this->newPassword)){
@@ -185,7 +184,6 @@ class Participant extends User
     {
         return $this->_businessclubIDs;
     }
-
 
     /**
      * Retrieves a list of models based on the current search/filter conditions.
@@ -405,7 +403,8 @@ class Participant extends User
     public function activateParticipation()
     {
         $this->tariff_id = self::TARIFF_50;
-        $this->save(false, array('tariff_id'));
+        $this->busy_date = new CDbExpression('NOW()');
+        $this->save(false, array('tariff_id', 'busy_date'));
     }
 
     /**
@@ -421,39 +420,35 @@ class Participant extends User
     *  пополнить кошелёк
     */
     public function depositPurse($amount = 0) {
-        Yii::app()->db
+        /*$count = Yii::app()->db
             ->createCommand('UPDATE ' . $this->tableName() . ' SET balance = balance + :amount WHERE id = :id')
             ->bindValues(array(':id' => $this->id, ':amount' => $amount))
-            ->execute();
-        return $this;
+            ->execute();*/
+        $this->balance = $this->balance + $amount;
+        $this->save(false, array('balance'));
+        return $this;              
     }    
         
     /**
     * построить полное имя (ФИО)
     * 
     */
-    public static function getFullname() {
+    public static function getFullname()
+    {
         return implode(' ', array($this->first_name, $this->last_name));
     }
-
-    /**
-     * состоит ли участник в бизнес-клубе
-     */
-    public  function isBusinessclub()
-    {
-        return in_array($this->tariff_id, $this->_businessclubIDs);
-    }
-
 
     /**
     * получить ссылку на аватар (или плашка - если нет)
     * 
     */
-    public function getUrlAvatar() {
+    public function getUrlAvatar()
+    {
         return self::buildUrlAvatar($this->ava);
     }
 
-    public static function buildUrlAvatar($ava) {
+    public static function buildUrlAvatar($ava)
+    {
         $file = Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $ava;
         if (!is_file($file)) { //если нет файла аватарки - определяем плашку (по полу)
             $file = Yii::app()->baseUrl . '/img/nophotom.jpg';
@@ -463,11 +458,20 @@ class Participant extends User
         return $file;
     }    
     
+	/*
+     * состоит ли участник в бизнес-клубе
+     */
+    public  function isBusinessclub()
+    {
+        return in_array($this->tariff_id, $this->_businessclubIDs);
+    }
+
     /**
     * получить список юзеров которые ОНЛАЙН
     * 
     */
-    public static function getOnlineUsers($withoutSelf = false) {
+    public static function getOnlineUsers($withoutSelf = false)
+    {
         $command = Yii::app()->db->createCommand()
             ->select('onlineusers.userid, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
             ->from('onlineusers')
@@ -487,7 +491,8 @@ class Participant extends User
     * добавить юзера в список ОНЛАЙН
     * 
     */
-    public function putUserToOnline() {
+    public function putUserToOnline()
+    {
         $command = Yii::app()->db->createCommand();
         $user_id = $command  //сначала проверить: не занесён ли он уже в онлайн-список
             ->select('userid')
@@ -499,6 +504,35 @@ class Participant extends User
         } else {          //если нет - добавить строку в таблицу
             return $command->insert('onlineusers', array('userid'=>$this->id, 'lastvisit'=>time()));
         }
+    }
+
+    //Получить всех юзеров, кто в твоей команде
+    public static function getTeamUsers($withoutSelf = false)
+    {
+//         $command = Yii::app()->db->createCommand()
+//                 ->select('id,username')
+//                 ->from('tbl_users')
+//                 ->where("refer_id =". Yii::app()->user->id)
+//                 ->queryAll();
+//         return $command;
+        $command = Yii::app()->db->createCommand()
+                ->select('{{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
+                ->from('{{users}}')
+                ->leftJoin('cities', 'cities.id = {{users}}.city_id')
+                ->leftJoin('countries', 'countries.id = cities.country_id');
+        if (isset(Yii::app()->user->id)) {
+            $command->andWhere("{{users}}.refer_id =" . Yii::app()->user->id);
+}
+        if (isset(Yii::app()->user->refer_id)) {
+            $command->orWhere("{{users}}.id = " . Yii::app()->user->refer_id . " and " . Yii::app()->user->refer_id . " is not null");
+        }
+        if ($withoutSelf && isset(Yii::app()->user->id->id)) {
+            $command->where = 'onlineusers.userid <> :self_id';
+            $command->params = array(':self_id' => Yii::app()->user->id->id);
+        }
+
+        $rows = $command->queryAll();
+        return $rows;
     }
 
 }

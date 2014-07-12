@@ -98,7 +98,7 @@ class RegisterController extends EController
             } else  
             //если аккаунт не активен ЗАПУСКАЕМ ОПЛАТУ 20$
             if (!$participant->status) { 
-                if (isset($_POST['pay'])) {DebugBreak();     //если пришёл ПОСТ с нажатой кнопкой "оплатить 20", то
+                if (isset($_POST['pay'])) {//DebugBreak();     //если пришёл ПОСТ с нажатой кнопкой "оплатить 20", то
                     $participant->setScenario('register');
                     $participant->attributes = $_POST['Participant'];
                     //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
@@ -138,7 +138,7 @@ class RegisterController extends EController
             } else 
             //если статус "оплачен 20$"
             if ($participant->tariff_id == Participant::TARIFF_20) {  
-                if (isset($_POST['pay'])) {DebugBreak();   //если пришёл ПОСТ с нажатой кнопкой "оплатить 50", то
+                if (isset($_POST['pay'])) {//DebugBreak();   //если пришёл ПОСТ с нажатой кнопкой "оплатить 50", то
                     
                     $participant->setScenario('register');
                     $participant->attributes = $_POST['Participant'];
@@ -194,7 +194,8 @@ class RegisterController extends EController
                                     $refer = $participant->referal;             //рефером остаётся пригласивший (такая вот судьба)))
                                 }
                                 $participant->refer_id = $refer->id;      //то перекинуть участника на реферала реферала
-                                $participant->save(false, 'refer_id');
+                                $participant->isalien = 1;                //установить флажок "чужой приглашённый"
+                                $participant->save(false, array('refer_id', 'isalien'));
                                 $refer->depositPurse($pm->amount);     //кинуть сумму в кошелёк дедушки
                             } else if ($structcount == 2 || $structcount == 3)  {  //если третий или четвёртый
                                 Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба 

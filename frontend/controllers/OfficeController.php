@@ -7,22 +7,22 @@
  */
 class OfficeController extends EController
 {
-    
+
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-    public $layout='//layouts/office';
-
+    public $layout = '//layouts/office';
 
     /**
-    * процедура перед любым действием в Офисе
-    * 
-    * @param mixed $action
-    * @return boolean
-    */
-    protected function beforeAction($action) {
-        if (parent::beforeAction($action)){
+     * процедура перед любым действием в Офисе
+     * 
+     * @param mixed $action
+     * @return boolean
+     */
+    protected function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
             if (!Yii::app()->user->isGuest) { //если юзер не гость
                 $user = New Participant('update');
                 $user->id = Yii::app()->user->id;
@@ -32,14 +32,14 @@ class OfficeController extends EController
             return true;
         }
     }
-    
+
     /**
-    * главная страница ОФиса
-    *     
-    */
+     * главная страница ОФиса
+     *     
+     */
     public function actionIndex()
     {
-      $this->render('cap', array('service_msg'=>'Заглушка'));   
+        $this->render('cap', array('service_msg' => 'Заглушка'));
     }
 
     /**
@@ -61,9 +61,8 @@ class OfficeController extends EController
         //$message - form admin panel.  Requqstes->Agreement
         $message = $objRequqstes->model()->findAll();
         $message = $message[0]['agreement'];
-        $this->render('office-8',array('content'=>$message));
+        $this->render('office-8', array('content' => $message));
     }
-
 
     /**
      * Show faq
@@ -73,7 +72,7 @@ class OfficeController extends EController
         $objFaq = new Faq();
         // $categories - sorted faq(array) by categories
         $categories = $objFaq->model()->showAllFaq();
-        $this->render('help',array('arrCategories'=>$categories));
+        $this->render('help', array('arrCategories' => $categories));
     }
 
     /**
@@ -83,12 +82,12 @@ class OfficeController extends EController
     {
         $participant = Participant::model()->findByPk(Yii::app()->user->id);
         $participant->setScenario('settings');
-        if($participant->dob != ''){
+        if ($participant->dob != '') {
             $date = explode('-', $participant->dob);
         }
-        $day = $participant->dob != '' ?   $date[2] : '';
-        $month = $participant->dob != '' ?   $date[1] : '';
-        $year = $participant->dob != '' ?   $date[0] : '';
+        $day = $participant->dob != '' ? $date[2] : '';
+        $month = $participant->dob != '' ? $date[1] : '';
+        $year = $participant->dob != '' ? $date[0] : '';
 
         $places = Countries::getCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
@@ -104,7 +103,7 @@ class OfficeController extends EController
             $city_id = Yii::app()->getRequest()->getPost('citySelect');
             $country_id = Yii::app()->getRequest()->getPost('countrySelect');
             $currentPassword = Yii::app()->getRequest()->getPost('currentPassword');
-            $newPassword  = Yii::app()->getRequest()->getPost('newPassword');
+            $newPassword = Yii::app()->getRequest()->getPost('newPassword');
             $participant->currentPassword = $currentPassword;
             $participant->newPassword = $newPassword;
             $participant->gmt_id = $timeZone;
@@ -118,7 +117,7 @@ class OfficeController extends EController
                 } else {
                     $participant->dob = '';
                 }
-            }else{
+            } else {
                 $participant->dob = '';
             }
             $oldPhoto = $participant->photo;
@@ -126,7 +125,7 @@ class OfficeController extends EController
             $participant->attributes = $_POST['Participant'];
             $newEmail = $participant->email;
             if ($participant->validate()) {
-                if($participant->password == md5($participant->currentPassword) && $newPassword != ''){
+                if ($participant->password == md5($participant->currentPassword) && $newPassword != '') {
                     $participant->password = md5($newPassword);
                 }
                 if ($_FILES['Participant']['name']['photo'] != '') {
@@ -134,8 +133,8 @@ class OfficeController extends EController
                     Yii::import('common.extensions.FileUpload.UploadAction');
                     $upload = new UploadAction('im/default', NULL);
                     $upload->path_to_file = $path;
-                    $upload->resize = array('width'=>250,'height'=>175);
-                    $upload->re_org = array('width'=>67,'height'=>67);
+                    $upload->resize = array('width' => 250, 'height' => 175);
+                    $upload->re_org = array('width' => 67, 'height' => 67);
                     $upload->prefixOrigin = 'settings-';
                     $upload->prefixResized = 'avatar-settings-';
                     $images = $upload->run();
@@ -148,12 +147,10 @@ class OfficeController extends EController
 //                    $participant->photo->saveAs($url_photo);//сохраняем картинку
 //                    ImageHelper::makeNewsThumb($url_photo,'settings-','250','175');
 //                    ImageHelper::makeNewsThumb($url_photo,'resized-settings-','67','67');
-
-                }else{
+                } else {
                     $participant->photo = $oldPhoto;
                 }
-                if($participant->purse != $participant->newPurse)
-                {
+                if ($participant->purse != $participant->newPurse) {
                     $participant->purse = $participant->newPurse;
                     $participant->newPurse = '';
                 }
@@ -165,14 +162,14 @@ class OfficeController extends EController
 
                 $participant->email = $currentEmail;
                 $participant->new_email = $newEmail;
-                $participant->activkey = UserModule::encrypting(microtime().$participant->password);
+                $participant->activkey = UserModule::encrypting(microtime() . $participant->password);
                 $participant->save(false);
 
                 if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
-                    EmailHelper::send($participant->new_email, 'Подтверждение почты', 'updateEmail',array('participant'=>$participant));
+                    EmailHelper::send($participant->new_email, 'Подтверждение почты', 'updateEmail', array('participant' => $participant));
                 }
-            }else{
+            } else {
                 $participant->photo = $oldPhoto;
             }
         }
@@ -191,24 +188,25 @@ class OfficeController extends EController
         $youTubeUrlUniqueId = $inviteInformation->videoLink;
         $arrBannerFiles = $inviteInformation->bannerFiles;
         $text = $inviteInformation->text;
-        $this->render('invitation',array('youTubeUrlUniqueId'=>$youTubeUrlUniqueId,
-                      'downloadFile'=>$downloadFile,'arrBannerFiles'=>$arrBannerFiles,
-                      'content'=>$text,
-                     ));
+        $this->render('invitation', array('youTubeUrlUniqueId' => $youTubeUrlUniqueId,
+            'downloadFile' => $downloadFile, 'arrBannerFiles' => $arrBannerFiles,
+            'content' => $text,
+        ));
     }
-    
+
     /* News */
+
     public function actionNews()
-    {  
-        if(!isset(Yii::app()->request->cookies['attended']->value )){
+    {
+        if (!isset(Yii::app()->request->cookies['attended']->value)) {
             Yii::app()->request->cookies['cookie_name'] = new CHttpCookie('attended', json_encode(array(0)));
         }
-        
+
         isset($_GET['page']) ? $page = sprintf('?page=%d', $_GET['page']) : $page = '';
-        if(isset($_GET['id'])){
+        if (isset($_GET['id'])) {
             $model = News::model()->findByPk($_GET['id']);
-            $this->render('newsone', array('model'=>$model, 'page'=>$page));
-        }else{
+            $this->render('newsone', array('model' => $model, 'page' => $page));
+        } else {
             $criteria = new CDbCriteria();
             $criteria->addCondition('activity = 1');
             $count = News::model()->count($criteria); // количество активных записей новостей
@@ -216,19 +214,18 @@ class OfficeController extends EController
             $pages->pageSize = 6;
             $pages->applyLimit($criteria);
             $models = News::model()->findAll($criteria); // новости
-            $models = News::model()->attendedScan($models);                        
-            $renderProperties = array('models'=>$models, 'pages'=>$pages);
-            $this->render('news', array('models'=>$models, 'pages'=>$pages, 'page'=>$page));
-            
-            
+            $models = News::model()->attendedScan($models);
+            $renderProperties = array('models' => $models, 'pages' => $pages);
+            $this->render('news', array('models' => $models, 'pages' => $pages, 'page' => $page));
         }
     }
-    
+
     /**
-    * Структура команды
-    * 
-    */
-    public function actionStructure(){
+     * Структура команды
+     * 
+     */
+    public function actionStructure()
+    {
         $model = Participant::model()->findByPk(Yii::app()->user->id);
         $model->userStructureProcess(); // делаем "хвост"
         $isBusinessClub = $model->isBusinessclub();
@@ -236,23 +233,50 @@ class OfficeController extends EController
         $this->render('structure', array('model'=>$model,'isBusinessClub'=>$isBusinessClub));
     }
 
-    
     /**
-    *  вызов чата
-    */
-    public function actionChat() {//DebugBreak();
+     *  вызов чата
+     * @param int $interlocutor ID собеседника
+     */
+    public function actionChat()
+    {
+
+//        if (isset($_GET['user_id'])) {
+//            $user_id = (int) $_GET['user_id'];
+//        } else {
+//            $user_id = 0;
+////            throw new CHttpException(404, 'invalid request');
+//        }
+        if (isset($_GET['interlocutor'])) {
+            $interlocutor = (int) $_GET['interlocutor'];
+        } else {
+            $interlocutor = 0;
+//            throw new CHttpException(404, 'invalid request');
+        }
+
+        //составляем уникальный $chat_id по id's юзеров для 
+        //разговора двух юзеров
+        $user_id = Yii::app()->user->id;
+        if ($user_id > $interlocutor) {
+            $chat_id = $user_id . "_" . $interlocutor;
+        } else {
+            $chat_id = $interlocutor . "_" . $user_id;
+        }
+        //команда
+        $onlineusers = Participant::getTeamUsers(true); //true - не показывать себя
         //текущий юзер
         $user = Participant::model()->findByPk(Yii::app()->user->id);
         //юзеры онлайн
-        $onlineusers = Participant::getOnlineUsers(false); //true - не показывать себя
-        $this->render('chat', array(
-            'onlineusers'=>$onlineusers,
-            'smileys'=>$this->getSmileNamesSet(),
-            'isActivated'=>$user->status,   //активен ли юзер
-            //'isWebinar' => $this->isWebinar(),  //идёт ли вебинар
-        ), false, true);
-    }
+//        $onlineusers = Participant::getOnlineUsers(false); //true - не показывать себя
 
+        $this->render('chat', array(
+            'onlineusers' => $onlineusers,
+            'smileys' => $this->getSmileNamesSet(),
+            'isActivated' => $user->status, //активен ли юзер
+            'chat_id' => $chat_id,
+            'interlocutor' => $interlocutor,
+                //'isWebinar' => $this->isWebinar(),  //идёт ли вебинар
+                ), false, true);
+    }
 
     /**
      * Functions(actionCountry(),actionCity(),actionTimezone()) for Invitation
@@ -261,43 +285,44 @@ class OfficeController extends EController
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function actionPlace()
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
     }
 
+    /* Perfect Money test */
 
-   /* Perfect Money test */
-   public function actionTest(){
-       $model = new PerfectMoney();
-       /* обязательные параметры */
-       $model->login = '6416431';
-       $model->password = 'uhaha322re423e';
-       $model->payerAccount = 'U6840713';
-       $model->payeeAccount = 'U3627324';
-       $model->amount = '0.01';
-       /* необязательные параметры */
-       $model->payerId = '17';
-       $model->payeeId = '18';
-       $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
-       $model->notation = 'Дополнительные сведения.';
-       //$model->Run('balance');
-       $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
-       echo $model->getError('paymentTransactionStatus').'<br>';
-       echo $model->notation.'<br>';
-       var_dump('Сообщения', $model->getErrors());
-       var_dump('Данные от perfectmoney.is как есть', $model->getOutput());
+    public function actionTest()
+    {
+        $model = new PerfectMoney();
+        /* обязательные параметры */
+        $model->login = '6416431';
+        $model->password = 'uhaha322re423e';
+        $model->payerAccount = 'U6840713';
+        $model->payeeAccount = 'U3627324';
+        $model->amount = '0.01';
+        /* необязательные параметры */
+        $model->payerId = '17';
+        $model->payeeId = '18';
+        $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
+        $model->notation = 'Дополнительные сведения.';
+        //$model->Run('balance');
+        $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
+        echo $model->getError('paymentTransactionStatus') . '<br>';
+        echo $model->notation . '<br>';
+        var_dump('Сообщения', $model->getErrors());
+        var_dump('Данные от perfectmoney.is как есть', $model->getOutput());
     }
-
 
     /**
      *  Check activation code and save new email
      */
-    public function actionEmail(){
+    public function actionEmail()
+    {
         $getActivityKey = Yii::app()->getRequest()->getQuery('activkey');
         $participatnObj = Participant::model()->findByPk(Yii::app()->user->id);
-        if($participatnObj->activkey == $getActivityKey ){
+        if ($participatnObj->activkey == $getActivityKey) {
             $participatnObj->activkey = '';
             $participatnObj->email = $participatnObj->new_email;
             $participatnObj->new_email = '';
@@ -315,6 +340,3 @@ class OfficeController extends EController
     }
 
 }
-
-
-

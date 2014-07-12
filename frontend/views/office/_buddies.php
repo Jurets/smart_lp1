@@ -1,11 +1,36 @@
 <?php foreach ($onlineusers as $item) { ?>
-    <div id="onlineuser_<?php echo $item['userid'] ?>" class="buddy" data="<?php echo $item['userid'] ?>">
+    <div id="onlineuser_<?php
+    if (isset($item['id']) && empty($item['id']) === false) {
+        echo (int) $item['id'];
+    }
+    ?>" class="buddy buddy-bold <?php
+         if (isset($_GET['interlocutor'])) {
+             $interlocutor = $_GET['interlocutor'];
+         }
+         if (isset($interlocutor) && $interlocutor == $item['id']) {
+             echo "buddy-highlighted";
+         }
+         ?>" data="<?php
+         if (isset($item['id']) && empty($item['id']) === false) {
+             echo (int) $item['id'];
+         }
+         ?>">
         <div class="flag">
             <?php if (!empty($item['country_code'])) { ?>
                 <img src="/images/flags/small/<?php echo $item['country_code'] ?>.png">
             <?php } ?>
         </div>
-        <div class="username"><?= $item['username'] ?></div>
+        <div class="username">
+            <a href="<?php
+            echo Yii::app()->createAbsoluteUrl('office/chat/', array(
+                'interlocutor' => $item['id']
+            ))
+            ?>"><?= $item['username'] ?></a>
+
+        </div>
+        <div class="info-image"> 
+            <img src="/images/info.gif" width="20px" height="20px">
+        </div>
         <div class="clearfix"></div>
     </div>
 
