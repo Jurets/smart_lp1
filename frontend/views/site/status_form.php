@@ -11,7 +11,6 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
     <!-- current status -->
     <p>Ваш статус : <?php echo $status['name'];?></p>
 
-    <div id="div-status-form">
         <?php
         if($model->tariff_id >= 2){
         ?>
@@ -27,27 +26,13 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
         <?php }
         $this->renderPartial('application.views.site._payform');
         ?>
-    </div>
 </div>
 
 
 
 <style>
-#cost{
-    margin-left:20px;
-}
-#account{
-    margin-left:30px;
-}
-#password{
-    margin-left:35px;
-}
 #main-div{
     position: absolute;
     top:150px;
-}
-#div-status-form input{
-    margin-top : 10px;
-    margin-bottom : 10px;
 }
 </style>

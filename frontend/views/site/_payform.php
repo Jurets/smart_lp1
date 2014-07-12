@@ -1,3 +1,4 @@
+<div id="div-status-form">
 <?php
 echo CHtml::beginForm('','post');
 echo CHtml::label('Введите данные из Perfect Money','');
@@ -13,3 +14,20 @@ echo '<br>';?>
 <?php echo CHtml::submitButton('Оплатить');
 echo CHtml::endForm();
 ?>
+</div>
+
+<style>
+    #cost{
+        margin-left:20px;
+    }
+    #account{
+        margin-left:30px;
+    }
+    #password{
+        margin-left:35px;
+    }
+    #div-status-form input{
+        margin-top : 10px;
+        margin-bottom : 10px;
+    }
+</style>
