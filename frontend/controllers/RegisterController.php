@@ -33,19 +33,34 @@ class RegisterController extends EController
     /**
     * Регистрация в системе
     */
-    public function actionIndex($refer = '') {
-        if (empty($refer)) {
+    public function actionIndex($user = '') {
+        if (empty($user)) {
             throw New CHttpException(404, "Регистрация разрешена только с личной страницы реферала");
-        } else if (!$refer = Participant::model()->findByAttributes(array('username'=>$refer))) {
-            throw New CHttpException(404, "Не найден участник с именем $refer");
+        } else if (!$inviter = Participant::model()->with('inviteCount')->findByAttributes(array('username'=>$user))) {
+            throw New CHttpException(404, "Не найден реферал с именем $user");
         }
         
         $participant = New Participant('register');
-
+        
         if(isset($_POST['Participant'])) {
             $participant->attributes = $_POST['Participant'];
-            $participant->refer_id = $refer->id;                  //поставить реферала
+            //ставим ид пригласившего
+            $participant->inviter_id = $inviter->id;                 
+            //определяем кто рефер в зависимости от номера приглашения
+            if ($inviter->inviteCount == 1 && isset($inviter->referal)) {  //если это второй приглашённый
+                $referal = $inviter->referal;    //то перекинуть участника на реферала реферала (дедушку)
+            } else {                             //иначе
+                $referal = $inviter;               //рефер - это пригласивший
+            }
+            //поставить ИД реферала
+            $participant->refer_id = $referal->id;                  
+            //поставить номер в списке приглашенных
+            $participant->invite_num = $inviter->inviteCount + 1;
+            
+            //сгенерить временный ключ
             $participant->activkey = Yii::app()->getModule('user')->encrypting(microtime().$participant->password);
+            
+            //Начало обработки, валидация
             if($participant->validate()) {//DebugBreak();
                 //пароль пока не хэшируем (захешируется позже при активации)
                 if ($participant->save()) {
@@ -69,8 +84,11 @@ class RegisterController extends EController
     public function actionActivate() {
         //$email = $_GET['email'];
         if (isset($_GET['activkey'])) {
-            $activkey = $_GET['activkey'];  //найти участника по коду активации
-            $participant = Participant::model()->with(array('referal'=>array('alias'=>'referal')))->findByAttributes(array('activkey'=>$activkey));
+            $activkey = $_GET['activkey'];  //найти участника по коду активации (с рефером и пригласившим)
+            $participant = Participant::model()->with(array(
+                'referal'=>array('alias'=>'referal'),
+                'inviter'=>array('alias'=>'inviter'),
+            ))->findByAttributes(array('activkey'=>$activkey));
             if (!isset($participant)) {
                 throw New CHttpException(404, 'Не удается подвердить регистрацию! Код активации не найден. Обратитесь к администратору сайта');
             }
@@ -152,24 +170,11 @@ class RegisterController extends EController
                     $pm->login = '6416431';                //временно хардкод
                     $pm->password = 'uhaha322re423e';      //временно хардкод
                     $pm->payerAccount = $participant->purse;//'U6840713';
-
                     //определить - на какой кошелёк пойдёт оплата
-                    $structcount = $participant->referal->structcount;  //выборка "счётчика структуры" реферала
-                    if ($structcount == 0 && isset($participant->referal)) { //если это первый приглашённый реферала
-                        $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
-                        $pm->payeeId = $participant->referal->id;
-                    } elseif ($structcount == 1 ) { //если это второй приглашённый реферала
-                        if (isset($participant->referal->referal)) {                   //и если есть рефер рефера (дедушка :)
-                            $pm->payeeAccount = $participant->referal->referal->purse;    //то на кошелёк дедушки
-                            $pm->payeeId = $participant->referal->referal->id;
-                        } else {                                                       //иначе
-                            $pm->payeeAccount = $participant->referal->purse;             //на кошелёк данного реферала
-                            $pm->payeeId = $participant->referal->id;
-                        }
-                    } elseif ($structcount == 2 || $structcount == 3) {  //если третий или четвёртый,
+                    if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
                         $pm->payeeAccount = Requisites::purseClub(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
                         $pm->payeeId = null;
-                    } elseif ($structcount >= 4 && isset($participant->referal)) { //если пятый и более,
+                    } else {
                         $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
                         $pm->payeeId = $participant->referal->id;
                     }
@@ -183,30 +188,17 @@ class RegisterController extends EController
                     $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
 
                     if (!$pm->hasErrors()) {  //если успешно - 
-                        $participant->attributes = $_POST['Participant'];
-                        $participant->activateParticipation();  //стать бизнес-участником
-                        
-                        if (isset($participant->referal)) {  //если это второй приглашённый реферала
-                            if ($structcount == 1) {  //если это второй приглашённый реферала
-                                if (isset($participant->referal->referal)) {  //если есть дедушка
-                                    $refer = $participant->referal->referal;    //то он будет рефером
-                                } else {                                      //иначе
-                                    $refer = $participant->referal;             //рефером остаётся пригласивший (такая вот судьба)))
-                                }
-                                $participant->refer_id = $refer->id;      //то перекинуть участника на реферала реферала
-                                $participant->isalien = 1;                //установить флажок "чужой приглашённый"
-                                $participant->save(false, array('refer_id', 'isalien'));
-                                $refer->depositPurse($pm->amount);     //кинуть сумму в кошелёк дедушки
-                            } else if ($structcount == 2 || $structcount == 3)  {  //если третий или четвёртый
-                                Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба 
-                                if ($structcount == 3) {                             //если это третий приглашённый реферала
-                                    $participant->referal->activateBusiness();         //активировать Бизнес-клуб у реферала
-                                }
-                            } else {                                               //если пятый и так далее -
-                                $participant->referal->depositPurse($pm->amount);     //кинуть сумму в кошелёк рефера
+                        //$participant->attributes = $_POST['Participant'];
+                        //стать бизнес-участником
+                        $participant->activateParticipation();  
+                        //перевести взнос на нужный кошелёк
+                        if ($participant->invite_num == 3 || $participant->invite_num == 4)  {  //если приглашённый 3 или 4
+                            Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба 
+                            if ($participant->invite_num == 4) {                 //если это четвёртый приглашённый 
+                                $participant->referal->activateBusiness();         //активировать Бизнес-клуб у реферала
                             }
-                            $participant->referal->structcount = $structcount + 1; //увеличить счётчик ЛИЧНЫХ приглашённых у рефера
-                            $participant->referal->save(false, 'structcount');
+                        } else {                                                 //иначе
+                            $participant->referal->depositPurse($pm->amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
                         }
                         //отослать письмо про вступление в бизнес-участие
                         EmailHelper::send(array($participant->email), 'Вы стали бизнес-участником', 'businessstart', array('participant'=>$participant));
@@ -250,15 +242,6 @@ class RegisterController extends EController
                 $this->render('finish', array('participant'=>$participant));
             }
         }
-        
     }
     
-    /**
-    * оплата активации (20$)
-    * 
-    */
-    public function actionPayactivation() {
-        
-        //if (Yii::app()->request->isAjaxRequest)
-    }
 }

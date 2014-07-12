@@ -2,7 +2,7 @@
 /* @var $this SiteController */ 
 
 //CSS-file for main page
-Yii::app()->clientScript->registerCssFile('css/style.css');
+Yii::app()->clientScript->registerCssFile('/css/style.css');
 
 //components for main page
 $this->beginContent('//layouts/common'); 

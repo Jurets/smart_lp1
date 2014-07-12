@@ -108,8 +108,13 @@ class Participant extends User
         return CMap::mergeArray(parent::relations(), array(
             //ссылка на объект-рефер для сабжа
             'referal' => array(self::BELONGS_TO, 'Participant', 'refer_id'),
+            //ссылка на пригласившего для сабжа
+            'inviter' => array(self::BELONGS_TO, 'Participant', 'inviter_id'),
             //кол-во подчинённых (т.е. тех, у которых сабж является рефером)
             'subCount' => array(self::STAT, 'Participant', 'refer_id'),
+            //кол-во приглашенных (т.е. тех, кто начинал регистрацию под данным сабжем)
+            'inviteCount' => array(self::STAT, 'Participant', 'inviter_id'),
+            //структура (?????)
             'structure' => array(self::STAT, 'Participant', 'id'),
             //тариф (статус по ТЗ)
             'tariff' => array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
