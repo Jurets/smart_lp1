@@ -15,13 +15,12 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
         if($model->tariff_id >= 2){
         ?>
         <p>Чтобы поднять ваш статус необходимо сделать взнос.</p>
-        <?php //array('100'=>100,'500'=>500,'1000'=>1000)
-            echo CHtml::label('Сумма: ','listData');
-            $list = CHtml::listData($tariffListData,'id','shortname');
-            echo CHtml::dropDownList('listData',100,$list);
+        <?php echo CHtml::label('Сумма: ','listData');
+            $list = CHtml::listData($tariffListData,'shortname','shortname');
+            echo CHtml::dropDownList('listData',100,$list,array('id'=>'dropDownId'));
         }elseif($model->tariff_id < 2){ ?>
             <p>Сначала вы должны оплатить за регистрацию 50$ после этого вам будет доступен 'Бизнес Клуб'</p>
-            <input id="cost" type="hidden" value="50">
+            <input id="sum" type="hidden" value="50">
 
         <?php }
         $this->renderPartial('application.views.site._payform');
