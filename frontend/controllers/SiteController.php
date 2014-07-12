@@ -181,4 +181,11 @@ class SiteController extends LoginController
         $this->render('status_form', array('model'=>$model,'status'=>$status,'tariffListData'=>$tariffListData));
     }
 
+    
+        public function actionTestmail() {
+            if (EmailHelper::send(array('jurets75@rambler.ru'), 'Тестовая отсылка', 'test', array()))
+                echo 'Успешная отсылка!';
+            else
+                echo '---Ошибка при отсылке';
+        }    
 }
