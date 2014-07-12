@@ -166,8 +166,6 @@ class SiteController extends LoginController
         $criteria->params[':id'] = 3;
         $tariffListData = Tariff::model()->findAll($criteria);
 
-        //Par
-        //:TODO Делаем запрос,проверяем какой статус у пользователя и отображаем страницуы
         $this->render('status_form', array('model'=>$model,'status'=>$status,'tariffListData'=>$tariffListData));
     }
 
