@@ -36,6 +36,7 @@ class EmailHelper {
         $message->setTo($emails);
         //$message->setFrom(array(Yii::app()->params['adminEmail'] => 'Fnetwork.ru'));
         $message->from = ($from = Yii::app()->params['adminEmail']) ? $from : 'noreply@jwms.pro';
+        Yii::log($message->from, 'trace', 'mail');
         if( !empty($file) ) {
             $message->attach(Swift_Attachment::fromPath($_SERVER['DOCUMENT_ROOT'].$file));
         }

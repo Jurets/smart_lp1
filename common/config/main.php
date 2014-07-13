@@ -60,6 +60,11 @@ return array(
                     'connectionID' => 'db',
                     'levels'       => 'error, warning',
                 ),
+                array(
+                    'class'=>'CFileLogRoute',
+                    'logFile'=>'mail.log',
+                    'levels'=>'error, warning, trace',
+                    'categories'=>'mail',                ),
             ),
         ),
         'user'=>array(
