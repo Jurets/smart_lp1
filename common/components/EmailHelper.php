@@ -36,6 +36,7 @@ class EmailHelper {
         $message->setTo($emails);
         //$message->setFrom(array(Yii::app()->params['adminEmail'] => 'Fnetwork.ru'));
         //Yii::log(Yii::app()->params['adminEmail'], 'trace', 'mail');
+        var_dump($emails);
         var_dump(Yii::app()->params['adminEmail']);
         Yii::app()->end();
         $message->from = ($from = Yii::app()->params['adminEmail']) ? $from : 'noreply@jwms.pro';
