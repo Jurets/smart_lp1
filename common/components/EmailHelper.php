@@ -25,7 +25,7 @@ class EmailHelper {
         //            return false;
         //        }
         ////////// >-- 
-
+        DebugBreak();
         if(empty($emails)) {
             return FALSE;
         }
@@ -35,6 +35,7 @@ class EmailHelper {
         $message->setBody($data, 'text/html');
         $message->setTo($emails);
         //$message->setFrom(array(Yii::app()->params['adminEmail'] => 'Fnetwork.ru'));
+        Yii::log(Yii::app()->params['adminEmail'], 'trace', 'mail');
         $message->from = ($from = Yii::app()->params['adminEmail']) ? $from : 'noreply@jwms.pro';
         Yii::log($message->from, 'trace', 'mail');
         if( !empty($file) ) {
