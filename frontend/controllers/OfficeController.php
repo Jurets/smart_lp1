@@ -50,9 +50,8 @@ class OfficeController extends EController
         if(!$model->validate()){
             throw new CHttpException(404, 'date mus be on dd.mm.yy format');
         }
-        
         // TO DO - вызов логики
-        
+        $model->statisticaStandard();
         $this->render('statistics', array('model'=>$model));
     }
     public function actionSpecification()

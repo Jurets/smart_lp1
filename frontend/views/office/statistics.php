@@ -24,10 +24,10 @@
                 'id'=>'dateToAct',
                 'value'=>$model->date,
                 'options'=>array(
-                  'dateFormat'=>'dd.mm.y'  
+                  'dateFormat'=>'dd.mm.yy'  
                 ),
                 'htmlOptions'=>array(
-                    'style'=>'height:25px;width: 86px;margin-top:-6px;font-size:22px !important; font-weight:bold !important; color:#656565; border:none;'
+                    'style'=>'height:25px;width: 100px;margin-top:-6px;font-size:22px !important; font-weight:bold !important; color:#656565; border:none;'
                 ),
                 ));
              echo TbHtml::endForm();
@@ -42,68 +42,29 @@
       <td colspan="3">
           <div class="scroll_window">
           <table height="160" class="tg22" id="tg22">
-              <tr>
-                <td class="tg-s6l6">24.02.14 18:57</td>
-                <td class="tg-2n7d">+50$</td>
-                <td class="tg-84pk">Новый личный в команде</td>
-              </tr>
-              <tr>
-                <td width="234">24.02.14 18:57</td>
-                <td width="308">+50$</td>
-                <td width="308">Новый чужой в команде</td>
-              </tr>
-              <tr>
-                <td class="tg-s6l6">24.02.14 18:57</td>
-                <td class="tg-2n7d">+50$</td>
-                <td class="tg-84pk">Новый личный в команде</td>
-              </tr>
-              <tr >
-                <td class="tg-k776">24.02.14 18:57</td>
-                <td class="tg-amld">+50$</td>
-                <td class="tg-f6s0">Новый чужой в команде</td>
-              </tr>
-              <tr>
-                <td class="tg-s6l6">24.02.14 18:57</td>
-                <td class="tg-2n7d">+50$</td>
-                <td class="tg-84pk">Новый личный в команде</td>
-              </tr>
-              <tr>
-                <td width="234">24.02.14 18:57</td>
-                <td width="308">+50$</td>
-                <td width="308">Новый чужой в команде</td>
-              </tr>
-              <tr>
-                <td class="tg-s6l6">24.02.14 18:57</td>
-                <td class="tg-2n7d">+50$</td>
-                <td class="tg-84pk">Новый личный в команде</td>
-              </tr>
-              <tr >
-                <td class="tg-k776">24.02.14 18:57</td>
-                <td class="tg-amld">+50$</td>
-                <td class="tg-f6s0">Новый чужой в команде</td>
-              </tr>
+              <?php echo $model->statisticsStructure['Checks'] ?>
           </table>
           </div>
       </td>
   </tr>
   <tr class="last-rows">
-    <td class="tg-auz7" colspan="3"><p>Всего за сегодня: <span>200 $</span></p></td>
+    <td class="tg-auz7" colspan="3"><p>Всего за сегодня: <span><?php echo $model->statisticsStructure['IncomeToday'] ?> $</span></p></td>
   </tr>
   <tr class="last-rows">
-    <td class="tg-auz7" colspan="3"><p id='last-value'>Всего получен доход: <span id="green">9450 $</span></p></td>
+    <td class="tg-auz7" colspan="3"><p id='last-value'>Всего получен доход: <span id="green"><?php echo $model->statisticsStructure['IncomeCommon'] ?> $</span></p></td>
   </tr>
 </table>
         </div>
         
       <table id="tg2">
     <tr>
-    <td class="tg-ll1" colspan="3">Сегодня: <span>&nbsp;&nbsp;14 $</span></td>
+        <td class="tg-ll1" colspan="3">Сегодня: <span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Charity']['today'] ?> $</span></td>
       </tr>
       <tr>
-    <td class="tg-ll2" colspan="3">В этом месяце: <span>245 $</span></td>
+    <td class="tg-ll2" colspan="3">В этом месяце: <span><?php echo $model->statisticsStructure['Charity']['permonth'] ?> $</span></td>
       </tr>
         <tr>
-    <td class="tg-ll3" colspan="3">Всего передано: <span id="green">962 $</span></td>
+    <td class="tg-ll3" colspan="3">Всего передано: <span id="green"><?php echo $model->statisticsStructure['Charity']['common'] ?> $</span></td>
       </tr>
     </table>  
         
@@ -111,7 +72,7 @@
         
         <table id="tg3">
     <tr>
-    <td class="tg-ll1" colspan="3">Личная команда сегодня: <span>&nbsp;&nbsp;14</span></td>
+    <td class="tg-ll1" colspan="3">Личная команда сегодня: <span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Staff']['privateStructure'] ?></span></td>
       </tr>
       <tr>
     <td class="tg-ll2" colspan="3">Бизнес-Клуб сегодня: <span>245</span></td>
@@ -172,7 +133,7 @@
        $('#showAllRec').click(function(){
            $('.scroll_window').toggleClass('scrolle');
            if ($('.scroll_window').hasClass('scrolle')){
-               $('#showAllRec').text('Показать 4');
+               $('#showAllRec').text('Показать часть');
            }else{
                $('#showAllRec').text('Показать все');
            }
