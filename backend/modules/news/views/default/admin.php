@@ -2,14 +2,14 @@
 /* @var $this NewsController */
 /* @var $model News */
 
-$this->breadcrumbs=array(
-	'News'=>array('index'),
-	'Manage',
+$this->breadcrumbs = array(
+    Yii::t('common', 'News') => array('index'),
+    Yii::t('common', 'Manage'),
 );
 
-$this->menu=array(
-	array('label'=>'List News', 'url'=>array('index')),
-	array('label'=>'Create News', 'url'=>array('create')),
+$this->menu = array(
+    array('label' => Yii::t('common', 'List News'), 'url' => array('index')),
+    array('label' => Yii::t('common', 'Create News'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,17 +26,19 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage News</h1>
+<h1><?php echo Yii::t('common', 'Manage News') ?></h1>
 
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link(Yii::t('common', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+    <?php
+    $this->renderPartial('_search', array(
+        'model' => $model,
+    ));
+    ?>
 </div><!-- search-form -->
 
-<?php 
+<?php
 // $this->widget('zii.widgets.grid.CGridView', array(
 // 	'id'=>'news-grid',
 // 	'dataProvider'=>$model->search(),
@@ -48,11 +50,9 @@ $('.search-form form').submit(function(){
 // 		'activated',
 // 		'title',
 // 		'announcement',
-		
 // 		'content',
 // 		/*'image',*/
 // 		'activity',
-		
 // 		array(
 // 			'class'=>'CButtonColumn',
 // 		),
@@ -61,24 +61,23 @@ $('.search-form form').submit(function(){
 ?>
 <?php
 $this->widget('yiiwheels.widgets.grid.WhGridView', array(
-	'id'=>'news-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-				//'id',
-				//'author',
-				'created',
-				'activated',
-				'title',
-				/*'announcement',*/	
+    'id' => 'news-grid',
+    'dataProvider' => $model->search(),
+    'filter' => $model,
+    'columns' => array(
+        //'id',
+        //'author',
+        'created',
+        'activated',
+        'title',
+        /* 'announcement', */
 
-				/*'content',*/
-				/*'image',*/
-				//'activity',
-
-				array(
-							'class'=>'CButtonColumn',
-						),
-			),
+        /* 'content', */
+        /* 'image', */
+        //'activity',
+        array(
+            'class' => 'CButtonColumn',
+        ),
+    ),
 ));
 ?>

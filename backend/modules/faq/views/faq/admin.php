@@ -3,12 +3,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Faqs',
+	'FAQ',
 );
 
 $this->menu=array(
-	array('label'=>'Create Faq', 'url'=>array('create')),
-	array('label'=>'Manage Faq', 'url'=>array('admin')),
+	array('label'=> Yii::t('common', 'Create Faq'), 'url'=>array('create')),
+	array('label'=> Yii::t('common', 'Manage Faq'), 'url'=>array('admin')),
 );
 ?>
 

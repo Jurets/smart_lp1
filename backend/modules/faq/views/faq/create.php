@@ -2,17 +2,17 @@
 /* @var $this FaqController */
 /* @var $model Faq */
 
-$this->breadcrumbs=array(
-	'Faqs'=>array('index'),
-	'Create',
+$this->breadcrumbs = array(
+    'FAQ' => array('index'),
+    Yii::t('common', 'Create'),
 );
 
-$this->menu=array(
-	array('label'=>'List Faq', 'url'=>array('index')),
-	array('label'=>'Manage Faq', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => Yii::t('common', Yii::t('common', 'List FAQ')), 'url' => array('index')),
+    array('label' => Yii::t('common', Yii::t('common', 'Manage FAQ')), 'url' => array('admin')),
 );
 ?>
 
-<h1>Create Faq</h1>
+<h1><?php echo Yii::t('common', 'Create FAQ') ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model' => $model)); ?>

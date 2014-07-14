@@ -3,13 +3,13 @@
 /* @var $model Faq */
 
 $this->breadcrumbs = array(
-    'Faqs' => array('index'),
-    'Manage',
+    'FAQ' => array('index'),
+    Yii::t('common', 'Manage'),
 );
 
 $this->menu = array(
-    array('label' => 'List Faq', 'url' => array('admin')),
-    array('label' => 'Create Faq', 'url' => array('create')),
+    array('label' => Yii::t('common', 'List FAQ'), 'url' => array('admin')),
+    array('label' => Yii::t('common', 'Create FAQ'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -28,26 +28,30 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Faqs</h1>
+<h1><?php echo Yii::t('common', 'Manage FAQ') ?></h1>
 
 
 
 
 
 <p>
-    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-    or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+    <?php
+    echo Yii::t(
+            'common', 'You may optionally enter a comparison operator ({signs}) at the beginning of each of your search values to specify how the comparison should be done', array(
+        '{signs}' => '<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>, <b>=</b>')
+    );
+    ?>.
 </p>
 
 
 
 
 <div class="search-form">
-    <?php
-    $this->renderPartial('_search', array(
-        'model' => $model,
-    ));
-    ?>
+<?php
+$this->renderPartial('_search', array(
+    'model' => $model,
+));
+?>
 </div><!-- search-form -->
 
 <?php
