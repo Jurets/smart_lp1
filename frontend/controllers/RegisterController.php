@@ -187,14 +187,14 @@ class RegisterController extends EController
                     $pm->notation = 'Вступление в бизнес-клуб';
                     $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
 
-                    if (!$pm->hasErrors()) {  //если успешно - 
+                    if (!$pm->hasErrors()) {  //если успешно -
                         //$participant->attributes = $_POST['Participant'];
                         //стать бизнес-участником
-                        $participant->activateParticipation();  
+                        $participant->activateParticipation();
                         //перевести взнос на нужный кошелёк
                         if ($participant->invite_num == 3 || $participant->invite_num == 4)  {  //если приглашённый 3 или 4
-                            Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба 
-                            if ($participant->invite_num == 4) {                 //если это четвёртый приглашённый 
+                            Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба
+                            if ($participant->invite_num == 4) {                 //если это четвёртый приглашённый
                                 $participant->referal->activateBusiness();         //активировать Бизнес-клуб у реферала
                             }
                         } else {                                                 //иначе

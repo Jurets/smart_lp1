@@ -170,15 +170,78 @@ class SiteController extends LoginController
      *  Change up status
      */
     public function actionStatus(){
-        $model = Participant::model()->findByPk(Yii::app()->user->id);
-        $status = Tariff::model()->findByPk($model->tariff_id);
+        /* Формирование данных для отображения */
+        $participant = Participant::model()->findByPk(Yii::app()->user->id);
+        $status = Tariff::model()->findByPk($participant->tariff_id);
+        // Переменная для определения максимального уровня в бизнес клубе
+        $max_status = false;
+        if($participant->tariff_id == 6){$max_status = true;}
 
+        // Возможные варианты поднятия статуса(пример:мы не можем купить статус ниже текущего)
+        if($participant->tariff_id >= 3 && $participant->tariff_id < 6){
         $criteria = new CDbCriteria();
         $criteria->addCondition( 'id >  :id');
-        $criteria->params[':id'] = 3;
+        $criteria->params[':id'] = $participant->tariff_id;
         $tariffListData = Tariff::model()->findAll($criteria);
+        }else{$tariffListData = array();}
+        /* завершение форм.данных */
 
-        $this->render('status_form', array('model'=>$model,'status'=>$status,'tariffListData'=>$tariffListData));
+        /* Определяем статус,тип операции,изменям статус после удачной оплаты */
+        /* безопасно извлекаем данные из $_POST */
+        // $type_amount - id операции(TARIFF_50 = 2,TARIFF_BC_BRONZE(100$) = 4)
+        $type_amount = Yii::app()->getRequest()->getPost('amount');
+        // данные для Perfect Money (account&password) обязательны
+        $account = Yii::app()->getRequest()->getPost('account');
+        $password = Yii::app()->getRequest()->getPost('password');
+
+
+        //если статус "оплачен 20$"
+        if ($type_amount == Participant::TARIFF_20) {
+            $pm = new PerfectMoney(); //Попытаться сделать платёж
+            /* обязательные параметры */
+            $pm->login = $account; //временно хардкод
+            $pm->password = $password; //временно хардкод
+            $pm->payerAccount = $participant->purse; //'U6840713';
+            $pm->payeeAccount = Requisites::purseActivation(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
+            $pm->amount = Tariff::getTariffAmount(Participant::TARIFF_20);
+            /* необязательные параметры */
+            $pm->payerId = $participant->id;
+            $pm->payeeId = null;
+            $pm->transactionId = 1; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
+            $pm->notation = 'Регистрация в системе';
+            $pm->Run('confirm'); //запуск процесса платежа в PerfectMoney
+            if (!$pm->hasErrors()) { //если успешно -
+                Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                $this->refresh();
+            } else {
+                //$participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
+            }
+        }
+        elseif($type_amount > Participant::TARIFF_20 && $participant->tariff_id < 6 )
+        {
+            $pm = new PerfectMoney();              //Попытаться сделать платёж
+            /* обязательные параметры */
+            $pm->login = $account;                //временно хардкод
+            $pm->password = $password;      //временно хардкод
+            $pm->payerAccount = $participant->purse;//'U6840713';
+            $pm->payeeAccount = Requisites::purseClub(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
+            $pm->amount = Tariff::getTariffAmount($type_amount);
+            /* необязательные параметры */
+            $pm->payerId = $participant->id;
+            $pm->payeeId = null;
+            $pm->transactionId = 4; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
+            $pm->notation = 'Изменение статсуса в бизнес клубе';
+            $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
+            if (!$pm->hasErrors()) {  //если успешно -
+                $participant->tariff_id = $type_amount;
+                $participant->save();
+                Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                $this->refresh();
+            } else {
+                //$participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
+            }
+        }
+        $this->render('status_form', array('model'=>$participant,'status'=>$status,'tariffListData'=>$tariffListData,'max_status'=>$max_status));
     }
 
     

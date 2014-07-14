@@ -30,12 +30,13 @@ echo CHtml::endForm();
     #div-status-form input{
         margin-top : 10px;
         margin-bottom : 10px;
+        height: 35px !important;
     }
 </style>
 <script>
     if(document.getElementById('dropDownId')){
         $('#dropDownId').change(function(){
-            var valueList = $('#dropDownId :selected').text();
+            var valueList = $('#dropDownId :selected').val();
             document.getElementById('amount').value = valueList;
         });
         $('#dropDownId').change();
