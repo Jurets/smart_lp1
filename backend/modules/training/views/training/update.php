@@ -2,20 +2,20 @@
 /* @var $this TrainingController */
 /* @var $model Training */
 
-$this->breadcrumbs=array(
-	'Trainings'=>array('index'),
-	$model->title=>array('view','id'=>$model->id),
-	'Update',
+$this->breadcrumbs = array(
+    Yii::t('common', 'Training') => array('index'),
+    $model->title => array('view', 'id' => $model->id),
+    Yii::t('common', 'Update'),
 );
 
-$this->menu=array(
+$this->menu = array(
 //	array('label'=>'List Training', 'url'=>array('index')),
-	array('label'=>'Create Training', 'url'=>array('create')),
-	array('label'=>'View Training', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Training', 'url'=>array('index')),
+    array('label' => Yii::t('common', 'Create Training'), 'url' => array('create')),
+    array('label' => Yii::t('common', 'View Training'), 'url' => array('view', 'id' => $model->id)),
+    array('label' => Yii::t('common', 'Manage Training'), 'url' => array('index')),
 );
 ?>
 
-<h1>Update Training <?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('common', 'Update Training') ?>  <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model' => $model)); ?>

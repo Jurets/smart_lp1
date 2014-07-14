@@ -61,11 +61,11 @@ class Faq extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'question' => 'Question',
-            'answer' => 'Answer',
-            'created' => 'Created',
-            'id_user' => 'Id User',
-            'category' => 'Category',
+            'question' => Yii::t('common', 'Question'),
+            'answer' => Yii::t('common', 'Answer'),
+            'created' => Yii::t('common', 'Created'),
+            'id_user' => Yii::t('common', 'Id User'),
+            'category' => Yii::t('common', 'Category'),
         );
     }
 
@@ -114,38 +114,28 @@ class Faq extends CActiveRecord
     {
         $arrFaq = $this->model()->findAll();
         $arrSortCategoryFaq = array();
-        foreach($arrFaq as $faq)
-        {
-           if($faq['category'] == 'finance')
-           {
-               $arrCategoryFaqFinance['question'] = $faq['question'];
-               $arrCategoryFaqFinance['answer'] = $faq['answer'];
-               $arrCategoryFaqFinance['category'] = $faq['category'];
-               $arrFinance[] = $arrCategoryFaqFinance;
-               $arrSortCategoryFaq['finance'] = $arrFinance;
-           }
-           elseif($faq['category'] == 'site')
-           {
-               $arrCategoryFaqSite['question'] = $faq['question'];
-               $arrCategoryFaqSite['answer'] = $faq['answer'];
-               $arrCategoryFaqSite['category'] = $faq['category'];
-               $arrSite[] = $arrCategoryFaqSite;
-               $arrSortCategoryFaq['site'] = $arrSite;
-           }
-           else
-           {
-               $arrCategoryFaqOffer['question'] = $faq['question'];
-               $arrCategoryFaqOffer['answer'] = $faq['answer'];
-               $arrCategoryFaqOffer['category'] = $faq['category'];
-               $arrOffer[] = $arrCategoryFaqOffer;
-               $arrSortCategoryFaq['offer'] = $arrOffer;
-           }
+        foreach ($arrFaq as $faq) {
+            if ($faq['category'] == 'finance') {
+                $arrCategoryFaqFinance['question'] = $faq['question'];
+                $arrCategoryFaqFinance['answer'] = $faq['answer'];
+                $arrCategoryFaqFinance['category'] = $faq['category'];
+                $arrFinance[] = $arrCategoryFaqFinance;
+                $arrSortCategoryFaq['finance'] = $arrFinance;
+            } elseif ($faq['category'] == 'site') {
+                $arrCategoryFaqSite['question'] = $faq['question'];
+                $arrCategoryFaqSite['answer'] = $faq['answer'];
+                $arrCategoryFaqSite['category'] = $faq['category'];
+                $arrSite[] = $arrCategoryFaqSite;
+                $arrSortCategoryFaq['site'] = $arrSite;
+            } else {
+                $arrCategoryFaqOffer['question'] = $faq['question'];
+                $arrCategoryFaqOffer['answer'] = $faq['answer'];
+                $arrCategoryFaqOffer['category'] = $faq['category'];
+                $arrOffer[] = $arrCategoryFaqOffer;
+                $arrSortCategoryFaq['offer'] = $arrOffer;
+            }
         }
         return $arrSortCategoryFaq;
     }
-
-
-
-
 
 }

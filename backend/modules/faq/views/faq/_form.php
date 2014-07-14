@@ -17,7 +17,7 @@
     ));
     ?>
 
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note"><?php echo Yii::t('common', 'Fields with {asteriks} are required', array('{asteriks}' => '<span class="required">*</span>')); ?>.</p>
 
     <?php echo $form->errorSummary($model); ?>
 
@@ -50,7 +50,7 @@
             'name' => 'created',
             'attribute' => 'created',
             'format' => 'dd.MM.yyyy hh:mm:ss',
-                ))
+        ))
         ?>
         <?php echo $form->error($model, 'created'); ?>
     </div>

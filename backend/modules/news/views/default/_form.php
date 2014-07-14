@@ -28,13 +28,13 @@
 	</div>  -->
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'created'); ?>
+		<?php echo $form->labelEx($model,Yii::t("common", "Created")); ?>
 		<?php echo $form->textField($model,'created', array('readonly'=>1)); ?>
 		<?php echo $form->error($model,'created'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'activated'); ?>
+		<?php echo $form->labelEx($model,Yii::t("common", "Activated")); ?>
 		<?php echo $form->textField($model,'activated'); ?>
 		<?php /*$this->widget('yiiwheels.widgets.datetimepicker.WhDateTimePicker', array(
                     'name'=>'News[_activated]',
@@ -53,7 +53,7 @@
 	
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
+		<?php echo $form->labelEx($model,Yii::t("common","Title")); ?>
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>75)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
@@ -65,7 +65,7 @@
 	</div> -->
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'content'); ?>
+		<?php echo $form->labelEx($model,Yii::t("common", "Сontent")); ?>
 		<?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'content'); ?>
 	</div>
@@ -78,7 +78,7 @@
                             )); ?>
     
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t("common", "Create") : Yii::t("common", "Save")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
