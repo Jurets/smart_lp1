@@ -27,7 +27,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
             echo CHtml::dropDownList('listData',100,$list,array('id'=>'dropDownId'));
         }elseif($model->tariff_id < 2){ ?>
             <p>Сначала вы должны оплатить за регистрацию 50$ после этого вам будет доступен 'Бизнес Клуб'</p>
-            <input id="sum" type="hidden" value="50">
+            <input id="sum" type="hidden" value="1">
 
         <?php }
         $this->renderPartial('application.views.site._payform');

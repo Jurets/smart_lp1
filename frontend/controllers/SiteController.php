@@ -181,9 +181,14 @@ class SiteController extends LoginController
         if($participant->tariff_id >= 3 && $participant->tariff_id < 6){
         $criteria = new CDbCriteria();
         $criteria->addCondition( 'id >  :id');
-        $criteria->params[':id'] = $participant->tariff_id;
+        $criteria->params[':id'] =  $participant->tariff_id;
         $tariffListData = Tariff::model()->findAll($criteria);
-        }else{$tariffListData = array();}
+        }else{
+            $criteria = new CDbCriteria();
+            $criteria->addCondition( 'id >  :id');
+            $criteria->params[':id'] =  Participant::TARIFF_BC;
+            $tariffListData = Tariff::model()->findAll($criteria);
+        }
         /* завершение форм.данных */
 
         /* Определяем статус,тип операции,изменям статус после удачной оплаты */
@@ -197,27 +202,16 @@ class SiteController extends LoginController
 
         //если статус "оплачен 20$"
         if ($type_amount == Participant::TARIFF_20) {
-            $pm = new PerfectMoney(); //Попытаться сделать платёж
-            /* обязательные параметры */
-            $pm->login = $account; //временно хардкод
-            $pm->password = $password; //временно хардкод
-            $pm->payerAccount = $participant->purse; //'U6840713';
-            $pm->payeeAccount = Requisites::purseActivation(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
-            $pm->amount = Tariff::getTariffAmount(Participant::TARIFF_20);
-            /* необязательные параметры */
-            $pm->payerId = $participant->id;
-            $pm->payeeId = null;
-            $pm->transactionId = 1; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
-            $pm->notation = 'Регистрация в системе';
-            $pm->Run('confirm'); //запуск процесса платежа в PerfectMoney
-            if (!$pm->hasErrors()) { //если успешно -
-                Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+
+            if (MPlan::payParticipation($participant, $account, $password)) {
                 $this->refresh();
-            } else {
-                //$participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
             }
+            /*
+            Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+            Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+             */
         }
-        elseif($type_amount > Participant::TARIFF_20 && $participant->tariff_id < 6 )
+        elseif($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD )
         {
             $pm = new PerfectMoney();              //Попытаться сделать платёж
             /* обязательные параметры */
@@ -229,7 +223,7 @@ class SiteController extends LoginController
             /* необязательные параметры */
             $pm->payerId = $participant->id;
             $pm->payeeId = null;
-            $pm->transactionId = 4; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
+            $pm->transactionId = 4;
             $pm->notation = 'Изменение статсуса в бизнес клубе';
             $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
             if (!$pm->hasErrors()) {  //если успешно -
@@ -238,7 +232,8 @@ class SiteController extends LoginController
                 Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
                 $this->refresh();
             } else {
-                //$participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
+                Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+                $this->refresh();
             }
         }
         $this->render('status_form', array('model'=>$participant,'status'=>$status,'tariffListData'=>$tariffListData,'max_status'=>$max_status));

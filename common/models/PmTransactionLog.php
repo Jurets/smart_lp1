@@ -18,6 +18,15 @@
  */
 class PmTransactionLog extends CActiveRecord
 {
+    //константы для обозначения типа транзакции
+    const TRANSACTION_REGISTRATION = 1;
+    const TRANSACTION_ENTER_BC = 2;
+    const TRANSACTION_BC_BRONZE = 3;
+    const TRANSACTION_BC_SILVER = 4;
+    const TRANSACTION_BC_GOLD = 5;
+    const TRANSACTION_COMMISSION = 6;
+    const TRANSACTION_CHARITY = 7;
+    const TRANSACTION_PRIZE = 8;
         public $statisticsStructure;
         private $id;
 	/**
