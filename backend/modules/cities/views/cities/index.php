@@ -2,14 +2,14 @@
 /* @var $this CitiesController */
 /* @var $model Cities */
 
-$this->breadcrumbs=array(
-	'Cities'=>array('admin'),
-	'Manage',
+$this->breadcrumbs = array(
+    Yii::t('common', 'Cities') => array('admin'),
+    Yii::t('common', 'Manage'),
 );
 
-$this->menu=array(
-	array('label'=>'List Cities', 'url'=>array('admin')),
-	array('label'=>'Create Cities', 'url'=>array('create')),
+$this->menu = array(
+    array('label' => Yii::t('common', 'List Cities'), 'url' => array('admin')),
+    array('label' => Yii::t('common', 'Create Cities'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,49 +26,51 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Cities</h1>
+<h1><?php echo Yii::t('common', 'Manage Cities') ?></h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+    <?php
+    echo Yii::t(
+            'common', 'You may optionally enter a comparison operator ({signs}) at the beginning of each of your search values to specify how the comparison should be done', array(
+        '{signs}' => '<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>, <b>=</b>')
+    );
+    ?>.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link(Yii::t('common', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+    <?php
+    $this->renderPartial('_search', array(
+        'model' => $model,
+    ));
+    ?>
 </div><!-- search-form -->
 
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
-	'id'=>'cities-grid',
-    'type'=>TbHtml::GRID_TYPE_STRIPED,
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-
+<?php
+$this->widget('bootstrap.widgets.TbGridView', array(
+    'id' => 'cities-grid',
+    'type' => TbHtml::GRID_TYPE_STRIPED,
+    'dataProvider' => $model->search(),
+    'filter' => $model,
+    'columns' => array(
         array(
-            'name'=>'id',
-            'filter'=>TbHtml::activeTextField($model, 'id', array('style'=>'width: 50px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
-
+            'name' => 'id',
+            'filter' => TbHtml::activeTextField($model, 'id', array('style' => 'width: 50px')),
+            'htmlOptions' => array('style' => 'width: 50px'),
+        ),
         array(
-            'name'=>'country_id',
-            'filter'=>TbHtml::activeTextField($model, 'country_id', array('style'=>'width: 50px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
-
+            'name' => 'country_id',
+            'filter' => TbHtml::activeTextField($model, 'country_id', array('style' => 'width: 50px')),
+            'htmlOptions' => array('style' => 'width: 50px'),
+        ),
         array(
-            'name'=>'name',
-            'filter'=>TbHtml::activeTextField($model, 'name', array('style'=>'width: 150 px')),
-            'htmlOptions'=>array('style'=>'width: 50px'),
-            ),
-
-
-
-		array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),
-	),
-)); ?>
+            'name' => 'name',
+            'filter' => TbHtml::activeTextField($model, 'name', array('style' => 'width: 150 px')),
+            'htmlOptions' => array('style' => 'width: 50px'),
+        ),
+        array(
+            'class' => 'bootstrap.widgets.TbButtonColumn',
+        ),
+    ),
+));
+?>

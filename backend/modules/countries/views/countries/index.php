@@ -3,13 +3,13 @@
 /* @var $model Countries */
 
 $this->breadcrumbs = array(
-    'Countries' => array('index'),
-    'Manage',
+    Yii::t('common', 'Countries') => array('index'),
+    Yii::t('common', 'Manage'),
 );
 
 $this->menu = array(
-    array('label' => 'List Countries', 'url' => array('admin')),
-    array('label' => 'Create Countries', 'url' => array('create')),
+    array('label' => Yii::t('common', 'List Countries'), 'url' => array('admin')),
+    array('label' => Yii::t('common', 'Create Countries'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +26,18 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Countries</h1>
+<h1><?php echo Yii::t('common', 'Manage Countries') ?></h1>
 
 <p>
-    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-    or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+    <?php
+    echo Yii::t(
+            'common', 'You may optionally enter a comparison operator ({signs}) at the beginning of each of your search values to specify how the comparison should be done', array(
+        '{signs}' => '<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>, <b>=</b>')
+    );
+    ?>.
 </p>
 
-<?php echo CHtml::link('Advanced Search', '#', array('class' => 'search-button')); ?>
+<?php echo CHtml::link(Yii::t('common', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form" style="display:none">
     <?php
     $this->renderPartial('_search', array(
@@ -42,7 +46,7 @@ $('.search-form form').submit(function(){
     ?>
 </div><!-- search-form -->
 
-// $this->widget('zii.widgets.grid.CGridView', array(
+<!--// $this->widget('zii.widgets.grid.CGridView', array(-->
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'countries-grid',
@@ -64,12 +68,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'filter' => TbHtml::activeTextField($model, 'code', array('style' => 'width: 40px')),
             'htmlOptions' => array('style' => 'width: 40px'),
         ),
-         array(
+        array(
             'name' => 'code_num',
             'filter' => TbHtml::activeTextField($model, 'code_num', array('style' => 'width: 40px')),
             'htmlOptions' => array('style' => 'width: 40px'),
         ),
-         array(
+        array(
             'name' => 'phone_code',
             'filter' => TbHtml::activeTextField($model, 'phone_code', array('style' => 'width: 40px')),
             'htmlOptions' => array('style' => 'width: 40px'),

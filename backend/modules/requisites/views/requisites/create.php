@@ -2,17 +2,17 @@
 /* @var $this RequisitesController */
 /* @var $model Requisites */
 
-$this->breadcrumbs=array(
-	'Requisites'=>array('index'),
-	'Create',
+$this->breadcrumbs = array(
+    Yii::t('common', 'Requisites') => array('index'),
+    Yii::t('common', 'Create'),
 );
 
-$this->menu=array(
-	array('label'=>'List Requisites', 'url'=>array('admin')),
-	array('label'=>'Manage Requisites', 'url'=>array('index')),
+$this->menu = array(
+    array('label' => Yii::t('common', 'List Requisites'), 'url' => array('admin')),
+    array('label' => Yii::t('common', 'Manage Requisites'), 'url' => array('index')),
 );
 ?>
 
-<h1>Create Requisites</h1>
+<h1><?php echo Yii::t('common', 'Create Requisites') ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model' => $model)); ?>

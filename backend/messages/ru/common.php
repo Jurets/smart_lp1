@@ -64,7 +64,6 @@ return array(
     'Update Training' => 'Обновить урок',
     'Delete Training' => 'Удалить урок',
     'View Training' => 'Просмотр урока',
-    
     //FAQ
     'Question' => 'Вопрос',
     'Answer' => 'Ответ',
@@ -76,10 +75,46 @@ return array(
     'Delete FAQ' => 'Удалить FAQ',
     'Manage FAQ' => 'Управление FAQ',
     'View FAQ' => 'Просмотр FAQ',
-    
     //Invitation
     'Apply' => 'Применить',
     'Add' => 'Добавить',
     'Banner' => 'Баннер',
+    //Countries
+    'List Countries' => 'Список стран',
+    'Create Countries' => 'Создать страну',
+    'Manage Countries' => 'Управление странами',
+    'Update Countries' => 'Обновить страну',
+    'Delete Countries' => 'Удалить страну',
+    'View Countries' => 'Просмотр страны',
+    'Name' => 'Название',
+    'Code' => 'Код страны',
+    'Code Num' => 'Цифровой код',
+    'Phone Code' => 'Телефонный код',
+    //Cities
+    'Country' => 'Страна',
+    'List Cities' => 'Список городов',
+    'Create Cities' => 'Создать город',
+    'Manage Cities' => 'Управление городами',
+    'View Cities' => 'Просмотреть ',
+    'Update Cities' => 'Обновить город',
+    'Delete Cities' => 'Удалить город',
+    //Requisites
+    'Details' => 'Детали',
+    'Agreement' => 'Соглашение',
+    'Marketing' => 'Маркетинг',
+    'Pw Supervisor' => 'Пароль руководителя',
+    'Pw Admin' => 'Пароль Админа',
+    'Pw Moderator' => 'Пароль модератора',
+    'Purse Activation' => 'Кошелек для активации',
+    'Purse Club' => 'Кошелек бизнес-клуба',
+    'Purse Investor' => 'Кошелек инвестора',
+    'Purse FDL' => 'Кошелек FDL',
+    'Requisites' => 'Реквизиты',
+    'List Requisites' => 'Список реквизитов',
+    'Create Requisites' => 'Создать реквизиты',
+    'Update Requisites' => 'Обновить реквизиты',
+    'Delete Requisites' => 'Удалить реквизиты',
+    'Manage Requisites' => 'Управление реквизитами',
+    'View Requisites' => 'Просмотр реквизитов',
 );
 ?>
