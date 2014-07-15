@@ -7,7 +7,7 @@ echo CHtml::label('Аккаунт: ','account');
 echo CHtml::textField('account');
 echo '<br>';
 echo CHtml::label('Пароль: ','password');
-echo CHtml::textField('password');
+echo CHtml::passwordField('password');
 echo '<br>';?>
     <input type="hidden" name="amount" id="amount" value="">
     <input type="hidden" name="purse_from" value="<?php //От куда пересылаем ?>">

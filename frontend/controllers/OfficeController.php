@@ -47,8 +47,9 @@ class OfficeController extends EController
      */
     public function actionStatistics(){
         $model = new PmTransactionLog;
+        $model->id = Yii::app()->user->id;
         if(!$model->validate()){
-            throw new CHttpException(404, 'date mus be on dd.mm.yy format');
+            throw new CHttpException(404, 'date must be on dd.mm.yyyy format');
         }
         // TO DO - вызов логики
         $model->statisticaStandard();

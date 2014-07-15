@@ -1,6 +1,6 @@
 <div id="content">
     
-               <a href="#"><input type="button" name="btn"  class="office-1-btn-style-green" value="ВЫВЕСТИ СРЕДСТВА" /></a>
+               <a href="https://perfectmoney.is/login.html"><input type="button" name="btn"  class="office-1-btn-style-green" value="ВЫВЕСТИ СРЕДСТВА" /></a>
              
              
               <p class="office-1-text-1">ДОХОД</p>
@@ -75,7 +75,7 @@
     <td class="tg-ll1" colspan="3">Личная команда сегодня: <span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Staff']['privateStructure'] ?></span></td>
       </tr>
       <tr>
-    <td class="tg-ll2" colspan="3">Бизнес-Клуб сегодня: <span>245</span></td>
+    <td class="tg-ll2" colspan="3">Бизнес-Клуб сегодня: <span><?php echo $model->statisticsStructure['Staff']['businessClub'] ?></span></td>
       </tr>
      
     </table> 
