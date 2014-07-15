@@ -418,7 +418,8 @@ class Participant extends User
     public function activateBusiness()
     {
         $this->tariff_id = self::TARIFF_BC;
-        $this->save(false, array('tariff_id'));
+        $this->club_date = new CDbExpression('NOW()');
+        $this->save(false, array('tariff_id', 'club_date'));
     }
 
     /**

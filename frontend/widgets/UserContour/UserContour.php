@@ -72,9 +72,9 @@ class UserContour extends CWidget {
              FROM pm_transaction_log
              JOIN tbl_users
              ON to_user_id = id
-             JOIN cities c
+             LEFT JOIN cities c
              ON city_id = c.id
-             JOIN countries co
+             LEFT JOIN countries co
              ON co.id = c.country_id
              WHERE tr_kind_id = 6
              LIMIT 6  ');

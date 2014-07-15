@@ -181,7 +181,7 @@ class PmTransactionLog extends CActiveRecord
                      ON trlog.tr_kind_id = trkind.kind_id
                      WHERE trlog.tr_err_code IS NULL
                      AND trlog.date >= DATE(:date)
-                     AND trlog.date <= DATE_ADD(:date, INTERVAL 1 DAY)
+                     AND trlog.date < DATE_ADD(:date, INTERVAL 1 DAY)
                      AND trlog.to_user_id = :id";
             $mainCommand = $dbh->createCommand($mainSQL);
             $mainCommand->bindParam(':date', $date, PDO::PARAM_STR);
@@ -216,7 +216,7 @@ class PmTransactionLog extends CActiveRecord
                             AND tr_err_code IS NULL
                             AND tr_kind_id IN (2, 6, 8)
                             AND date >= DATE(:date)
-                            AND date <= DATE_ADD(:date, INTERVAL 1 DAY)";
+                            AND date < DATE_ADD(:date, INTERVAL 1 DAY)";
             $todaySumm = $dbh->createCommand($todaySQL);
             $todaySumm->bindParam(':date', $date, PDO::PARAM_STR);
             $todaySumm->bindParam(':id', $this->id, PDO::PARAM_INT);
@@ -247,7 +247,7 @@ class PmTransactionLog extends CActiveRecord
                             AND tr_err_code IS NULL
                             AND tr_kind_id IN (2,3,4,5)
                             AND date >= DATE(:date)
-                            AND date <= DATE_ADD(:date, INTERVAL 1 DAY)";
+                            AND date < DATE_ADD(:date, INTERVAL 1 DAY)";
             $today = $dbh->createCommand($todaySQL);
             $today->bindParam(':date', $date, PDO::PARAM_STR);
             $today->bindParam(':id', $this->id, PDO::PARAM_INT);
@@ -262,7 +262,7 @@ class PmTransactionLog extends CActiveRecord
                                 AND tr_err_code IS NULL
                                 AND tr_kind_id IN (2,3,4,5)
                                 AND date >= DATE(:date)
-                                AND date <= DATE_ADD(:date, INTERVAL 1 MONTH)";
+                                AND date < DATE_ADD(:date, INTERVAL 1 MONTH)";
             $permonth = $dbh->createCommand($permonthSQL);
             $permonth->bindParam(':date', $date, PDO::PARAM_STR);
             $permonth->bindParam(':id', $this->id, PDO::PARAM_INT);
@@ -292,12 +292,12 @@ class PmTransactionLog extends CActiveRecord
                                 WHERE refer_id = :id
                                 AND status = 1
                                 AND busy_date >= DATE(:date)
-                                AND busy_date <= DATE_ADD(:date, INTERVAL 1 DAY)";          
+                                AND busy_date < DATE_ADD(:date, INTERVAL 1 DAY)";          
             $private = $dbh->createCommand($privateSQL);
             $private->bindParam(':date', $date, PDO::PARAM_STR);
             $private->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $private->query()->read()['count'];
-            $this->statisticsStructure['Staff']['privateStructure'] = (!is_null($param) ? $param : '0');
+            $this->statisticsStructure['Staff']['privateStructure'] = (!is_null($param)) ? $param : '0';
             
             $clubSQL = "SELECT
                          count(id) count 
@@ -305,14 +305,13 @@ class PmTransactionLog extends CActiveRecord
                          WHERE refer_id = :id
                          AND status = 1
                          AND club_date >= DATE(:date)
-                         AND club_date <= DATE_ADD(:date, INTERVAL 1 DAY)
+                         AND club_date < DATE_ADD(:date, INTERVAL 1 DAY)
                          AND tariff_id >= 3";
             $club = $dbh->createCommand($clubSQL);
             $club->bindParam(':date', $date, PDO::PARAM_STR);
             $club->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $club->query()->read()['count'];
-            var_dump($param);die;
-            
+            $this->statisticsStructure['Staff']['businessClub'] = (!is_null($param)) ? $param : '0';            
         }
         /* Преобразование даты к формату для базы данных */
         public function dateConvertToSite($date_from_db, $choise='short'){
