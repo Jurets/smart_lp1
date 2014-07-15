@@ -28,7 +28,7 @@ class PmTransactionLog extends CActiveRecord
     const TRANSACTION_CHARITY = 7;
     const TRANSACTION_PRIZE = 8;
         public $statisticsStructure;
-        private $id;
+        public $id;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -43,7 +43,6 @@ class PmTransactionLog extends CActiveRecord
         
         public function init() {
             parent::init();
-            $this->id = 3; // пока харткод, потом, авторизованный юзер подставлен быть надлежит
             $this->dateInit();
             $this->statisticsStructure = array(
                 'Checks'=>'', // формирутеся полоса по всем чекам для данного пользователя
