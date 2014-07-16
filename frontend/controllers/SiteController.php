@@ -42,7 +42,11 @@ class SiteController extends LoginController
     {
         $model = new Indexmanager;
         $model->LoadIndexManager();
-        //вывести вью
+        if(isset($_GET['user'])){
+            PmTransactionLog::model()->date = date('d.m.Y');
+            PmTransactionLog::model()->domain = $_GET['user'];
+            PmTransactionLog::model()->statisticaVisitesCreation();
+        }
         $this->render('index', array('model' => $model));
     }
 

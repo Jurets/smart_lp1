@@ -29,6 +29,7 @@ class PmTransactionLog extends CActiveRecord
     const TRANSACTION_PRIZE = 8;
         public $statisticsStructure;
         public $id;
+        public $domain;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -73,9 +74,10 @@ class PmTransactionLog extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('from_purse, to_purse', 'required'),
-			array('from_user_id, to_user_id, tr_kind_id, tr_err_code', 'numerical', 'integerOnly'=>true),
+			array('id, from_user_id, to_user_id, tr_kind_id, tr_err_code', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			array('from_purse, to_purse, notation', 'length', 'max'=>255),
+                        array('domain', 'length', 'max'=>20),
 			array('currency', 'length', 'max'=>3),
                         array('date', 'date', 'format'=>'dd.mm.yyyy'),
 			// The following rule is used by search().
@@ -167,6 +169,44 @@ class PmTransactionLog extends CActiveRecord
             $this->checkSummFormer();
             $this->charityFormer();
             $this->structureFormer();
+            $this->visitsFormer();
+            
+        }
+        public function statisticaVisitesCreation(){
+            $dbh = Yii::app()->db;
+            $date = $this->dateConvertToDb($this->date);
+            $checkDomainSQL = "SELECT id as uid 
+                                 FROM tbl_users
+                                 WHERE username = :domain";
+            $checkNewSQL = "SELECT id as rec
+                            FROM tbl_visits
+                            WHERE user_id = :uid
+                            AND date_visit = :date";
+            $updateNewSQL = "UPDATE tbl_visits 
+                            SET visits_count = visits_count + 1
+                            WHERE id = :rec";
+            $insertNewSQL = "INSERT INTO tbl_visits (user_id, date_visit, visits_count) VALUES (:uid, :date, 1)";
+            $checkDomain = $dbh->createCommand($checkDomainSQL);
+            $checkDomain->bindParam(':domain', $this->domain, PDO::PARAM_STR);
+            $uid = $checkDomain->query()->read()['uid'];
+            if(!is_null($uid)){
+               $checkNew = $dbh->createCommand($checkNewSQL);
+               $checkNew->bindParam(':uid', $uid, PDO::PARAM_INT);
+               $checkNew->bindParam(':date', $date, PDO::PARAM_STR);
+               $rec = $checkNew->query()->read()['rec'];
+               if(!is_null($rec)){
+                   $update = $dbh->createCommand($updateNewSQL);
+                   $update->bindParam(':rec', $rec, PDO::PARAM_INT);
+                   $update->execute();
+               }else{
+                   $insert = $dbh->createCommand($insertNewSQL);
+                   $insert->bindParam(':date', $date, PDO::PARAM_STR);
+                   $insert->bindParam(':uid', $uid, PDO::PARAM_INT);
+                   $insert->execute();
+               }
+            }else{
+                throw new CHttpException('404', 'not exist in nature');
+            }
             
         }
         /* Цепь функций */
@@ -311,6 +351,50 @@ class PmTransactionLog extends CActiveRecord
             $club->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $club->query()->read()['count'];
             $this->statisticsStructure['Staff']['businessClub'] = (!is_null($param)) ? $param : '0';            
+        }
+        /* Visits Former */
+        protected function visitsFormer(){
+            $dbh = Yii::app()->db;
+            $date = $this->dateConvertToDb($this->date);
+            
+            $todaySQL = "SELECT sum(visits_count) as summ
+                            FROM tbl_visits
+                            WHERE user_id = :id
+                            AND date_visit = :date";
+            $today = $dbh->createCommand($todaySQL);
+            $today->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $today->bindParam(':date', $date, PDO::PARAM_STR);
+            $param = $today->query()->read()['summ'];
+            $this->statisticsStructure['Visitors']['today'] = (!is_null($param)) ? $param : '0';
+            
+            $tomorrowSQL = "SELECT sum(visits_count) as summ
+                                FROM tbl_visits
+                                WHERE user_id = :id
+                                AND date_visit = DATE_ADD(:date, INTERVAL -1 DAY)";
+            $tomorrow = $dbh->createCommand($tomorrowSQL);
+            $tomorrow->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $tomorrow->bindParam(':date', $date, PDO::PARAM_STR);
+            $param = $tomorrow->query()->read()['summ'];
+            $this->statisticsStructure['Visitors']['tomorrow'] = (!is_null($param)) ? $param : '0';
+            
+            $permonthSQL = "SELECT sum(visits_count) as summ
+                                FROM tbl_visits
+                                WHERE user_id = :id
+                                AND date_visit >= DATE(:date)
+                                AND date_visit < DATE_ADD(:date, INTERVAL 1 MONTH)";
+            $permonth = $dbh->createCommand($permonthSQL);
+            $permonth->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $permonth->bindParam(':date', $date, PDO::PARAM_STR);
+            $param = $permonth->query()->read()['summ'];
+            $this->statisticsStructure['Visitors']['permonth'] = (!is_null($param)) ? $param : '0';
+            
+            $commonSQL = "SELECT sum(visits_count) as summ
+                                FROM tbl_visits
+                                WHERE user_id = :id";
+            $common = $dbh->createCommand($commonSQL);
+            $common->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $param = $common->query()->read()['summ'];
+            $this->statisticsStructure['Visitors']['common'] = (!is_null($param)) ? $param : '0';
         }
         /* Преобразование даты к формату для базы данных */
         public function dateConvertToSite($date_from_db, $choise='short'){

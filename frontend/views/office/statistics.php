@@ -82,16 +82,16 @@
     
     <table id="tg4">
     <tr>
-    <td class="tg-ll1" colspan="3">Сегодня:<span>&nbsp;&nbsp;+85</span></td>
+    <td class="tg-ll1" colspan="3">Сегодня:<span>&nbsp;&nbsp;+<?php echo $model->statisticsStructure['Visitors']['today'] ?></span></td>
     </tr>
     <tr>
-    <td class="tg-ll2" colspan="3">Вчера: <span>&nbsp;&nbsp;&nbsp;&nbsp;77</span></td>
+    <td class="tg-ll2" colspan="3">Вчера: <span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['tomorrow'] ?></span></td>
      </tr>
      <tr>
-    <td class="tg-ll3" colspan="3">Месяц: <span>2214</span></td>
+    <td class="tg-ll3" colspan="3">Месяц: <span><?php echo $model->statisticsStructure['Visitors']['permonth'] ?></span></td>
      </tr>
     <tr>
-    <td class="tg-ll4" colspan="3">Всего: <span  style="color: #12be25;" >8840</span></td>
+    <td class="tg-ll4" colspan="3">Всего: <span  style="color: #12be25;" ><?php echo $model->statisticsStructure['Visitors']['common'] ?></span></td>
      </tr>
     </table>   
  </div>  
