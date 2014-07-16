@@ -3,6 +3,15 @@ class MPlan extends CModel
 {
 
     public function attributeNames(){}
+
+    /**
+     * @param $participant
+     * @param $account
+     * @param $password
+     * @return bool
+     *
+     * Function: pay for participation 50$
+     */
     public static function payParticipation($participant,$account,$password) {
         $pm = new PerfectMoney();              //Попытаться сделать платёж
         /* обязательные параметры */
@@ -40,7 +49,6 @@ class MPlan extends CModel
             }
             //отослать письмо про вступление в бизнес-участие
             EmailHelper::send(array($participant->email), 'Вы стали бизнес-участником', 'businessstart', array('participant'=>$participant));
-            Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
             /////                        $this->step = 4;
             /////                        $this->render('finish', array('participant'=>$participant));
             /////                        Yii::app()->end();
@@ -48,6 +56,36 @@ class MPlan extends CModel
         } else {
             $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
             return false;
+        }
+    }
+
+    /**
+     * @param $participant
+     * @param $account
+     * @param $password
+     * @param $type_amount
+     *
+     * Function: pay for change status BC
+     */
+    public static  function payForChangeStatus($participant,$account,$password,$type_amount){
+        $pm = new PerfectMoney();
+        /* обязательные параметры */
+        $pm->login = $account;
+        $pm->password = $password;
+        $pm->payerAccount = $participant->purse;
+        $pm->payeeAccount = Requisites::purseClub();
+        $pm->amount = Tariff::getTariffAmount($type_amount);
+        /* необязательные параметры */
+        $pm->payerId = $participant->id;
+        $pm->payeeId = null;
+        $pm->transactionId = Tariff::getTransactionKindTariff($type_amount);
+        $pm->notation = 'Изменение статсуса в бизнес клубе';
+        $pm->Run('confirm');   //запуск процесса платежа в PerfectMoney
+        if (!$pm->hasErrors()) {  //если успешно -
+            $participant->tariff_id = $type_amount;
+            $participant->save();
+        }else{
+            $participant->addError('tariff_id', $pm->getError('Can\'t change status.Transaction fail.'));
         }
     }
 
