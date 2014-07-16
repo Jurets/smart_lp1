@@ -172,6 +172,11 @@ class OfficeController extends EController
             } else {
                 $participant->photo = $oldPhoto;
             }
+            
+           if(!$participant->hasErrors()){
+                Yii::app()->user->setFlash('settings saved', "Data saved successfull");
+            }
+            
         }
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
@@ -303,8 +308,8 @@ class OfficeController extends EController
         $model->payeeAccount = 'U3627324';
         $model->amount = '0.01';
         /* необязательные параметры */
-        $model->payerId = '17';
-        $model->payeeId = '18';
+//        $model->payerId = '3';
+//        $model->payeeId = '4';
         $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
         $model->notation = 'Дополнительные сведения.';
         //$model->Run('balance');

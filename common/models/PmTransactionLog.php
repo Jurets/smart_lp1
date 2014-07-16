@@ -377,6 +377,7 @@ class PmTransactionLog extends CActiveRecord
             $param = $tomorrow->query()->read()['summ'];
             $this->statisticsStructure['Visitors']['tomorrow'] = (!is_null($param)) ? $param : '0';
             
+            $date = $this->dateConvertToDb($this->date, TRUE);
             $permonthSQL = "SELECT sum(visits_count) as summ
                                 FROM tbl_visits
                                 WHERE user_id = :id
