@@ -178,15 +178,15 @@ class SiteController extends LoginController
         if($participant->tariff_id == 6){$max_status = true;}
 
         // Возможные варианты поднятия статуса(пример:мы не можем купить статус ниже текущего)
-        if($participant->tariff_id >= 3 && $participant->tariff_id < 6){
-        $criteria = new CDbCriteria();
-        $criteria->addCondition( 'id >  :id');
-        $criteria->params[':id'] =  $participant->tariff_id;
-        $tariffListData = Tariff::model()->findAll($criteria);
-        }else{
+        if ($participant->tariff_id >= 3 && $participant->tariff_id < 6) {
             $criteria = new CDbCriteria();
-            $criteria->addCondition( 'id >  :id');
-            $criteria->params[':id'] =  Participant::TARIFF_BC;
+            $criteria->addCondition('id >  :id');
+            $criteria->params[':id'] = $participant->tariff_id;
+            $tariffListData = Tariff::model()->findAll($criteria);
+        } else {
+            $criteria = new CDbCriteria();
+            $criteria->addCondition('id >  :id');
+            $criteria->params[':id'] = Participant::TARIFF_BC;
             $tariffListData = Tariff::model()->findAll($criteria);
         }
         /* завершение форм.данных */
@@ -223,7 +223,7 @@ class SiteController extends LoginController
             /* необязательные параметры */
             $pm->payerId = $participant->id;
             $pm->payeeId = null;
-            $pm->transactionId = 4;
+            $pm->transactionId = Tariff::getTransactionKindTariff($type_amount);
             $pm->notation = 'Изменение статсуса в бизнес клубе';
             $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
             if (!$pm->hasErrors()) {  //если успешно -

@@ -7,6 +7,7 @@
  * @property string $id
  * @property string $name
  * @property string $shortname
+ * @property int $tr_kind
  *
  * The followings are the available model relations:
  * @property Users[] $users
@@ -111,4 +112,16 @@ class Tariff extends CActiveRecord
             return 0;
         }
     }
+
+    /**
+     *  get transaction kind from pm_transaction_kind
+     */
+    public static function getTransactionKindTariff($id){
+        if ($tariff = self::model()->findByPk($id)) {
+            return $tariff->tr_kind;
+        } else {
+            return 0;
+        }
+    }
+
 }
