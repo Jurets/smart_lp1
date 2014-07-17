@@ -14,7 +14,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
     <h3><?php echo Yii::t('common', 'Finance') ?></h3>
     <div class="accordionContent">
         <?php
-        if(!empty($arrCategories)){
+        if(isset($arrCategories['finance'])){
         foreach($arrCategories['finance'] as $finance)
         {
             echo $finance['question'];
@@ -27,11 +27,11 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
     <h3><?php echo Yii::t('common', 'Offers') ?></h3>
     <div class="accordionContent">
 
-        <?php if(!empty($arrCategories)){
-        foreach($arrCategories['offer'] as $finance)
+        <?php if(isset($arrCategories['offer'])){
+        foreach($arrCategories['offer'] as $offer)
         {
-            echo $finance['question'];
-            echo $finance['answer'];
+            echo $offer['question'];
+            echo $offer['answer'];
             echo '<hr>';
         }
         }else{ echo 'Нет данных.'; }
@@ -40,11 +40,11 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
     <h3><?php echo Yii::t('common', 'Site work') ?></h3>
     <div class="accordionContent">
         <?php
-        if(!empty($arrCategories)){
-            foreach($arrCategories['site'] as $finance)
+        if(isset($arrCategories['site'])){
+            foreach($arrCategories['site'] as $site)
             {
-                echo $finance['question'];
-                echo $finance['answer'];
+                echo $site['question'];
+                echo $site['answer'];
                 echo '<hr>';
             }
         }else{ echo 'Нет данных.'; }
