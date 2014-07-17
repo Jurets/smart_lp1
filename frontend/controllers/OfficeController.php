@@ -70,9 +70,15 @@ class OfficeController extends EController
     public function actionHelp()
     {
         $objFaq = new Faq();
-        // $categories - sorted faq(array) by categories
+        $availableCategories = $objFaq->getTypeOfCategories();
         $categories = $objFaq->model()->showAllFaq();
-        $this->render('help', array('arrCategories' => $categories));
+        if(!empty($_POST)){
+            $objFaq->attributes = $_POST;
+            $objFaq->created = date('y-m-d h:m:s');
+            $objFaq->save();
+            $this->refresh();
+        }
+        $this->render('help', array('arrCategories' => $categories, 'availableCategories'=>$availableCategories));
     }
 
     /**

@@ -52,21 +52,33 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
         ?>
     </div>
 </div>
-
+<div id='popup'>
+    <div id="help-7-2">
+        <?php echo CHtml::beginForm('','post'); ?>
+        <p class="sub1">ВЫБЕРИТЕ ТЕМУ СООБЩЕНИЯ:</p>
+        <p class="sub2">ВАШ ВОПРОС:</p>
+        <?php echo CHtml::dropDownList('category','',$availableCategories,array('class'=>'help-option')); ?>
+        <?php echo CHtml::textArea('question','',array('id'=>'helpText')) ?>
+<!--        <textarea id="helpText"> </textarea>-->
+        <a id="close-popup" href="#"><img src="images/Х.png" width="22"></a>
+        <?php echo CHtml::submitButton('',array('name'=>'btn','class'=>'btn-style-green-7-2','value'=>'ЗАДАТЬ ВОПРОС')) ?>
+        <?php echo CHtml::endForm(); ?>
+    </div>
+</div>
 
 <script>
-$( "#accordion" ).accordion();
-$('#popup').hide()
-$( document ).ready(function() {
-$('#popupbtn').on("click",function (){
+    $("#accordion").accordion();
+    $('#popup').hide()
+    $(document).ready(function () {
+        $('#popupbtn').on("click", function () {
 
-$('#popup').show()
-$('#close-popup').on('click',function(){
+            $('#popup').show()
+            $('#close-popup').on('click', function () {
 
-$('#popup').hide()
+                $('#popup').hide()
 
-})
-})
+            })
+        })
 
-});
+    });
 </script>
