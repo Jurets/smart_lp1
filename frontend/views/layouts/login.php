@@ -24,7 +24,8 @@
     #refresh {
         overflow: hidden;
         text-indent: -200px;
-    }    
+    }
+
 </style>
 
 
@@ -65,7 +66,9 @@ $this->widget('CCaptcha', array(
 <?php echo CHtml::activeTextField($userLogin, 'verifyCode', array('class' => 'textbox3 textbox3-login')); ?>
 <?php echo $form->error($userLogin, 'verifyCode', array('style' => 'top: 202px;')); ?>
 
-<?php echo CHtml::submitButton(Yii::t('common', 'LOGIN'), array('name' => 'btn', 'class' => 'btn-style')); ?>
+<?php echo CHtml::submitButton(Yii::t('common', 'LOGIN'), array('id'=>'btn-submit','name' => 'btn',
+                                                                'class' => 'btn-style',
+                                                                 'style' => 'font-family: \'Open Sans Condensed\',\'sans-serif\' !important')); ?>
 
 <a href="#" id="sub4"><?php echo Yii::t('common', 'FORGOT YOUR PASSWORD?') ?></a>
 <?php $this->endWidget(); ?>

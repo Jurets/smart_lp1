@@ -15,9 +15,10 @@ input {
     height: 37px !important;
     width: 249px ;
     margin-top: -2px;
-    color: #343434; 
-    font: 26px 'Open Sans Condensed' !important;
-
+    color: #343434;
+    /* Can't change style for button on login form! */
+    /*font: 26px 'Open Sans Condensed' !important;*/
+    font: 26px 'Open Sans Condensed';
 }
 
 select {
