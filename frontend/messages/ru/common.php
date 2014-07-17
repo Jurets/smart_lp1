@@ -138,10 +138,17 @@ return array(
     'ENTER THE CODE' => 'ВВЕДИТЕ КОД С КАРТИНКИ',
     'FORGOT YOUR PASSWORD?' => 'ЗАБЫЛИ ПАРОЛЬ?',
     'PASSWORD' => 'ПАРОЛЬ',
-    
     //-----_buddies-----
     'Information' => 'Информация',
     'Add user to list' => 'Добавить в список',
-    'Send message' => 'Отправить сообщение'
+    'Send message' => 'Отправить сообщение',
+    //-----chat-----
+    'Find users' => 'Искать пользователей',
+    'The User was added to list' => 'Пользователь был успешно добавлен',
+    "You can't add yourself" => 'Вы не можете добавить сами себя',
+    "The User has already been added" => 'Пользователь уже был добавлен',
+    "The User has been added successfuly" => 'Пользователь успешно добавлен',
+    "The User hasn't been found" => 'Пользователь не найден',
+    "The User hasn't been added" => 'Пользователь не был добавлен',
 );
 ?>

@@ -134,7 +134,30 @@ class SiteController extends LoginController
     // добавить к себе в список
     public function actionAddUserToList()
     {
-        
+
+        if (isset($_POST['id']) && isset($_POST['username'])) {
+            if (!preg_match('/^\d+$/', $_POST['id'])) {
+                throw New CHttpException(404, 'Invalid ID');
+            }
+            $id = $_POST['id'];
+            $username = $_POST['username'];
+        }
+        $user = Participant::model()->findByAttributes(array(
+            'username' => $username,
+        ));
+        if (!$user || $user === null) {
+            echo CJSON::encode(array(
+                'result' => true,
+                'description' => Yii::t('common', "The User hasn't been found")
+            ));
+            Yii::app()->end();
+        }
+
+        $response = Participant::addUserToList($id, $user->id);
+        if ($response) {
+            echo CJSON::encode($response);
+            Yii::app()->end();
+        }
     }
 
     //личное сообщение (начать личный чат).
@@ -154,7 +177,7 @@ class SiteController extends LoginController
             'skype' => $user->skype
         ));
     }
-    
+
     // возврат списка онлайн-юзеров
     public function actionGetTeamUsers()
     {
@@ -169,24 +192,27 @@ class SiteController extends LoginController
     /**
      *  Change up status
      */
-    public function actionStatus(){
+    public function actionStatus()
+    {
         /* Формирование данных для отображения */
         $participant = Participant::model()->findByPk(Yii::app()->user->id);
         $status = Tariff::model()->findByPk($participant->tariff_id);
         // Переменная для определения максимального уровня в бизнес клубе
         $max_status = false;
-        if($participant->tariff_id == 6){$max_status = true;}
+        if ($participant->tariff_id == 6) {
+            $max_status = true;
+        }
 
         // Возможные варианты поднятия статуса(пример:мы не можем купить статус ниже текущего)
-        if($participant->tariff_id >= 3 && $participant->tariff_id < 6){
-        $criteria = new CDbCriteria();
-        $criteria->addCondition( 'id >  :id');
-        $criteria->params[':id'] =  $participant->tariff_id;
-        $tariffListData = Tariff::model()->findAll($criteria);
-        }else{
+        if ($participant->tariff_id >= 3 && $participant->tariff_id < 6) {
             $criteria = new CDbCriteria();
-            $criteria->addCondition( 'id >  :id');
-            $criteria->params[':id'] =  Participant::TARIFF_BC;
+            $criteria->addCondition('id >  :id');
+            $criteria->params[':id'] = $participant->tariff_id;
+            $tariffListData = Tariff::model()->findAll($criteria);
+        } else {
+            $criteria = new CDbCriteria();
+            $criteria->addCondition('id >  :id');
+            $criteria->params[':id'] = Participant::TARIFF_BC;
             $tariffListData = Tariff::model()->findAll($criteria);
         }
         /* завершение форм.данных */
@@ -207,17 +233,15 @@ class SiteController extends LoginController
                 $this->refresh();
             }
             /*
-            Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
-            Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+              Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+              Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
              */
-        }
-        elseif($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD )
-        {
+        } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
             $pm = new PerfectMoney();              //Попытаться сделать платёж
             /* обязательные параметры */
             $pm->login = $account;                //временно хардкод
             $pm->password = $password;      //временно хардкод
-            $pm->payerAccount = $participant->purse;//'U6840713';
+            $pm->payerAccount = $participant->purse; //'U6840713';
             $pm->payeeAccount = Requisites::purseClub(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
             $pm->amount = Tariff::getTariffAmount($type_amount);
             /* необязательные параметры */
@@ -236,14 +260,15 @@ class SiteController extends LoginController
                 $this->refresh();
             }
         }
-        $this->render('status_form', array('model'=>$participant,'status'=>$status,'tariffListData'=>$tariffListData,'max_status'=>$max_status));
+        $this->render('status_form', array('model' => $participant, 'status' => $status, 'tariffListData' => $tariffListData, 'max_status' => $max_status));
     }
 
-    
-        public function actionTestmail() {
-            if (EmailHelper::send(array('jurets75@rambler.ru'), 'Тестовая отсылка', 'test', array()))
-                echo 'Успешная отсылка!';
-            else
-                echo '---Ошибка при отсылке';
-        }    
+    public function actionTestmail()
+    {
+        if (EmailHelper::send(array('jurets75@rambler.ru'), 'Тестовая отсылка', 'test', array()))
+            echo 'Успешная отсылка!';
+        else
+            echo '---Ошибка при отсылке';
+    }
+
 }

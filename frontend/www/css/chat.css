@@ -442,3 +442,29 @@ ul.history-buttons li.active {
 .username a{
     display: block;
 }
+.search-users{
+    width: 200px;
+    height: 25px;
+    margin-left: 11px;
+    border: 1px #007e97 solid;
+    border-radius: 10px;
+    text-decoration-color: #0078ca; 
+    color:#0078ca;
+    margin-top:-45px;
+    position: absolute;
+}
+.search-users:focus{
+    border: 2px #007e97 solid;
+    z-index: 6;
+}
+.add-user-to-chat{
+    margin-top: -26px;
+    position: absolute;
+    z-index: 5;
+}
+#hidden-alert{
+    /*display none;*/
+}
+#div-hidden-alert{
+    margin-top: 170px;
+}
