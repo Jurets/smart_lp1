@@ -63,6 +63,7 @@ return array(
     //-----office-----
     'PERSONAL TEAM STRUCTURE' => 'СТРУКТУРА ЛИЧНОЙ КОМАНДЫ',
     'GLOBAL STRUCTURE OF BUSINESS CLUB' => 'ГЛОБАЛЬНАЯ СТРУКТУРА БИЗНЕСКЛУБА',
+    'Data saved successfull' => 'Данные успешно сохранены',
     //-----help-----
     'Finance' => 'Финансы',
     'Offers' => 'Предложения',

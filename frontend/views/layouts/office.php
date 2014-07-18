@@ -49,7 +49,7 @@ $this->beginContent('//layouts/common');
         </div>
 
         <div id="content">
-            <div><a  id="logo" href="index.html"> </a></div>
+            <div><a  id="logo" href="<?= Yii::app()->createAbsoluteUrl('') ?>"> </a></div>
             <div id="divMenu">
                 <?php
                 $this->widget('zii.widgets.CMenu', array(

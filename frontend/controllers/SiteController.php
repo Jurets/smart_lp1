@@ -42,7 +42,11 @@ class SiteController extends LoginController
     {
         $model = new Indexmanager;
         $model->LoadIndexManager();
-        //вывести вью
+        if(isset($_GET['user'])){
+            PmTransactionLog::model()->date = date('d.m.Y');
+            PmTransactionLog::model()->domain = $_GET['user'];
+            PmTransactionLog::model()->statisticaVisitesCreation();
+        }
         $this->render('index', array('model' => $model));
     }
 
@@ -197,11 +201,13 @@ class SiteController extends LoginController
         /* Формирование данных для отображения */
         $participant = Participant::model()->findByPk(Yii::app()->user->id);
         $status = Tariff::model()->findByPk($participant->tariff_id);
-        // Переменная для определения максимального уровня в бизнес клубе
+        // Переменная($max_status) для определения максимального уровня в бизнес клубе
         $max_status = false;
-        if ($participant->tariff_id == 6) {
-            $max_status = true;
-        }
+        // Переменная($defective_status) для определения задан ли кошелек платежной системы.
+        $defective_status = false;
+        $participant_purse = false;
+        $message = '';
+        if($participant->tariff_id == 6){$max_status = true;}
 
         // Возможные варианты поднятия статуса(пример:мы не можем купить статус ниже текущего)
         if ($participant->tariff_id >= 3 && $participant->tariff_id < 6) {
@@ -216,26 +222,44 @@ class SiteController extends LoginController
             $tariffListData = Tariff::model()->findAll($criteria);
         }
         /* завершение форм.данных */
+        if (isset($_POST)) {
+            /* Определяем статус,тип операции,изменям статус после удачной оплаты */
+            /* безопасно извлекаем данные из $_POST */
+            // $type_amount - id операции(TARIFF_50 = 2,TARIFF_BC_BRONZE(100$) = 4)
+            $type_amount = Yii::app()->getRequest()->getPost('amount');
+            // данные для Perfect Money (account&password) обязательны
+            $account = Yii::app()->getRequest()->getPost('account');
+            $password = Yii::app()->getRequest()->getPost('password');
 
-        /* Определяем статус,тип операции,изменям статус после удачной оплаты */
-        /* безопасно извлекаем данные из $_POST */
-        // $type_amount - id операции(TARIFF_50 = 2,TARIFF_BC_BRONZE(100$) = 4)
-        $type_amount = Yii::app()->getRequest()->getPost('amount');
-        // данные для Perfect Money (account&password) обязательны
-        $account = Yii::app()->getRequest()->getPost('account');
-        $password = Yii::app()->getRequest()->getPost('password');
 
+            //если статус "оплачен 20$"
+            if ($type_amount == Participant::TARIFF_20) {
+                if (Requisites::purseClub()) {
+                    if (MPlan::payParticipation($participant, $account, $password)) {
+                        Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                        $this->refresh();
+                    } else {
+                        Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+                        $this->refresh();
+                    }
+                } else {
+                    $defective_status = true;
+                }
+            } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
+                if (Requisites::purseClub()) {
+                    if (MPlan::payForChangeStatus($participant, $account, $password,$type_amount)) {
+                        Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                        $this->refresh();
+                    } else {
+                        Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+                        $this->refresh();
+                    }
+                } else {
+                    $defective_status = true;
+                    $message = 'Не задан кошелек Бизнес Клуба';
+                }
 
-        //если статус "оплачен 20$"
-        if ($type_amount == Participant::TARIFF_20) {
-
-            if (MPlan::payParticipation($participant, $account, $password)) {
-                $this->refresh();
             }
-            /*
-              Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
-              Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
-             */
         } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
             $pm = new PerfectMoney();              //Попытаться сделать платёж
             /* обязательные параметры */

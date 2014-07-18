@@ -59,6 +59,9 @@ return array(
         'im' => array(
             'class' => 'backend.modules.im.ImModule',
         ),
+        'siap' => array(
+            'class' => 'backend.modules.siap.SiapModule',
+        ),
     ),
     
     'import'=>array(

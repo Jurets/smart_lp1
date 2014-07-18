@@ -16,6 +16,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div id="office-6-content">
     <div><a id="logo" href="index.html"> </a></div>
     <div id="FORMA">
+        
         <p class="zagolovok"><?php echo Yii::t('common', 'ACCOUNT SETTINGS') ?></p>
 
         <p class="zagolovok2">
@@ -25,7 +26,11 @@ $form = $this->beginWidget('CActiveForm', array(
            </p>
         <a href="#" class="zagolovok3"></a>
 
-
+        <?php if(Yii::app()->user->hasFlash('settings saved')) { ?>
+             <div style="background-color:greenyellow; margin: 211px 0px 0px 420px ">
+                  <?php  echo Yii::t('common',Yii::app()->user->getFlash('settings saved')) ?>
+             </div>
+        <?php } ?>   
 
         <p class="sub1"><?php echo Yii::t('common', 'USERNAME') ?>:</p>
         <?php echo $form->textField($participant, 'username', array('class' => 'textbox1')); //ИМЯ ПОЛЬЗОВАТЕЛЯ ?>

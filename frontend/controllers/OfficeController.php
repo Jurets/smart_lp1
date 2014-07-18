@@ -49,7 +49,7 @@ class OfficeController extends EController
         $model = new PmTransactionLog;
         $model->id = Yii::app()->user->id;
         if(!$model->validate()){
-            throw new CHttpException(404, 'date must be on dd.mm.yyyy format');
+            throw new CHttpException(404, 'parameters failure');
         }
         // TO DO - вызов логики
         $model->statisticaStandard();
@@ -70,9 +70,15 @@ class OfficeController extends EController
     public function actionHelp()
     {
         $objFaq = new Faq();
-        // $categories - sorted faq(array) by categories
+        $availableCategories = $objFaq->getTypeOfCategories();
         $categories = $objFaq->model()->showAllFaq();
-        $this->render('help', array('arrCategories' => $categories));
+        if(!empty($_POST)){
+            $objFaq->attributes = $_POST;
+            $objFaq->created = date('y-m-d h:m:s');
+            $objFaq->save();
+            $this->refresh();
+        }
+        $this->render('help', array('arrCategories' => $categories, 'availableCategories'=>$availableCategories));
     }
 
     /**
@@ -172,6 +178,11 @@ class OfficeController extends EController
             } else {
                 $participant->photo = $oldPhoto;
             }
+            
+           if(!$participant->hasErrors()){
+                Yii::app()->user->setFlash('settings saved', "Data saved successfull");
+            }
+            
         }
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
@@ -303,8 +314,8 @@ class OfficeController extends EController
         $model->payeeAccount = 'U3627324';
         $model->amount = '0.01';
         /* необязательные параметры */
-        $model->payerId = '17';
-        $model->payeeId = '18';
+//        $model->payerId = '3';
+//        $model->payeeId = '4';
         $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
         $model->notation = 'Дополнительные сведения.';
         //$model->Run('balance');

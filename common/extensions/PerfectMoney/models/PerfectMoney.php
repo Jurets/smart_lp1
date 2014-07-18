@@ -33,6 +33,8 @@ class PerfectMoney extends CFormModel {
       $this->message['success'] = 'Оплата произведена успешно';
       $this->message['failure'] = 'В процессе оплаты произошла ошибка. Для разъяснений обратитесь к администратору сайта';
       $this->message['errorText'] = '';
+      $this->payerId = NULL;
+      $this->payeeId = NULL;
   }
   
   public function successBusinessLogic($event){ // Обработчик события для компонентва API "ОПЛАТА ОКЕЮШКИ"
@@ -93,8 +95,8 @@ class PerfectMoney extends CFormModel {
       $transaction = $dbObject->beginTransaction();
       try {
         $kind_id = false;
-        if(isset($this->transactionId) && is_int($this->transactionId)){ //установка поля tr_kind_id вручную
-            $act_id = $this->transactionId;
+        if(isset($this->transactionId)){ //установка поля tr_kind_id вручную
+            $act_id = (int)$this->transactionId;
         }else{ // установка поля tr_kind_id автоматически
               $isExist = $dbObject->createCommand()
               ->select('kind_id')
