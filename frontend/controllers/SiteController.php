@@ -138,7 +138,30 @@ class SiteController extends LoginController
     // добавить к себе в список
     public function actionAddUserToList()
     {
-        
+
+        if (isset($_POST['id']) && isset($_POST['username'])) {
+            if (!preg_match('/^\d+$/', $_POST['id'])) {
+                throw New CHttpException(404, 'Invalid ID');
+            }
+            $id = $_POST['id'];
+            $username = $_POST['username'];
+        }
+        $user = Participant::model()->findByAttributes(array(
+            'username' => $username,
+        ));
+        if (!$user || $user === null) {
+            echo CJSON::encode(array(
+                'result' => true,
+                'description' => Yii::t('common', "The User hasn't been found")
+            ));
+            Yii::app()->end();
+        }
+
+        $response = Participant::addUserToList($id, $user->id);
+        if ($response) {
+            echo CJSON::encode($response);
+            Yii::app()->end();
+        }
     }
 
     //личное сообщение (начать личный чат).
@@ -158,7 +181,7 @@ class SiteController extends LoginController
             'skype' => $user->skype
         ));
     }
-    
+
     // возврат списка онлайн-юзеров
     public function actionGetTeamUsers()
     {
@@ -173,7 +196,8 @@ class SiteController extends LoginController
     /**
      *  Change up status
      */
-    public function actionStatus(){
+    public function actionStatus()
+    {
         /* Формирование данных для отображения */
         $participant = Participant::model()->findByPk(Yii::app()->user->id);
         $status = Tariff::model()->findByPk($participant->tariff_id);
@@ -236,17 +260,39 @@ class SiteController extends LoginController
                 }
 
             }
+        } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
+            $pm = new PerfectMoney();              //Попытаться сделать платёж
+            /* обязательные параметры */
+            $pm->login = $account;                //временно хардкод
+            $pm->password = $password;      //временно хардкод
+            $pm->payerAccount = $participant->purse; //'U6840713';
+            $pm->payeeAccount = Requisites::purseClub(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
+            $pm->amount = Tariff::getTariffAmount($type_amount);
+            /* необязательные параметры */
+            $pm->payerId = $participant->id;
+            $pm->payeeId = null;
+            $pm->transactionId = 4;
+            $pm->notation = 'Изменение статсуса в бизнес клубе';
+            $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
+            if (!$pm->hasErrors()) {  //если успешно -
+                $participant->tariff_id = $type_amount;
+                $participant->save();
+                Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                $this->refresh();
+            } else {
+                Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+                $this->refresh();
+            }
         }
-        $this->render('status_form', array('model'=>$participant,'status'=>$status,
-                                           'tariffListData'=>$tariffListData,'max_status'=>$max_status,
-                                           'defective_status'=>$defective_status,'message'=>$message));
+        $this->render('status_form', array('model' => $participant, 'status' => $status, 'tariffListData' => $tariffListData, 'max_status' => $max_status));
     }
 
-    
-        public function actionTestmail() {
-            if (EmailHelper::send(array('jurets75@rambler.ru'), 'Тестовая отсылка', 'test', array()))
-                echo 'Успешная отсылка!';
-            else
-                echo '---Ошибка при отсылке';
-        }    
+    public function actionTestmail()
+    {
+        if (EmailHelper::send(array('jurets75@rambler.ru'), 'Тестовая отсылка', 'test', array()))
+            echo 'Успешная отсылка!';
+        else
+            echo '---Ошибка при отсылке';
+    }
+
 }

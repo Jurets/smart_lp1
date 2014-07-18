@@ -193,8 +193,9 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                     'onlineusers' => $onlineusers,
                     'interlocutor' => $interlocutor));
                 ?>
+
             </div>
-            <div id="hidden-user-info"  >
+            <div id="hidden-user-info">
                 <p> <span><?php echo Yii::t('common', 'Information') ?>:</span></p>
                 <div id="for-avatar"></div>
                 <p><span>phone:<span id="phone"></span></p>
@@ -204,12 +205,33 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                     <img id="close-btn" src="/images/Х.png" width="22">
                 </a>
             </div>
+            <div id="div-hidden-alert"><p><span id="hidden-alert"></span></p></div>
         </div>
+
 
 
 
         <div id="chat-log-wrapper" class="chat-log-wrapper">
         </div>
+<!--        <input type="text" class="search-users" placeholder="<?php // echo Yii::t('common', 'Find users')              ?>" >-->
+        <?php
+//        $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+        $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+            'name' => 'search-users',
+            'source' => $this->createUrl('user/user/autocompleteTest'),
+            // additional javascript options for the autocomplete plugin
+            'options' => array(
+                'showAnim' => 'fold',
+            ),
+            'htmlOptions' => array(
+                'placeholder' => Yii::t('common', 'Find users'),
+                'class' => 'search-users'
+            ),
+        ));
+        ?>
+        </br>
+        <input id="add-user-to-chat" type="button" value="Добавить в список" name="add-user-to-chat" class="search-users add-user-to-chat">
+
         <?php
         if (isset($_GET['interlocutor'])) {
             $interlocutor = $_GET['interlocutor'];
@@ -398,8 +420,28 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
     //Процедура при загрузке страницы
     $(document).ready(function() {
 
-        $('.buddy').live('click', function() {
-           // $('.info-image').click(function() {
+        $("#add-user-to-chat").click(function() {
+            $.ajax({
+                url: '<?= Yii::app()->createAbsoluteUrl('site/addUserToList') ?>',
+                dataType: 'json', //'text',
+                type: 'POST',
+                data: {
+                    'id': <?php echo Yii::app()->user->id ?>,
+                    'username': $("#search-users").val(),
+                },
+                success: function(data) {
+                    if (data.description) {
+                        $('#hidden-alert').text(data.description);
+                        setTimeout(function(){
+                            $('#hidden-alert').text('');
+                        },5000);
+                    }
+                }
+            });
+        });
+
+        $('.info-image').live('click', function() {
+            // $('.info-image').click(function() {
 //                $('#hidden-user-info').show();
 //                return false;
 //            });
@@ -409,7 +451,9 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
             });
 
 
-            var id = $(this).attr('data');
+
+
+            var id = $(this).parent().attr('data');
             $.ajax({
                 url: '<?= Yii::app()->createAbsoluteUrl('site/GetUserInfo') ?>',
                 dataType: 'json', //'text',
@@ -430,7 +474,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                         $('#skype').text(data.skype);
                     }
 //                    $('#link-send-message').append
-//                            ('<a href="<?php // echo Yii::app()->createAbsoluteUrl('office/chat/')    ?>' + '?interlocutor=' + id + ' "><?php // echo Yii::t('common', 'Send message')    ?></a>');
+//                            ('<a href="<?php // echo Yii::app()->createAbsoluteUrl('office/chat/')                   ?>' + '?interlocutor=' + id + ' "><?php // echo Yii::t('common', 'Send message')                   ?></a>');
                     $('#hidden-user-info').show();
                     return false;
                 }
@@ -510,6 +554,8 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
             }, 5000);
         }
         launchTimer();
+
+
     });
     //launchTimer();
 

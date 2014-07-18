@@ -164,7 +164,7 @@ abstract class YiiChatDbHandlerBase extends CComponent implements IYiiChat {
             $ar = $this->getLastPosts($rows, $limit, $last_id);
             foreach($ar as $k=>$v) {
                 $ar[$k]['time']=$this->getDateFormatted($v['created']);
-                $rows[$k]['photo'] = Users::buildUrlAvatar($rows[$k]['photo']);
+                $rows[$k]['photo'] = Participant::buildUrlAvatar($rows[$k]['photo']);
             }
             return $ar;
         }
