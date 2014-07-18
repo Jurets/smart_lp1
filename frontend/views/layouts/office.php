@@ -58,7 +58,7 @@ $this->beginContent('//layouts/common');
                     'items' => array(
                         array('label' => Yii::t('common', 'STATISTICS'), 'url' => array('office/statistics'), 'itemOptions' => array('class' => 'btn-style btn-style1 ')),
                         array('label' => Yii::t('common', 'STRUCTURE'), 'url' => array('office/structure'), 'itemOptions' => array('class' => 'btn-style btn-style2')),
-                        array('label' => Yii::t('common', 'NEWS'), 'url' => array('news'), 'itemOptions' => array('class' => 'btn-style btn-style3')),
+                        array('label' => Yii::t('common', 'NEWS'), 'url' => array('office/news'), 'itemOptions' => array('class' => 'btn-style btn-style3')),
                         array('label' => Yii::t('common', 'CHAT'), 'url' => array('office/chat'), 'itemOptions' => array('class' => 'btn-style btn-style4')),
                         array('label' => Yii::t('common', 'INVITATION'), 'url' => array('office/invitation'), 'itemOptions' => array('class' => 'btn-style btn-style5')),
                         array('label' => Yii::t('common', 'SETTINGS'), 'url' => array('office/settings'), 'itemOptions' => array('class' => 'btn-style btn-style6')),
