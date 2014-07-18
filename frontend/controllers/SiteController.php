@@ -207,7 +207,9 @@ class SiteController extends LoginController
         $defective_status = false;
         $participant_purse = false;
         $message = '';
-        if($participant->tariff_id == 6){$max_status = true;}
+        if ($participant->tariff_id == 6) {
+            $max_status = true;
+        }
 
         // Возможные варианты поднятия статуса(пример:мы не можем купить статус ниже текущего)
         if ($participant->tariff_id >= 3 && $participant->tariff_id < 6) {
@@ -247,7 +249,7 @@ class SiteController extends LoginController
                 }
             } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
                 if (Requisites::purseClub()) {
-                    if (MPlan::payForChangeStatus($participant, $account, $password,$type_amount)) {
+                    if (MPlan::payForChangeStatus($participant, $account, $password, $type_amount)) {
                         Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
                         $this->refresh();
                     } else {
@@ -260,31 +262,12 @@ class SiteController extends LoginController
                 }
 
             }
-        } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
-            $pm = new PerfectMoney();              //Попытаться сделать платёж
-            /* обязательные параметры */
-            $pm->login = $account;                //временно хардкод
-            $pm->password = $password;      //временно хардкод
-            $pm->payerAccount = $participant->purse; //'U6840713';
-            $pm->payeeAccount = Requisites::purseClub(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
-            $pm->amount = Tariff::getTariffAmount($type_amount);
-            /* необязательные параметры */
-            $pm->payerId = $participant->id;
-            $pm->payeeId = null;
-            $pm->transactionId = 4;
-            $pm->notation = 'Изменение статсуса в бизнес клубе';
-            $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
-            if (!$pm->hasErrors()) {  //если успешно -
-                $participant->tariff_id = $type_amount;
-                $participant->save();
-                Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
-                $this->refresh();
-            } else {
-                Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
-                $this->refresh();
-            }
         }
-        $this->render('status_form', array('model' => $participant, 'status' => $status, 'tariffListData' => $tariffListData, 'max_status' => $max_status));
+
+        $this->render('status_form', array('model' => $participant, 'status' => $status,
+            'tariffListData' => $tariffListData, 'max_status' => $max_status,
+            'defective_status' => $defective_status, 'message' => $message));
+
     }
 
     public function actionTestmail()
