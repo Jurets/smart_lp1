@@ -4,6 +4,45 @@ class MPlan extends CModel
 
     public function attributeNames(){}
 
+
+    /**
+     * @param $participant
+     * @param $account
+     * @param $password
+     * @return bool
+     *
+     * Function: pay for participation 20$
+     */
+    public static function payRegistration($participant,$account,$password) {
+        $pm = new PerfectMoney();              //Попытаться сделать платёж
+        /* обязательные параметры */
+        $pm->login = $account;                //временно хардкод
+        $pm->password = $password;      //временно хардкод
+        $pm->payerAccount = $participant->purse;
+        $pm->payeeAccount = Requisites::purseActivation();
+        //поставить сумму платежа
+        $pm->amount = Tariff::getTariffAmount(Participant::TARIFF_20); //'50.00';
+        /* необязательные параметры */
+        $pm->payerId = $participant->id;
+        $pm->transactionId = PmTransactionLog::TRANSACTION_REGISTRATION;
+        $pm->notation = 'Оплата регистрации 20$';
+        $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
+
+        if (!$pm->hasErrors()) {//DebugBreak();  //если успешно -
+            $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
+            Yii::app()->user->setState('pw_original', $pw_original);
+            $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
+            Requisites::depositActivation($pm->amount); //увеличить баланс кошелька активаций
+            EmailHelper::send(array($participant->email), 'Активация в системе', 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
+            return true;
+        } else {
+            $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
+            return false;
+        }
+    }
+
+
+
     /**
      * @param $participant
      * @param $account
