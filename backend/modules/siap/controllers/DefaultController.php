@@ -23,4 +23,15 @@ class DefaultController extends EController {
     public function actionPaymentPeriod(){
         
     }
+    public function actionPeriodManually(){
+        $model = new SiapPeriodesManually;
+        if(isset($_POST)){
+            $model->attributes = $_POST;
+            if($model->save()){
+                $this->renderPartial('_setperiodsuccess', array('model'=>$model));
+                return true;
+            }
+        }
+        $this->render('setperiod', array('model'=>$model));
+    }
 }
