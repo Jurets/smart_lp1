@@ -59,7 +59,25 @@ class RegisterController extends EController
             
             //сгенерить временный ключ
             $participant->activkey = Yii::app()->getModule('user')->encrypting(microtime().$participant->password);
-            
+
+            /* Работа с аватаром */
+            if (isset($_FILES['photo'])) {
+                // путь для сохранения файла
+                $path = Yii::app()->params['upload.path'];
+                Yii::import('common.extensions.FileUpload.UploadAction');
+                $upload = new UploadAction('im/default', NULL);
+                $upload->path_to_file = $path;
+                $upload->resize = array('width' => 250, 'height' => 175);
+                $upload->re_org = array('width' => 67, 'height' => 67);
+                $upload->prefixOrigin = 'settings-';
+                $upload->prefixResized = 'avatar-settings-';
+                $images = $upload->run();
+                $tmp =1;
+                $participant->photo = $images[0]['name'];
+
+            } else {
+                $participant->photo = '';
+            }
             //Начало обработки, валидация
             if($participant->validate()) {//DebugBreak();
                 //пароль пока не хэшируем (захешируется позже при активации)
