@@ -70,8 +70,29 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <p class="shag-1-1-option4text">  <?php echo Yii::t('common', 'AVATAR') ?>:</p>
 
-<div id="shag-1-1-avatar"></div>
-<a href="#"><span id="shag-1-1-vibrat"><?php echo Yii::t('common', 'SELECT IMAGE') ?></span></a> 
+
+<!--<div id="shag-1-1-avatar"></div>-->
+<!--<a href="#"><span id="shag-1-1-vibrat">--><?php //echo Yii::t('common', 'SELECT IMAGE') ?><!--</span></a>-->
+
+
+<?php //$this->widget('common.extensions.FileUpload.widgets.UploadFileWidget.UploadFileWidget',
+//    array('participant'=>$participant, 'params'=>array('width'=>377, 'height'=>191),
+//        're_org'=>array('width'=>554, 'height'=>281),
+//    )); ?>
+
+<?php if($participant->photo != '') { ?>
+    <div id="shag-1-1-photo-db">
+        <?php echo CHtml::image(UrlHelper::getImageUrl('resized-'.$participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
+    </div>
+<?php } else{ ?>
+    <div id="shag-1-1-avatar"></div>
+<?php } ?>
+<div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo Yii::t('common', 'SELECT IMAGE') ?></span>
+    <?php echo CHtml::fileField('photo[]','',array('class'=>'shag-fileFiled')); ?>
+</div>
+<?php ////echo CHtml::error($participant, 'photo',array('class'=>'error-message em-9')); ?>
+
+
 
 <p class="sub3">
     <?php echo Yii::t('common', 'I agree with the rules and accept') ?>
@@ -145,4 +166,48 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
             return false;
         });
     });
+
+    $('.shag-fileFiled').change(function() {
+        var fileName = $(this).val();
+        if(fileName.length > 30) {
+            fileName = fileName.substr(0, 29) + '...';
+        }
+        $('#shag-1-1-vibrat-image').html(fileName);
+    });
 </script>
+<style>
+    #shag-1-1-vibrat input{
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        font-size:199px !important;
+        cursor:pointer;
+        border:none;
+    }
+    #shag-1-1-photo-db{
+        position: absolute;
+        height:250px !important;
+        width: 250px;
+        top:275px;
+        left: 619px;
+    }
+
+
+    .error {
+        border-color: #FF0000;
+        border-width: medium;
+    }
+    .error-message {
+        color: #FF0000;
+        font-size: medium;
+        font-weight: lighter;
+        width: 400px;
+        height: 22px;
+        position: absolute;
+    }
+    /* photo */
+    .em-1{ top: 295px; left:625px; }
+</style>
