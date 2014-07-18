@@ -23,15 +23,21 @@ class DefaultController extends EController {
     public function actionPaymentPeriod(){
         
     }
+    /*  */
     public function actionPeriodManually(){
-        $model = new SiapPeriodesManually;
-        if(isset($_POST)){
-            $model->attributes = $_POST;
-            if($model->save()){
-                $this->renderPartial('_setperiodsuccess', array('model'=>$model));
-                return true;
+        $model = new SiapPeriodes;
+        $check = FALSE;
+        if(isset($_POST['begin'])){
+            $check = TRUE;
+            $model->begin = $_POST['begin'];
+            $model->addWeek();
+            if($model->validate()){
+                 $this->render('setperiodsuccess', array('model'=>$model));
+                 $model->save();
+                 return true;
             }
         }
-        $this->render('setperiod', array('model'=>$model));
+        $this->render('setperiod', array('model'=>$model, 'check'=>$check));
     }
+
 }
