@@ -440,7 +440,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
             });
         });
 
-        $('.buddy').live('click', function() {
+        $('.info-image').live('click', function() {
             // $('.info-image').click(function() {
 //                $('#hidden-user-info').show();
 //                return false;
@@ -453,7 +453,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
 
 
 
-            var id = $(this).attr('data');
+            var id = $(this).parent().attr('data');
             $.ajax({
                 url: '<?= Yii::app()->createAbsoluteUrl('site/GetUserInfo') ?>',
                 dataType: 'json', //'text',
