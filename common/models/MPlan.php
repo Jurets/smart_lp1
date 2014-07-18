@@ -41,8 +41,6 @@ class MPlan extends CModel
         }
     }
 
-
-
     /**
      * @param $participant
      * @param $account
