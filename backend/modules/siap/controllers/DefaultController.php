@@ -20,10 +20,7 @@ class DefaultController extends EController {
         }
         $this->render('index', array('model'=>$model));
     }
-    public function actionPaymentPeriod(){
-        
-    }
-    /*  */
+    /* Формирование вручную (для первого интервала) */
     public function actionPeriodManually(){
         $model = new SiapPeriodes;
         $check = FALSE;
@@ -40,4 +37,20 @@ class DefaultController extends EController {
         $this->render('setperiod', array('model'=>$model, 'check'=>$check));
     }
 
+    /* Автоматическое формирование (отталкиваемся от первого и последующих по свежей дате) - тестовый */
+    public function actionInstructionProcess(){
+        // автоматически создаем новый период, отталкиваясь от предидущего (получаем period_id, date_begin, date_end)
+       // $periodSource = SiapPeriodes::dateIntervalAutomate();
+        $periodSource = array(
+            'period_id'=>1,
+            'date_begin'=>'2014-07-16 12:00:00',
+            'date_end'=>'2014-07-23 12:00:00',
+        ); //Test
+        //$periodSource = SiapInstructions::makePeriodInstructions($periodSource);
+        
+        SiapExecute::executeInstructions($periodSource['period_id']);
+        
+    }
+    
 }
+
