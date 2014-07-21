@@ -115,7 +115,7 @@ class SiapInstructions extends CActiveRecord{
        $model->dependFormulesInit();
        $model->calculateClub();
        $model->instructionsCreate();
-       //var_dump('invoices', $model->invoices, 'clubs', $model->club_users['B0'],$model->club_users['B1'],$model->club_users['B2'],$model->club_users['B3']);  
+       
        return array(
            'period_id'=>$model->period_id,
            'begin'=>$model->begin,
@@ -365,9 +365,13 @@ class SiapInstructions extends CActiveRecord{
            $this->formules['p_rnd_b2']();
            $this->formules['p_rnd_b1']();
            
+        if($this->club_users['B0']['count'] > 0)
            $this->dbh->createCommand($sql_B0)->execute();
+        if($this->club_users['B1']['count'] > 0)
            $this->dbh->createCommand($sql_B1)->execute();
+        if($this->club_users['B2']['count'] > 0)
            $this->dbh->createCommand($sql_B2)->execute();
+        if($this->club_users['B3']['count'] > 0)
            $this->dbh->createCommand($sql_B3)->execute();
            
            $transaction->commit();
