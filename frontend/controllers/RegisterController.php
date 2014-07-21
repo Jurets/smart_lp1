@@ -71,9 +71,15 @@ class RegisterController extends EController
                 $upload->re_org = array('width' => 67, 'height' => 67);
                 $upload->prefixOrigin = 'settings-';
                 $upload->prefixResized = 'avatar-settings-';
+//                if($upload->run()){
+//                    $images = $upload->run();
+//                }else{
+//                    $this->refresh();
+//                }
                 $images = $upload->run();
-                $tmp =1;
+                if(isset($images[0]['name'])){
                 $participant->photo = $images[0]['name'];
+                }else{$participant->photo = '';}
 
             } else {
                 $participant->photo = '';
