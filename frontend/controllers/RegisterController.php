@@ -41,57 +41,53 @@ class RegisterController extends EController
         }
         
         $participant = New Participant('register');
-        
-        if(isset($_POST['Participant'])) {
+
+        if (isset($_POST['Participant'])) {
             $participant->attributes = $_POST['Participant'];
             //ставим ид пригласившего
-            $participant->inviter_id = $inviter->id;                 
+            $participant->inviter_id = $inviter->id;
             //определяем кто рефер в зависимости от номера приглашения
-            if ($inviter->inviteCount == 1 && isset($inviter->referal)) {  //если это второй приглашённый
-                $referal = $inviter->referal;    //то перекинуть участника на реферала реферала (дедушку)
-            } else {                             //иначе
-                $referal = $inviter;               //рефер - это пригласивший
+            if ($inviter->inviteCount == 1 && isset($inviter->referal)) { //если это второй приглашённый
+                $referal = $inviter->referal; //то перекинуть участника на реферала реферала (дедушку)
+            } else { //иначе
+                $referal = $inviter; //рефер - это пригласивший
             }
             //поставить ИД реферала
-            $participant->refer_id = $referal->id;                  
+            $participant->refer_id = $referal->id;
             //поставить номер в списке приглашенных
             $participant->invite_num = $inviter->inviteCount + 1;
-            
+
             //сгенерить временный ключ
-            $participant->activkey = Yii::app()->getModule('user')->encrypting(microtime().$participant->password);
-
-            /* Работа с аватаром */
-            if (isset($_FILES['photo'])) {
-                // путь для сохранения файла
-                $path = Yii::app()->params['upload.path'];
-                Yii::import('common.extensions.FileUpload.UploadAction');
-                $upload = new UploadAction('im/default', NULL);
-                $upload->path_to_file = $path;
-                $upload->resize = array('width' => 250, 'height' => 175);
-                $upload->re_org = array('width' => 67, 'height' => 67);
-                $upload->prefixOrigin = 'settings-';
-                $upload->prefixResized = 'avatar-settings-';
-//                if($upload->run()){
-//                    $images = $upload->run();
-//                }else{
-//                    $this->refresh();
-//                }
-                $images = $upload->run();
-                if(isset($images[0]['name'])){
-                $participant->photo = $images[0]['name'];
-                }else{$participant->photo = '';}
-
-            } else {
-                $participant->photo = '';
-            }
+            $participant->activkey = Yii::app()->getModule('user')->encrypting(microtime() . $participant->password);
             //Начало обработки, валидация
-            if($participant->validate()) {//DebugBreak();
-                //пароль пока не хэшируем (захешируется позже при активации)
-                if ($participant->save()) {
-                    //отсылка почты для подтверждения регистрации
-                    EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'regconfirm', array('participant'=>$participant));
+            if ($participant->validate()) {
+                /* Работа с аватаром */
+                if (isset($_FILES['photo'])) {
+                    // путь для сохранения файла
+                    $path = Yii::app()->params['upload.path'];
+                    Yii::import('common.extensions.FileUpload.UploadAction');
+                    $upload = new UploadAction('im/default', NULL);
+                    $upload->path_to_file = $path;
+                    $upload->resize = array('width' => 250, 'height' => 175);
+                    $upload->re_org = array('width' => 67, 'height' => 67);
+                    $upload->prefixOrigin = 'settings-';
+                    $upload->prefixResized = 'avatar-settings-';
+                    $images = $upload->run();
+
+                    if (isset($images[0]['name'])) {
+                        $participant->photo = $images[0]['name'];
+                    } else {
+                        $participant->photo = '';
+                    }
+                } else {
+                    $participant->photo = '';
                 }
-                $this->render('confirmsended', array('step'=>1));
+                //пароль пока не хэшируем (захешируется позже при активации)
+                if ($participant->save(false)) {
+                    //отсылка почты для подтверждения регистрации
+                    EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'regconfirm', array('participant' => $participant));
+                }
+                $this->render('confirmsended', array('step' => 1));
                 Yii::app()->end();
             }
         }

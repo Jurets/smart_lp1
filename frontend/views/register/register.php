@@ -88,9 +88,11 @@ $form = $this->beginWidget('CActiveForm', array(
     <div id="shag-1-1-avatar"></div>
 <?php } ?>
 <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo Yii::t('common', 'SELECT IMAGE') ?></span>
-    <?php echo CHtml::fileField('photo[]','',array('class'=>'shag-fileFiled')); ?>
+    <?php echo $form->fileField($participant, 'photo',array('class'=>'shag-fileFiled')); ?>
+    <?php //echo CHtml::fileField('photo[]','',array('class'=>'shag-fileFiled')); ?>
 </div>
-<?php echo CHtml::error($participant, 'photo',array('class'=>'error-message em-9')); ?>
+<?php echo $form->error($participant, 'photo',array('class'=>'error-message em-9')); ?>
+<?php //echo CHtml::error($participant, 'photo',array('class'=>'error-message em-9')); ?>
 
 
 
@@ -209,5 +211,5 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
         position: absolute;
     }
     /* photo */
-    .em-9{ top: 295px; left:625px; }
+    .em-9{ top: 590px; left:422px; }
 </style>

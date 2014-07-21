@@ -77,7 +77,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'type'=>'raw',
 			'value'=>'TbHtml::link(UHtml::markSearch($data,"email"), "mailto:".$data->email)',
 		),
-        array(
+      /*  array(
             'name'=>'structure',
             'header'=>UserModule::t("Structure", array(), 'participant'),
             'type'=>'raw',
@@ -92,7 +92,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value'=>null,
             'filter'=>false,
             'htmlOptions'=>array('style'=>'width: 70px'),
-        ),
+        ),*/
         array(
             'name' => 'refer_id',
             'type'=>'raw',
@@ -100,7 +100,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
             'value' => 'TbHtml::link($data->referalName, array("admin/view","id"=>$data->referalId))',
         ),
-        array(
+      /*  array(
             'name'=>'checks',
             'header'=>UserModule::t("Checks", array(), 'participant'),
             'type'=>'raw',
@@ -123,7 +123,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value'=>null,
             'filter'=>false,
             'htmlOptions'=>array('style'=>'width: 50px'),
-        ),
+        ),*/
         //кнопки
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
