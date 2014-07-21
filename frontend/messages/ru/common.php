@@ -105,6 +105,29 @@ return array(
     'But even up to 30 days after deactivation, yours choosen name will be fixed' => 'Но даже до 30 дней после деактивации, за тобой будет закреплено выбранное имя',
     'SAVE' => 'СОХРАНИТЬ',
     //-----register-----
+
+    //----regconfirm---
+    'Hello!' => 'Здравствуйте',
+    'To confirm registration follow the link' => 'Для подтверждения регистрации нажмите на ссылку',
+    'Do not remove this message until you finally registered.' => 'Не удаляйте сообщение пока не закончите регистрацию полностью.',
+    'This link is unique and will operate until you pass all registration steps' => 'Эта ссылка уникальна и будет дейтвительна пока вы пройдете все шаги регистрации.',
+    'Best Regards' => 'С найлудшими пожеланиями',
+    'administration' => 'администрация',
+
+    //----activation---
+    'Your account is activated, the system set up an office for you, as you are subscribed to the mailing list of all the news system' => '',
+    'To go to the office, follow the link' => '',
+    'enter' => '',
+    'Login' => '',
+    'and enter your login information' => '',
+    'login' => '',
+    'password' => '',
+    'In order to proceedfollow the link' => '',
+    //------updateEmail
+    'Your e-mail has been changed to' => 'Ваш почтовый адрес был изменен на',
+    //------businessStart
+    'Congratulations on your purchase Business Start! Registration is fully passed.' => 'Поздравляем с покупкой Бизнес-Старта! Регистрация полностью пройдена.',
+    'Now login information will be used only your email and password.' => 'Теперь для входа будут использованы исключительно ваши емейл и пароль.',
     //-----confirmed-----
     'Thank you! You just confirmed your email address. CONTINUE passed all 4 steps.' => 'Спасибо! Вы только что подтвердили свой электронный адрес. Продолжайте регистрацию, пройдя все 4 шага.',
     'NEXT' => 'ДАЛЕЕ',

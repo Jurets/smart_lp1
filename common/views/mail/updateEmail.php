@@ -8,13 +8,13 @@
     $urlRegister = Yii::app()->createAbsoluteUrl('office/email?activkey=' . $participant->activkey);
 ?>
 <p style="color: #000; font-size: medium;">
-    Здравствуйте!<br/>
-    Ваш почтовый адрес был изменен на <strong><?php echo $participant->new_email; ?></strong><br>
+    <?php echo Yii::t('common', 'Hello!') ?><br/>
+    <?php echo Yii::t('common', 'Your e-mail has been changed to') ?> <strong><?php echo $participant->new_email; ?></strong><br>
     <br>
-    Для подтверждения новой почты перейдите по ссылке <a href="<?php echo 'http://jwms:8081/office/email'; ?>" target="_blank"><?php echo $urlRegister; ?></a><br/>
-    Не удаляйте это письмо, пока не активируете свой почтовый адрес.
-    Эта ссылка уникальна и будет действовать, пока вы не пройдете все этапы регистрации
+    <?php echo Yii::t('common', 'To confirm registration follow the link') ?> <a href="<?php echo 'http://jwms:8081/office/email'; ?>" target="_blank"><?php echo $urlRegister; ?></a><br/>
+    <?php echo Yii::t('common', 'Do not remove this message until you finally registered.') ?>
+    <?php echo Yii::t('common', 'This link is unique and will operate until you pass all registration steps') ?>
 </p>
-<p>С уважением, <br/>
-    администрация сайта <br/>
-    <a target="_blank" href=""><?=CHtml::encode(Yii::app()->name)?></a></p>
+<p><?php echo Yii::t('common', 'Best Regards') ?>, <br/>
+    <?php echo Yii::t('common', 'administration') ?> <br/>
+    <a target="_blank" href=""><?= CHtml::encode(Yii::app()->name) ?></a></p>

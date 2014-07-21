@@ -151,7 +151,7 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
         Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
     </p>
     <a href="#">
-        <img id="close-btn" src="images/Х.png" width="22">
+        <img id="close-btn" src="/images/Х.png" width="22">
     </a>
 </div>           
               
