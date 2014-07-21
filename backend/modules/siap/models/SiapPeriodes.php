@@ -37,10 +37,10 @@ class SiapPeriodes extends CActiveRecord{
        }
        $model->addWeek(); // задаем $model->end;
        if(!$model->save()){
-           var_dump($model->errors);die;
+           //($model->errors);die;
            throw new CHttpException('500', 'db error record not create');
        }
-       var_dump($model->id, $model->begin, $model->end); // возвращаем последний автоинкремент для формирования связей
+       //var_dump($model->id, $model->begin, $model->end); // возвращаем последний автоинкремент для формирования связей
        return array('fk_id'=>$model->id, 'date_begin'=>$model->begin, 'date_end'=>$model->end);
     }
 }

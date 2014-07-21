@@ -39,12 +39,16 @@ class PerfectMoney extends CFormModel {
   
   public function successBusinessLogic($event){ // Обработчик события для компонентва API "ОПЛАТА ОКЕЮШКИ"
       $this->output = $event->sender->dataOut();
+      $this->API->detachEventHandler('onSuccess', array($this, 'successBusinessLogic')); // вариант для использования компонента pm в цикле
+      $this->API->detachEventHandler('onFailure', array($this, 'failureBusinessLogic')); // вариант для использования компонента pm в цикле
       if($event->sender->choise === 'confirm'){
           $this->confirmSuccessHelper($event);
       }
   }
   public function failureBusinessLogic($event){ // Обработчик события для компонента API "ОПЛАТА НЕ ПРОШЛА"
       $this->output = $event->sender->dataOut('ERROR');
+      $this->API->detachEventHandler('onSuccess', array($this, 'successBusinessLogic')); // вариант для использования компонента pm в цикле
+      $this->API->detachEventHandler('onFailure', array($this, 'failureBusinessLogic')); // вариант для использования компонента pm в цикле
       if($event->sender->choise === 'confirm'){
           $this->confirmFailureHelper($event);
       }         

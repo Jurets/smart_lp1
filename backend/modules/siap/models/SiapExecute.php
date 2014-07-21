@@ -15,10 +15,6 @@ class SiapExecute extends CActiveRecord{
     public function init() {
         $this->dbh = Yii::app()->db;
         $this->setSystemPurses();
-       // $this->PM = new PerfectMoney;
-//        $this->PM->login = '6416431';
-//        $this->PM->password = 'uhaha322re423e';
-//        $this->PM->payerAccount = 'U6840713';
     }
     public function tableName() {
         return 'sip_instructions';
@@ -29,7 +25,6 @@ class SiapExecute extends CActiveRecord{
         foreach($models as $model){
             $model->paymentThrowAPI();
         }
-        var_dump($model);
     }
      public static function model($className=__CLASS__)
     {
@@ -40,28 +35,20 @@ class SiapExecute extends CActiveRecord{
        
          $model = new PerfectMoney();
         /* обязательные параметры */
-        $model->login = '6416431';
-        $model->password = 'uhaha322re423e';
+        $model->login = '12345678';
+        $model->password = 'fjfdjkhgrjhhgrd';
         $model->payerAccount = $this->systemPurses['B'];
         $model->payeeAccount = $this->purse;
         $model->amount = $this->amount;
         $model->payeeId = $this->user_id;
-        $model->transactionId = $this->tr_kind_id; 
+        $model->transactionId = $this->tr_kind_id;
+        /* необязательные параметры */
         $model->notation = 'test';
         $model->Run();
-        return FALSE;
-        
-//        $this->PM->payeeAccount = $this->purse;
-//        $this->PM->payeeId = $this->user_id;
-//        $this->PM->amount = $this->amount;
-//        $this->PM->transactionId = $this->tr_kind_id;
-//        $this->PM->notation = 'test';
-//        $this->PM->Run();
-//        if(is_null($this->PM->getError('paymentTransactionStatus'))){
-//            //$this->instruction_result = 1;
-//            //$this->save();
-//        }
-        
+        if(is_null($model->getError('paymentTransactionStatus'))){
+            $this->instruction_result = 1;
+            $this->save();
+        }
     }
     /* Служебное */
     protected function setSystemPurses(){ // запускается при ините объекта модели
