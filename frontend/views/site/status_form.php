@@ -34,6 +34,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 
             <?php
             }
+            //вывод формы ввода аккаунта/пароля PM
             $this->renderPartial('application.views.site._payform');
         }
     } else {

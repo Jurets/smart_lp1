@@ -119,6 +119,7 @@ class MPlan extends CModel
         $pm->notation = 'Изменение статсуса в бизнес клубе';
         $pm->Run('confirm');   //запуск процесса платежа в PerfectMoney
         if (!$pm->hasErrors()) {  //если успешно -
+            Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба
             $participant->tariff_id = $type_amount;
             $participant->save();
         }else{
