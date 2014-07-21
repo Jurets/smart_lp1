@@ -43,15 +43,14 @@ class DefaultController extends EController {
        // $periodSource = SiapPeriodes::dateIntervalAutomate();
         $periodSource = array(
             'period_id'=>1,
-            'date_begin'=>'2014-07-15 12:00:00.00',
-            'date_end'=>'2014-07-22 12:00:00',
+            'date_begin'=>'2014-07-16 12:00:00',
+            'date_end'=>'2014-07-23 12:00:00',
         ); //Test
-        SiapInstructions::makePeriodInstructions($periodSource);
+        //$periodSource = SiapInstructions::makePeriodInstructions($periodSource);
+        
+        SiapExecute::executeInstructions($periodSource['period_id']);
         
     }
-    /* Служебное  */
-    protected function makeB(){
-        
-    }
+    
 }
 
