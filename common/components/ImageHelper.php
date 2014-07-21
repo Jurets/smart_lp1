@@ -56,7 +56,7 @@ class ImageHelper {
             $options = array('jpegQuality' => $quality);
             $thumb = PhpThumbFactory::create($img, $options);
             $thumb->{$method}($width, $height);
-            $thumb->save($thumb_path.$thumb_name);            
+            $thumb->save($thumb_path.$thumb_name);
         }
         
         $relative_path = str_replace(YiiBase::getPathOfAlias('webroot'), '', $thumb_path.$thumb_name);

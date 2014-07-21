@@ -60,7 +60,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
         <?php echo CHtml::dropDownList('category','',$availableCategories,array('class'=>'help-option')); ?>
         <?php echo CHtml::textArea('question','',array('id'=>'helpText')) ?>
 <!--        <textarea id="helpText"> </textarea>-->
-        <a id="close-popup" href="#"><img src="images/Х.png" width="22"></a>
+        <a id="close-popup" href="#"><img src="/images/Х.png" width="22"></a>
         <?php echo CHtml::submitButton('',array('name'=>'btn','class'=>'btn-style-green-7-2','value'=>'ЗАДАТЬ ВОПРОС')) ?>
         <?php echo CHtml::endForm(); ?>
     </div>
