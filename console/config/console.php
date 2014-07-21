@@ -12,6 +12,17 @@
 defined('APP_CONFIG_NAME') or define('APP_CONFIG_NAME', 'console');
 
 return array(
+        
+        //path aliases
+        
+        'aliases' => array(
+		'backend' => dirname(__FILE__) . '/../..' . '/backend',
+	),
+        'modules' => array(
+            'siap' => array(
+                'class' => 'backend.modules.siap.SiapModule',
+             ),
+        ),
 	'basePath' => realPath(__DIR__ . '/..'),
 	'commandMap' => array(
 		'migrate' => array(
@@ -21,5 +32,6 @@ return array(
 	),
     'import' => array(
         'application.migrations.ProjectMigration',
+        'backend.modules.siap.models.*'
     ),
 );
