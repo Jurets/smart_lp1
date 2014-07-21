@@ -5,10 +5,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-    array('label'=>UserModule::t('Create User'), 'url'=>array('create')),
+    /*array('label'=>UserModule::t('Create User'), 'url'=>array('create')),
     array('label'=>UserModule::t('Manage Users'), 'url'=>array('admin')),
     array('label'=>UserModule::t('Manage Profile Field'), 'url'=>array('profileField/admin')),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),*/
+    array('label'=>UserModule::t('Create User'), 'url'=>array('create')),
+    array('label'=>UserModule::t('Participants structure',array(), 'participant'), 'url'=>array('admin/structure/')),
+    array('label'=>UserModule::t('BusinessClub structure',array(), 'participant'), 'url'=>array('admin/bcstructure/')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
