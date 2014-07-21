@@ -82,7 +82,7 @@ $this->beginContent('//layouts/common');
                             width: 387px;
                         }
                     </style>                
-                    <li> <a href="#"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
+                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/index')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
                     <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;Настройки </a> </li>
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('site/logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Exit'); ?></a> </li>
                 <?php } ?>
