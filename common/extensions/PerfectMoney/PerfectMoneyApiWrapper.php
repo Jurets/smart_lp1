@@ -35,9 +35,9 @@ class PerfectMoneyApiWrapper extends CComponent/*CApplicationComponent*/ {
         }
     }
     public function dataProcess(){ // проведение процесса передачи данных на api и получение ответных даннных
-        //$this->API_make();
-        //$this->API_analyse();
-        $this->API_analyse_test();
+        $this->API_make();
+        $this->API_analyse();
+        //$this->API_analyse_test();
     }
 
     public function dataOut($param=NULL){ // выгрузка массива ответа api либо конкретно указанного значения

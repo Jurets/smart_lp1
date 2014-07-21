@@ -139,7 +139,7 @@ class RegisterController extends EController
                 }
             } else  
             //если аккаунт не активен ЗАПУСКАЕМ ОПЛАТУ 20$
-            if (!$participant->status) { 
+            if (!$participant->status) {
                 if (isset($_POST['pay'])) {//DebugBreak();     //если пришёл ПОСТ с нажатой кнопкой "оплатить 20", то
                     $participant->setScenario('register');
                     $participant->attributes = $_POST['Participant'];
@@ -147,35 +147,9 @@ class RegisterController extends EController
                     if ($participant->activkey != $participant->postedActivKey) {
                         throw New CHttpException(405, 'Не удается авторизоваться! Код активации не правильный. Обратитесь к администратору сайта');
                     }
-//                    $pm = new PerfectMoney();              //Попытаться сделать платёж
-//                    /* обязательные параметры */
-//                    $pm->login = '6416431';                //временно хардкод
-//                    $pm->password = 'uhaha322re423e';      //временно хардкод
-//                    $pm->payerAccount = $participant->purse;//'U6840713';
-//                    $pm->payeeAccount = Requisites::purseActivation(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
-//                    $pm->amount = Tariff::getTariffAmount(Participant::TARIFF_20);
-//                    /* необязательные параметры */
-//                    $pm->payerId = $participant->id;
-//                    $pm->payeeId = null;
-//                    $pm->transactionId = 1; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
-//                    $pm->notation = 'Регистрация в системе';
-//                    $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
-//
-//                    if (!$pm->hasErrors()) {//DebugBreak();  //если успешно -
-//                        $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
-//                        Yii::app()->user->setState('pw_original', $pw_original);
-//                        $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
-//                        Requisites::depositActivation($pm->amount); //увеличить баланс кошелька активаций
-//                        EmailHelper::send(array($participant->email), 'Активация в системе', 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
-//                        $this->step = 4;
-//                        $this->render('secondpay', array('participant'=>$participant)); //и вывести форму оплаты 50$
-//                        Yii::app()->end();
-//                    } else {
-//                        $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
-//                    }
-                    $account = 'u66666';
-                    $password = '123456';
-                    if(MPlan::payRegistration($participant, $account, $password)){
+                    $account = $_POST['account'];   //PM-аккаунт  //'u66666';   //тестовый хардкод
+                    $password = $_POST['password']; //PM-пароль   //'123456';  //тестовый хардкод
+                    if(MPlan::payRegistration($participant, $account, $password)){    //--- ОПЛАТА регистрации
                         $this->step = 4;
                         $this->render('secondpay', array('participant'=>$participant)); //и вывести форму оплаты 50$
                         Yii::app()->end();
@@ -187,60 +161,15 @@ class RegisterController extends EController
             //если статус "оплачен 20$"
             if ($participant->tariff_id == Participant::TARIFF_20) {  
                 if (isset($_POST['pay'])) {//DebugBreak();   //если пришёл ПОСТ с нажатой кнопкой "оплатить 50", то
-                    
                     $participant->setScenario('register');
                     $participant->attributes = $_POST['Participant'];
                     //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
                     if ($participant->activkey != $participant->postedActivKey) {
                         throw New CHttpException(405, 'Не удается авторизоваться! Код активации не правильный. Обратитесь к администратору сайта');
                     }
-
-//                    $pm = new PerfectMoney();              //Попытаться сделать платёж
-//                    /* обязательные параметры */
-//                    $pm->login = '6416431';                //временно хардкод
-//                    $pm->password = 'uhaha322re423e';      //временно хардкод
-//                    $pm->payerAccount = $participant->purse;//'U6840713';
-//                    //определить - на какой кошелёк пойдёт оплата
-//                    if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
-//                        $pm->payeeAccount = Requisites::purseClub(); //'U3627324';  //поставить кошелёк активаций системы!!!!!!!!!!!
-//                        $pm->payeeId = null;
-//                    } else {
-//                        $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
-//                        $pm->payeeId = $participant->referal->id;
-//                    }
-//
-//                    //поставить сумму платежа
-//                    $pm->amount = Tariff::getTariffAmount(Participant::TARIFF_50); //'50.00';
-//                    /* необязательные параметры */
-//                    $pm->payerId = $participant->id;
-//                    $pm->transactionId = 2; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
-//                    $pm->notation = 'Вступление в бизнес-клуб';
-//                    $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
-//
-//                    if (!$pm->hasErrors()) {  //если успешно -
-//                        //$participant->attributes = $_POST['Participant'];
-//                        //стать бизнес-участником
-//                        $participant->activateParticipation();
-//                        //перевести взнос на нужный кошелёк
-//                        if ($participant->invite_num == 3 || $participant->invite_num == 4)  {  //если приглашённый 3 или 4
-//                            Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба
-//                            if ($participant->invite_num == 4) {                 //если это четвёртый приглашённый
-//                                $participant->referal->activateBusiness();         //активировать Бизнес-клуб у реферала
-//                            }
-//                        } else {                                                 //иначе
-//                            $participant->referal->depositPurse($pm->amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
-//                        }
-//                        //отослать письмо про вступление в бизнес-участие
-//                        EmailHelper::send(array($participant->email), 'Вы стали бизнес-участником', 'businessstart', array('participant'=>$participant));
-//                        $this->step = 4;
-//                        $this->render('finish', array('participant'=>$participant));
-//                        Yii::app()->end();
-//                    } else {
-//                        $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
-//                    }
-                    $account = 'u66666';
-                    $password = '123456';
-                    if (MPlan::payParticipation($participant, $account, $password)) {
+                    $account = $_POST['account'];   //PM-аккаунт
+                    $password = $_POST['password']; //PM-пароль
+                    if (MPlan::payParticipation($participant, $account, $password)) {  //--- ОПЛАТА бизнес-участия
                         Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
                         $this->step = 4;
                         $this->render('finish', array('participant'=>$participant));
