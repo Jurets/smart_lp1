@@ -4,22 +4,21 @@ class SiapExecute extends CActiveRecord{
     public $begin;
     public $end;
     
-    private $dbh;
     protected $instructions;
-    protected $systemPurses;
+    protected static $systemPurses;
     
     //public static $PM; // Модель для взаимодействия с API Perfect Money
     
     /* параметры для API PM */
     
     public function init() {
-        $this->dbh = Yii::app()->db;
-        $this->setSystemPurses();
+        
     }
     public function tableName() {
         return 'sip_instructions';
     }
     public static function executeInstructions($period_id){
+        SiapExecute::setSystemPurses();
         $model = new SiapExecute;
         $models = $model->findAllByAttributes(array('period_id'=>(int)$period_id,'instruction_result'=>0));
         foreach($models as $model){
@@ -35,32 +34,35 @@ class SiapExecute extends CActiveRecord{
        
          $model = new PerfectMoney();
         /* обязательные параметры */
-        $model->login = '12345678';
-        $model->password = 'fjfdjkhgrjhhgrd';
-        $model->payerAccount = $this->systemPurses['B'];
+        $model->login = SiapExecute::$systemPurses['_login'];
+        $model->password = SiapExecute::$systemPurses['_pass'];
+        $model->payerAccount = SiapExecute::$systemPurses['B'];
         $model->payeeAccount = $this->purse;
         $model->amount = $this->amount;
         $model->payeeId = $this->user_id;
         $model->transactionId = $this->tr_kind_id;
         /* необязательные параметры */
-        $model->notation = 'test';
+        $model->notation = 'Weekly Payments';
         $model->Run();
         if(is_null($model->getError('paymentTransactionStatus'))){
             $this->instruction_result = 1;
             $this->save();
         }
+        
     }
     /* Служебное */
-    protected function setSystemPurses(){ // запускается при ините объекта модели
-        $systemPursesSQL = 'SELECT purse_activation, purse_club, purse_fdl FROM requisites WHERE id = "JVMS" ';
-        $systemPurses = $this->dbh->createCommand($systemPursesSQL)->query()->read();
+    protected static function setSystemPurses(){ // запускается при ините объекта модели
+        $systemPursesSQL = 'SELECT purse_activation, purse_club, bpm_login, bpm_password, purse_fdl FROM requisites WHERE id = "JVMS" ';
+        $systemPurses = Yii::app()->db->createCommand($systemPursesSQL)->query()->read();
         if(is_null($systemPurses)){
             throw new CHttpException('500', 'System purses not found, check the requisites table');
         }
-        $this->systemPurses = array(
+        SiapExecute::$systemPurses = array(
             'A'=>$systemPurses['purse_activation'],
             'B'=>$systemPurses['purse_club'],
             'F'=>$systemPurses['purse_fdl'],
-        );        
+            '_login'=>$systemPurses['bpm_login'],
+            '_pass'=>$systemPurses['bpm_password'],
+        );
     }
 }
