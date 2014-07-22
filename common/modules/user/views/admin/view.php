@@ -33,11 +33,15 @@ $attributes = array(
   ));
   }
   } */
-
-array_push($attributes, 'password', 'email', 'activkey', 'create_at', 'lastvisit_at', 'username',  array(
-    'name' => 'photo',
+if(empty($model->photo)){
+    $photo = '';
+}else{
+    $photo = CHtml::image(Yii::app()->createAbsoluteUrl( "/uploads/" . $model->photo));
+}
+array_push($attributes, 'password', 'first_name', 'last_name', 'skype', 'phone', 'email', 'activkey', 'create_at', 'lastvisit_at', 'username',  array(
+    'name' => UserModule::t('Photo'),
     'type' => 'raw',
-    'value' => CHtml::image(Yii::app()->createAbsoluteUrl( "/uploads/" . $model->photo))
+    'value' => $photo
         ), array(
     'name' => 'superuser',
     'value' => User::itemAlias("AdminStatus", $model->superuser),
