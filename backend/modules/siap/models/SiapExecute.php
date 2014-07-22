@@ -1,10 +1,10 @@
 <?php
 class SiapExecute extends CActiveRecord{
-    public $period_id;
-    public $begin;
-    public $end;
+//    public $period_id;
+//    public $begin;
+//    public $end;
     
-    protected $instructions;
+    protected  $instructions;
     protected static $systemPurses;
     
     //public static $PM; // Модель для взаимодействия с API Perfect Money
@@ -17,10 +17,10 @@ class SiapExecute extends CActiveRecord{
     public function tableName() {
         return 'sip_instructions';
     }
-    public static function executeInstructions($period_id){
+    public static function executeInstructions(){
         SiapExecute::setSystemPurses();
         $model = new SiapExecute;
-        $models = $model->findAllByAttributes(array('period_id'=>(int)$period_id,'instruction_result'=>0));
+        $models = $model->findAllByAttributes(array('instruction_result'=>0));
         foreach($models as $model){
             $model->paymentThrowAPI();
         }

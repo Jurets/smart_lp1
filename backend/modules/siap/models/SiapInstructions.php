@@ -21,6 +21,7 @@ class SiapInstructions extends CActiveRecord{
     // [p_rnd_b2] random B2 1.5%
     // [p_rnd_b1] random B1 0.5%
     // [p_70] 70% - фонд выплат B0, B1, B2, B3 - яамая нагруженная часть. Вызывать последней.
+    // [create_new_interval] - создается новый интервал на следующую неделю. [WARNING!]Вызов метода строго в транзакции и в самом конце.[*]
     protected $systemPurses; // A, B, F - по этим ключам записываются соответствующие системные кошельки
     
      public static function model($className=__CLASS__)
@@ -60,6 +61,12 @@ class SiapInstructions extends CActiveRecord{
                             $this->club_users['B2']['struct'] = array();
                             $this->club_users['B3']['struct'] = array();
         // Инициализация независимых расчетных действий
+        $this->formules['create_new_interval'] = function(){
+           $begin = $this->end;
+           $end = date('Y-m-d H:i:s', strtotime($begin . '+1 WEEK'));
+           $this->dbh->createCommand('INSERT INTO sip_periodes (begin, end) VALUES ('.'"'.$begin.'"'.','.'"'.$end.'"'.')')->execute();
+           
+       };
         $this->formules['p_20'] = function(){
             $sql = "INSERT INTO sip_instructions (period_id, user_id, purse, amount, tr_kind_id) VALUES(:period_id, NULL, :purse, :invoice, 9)";
             $command = $this->dbh->createCommand($sql);
@@ -344,7 +351,6 @@ class SiapInstructions extends CActiveRecord{
            $newB3 = (int)$this->club_users['B3']['countNew'];
            $this->club_users['B3']['amount'] = $B0 + $newB3 * 1000 / $AllB3 * 0.7;
        };
-       
    }
    protected function calculateClub(){
        $this->formules['calc_B0_Amount']();
@@ -374,9 +380,12 @@ class SiapInstructions extends CActiveRecord{
                 $this->dbh->createCommand($sql_B2)->execute();
              if($this->club_users['B3']['count'] > 0 && $this->club_users['B3']['amount']>0)
                 $this->dbh->createCommand($sql_B3)->execute();
+             
+           }
+           $this->formules['create_new_interval']();
            $transaction->commit();
 
-           }
+           
            
        } catch (Exception $ex) {
            // Логирование возможно

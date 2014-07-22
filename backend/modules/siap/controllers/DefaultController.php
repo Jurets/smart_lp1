@@ -58,9 +58,9 @@ class DefaultController extends EController {
 //            'date_end'=>'2014-07-23 12:00:00',
 //        );
         
-        $periodSource = SiapInstructions::makePeriodInstructions($periodSource); // создаются инструкции за новый период, созданный автоматически
+      //  $periodSource = SiapInstructions::makePeriodInstructions($periodSource); // создаются инструкции за новый период, созданный автоматически
         
-        SiapExecute::executeInstructions($periodSource['period_id']); // теперь эти инструкции выполняются
+        SiapExecute::executeInstructions(/*$periodSource['period_id']*/); // теперь эти инструкции выполняются
         
     }
     
