@@ -359,22 +359,24 @@ class SiapInstructions extends CActiveRecord{
        $sql_B3 = $this->sql_constructio($this->club_users['B3']);
        $transaction = $this->dbh->beginTransaction();
        try{
-           $this->formules['p_20']();
-           $this->formules['p_F']();
-           $this->formules['p_rnd_b3']();
-           $this->formules['p_rnd_b2']();
-           $this->formules['p_rnd_b1']();
-           
-        if($this->club_users['B0']['count'] > 0)
-           $this->dbh->createCommand($sql_B0)->execute();
-        if($this->club_users['B1']['count'] > 0)
-           $this->dbh->createCommand($sql_B1)->execute();
-        if($this->club_users['B2']['count'] > 0)
-           $this->dbh->createCommand($sql_B2)->execute();
-        if($this->club_users['B3']['count'] > 0)
-           $this->dbh->createCommand($sql_B3)->execute();
-           
+           if($this->AmountSummB > 0){
+                $this->formules['p_20']();
+                $this->formules['p_F']();
+                $this->formules['p_rnd_b3']();
+                $this->formules['p_rnd_b2']();
+                $this->formules['p_rnd_b1']();
+
+             if($this->club_users['B0']['count'] > 0 && $this->club_users['B0']['amount']>0)
+                $this->dbh->createCommand($sql_B0)->execute();
+             if($this->club_users['B1']['count'] > 0 && $this->club_users['B1']['amount']>0)
+                $this->dbh->createCommand($sql_B1)->execute();
+             if($this->club_users['B2']['count'] > 0 && $this->club_users['B2']['amount']>0)
+                $this->dbh->createCommand($sql_B2)->execute();
+             if($this->club_users['B3']['count'] > 0 && $this->club_users['B3']['amount']>0)
+                $this->dbh->createCommand($sql_B3)->execute();
            $transaction->commit();
+
+           }
            
        } catch (Exception $ex) {
            // Логирование возможно
