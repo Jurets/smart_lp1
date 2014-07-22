@@ -41,7 +41,7 @@ class Requisites extends CActiveRecord
             array('id', 'length', 'max' => 50),
             array('pw_supervisor, pw_admin, pw_moderator', 'length', 'max' => 20),
             array('purse_activation, purse_club, purse_investor, purse_fdl', 'length', 'max' => 255),
-            array('details, agreement, marketing, email_faq', 'safe'),
+            array('details, agreement, marketing, email_faq, bpm_login, bpm_password', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, details, agreement, marketing, pw_supervisor, pw_admin, pw_moderator, purse_activation, purse_club, purse_investor, purse_fdl, email_faq', 'safe', 'on' => 'search'),
@@ -74,6 +74,8 @@ class Requisites extends CActiveRecord
             'pw_moderator' => Yii::t('common', 'Pw Moderator'),
             'purse_activation' => Yii::t('common', 'Purse Activation'),
             'purse_club' => Yii::t('common', 'Purse Club'),
+            'bpm_login' => Yii::t('common', 'Club Purse Login'),
+            'bpm_password' => Yii::t('common', 'Club Purse Password'),
             'purse_investor' => Yii::t('common', 'Purse Investor'),
             'purse_fdl' => Yii::t('common', 'Purse FDL'),
             'email_faq' => Yii::t('common', 'Email FAQ'),

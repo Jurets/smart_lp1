@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     array('label' => Yii::t('common', 'List Requisites'), 'url' => array('index')),
-    array('label' => Yii::t('common', 'Create Requisites'), 'url' => array('create')),
+   // array('label' => Yii::t('common', 'Create Requisites'), 'url' => array('create')),
     array('label' => Yii::t('common', 'View Requisites'), 'url' => array('view', 'id' => $model->id)),
     array('label' => Yii::t('common', 'Manage Requisites'), 'url' => array('admin')),
 );

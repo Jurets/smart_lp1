@@ -116,5 +116,7 @@ return array(
     'Delete Requisites' => 'Удалить реквизиты',
     'Manage Requisites' => 'Управление реквизитами',
     'View Requisites' => 'Просмотр реквизитов',
+    'Club Purse Login' => 'Логин кошелька клуба',
+    'Club Purse Password' => 'Пароль кошелька клуба',
 );
 ?>

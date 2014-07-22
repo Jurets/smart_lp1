@@ -74,6 +74,17 @@
 <?php echo $form->textField($model, 'purse_club', array('size' => 60, 'maxlength' => 255)); ?>
 <?php echo $form->error($model, 'purse_club'); ?>
     </div>
+    
+    <div class="row">
+        <?php echo $form->labelEx($model, 'bpm_login'); ?>
+        <?php echo $form->textField($model, 'bpm_login', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'bpm_login'); ?>
+    </div>
+    <div class="row">
+        <?php echo $form->labelEx($model, 'bpm_password'); ?>
+        <?php echo $form->textField($model, 'bpm_password', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'bpm_password'); ?>
+    </div>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'purse_investor'); ?>

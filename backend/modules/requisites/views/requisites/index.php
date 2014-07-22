@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     array('label' => Yii::t('common', 'List Requisites'), 'url' => array('admin')),
-    array('label' => Yii::t('common', 'Create Requisites'), 'url' => array('create')),
+    //array('label' => Yii::t('common', 'Create Requisites'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
