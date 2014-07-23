@@ -85,7 +85,7 @@ class Participant extends User
                     //@todo Please remove those attributes that should not be searched.
                     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
                     array('purse', 'safe', 'on' => array('setpurse')),
-                    array('purse', 'required', 'on' => array('setpurse')),
+                    array('purse, newPurse', 'required', 'on' => array('setpurse')),
                     array('purse', 'unique'),
                     // Scenario for settings(update information)
                     array('username,newPurse,password,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype ', 'safe', 'on' => array('settings')),

@@ -98,7 +98,7 @@ class OfficeController extends EController
         $places = Countries::getCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
         $gmtZone = Gmt::getTimezonesList();
-
+        $participant->newPurse = $participant->purse;
         // путь для сохранения файла
         $path = Yii::app()->params['upload.path'];
         if (isset($_POST['Participant'])) {
@@ -156,10 +156,14 @@ class OfficeController extends EController
                 } else {
                     $participant->photo = $oldPhoto;
                 }
+                if(empty($participant->newPurse)){
+                    $participant->newPurse = $participant->purse;
+                }
                 if ($participant->purse != $participant->newPurse) {
                     $participant->purse = $participant->newPurse;
-                    $participant->newPurse = '';
+                    ////$participant->newPurse = '';
                 }
+                
 
                 $participant->country_access = isset($_POST['country_access']) ? 1 : 0;
                 $participant->city_access = isset($_POST['city_access']) ? 1 : 0;
