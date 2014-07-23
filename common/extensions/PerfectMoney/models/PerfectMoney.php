@@ -32,6 +32,7 @@ class PerfectMoney extends CFormModel {
       /*Соглашение о выводе информации пользователю - умолчание*/
       $this->message['success'] = 'Оплата произведена успешно';
       $this->message['failure'] = 'В процессе оплаты произошла ошибка. Для разъяснений обратитесь к администратору сайта';
+      $this->message['empty_purse'] = Yii::t('common',"Recipient's or Sender's purse absent");
       $this->message['errorText'] = '';
       $this->payerId = NULL;
       $this->payeeId = NULL;
@@ -80,9 +81,11 @@ class PerfectMoney extends CFormModel {
        return array(
            array('login, password', 'required'),
            array('payerId, payeeId, transactionId', 'type', 'type'=>'integer'),
+           array('payerAccount, payeeAccount', 'checkPurseFormat'),
            array('notation', 'length', 'max'=>255),
            //array('transactionKind', 'length', 'max'=>255), // параметр запрещен к использованию
        );
+       
    }
       
   /*Собственная Валидация */
@@ -91,6 +94,10 @@ class PerfectMoney extends CFormModel {
        $checked = $this->$attribute;
        if(substr($checked, 0, 1) !== 'U'){
           $this->addError($attribute, 'Purse must be a dollar context');
+       }
+       if(empty($this->payeeAccount)){
+          $this->addError('paymentTransactionStatus',$this->message['empty_purse']);
+          
        }
    }
   /* Служебные вспомогательные методы */

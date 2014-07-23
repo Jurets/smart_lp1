@@ -174,5 +174,6 @@ return array(
     "The User has been added successfuly" => 'Пользователь успешно добавлен',
     "The User hasn't been found" => 'Пользователь не найден',
     "The User hasn't been added" => 'Пользователь не был добавлен',
+    "Recipient's or Sender's purse absent" => "Кошелек отправителя или получателя отсутмствует",
 );
 ?>

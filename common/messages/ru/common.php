@@ -22,6 +22,5 @@
         'Congratulations on your purchase Business Start! Registration is fully passed.' => 'Поздравляем с покупкой Бизнес-Старта! Регистрация полностью пройдена.',
         'Now login information will be used only your email and password.' => 'Теперь для входа будут использованы исключительно ваши емейл и пароль.',
         'To confirm registration follow the link' => 'Для подтверждения регистрации перейдите по ссылке',
-        
     );
 ?>
