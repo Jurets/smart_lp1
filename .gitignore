@@ -47,3 +47,6 @@ index
 /common/config/local.php
 *~
 .htaccess
+
+# uploads
+/backend/www/uploads
