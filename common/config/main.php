@@ -12,15 +12,17 @@
 return array(
     'name'=>'JustMoney',
     //'language'=> 'ru',
-    'preload' => array('log'),
+    'preload' => array('log', 'chartjs'),
     'aliases' => array(
         'frontend' => dirname(__FILE__) . '/../..' . '/frontend',
         'common' => dirname(__FILE__) . '/../..' . '/common',
         'backend' => dirname(__FILE__) . '/../..' . '/backend',
-        'vendor' => dirname(__FILE__) . '/../..' . '/common/lib/vendor'
+        'vendor' => dirname(__FILE__) . '/../..' . '/common/lib/vendor',
+        'chartjs' => dirname(__FILE__) . '/../..' . '/common/extensions/yii-chartjs',
     ),
     'import' => array(
         'common.extensions.components.*',
+        'common.extensions.yii-chartjs.components.*',
         'common.components.*',
         'common.helpers.*',
         'common.models.*',
@@ -93,6 +95,9 @@ return array(
                'acc_name' => 'https://perfectmoney.is/acct/acc_name.asp', // (не тестировано)
            ),
            'choise'=>'confirm', // по умолчанию будет выбираться ключ для api для передачи денег с кошелька на кошелек
+        ),
+        'chartjs' => array(
+			'class' => 'common.extensions.yii-chartjs.components.ChartJs',
         ),
     ),
     'params' => array(
