@@ -45,9 +45,10 @@ class SiapPeriodes extends CActiveRecord{
         if(!is_null($currentInterval)){
             $now = date('Y-m-d H:i:s');
             if($currentInterval->end > $now){
+                var_dump('New interval not detected');
                 return 0;
             }
-            
+                var_dump('Detected New Interval');
             SiapInstructions::makePeriodInstructions(
                     array(
                         'fk_id' => $currentInterval->id,
