@@ -48,7 +48,7 @@ class SiapPeriodes extends CActiveRecord{
                 var_dump('New interval not detected');
                 return 0;
             }
-                var_dump('Detected New Interval');
+                var_dump('Detected New Interval'.'     '.$now);
             SiapInstructions::makePeriodInstructions(
                     array(
                         'fk_id' => $currentInterval->id,
