@@ -29,7 +29,6 @@ class SiapExecute extends CActiveRecord{
     {
 	return parent::model($className);
     }
-    protected function test(){echo ' * ';}
     protected function paymentThrowAPI(){
        
          $model = new PerfectMoney();
@@ -43,11 +42,22 @@ class SiapExecute extends CActiveRecord{
         $model->transactionId = $this->tr_kind_id;
         /* необязательные параметры */
         $model->notation = 'Weekly Payments';
-        $model->Run();
-        if(is_null($model->getError('paymentTransactionStatus'))){
-            $this->instruction_result = 1;
-            $this->save();
+        
+        $transaction = Yii::app()->db->beginTransaction();
+        try{
+            if($this->save()){
+                $transaction->commit();
+                $model->Run();
+                if(is_null($model->getError('paymentTransactionStatus'))){
+                    $this->instruction_result = 1;
+                    $this->save();
+                }
+            }
+        } catch (Exception $ex) {
+            $transaction->rollback();
         }
+        
+        
         
     }
     /* Служебное */
