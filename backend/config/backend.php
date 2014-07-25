@@ -62,6 +62,9 @@ return array(
         'siap' => array(
             'class' => 'backend.modules.siap.SiapModule',
         ),
+        'commonstat' =>array(
+            'class' => 'backend.modules.commonstat.CommonstatModule',
+        ),
     ),
     
     'import'=>array(
