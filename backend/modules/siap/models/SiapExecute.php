@@ -52,11 +52,11 @@ class SiapExecute extends CActiveRecord{
                     $this->instruction_result = 1;
                     $this->save();
                 }
-                var_dump('Instructions throued');
+            
             }
         } catch (Exception $ex) {
             $transaction->rollback();
-            var_dump('Instructions wrong amount transfer');
+            
         }
         
         

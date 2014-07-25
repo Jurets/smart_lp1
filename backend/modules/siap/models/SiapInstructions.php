@@ -383,12 +383,13 @@ class SiapInstructions extends CActiveRecord{
              
            }
            $this->formules['create_new_interval']();
+       
            $transaction->commit();
 
            
            
        } catch (Exception $ex) {
-           // Логирование возможно
+           
            $transaction->rollback();
        }
    }
