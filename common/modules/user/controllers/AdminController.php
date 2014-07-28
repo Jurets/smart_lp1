@@ -186,13 +186,25 @@ class AdminController extends EController
 		{
 			// we only allow deletion via POST request
 			$model = $this->loadModel();
+                        if($model->tariff_id == '0'){
+                            foreach($model->pmfromuser as $tr_log){
+                                if(is_null($tr_log->tr_err_code)){
+                                    throw new CHttpException('500', 'Пользователя нельзя удалить, не смотря на его статус, у него имеются проплаты');
+                                }
+                                $tr_log->delete();
+                            }
+                            
+                        }
 			//$profile = Profile::model()->findByPk($model->id);
 			
 			// Make sure profile exists
 			//if ($profile)
 			//	$profile->delete();
-
-			$model->delete();
+                        try {
+                            $model->delete();   
+                        } catch (Exception $ex) {
+                            throw new CHttpException('500', 'Нельзя удалить пользователя, который совершил хотя-бы один платеж');
+                        }
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_POST['ajax']))
 				$this->redirect(array('/user/admin'));

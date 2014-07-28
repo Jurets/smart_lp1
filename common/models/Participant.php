@@ -124,6 +124,9 @@ class Participant extends User
                     'chatban' => array(self::HAS_ONE, 'Chatban', 'user_id', 'condition' => 'active = 1' /* , 'limit'=>1 */),
                     //массив истории забанивания в чате
                     'chatbanhistory' => array(self::HAS_MANY, 'Chatban', 'user_id'),
+                    //связи с pm_transaction_log
+                    'pmtouser' => array(self::HAS_MANY, 'PmTransactionLog', 'to_user_id'),
+                    'pmfromuser' => array(self::HAS_MANY, 'PmTransactionLog', 'from_user_id'),
         ));
     }
 
