@@ -13,6 +13,10 @@ class DefaultController extends EController {
             $model = new CommonStatistics;
             $this->render('index', array('model'=>$model));
         }
+        public function actionTest(){
+            $model = new CommonStatistics;
+            $this->render('test');
+        }
 }
 
 

@@ -1,19 +1,20 @@
-<?php 
-        $this->widget(
-            'chartjs.widgets.ChBars', 
-            array(
-                'width' => 600,
-                'height' => 300,
-                'htmlOptions' => array(),
-                'labels' => array("January","February","March","April","May","June"),
-                'datasets' => array(
-                    array(
-                        "fillColor" => "#ff00ff",
-                        "strokeColor" => "rgba(220,220,220,1)",
-                        "data" => array(10, 20, 30, 40, 50, 60)
-                    )       
-                ),
-                'options' => array()
-            )
-        ); 
-    ?>
+<div class="commonstat">
+    <div>Участники</div>
+    <div>Обороты</div>
+    <div>Благотоворительность</div>
+    <div style="border-bottom: 1px solid #777777;">Посещения</div>
+</div>
+
+<style type="text/css">
+    .commonstat {
+        width: 600px;
+        padding: 10px 20px 10px 20px;
+    }
+    .commonstat div {
+        border-top: 1px solid #777777;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 0px 10px 0px;
+        color: #777777;
+    }
+</style>
