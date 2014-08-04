@@ -11,11 +11,14 @@ class DefaultController extends EController {
         
         public function actionIndex(){
             $model = new CommonStatistics;
+            
             $this->render('index', array('model'=>$model));
         }
-        public function actionTest(){
-            $model = new CommonStatistics;
-            $this->render('test');
+        public function actionGraph(){
+            if (Yii::app()->request->isAjaxRequest){
+                $graph_choise = $_POST['graph_choise'];
+                $model = new CommonStatistics($graph_choise);
+            }
         }
 }
 
