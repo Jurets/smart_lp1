@@ -1,34 +1,60 @@
 <h1><?php echo CommonstatModule::t('General statistics')?></h1>
 <div class="commonstat">
-    <div id="1"><?php echo CommonstatModule::t('Participants')?>
+    <div class="greedElem">
+        <div class="dataTbl">
+        <?php echo CommonstatModule::t('Participants')?>
         <ul type="none">
-            <li><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Entered')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Business Club')?>:</span><span class="toright">0</span></li>
+            <li id="p1"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright">0</span></li>
+            <li id="p2"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
+            <li id="p3"><span><?php echo CommonstatModule::t('Entered')?>:</span><span class="toright">0</span></li>
+            <li id="p4"><span><?php echo CommonstatModule::t('Business Club')?>:</span><span class="toright">0</span></li>
         </ul>
+        </div>
+        <div class="dataGraph">&nbsp;</div>
     </div>
-    <div id="2"><?php echo CommonstatModule::t('Money Turnover')?>
+    <div class="greedElem">
+        <div class="dataTbl">
+        <?php echo CommonstatModule::t('Money Turnover')?>
         <ul type="none">
-            <li><span><?php echo CommonstatModule::t('Activations total')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Activations today')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Capital total')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Capital today')?>:</span><span class="toright">0</span></li>
+            <li id="mt1"><span><?php echo CommonstatModule::t('Activations total')?>:</span><span class="toright">0</span></li>
+            <li id="mt2"><span><?php echo CommonstatModule::t('Activations today')?>:</span><span class="toright">0</span></li>
+            <li id="mt3"><span><?php echo CommonstatModule::t('Capital total')?>:</span><span class="toright">0</span></li>
+            <li id="mt4"><span><?php echo CommonstatModule::t('Capital today')?>:</span><span class="toright">0</span></li>
         </ul>
+        </div>
+        <div class="dataGraph">&nbsp;</div>
     </div>
-    <div id="3"><?php echo CommonstatModule::t('Charity')?>
+    <div class="greedElem">
+        <div class="dataTbl">
+        <?php echo CommonstatModule::t('Charity')?>
         <ul type="none">
-            <li><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Total transferred')?>:</span><span class="toright">0</span></li>
+            <li id="ch1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
+            <li id="ch2"><span><?php echo CommonstatModule::t('Total transferred')?>:</span><span class="toright">0</span></li>
         </ul>
+        </div>
+        <div class="dataGraph">&nbsp;</div>
     </div>
-    <div id="4" style="border-bottom: 1px solid #777777;"><?php echo CommonstatModule::t('Visits')?>
+    <div style="border-bottom: 1px solid #777777;" class="greedElem">
+        <div class="dataTbl">
+        <?php echo CommonstatModule::t('Visits')?>
         <ul type="none">
-            <li><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Yesterday')?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Month') ?>:</span><span class="toright">0</span></li>
-            <li><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright">0</span></li>
+            <li id="v1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
+            <li id="v2"><span><?php echo CommonstatModule::t('Yesterday')?>:</span><span class="toright">0</span></li>
+            <li id="v3"><span><?php echo CommonstatModule::t('Month') ?>:</span><span class="toright">0</span></li>
+            <li id="v4"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright">0</span></li>
         </ul>
+        </div>
+        <div class="dataGraph">
+            <?php //$this->widget('chartjs.widgets.ChLine',array('width' => 600,'height' => 300,'htmlOptions' => array(),'labels' => array("1","2","3","4","5","6"),'datasets' => array(array("fillColor" => "rgba(255,255,255,0)","strokeColor" => "rgba(244,17,17,1)","pointColor" => "rgba(244,17,17,1)","pointStrokeColor" => "#ffffff","data" => array(10, 20, 25, 25, 50, 60)),),'options' => array()));?>
+            <div class="intervalls">
+                <form>
+                    <input type="text" value="">
+                    <input type="text" value="">
+                    <input type="text" value="">
+                    <input type="button" value="test" style="width:80px;margin-bottom:10px;">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -36,7 +62,7 @@
 
 <style type="text/css">
     .commonstat {
-        width: 600px;
+        width: 900px;
         padding: 10px 20px 10px 20px;
     }
     .commonstat div {
@@ -45,6 +71,10 @@
         font-weight: bold;
         padding: 10px 0px 10px 0px;
         color: #777777;
+        position: relative;
+    }
+    .increase_H{
+        height: 320px;
     }
     .commonstat div ul  {
         /*border: 1px solid red;*/
@@ -59,31 +89,57 @@
         float: right;
         padding-right: 10px;
     }
-    .commonstat div:hover  {
+    .commonstat div ul li:hover  {
         color: #FFFFFF;
         background: #777777;
     }
-    .stat_choise{
-        background: #00bbd9;
+    #v:hover{
+        color: #FFFFFF;
+        background: #777777;
+    }
+    .dataTbl{
+        border:none !important;
+        width:230px;
+        float:left;
+    }
+    .dataGraph{
+        border:1px solid #777777;
+        float:left;
+        width:630px;
+        height:370px;
+        margin-left:20px;
+    }
+    .greedElem{
+        overflow: hidden;
+    }
+    .intervalls{
+        border: none !important;
+        margin-left: 20px;
+    }
+    .intervalls form input{
+        width:150px;
     }
 </style>
 
 <script>
-    function St_choise(){
-        var itemSelector = $(this).attr('id');
+    var ChContainer = {ItemSelector:'none', TimeStart:'0000-00-00 00:00:00', TimeStop:'0000-00-00 00:00:00'};
+    
+    $(function(){
+       
+    });
+    
+    function commonViewer(){
+        
+    }
+    function createGraphics(data){
         $.ajax({
           type: "POST",
              url: "<?php echo $this->createAbsoluteUrl('/commonstat/default/graph')?>",
              dataType: 'html',
-             data: {'graph_choise':itemSelector},
+             data: data,//{'graph_choise':itemSelector},
              success: function(resource){
                  $('#graph').html(resource);
-             },
+             }
         });
-        console.log(itemSelector);
     }
-    $(function(){
-        $('.commonstat div').click(St_choise);
-    });
-    
 </script>

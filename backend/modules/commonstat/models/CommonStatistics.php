@@ -7,7 +7,7 @@ private $colourStandard; // стандартные цветовые решени
 private $graphix; // контейнер инструкций для построения графика: 1 инструкция описывает один график
 
 
-public function __construct($choiseMode){
+public function __construct($choiseMode=NULL){
     $this->choiseMode = $choiseMode;
     $this->colourStandard = array(
         'a'=>array('fillColor'=>'rgba(255,255,255,0)','strokeColor'=>'rgba(244,17,17,1)','pointColor'=>'rgba(244,17,17,1)',"pointStrokeColor" => "#ffffff"),
