@@ -1,6 +1,6 @@
 <h1><?php echo CommonstatModule::t('General statistics')?></h1>
 <div class="commonstat">
-    <div class="greedElem">
+    <div class="greedElem" id="Participiants">
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Participants')?>
         <ul type="none">
@@ -12,7 +12,7 @@
         </div>
         <div class="dataGraph">&nbsp;</div>
     </div>
-    <div class="greedElem">
+    <div class="greedElem" id="MoneyTurnover">
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Money Turnover')?>
         <ul type="none">
@@ -24,7 +24,7 @@
         </div>
         <div class="dataGraph">&nbsp;</div>
     </div>
-    <div class="greedElem">
+    <div class="greedElem" id="Charity">
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Charity')?>
         <ul type="none">
@@ -34,7 +34,7 @@
         </div>
         <div class="dataGraph">&nbsp;</div>
     </div>
-    <div style="border-bottom: 1px solid #777777;" class="greedElem">
+    <div style="border-bottom: 1px solid #777777;" class="greedElem" id="Visits">
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Visits')?>
         <ul type="none">
@@ -45,7 +45,9 @@
         </ul>
         </div>
         <div class="dataGraph">
-            <?php //$this->widget('chartjs.widgets.ChLine',array('width' => 600,'height' => 300,'htmlOptions' => array(),'labels' => array("1","2","3","4","5","6"),'datasets' => array(array("fillColor" => "rgba(255,255,255,0)","strokeColor" => "rgba(244,17,17,1)","pointColor" => "rgba(244,17,17,1)","pointStrokeColor" => "#ffffff","data" => array(10, 20, 25, 25, 50, 60)),),'options' => array()));?>
+            <span class="graph">
+            <?php $this->widget('chartjs.widgets.ChLine',array('width' => 600,'height' => 300,'htmlOptions' => array(),'labels' => array("1","2","3","4","5","6"),'datasets' => array(array("fillColor" => "rgba(255,255,255,0)","strokeColor" => "rgba(244,17,17,1)","pointColor" => "rgba(244,17,17,1)","pointStrokeColor" => "#ffffff","data" => array(10, 20, 25, 25, 50, 60)),),'options' => array()));?>
+            </span>
             <div class="intervalls">
                 <form>
                     <input type="text" value="">
@@ -119,26 +121,28 @@
     .intervalls form input{
         width:150px;
     }
+    
 </style>
 
-<script>
-    var ChContainer = {ItemSelector:'none', TimeStart:'0000-00-00 00:00:00', TimeStop:'0000-00-00 00:00:00'};
-    
+<script>   
     $(function(){
-       
+       $('.commonstat div div ul li').click(function(){
+           ciel = $(this).parent().parent().parent();
+           ciel.find('.graph').html('Renderer');
+       })
     });
     
     function commonViewer(){
         
     }
-    function createGraphics(data){
+    function createGraphics(data, renderingTarget){
         $.ajax({
           type: "POST",
              url: "<?php echo $this->createAbsoluteUrl('/commonstat/default/graph')?>",
              dataType: 'html',
              data: data,//{'graph_choise':itemSelector},
              success: function(resource){
-                 $('#graph').html(resource);
+                 renderingTarget.html(resource);
              }
         });
     }
