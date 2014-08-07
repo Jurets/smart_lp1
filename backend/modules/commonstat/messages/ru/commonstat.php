@@ -25,5 +25,9 @@ return array(
     'hour' => 'час',
     'from' => 'с&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
     'step' => 'шаг&nbsp;',
-    'to' => 'по'
+    'to' => 'по',
+    
+    'send' => 'отправить',
+    
+    'invalid interval date format' => 'Не правильный формат даты интервала'
 );

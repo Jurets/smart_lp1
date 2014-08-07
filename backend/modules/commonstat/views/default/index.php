@@ -1,3 +1,6 @@
+<?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl.'/css/commonstat.css'); ?>
+<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/commonstat.js'); ?>
+
 <h1><?php echo CommonstatModule::t('General statistics')?></h1>
 <div class="commonstat">
     <div class="greedElem" id="Participiants">
@@ -10,7 +13,10 @@
             <li id="p4"><span><?php echo CommonstatModule::t('Business Club')?>:</span><span class="toright">0</span></li>
         </ul>
         </div>
-        <div class="dataGraph">&nbsp;</div>
+        <div class="dataGraph">
+            <span class="graph"> </span>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 0)) ?>
+        </div>
     </div>
     <div class="greedElem" id="MoneyTurnover">
         <div class="dataTbl">
@@ -22,7 +28,10 @@
             <li id="mt4"><span><?php echo CommonstatModule::t('Capital today')?>:</span><span class="toright">0</span></li>
         </ul>
         </div>
-        <div class="dataGraph">&nbsp;</div>
+        <div class="dataGraph">
+            <span class="graph"> </span>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 1)) ?>
+        </div>
     </div>
     <div class="greedElem" id="Charity">
         <div class="dataTbl">
@@ -32,7 +41,10 @@
             <li id="ch2"><span><?php echo CommonstatModule::t('Total transferred')?>:</span><span class="toright">0</span></li>
         </ul>
         </div>
-        <div class="dataGraph">&nbsp;</div>
+        <div class="dataGraph">
+            <span class="graph"> </span>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 2)) ?>
+        </div>
     </div>
     <div style="border-bottom: 1px solid #777777;" class="greedElem" id="Visits">
         <div class="dataTbl">
@@ -45,27 +57,8 @@
         </ul>
         </div>
         <div class="dataGraph">
-            <span class="graph">
-            <?php $this->widget('chartjs.widgets.ChLine',array('width' => 600,'height' => 300,'htmlOptions' => array(),'labels' => array("1","2","3","4","5","6"),'datasets' => array(array("fillColor" => "rgba(255,255,255,0)","strokeColor" => "rgba(244,17,17,1)","pointColor" => "rgba(244,17,17,1)","pointStrokeColor" => "#ffffff","data" => array(10, 20, 25, 25, 50, 60)),),'options' => array()));?>
-            </span>
-            <div class="intervalls">
-                <span><?php echo CommonstatModule::t('from')?></span>
-                <span style="margin-left:130px;">&nbsp;</span>
-                <span><?php echo CommonstatModule::t('step')?></span>
-                <span style="margin-left:110px;">&nbsp;</span>
-                <span><?php echo CommonstatModule::t('to')?></span>
-                <form>
-                    <input type="hidden" value="">
-                    <input type="text" value="">
-                    <select name="interval">
-                        <option value="1"><?php echo CommonstatModule::t('day')?></option>
-                        <option value="2"><?php echo CommonstatModule::t('month')?></option>
-                        <option value="3"><?php echo CommonstatModule::t('hour')?></option>
-                    </select>
-                    <input type="text" value="">
-                    <input type="button" value="test" style="width:80px;margin-bottom:10px;">
-                </form>
-            </div>
+            <span class="graph"> </span>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 3)) ?>
         </div>
     </div>
 </div>
@@ -73,84 +66,17 @@
 <div id="graph"></div>
 
 <style type="text/css">
-    .commonstat {
-        width: 900px;
-        padding: 10px 20px 10px 20px;
-    }
-    .commonstat div {
-        border-top: 1px solid #777777;
-        font-size: 15px;
-        font-weight: bold;
-        padding: 10px 0px 10px 0px;
-        color: #777777;
-        position: relative;
-    }
-    .increase_H{
-        height: 320px;
-    }
-    .commonstat div ul  {
-        /*border: 1px solid red;*/
-        font-weight: normal;
-        width: 200px;
-    }
-    .commonstat div ul li {
-        border-bottom: 1px dotted #777777;
-        padding-left: 10px;
-    }
-    .toright{
-        float: right;
-        padding-right: 10px;
-    }
-    .commonstat div ul li:hover  {
-        color: #FFFFFF;
-        background: #777777;
-    }
-    #v:hover{
-        color: #FFFFFF;
-        background: #777777;
-    }
-    .dataTbl{
-        border:none !important;
-        width:230px;
-        float:left;
-    }
-    .dataGraph{
-        border:1px solid #777777;
-        float:left;
-        width:630px;
-        height:370px;
-        margin-left:20px;
-    }
-    .greedElem{
-        overflow: hidden;
-    }
-    .intervalls{
-        border: none !important;
-        margin-left: 20px;
-    }
-    .intervalls form input,select{
+   .intervalls form input,select{
         width:150px;
     }
-    
 </style>
-
-<script>   
-    $(function(){
-       $('.commonstat div div ul li').click(function(){
-           ciel = $(this).parent().parent().parent();
-           ciel.find('.graph').html('Renderer');
-       })
-    });
-    
-    function commonViewer(){
-        
-    }
+<script>    
     function createGraphics(data, renderingTarget){
         $.ajax({
           type: "POST",
              url: "<?php echo $this->createAbsoluteUrl('/commonstat/default/graph')?>",
              dataType: 'html',
-             data: data,//{'graph_choise':itemSelector},
+             data: data,
              success: function(resource){
                  renderingTarget.html(resource);
              }

@@ -2,13 +2,19 @@
 class CommonStatistics extends CModel {
 public function attributeNames(){}
 
-private $choiseMode; // режим формирования данных для построения графиков - входной параметр статистического анализа
+private $features; // массив с настройками моделей для выполнения нужных запросов
+
 private $colourStandard; // стандартные цветовые решения для отображения графиков
-private $graphix; // контейнер инструкций для построения графика: 1 инструкция описывает один график
+
+private $graphix; // контейнер инструкций для построения графика: 1 инструкция описывает один график : 3 параметра: индекс цветов, набор x и набор y
 
 
-public function __construct($choiseMode=NULL){
-    $this->choiseMode = $choiseMode;
+public function __construct(){
+    $this->features = array();
+    $this->features['graphic'] = (isset($_POST['Item'])) ? $_POST['Item'] : NULL;
+    $this->features['timeBegin'] = (isset($_POST['begin'])) ? $_POST['begin'] : date('d.m.Y', strtotime('-7 days'));
+    $this->features['timeStep'] = (isset($_POST['step'])) ? $_POST['step'] : 'day_step';
+    $this->features['timeEnd'] = (isset($_POST['end'])) ? $_POST['end'] : date('d.m.Y');
     $this->colourStandard = array(
         'a'=>array('fillColor'=>'rgba(255,255,255,0)','strokeColor'=>'rgba(244,17,17,1)','pointColor'=>'rgba(244,17,17,1)',"pointStrokeColor" => "#ffffff"),
         'b'=>array('fillColor'=>'rgba(255,255,255,0)','strokeColor'=>'rgba(236,93,82,1)','pointColor'=>'rgba(236,93,82,1)',"pointStrokeColor" => "#ffffff"),
@@ -20,6 +26,46 @@ public function __construct($choiseMode=NULL){
         'h'=>array('fillColor'=>'rgba(255,255,255,0)','strokeColor'=>'rgba(69,69,145,1)','pointColor'=>'rgba(69,69,145,1)',"pointStrokeColor" => "#ffffff"),
     );
 }
+
+public function showTest(){ // Потом удалить
+    var_dump($this->features);       
+}
+
+private function dateToDb($date){
+    $date = array_reverse(explode('.', $date));
+    $date = implode('-', $date);
+    return $date;
+}
+private function dateToSite($date){
+    $date = strtotime($date);
+    $date = date('d.m.Y', $date);
+    return date;
+}
+public function dateValidate(){
+    if(preg_match('/^\d{2}\.\d{2}\.\d{4}$/', $this->features['timeBegin']) && preg_match('/^\d{2}\.\d{2}\.\d{4}$/', $this->features['timeEnd']))
+       return true;
+    else{
+        echo '<script type="text/javascript"> alert("'.CommonstatModule::t('invalid interval date format').'");';
+        die;
+    }
+        
+}
+public function getBegin(){
+    return $this->features['timeBegin'];
+}
+public function setBegin($date){
+    $this->features['timeBegin'] = $date;
+}
+public function getEnd(){
+    return $this->features['timeEnd'];
+}
+public function setEnd($date){
+    $this->features['timeEnd'] = $date;
+}
+
+
+
+
 
 
 }

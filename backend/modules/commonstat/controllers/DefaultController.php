@@ -16,13 +16,11 @@ class DefaultController extends EController {
         }
         public function actionGraph(){
             if (Yii::app()->request->isAjaxRequest){
-                $graph_choise = $_POST['graph_choise'];
-                $model = new CommonStatistics($graph_choise);
-                var_dump($_POST);
+                $this->renderPartial('_graph');
             }
         }
         public function actionTest(){
-            $this->render('test');
+            $this->render('_graph');
         }
 }
 

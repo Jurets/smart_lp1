@@ -1,0 +1,62 @@
+    .commonstat {
+        width: 900px;
+        padding: 10px 20px 10px 20px;
+    }
+    .commonstat div {
+        border-top: 1px solid #777777;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 0px 10px 0px;
+        color: #777777;
+        position: relative;
+    }
+    .increase_H{
+        height: 320px;
+    }
+    .commonstat div ul  {
+        /*border: 1px solid red;*/
+        font-weight: normal;
+        width: 200px;
+    }
+    .commonstat div ul li {
+        border-bottom: 1px dotted #777777;
+        padding-left: 10px;
+    }
+    .toright{
+        float: right;
+        padding-right: 10px;
+    }
+    .commonstat div ul li:hover  {
+        color: #FFFFFF;
+        background: #777777;
+    }
+    #v:hover{
+        color: #FFFFFF;
+        background: #777777;
+    }
+    .dataTbl{
+        border:none !important;
+        width:230px;
+        float:left;
+    }
+    .dataGraph{
+        border:1px solid #777777;
+        float:left;
+        width:630px;
+        height:370px;
+        margin-left:20px;
+        display: none;
+    }
+    .greedElem{
+        overflow: hidden;
+    }
+    .intervalls{
+        border: none !important;
+        margin-left: 20px;
+    }
+    .intervalls form input,select{
+        width:150px;
+    }
+    .selectRed{
+        color: red;
+    }
