@@ -49,9 +49,19 @@
             <?php $this->widget('chartjs.widgets.ChLine',array('width' => 600,'height' => 300,'htmlOptions' => array(),'labels' => array("1","2","3","4","5","6"),'datasets' => array(array("fillColor" => "rgba(255,255,255,0)","strokeColor" => "rgba(244,17,17,1)","pointColor" => "rgba(244,17,17,1)","pointStrokeColor" => "#ffffff","data" => array(10, 20, 25, 25, 50, 60)),),'options' => array()));?>
             </span>
             <div class="intervalls">
+                <span><?php echo CommonstatModule::t('from')?></span>
+                <span style="margin-left:130px;">&nbsp;</span>
+                <span><?php echo CommonstatModule::t('step')?></span>
+                <span style="margin-left:110px;">&nbsp;</span>
+                <span><?php echo CommonstatModule::t('to')?></span>
                 <form>
+                    <input type="hidden" value="">
                     <input type="text" value="">
-                    <input type="text" value="">
+                    <select name="interval">
+                        <option value="1"><?php echo CommonstatModule::t('day')?></option>
+                        <option value="2"><?php echo CommonstatModule::t('month')?></option>
+                        <option value="3"><?php echo CommonstatModule::t('hour')?></option>
+                    </select>
                     <input type="text" value="">
                     <input type="button" value="test" style="width:80px;margin-bottom:10px;">
                 </form>
@@ -118,7 +128,7 @@
         border: none !important;
         margin-left: 20px;
     }
-    .intervalls form input{
+    .intervalls form input,select{
         width:150px;
     }
     

@@ -19,4 +19,11 @@ return array(
     'Visits' => 'Посещения',
     'Yesterday' => 'Вчера',
     'Month' => 'Месяц',
+    
+    'month' => 'месяц',
+    'day' => 'день',
+    'hour' => 'час',
+    'from' => 'с&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+    'step' => 'шаг&nbsp;',
+    'to' => 'по'
 );
