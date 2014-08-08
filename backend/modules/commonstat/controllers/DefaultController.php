@@ -16,11 +16,11 @@ class DefaultController extends EController {
         }
         public function actionGraph(){
             if (Yii::app()->request->isAjaxRequest){
-                $this->renderPartial('_graph');
+                $this->renderPartial('_graph',array(),FALSE, TRUE);
             }
         }
         public function actionTest(){
-            $this->render('_graph');
+            $this->renderPartial('_graph',array(),FALSE, TRUE);
         }
 }
 
