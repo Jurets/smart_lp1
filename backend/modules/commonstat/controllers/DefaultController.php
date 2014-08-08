@@ -12,16 +12,21 @@ class DefaultController extends EController {
         public function actionIndex(){
             ChartJsOnceInit::onceInit();
             $model = new CommonStatistics;
-            
             $this->render('index', array('model'=>$model));
         }
         public function actionGraph(){
             if (Yii::app()->request->isAjaxRequest){
-                $this->renderPartial('_graph',array(),FALSE, TRUE);
+                $model = new CommonStatistics;
+                $features = $model->demoTest()->getWidgetFeatures();
+                $this->renderPartial('_graph',array('features'=>$features),FALSE, TRUE);
             }
         }
         public function actionTest(){
-            $this->renderPartial('_graph',array(),FALSE, TRUE);
+            ChartJsOnceInit::onceInit();
+            $model = new CommonStatistics;
+                $features = $model->completterTest()->getWidgetFeatures();
+                
+                $this->renderPartial('_graph',array('features'=>$features),FALSE, TRUE);
         }
 }
 
