@@ -10,6 +10,7 @@ class DefaultController extends EController {
 	}
         
         public function actionIndex(){
+            ChartJsOnceInit::onceInit();
             $model = new CommonStatistics;
             
             $this->render('index', array('model'=>$model));

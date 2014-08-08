@@ -97,7 +97,8 @@ return array(
            'choise'=>'confirm', // по умолчанию будет выбираться ключ для api для передачи денег с кошелька на кошелек
         ),
         'chartjs' => array(
-			'class' => 'common.extensions.yii-chartjs.components.ChartJs',
+			//'class' => 'common.extensions.yii-chartjs.components.ChartJs',
+                        'class' => 'common.extensions.yii-chartjs.components.ChartJsOnceInit'
         ),
     ),
     'params' => array(

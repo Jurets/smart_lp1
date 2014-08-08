@@ -19,6 +19,7 @@ var NSCH = {};
         NSCH.currElemId = this.id;
         var targetInd = $(this).parent().parent().parent().index();
         NSCH.GraphicalBlock.each(function(index){
+            $(this).find('.graph').empty();
            if(index === targetInd){
                $(this).css('display', 'block');
                createGraphics({'Item':NSCH.currElemId}, $(this).find('.graph'));
