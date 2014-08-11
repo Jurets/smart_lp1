@@ -17,16 +17,16 @@ class DefaultController extends EController {
         public function actionGraph(){
             if (Yii::app()->request->isAjaxRequest){
                 $model = new CommonStatistics;
-                $features = $model->demoTest()->getWidgetFeatures();
-                $this->renderPartial('_graph',array('features'=>$features),FALSE, TRUE);
+                if(isset($_POST['begin'])){//test for filters - to model postAnalyse()
+                    $model->dateValidate();
+                    var_dump($_POST);
+                }
+                $model->demoTest();
+                $this->renderPartial('_graph',array('model'=>$model),FALSE, TRUE);
             }
         }
         public function actionTest(){
-            ChartJsOnceInit::onceInit();
-            $model = new CommonStatistics;
-                $features = $model->completterTest()->getWidgetFeatures();
-                
-                $this->renderPartial('_graph',array('features'=>$features),FALSE, TRUE);
+          
         }
 }
 

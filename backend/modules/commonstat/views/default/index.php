@@ -7,15 +7,15 @@
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Participants')?>
         <ul type="none">
-            <li id="p1"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright">0</span></li>
-            <li id="p2"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
-            <li id="p3"><span><?php echo CommonstatModule::t('Entered')?>:</span><span class="toright">0</span></li>
-            <li id="p4"><span><?php echo CommonstatModule::t('Business Club')?>:</span><span class="toright">0</span></li>
+            <li id="p1"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p1']?></span></li>
+            <li id="p2"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p2']?></span></li>
+            <li id="p3"><span><?php echo CommonstatModule::t('Entered')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p3']?></span></li>
+            <li id="p4"><span><?php echo CommonstatModule::t('Business Club')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p4']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
             <span class="graph"> </span>
-            <?php $this->renderPartial('_filter', array('timePickerId' => 0)) ?>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 1, 'model'=>$model)) ?>
         </div>
     </div>
     <div class="greedElem" id="MoneyTurnover">
@@ -30,7 +30,7 @@
         </div>
         <div class="dataGraph">
             <span class="graph"> </span>
-            <?php $this->renderPartial('_filter', array('timePickerId' => 1)) ?>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 2, 'model'=>$model)) ?>
         </div>
     </div>
     <div class="greedElem" id="Charity">
@@ -43,7 +43,7 @@
         </div>
         <div class="dataGraph">
             <span class="graph"> </span>
-            <?php $this->renderPartial('_filter', array('timePickerId' => 2)) ?>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 3, 'model'=>$model)) ?>
         </div>
     </div>
     <div style="border-bottom: 1px solid #777777;" class="greedElem" id="Visits">
@@ -58,7 +58,7 @@
         </div>
         <div class="dataGraph">
             <span class="graph"> </span>
-            <?php $this->renderPartial('_filter', array('timePickerId' => 3)) ?>
+            <?php $this->renderPartial('_filter', array('timePickerId' => 4, 'model'=>$model)) ?>
         </div>
     </div>
 </div>

@@ -2,10 +2,10 @@
 class CommonStatistics extends CModel {
 public function attributeNames(){}
 
-public $features; // для вреенных данных
-public $CommonStatistic; // общие данные статистики (actionIndex)
+public $features; // для временных данных
+public $CommonStatistic; // общие данные статистики (array) (actionIndex)
 private $colourStandard; // стандартные цветовые решения для отображения графиков
-private $graphix; // контейнер инструкций для построения графика: 1 инструкция описывает один график : 3 параметра: индекс цветов, набор x и набор y
+public $graphix; // контейнер инструкций для построения графика: 1 инструкция описывает один график : 3 параметра: индекс цветов, набор x и набор y
 
 private $commonQueries; // Хранилище процедур запросов для данных по общей статистике
 private $defaultQueries; // -//- по статистике по умолчанию (для постройки графиков по клику)
@@ -28,6 +28,8 @@ public function __construct(){
         'h'=>array('fillColor'=>'rgba(255,255,255,0)','strokeColor'=>'rgba(69,69,145,1)','pointColor'=>'rgba(69,69,145,1)',"pointStrokeColor" => "#ffffff"),
     );
     $this->QueryPullInitial();
+    $this->graphix['x'] = array();$this->graphix['colors'] = $this->colourStandard['a'];$this->graphix['y'] = array();
+    $this->makeCommonStatistic();
 }
 
 private function dateToDb($date){
@@ -50,57 +52,71 @@ public function dateValidate(){
         
 }
 /* методы сборки инструкций для виджета */
-public function completterTest(){
-    $this->graphix['x'] = array('a','b','c','d','e','f','g','h');
-    $this->graphix['y'] = array(1,2,7,8,9,10,15,20);
-    $this->graphix['colors'] = $this->getRandomColorSchema();
-    return $this;
-}
 public function demoTest(){
     $this->graphix['x'] = array('a','b','c','d','e','f','g','h');
     for($i = 0; $i < 8; $i++){
         $this->graphix['y'][] = rand(1, 100);
     }
     $this->graphix['colors'] = $this->getRandomColorSchema();
-    return $this;
 }
 private function getRandomColorSchema(){
     $buff = $this->colourStandard;
     shuffle($buff);
     return array_shift($buff);
 }
-public function getBegin(){
-    return $this->features['timeBegin'];
-}
-public function setBegin($date){
-    $this->features['timeBegin'] = $date;
-}
-public function getEnd(){
-    return $this->features['timeEnd'];
-}
-public function setEnd($date){
-    $this->features['timeEnd'] = $date;
-}
-public function getWidgetFeatures(){ // возвращает готовую структуру данных для передачи виджета
-    return $this->graphix;
-}
+
 
 /* common statistics procedure */
-public function makeCommonStatistic(){
-   
-   return $this;
+private function makeCommonStatistic(){
+   $this->commonQueries['p1']();
+   $this->commonQueries['p2']();
+   $this->commonQueries['p3']();
+   $this->commonQueries['p4']();
 }
 /* Queries Pull */
 private function QueryPullInitial(){
     // Участники 
     //всего
-    $this->commonQueries['p1'] = function(){};
+    $this->commonQueries['p1'] = function(){
+        $sql = "SELECT count(id) c FROM tbl_users WHERE
+                status=1 AND superuser=0 AND
+                tariff_id >= 2";
+        $res = Yii::app()->db->createCommand($sql)->query()->read()['c'];
+        $this->CommonStatistic['p1'] = (!is_null($res)) ? $res : '0';
+    };
     //сегодня
-    $this->commonQueries['p2'] = function(){};
+    $this->commonQueries['p2'] = function(){ // возможна коллизия: нужно учитывать за сегодня любые изменения, но в течение дня юзер может, например, статус поднять, что породит его фантомный дубль.
+        $date_now = date('Y-m-d');
+        $sql_tariff_3 = "SELECT count(id) c FROM tbl_users WHERE
+                status=1 AND busy_date >= DATE(:date) AND
+                busy_date < DATE_ADD(:date, INTERVAL 1 DAY) OR
+                club_date >= DATE(:date) AND club_date < DATE_ADD(:date, INTERVAL 1 DAY)" ;
+        $sql_others = "SELECT count(tr_id) c FROM pm_transaction_log WHERE
+                tr_err_code IS NULL AND
+                tr_kind_id IN (3,4,5) AND
+                date >= DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 DAY);";
+        $tariff_3 = Yii::app()->db->createCommand($sql_tariff_3)->bindParam(':date', $date_now, PDO::PARAM_STR);
+        $others = Yii::app()->db->createCommand($sql_others)->bindParam(':date', $date_now, PDO::PARAM_STR);
+        $buff = $tariff_3->query()->read()['c'];
+        $summ = (!is_null($buff)) ? (int)$buff : 0;
+        $buff = $others->query()->read()['c'];
+        $summ += (!is_null($buff)) ? (int)$buff : 0;
+        $this->CommonStatistic['p2'] = $summ;
+    };
     //вошли
-    $this->commonQueries['p3'] = function(){};
+    $this->commonQueries['p3'] = function(){
+        $sql = "SELECT count(id) c FROM tbl_users WHERE
+                status=1 AND tariff_id=2";
+        $res = Yii::app()->db->createCommand($sql)->query()->read()['c'];
+        $this->CommonStatistic['p3'] = (!is_null($res)) ? $res : '0';
+    };
     //бизнес клуб
-    $this->commonQueries['p4'] = function(){};
+    $this->commonQueries['p4'] = function(){
+        $sql = "SELECT count(id) c FROM tbl_users WHERE
+                status=1 AND tariff_id > 2";
+        $res = Yii::app()->db->createCommand($sql)->query()->read()['c'];
+        $this->CommonStatistic['p4'] = (!is_null($res)) ? $res : '0';
+    };
     // Обороты
     //Активаций всего
     $this->commonQueries['mt1'] = function(){};
