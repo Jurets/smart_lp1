@@ -244,8 +244,12 @@ class Participant extends User
             $criteria->addCondition('refer_id = :refer_id');
             $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id' => $this->refer_id));
         }
+        if (isset($this->income)) {
         $criteria->compare('user.income', $this->income); //поиск по доходу
+        }
+        if (isset($this->transfer_fund)) {
         $criteria->compare('user.transfer_fund', $this->transfer_fund); //поиск по отчислениям в фонд
+        }
         //мержим критерию с родительской и возвращаем набор данных 
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;
