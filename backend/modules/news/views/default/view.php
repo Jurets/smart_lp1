@@ -17,7 +17,7 @@ $this->menu = array(
 ?>
 
 <h1><?php echo Yii::t('common','View News') ?> #<?php echo $model->id; ?></h1>
-<img src="<?php echo $model->UploadImage; //echo Yii::app()->baseUrl . '/uploads/' . 'resized-' . $model->image  ?>" />
+<img src="<?php echo '/admin'. $model->getUploadImage(); //echo Yii::app()->baseUrl . '/uploads/' . 'resized-' . $model->image  ?>" />
 
 <?php
 $this->widget('yiiwheels.widgets.detail.WhDetailView', array(

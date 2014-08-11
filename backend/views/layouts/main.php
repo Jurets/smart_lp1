@@ -92,7 +92,7 @@
                             ),
                         ),
                         array('url' => Yii::app()->getModule('user')->logoutUrl, 'label' => Yii::app()->getModule('user')->t("Logout") . ' (' . Yii::app()->user->name . ')', 'visible' => !$isGuest),
-                    ),
+            ),
                 ),
             ),
         ));
