@@ -22,10 +22,10 @@
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Money Turnover')?>
         <ul type="none">
-            <li id="mt1"><span><?php echo CommonstatModule::t('Activations total')?>:</span><span class="toright">0</span></li>
-            <li id="mt2"><span><?php echo CommonstatModule::t('Activations today')?>:</span><span class="toright">0</span></li>
-            <li id="mt3"><span><?php echo CommonstatModule::t('Capital total')?>:</span><span class="toright">0</span></li>
-            <li id="mt4"><span><?php echo CommonstatModule::t('Capital today')?>:</span><span class="toright">0</span></li>
+            <li id="mt1"><span><?php echo CommonstatModule::t('Activations total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt1']?></span></li>
+            <li id="mt2"><span><?php echo CommonstatModule::t('Activations today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt2']?></span></li>
+            <li id="mt3"><span><?php echo CommonstatModule::t('Capital total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt3']?></span></li>
+            <li id="mt4"><span><?php echo CommonstatModule::t('Capital today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt4']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
@@ -37,8 +37,8 @@
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Charity')?>
         <ul type="none">
-            <li id="ch1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
-            <li id="ch2"><span><?php echo CommonstatModule::t('Total transferred')?>:</span><span class="toright">0</span></li>
+            <li id="ch1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['ch1']?></span></li>
+            <li id="ch2"><span><?php echo CommonstatModule::t('Total transferred')?>:</span><span class="toright"><?php echo $model->CommonStatistic['ch2']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
@@ -50,10 +50,10 @@
         <div class="dataTbl">
         <?php echo CommonstatModule::t('Visits')?>
         <ul type="none">
-            <li id="v1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright">0</span></li>
-            <li id="v2"><span><?php echo CommonstatModule::t('Yesterday')?>:</span><span class="toright">0</span></li>
-            <li id="v3"><span><?php echo CommonstatModule::t('Month') ?>:</span><span class="toright">0</span></li>
-            <li id="v4"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright">0</span></li>
+            <li id="v1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v1']?></span></li>
+            <li id="v2"><span><?php echo CommonstatModule::t('Yesterday')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v2']?></span></li>
+            <li id="v3"><span><?php echo CommonstatModule::t('Month') ?>:</span><span class="toright"><?php echo $model->CommonStatistic['v3']?></span></li>
+            <li id="v4"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v4']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
