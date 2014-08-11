@@ -39,7 +39,7 @@ if(empty($model->photo)){
 }else{
     $photo = CHtml::image(Yii::app()->createAbsoluteUrl( "/uploads/" . $model->photo));
 }
-array_push($attributes, 'password', 'first_name', 'last_name', 'skype', 'phone', 'email', 'activkey', 'create_at', 'lastvisit_at', 'username',  array(
+array_push($attributes, 'password', 'first_name', 'last_name', 'skype', 'phone', 'email', 'activkey', 'create_at', 'lastvisit_at', 'username', 'income','transfer_fund',  array(
     'name' => UserModule::t('Photo'),
     'type' => 'raw',
     'value' => $photo

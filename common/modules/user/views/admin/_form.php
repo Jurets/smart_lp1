@@ -29,6 +29,21 @@
 
         echo $form->textFieldControlGroup($model, 'first_name', array('class'=>'span5'));  //имя
         echo $form->textFieldControlGroup($model, 'last_name', array('class'=>'span5'));   //фамилия
+
+        echo TbHtml::tag('div', array('class'=>'control-group'));
+        echo $form->labelEx($model, 'income', array('class'=>"control-label"));
+        echo TbHtml::tag('div', array('class'=>'controls'));
+        echo $form->numberField($model, 'income', array('class'=>'span5'));  // доход
+        echo $form->error($model, 'income');
+        echo TbHtml::closeTag('div');
+        echo TbHtml::closeTag('div');
+        echo TbHtml::tag('div', array('class'=>'control-group'));
+        echo $form->labelEx($model, 'transfer_fund', array('class'=>"control-label"));
+        echo TbHtml::tag('div', array('class'=>'controls'));
+        echo $form->numberField($model, 'transfer_fund', array('class'=>'span5'));   // отчисления в фонд
+        echo $form->error($model, 'transfer_fund');
+        echo TbHtml::closeTag('div');
+        echo TbHtml::closeTag('div');
         
         //дата рождения
         echo TbHtml::tag('div', array('class'=>'control-group'));

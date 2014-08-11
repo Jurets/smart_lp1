@@ -23,6 +23,9 @@ return array(
     'Skype' => 'Скайп',
     'Birthday' => 'Дата рождения',
     'Gmt' => 'Временная зона',
+    'Income' => 'Доход',
+    'Transfer to the Fund' => 'Отчисления',
+
 
     'Activate' => 'Запустить',
     'Deactivate' => 'Заблокировать',

@@ -22,6 +22,8 @@
  * @var integer $createtime
  * @var integer $lastvisit
  * @var integer $superuser
+ * @var integer $income
+ * @var integer $transfer_fund
  * @property integer $status
  * @var timestamp $create_at
  * @var timestamp $lastvisit_at
@@ -74,7 +76,7 @@ class Participant extends User
         //NOTE: you should only define rules for those attributes that
         //will receive user inputs.
         return CMap::mergeArray(parent::rules(), array(
-                    array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id', 'safe'),
+                    array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id,income,transfer_fund', 'safe'),
                     array('id', 'safe', 'on' => array('search', 'seestructure')),
                     //регистрация 'required'
                     array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
@@ -150,6 +152,8 @@ class Participant extends User
                     'skype' => UserModule::t("Skype", array(), $this->dict_participant),
                     'dob' => UserModule::t("Birthday", array(), $this->dict_participant),
                     'gmt_id' => UserModule::t("Gmt", array(), $this->dict_participant),
+                    'income' => UserModule::t("Income", array(), $this->dict_participant),
+                    'transfer_fund' => UserModule::t("Transfer to the Fund", array(), $this->dict_participant),
         ));
     }
 
@@ -240,6 +244,8 @@ class Participant extends User
             $criteria->addCondition('refer_id = :refer_id');
             $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id' => $this->refer_id));
         }
+        $criteria->compare('user.income', $this->income); //поиск по доходу
+        $criteria->compare('user.transfer_fund', $this->transfer_fund); //поиск по отчислениям в фонд
         //мержим критерию с родительской и возвращаем набор данных 
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;

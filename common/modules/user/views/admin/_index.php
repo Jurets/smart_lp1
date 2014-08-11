@@ -96,9 +96,23 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'refer_id',
             'type'=>'raw',
-            'filter'=>false,
+            'filter'=>true,
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
             'value' => 'TbHtml::link($data->referalName, array("admin/view","id"=>$data->referalId))',
+        ),
+        array(
+            'name' => 'income',
+            'type'=>'raw',
+            'filter'=>TbHtml::activeTextField($model, 'income', array('style'=>'width: 100px')),
+            //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
+            'value' => 'TbHtml::link(UHtml::markSearch($data,"income"),array("admin/view","id"=>$data->id))',
+        ),
+        array(
+            'name' => 'transfer_fund',
+            'type'=>'raw',
+            'filter'=>TbHtml::activeTextField($model, 'transfer_fund', array('style'=>'width: 100px')),
+            //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
+            'value' => 'TbHtml::link(UHtml::markSearch($data,"transfer_fund"),array("admin/view","id"=>$data->id))',
         ),
       /*  array(
             'name'=>'checks',

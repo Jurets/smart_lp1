@@ -1,4 +1,4 @@
-`<?php
+<?php
 /* @var $this FaqController */
 /* @var $model Faq */
 $current_id = $model->id;
