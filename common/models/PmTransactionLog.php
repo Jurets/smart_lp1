@@ -226,7 +226,6 @@ class PmTransactionLog extends CActiveRecord
             $mainCommand->bindParam(':date', $date, PDO::PARAM_STR);
             $mainCommand->bindParam(':id', $this->id, PDO::PARAM_INT);
             $resource = $mainCommand->query();
-            //var_dump($date,$this->id,$resource->readAll());die;
             foreach($resource->readAll() as $rec){
                 if($rec['refer_id'] == NULL && $rec['inviter_id'] == NULL){ // сборка безфамильной строки
                     $this->statisticsStructure['Checks'] .= '<tr>'
