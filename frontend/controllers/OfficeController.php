@@ -70,7 +70,9 @@ class OfficeController extends EController
     public function actionHelp()
     {
         $objFaq = new Faq();
-        $availableCategories = $objFaq->getTypeOfCategories();
+        $objFaqManager = new Faqm();
+        $objFaqManager->LoadFaqManager();
+        $availableCategories = $objFaqManager->getTypeOfCategories();
         $categories = $objFaq->model()->showAllFaq();
         if(!empty($_POST)){
             $objFaq->attributes = $_POST;

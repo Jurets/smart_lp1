@@ -47,5 +47,9 @@ class Faqm extends CFormModel {
         $result = $checkCommand->query();
         return $result->read();
     }
+
+    public function getTypeOfCategories(){
+        return array($this->financialMail => 'финансы', $this->offerMail => 'предложения', $this->performanceMail => 'работа сайта');
+    }
 }
 

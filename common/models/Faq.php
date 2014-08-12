@@ -138,8 +138,8 @@ class Faq extends CActiveRecord
         return $arrSortCategoryFaq;
     }
 
-    public function getTypeOfCategories(){
-        return array('finance' => 'финансы', 'offer' => 'предложения', 'site' => 'работа сайта');
-    }
+//    public function getTypeOfCategories(){
+//        return array('finance' => 'финансы', 'offer' => 'предложения', 'site' => 'работа сайта');
+//    }
 
 }
