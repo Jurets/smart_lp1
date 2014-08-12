@@ -15,6 +15,7 @@ return array(
     'Requisites' => 'Реквизиты',
     'Marketings Plan' => 'Маркетинговый план',
     'Index Management' => 'Управление индексом',
+    'Faq Management' => 'Управление FAQ',
     'Logout' => 'Выход',
     'Login' => 'Вход',
     //кнопки
