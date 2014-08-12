@@ -5,12 +5,10 @@ public function attributeNames(){}
 public $features; // для временных данных
 public $CommonStatistic; // общие данные статистики (array) (actionIndex)
 private $colourStandard; // стандартные цветовые решения для отображения графиков
-private $filter; // сюда складываются преобразованные ресивером даты-интервалы
 public $graphix; // контейнер инструкций для построения графика: 1 инструкция описывает один график : 3 параметра: индекс цветов, набор x и набор y
 
 private $commonQueries; // Хранилище процедур запросов для данных по общей статистике
-private $defaultQueries; // -//- по статистике по умолчанию (для постройки графиков по клику)
-private $filteredQueries; // -//- для статистики по фильтрам
+private $ajaxQueries; // для статистики, как по фильтрам, так и по умолчанию
 
 public function __construct(){
     $this->features = array();
@@ -29,7 +27,7 @@ public function __construct(){
         'h'=>array('fillColor'=>'rgba(255,255,255,0)','strokeColor'=>'rgba(69,69,145,1)','pointColor'=>'rgba(69,69,145,1)',"pointStrokeColor" => "#ffffff"),
     );
     $this->QueryPullInitial();
-    $this->graphix['x'] = array();$this->graphix['colors'] = $this->colourStandard['a'];$this->graphix['y'] = array();
+    $this->graphix['x'] = array('0');$this->graphix['colors'] = $this->colourStandard['h'];$this->graphix['y'] = array(0);
     $this->makeCommonStatistic();
 }
 
@@ -38,10 +36,21 @@ private function dateToDb($date){
     $date = implode('-', $date);
     return $date;
 }
-private function dateToSite($date){
+private function dateToGraphix($date, $format){
     $date = strtotime($date);
-    $date = date('d.m.Y', $date);
-    return date;
+    switch($format){
+        case '%Y-%m-%d':
+            $format = 'd.m';
+            break;
+        case '%Y-%m':
+            $format = 'm.y';
+            break;
+        case '%Y-%m-%d %H':
+            $format = 'H:i';
+            break;
+    }
+    $date = date($format, $date);
+    return $date;
 }
 public function dateValidate(){
     if(preg_match('/^\d{2}\.\d{2}\.\d{4}$/', $this->features['timeBegin']) && preg_match('/^\d{2}\.\d{2}\.\d{4}$/', $this->features['timeEnd']))
@@ -87,31 +96,48 @@ private function makeCommonStatistic(){
 public function postAnalyse(){
     if(isset($_POST['begin'])){ // не по умолчанию; речь идет о примененном фильтре
         $this->dateValidate();
-        $this->resiver(); // устанавливаем фильтры для работы с базой данных
+        $this->resiever(); // устанавливаем фильтры для работы с базой данных
+        $this->ajaxQueries[$_POST['Item']]();
     }else{ // графика та, что по умолчанию должна быть
-        $this->demoTest();
+        $this->default_resiever();
+        $this->ajaxQueries[$_POST['Item']]();
+        //$this->demoTest();
     }
 }
-private function resiver(){
+private function default_resiever(){
+    $this->features['timeBegin'] = $this->dateToDb($this->features['timeBegin']);
+    $this->features['timeEnd'] = $this->dateToDb($this->features['timeEnd']);
+    $this->features['timeStep'] = '%Y-%m-%d';
+}
+private function resiever(){
     if(!isset($_POST['step'])){
         echo '<script>alert("unknown error")</script>';
         die;
     }
-    $this->filter['begin'] = $this->dateToDb($_POST['begin']);
-    $this->filter['end'] = $this->dateToDb($_POST['end']);
+    $this->features['timeBegin'] = $this->dateToDb($_POST['begin']);
+    $this->features['timeEnd'] = $this->dateToDb($_POST['end']);
     switch($_POST['step']){
         case 'hour_step':
-            $this->filter['step'] = '%Y-%m-%d %H';
+            $this->features['timeStep'] = '%Y-%m-%d %H';
             break;
         case 'day_step':
-            $this->filter['step'] = '%Y-%m-%d';
+            $this->features['timeStep'] = '%Y-%m-%d';
             break;
         case 'month_step':
-            $this->filter['step'] = '%Y-%m';
+            $this->features['timeStep'] = '%Y-%m';
             break;
         default:
-            $this->filter['step'] = '%Y-%m-%d'; // if unset initial dayly
+            $this->features['timeStep'] = '%Y-%m-%d'; // if no set initial dayly
             break;
+    }
+}
+/* grahix structure filler */
+private function graphixFiller($input, $format){
+    if(!empty($input)){
+        foreach($input as $key=>$elem){
+            $this->graphix['x'][] = $this->dateToGraphix($elem['x'], $format);
+            $this->graphix['y'][] = (int)$elem['y'];
+        }
     }
 }
 /* Queries Pull */
@@ -126,23 +152,23 @@ private function QueryPullInitial(){
         $this->CommonStatistic['p1'] = (!is_null($res)) ? $res : '0';
     };
     //сегодня
-    $this->commonQueries['p2'] = function(){ // возможна коллизия: нужно учитывать за сегодня любые изменения, но в течение дня юзер может, например, статус поднять, что породит его фантомный дубль.
+    $this->commonQueries['p2'] = function(){
         $date_now = date('Y-m-d');
         $sql_tariff_3 = "SELECT count(id) c FROM tbl_users WHERE
-                status=1 AND busy_date >= DATE(:date) AND
+                status=1 AND busy_date >= DATE(:date) AND(
                 busy_date < DATE_ADD(:date, INTERVAL 1 DAY) OR
-                club_date >= DATE(:date) AND club_date < DATE_ADD(:date, INTERVAL 1 DAY)" ;
-        $sql_others = "SELECT count(tr_id) c FROM pm_transaction_log WHERE
-                tr_err_code IS NULL AND
-                tr_kind_id IN (3,4,5) AND
-                date >= DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 DAY);";
+                club_date >= DATE(:date) AND club_date < DATE_ADD(:date, INTERVAL 1 DAY))" ;
+//        $sql_others = "SELECT count(tr_id) c FROM pm_transaction_log WHERE
+//                tr_err_code IS NULL AND
+//                tr_kind_id IN (3,4,5) AND
+//                date >= DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 DAY);";
         $tariff_3 = Yii::app()->db->createCommand($sql_tariff_3)->bindParam(':date', $date_now, PDO::PARAM_STR);
-        $others = Yii::app()->db->createCommand($sql_others)->bindParam(':date', $date_now, PDO::PARAM_STR);
+ //       $others = Yii::app()->db->createCommand($sql_others)->bindParam(':date', $date_now, PDO::PARAM_STR);
         $buff = $tariff_3->query()->read()['c'];
         $summ = (!is_null($buff)) ? (int)$buff : 0;
-        $buff = $others->query()->read()['c'];
-        $summ += (!is_null($buff)) ? (int)$buff : 0;
-        $this->CommonStatistic['p2'] = $summ;
+//        $buff = $others->query()->read()['c'];
+//        $summ += (!is_null($buff)) ? (int)$buff : 0;
+        $this->CommonStatistic['p2'] = (!is_null($summ)) ? $summ : '0';
     };
     //вошли
     $this->commonQueries['p3'] = function(){
@@ -267,35 +293,83 @@ private function QueryPullInitial(){
         $res = Yii::app()->db->createCommand($sql)->query()->read()['v'];
         $this->CommonStatistic['v4'] = (!is_null($res)) ? $res : '0';
     };
-    
-    $this->defaultQueries['p1'] = function(){};
-    $this->defaultQueries['p2'] = function(){};
-    $this->defaultQueries['p3'] = function(){};
-    $this->defaultQueries['p4'] = function(){};
-    $this->defaultQueries['mt1'] = function(){};
-    $this->defaultQueries['mt2'] = function(){};
-    $this->defaultQueries['mt3'] = function(){};
-    $this->defaultQueries['mt4'] = function(){};
-    $this->defaultQueries['ch1'] = function(){};
-    $this->defaultQueries['ch2'] = function(){};
-    $this->defaultQueries['v1'] = function(){};
-    $this->defaultQueries['v2'] = function(){};
-    $this->defaultQueries['v3'] = function(){};
-    $this->defaultQueries['v4'] = function(){};
-    
-    $this->filteredQueries['p1'] = function(){};
-    $this->filteredQueries['p2'] = function(){};
-    $this->filteredQueries['p3'] = function(){};
-    $this->filteredQueries['p4'] = function(){};
-    $this->filteredQueries['mt1'] = function(){};
-    $this->filteredQueries['mt2'] = function(){};
-    $this->filteredQueries['mt3'] = function(){};
-    $this->filteredQueries['mt4'] = function(){};
-    $this->filteredQueries['ch1'] = function(){};
-    $this->filteredQueries['ch2'] = function(){};
-    $this->filteredQueries['v1'] = function(){};
-    $this->filteredQueries['v2'] = function(){};
-    $this->filteredQueries['v3'] = function(){};
-    $this->filteredQueries['v4'] = function(){};
+    // ->
+    $this->ajaxQueries['p1'] = function(){
+        $sql = "SELECT count(id) y, busy_date x FROM tbl_users WHERE
+                status=1 AND superuser=0 AND
+                tariff_id >= 2 AND
+                busy_date BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY)
+                GROUP BY DATE_FORMAT(`busy_date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $this->features['timeStep']);
+    };
+    $this->ajaxQueries['p2'] = function(){
+        $date = date('Y-m-d');
+        $filter = '%Y-%m-%d %H';
+        $sql = "SELECT count(id) y, busy_date x FROM tbl_users WHERE
+                status=1 AND tariff_id >=2 AND busy_date >= DATE(:date) AND(
+                busy_date < DATE_ADD(:date, INTERVAL 1 DAY) OR
+                club_date >= DATE(:date) AND club_date < DATE_ADD(:date, INTERVAL 1 DAY))
+                GROUP BY DATE_FORMAT(`busy_date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':date', $date, PDO::PARAM_STR);
+        $command->bindParam(':format', $filter, PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, '%Y-%m-%d %H');
+    };
+    $this->ajaxQueries['p3'] = function(){
+       $sql = "SELECT count(id) y, busy_date x FROM tbl_users WHERE
+                status=1 AND superuser=0 AND
+                tariff_id = 2 AND(
+                busy_date BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY))
+                GROUP BY DATE_FORMAT(`busy_date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $this->features['timeStep']);        
+    };
+    $this->ajaxQueries['p4'] = function(){
+        $sql_main = "SELECT count(id) y, club_date x FROM tbl_users WHERE
+                status=1 AND tariff_id > 2 AND(
+                club_date BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY))
+                GROUP BY DATE_FORMAT(`club_date`, :format)";
+        $command = Yii::app()->db->createCommand($sql_main);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res1 = $command->query()->readAll();
+        $sql_trlog = "SELECT count(tr_id) y, date x FROM pm_transaction_log
+                      LEFT JOIN tbl_users ON pm_transaction_log.from_user_id = tbl_users.id
+                      WHERE
+                      tr_err_code IS NULL AND tr_kind_id IN (3,4,5) AND
+                      tbl_users.club_date = '0000-00-00 00:00:00'
+                      AND(
+                      date BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY)
+                      )
+                      GROUP BY DATE_FORMAT(`date`, :format)";
+        $command = Yii::app()->db->createCommand($sql_trlog);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res2 = $command->query()->readAll();
+        $res = array_merge($res1, $res2);
+        $this->graphixFiller($res, $this->features['timeStep']);  
+    };
+    $this->ajaxQueries['mt1'] = function(){};
+    $this->ajaxQueries['mt2'] = function(){};
+    $this->ajaxQueries['mt3'] = function(){};
+    $this->ajaxQueries['mt4'] = function(){};
+    $this->ajaxQueries['ch1'] = function(){};
+    $this->ajaxQueries['ch2'] = function(){};
+    $this->ajaxQueries['v1'] = function(){};
+    $this->ajaxQueries['v2'] = function(){};
+    $this->ajaxQueries['v3'] = function(){};
+    $this->ajaxQueries['v4'] = function(){};
 }
 }
