@@ -89,6 +89,7 @@
                                 array('url' => Yii::app()->getModule('requisites')->requisitesShow, 'label' => Yii::t('common', "Requisites"), 'visible' => !$isGuest),
                                 array('url' => Yii::app()->getModule('mp')->mpShow, 'label' => Yii::t('common', 'Marketings Plan')),
                                 array('url' => Yii::app()->getModule('im')->imShow, 'label' => Yii::t('common', 'Index Management')),
+                                array('url' => Yii::app()->getModule('faqm')->faqmShow, 'label' => Yii::t('common', 'Faq Management')),
                             ),
                         ),
                         array('url' => Yii::app()->getModule('user')->logoutUrl, 'label' => Yii::app()->getModule('user')->t("Logout") . ' (' . Yii::app()->user->name . ')', 'visible' => !$isGuest),

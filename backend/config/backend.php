@@ -35,6 +35,9 @@ return array(
         'faq' => array(
             'class' => 'backend.modules.faq.FaqModule',
         ),
+        'faqm' => array(
+            'class' => 'backend.modules.faqm.FaqmModule',
+        ),
         'countries' => array(
             'class' => 'backend.modules.countries.CountriesModule',
         ),
