@@ -5,6 +5,7 @@ public function attributeNames(){}
 public $features; // для временных данных
 public $CommonStatistic; // общие данные статистики (array) (actionIndex)
 private $colourStandard; // стандартные цветовые решения для отображения графиков
+private $filter; // сюда складываются преобразованные ресивером даты-интервалы
 public $graphix; // контейнер инструкций для построения графика: 1 инструкция описывает один график : 3 параметра: индекс цветов, набор x и набор y
 
 private $commonQueries; // Хранилище процедур запросов для данных по общей статистике
@@ -65,13 +66,53 @@ private function getRandomColorSchema(){
     return array_shift($buff);
 }
 
-
 /* common statistics procedure */
 private function makeCommonStatistic(){
    $this->commonQueries['p1']();
    $this->commonQueries['p2']();
    $this->commonQueries['p3']();
    $this->commonQueries['p4']();
+   $this->commonQueries['mt1']();
+   $this->commonQueries['mt2']();
+   $this->commonQueries['mt3']();
+   $this->commonQueries['mt4']();
+   $this->commonQueries['ch1']();
+   $this->commonQueries['ch2']();
+   $this->commonQueries['v1']();
+   $this->commonQueries['v2']();
+   $this->commonQueries['v3']();
+   $this->commonQueries['v4']();
+}
+/* This is a main Runtime of the graphycal rendering process */
+public function postAnalyse(){
+    if(isset($_POST['begin'])){ // не по умолчанию; речь идет о примененном фильтре
+        $this->dateValidate();
+        $this->resiver(); // устанавливаем фильтры для работы с базой данных
+    }else{ // графика та, что по умолчанию должна быть
+        $this->demoTest();
+    }
+}
+private function resiver(){
+    if(!isset($_POST['step'])){
+        echo '<script>alert("unknown error")</script>';
+        die;
+    }
+    $this->filter['begin'] = $this->dateToDb($_POST['begin']);
+    $this->filter['end'] = $this->dateToDb($_POST['end']);
+    switch($_POST['step']){
+        case 'hour_step':
+            $this->filter['step'] = '%Y-%m-%d %H';
+            break;
+        case 'day_step':
+            $this->filter['step'] = '%Y-%m-%d';
+            break;
+        case 'month_step':
+            $this->filter['step'] = '%Y-%m';
+            break;
+        default:
+            $this->filter['step'] = '%Y-%m-%d'; // if unset initial dayly
+            break;
+    }
 }
 /* Queries Pull */
 private function QueryPullInitial(){
@@ -119,27 +160,113 @@ private function QueryPullInitial(){
     };
     // Обороты
     //Активаций всего
-    $this->commonQueries['mt1'] = function(){};
+    $this->commonQueries['mt1'] = function(){
+        $sql = "SELECT count(tr_id) c FROM pm_transaction_log WHERE
+                tr_err_code IS NULL AND
+                tr_kind_id = 2";
+        $res = Yii::app()->db->createCommand($sql)->query()->read()['c'];
+        $this->CommonStatistic['mt1'] = (!is_null($res)) ? $res : '0';
+    };
     //Активаций сегодня
-    $this->commonQueries['mt2'] = function(){};
+    $this->commonQueries['mt2'] = function(){
+        $date_now = date('Y-m-d');
+        $sql = "SELECT count(tr_id) c FROM pm_transaction_log WHERE
+                     tr_err_code IS NULL AND
+                     tr_kind_id = 2 AND
+                     date >= DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 DAY);";
+        $command = Yii::app()->db->createCommand($sql)->bindParam(':date', $date_now, PDO::PARAM_STR);
+        $res = $command->query()->read()['c'];
+        $this->CommonStatistic['mt2'] = (!is_null($res)) ? $res : '0';
+    };
     //Капитал всего
-    $this->commonQueries['mt3'] = function(){};
+    $this->commonQueries['mt3'] = function(){
+        $buff = Requisites::getInstance();
+        $A = $buff->purse_activation;
+        $B = $buff->purse_club;
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) summ FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND(
+                to_purse = :a OR to_purse = :b OR to_purse = :f OR to_user_id IS NULL)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':a', $A, PDO::PARAM_STR); $command->bindParam(':b', $B, PDO::PARAM_STR); $command->bindParam(':f', $F, PDO::PARAM_STR);
+        $res = $command->query()->read()['summ'];
+        $this->CommonStatistic['mt3'] = (!is_null($res)) ? $res : '0';
+    };
     //Капитал сегодня
-    $this->commonQueries['mt4'] = function(){};
+    $this->commonQueries['mt4'] = function(){
+        $date_now = date('Y-m-d');
+        $buff = Requisites::getInstance();
+        $A = $buff->purse_activation;
+        $B = $buff->purse_club;
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) summ FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND(
+                to_purse = :a OR to_purse = :b OR to_purse = :f OR to_user_id IS NULL) AND date >= DATE(:date) AND
+                date < DATE_ADD(:date, INTERVAL 1 DAY)";
+        $com = Yii::app()->db->createCommand($sql);
+        $com->bindParam(':a', $A, PDO::PARAM_STR); $com->bindParam(':b', $B, PDO::PARAM_STR); 
+        $com->bindParam(':f', $F, PDO::PARAM_STR); $com->bindParam(':date', $date_now, PDO::PARAM_STR);
+        $res = $com->query()->read()['summ'];
+        $this->CommonStatistic['mt4'] = (!is_null($res)) ? $res : '0';
+    };
     // Благотворительность
     //Сегодня
-    $this->commonQueries['ch1'] = function(){};
+    $this->commonQueries['ch1'] = function(){
+        $date = date('Y-m-d');
+        $buff = Requisites::getInstance();
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) summ FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND to_purse = :f AND
+                date >=DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 DAY)";
+        $com = Yii::app()->db->createCommand($sql);
+        $com->bindParam(':f', $F, PDO::PARAM_STR); $com->bindParam('date', $date, PDO::PARAM_STR);
+        $res = $com->query()->read()['summ'];
+        $this->CommonStatistic['ch1'] = (!is_null($res)) ? $res : '0';
+    };
     //Всего передано
-    $this->commonQueries['ch2'] = function(){};
+    $this->commonQueries['ch2'] = function(){
+        $date = date('Y-m-d');
+        $buff = Requisites::getInstance();
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) summ FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND to_purse = :f";
+        $com = Yii::app()->db->createCommand($sql);
+        $com->bindParam(':f', $F, PDO::PARAM_STR);
+        $res = $com->query()->read()['summ'];
+        $this->CommonStatistic['ch2'] = (!is_null($res)) ? $res : '0';
+    };
     // Посещения
     //Сегодня
-    $this->commonQueries['v1'] = function(){};
+    $this->commonQueries['v1'] = function(){
+        $date = date('Y-m-d');
+        
+        $sql = "SELECT sum(visits_count) visits FROM tbl_visits
+                WHERE date_visit >= DATE(:date) AND date_visit < DATE_ADD(:date, INTERVAL 1 DAY)";
+        $res = Yii::app()->db->createCommand($sql)->bindParam(':date', $date, PDO::PARAM_STR)->query()->read()['visits'];
+        $this->CommonStatistic['v1'] = (!is_null($res)) ? $res : '0';        
+    };
     //Вчера
-    $this->commonQueries['v2'] = function(){};
+    $this->commonQueries['v2'] = function(){
+        $date = date('Y-m-d');
+        $sql = "SELECT sum(visits_count) visits FROM tbl_visits
+                WHERE date_visit >= DATE_ADD(:date, INTERVAL -1 DAY) AND date_visit < DATE(:date)";
+        $res = Yii::app()->db->createCommand($sql)->bindParam(':date', $date, PDO::PARAM_STR)->query()->read()['visits'];
+        $this->CommonStatistic['v2'] = (!is_null($res)) ? $res : '0';
+    };
     //Месяц
-    $this->commonQueries['v3'] = function(){};
+    $this->commonQueries['v3'] = function(){
+        $date = date('Y-m-01');
+        $sql = "SELECT sum(visits_count) visits FROM tbl_visits
+                WHERE date_visit >= DATE(:date) AND date_visit < DATE_ADD(:date, INTERVAL 1 MONTH)";
+        $res = Yii::app()->db->createCommand($sql)->bindParam(':date', $date, PDO::PARAM_STR)->query()->read()['visits'];
+        $this->CommonStatistic['v3'] = (!is_null($res)) ? $res : '0';
+    };
     //Всего
-    $this->commonQueries['v4'] = function(){};
+    $this->commonQueries['v4'] = function(){
+        $sql = "SELECT sum(visits_count) v FROM tbl_visits";
+        $res = Yii::app()->db->createCommand($sql)->query()->read()['v'];
+        $this->CommonStatistic['v4'] = (!is_null($res)) ? $res : '0';
+    };
     
     $this->defaultQueries['p1'] = function(){};
     $this->defaultQueries['p2'] = function(){};

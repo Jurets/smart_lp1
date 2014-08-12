@@ -17,11 +17,8 @@ class DefaultController extends EController {
         public function actionGraph(){
             if (Yii::app()->request->isAjaxRequest){
                 $model = new CommonStatistics;
-                if(isset($_POST['begin'])){//test for filters - to model postAnalyse()
-                    $model->dateValidate();
-                    var_dump($_POST);
-                }
-                $model->demoTest();
+                $model->postAnalyse();
+                //$model->demoTest();
                 $this->renderPartial('_graph',array('model'=>$model),FALSE, TRUE);
             }
         }

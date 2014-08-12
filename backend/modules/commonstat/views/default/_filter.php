@@ -22,7 +22,7 @@
                     </select>
                 <?php 
                 $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                    'id' => 'time-picker-end-'. (isset($timePickerId) ? $timePickerId : ''),
+                   'id' => 'time-picker-end-'. (isset($timePickerId) ? $timePickerId : ''),
                    'name' => 'end',
                    'value' => $model->features['timeEnd'],
                    'options' => array(

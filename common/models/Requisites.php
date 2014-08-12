@@ -133,7 +133,7 @@ class Requisites extends CActiveRecord
      * получить строку с реквизитами системы
      * 
      */
-    private static function getInstance()
+    public static function getInstance()
     {
         return self::model()->findByPk(self::INSTANCE_NAME);
     }
