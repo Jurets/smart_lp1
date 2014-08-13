@@ -13,7 +13,7 @@ var NSCH = {};
            'ch2':true,
            'v1':false,
            'v2':false,
-           'v3':true,
+           'v3':false,
            'v4':true
        };
        NSCH.Common = $('.commonstat div div ul li');

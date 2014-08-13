@@ -29,5 +29,6 @@ return array(
     
     'send' => 'отправить',
     
-    'invalid interval date format' => 'Не правильный формат даты интервала'
+    'invalid interval date format' => 'Не правильный формат даты интервала',
+    'No data for display'=>'Нет данных для отображения'
 );

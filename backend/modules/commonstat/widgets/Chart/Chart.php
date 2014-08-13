@@ -7,7 +7,7 @@ class Chart extends CWidget {
         $this->model->graphix['y'][] = 0;
         $this->features = $this->model->graphix;
         $x = $this->features['x'];
-        if(!empty($this->features['y'])){
+        if(count($this->features['y']) >= 3){
             $dataset = array_merge($this->features['colors'], array('data'=>$this->features['y']));
             $this->render('chart', array('x'=>$x, 'dataset'=>$dataset));
         }else{

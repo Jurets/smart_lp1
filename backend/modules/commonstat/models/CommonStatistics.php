@@ -265,7 +265,6 @@ private function QueryPullInitial(){
     //Сегодня
     $this->commonQueries['v1'] = function(){
         $date = date('Y-m-d');
-        
         $sql = "SELECT sum(visits_count) visits FROM tbl_visits
                 WHERE date_visit >= DATE(:date) AND date_visit < DATE_ADD(:date, INTERVAL 1 DAY)";
         $res = Yii::app()->db->createCommand($sql)->bindParam(':date', $date, PDO::PARAM_STR)->query()->read()['visits'];
@@ -427,12 +426,84 @@ private function QueryPullInitial(){
         $res = $command->query()->readAll();
         $this->graphixFiller($res, $this->features['timeStep']);        
     };
-    $this->ajaxQueries['ch1'] = function(){};
-    $this->ajaxQueries['ch2'] = function(){};
+    $this->ajaxQueries['ch1'] = function(){
+        $date = date('Y-m-d');
+        $filter = '%Y-%m-%d %H';
+        $buff = Requisites::getInstance();
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) y, date x FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND to_purse = :f AND
+                date >=DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 DAY)
+                GROUP BY DATE_FORMAT(`date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':f', $F, PDO::PARAM_STR);
+        $command->bindParam('date', $date, PDO::PARAM_STR);
+        $command->bindParam(':format', $filter, PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $filter);
+    };
+    $this->ajaxQueries['ch2'] = function(){
+        $buff = Requisites::getInstance();
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) y, date x FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND to_purse = :f AND(
+                date BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY))
+                GROUP BY DATE_FORMAT(`date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':f', $F, PDO::PARAM_STR);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $this->features['timeStep']);
+    };
     
-    $this->ajaxQueries['v1'] = function(){};
-    $this->ajaxQueries['v2'] = function(){};
-    $this->ajaxQueries['v3'] = function(){};
-    $this->ajaxQueries['v4'] = function(){};
+    $this->ajaxQueries['v1'] = function(){
+        $date = date('Y-m-d');
+        $filter = '%Y-%m-%d %H';
+        $sql = "SELECT sum(visits_count) y, date_visit x FROM tbl_visits
+                WHERE date_visit >= DATE(:date) AND date_visit < DATE_ADD(:date, INTERVAL 1 DAY)
+                GROUP BY DATE_FORMAT(`date_visit`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':format', $filter, PDO::PARAM_STR);
+        $command->bindParam(':date', $date, PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $filter);
+    };
+    $this->ajaxQueries['v2'] = function(){
+        $date = date('Y-m-d');
+        $filter = '%Y-%m-%d %H';
+        $sql = "SELECT sum(visits_count) y, date_visit x FROM tbl_visits
+                WHERE date_visit >= DATE_ADD(:date, INTERVAL -1 DAY) AND date_visit < DATE(:date)
+                GROUP BY DATE_FORMAT(`date_visit`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':format', $filter, PDO::PARAM_STR);
+        $command->bindParam(':date', $date, PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $filter);
+    };
+    $this->ajaxQueries['v3'] = function(){
+        $date = date('Y-m-01');
+        $filter = '%Y-%m-%d';
+        $sql = "SELECT sum(visits_count) y, date_visit x FROM tbl_visits
+                WHERE date_visit >= DATE(:date) AND date_visit < DATE_ADD(:date, INTERVAL 1 MONTH)
+                GROUP BY DATE_FORMAT(`date_visit`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':format', $filter, PDO::PARAM_STR);
+        $command->bindParam(':date', $date, PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $filter);
+    };
+    $this->ajaxQueries['v4'] = function(){
+        $sql = "SELECT sum(visits_count) y, date_visit x FROM tbl_visits WHERE
+                date_visit BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY)
+                GROUP BY DATE_FORMAT(`date_visit`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $this->features['timeStep']);
+    };
 }
 }
