@@ -361,12 +361,75 @@ private function QueryPullInitial(){
         $res = array_merge($res1, $res2);
         $this->graphixFiller($res, $this->features['timeStep']);  
     };
-    $this->ajaxQueries['mt1'] = function(){};
-    $this->ajaxQueries['mt2'] = function(){};
-    $this->ajaxQueries['mt3'] = function(){};
-    $this->ajaxQueries['mt4'] = function(){};
+    $this->ajaxQueries['mt1'] = function(){
+        $sql = "SELECT count(tr_id) y, date x FROM pm_transaction_log WHERE
+                tr_err_code IS NULL AND
+                tr_kind_id = 2 AND(
+                date BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY))
+                GROUP BY DATE_FORMAT(`date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $this->features['timeStep']);
+    };
+    $this->ajaxQueries['mt2'] = function(){
+        $date = date('Y-m-d');
+        $filter = '%Y-%m-%d %H';
+        $sql = "SELECT count(tr_id) y, date x FROM pm_transaction_log WHERE
+                     tr_err_code IS NULL AND
+                     tr_kind_id = 2 AND
+                     date >= :date AND date < DATE_ADD(:date , INTERVAL 1 DAY)
+                     GROUP BY DATE_FORMAT(`date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':date', $date, PDO::PARAM_STR);
+        $command->bindParam(':format', $filter, PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $filter);
+    };
+    $this->ajaxQueries['mt3'] = function(){
+       $buff = Requisites::getInstance();
+        $A = $buff->purse_activation;
+        $B = $buff->purse_club;
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) y, date x FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND(
+                to_purse = :a OR to_purse = :b OR to_purse = :f OR to_user_id IS NULL) AND(
+                date BETWEEN :date_b AND DATE_ADD(:date_e , INTERVAL 1 DAY))
+                GROUP BY DATE_FORMAT(`date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':a', $A, PDO::PARAM_STR); $command->bindParam(':b', $B, PDO::PARAM_STR); $command->bindParam(':f', $F, PDO::PARAM_STR);
+        $command->bindParam(':date_b', $this->features['timeBegin'], PDO::PARAM_STR);
+        $command->bindParam(':date_e', $this->features['timeEnd'], PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $this->features['timeStep']);
+    };
+    $this->ajaxQueries['mt4'] = function(){
+        $date = date('Y-m-d');
+        $buff = Requisites::getInstance();
+        $A = $buff->purse_activation;
+        $B = $buff->purse_club;
+        $F = $buff->purse_fdl;
+        $sql = "SELECT sum(amount) y, date x FROM pm_transaction_log
+                WHERE tr_err_code IS NULL AND(
+                to_purse = :a OR to_purse = :b OR to_purse = :f OR to_user_id IS NULL) AND
+                date >= DATE(:date) AND
+                date < DATE_ADD(:date, INTERVAL 1 DAY)
+                GROUP BY DATE_FORMAT(`date`, :format)";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindParam(':a', $A, PDO::PARAM_STR);
+        $command->bindParam(':b', $B, PDO::PARAM_STR); 
+        $command->bindParam(':f', $F, PDO::PARAM_STR);
+        $command->bindParam(':date', $date, PDO::PARAM_STR);
+        $command->bindParam(':format', $this->features['timeStep'], PDO::PARAM_STR);
+        $res = $command->query()->readAll();
+        $this->graphixFiller($res, $this->features['timeStep']);        
+    };
     $this->ajaxQueries['ch1'] = function(){};
     $this->ajaxQueries['ch2'] = function(){};
+    
     $this->ajaxQueries['v1'] = function(){};
     $this->ajaxQueries['v2'] = function(){};
     $this->ajaxQueries['v3'] = function(){};
