@@ -51,8 +51,12 @@ class SystemUserController extends EController
 	 */
 	public function actionView($id)
 	{
+                $model = $this->loadModel($id);
+                list($status, $role) = $model->getStatusAndRole();
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+                        'status'=>$status,
+                        'role'=>$role,
 		));
 	}
 
@@ -70,8 +74,10 @@ class SystemUserController extends EController
 		if(isset($_POST['SystemUser']))
 		{
 			$model->attributes=$_POST['SystemUser'];
+                        $model->password = Yii::app()->controller->module->encrypting($model->password);
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				//$this->redirect(array('view','id'=>$model->id));
+                            $this->redirect('/admin/user/systemUser/admin');
 		}
 
 		$this->render('create',array(
@@ -94,8 +100,10 @@ class SystemUserController extends EController
 		if(isset($_POST['SystemUser']))
 		{
 			$model->attributes=$_POST['SystemUser'];
+                        $model->password = Yii::app()->controller->module->encrypting($model->password);
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			//	$this->redirect(array('view','id'=>$model->id));
+                        $this->redirect('/admin/user/systemUser/admin');
 		}
 
 		$this->render('update',array(
@@ -122,10 +130,7 @@ class SystemUserController extends EController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('SystemUser');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+            $this->redirect('/admin/user/systemUser/admin');
 	}
 
 	/**
@@ -136,10 +141,12 @@ class SystemUserController extends EController
 		$model=new SystemUser('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['SystemUser']))
-			$model->attributes=$_GET['SystemUser'];
-
+                    $model->attributes=$_GET['SystemUser'];
+                    list($status, $role) = $model->getStatusAndRole();
 		$this->render('admin',array(
 			'model'=>$model,
+                        'status'=>$status,
+                        'role'=>$role, 
 		));
 	}
 

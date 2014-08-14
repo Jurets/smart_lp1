@@ -169,6 +169,15 @@ class User extends CActiveRecord
 				'0' => UserModule::t('No'),
 				'1' => UserModule::t('Yes'),
 			),
+                        'RoleStatus' => array(
+                                '2' => UserModule::t('Admin'),
+                                '3' => UserModule::t('Moderator'),
+                                '1' => UserModule::t('Superadmin'),
+                        ),
+                        'SystemUserStatus' => array(
+                            '1' => UserModule::t('Active'),
+                            '0' => UserModule::t('Not active'),
+                        ),
 		);
 		if (isset($code))
 			return isset($_items[$type][$code]) ? $_items[$type][$code] : false;

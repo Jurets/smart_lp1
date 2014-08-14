@@ -44,6 +44,9 @@
  */
 class SystemUser extends CActiveRecord
 {
+        public function getTTT(){
+            return '1234567890';
+        }
 	/**
 	 * @return string the associated database table name
 	 */
@@ -60,7 +63,8 @@ class SystemUser extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('create_at, active', 'required'),
+			//array('create_at, active', 'required'),
+                        array('username, password', 'required'),
 			array('superuser, roles, status, refer_id, inviter_id, invite_num, city_id, gmt_id, income, transfer_fund, active, country_access, city_access, skype_access, email_access', 'numerical', 'integerOnly'=>true),
 			array('balance', 'numerical'),
 			array('username, phone', 'length', 'max'=>20),
@@ -92,108 +96,24 @@ class SystemUser extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		return array(
-			'id' => 'ID',
-			'username' => 'Username',
-			'password' => 'Password',
-			'email' => 'Email',
-			'activkey' => 'Activkey',
-			'superuser' => 'Superuser',
-			'roles' => 'Roles',
-			'status' => 'Status',
-			'create_at' => 'Create At',
-			'lastvisit_at' => 'Lastvisit At',
-			'logincode' => 'Logincode',
-			'tariff_id' => 'Tariff',
-			'refer_id' => 'Refer',
-			'inviter_id' => 'Inviter',
-			'invite_num' => 'Invite Num',
-			'busy_date' => 'Busy Date',
-			'club_date' => 'Club Date',
-			'balance' => 'Balance',
-			'first_name' => 'First Name',
-			'last_name' => 'Last Name',
-			'dob' => 'Dob',
-			'city_id' => 'City',
-			'gmt_id' => 'Gmt',
-			'phone' => 'Phone',
-			'skype' => 'Skype',
-			'photo' => 'Photo',
-			'purse' => 'Purse',
-			'income' => 'Income',
-			'transfer_fund' => 'Transfer Fund',
-			'active' => 'Active',
-			'activated' => 'Activated',
-			'sys_lang' => 'Sys Lang',
-			'country_access' => 'Country Access',
-			'city_access' => 'City Access',
-			'skype_access' => 'Skype Access',
-			'email_access' => 'Email Access',
-			'new_email' => 'New Email',
+		return array(                   
+                        'id' => 'ID',
+                        'username' => UserModule::t('username'),
+                        'password' => UserModule::t('password'),
+			'first_name' => UserModule::t('First Name'),
+			'last_name' => UserModule::t('Last Name'),
+                        'email' => UserModule::t('Email'),
+                        'status' => UserModule::t('Status'),
+                        'roles' => UserModule::t('Roles'),
 		);
 	}
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('activkey',$this->activkey,true);
-		$criteria->compare('superuser',$this->superuser);
-		$criteria->compare('roles',$this->roles);
-		$criteria->compare('status',$this->status);
-		$criteria->compare('create_at',$this->create_at,true);
-		$criteria->compare('lastvisit_at',$this->lastvisit_at,true);
-		$criteria->compare('logincode',$this->logincode,true);
-		$criteria->compare('tariff_id',$this->tariff_id,true);
-		$criteria->compare('refer_id',$this->refer_id);
-		$criteria->compare('inviter_id',$this->inviter_id);
-		$criteria->compare('invite_num',$this->invite_num);
-		$criteria->compare('busy_date',$this->busy_date,true);
-		$criteria->compare('club_date',$this->club_date,true);
-		$criteria->compare('balance',$this->balance);
-		$criteria->compare('first_name',$this->first_name,true);
-		$criteria->compare('last_name',$this->last_name,true);
-		$criteria->compare('dob',$this->dob,true);
-		$criteria->compare('city_id',$this->city_id);
-		$criteria->compare('gmt_id',$this->gmt_id);
-		$criteria->compare('phone',$this->phone,true);
-		$criteria->compare('skype',$this->skype,true);
-		$criteria->compare('photo',$this->photo,true);
-		$criteria->compare('purse',$this->purse,true);
-		$criteria->compare('income',$this->income);
-		$criteria->compare('transfer_fund',$this->transfer_fund);
-		$criteria->compare('active',$this->active);
-		$criteria->compare('activated',$this->activated,true);
-		$criteria->compare('sys_lang',$this->sys_lang,true);
-		$criteria->compare('country_access',$this->country_access);
-		$criteria->compare('city_access',$this->city_access);
-		$criteria->compare('skype_access',$this->skype_access);
-		$criteria->compare('email_access',$this->email_access);
-		$criteria->compare('new_email',$this->new_email,true);
-
-		return new CActiveDataProvider($this, array(
+        public function systemUsrCriteria(){
+            $criteria=new CDbCriteria;
+                $criteria->addCondition('superuser = 1');
+                return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-
+        }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
@@ -204,4 +124,45 @@ class SystemUser extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /* Добавочный для отрисовки статуса и роли */
+        public function getStatusAndRole(){
+            $resource = array();
+            $resource[] = ($this->status == 1) ? UserModule::t('Active') : UserModule::t('Not active');
+            switch($this->roles){
+                case '1':
+                    $resource[] = UserModule::t('Superadmin');
+                    break;
+                case '2':
+                    $resource[] = UserModule::t('Admin');
+                    break;
+                case '3':
+                    $resource[] = UserModule::t('Moderator');
+                    break;
+                default:
+                    $resource[] = UserModule::t('Without Role');
+                    break;
+            }
+            return $resource;
+        }
+        /* разбиваем прежидущую на два вызова для грида */
+        public function getStatus(){
+            return ($this->status == 1) ? UserModule::t('Active') : UserModule::t('Not active');
+        }
+        public function getRole(){
+            switch($this->roles){
+                case '1':
+                    return UserModule::t('Superadmin');
+                    break;
+                case '2':
+                    return UserModule::t('Admin');
+                    break;
+                case '3':
+                    return UserModule::t('Moderator');
+                    break;
+                default:
+                    return UserModule::t('Without Role');
+                    break;
+            }
+        }
 }
