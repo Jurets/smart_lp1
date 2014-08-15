@@ -48,6 +48,8 @@ return array(
     'Announcement' => 'Объявление',
     'Activity' => 'Активность',
     'Search' => 'Поиск',
+    'Common Statisitcs'=>'Общая статистика',
+    'System Users' => 'Системные пользователи',
     'News' => 'Новости',
     'Image' => 'Изображение',
     'Illustration' => 'Иллюстрация',

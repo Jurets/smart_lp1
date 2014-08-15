@@ -50,6 +50,9 @@ class UserModule extends CWebModule
 	 * @var boolean
 	 * @desc login after registration (need loginNotActiv or activeAfterRegister = true)
 	 */
+        
+        public $sysusrUrl = array('/user/systemUser'); // для связи с главнымм меню
+        
 	public $autoLogin=true;
 	
 	public $registrationUrl = array("/user/registration");
@@ -216,7 +219,41 @@ class UserModule extends CWebModule
 		}
 		return self::$_admins;
 	}
-	
+        /* разграничение прав доступа для системных пользователей User access Control */
+        public static function UAC($param=array('superadmin')){
+        $admins = array('');
+	if(!empty($param) && is_array($param)){
+		$roles = array();
+		foreach($param as $item){
+			switch($item){
+                                case 'superadmin': $roles[] = '1'; break;
+                                case 'admin': $roles[] = '2'; break;
+                                case 'moderator': $roles[] = '3'; break;
+                                default:
+                                    throw new CHttpException('500', 'UAC parametr is wrong');
+                                    break;
+			}
+		}
+		$roles = implode(',', $roles);
+                $sql = 'SELECT username FROM tbl_users WHERE status=1 AND superuser=1 AND roles IN('.$roles.')';
+                $command = Yii::app()->db->createCommand($sql);
+                $res = $command->query()->readAll();
+                if(!empty($res)){
+                    $admins = array();
+                    $res = self::dataRebase($res, 'username');
+                    $admins = $res;
+                }
+        }
+            return $admins;
+        }
+        /* дополнение */
+        protected static function dataRebase($p, $field){
+            $return = array();
+            foreach($p as $elem){
+                $return[] = $elem[$field];
+            }
+            return $return;
+        }
 	/**
 	 * Send to user mail
 	 */

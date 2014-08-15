@@ -177,4 +177,23 @@ class DefaultController extends EController
 			Yii::app()->end();
 		}
 	}
+        public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+		);
+	}
+        public function accessRules() {
+            Yii::import('common.modules.user.UserModule');
+            return array(
+                array(
+                    'allow',
+                    'users'=>UserModule::UAC(array('superadmin', 'admin', 'moderator')),
+                ),
+                array(
+                    'deny',
+                    'users'=>array('*'),
+                ),
+            );
+        }
 }

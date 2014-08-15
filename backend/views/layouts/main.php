@@ -78,6 +78,8 @@
                             ),
                         ),
                         //array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>$isGuest),
+                        array('url' => Yii::app()->getModule('user')->sysusrUrl, 'label'=>Yii::t('common','System Users')),
+                        array('url'=>Yii::app()->getModule('commonstat')->commonstatShow, 'label'=>Yii::t('common','Common Statisitcs')),
                         array('url' => Yii::app()->getModule('news')->newsShow, 'label' => Yii::t('common', "News"), 'visible' => !$isGuest),
                         array('url' => Yii::app()->getModule('training')->trainingShow, 'label' => Yii::t('common', "Training"), 'visible' => !$isGuest),
                         array('url' => Yii::app()->getModule('faq')->faqShow, 'label' => Yii::t('common', "FAQ"), 'visible' => !$isGuest),

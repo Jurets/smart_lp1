@@ -9,6 +9,19 @@ class DefaultController extends EController {
 		);
 	}
         
+        public function accessRules() {
+            Yii::import('common.modules.user.UserModule');
+            return array(
+                array(
+                    'allow',
+                    'users'=>UserModule::UAC(array('superadmin')),
+                ),
+                array(
+                    'deny',
+                    'users'=>array('*'),
+                ),
+            );
+        }
         public function actionIndex(){
             ChartJsOnceInit::onceInit();
             $model = new CommonStatistics;

@@ -13,12 +13,12 @@ class AdminController extends EController
 	/**
 	 * @return array action filters
 	 */
-	/*public function filters()
+	public function filters()
 	{
 		return CMap::mergeArray(parent::filters(),array(
 			'accessControl', // perform access control for CRUD operations
 		));
-	}*/
+	}
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -40,6 +40,21 @@ class AdminController extends EController
 	/**
 	 * Manages all models.
 	 */
+        
+         public function accessRules() {
+            Yii::import('common.modules.user.UserModule');
+            return array(
+                array(
+                    'allow',
+                    'users'=>UserModule::UAC(array('superadmin')),
+                ),
+                array(
+                    'deny',
+                    'users'=>array('*'),
+                ),
+            );
+        }
+        
 	public function actionAdmin()
 	{
         //$model=new User('search');
