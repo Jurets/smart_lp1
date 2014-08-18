@@ -30,9 +30,11 @@ class Mathparams extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('verid', 'required'),
+			array('verid, value', 'required'),
 			array('verid', 'numerical', 'integerOnly'=>true),
-			array('name, value', 'length', 'max'=>255),
+			//array('name, value', 'length', 'max'=>255),
+                        array('name' , 'length', 'max'=>255),
+                        array('value', 'type', 'type'=>'float'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, value, verid', 'safe', 'on'=>'search'),

@@ -67,12 +67,12 @@ class SiapInstructions extends CActiveRecord{
            $this->dbh->createCommand('INSERT INTO sip_periodes (begin, end) VALUES ('.'"'.$begin.'"'.','.'"'.$end.'"'.')')->execute();
            
        };
-        $this->formules['p_20'] = function(){
+        $this->formules['p_A'] = function(){
             $sql = "INSERT INTO sip_instructions (period_id, user_id, purse, amount, tr_kind_id) VALUES(:period_id, NULL, :purse, :invoice, 9)";
             $command = $this->dbh->createCommand($sql);
             $command->bindParam(':period_id', $this->period_id);
             $command->bindParam(':purse', $this->systemPurses['A']);
-            $command->bindParam(':invoice', $this->invoices['p_20']);
+            $command->bindParam(':invoice', $this->invoices['p_A']);
             $command->execute();
         };
         $this->formules['p_F'] = function(){
@@ -145,7 +145,7 @@ class SiapInstructions extends CActiveRecord{
        $this->AmountSummB = (!is_null($param)) ? (float)$param : '0';
    }
    protected function fillInvoices(){
-       $this->invoices['p_20'] = $this->AmountSummB * 0.2;
+       $this->invoices['p_A'] = $this->AmountSummB * 0.2;
        $this->invoices['p_rnd_b3'] = $this->AmountSummB * 0.03;
        $this->invoices['p_rnd_b2'] = $this->AmountSummB * 0.015;
        $this->invoices['p_rnd_b1'] = $this->AmountSummB * 0.005;
@@ -366,7 +366,7 @@ class SiapInstructions extends CActiveRecord{
        $transaction = $this->dbh->beginTransaction();
        try{
            if($this->AmountSummB > 0){
-                $this->formules['p_20']();
+                $this->formules['p_A']();
                 $this->formules['p_F']();
                 $this->formules['p_rnd_b3']();
                 $this->formules['p_rnd_b2']();

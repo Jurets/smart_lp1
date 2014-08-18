@@ -116,7 +116,7 @@ class Mpversions extends CActiveRecord
             $this->model()->updateAll(array('activity'=>0));
             $this->model()->updateByPk($this->id, array('activity'=>1));
         }
-        public function manageParameters($post){
+        public function manageParameters($post){ // метод устарел, на его основе сделать новый метод
             if($post == FALSE){ // удаляются все параметры версии
               Mathparams::deleteBindedRecords($this->id);
           }else{ //анализ и принятие решения
@@ -129,7 +129,9 @@ class Mpversions extends CActiveRecord
                       if($elem->name !== $fromUser['name'][$search] || $elem->value !== $fromUser['value'][$search]){
                           $elem->name = $fromUser['name'][$search];
                           $elem->value = $fromUser['value'][$search];
-                          $elem->save();
+                          if(!$elem->save()){
+                               echo '<script> alert("'.$elem->getError('value').'")</script>';die;
+                          }
                       }
                   }else{
                       // удаление
@@ -144,7 +146,11 @@ class Mpversions extends CActiveRecord
                       $rec->setAttribute('name', $fromUser['name'][$newElem]);
                       $rec->setAttribute('value', $fromUser['value'][$newElem]);
                       $rec->setAttribute('verid', $this->id);
-                      $rec->save();
+                      if(!$rec->save()){
+                          $buff = $rec->getError('value');
+                          $this->delete();
+                          echo '<script> alert("'.$rec->getError('value').'")</script>';die;
+                      }
                   }
               }
           }

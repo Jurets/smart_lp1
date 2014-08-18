@@ -16,5 +16,5 @@ $this->breadcrumbs=array(
     ?>
 
 <h1><?php echo MpModule::t('Create Mpversions'); ?></h1>
-<?php $this->renderPartial('_addparams', array()); ?>
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php //$this->renderPartial('_addparams', array()); // добавление параметров посредством js выключено, количество математических параметров фиксировано ?>
+<?php $this->renderPartial('_form2', array('model'=>$model)); ?>

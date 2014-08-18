@@ -95,10 +95,11 @@ class DefaultController extends EController
                         }
 			$model->attributes=$_POST['Mpversions'];
                         $model->manageParameters(isset($_POST['Mathparams'])? $_POST['Mathparams'] : FALSE);
-			if($model->save())
+			if($model->save()){
 				//$this->redirect(array('view','id'=>$model->id));
                             //$this->redirect(array('update', 'id'=>$model->id));
-                            $this->redirect (array('admin'));
+                        $this->redirect (array('admin'));
+                        }
 		}
 
 		$this->render('update',array(
@@ -161,6 +162,11 @@ class DefaultController extends EController
 			'model'=>$model,
 		));
 	}
+        
+        public function actionTest(){
+            //var_dump(marketingPlanHelper::init()->getMpParam('price_activation'));
+            var_dump(marketingPlanHelper::init()->getMpParams());
+        }
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
