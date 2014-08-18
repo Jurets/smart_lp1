@@ -21,7 +21,8 @@ class MPlan extends CModel
         $pm->payerAccount = $participant->purse;
         $pm->payeeAccount = Requisites::purseActivation();
         //поставить сумму платежа
-        $pm->amount = Tariff::getTariffAmount(Participant::TARIFF_20); //'50.00';
+        //$pm->amount = Tariff::getTariffAmount(Participant::TARIFF_20); //'50.00';
+        $pm->amount = marketingPlanHelper::init()->getMpParam('price_activation');
         /* необязательные параметры */
         $pm->payerId = $participant->id;
         $pm->transactionId = PmTransactionLog::TRANSACTION_REGISTRATION;
@@ -65,7 +66,8 @@ class MPlan extends CModel
         }
 
         //поставить сумму платежа
-        $pm->amount = Tariff::getTariffAmount(Participant::TARIFF_50); //'50.00';   
+        //$pm->amount = Tariff::getTariffAmount(Participant::TARIFF_50); //'50.00';   
+        $pm->amount = marketingPlanHelper::init()->getMpParam('price_start');
         /* необязательные параметры */
         $pm->payerId = $participant->id;
         $pm->transactionId = PmTransactionLog::TRANSACTION_ENTER_BC;

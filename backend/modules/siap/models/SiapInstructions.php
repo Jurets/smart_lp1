@@ -144,13 +144,14 @@ class SiapInstructions extends CActiveRecord{
        $param = $B->query()->read()['summ'];
        $this->AmountSummB = (!is_null($param)) ? (float)$param : '0';
    }
-   protected function fillInvoices(){
-       $this->invoices['p_A'] = $this->AmountSummB * 0.2;
-       $this->invoices['p_rnd_b3'] = $this->AmountSummB * 0.03;
-       $this->invoices['p_rnd_b2'] = $this->AmountSummB * 0.015;
-       $this->invoices['p_rnd_b1'] = $this->AmountSummB * 0.005;
-       $this->invoices['p_F'] = $this->AmountSummB * 0.05;
-       $this->invoices['p_70'] = $this->AmountSummB * 0.7;
+   protected function fillInvoices(){       
+       $payments = marketingPlanHelper::init()->getMpParams(); // получаем все настройки платежейs
+       $this->invoices['p_A'] = $this->AmountSummB * $payments['percent_to_A'] / 100;
+       $this->invoices['p_rnd_b1'] = $this->AmountSummB * $payments['percent_pot_B1'] / 100;
+       $this->invoices['p_rnd_b2'] = $this->AmountSummB * $payments['percent_pot_B2'] / 100;
+       $this->invoices['p_rnd_b3'] = $this->AmountSummB * $payments['percent_pot_B3'] / 100;
+       $this->invoices['p_F'] = $this->AmountSummB * $payments['percent_to_F'] / 100;
+       $this->invoices['p_70'] = $this->AmountSummB * 0.7; // этот параметр по фидбэкам в динамические настройки не включается
    }
    // собираем структуру всех клубных юзеров (init procedure)
    protected function setClubUsers(){

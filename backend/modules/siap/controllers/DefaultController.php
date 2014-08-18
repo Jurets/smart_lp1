@@ -27,24 +27,9 @@ class DefaultController extends EController {
         $this->render('setperiod', array('model'=>$model, 'check'=>$check));
     }
 
-    
-    /* Заготовка для крона */
-    
-    /* Автоматическое формирование (отталкиваемся от первого и последующих по свежей дате) - тестовый */
-    public function actionInstructionProcess(){
-        // автоматически создаем новый период, отталкиваясь от предидущего (получаем period_id, date_begin, date_end)
-        $periodSource = SiapPeriodes::dateIntervalAutomate();
-         //Test
-//        $periodSource = array(
-//            'period_id'=>1,
-//            'date_begin'=>'2014-07-16 12:00:00',
-//            'date_end'=>'2014-07-23 12:00:00',
-//        );
-        
-      //  $periodSource = SiapInstructions::makePeriodInstructions($periodSource); // создаются инструкции за новый период, созданный автоматически
-        
-        SiapExecute::executeInstructions(/*$periodSource['period_id']*/); // теперь эти инструкции выполняются
-        
+    public function actionTest(){
+        Yii::app()->language = 'en';
+        var_dump(Yii::app()->language);
     }
     
 }

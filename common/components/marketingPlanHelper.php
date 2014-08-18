@@ -1,11 +1,15 @@
 <?php
 /* помогает вернуть полную структуру актуальной (выбранной текущей) версии маркетинг-плана *
  * Стандарт описания структуры
+ * price_activation - $20   - deault
+ * price_start      - $50   - deault
+ * ................ ................ ................ ................
  * percent_to_A     - 20%   - default   процент уходящий на кошелек A
  * percent_pot_B1   - 0.5%  - default   процент призового фонда для B1
  * percent_pot_B2   - 1.5%  - default   процент призового фонда для B2
  * percent_pot_B3   - 3%    - default   процент призового фонда для B3
  * percent_to_F     - 5%    - default   процент   вывода  на кошелек F
+ * ................ ................ ................ ................
  */
 class marketingPlanHelper {
    private $structure;
@@ -21,7 +25,6 @@ class marketingPlanHelper {
        );
        Yii::import('common.models.Mpversions');
        $model = Mpversions::activeVersion();
-       //var_dump($model->mathparams);die;
        foreach($model->mathparams as $item){
            $this->structure[$item->name] = (float)$item->value;
        }

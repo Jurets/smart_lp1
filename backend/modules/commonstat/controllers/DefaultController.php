@@ -1,6 +1,7 @@
 <?php
 class DefaultController extends EController {
     public $layout='//layouts/column2';
+       
      public function filters()
 	{
 		return array(
