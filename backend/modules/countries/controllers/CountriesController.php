@@ -1,6 +1,6 @@
 <?php
 
-class CountriesController extends EController
+class CountriesController extends EMController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning

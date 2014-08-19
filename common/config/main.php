@@ -54,6 +54,12 @@ return array(
         'errorHandler' => array(
             'errorAction' => 'site/error',
         ),
+        'messages' => array(
+            'class'=>'CDbMessageSource',
+            'sourceMessageTable'=>'SourceMessage',
+            'translatedMessageTable'=>'Message',
+            //'cachingDuration'=>3600,
+        ),
         'log' => array(
             'class'  => 'CLogRouter',
             'routes' => array(

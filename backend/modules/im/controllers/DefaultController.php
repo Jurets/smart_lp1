@@ -1,6 +1,6 @@
 <?php
 
-class DefaultController extends EController
+class DefaultController extends EMController
 {
     public $layout='//layouts/column2';
     

@@ -1,6 +1,6 @@
 <?php
 
-class RecoveryController extends EController
+class RecoveryController extends EMController
 {
 	public $defaultAction = 'recovery';
 	

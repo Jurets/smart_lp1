@@ -2,7 +2,7 @@
 /**
 * 
 */
-class AdminController extends EController
+class AdminController extends EMController
 {
 	public $defaultAction = 'admin';
     public $breadcrumbs;

@@ -1,6 +1,6 @@
 <?php
 
-class ProfileController extends EController
+class ProfileController extends EMController
 {
 	public $defaultAction = 'profile';
 //	public $layout='//layouts/column2';

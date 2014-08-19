@@ -1,6 +1,6 @@
 <?php
 
-class RegistrationController extends EController
+class RegistrationController extends EMController
 {
 	public $defaultAction = 'registration';
 	

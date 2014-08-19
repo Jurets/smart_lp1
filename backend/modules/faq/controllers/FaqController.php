@@ -1,6 +1,6 @@
 <?php
 
-class FaqController extends EController
+class FaqController extends EMController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning

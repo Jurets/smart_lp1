@@ -1,6 +1,6 @@
 <?php
 
-class ProfileFieldController extends EController
+class ProfileFieldController extends EMController
 {
 
 	/**

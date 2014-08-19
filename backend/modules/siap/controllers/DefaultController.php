@@ -1,5 +1,5 @@
 <?php
-class DefaultController extends EController {
+class DefaultController extends EMController {
     public $layout='//layouts/column2';
     
     public function filters()
@@ -27,10 +27,14 @@ class DefaultController extends EController {
         $this->render('setperiod', array('model'=>$model, 'check'=>$check));
     }
 
-    public function actionTest(){
-        Yii::app()->language = 'en';
-        var_dump(Yii::app()->language);
+    public function actionTest($lang){
+        Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
     }
-    
+    public function actionTest2(){
+        echo Yii::t('rec','Cat');
+    }
+    public function actionTest3(){
+        LangDefaultInstall::install();
+    }
 }
 

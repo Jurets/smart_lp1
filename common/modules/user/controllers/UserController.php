@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends EController
+class UserController extends EMController
 {
 
     /**

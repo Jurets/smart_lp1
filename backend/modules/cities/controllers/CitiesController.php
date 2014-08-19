@@ -1,6 +1,6 @@
 <?php
 
-class CitiesController extends EController
+class CitiesController extends EMController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning

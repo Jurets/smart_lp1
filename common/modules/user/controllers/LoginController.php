@@ -1,6 +1,6 @@
 <?php
 
-class LoginController extends EController
+class LoginController extends EMController
 {
 	public $defaultAction = 'login';
 

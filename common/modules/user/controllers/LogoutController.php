@@ -1,6 +1,6 @@
 <?php
 
-class LogoutController extends EController
+class LogoutController extends EMController
 {
 	public $defaultAction = 'logout';
 	
