@@ -24,7 +24,7 @@
 		<?php echo $form->error($model,'username'); ?>
         
                 <?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>128, 'value'=>'')); ?>
 		<?php echo $form->error($model,'password'); ?>	
         
 		<?php echo $form->labelEx($model,'first_name'); ?>
