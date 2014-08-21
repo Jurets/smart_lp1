@@ -17,7 +17,7 @@
         <input id="save_1100" type="button" value="<?php echo Yii::t('rec', 'Create')?>">
     </form>
 </div>
-
+</div>
 <style>
     .Table{
         padding: 5px;
