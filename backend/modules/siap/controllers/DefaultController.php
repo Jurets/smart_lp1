@@ -27,14 +27,5 @@ class DefaultController extends EMController {
         $this->render('setperiod', array('model'=>$model, 'check'=>$check));
     }
 
-    public function actionTest($lang){
-        Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
-    }
-    public function actionTest2(){
-        echo Yii::t('rec','Cat');
-    }
-    public function actionTest3(){
-        LangDefaultInstall::install();
-    }
 }
 

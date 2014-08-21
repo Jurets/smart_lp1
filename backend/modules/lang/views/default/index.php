@@ -69,9 +69,10 @@
                 type: "POST",
                 url: "<?php echo $this->createAbsoluteUrl('/lang/default/deleteLanguage')?>",
                 dataType: "html",
-                data: {'lang':thisLang.val()},
+                data: {'langName':thisLang.html(), 'lang':thisLang.val()},
                 success: function(resource){
                     $('.langblock').html(resource);
+                    $('.translationBar').html('&nbsp;');
                 }
             });
         }

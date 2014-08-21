@@ -22,6 +22,8 @@ class DefaultController extends EMController
                 $model = new LanguageInterphace();
                 $model->addLanguage();
                 $model->renderLanguages();
+                $model->showTranslation();
+                $model->prepareTranslation();
                 $this->renderPartial('_lang_list', array('model'=>$model),FALSE,TRUE);
             }
         }
@@ -37,13 +39,14 @@ class DefaultController extends EMController
             if(Yii::app()->request->isAjaxRequest){
                 $model = new LanguageInterphace();
                 $model->showTranslation();
+                Yii::app()->request->cookies['language'] = new CHttpCookie('language', $model->lang);
                 $this->renderPartial('_form_partial', array('model'=>$model),FALSE,TRUE);
             }
         }
         public function actionCreateTranslation(){
             $model = new LanguageInterphace();
-            $model->createTranslation();
-            //$model->showTranslation();
+            $model->showTranslation();
+            $model->createTranslation();           
             //$this->renderPartial('_form_partial', array('model'=>$model),FALSE,TRUE);
         }
 
@@ -60,4 +63,7 @@ class DefaultController extends EMController
                 ),
             );
         }
+    public function actionSetLang($lang){
+        Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
+    }
 }

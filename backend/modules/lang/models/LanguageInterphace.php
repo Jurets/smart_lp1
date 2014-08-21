@@ -7,6 +7,7 @@ class LanguageInterphace extends CFormModel {
     public function __construct() {
         $this->languages = array(); 
         $this->translateList = array();
+        $this->lang = NULL;
     }
     public function renderLanguages(){
         $this->languages = Yii::app()->db->createCommand('SELECT * FROM Languages')->query()->readAll();
@@ -28,11 +29,13 @@ class LanguageInterphace extends CFormModel {
     
     public function deleteLanguage(){
        
-        if(isset($_POST['lang'])){
+        if(isset($_POST['lang']) && isset($_POST['langName'])){
             $lang = $_POST['lang'];
+            $langName = $_POST['langName'];
             try {
                 $sql = 'DELETE FROM Languages WHERE lang="'.$lang.'";';
-                if(Yii::app()->db->createCommand($sql)->execute() != 0)
+                $sql2 = 'DELETE FROM SourceMessage WHERE message="'.$langName.'";';
+                if(Yii::app()->db->createCommand($sql)->execute() != 0 && Yii::app()->db->createCommand($sql2)->execute() != 0)
                 echo '<script> alert("'.Yii::t('rec', $lang.' : '.'Language deleted successfull').'");</script>';
             }catch (Exception $exc){
                 echo '<script>'.$exc->getTraceAsString().'</script>';
@@ -57,27 +60,32 @@ class LanguageInterphace extends CFormModel {
                 $this->translateList = $res;
             }
     }
-    public function createTranslation(){
-        if(isset($_POST['language']) && isset($_POST['lang']) ){
-            $sql = 'INSERT INTO Message (id, language, translation) VALUES ';
-            foreach($_POST['language']['id'] as $ind=>$number){
-                if(empty($_POST['language']['translation'][$ind])) continue;
+    public function prepareTranslation(){
+        if(!empty($this->translateList) && !is_null($this->lang)){
+            $sql = 'INSERT INTO Message (id, language) VALUES ';
+            foreach($this->translateList as $item){
                 $sql .= '(';
-                $sql .= (int)$number.', ';
-                $sql .= "'".$_POST['lang']."', ";
-                if(strpos($_POST['language']['translation'][$ind], '"') !=FALSE){
-                    $sql .= "'".$_POST['language']['translation'][$ind]."',";
-                }else{
-                    $sql .= '"'.$_POST['language']['translation'][$ind].'"';
-                }
+                $sql .= (int)$item['id'].', ';
+                $sql .= '"'.$this->lang.'"';
                 $sql .= '),';
             }
             $sql = substr_replace($sql, ';', strrpos($sql, ','));
-            //var_dump($sql);
-            if(Yii::app()->db->createCommand($sql)->execute() != 0)
-                echo 'Edition completed';
-            else 'Wrong edition, has error';
+            Yii::app()->db->createCommand($sql)->execute();
+            
         }
     }
+  
+   public function createTranslation(){
+      if(isset($_POST['language']) && isset($_POST['lang']) ){
+          foreach($_POST['language']['id'] as $ind=>$number){
+              if(empty($_POST['language']['translation'][$ind])) continue;
+              $sql = 'UPDATE Message SET translation="'.$_POST['language']['translation'][$ind].'" WHERE id='.(int)$number.' AND language="'.$_POST['lang'].'";';
+              Yii::app()->db->createCommand($sql)->execute();
+          }
+              Yii::app()->db->createCommand($sql)->execute();
+              echo 'Edition completed';
+                
+      }
+   }
    
 }
