@@ -17,5 +17,7 @@ $this->menu=array(
 ?>
 
 <h1><?php echo UserModule::t('Update System User') ?> <?php echo $model->id; ?></h1>
-
+<div style="color:red;">
+    <?php echo Yii::t('rec','<br>Empty password field means the old password<br>fill it only if you want to change old password.<br><br>') ?>
+</div>
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

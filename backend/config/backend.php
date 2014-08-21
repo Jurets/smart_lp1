@@ -68,6 +68,9 @@ return array(
         'commonstat' =>array(
             'class' => 'backend.modules.commonstat.CommonstatModule',
         ),
+        'lang' => array(
+            'class' => 'backend.modules.lang.LangModule',
+        ),
     ),
     
     'import'=>array(
