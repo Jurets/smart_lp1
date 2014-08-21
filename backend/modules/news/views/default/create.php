@@ -12,7 +12,7 @@ $this->menu = array(
     array('label' => Yii::t('common', 'Manage News'), 'url' => array('admin')),
 );
 ?>
-
+</div>
 <h1>Create News</h1>
 
 <?php $this->renderPartial('_form', array('model' => $model)); ?>
