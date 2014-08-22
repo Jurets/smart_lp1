@@ -15,7 +15,6 @@
  * @property string $purse_club
  * @property string $purse_investor
  * @property string $purse_fdl
- * @property string $email_faq
  */
 class Requisites extends CActiveRecord
 {
@@ -41,7 +40,7 @@ class Requisites extends CActiveRecord
             array('id', 'length', 'max' => 50),
             array('pw_supervisor, pw_admin, pw_moderator', 'length', 'max' => 20),
             array('purse_activation, purse_club, purse_investor, purse_fdl', 'length', 'max' => 255),
-            array('details, agreement, marketing, email_faq, bpm_login, bpm_password', 'safe'),
+            array('details, agreement, marketing, bpm_login, bpm_password', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, details, agreement, marketing, pw_supervisor, pw_admin, pw_moderator, purse_activation, purse_club, purse_investor, purse_fdl, email_faq', 'safe', 'on' => 'search'),
@@ -78,7 +77,6 @@ class Requisites extends CActiveRecord
             'bpm_password' => Yii::t('common', 'Club Purse Password'),
             'purse_investor' => Yii::t('common', 'Purse Investor'),
             'purse_fdl' => Yii::t('common', 'Purse FDL'),
-            'email_faq' => Yii::t('common', 'Email FAQ'),
         );
     }
 
@@ -111,7 +109,6 @@ class Requisites extends CActiveRecord
         $criteria->compare('purse_club', $this->purse_club, true);
         $criteria->compare('purse_investor', $this->purse_investor, true);
         $criteria->compare('purse_fdl', $this->purse_fdl, true);
-        $criteria->compare('email_faq', $this->email_faq, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

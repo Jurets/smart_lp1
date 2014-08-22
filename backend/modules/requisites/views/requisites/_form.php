@@ -98,12 +98,6 @@
 <?php echo $form->error($model, 'purse_fdl'); ?>
     </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'email_faq'); ?>
-<?php echo $form->textArea($model, 'email_faq', array('rows' => 6, 'cols' => 50)); ?>
-<?php echo $form->error($model, 'email_faq'); ?>
-    </div>
-
     <div class="row buttons">
     <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('common', 'Create') : Yii::t('common', 'Save')); ?>
     </div>

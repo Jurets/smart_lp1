@@ -63,7 +63,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'purse_club',
         'purse_investor',
         'purse_fdl',
-        'email_faq',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
         ),

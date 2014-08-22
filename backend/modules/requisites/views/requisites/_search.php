@@ -66,11 +66,6 @@
 		<?php echo $form->textField($model,'purse_fdl',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'email_faq'); ?>
-		<?php echo $form->textArea($model,'email_faq',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton(Yii::t('common', 'Search')); ?>
 	</div>

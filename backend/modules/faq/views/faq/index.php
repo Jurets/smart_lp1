@@ -31,7 +31,12 @@ $('.search-form form').submit(function(){
 <h1><?php echo Yii::t('common', 'Manage FAQ') ?></h1>
 
 
-
+<?php
+if(Yii::app()->user->hasFlash('wrong_form')){
+   echo '<div class="alert alert-error">',Yii::app()->user->getFlash('wrong_form'),'</div>';
+}
+$this->renderPartial('_form_email', array('modelEmail' => $modelEmail));
+?>
 
 
 <p>

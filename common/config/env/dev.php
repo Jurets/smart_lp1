@@ -19,8 +19,8 @@ return array(
         'db' => array(
             // setup to suit your needs
             'connectionString' => 'mysql:host=localhost;dbname=justmoney',
-            'username' => 'root',
-            'password' => '',
+            'username' => 'andrey',
+            'password' => 'admin',
             'enableProfiling' => true,
             'enableParamLogging' => true,
             'charset' => 'utf8',

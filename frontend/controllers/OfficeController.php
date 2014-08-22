@@ -74,11 +74,15 @@ class OfficeController extends EController
         $objFaqManager->LoadFaqManager();
         $availableCategories = $objFaqManager->getTypeOfCategories();
         $categories = $objFaq->model()->showAllFaq();
-        if(!empty($_POST)){
-            $objFaq->attributes = $_POST;
-            $objFaq->created = date('y-m-d h:m:s');
-            $objFaq->save();
-            $this->refresh();
+        if(!empty($_POST) and $_POST['question']){
+//            $objFaq->attributes = $_POST;
+//            $objFaq->created = date('y-m-d h:m:s');
+//            $objFaq->save();
+//            $this->refresh();
+            if($_POST['category']){
+                $category = $_POST['category'];
+                EmailHelper::send(array($objFaqManager[$category.'Mail']), $_POST['question'], 'question from faq', array());
+            }
         }
         $this->render('help', array('arrCategories' => $categories, 'availableCategories'=>$availableCategories));
     }

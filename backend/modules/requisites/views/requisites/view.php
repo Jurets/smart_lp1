@@ -33,7 +33,6 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'purse_club',
         'purse_investor',
         'purse_fdl',
-        'email_faq',
     ),
 ));
 ?>

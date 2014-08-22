@@ -136,9 +136,14 @@ class FaqController extends EMController
 		if(isset($_GET['Faq']))
 			$model->attributes=$_GET['Faq'];
 
-		$this->render('index',array(
-			'model'=>$model,
-		));
+        $modelEmail = new Faqm;
+        $modelEmail->LoadFaqManager(); // запрос к itemsstorage по параметру FAQ_MANAGER
+        if(isset($_POST['Faqm'])){
+            $modelEmail->attributes = $_POST['Faqm'];
+            $modelEmail->SaveFaqManager();
+            $this->redirect(array('index'));
+        }
+        $this->render('index', array('model'=>$model,'modelEmail'=>$modelEmail));
 	}
 
 	/**

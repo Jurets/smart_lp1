@@ -6,6 +6,8 @@ $this->breadcrumbs=array(
 );
 ?>
 <h1><?php echo FaqmModule::t('FAQ Management'); ?></h1>
-
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php
+if(Yii::app()->user->hasFlash('wrong_form')){
+    echo '<div class="alert alert-error">',Yii::app()->user->getFlash('wrong_form'),'</div>';
+}
+$this->renderPartial('_form', array('model'=>$model)); ?>
