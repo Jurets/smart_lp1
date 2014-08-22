@@ -91,8 +91,9 @@ class SystemUserController extends EMController
 
 		if(isset($_POST['SystemUser']))
 		{
+                        $buff_pass = (!empty($_POST['SystemUser']['password'])) ? Yii::app()->controller->module->encrypting($_POST['SystemUser']['password']): $model->password;
 			$model->attributes=$_POST['SystemUser'];
-                        $model->password = Yii::app()->controller->module->encrypting($model->password);
+                        $model->password = $buff_pass;
 			if($model->save())
 			//	$this->redirect(array('view','id'=>$model->id));
                         $this->redirect('/admin/user/systemUser/admin');

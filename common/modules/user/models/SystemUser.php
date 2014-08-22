@@ -64,7 +64,7 @@ class SystemUser extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('create_at, active', 'required'),
-                        array('username, password', 'required'),
+                        array('username, email', 'required'),
 			array('superuser, roles, status, refer_id, inviter_id, invite_num, city_id, gmt_id, income, transfer_fund, active, country_access, city_access, skype_access, email_access', 'numerical', 'integerOnly'=>true),
 			array('balance', 'numerical'),
 			array('username, phone', 'length', 'max'=>20),
