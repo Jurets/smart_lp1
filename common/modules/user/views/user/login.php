@@ -1,12 +1,12 @@
 <?php
 // TODO Переделать форму
-$this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
+$this->pageTitle=Yii::app()->name . ' - '.Yii::t('rec',"Login");
 $this->breadcrumbs=array(
-	UserModule::t("Login"),
+	Yii::t('rec',"Login"),
 );
 ?>
 
-<h1><?php echo UserModule::t("Login"); ?></h1>
+<h1><?php echo Yii::t('rec',"Login"); ?></h1>
 
 <?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
 
@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 
 <?php endif; ?>
 
-<p><?php echo UserModule::t("Please fill out the following form with your login credentials:"); ?></p>
+<p><?php echo Yii::t('rec',"Please fill out the following form with your login credentials:"); ?></p>
 
 <div class="form">
 <?php $this->beginWidget('CActiveForm', array(
@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
     ),
 )); ?>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
+	<p class="note"><?php echo Yii::t('rec','Fields with <span class="required">*</span> are required.'); ?></p>
 	
 	<?php echo CHtml::errorSummary($model); ?>
     
@@ -54,7 +54,7 @@ $this->breadcrumbs=array(
     <div class="row">
         <?php echo CHtml::activeLabelEx($model,'activekey'); 
               $class = empty($model->logincode) ? 'invisible' : ''; 
-              echo CHtml::link(UserModule::t('Generate login code'), '#', array('id'=>'temp_key_link')); 
+              echo CHtml::link(Yii::t('rec','Generate login code'), Yii::t('rec', '#'), array('id'=>'temp_key_link')); 
         ?>
         <br>
         <div id="show-errors" class="error"></div>
@@ -70,7 +70,7 @@ $this->breadcrumbs=array(
 	
 	<div class="row">
 		<p class="hint">
-		<?php echo CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
+		<?php echo CHtml::link(Yii::t('rec',"Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(Yii::t('rec',"Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
 		</p>
 	</div>
 	

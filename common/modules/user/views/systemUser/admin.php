@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	UserModule::t('System Users')=>array('index'),
-	UserModule::t('Manage'),
+	Yii::t('rec','System Users')=>array('index'),
+	Yii::t('rec','Manage'),
 );
-$this->menu=array(array('label'=>UserModule::t('Create System User'), 'url'=>array('create')));
+$this->menu=array(array('label'=>Yii::t('rec','Create System User'), 'url'=>array('create')));
 ?>
 
-<h1><?php echo UserModule::t('Manage System Users')?></h1>
+<h1><?php echo Yii::t('rec','Manage System Users')?></h1>
 
 <?php  ?>
 <?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>

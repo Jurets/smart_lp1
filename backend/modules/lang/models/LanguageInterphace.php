@@ -70,8 +70,11 @@ class LanguageInterphace extends CFormModel {
                 $sql .= '),';
             }
             $sql = substr_replace($sql, ';', strrpos($sql, ','));
-            Yii::app()->db->createCommand($sql)->execute();
-            
+            try{
+                Yii::app()->db->createCommand($sql)->execute();
+            }  catch (CException $ce){
+                ;
+            }
         }
     }
   
@@ -88,4 +91,14 @@ class LanguageInterphace extends CFormModel {
       }
    }
    
+   public function localeList(){ // формирует список существующих локалей в Yii для передачи его во вью
+       $widget = '<select>';
+       $buff = CLocale::getLocaleIDs();
+       foreach($buff as $locale){
+           if(strpos($locale, '_') != FALSE) continue;
+           $widget .= '<option name="lang" value="'.$locale.'">'.$locale.'</option>';
+       }
+       $widget .= '</select>';
+       return $widget;
+   }   
 }

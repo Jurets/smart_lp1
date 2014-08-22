@@ -1,24 +1,24 @@
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Change password");
 $this->breadcrumbs=array(
-	UserModule::t("Login") => array('/user/login'),
-	UserModule::t("Change password"),
+	Yii::t('rec',"Login") => array('/user/login'),
+	Yii::t('rec',"Change password"),
 );
 ?>
 
-<h1><?php echo UserModule::t("Change password"); ?></h1>
+<h1><?php echo Yii::t('rec',"Change password"); ?></h1>
 
 
 <div class="form">
 <?php echo CHtml::beginForm(); ?>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
+	<p class="note"><?php echo Yii::t('rec','Fields with <span class="required">*</span> are required.'); ?></p>
 	<?php echo CHtml::errorSummary($form); ?>
 	
 	<div class="row">
 	<?php echo CHtml::activeLabelEx($form,'password'); ?>
 	<?php echo CHtml::activePasswordField($form,'password'); ?>
 	<p class="hint">
-	<?php echo UserModule::t("Minimal password length 4 symbols."); ?>
+	<?php echo Yii::t("Minimal password length 4 symbols."); ?>
 	</p>
 	</div>
 	
@@ -29,7 +29,7 @@ $this->breadcrumbs=array(
 	
 	
 	<div class="row submit">
-	<?php echo CHtml::submitButton(UserModule::t("Save")); ?>
+	<?php echo CHtml::submitButton(Yii::t("Save")); ?>
 	</div>
 
 <?php echo CHtml::endForm(); ?>

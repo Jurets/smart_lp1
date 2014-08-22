@@ -4,8 +4,8 @@
         <?php $this->renderPartial('_lang_list', array('model'=>$model))?>
     </div>
     <div class="createLanguage">
-        <input type="text" name="lang" value="<?php echo Yii::t('rec', 'Language sign')?>" onfocus="this.value=''">
-        <input type="text" name="name" value="<?php echo Yii::t('rec', 'value')?>" onfocus="this.value=''">
+        <?php echo $locale_list ?>
+        <input type="text" name="name" value="<?php echo Yii::t('rec', 'Language name')?>" onfocus="this.value=''">
         <input id="lang_create" style="margin-bottom:10px;" type="button" value="<?php echo Yii::t('rec', 'Create')?>"
     </div>
 </div>
@@ -79,7 +79,7 @@
     
     $(function(){
         $('#lang_create').click(function(){
-            var langSign = $(this).parent().find('input[name=lang]');
+            var langSign = $(this).parent().find('option[name=lang]').filter(':selected');
             var langName = $(this).parent().find('input[name=name]');
             $.ajax({
              type: "POST",
@@ -88,10 +88,9 @@
              data: {'lang':langSign.val(), 'name':langName.val()},
              success: function(resource){
                  $('.langblock').html(resource);
+                 langName.val('<?php echo Yii::t('rec', 'Language name')?>');
              }
         });
-        langSign.val('<?php echo Yii::t('rec', 'Language sign')?>');
-        langName.val('<?php echo Yii::t('rec', 'name')?>');
         });
         
         $('#save_1100').click(function(){

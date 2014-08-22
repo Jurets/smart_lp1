@@ -3,8 +3,8 @@
 /* @var $model Participant */
 
 $this->breadcrumbs=array(
-	UserModule::t('Users')=>array('/user'),
-	UserModule::t("Participants structure", array(), 'participant'),
+	Yii::t('rec','Users')=>array('/user'),
+	Yii::t('rec',"Participants structure", array(), 'participant'),
 );
 
 $this->menu=array(
@@ -12,7 +12,7 @@ $this->menu=array(
 
 ?>
 
-<h1><?php echo UserModule::t("Participants structure", array(), 'participant') . ' #' . $participant->username ; ?></h1>
+<h1><?php echo Yii::t('rec',"Participants structure", array(), 'participant') . ' '.Yii::t('rec', '#') . $participant->username ; ?></h1>
 
 <?php 
 $this->renderPartial('_index', array('model'=>$model));

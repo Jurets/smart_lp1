@@ -3,16 +3,16 @@
 /* @var $model SystemUser */
 
 $this->breadcrumbs=array(
-	'System Users'=>array('index'),
+	Yii::t('rec', 'System Users')=>array('index'),
 	" ".$model->id=>array('view','id'=>$model->id),
-	'Update',
+	Yii::t('rec', 'Update'),
 );
 
 $this->menu=array(
-	array('label'=>'List SystemUser', 'url'=>array('index')),
-	array('label'=>'Create SystemUser', 'url'=>array('create')),
-	array('label'=>'View SystemUser', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage SystemUser', 'url'=>array('admin')),
+	array('label'=>Yii::t('rec','List SystemUser'), 'url'=>array('index')),
+	array('label'=>Yii::t('rec', 'Create SystemUser'), 'url'=>array('create')),
+	array('label'=>Yii::t('rec', 'View SystemUser'), 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>Yii::t('rec', 'Manage SystemUser'), 'url'=>array('admin')),
 );
 ?>
 

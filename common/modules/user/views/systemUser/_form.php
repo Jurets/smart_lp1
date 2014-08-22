@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.')?></p>
+	<p class="note"><?php echo Yii::t('rec','Fields with <span class="required">*</span> are required.')?></p>
 
 	<?php echo $form->errorSummary($model); ?>
 	
@@ -45,7 +45,7 @@
 		<?php echo $form->dropDownListControlGroup($model, 'status', User::itemAlias('SystemUserStatus'), array('displaySize'=>'1'));  //активность?>
                 <?php echo $form->dropDownListControlGroup($model, 'roles', User::itemAlias('RoleStatus'), array('displaySize'=>'1')); // роли ?>
 
-                <?php echo TbHtml::submitButton($model->isNewRecord ? Yii::t('common', 'Create') : Yii::t('common', 'Save'), array('class'=>'primary')); ?>
+                <?php echo TbHtml::submitButton($model->isNewRecord ? Yii::t('rec', 'Create') : Yii::t('rec', 'Save'), array('class'=>'primary')); ?>
         
 <?php $this->endWidget(); ?>
 

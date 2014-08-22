@@ -1,16 +1,16 @@
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Change password");
 $this->breadcrumbs=array(
-	UserModule::t("Profile") => array('/user/profile'),
-	UserModule::t("Change password"),
+	Yii::t('rec',"Profile") => array('/user/profile'),
+	Yii::t('rec',"Change password"),
 );
 $this->menu=array(
 	((UserModule::isAdmin())
 		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
 		:array()),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
-    array('label'=>UserModule::t('Profile'), 'url'=>array('/user/profile')),
-    array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
-    array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
+    array('label'=>Yii::t('rec','List User'), 'url'=>array('/user')),
+    array('label'=>Yii::t('rec','Profile'), 'url'=>array('/user/profile')),
+    array('label'=>Yii::t('rec','Edit'), 'url'=>array('edit')),
+    array('label'=>Yii::t('rec','Logout'), 'url'=>array('/user/logout')),
 );
 ?>
 
@@ -39,7 +39,7 @@ $this->menu=array(
 	<?php echo $form->passwordField($model,'password'); ?>
 	<?php echo $form->error($model,'password'); ?>
 	<p class="hint">
-	<?php echo UserModule::t("Minimal password length 4 symbols."); ?>
+	<?php echo Yii::t('rec',"Minimal password length 4 symbols."); ?>
 	</p>
 	</div>
 	
@@ -51,7 +51,7 @@ $this->menu=array(
 	
 	
 	<div class="row submit">
-	<?php echo CHtml::submitButton(UserModule::t("Save")); ?>
+	<?php echo CHtml::submitButton(Yii::t('rec',"Save")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

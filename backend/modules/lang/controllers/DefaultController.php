@@ -15,7 +15,7 @@ class DefaultController extends EMController
             $model = new LanguageInterphace();
                 $model->addLanguage();
                 $model->renderLanguages();
-            $this->render('index', array('model'=>$model));
+            $this->render('index', array('model'=>$model, 'locale_list'=>$model->localeList()));
 	}
         public function actionAddLanguage(){
             if(Yii::app()->request->isAjaxRequest){
@@ -65,5 +65,8 @@ class DefaultController extends EMController
         }
     public function actionSetLang($lang){
         Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
+    }
+    public function actionTest(){ // это временный метод по добавлению служебного контента, который появляется на стадии доработки проекта.
+        LangDefaultInstall::readMatrixFromFile();
     }
 }

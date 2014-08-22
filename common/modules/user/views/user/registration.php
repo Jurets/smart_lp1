@@ -1,10 +1,10 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Registration");
+<?php $this->pageTitle=Yii::app()->name . ' - '.Yii::t('rec',"Registration");
 $this->breadcrumbs=array(
 	UserModule::t("Registration"),
 );
 ?>
 
-<h1><?php echo UserModule::t("Registration"); ?></h1>
+<h1><?php echo Yii::t('rec',"Registration"); ?></h1>
 
 <?php if(Yii::app()->user->hasFlash('registration')): ?>
 <div class="success">
@@ -23,7 +23,7 @@ $this->breadcrumbs=array(
 	'htmlOptions' => array('enctype'=>'multipart/form-data'),
 )); ?>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
+	<p class="note"><?php echo Yii::t('rec','Fields with <span class="required">*</span> are required.'); ?></p>
 	
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
 	
@@ -38,7 +38,7 @@ $this->breadcrumbs=array(
 	<?php echo $form->passwordField($model,'password'); ?>
 	<?php echo $form->error($model,'password'); ?>
 	<p class="hint">
-	<?php echo UserModule::t("Minimal password length 4 symbols."); ?>
+	<?php echo Yii::t('rec',"Minimal password length 4 symbols."); ?>
 	</p>
 	</div>
 	
@@ -67,7 +67,7 @@ $this->breadcrumbs=array(
 		} elseif ($field->range) {
 			echo $form->dropDownList($profile,$field->varname,Profile::range($field->range));
 		} elseif ($field->field_type=="TEXT") {
-			echo$form->textArea($profile,$field->varname,array('rows'=>6, 'cols'=>50));
+			echo $form->textArea($profile,$field->varname,array('rows'=>6, 'cols'=>50));
 		} else {
 			echo $form->textField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
 		}
@@ -86,13 +86,13 @@ $this->breadcrumbs=array(
 		<?php echo $form->textField($model,'verifyCode'); ?>
 		<?php echo $form->error($model,'verifyCode'); ?>
 		
-		<p class="hint"><?php echo UserModule::t("Please enter the letters as they are shown in the image above."); ?>
-		<br/><?php echo UserModule::t("Letters are not case-sensitive."); ?></p>
+		<p class="hint"><?php echo Yii::t('rec',"Please enter the letters as they are shown in the image above."); ?>
+		<br/><?php echo Yii::t('rec',"Letters are not case-sensitive."); ?></p>
 	</div>
 	<?php endif; ?>
 	
 	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Register")); ?>
+		<?php echo CHtml::submitButton(Yii::t('rec',"Register")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

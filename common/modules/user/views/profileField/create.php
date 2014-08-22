@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	UserModule::t('Profile Fields')=>array('admin'),
-	UserModule::t('Create'),
+	Yii::t('rec','Profile Fields')=>array('admin'),
+	Yii::t('rec','Create'),
 );
 $this->menu=array(
-    array('label'=>UserModule::t('Manage Profile Field'), 'url'=>array('admin')),
-    array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin')),
+    array('label'=>Yii::t('rec','Manage Profile Field'), 'url'=>array('admin')),
+    array('label'=>Yii::t('rec','Manage Users'), 'url'=>array('/user/admin')),
 );
 ?>
-<h1><?php echo UserModule::t('Create Profile Field'); ?></h1>
+<h1><?php echo Yii::t('rec','Create Profile Field'); ?></h1>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

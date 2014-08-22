@@ -1,17 +1,17 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
+<?php $this->pageTitle=Yii::app()->name . ' - '.Yii::t('rec',"Profile");
 $this->breadcrumbs=array(
 	UserModule::t("Profile"),
 );
 $this->menu=array(
 	((UserModule::isAdmin())
-		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
+		?array('label'=>Yii::t('rec','Manage Users'), 'url'=>array('/user/admin'))
 		:array()),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
-    array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
-    array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
-    array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
+    array('label'=>Yii::t('rec','List User'), 'url'=>array('/user')),
+    array('label'=>Yii::t('rec','Edit'), 'url'=>array('edit')),
+    array('label'=>Yii::t('rec','Change password'), 'url'=>array('changepassword')),
+    array('label'=>Yii::t('rec','Logout'), 'url'=>array('/user/logout')),
 );
-?><h1><?php echo UserModule::t('Your profile'); ?></h1>
+?><h1><?php echo Yii::t('rec','Your profile'); ?></h1>
 
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
 <div class="success">
@@ -30,7 +30,7 @@ $this->menu=array(
 				//echo "<pre>"; print_r($profile); die();
 			?>
 	<tr>
-		<th class="label"><?php echo CHtml::encode(UserModule::t($field->title)); ?></th>
+		<th class="label"><?php echo CHtml::encode(Yii::t('rec',$field->title)); ?></th>
     	<td><?php echo (($field->widgetView($profile))?$field->widgetView($profile):CHtml::encode((($field->range)?Profile::range($field->range,$profile->getAttribute($field->varname)):$profile->getAttribute($field->varname)))); ?></td>
 	</tr>
 			<?php
