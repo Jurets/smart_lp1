@@ -40,7 +40,9 @@ class DefaultController extends EMController
                 $model = new LanguageInterphace();
                 $model->showTranslation();
                 Yii::app()->request->cookies['language'] = new CHttpCookie('language', $model->lang);
-                $this->renderPartial('_form_partial', array('model'=>$model),FALSE,TRUE);
+                if($model->lang !== 'en'){ // язык по умолчанию в панели переводов не нуждается
+                    $this->renderPartial('_form_partial', array('model'=>$model),FALSE,TRUE);
+                }
             }
         }
         public function actionCreateTranslation(){

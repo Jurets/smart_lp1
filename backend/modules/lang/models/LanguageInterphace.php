@@ -43,13 +43,7 @@ class LanguageInterphace extends CFormModel {
         }
     }
     public function showTranslation(){
-        /*
-         * Образец
-         * SELECT sm.id, sm.message, m.translation FROM SourceMessage sm
-           LEFT JOIN Message m ON sm.id = m.id AND m.language = 'ru'
-           WHERE m.language = 'ru' OR m.language IS NULL  */
-        
-            if(isset($_POST['lang'])){
+                if(isset($_POST['lang'])){
                 $this->lang = $_POST['lang'];
                 $sql = "SELECT sm.id, sm.message, m.translation FROM SourceMessage sm
                         LEFT JOIN Message m ON sm.id = m.id AND m.language = :lang
@@ -91,11 +85,13 @@ class LanguageInterphace extends CFormModel {
       }
    }
    
-   public function localeList(){ // формирует список существующих локалей в Yii для передачи его во вью
+   // формирует список существующих локалей в Yii для передачи его во вью
+   // язык по умолчанию - en - из списка локалей должен быть исключен
+   public function localeList(){
        $widget = '<select>';
        $buff = CLocale::getLocaleIDs();
        foreach($buff as $locale){
-           if(strpos($locale, '_') != FALSE) continue;
+           if(strpos($locale, '_') != FALSE || $locale == 'en') continue;
            $widget .= '<option name="lang" value="'.$locale.'">'.$locale.'</option>';
        }
        $widget .= '</select>';
