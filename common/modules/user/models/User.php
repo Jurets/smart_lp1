@@ -98,19 +98,19 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => UserModule::t("Id"),
-			'username'=>UserModule::t("username"),
-			'password'=>UserModule::t("password"),
-			'verifyPassword'=>UserModule::t("Retype Password"),
-			'email'=>UserModule::t("E-mail"),
-			'verifyCode'=>UserModule::t("Verification Code"),
-			'activkey' => UserModule::t("activation key"),
-			'createtime' => UserModule::t("Registration date"),
-			'create_at' => UserModule::t("Registration date"),
+			'id' => Yii::t('rec',"Id"),
+			'username'=>Yii::t('rec',"username"),
+			'password'=>Yii::t('rec',"password"),
+			'verifyPassword'=>Yii::t('rec',"Retype Password"),
+			'email'=>Yii::t('rec',"E-mail"),
+			'verifyCode'=>Yii::t('rec',"Verification Code"),
+			'activkey' => Yii::t('rec',"activation key"),
+			'createtime' => Yii::t('rec',"Registration date"),
+			'create_at' => Yii::t('rec',"Registration date"),
 			
-			'lastvisit_at' => UserModule::t("Last visit"),
-			'superuser' => UserModule::t("Superuser"),
-			'status' => UserModule::t("Status"),
+			'lastvisit_at' => Yii::t('rec',"Last visit"),
+			'superuser' => Yii::t('rec',"Superuser"),
+			'status' => Yii::t('rec',"Status"),
             //'verifyCode' => 'Код проверки',
 		);
 	}

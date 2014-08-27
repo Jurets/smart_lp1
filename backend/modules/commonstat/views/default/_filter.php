@@ -1,9 +1,9 @@
 <div class="intervalls">
-                <span><?php echo CommonstatModule::t('from')?></span>
+    <span><?php echo htmlspecialchars_decode(Yii::t('rec','from'))?></span>
                 <span style="margin-left:130px;">&nbsp;</span>
-                <span><?php echo CommonstatModule::t('step')?></span>
+                <span><?php echo htmlspecialchars_decode(Yii::t('rec','step'))?></span>
                 <span style="margin-left:110px;">&nbsp;</span>
-                <span><?php echo CommonstatModule::t('to')?></span>
+                <span><?php echo htmlspecialchars_decode(Yii::t('rec','to'))?></span>
                 <form>
                 <?php
                $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -16,9 +16,9 @@
                     ));
                 ?>
                     <select name="step">
-                        <option value="day_step"><?php echo CommonstatModule::t('day')?></option>
-                        <option value="month_step"><?php echo CommonstatModule::t('month')?></option>
-                        <option value="hour_step"><?php echo CommonstatModule::t('hour')?></option>
+                        <option value="day_step"><?php echo Yii::t('rec','day')?></option>
+                        <option value="month_step"><?php echo Yii::t('rec','month')?></option>
+                        <option value="hour_step"><?php echo Yii::t('rec','hour')?></option>
                     </select>
                 <?php 
                 $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -30,6 +30,6 @@
                     ),
                     ));
                 ?>
-                    <input name="send" type="button" value="<?php echo CommonstatModule::t('send')?>" style="width:80px;margin-bottom:10px;">
+                    <input name="send" type="button" value="<?php echo Yii::t('rec','send')?>" style="width:80px;margin-bottom:10px;">
                 </form>
             </div>

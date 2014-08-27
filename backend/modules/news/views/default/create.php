@@ -3,13 +3,13 @@
 /* @var $model News */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'News') => array('index'),
-    Yii::t('common', 'Create'),
+    Yii::t('rec', 'News') => array('index'),
+    Yii::t('rec', 'Create'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'List News'), 'url' => array('index')),
-    array('label' => Yii::t('common', 'Manage News'), 'url' => array('admin')),
+    array('label' => Yii::t('rec', 'List News'), 'url' => array('index')),
+    array('label' => Yii::t('rec', 'Manage News'), 'url' => array('admin')),
 );
 ?>
 </div>

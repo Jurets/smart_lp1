@@ -183,7 +183,7 @@ Display order of fields.
 Not visited
 Search
 Advanced Search
-You may optionally enter a comparison operator (<, <=, >, >=, <> or =) at the beginning of each of your search values to specify how the comparison should be done.
+You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.
 Photo
 select city
 OPPORTUNITIES
@@ -377,3 +377,9 @@ New Language added successfull
 Language deleted successfull
 Edition completed
 Wrong edition, has error
+Common Statistics
+Countries
+Update News
+List News
+View News
+Activated

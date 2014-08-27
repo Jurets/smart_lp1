@@ -70,15 +70,15 @@ class News extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'author' => Yii::t("common", "Author"),
-            'created' => Yii::t('common', 'Created'),
-            'activated' => Yii::t('common', 'Activated'),
-            'title' => Yii::t('common', 'Title'),
-            'announcement' => Yii::t('common', 'Announcement'),
-            'content' => Yii::t('common', 'Сontent'),
-            'image' => Yii::t('common', 'Image'),
-            'illustration' => Yii::t('common', 'Illustration'),
-            'activity' => Yii::t('common', 'Activity'),
+            'author' => Yii::t("rec", "Author"),
+            'created' => Yii::t('rec', 'Created'),
+            'activated' => Yii::t('rec', 'Activated'),
+            'title' => Yii::t('rec', 'Title'),
+            'announcement' => Yii::t('rec', 'Announcement'),
+            'content' => Yii::t('rec', 'Сontent'),
+            'image' => Yii::t('rec', 'Image'),
+            'illustration' => Yii::t('rec', 'Illustration'),
+            'activity' => Yii::t('rec', 'Activity'),
         );
     }
 

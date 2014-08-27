@@ -5,14 +5,14 @@
 $this->breadcrumbs=array(
 	Yii::t('rec', 'System Users')=>array('index'),
 	" ".$model->id=>array('view','id'=>$model->id),
-	Yii::t('rec', 'Update'),
+	Yii::t('rec', 'Update User'),
 );
 
 $this->menu=array(
-	array('label'=>Yii::t('rec','List SystemUser'), 'url'=>array('index')),
-	array('label'=>Yii::t('rec', 'Create SystemUser'), 'url'=>array('create')),
-	array('label'=>Yii::t('rec', 'View SystemUser'), 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>Yii::t('rec', 'Manage SystemUser'), 'url'=>array('admin')),
+	array('label'=>Yii::t('rec','List User'), 'url'=>array('index')),
+	array('label'=>Yii::t('rec', 'Create User'), 'url'=>array('create')),
+	array('label'=>Yii::t('rec', 'View User'), 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>Yii::t('rec', 'Manage Users'), 'url'=>array('admin')),
 );
 ?>
 

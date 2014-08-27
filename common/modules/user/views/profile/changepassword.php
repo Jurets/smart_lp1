@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 $this->menu=array(
 	((UserModule::isAdmin())
-		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
+		?array('label'=>Yii::t('rec','Manage Users'), 'url'=>array('/user/admin'))
 		:array()),
     array('label'=>Yii::t('rec','List User'), 'url'=>array('/user')),
     array('label'=>Yii::t('rec','Profile'), 'url'=>array('/user/profile')),

@@ -1,3 +1,4 @@
+<h1><?php echo Yii::t('rec', 'Language Management')?></h1>
 <div class="Table">
 <div>
     <div class="langblock">
