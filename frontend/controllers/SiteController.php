@@ -48,7 +48,6 @@ class SiteController extends LoginController
             PmTransactionLog::model()->statisticaVisitesCreation();
         }
         $this->render('index', array('model' => $model));
-        var_dump('!!!');die;
     }
 
     /**
