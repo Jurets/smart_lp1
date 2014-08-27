@@ -72,14 +72,15 @@ class LanguageInterphace extends CFormModel {
         }
     }
   
-   public function createTranslation(){
+  public function createTranslation(){
       if(isset($_POST['language']) && isset($_POST['lang']) ){
           foreach($_POST['language']['id'] as $ind=>$number){
               if(empty($_POST['language']['translation'][$ind])) continue;
-              $sql = 'UPDATE Message SET translation="'.$_POST['language']['translation'][$ind].'" WHERE id='.(int)$number.' AND language="'.$_POST['lang'].'";';
+              $buff = $_POST['language']['translation'][$ind];
+              $sql = "UPDATE Message SET translation=".'"'.htmlspecialchars($buff).'"';
+              $sql .= ' WHERE id='.(int)$number.' AND language="'.$_POST['lang'].'";';
               Yii::app()->db->createCommand($sql)->execute();
           }
-              Yii::app()->db->createCommand($sql)->execute();
               echo 'Edition completed';
                 
       }

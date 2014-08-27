@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note"><?php echo Yii::t('rec','Fields with <span class="required">*</span> are required.')?></p>
+    <p class="note"><?php echo htmlspecialchars_decode(Yii::t('rec',htmlspecialchars('Fields with * are required.')))?></p>
 
 	<?php echo $form->errorSummary($model); ?>
 	

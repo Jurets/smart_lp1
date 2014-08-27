@@ -4,13 +4,10 @@ class LangDefaultInstall {
     private static function save(){
        $sql = 'INSERT INTO SourceMessage (message) VALUES ';
         foreach (self::$items as $one){
-            if(strpos($one, '"') != FALSE){
-                $sql .= "('".$one."'),";
-            }else{
-                $sql .= '("'.$one.'"),';
-            }
+            $sql .= '("'.htmlspecialchars($one).'"),';
         }
         $sql[strrpos($sql, ',')] = ';';
+        
         Yii::app()->db->createCommand($sql)->execute(); 
     }
     public static function install(){
