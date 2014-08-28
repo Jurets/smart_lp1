@@ -29,16 +29,16 @@
     font-weight: bold;
     font-size: 18px;
 }
-.attended {
-    background: #f4dce3;
-}
+/*.attended {*/
+    /*background: #f4dce3;*/
+/*}*/
     
 </style>
 
 
 <div id="office3-content">
 <div>
-    
+
 <?php foreach ($models as $ind=>$model) { ?>
     <a href="/office/news/<?php echo $model->id . $page?>">
    <div id="office-3-post<?php echo $ind + 1; ?>" class='<?=$model->attended?>'>
@@ -49,22 +49,23 @@
        <p class="office-3-text">
            <?php echo $model->getPrew(); ?>
        </p>         
-        <hr  width="421" size="1"  color="#838181" />
+        <hr width="421" size="1"  color="#838181" />
    </div>
 </a>
 <?php } ?>
     
 </div>
     
-<div class="pagination">
- <?php 
+
+ <?php
  if(isset($pages)){
+     ?><div class="pagination"><?php
    $obj =  $this->widget('CLinkPager', array(
     'pages' => $pages,
     'nextPageCssClass' => 'nextm',
     'previousPageCssClass' => 'prevm',
     'prevPageLabel' => '<',
-    'nextPageLabel'=>'>'   
+    'nextPageLabel'=>'>'
     ));
  }
  ?>

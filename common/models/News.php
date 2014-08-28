@@ -75,7 +75,7 @@ class News extends CActiveRecord
             'activated' => Yii::t('common', 'Activated'),
             'title' => Yii::t('common', 'Title'),
             'announcement' => Yii::t('common', 'Announcement'),
-            'content' => Yii::t('common', 'Сontent'),
+            'content' => Yii::t('common', 'Content'),
             'image' => Yii::t('common', 'Image'),
             'illustration' => Yii::t('common', 'Illustration'),
             'activity' => Yii::t('common', 'Activity'),

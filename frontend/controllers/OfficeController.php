@@ -231,9 +231,12 @@ class OfficeController extends EController
             $criteria = new CDbCriteria();
             $criteria->addCondition('activity = 1');
             $count = News::model()->count($criteria); // количество активных записей новостей
-            $pages = new CPagination($count);
-            $pages->pageSize = 6;
-            $pages->applyLimit($criteria);
+            if($count!=0){
+                $pages = new CPagination($count);
+                $pages->pageSize = 6;
+                $pages->applyLimit($criteria);
+            }else $pages = null;
+
             $models = News::model()->findAll($criteria); // новости
             $models = News::model()->attendedScan($models);
             $renderProperties = array('models' => $models, 'pages' => $pages);

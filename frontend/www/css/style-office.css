@@ -1271,8 +1271,8 @@ select {
 
 
 #office3-content{
-    height: 1692px;
-    width: 1276px;
+    /*height: 1692px;*/
+    /*width: 1276px;*/
     position: relative;
 
 }
@@ -4227,7 +4227,7 @@ select {
 
 
 #office3-content{
-    height: 1692px;
+    height: auto;
     width: 1000px;
     position: relative;
 
