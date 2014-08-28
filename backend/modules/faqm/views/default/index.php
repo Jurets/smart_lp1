@@ -2,10 +2,10 @@
 /* @var $this DefaultController */
 
 $this->breadcrumbs=array(
-	$this->module->id,
+	Yii::t('rec','Manage').' '.Yii::t('rec','FAQ'),
 );
 ?>
-<h1><?php echo FaqmModule::t('FAQ Management'); ?></h1>
+<h1><?php echo Yii::t('rec','Manage').' '.Yii::t('rec','FAQ'); ?></h1>
 <?php
 if(Yii::app()->user->hasFlash('wrong_form')){
     echo '<div class="alert alert-error">',Yii::app()->user->getFlash('wrong_form'),'</div>';

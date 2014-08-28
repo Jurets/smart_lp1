@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Countries'),
+    Yii::t('rec', 'Countries'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'Create Countries'), 'url' => array('create')),
-    array('label' => Yii::t('common', 'Manage Countries'), 'url' => array('admin')),
+    array('label' => Yii::t('rec', 'Create Countries'), 'url' => array('create')),
+    array('label' => Yii::t('rec', 'Manage Countries'), 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo Yii::t('common', Countries) ?></h1>
+<h1><?php echo Yii::t('rec', 'Countries') ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbListView', array(

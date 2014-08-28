@@ -3,13 +3,13 @@
 /* @var $model Training */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Training') => array('index'),
-    Yii::t('common', 'Manage'),
+    Yii::t('rec', 'Training') => array('index'),
+    Yii::t('rec', 'Manage'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'List Training'), 'url' => array('admin')),
-    array('label' => Yii::t('common', 'Create Training'), 'url' => array('create')),
+   // array('label' => Yii::t('common', 'List Training'), 'url' => array('admin')),
+    array('label' => Yii::t('rec', 'Create Training'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo Yii::t('common', 'Manage Trainings'); ?></h1>
+<h1><?php echo Yii::t('rec', 'Manage Trainings'); ?></h1>
 
 <div class="search-form" style="display:none">
     <?php

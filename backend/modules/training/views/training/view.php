@@ -3,16 +3,16 @@
 /* @var $model Training */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Training') => array('index'),
+    Yii::t('rec', 'Training') => array('index'),
     $model->title,
 );
 
 $this->menu = array(
 //	array('label'=>'List Training', 'url'=>array('index')),
-    array('label' => Yii::t('common', 'Create Training'), 'url' => array('create')),
-    array('label' => Yii::t('common', 'Update Training'), 'url' => array('update', 'id' => $model->id)),
-    array('label' => Yii::t('common', 'Delete Training'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => Yii::t('common', 'Manage Training'), 'url' => array('index')),
+    array('label' => Yii::t('rec', 'Create Training'), 'url' => array('create')),
+    array('label' => Yii::t('rec', 'Update Training'), 'url' => array('update', 'id' => $model->id)),
+    array('label' => Yii::t('rec', 'Delete Training'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
+    array('label' => Yii::t('rec', 'Manage Training'), 'url' => array('index')),
 );
 ?>
 

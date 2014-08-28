@@ -192,5 +192,4 @@ class FaqController extends EMController
 
     }
 
-
 }

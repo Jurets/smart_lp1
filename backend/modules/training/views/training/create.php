@@ -3,16 +3,16 @@
 /* @var $model Training */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Training') => array('index'),
-    Yii::t('common', 'Create'),
+    Yii::t('rec', 'Training') => array('index'),
+    Yii::t('rec', 'Create'),
 );
 
 $this->menu = array(
 //	array('label'=>'List Training', 'url'=>array('index')),
-    array('label' => Yii::t('common', 'Manage Training'), 'url' => array('index')),
+    array('label' => Yii::t('rec', 'Manage Trainings'), 'url' => array('index')),
 );
 ?>
 
-<h1><?php echo Yii::t('common', 'Create Training') ?></h1>
+<h1><?php echo Yii::t('rec', 'Create Training') ?></h1>
 
 <?php $this->renderPartial('_form', array('model' => $model)); ?>

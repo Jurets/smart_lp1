@@ -15,7 +15,7 @@
            <?php $this->renderPartial('_form_partial', array('model'=>$model))?>       
         </div>
         <input id="lang" type="hidden" value="" name='lang'>
-        <input id="save_1100" type="button" value="<?php echo Yii::t('rec', 'Create')?>">
+        <input id="save_1100" type="button" value="<?php echo Yii::t('rec', 'Edit')?>">
     </form>
 </div>
 </div>

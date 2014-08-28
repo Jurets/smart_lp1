@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note"><?php echo Yii::t('common', 'Fields with {asteriks} are required', array('{asteriks}'=>'<span class="required">*</span>')); ?>.</p>
+	<p class="note"><?php echo Yii::t('rec', 'Fields with * are required.'); ?>.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -38,7 +38,7 @@
 <!--	</div>-->
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'videolink'); ?>
+		<?php echo $form->labelEx($model,Yii::t('rec','Video Link')); ?>
 		<?php echo $form->textField($model,'videolink',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'videolink'); ?>
 	</div>
@@ -67,9 +67,13 @@
 
         <?php echo $form->hiddenField($model, 'image'); ?>
         <?php $form->label($model, 'Upload illustration') ?>
-
         <div class="news-image-preview" id="news-image-preview" style="width: 336px; height: 160px; border: 1px solid gray; background: url('<?php
-        echo (isset($model->image)) ? $model->UploadImage : '/img/img-gate.png';
+        //echo (isset($model->image)) ? $this->module->uploadUrl .'resized-'. $model->image : '/img/img-gate.png';
+        if(isset($model->image)) {
+            echo $this->module->uploadUrl .'resized-'. $model->image;
+        }else{
+            var_dump($model);
+        }
         ?>') no-repeat;">
         </div>
         <br/>
@@ -89,7 +93,7 @@
 	</div> -->
     <div class="row">&nbsp;</div>
     <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('rec','Create') : Yii::t('rec','Save')); ?>
     </div>
 <?php $this->endWidget(); ?>
 
@@ -108,7 +112,7 @@
             },
             done: function(e, data) {
                 $.each(data.result.files, function(index, file) {
-                    showOverlay(file.original, file.name);
+                    showOverlay(file.resized, file.name);
                 });
                 $("#uploader-progress").empty().html("Изображение успешно загружено!");
             },
@@ -120,6 +124,7 @@
         //var img = '<img id="cronbox" src="/uploads/' + imagePath + '"/>';
         $("#news-image-preview").empty().append(img);
         //$("#News_image").val(imagePath);
-        $("#News_image").val(imageName);
+        $("#Training_image").val(imageName);
+        $("#news-image-preview")
     }
 </script>

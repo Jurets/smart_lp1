@@ -17,7 +17,7 @@
     ));
     ?>
 
-    <p class="note"><?php echo Yii::t('common', 'Fields with {asteriks} are required', array('{asteriks}' => '<span class="required">*</span>')); ?>.</p>
+    <p class="note"><?php echo Yii::t('rec', 'Fields with * are required.'); ?>.</p>
 
         <?php echo $form->errorSummary($model); ?>
 
@@ -34,7 +34,7 @@
     </div>
 
     <div class="row buttons">
-    <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('common', 'Create') : Yii::t('common', 'Save')); ?>
+    <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('rec', 'Create') : Yii::t('common', 'Save')); ?>
     </div>
 
 <?php $this->endWidget(); ?>

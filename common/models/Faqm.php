@@ -56,5 +56,13 @@ class Faqm extends CFormModel {
         return array('financial'=> Yii::t('rec', 'financial'),
             'offer'=> Yii::t('rec', 'offer'), 'performance' => Yii::t('rec', 'performance'));
     }
+    public function attributeLabels()
+    {
+        return array(
+            'financialMail' => Yii::t('rec','Financial Mail'),
+            'offerMail' => Yii::t('rec','Offer Mail'),
+            'performanceMail' => Yii::t('rec','Performance Mail'),
+        );
+    }
 }
 
