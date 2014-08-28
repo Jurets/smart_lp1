@@ -8,12 +8,12 @@ $this->breadcrumbs=array(
 $this->menu=array(
 // 	array('label'=>'Create News', 'url'=>array('/news/news/create')),
 // 	array('label'=>'Manage News', 'url'=>array('/news/news/admin')),
-	array('label'=>Yii::t("common","Create News"), 'url'=>array('create')),
-	array('label'=>Yii::app()->getModule('news')->t("Manage News"), 'url'=>array('admin')),
+	array('label'=>Yii::t("rec","Create News"), 'url'=>array('create')),
+	array('label'=>Yii::t('rec',"Manage News"), 'url'=>array('admin')),
 );
 ?>
 
-<h1><?php echo Yii::app()->getModule('news')->t("News") ?></h1>
+<h1><?php echo Yii::t('rec',"News") ?></h1>
 
 
 <?php

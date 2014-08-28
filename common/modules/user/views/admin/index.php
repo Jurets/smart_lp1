@@ -4,13 +4,13 @@
 $this->breadcrumbs=array(
 	//UserModule::t('Users')=>array('/user'),
     //UserModule::t('Participants') . ' /',
-	Yii::t('rec','Unified database participants', array(), 'participant'),
+	Yii::t('rec','Unified database participants'),
 );
 
 $this->menu=array(
     array('label'=>Yii::t('rec','Create User'), 'url'=>array('create')),
-    array('label'=>Yii::t('rec','Participants structure',array(), 'participant'), 'url'=>array('admin/structure/')),
-    array('label'=>Yii::t('rec','BusinessClub structure',array(), 'participant'), 'url'=>array('admin/bcstructure/')),
+    array('label'=>Yii::t('rec','Participants structure'), 'url'=>array('admin/structure/')),
+    array('label'=>Yii::t('rec','BusinessClub structure'), 'url'=>array('admin/bcstructure/')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -28,7 +28,7 @@ $('.search-form form').submit(function(){
 
 ?>
 
-<h1><?php echo Yii::t('rec',"Unified database participants", array(), 'participant'); ?></h1>
+<h1><?php echo Yii::t('rec',"Unified database participants"); ?></h1>
 
 <!--<p><?php echo Yii::t('rec',"You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done."); ?></p>-->
 <?php //echo TbHtml::link(UserModule::t('Advanced Search'),'#',array('class'=>'search-button')); ?>

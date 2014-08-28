@@ -138,22 +138,22 @@ class Participant extends User
     public function attributeLabels()
     {
         return CMap::mergeArray(parent::attributeLabels(), array(
-                    'create_at' => UserModule::t("Created", array(), $this->dict_participant),
-                    'username' => UserModule::t("Domain", array(), $this->dict_participant),
-                    'first_name' => UserModule::t("Firstname", array(), $this->dict_participant),
-                    'last_name' => UserModule::t("Lastname", array(), $this->dict_participant),
-                    'city_id' => UserModule::t("City", array(), $this->dict_participant),
-                    'country_id' => UserModule::t("Country", array(), $this->dict_participant),
-                    'structure' => UserModule::t("Structure", array(), $this->dict_participant),
-                    'business' => UserModule::t("Business Club", array(), $this->dict_participant),
-                    'refer_id' => UserModule::t("Referal", array(), $this->dict_participant),
-                    'tariff_id' => UserModule::t("Tariff", array(), $this->dict_participant),
-                    'phone' => UserModule::t("Phone", array(), $this->dict_participant),
-                    'skype' => UserModule::t("Skype", array(), $this->dict_participant),
-                    'dob' => UserModule::t("Birthday", array(), $this->dict_participant),
-                    'gmt_id' => UserModule::t("Gmt", array(), $this->dict_participant),
-                    'income' => UserModule::t("Income", array(), $this->dict_participant),
-                    'transfer_fund' => UserModule::t("Transfer to the Fund", array(), $this->dict_participant),
+                    'create_at' => Yii::t('rec',"Created"),
+                    'username' => Yii::t('rec',"Domain"),
+                    'first_name' => Yii::t('rec',"Firstname"),
+                    'last_name' => Yii::t('rec',"Lastname"),
+                    'city_id' => Yii::t('rec',"City"),
+                    'country_id' => Yii::t('rec',"Country"),
+                    'structure' => Yii::t('rec',"Structure"),
+                    'business' => Yii::t('rec',"Business Club"),
+                    'refer_id' => Yii::t('rec',"Referal"),
+                    'tariff_id' => Yii::t('rec',"Tariff"),
+                    'phone' => Yii::t('rec',"Phone"),
+                    'skype' => Yii::t('rec',"Skype"),
+                    'dob' => Yii::t('rec',"Birthday"),
+                    'gmt_id' => Yii::t('rec',"Gmt"),
+                    'income' => Yii::t('rec',"Income"),
+                    'transfer_fund' => Yii::t('rec',"Transfer to the Fund"),
         ));
     }
 

@@ -10,8 +10,8 @@ $this->menu=array(
     array('label'=>UserModule::t('Manage Profile Field'), 'url'=>array('profileField/admin')),
     array('label'=>UserModule::t('List User'), 'url'=>array('/user')),*/
     array('label'=>Yii::t('rec','Create User'), 'url'=>array('create')),
-    array('label'=>Yii::t('rec','Participants structure',array(), 'participant'), 'url'=>array('admin/structure/')),
-    array('label'=>Yii::t('rec','BusinessClub structure',array(), 'participant'), 'url'=>array('admin/bcstructure/')),
+    array('label'=>Yii::t('rec','Participants structure'), 'url'=>array('admin/structure/')),
+    array('label'=>Yii::t('rec','BusinessClub structure'), 'url'=>array('admin/bcstructure/')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -29,10 +29,10 @@ $('.search-form form').submit(function(){
 
 ?>
 
-<h1><?php echo Yii::t('rec',"Participants structure", array(), 'participant'); ?></h1>
+<h1><?php echo Yii::t('rec',"Participants structure"); ?></h1>
 
 
-<p><?php echo Yii::t('rec',"You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done."); ?></p>
+<p><?php echo htmlspecialchars_decode(Yii::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done."))); ?></p>
 <?php //echo CHtml::link(UserModule::t('Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display: block;">
 <?php $this->renderPartial('_search',array(

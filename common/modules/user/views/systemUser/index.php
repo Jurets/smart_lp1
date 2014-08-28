@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>Yii::t('rec','Create SystemUser'), 'url'=>array('create')),
-	array('label'=>'Manage SystemUser', 'url'=>array('admin')),
+	array('label'=>Yii::t('rec','Manage SystemUser'), 'url'=>array('admin')),
 );
 ?>
 

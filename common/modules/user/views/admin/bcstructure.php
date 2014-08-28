@@ -3,7 +3,7 @@
 
 $this->breadcrumbs=array(
 	Yii::t('rec','Users')=>array('/user'),
-	Yii::t('rec',"BusinessClub structure", array(), 'participant'),
+	Yii::t('rec',"BusinessClub structure"),
 );
 
 $this->menu=array(
@@ -11,7 +11,7 @@ $this->menu=array(
 
 ?>
 
-<h1><?php echo Yii::t('rec',"BusinessClub structure", array(), 'participant'); ?></h1>
+<h1><?php echo Yii::t('rec',"BusinessClub structure"); ?></h1>
 
 <?php 
 $this->renderPartial('_index', array('model'=>$model));

@@ -1,16 +1,16 @@
 <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl.'/css/commonstat.css'); ?>
 <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/commonstat.js'); ?>
 
-<h1><?php echo CommonstatModule::t('General statistics')?></h1>
+<h1><?php echo Yii::t('rec','General statistics')?></h1>
 <div class="commonstat">
     <div class="greedElem" id="Participiants">
         <div class="dataTbl">
-        <?php echo CommonstatModule::t('Participants')?>
+        <?php echo Yii::t('rec','Participants')?>
         <ul type="none">
-            <li id="p1"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p1']?></span></li>
-            <li id="p2"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p2']?></span></li>
-            <li id="p3"><span><?php echo CommonstatModule::t('Entered')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p3']?></span></li>
-            <li id="p4"><span><?php echo CommonstatModule::t('Business Club')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p4']?></span></li>
+            <li id="p1"><span><?php echo Yii::t('rec','Total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p1']?></span></li>
+            <li id="p2"><span><?php echo Yii::t('rec','Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p2']?></span></li>
+            <li id="p3"><span><?php echo Yii::t('rec','Entered')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p3']?></span></li>
+            <li id="p4"><span><?php echo Yii::t('rec','Business Club')?>:</span><span class="toright"><?php echo $model->CommonStatistic['p4']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
@@ -20,12 +20,12 @@
     </div>
     <div class="greedElem" id="MoneyTurnover">
         <div class="dataTbl">
-        <?php echo CommonstatModule::t('Money Turnover')?>
+        <?php echo Yii::t('rec','Money Turnover')?>
         <ul type="none">
-            <li id="mt1"><span><?php echo CommonstatModule::t('Activations total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt1']?></span></li>
-            <li id="mt2"><span><?php echo CommonstatModule::t('Activations today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt2']?></span></li>
-            <li id="mt3"><span><?php echo CommonstatModule::t('Capital total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt3']?></span></li>
-            <li id="mt4"><span><?php echo CommonstatModule::t('Capital today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt4']?></span></li>
+            <li id="mt1"><span><?php echo Yii::t('rec','Activations total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt1']?></span></li>
+            <li id="mt2"><span><?php echo Yii::t('rec','Activations today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt2']?></span></li>
+            <li id="mt3"><span><?php echo Yii::t('rec','Capital total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt3']?></span></li>
+            <li id="mt4"><span><?php echo Yii::t('rec','Capital today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['mt4']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
@@ -35,10 +35,10 @@
     </div>
     <div class="greedElem" id="Charity">
         <div class="dataTbl">
-        <?php echo CommonstatModule::t('Charity')?>
+        <?php echo Yii::t('rec','Charity')?>
         <ul type="none">
-            <li id="ch1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['ch1']?></span></li>
-            <li id="ch2"><span><?php echo CommonstatModule::t('Total transferred')?>:</span><span class="toright"><?php echo $model->CommonStatistic['ch2']?></span></li>
+            <li id="ch1"><span><?php echo Yii::t('rec','Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['ch1']?></span></li>
+            <li id="ch2"><span><?php echo Yii::t('rec','Total transferred')?>:</span><span class="toright"><?php echo $model->CommonStatistic['ch2']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
@@ -48,12 +48,12 @@
     </div>
     <div style="border-bottom: 1px solid #777777;" class="greedElem" id="Visits">
         <div class="dataTbl">
-        <?php echo CommonstatModule::t('Visits')?>
+        <?php echo Yii::t('rec','Visits')?>
         <ul type="none">
-            <li id="v1"><span><?php echo CommonstatModule::t('Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v1']?></span></li>
-            <li id="v2"><span><?php echo CommonstatModule::t('Yesterday')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v2']?></span></li>
-            <li id="v3"><span><?php echo CommonstatModule::t('Month') ?>:</span><span class="toright"><?php echo $model->CommonStatistic['v3']?></span></li>
-            <li id="v4"><span><?php echo CommonstatModule::t('Total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v4']?></span></li>
+            <li id="v1"><span><?php echo Yii::t('rec','Today')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v1']?></span></li>
+            <li id="v2"><span><?php echo Yii::t('rec','Yesterday')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v2']?></span></li>
+            <li id="v3"><span><?php echo Yii::t('rec','Month') ?>:</span><span class="toright"><?php echo $model->CommonStatistic['v3']?></span></li>
+            <li id="v4"><span><?php echo Yii::t('rec','Total')?>:</span><span class="toright"><?php echo $model->CommonStatistic['v4']?></span></li>
         </ul>
         </div>
         <div class="dataGraph">
