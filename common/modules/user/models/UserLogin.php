@@ -15,6 +15,7 @@ class UserLogin extends CFormModel
     public $temp_key;
 
     public $identity;
+    public $lang;
     
     public $activekey;
     private $_logincode = null;
@@ -32,21 +33,42 @@ class UserLogin extends CFormModel
 	 */
 	public function rules()
 	{
-		return array(
-			// username and password are required
+            $rules = array(
+                // username and password are required
             array('username, password', 'required'),
 			array('username', 'email'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
+                        array('password', 'authenticate'),
 /////временно отключаем            array('activekey', 'checkActivekey'),  
-                    array('activekey', 'checkActivekey'), // временно включаем ))
             array('verifyCode', 'captcha',
                 // авторизованным пользователям код можно не вводить
-                'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
-            ),
-			array('password', 'authenticate'),
-		);
+                  'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
+                
+                )
+            );
+            if(isset(Yii::app()->params['email_verify_code_enabled']) && Yii::app()->params['email_verify_code_enabled'] == true){
+                $rules[] = array('activekey', 'checkActivekey'); // временно включаем ))
+            }
+            return $rules;
+ // Исходник begin
+//		return array(
+//			// username and password are required
+//            array('username, password', 'required'),
+//			array('username', 'email'),
+//			// rememberMe needs to be a boolean
+//			array('rememberMe', 'boolean'),
+//			// password needs to be authenticated
+///////временно отключаем            array('activekey', 'checkActivekey'),  
+//                    array('activekey', 'checkActivekey'), // временно включаем ))
+//            array('verifyCode', 'captcha',
+//                // авторизованным пользователям код можно не вводить
+//                'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
+//            ),
+//			array('password', 'authenticate'),
+//		);
+// Исходник end
 	}
 
     /**

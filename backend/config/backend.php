@@ -125,4 +125,7 @@ return array(
              'dateFormat'=>'d.m.Y',   //формат по умолчанию для форматтера дат
         ),
 	),
+        'params'=>array(
+            'email_verify_code_enabled' => TRUE,
+        ),
 );
