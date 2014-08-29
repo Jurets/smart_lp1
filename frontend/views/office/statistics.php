@@ -48,17 +48,17 @@
       </td>
   </tr>
   <tr class="last-rows">
-    <td class="tg-auz7" colspan="3"><p>Всего за сегодня: <span><?php echo $model->statisticsStructure['IncomeToday'] ?> $</span></p></td>
+    <td class="tg-auz7" colspan="3"><p>Всего за сегодня: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span><?php echo $model->statisticsStructure['IncomeToday'] ?> $</span></p></td>
   </tr>
   <tr class="last-rows">
-    <td class="tg-auz7" colspan="3"><p id='last-value'>Всего получен доход: <span id="green"><?php echo $model->statisticsStructure['IncomeCommon'] ?> $</span></p></td>
+    <td class="tg-auz7" colspan="3"><p id='last-value'>Всего получен доход: &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<span id="green"><?php echo $model->statisticsStructure['IncomeCommon'] ?> $</span></p></td>
   </tr>
 </table>
         </div>
         
       <table id="tg2">
     <tr>
-        <td class="tg-ll1" colspan="3">Сегодня: <span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Charity']['today'] ?> $</span></td>
+        <td class="tg-ll1" colspan="3">Сегодня: <span><?php echo $model->statisticsStructure['Charity']['today'] ?> $</span></td>
       </tr>
       <tr>
     <td class="tg-ll2" colspan="3">В этом месяце: <span><?php echo $model->statisticsStructure['Charity']['permonth'] ?> $</span></td>
@@ -72,7 +72,7 @@
         
         <table id="tg3">
     <tr>
-    <td class="tg-ll1" colspan="3">Личная команда сегодня: <span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Staff']['privateStructure'] ?></span></td>
+    <td class="tg-ll1" colspan="3">Личная команда сегодня: <span><?php echo $model->statisticsStructure['Staff']['privateStructure'] ?></span></td>
       </tr>
       <tr>
     <td class="tg-ll2" colspan="3">Бизнес-Клуб сегодня: <span><?php echo $model->statisticsStructure['Staff']['businessClub'] ?></span></td>
@@ -82,16 +82,16 @@
     
     <table id="tg4">
     <tr>
-    <td class="tg-ll1" colspan="3">Сегодня:<span>&nbsp;&nbsp;+<?php echo $model->statisticsStructure['Visitors']['today'] ?></span></td>
+    <td class="tg-ll1" colspan="3">Сегодня:<span>+<?php echo $model->statisticsStructure['Visitors']['today'] ?></span></td>
     </tr>
     <tr>
-    <td class="tg-ll2" colspan="3">Вчера: <span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['tomorrow'] ?></span></td>
+    <td class="tg-ll2" colspan="3">Вчера: <span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['tomorrow'] ?></span></td>
      </tr>
      <tr>
-    <td class="tg-ll3" colspan="3">Месяц: <span><?php echo $model->statisticsStructure['Visitors']['permonth'] ?></span></td>
+    <td class="tg-ll3" colspan="3">Месяц: <span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['permonth'] ?></span></td>
      </tr>
     <tr>
-    <td class="tg-ll4" colspan="3">Всего: <span  style="color: #12be25;" ><?php echo $model->statisticsStructure['Visitors']['common'] ?></span></td>
+    <td class="tg-ll4" colspan="3">Всего: <span  style="color: #12be25;" >&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['common'] ?></span></td>
      </tr>
     </table>   
  </div>  
