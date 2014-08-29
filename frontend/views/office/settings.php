@@ -257,6 +257,10 @@ $form = $this->beginWidget('CActiveForm', array(
 </script>
 
 <style>
+    div.wrap{
+        padding: 0;
+    }
+
     #shag-1-1-vibrat input{
         padding: 0;
         margin: 0;
@@ -264,7 +268,7 @@ $form = $this->beginWidget('CActiveForm', array(
         right: 0;
         top: 0;
         opacity: 0;
-        font-size:199px !important;
+        /*font-size:199px !important;*/
         cursor:pointer;
         border:none;
     }
