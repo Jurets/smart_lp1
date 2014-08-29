@@ -58,9 +58,9 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option1text"> <?php echo Yii::t('common', 'COUNTRY') ?>*:</p>
         <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" <?php if($participant->country_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG51" class="css-label1"></label>
+        <label for="checkboxG51" class="css-label1" style="width: 40px; height: 40px; padding: 0"></label>
 
-        <a href="#" name="label-1" class="vopros1" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
+        <a href="#" name="label-1" class="vopros1"></a>
 
         <select name="countrySelect" class="shag-1-1-option1">
             <?php foreach($places as $key=>$place) {?>
@@ -75,11 +75,11 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" <?php if($participant->city_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG52" class="css-label2"></label>
+        <label for="checkboxG52" class="css-label2" style="width: 40px; height: 40px; padding: 0"></label>
 
 
         <p class="shag-1-1-option2text"><?php echo Yii::t('common', 'CITY') ?>*: </p>
-        <a href="#" name="label-2" class="vopros2" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
+        <a href="#" name="label-2" class="vopros2"></a>
         <select name="citySelect" class="shag-1-1-option2">
             <?php foreach($citesByCountryId as $key=>$city) {?>
                 <?php if($participant->city_id == $key) {?>
@@ -95,10 +95,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
             <p class="shag-1-1-option1-1text"> SKYPE:</p>
             <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3"  <?php if($participant->skype_access == 1){echo 'checked="checked"';} ?> />
-            <label for="checkboxG53" class="css-label3"></label>
+            <label for="checkboxG53" class="css-label3" style="width: 40px; height: 40px; padding: 0"></label>
 
-       <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>
-        <a href="#" name="label-3" class="vopros1-1" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
+<!--       <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>-->
+        <a href="#" name="label-3" class="vopros1-1"></a>
         <?php echo $form->textField($participant, 'skype', array('class' => 'shag-1-1-option1-1')); //skype ?>
         <?php echo $form->error($participant, 'skype', array('class' => 'error-message em-7')); //skype ?>
 
@@ -132,14 +132,14 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option2-1text">EMAIL*: </p>
         <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" <?php if($participant->email_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG54" class="css-label4"></label>
+        <label for="checkboxG54" class="css-label4" style="width: 40px; height: 40px; padding: 0"></label>
 
-        <a href="#" name="label-4" class="vopros2-1" title="<?php echo Yii::t('common', 'allow to show to all users') ?>"></a>
+        <a href="#" name="label-4" class="vopros2-1"></a>
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
         <?php echo $form->error($participant, 'email',array('class' => 'error-message em-11')); //Email ?>
 
 
-       <p class="shag-1-1-option3text"> МОЕ ВРЕМЯ:</p>
+<!--       <p class="shag-1-1-option3text"> МОЕ ВРЕМЯ:</p>-->
         <p class="shag-1-1-option3text"> <?php echo Yii::t('common', 'MY TIME') ?>:</p>
             <select name="timeZoneSelect" class="shag-1-1-option3">
             <?php foreach($gmtZone as $key=>$currentGmt) {?>
@@ -194,20 +194,19 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <div id="popup-1"  class="p-6-popup"><span><?php echo Yii::t('common', 'show country to everyone user') ?></span><img class="stick"
-                                                                                src="images/popupstick.png" width="13">
+                                                                                src="images/popupstick.png" width="1">
         </div>
 
         <div id="popup-2"  class="p-6-popup"><span><?php echo Yii::t('common', 'show city to everyone user') ?></span><img class="stick"
                                                                                         src="images/popupstick.png"
-                                                                                        width="13"></div>
+                                                                                        width="1"></div>
 
         <div id="popup-3"  class="p-6-popup"><span><?php echo Yii::t('common', 'show skype to everyone user') ?></span><img class="stick"
                                                                                            src="images/popupstick.png"
-                                                                                           width="13"></div>
-       <div id="popup-4"  class="p-6-popup"><span>показывать email всем пользователям</span><img class="stick"
+                                                                                           width="1"></div>
         <div id="popup-4"  class="p-6-popup"><span><?php echo Yii::t('common', 'show email to everyone user') ?></span><img class="stick"
                                                                                         src="images/popupstick.png"
-                                                                                        width="13"></div>
+                                                                                        width="1"></div>
 
     </div>
 
