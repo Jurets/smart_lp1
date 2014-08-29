@@ -377,9 +377,45 @@ New Language added successfull
 Language deleted successfull
 Edition completed
 Wrong edition, has error
+Russian
 Common Statistics
 Countries
 Update News
 List News
 View News
 Activated
+Upload Illustration
+Content
+Create Training
+Manage Trainings
+Image
+Number
+Date
+Manage FAQ
+Financial Mail
+Performance Mail
+Offer Mail
+Question
+Answer
+Category
+List FAQ
+Create FAQ
+Update Training
+FAQ
+Banner
+Text
+Create Countries
+Manage Countries
+Name
+Code
+Code Num
+Phone Code
+List Countries
+Index Management
+Manage Cities
+Create Cities
+Version id
+Sliderlist
+leader
+Descriptio
+

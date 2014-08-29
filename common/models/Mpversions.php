@@ -57,10 +57,10 @@ class Mpversions extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'description' => MpModule::t('Description'),
-			'creationdate' => MpModule::t('Creationdate'),
-			'activity' => MpModule::t('Activity'),
+			'id' => Yii::t('rec','Id'),
+			'description' => Yii::t('rec','Description'),
+			'creationdate' => Yii::t('rec','Creationdate'),
+			'activity' => Yii::t('rec','Activity'),
 		);
 	}
 

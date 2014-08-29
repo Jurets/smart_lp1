@@ -13,6 +13,6 @@ $this->menu = array(
 );
 ?>
 </div>
-<h1>Create News</h1>
+<h1><?php echo Yii::t('rec','Create News') ?></h1>
 
 <?php $this->renderPartial('_form', array('model' => $model)); ?>

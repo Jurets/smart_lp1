@@ -62,5 +62,13 @@ class Indexmanager extends CFormModel {
         $result = $checkCommand->query();
         return $result->read();
     }
+     public function attributeLabels(){
+         return array(
+            'videolink' => Yii::t('rec','Video Link'),
+            'title' => Yii::t('rec','Title'),
+            'about' => Yii::t('rec','About Us'),
+            'sliderlist' => Yii::t('rec','Sliderlist'),
+         );
+     }
 }
 

@@ -59,10 +59,10 @@ class Mathparams extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'value' => 'Value',
-			'verid' => 'Verid',
+			'id' => Yii::t('rec','Id'),
+			'name' => Yii::t('rec','Name'),
+			'value' => Yii::t('rec','Value'),
+			'verid' => Yii::t('rec','Version id'),
 		);
 	}
 

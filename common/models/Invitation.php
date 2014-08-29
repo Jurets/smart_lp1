@@ -102,4 +102,12 @@ class Invitation extends CFormModel
             $this->bannerFiles[$i]['name'] = $elem[$key];
         }
     }
+    public function attributeLabels(){
+        return array(
+           'videoLink' => Yii::t('rec', 'Video Link'),
+            'fileLink' => Yii::t('rec','File Link'),
+            'bannerFiles' => Yii::t('rec','Banner'),
+            'text' => Yii::t('rec','Text'),
+        );
+    }
 } 

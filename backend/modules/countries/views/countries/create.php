@@ -3,16 +3,16 @@
 /* @var $model Countries */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Countries') => array('index'),
-    Yii::t('common', 'Create'),
+    Yii::t('rec', 'Countries') => array('index'),
+    Yii::t('rec', 'Create'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'List Countries'), 'url' => array('index')),
-    array('label' => Yii::t('common', 'Manage Countries'), 'url' => array('admin')),
+    //array('label' => Yii::t('common', 'List Countries'), 'url' => array('index')),
+    array('label' => Yii::t('rec', 'Manage Countries'), 'url' => array('index')),
 );
 ?>
 
-<h1><?php echo Yii::t('common', 'Create Countries') ?></h1>
+<h1><?php echo Yii::t('rec', 'Create Countries') ?></h1>
 
 <?php $this->renderPartial('_form', array('model' => $model)); ?>

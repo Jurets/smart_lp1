@@ -44,6 +44,7 @@ class TrainingController extends EMController
 	 */
 	public function actionView($id)
 	{
+            $this->redirect(array('index'));
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -163,4 +164,16 @@ class TrainingController extends EMController
 			Yii::app()->end();
 		}
 	}
+        
+        public function actions() {
+        return array(
+            'upload'=>array(
+                'class'=>'common.extensions.FileUpload.UploadAction',
+                'prefixOrigin'=>'training-',
+                'prefixResized'=>'resized-training-',
+                'uploadDir'=>$this->module->uploadDir,
+                'uploadUrl'=>$this->module->uploadUrl,
+            ),            
+        );
+    }
 }

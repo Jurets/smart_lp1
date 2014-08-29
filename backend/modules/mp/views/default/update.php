@@ -5,19 +5,19 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Mpversions'=>array('index'),
+	Yii::t('rec','Mpversions')=>array('index'),
 	" ".$model->id=>array('view','id'=>$model->id),
-	'Update',
+	Yii::t('rec','Update'),
 );
 
     $this->menu=array(
-    array('label'=>MpModule::t('List Mpversions'), 'url'=>array('index')),
-    array('label'=>MpModule::t('Create Mpversions'), 'url'=>array('create')),
-    array('label'=>MpModule::t('View Mpversions'), 'url'=>array('view', 'id'=>$model->id)),
-    array('label'=>MpModule::t('Manage Mpversions'), 'url'=>array('admin')),
+//    array('label'=>MpModule::t('List Mpversions'), 'url'=>array('index')),
+    array('label'=>Yii::t('rec','Create Mpversions'), 'url'=>array('create')),
+//    array('label'=>MpModule::t('View Mpversions'), 'url'=>array('view', 'id'=>$model->id)),
+    array('label'=>Yii::t('rec','Manage Mpversions'), 'url'=>array('admin')),
     );
     ?>
 
-    <h1><?php echo MpModule::t('Update Mpversions'); ?> <?php echo $model->id; ?></h1>
+    <h1><?php echo Yii::t('rec','Update Mpversions'); ?> <?php echo $model->id; ?></h1>
 <?php //$this->renderPartial('_addparams', array()); // отключено, см view create ?>
 <?php $this->renderPartial('_form2', array('model'=>$model)); ?>

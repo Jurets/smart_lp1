@@ -4,6 +4,8 @@ class TrainingModule extends CWebModule
 {
     // path
     public $trainingShow = array('/training/training');
+    public $uploadDir;
+    public $uploadUrl = '/admin/uploads/';
 
 	public function init()
 	{

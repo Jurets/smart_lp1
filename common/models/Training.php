@@ -14,6 +14,7 @@
  */
 class Training extends CActiveRecord
 {
+    public $UploadImage;
 
     /**
      * @return string the associated database table name
@@ -37,7 +38,7 @@ class Training extends CActiveRecord
             array('title, image, videolink', 'length', 'max' => 255),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, title, description, image, videolink, date, number', 'safe', 'on' => 'search'),
+            array('id, title, description, image, UploadImage, videolink, date, number', 'safe', 'on' => 'search'),
         );
     }
 
@@ -59,12 +60,12 @@ class Training extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'title' => Yii::t('common', 'Title'),
-            'description' => Yii::t('common', 'Description'),
-            'image' => Yii::t('common', 'Image'),
-            'videolink' => Yii::t('common', 'Videolink'),
-            'date' => Yii::t('common', 'Date'),
-            'number' => Yii::t('common', 'Number'),
+            'title' => Yii::t('rec', 'Title'),
+            'description' => Yii::t('rec', 'Description'),
+            'image' => Yii::t('rec', 'Image'),
+            'videolink' => Yii::t('rec', 'Videolink'),
+            'date' => Yii::t('rec', 'Date'),
+            'number' => Yii::t('rec', 'Number'),
         );
     }
 

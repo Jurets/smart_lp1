@@ -29,7 +29,7 @@
     </div>
 
     <div class="row buttons">
-    <?php echo CHtml::submitButton(Yii::t('common', 'Search')); ?>
+    <?php echo CHtml::submitButton(Yii::t('rec', 'Search')); ?>
     </div>
 
 <?php $this->endWidget(); ?>

@@ -58,9 +58,9 @@ class Cities extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'country_id' => Yii::t('common', 'Country'),
-            'name' => Yii::t('common', 'Name'),
+            'id' => Yii::t('rec','Id'),
+            'country_id' => Yii::t('rec', 'Country'),
+            'name' => Yii::t('rec', 'Name'),
         );
     }
 
