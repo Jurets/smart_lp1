@@ -4,7 +4,7 @@
         <div id="footerUL" > 
             <ul id="footerUL1">
                 <li> <a href="#" id="zagolovok"> <?php echo Yii::t('common', 'Live') ?> </a> </li>
-                <li> <a href="<?php echo Yii::app()->createAbsoluteUrl('/office/news')?>"> <?php echo Yii::t('common', 'News') ?> </a> </li>
+                <li> <a href="#"> <?php echo Yii::t('common', 'News') ?> </a> </li>
                 <li> <a href="#"> <?php echo Yii::t('common', 'Feedback') ?></a> </li>
                 <li> <a href="#"> <?php echo Yii::t('common', 'YouTube Channel') ?> </a> </li>
             </ul>
