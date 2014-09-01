@@ -24,9 +24,10 @@ class LanguageInterphace extends CFormModel {
                $sql3 = 'INSERT INTO Message (id, language) VALUES('.$lastInsertId.', '.'"ru"'. ')';
                Yii::app()->db->createCommand($sql3)->execute();
                $this->addNewMatrix($lang);
-                echo '<script> alert("'.Yii::t('rec','New Language added successfull').'");</script>';
+               Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
+                echo '<script> alert("'.Yii::t('rec',Yii::t('rec','New Language added successfull')).'");</script>';
                } catch (Exception $exc) {
-                echo '<script> alert("'.Yii::t('rec', 'This Language alredy present').'");</script>';
+                echo '<script> alert("'.Yii::t('rec', Yii::t('rec','This Language allredy present')).'");</script>';
                }
         }
     }
@@ -46,13 +47,17 @@ class LanguageInterphace extends CFormModel {
     public function deleteLanguage(){
        
         if(isset($_POST['lang']) && isset($_POST['langName'])){
+            if($_POST['lang'] == 'en' || $_POST['lang'] == 'ru'){
+                return 0;
+            }
             $lang = $_POST['lang'];
             $langName = $_POST['langName'];
             try {
                 $sql = 'DELETE FROM Languages WHERE lang="'.$lang.'";';
                 $sql2 = 'DELETE FROM SourceMessage WHERE message="'.$langName.'";';
-                if(Yii::app()->db->createCommand($sql)->execute() != 0 && Yii::app()->db->createCommand($sql2)->execute() != 0)
-                echo '<script> alert("'.Yii::t('rec', $lang.' : '.'Language deleted successfull').'");</script>';
+                if(Yii::app()->db->createCommand($sql)->execute() != 0 && Yii::app()->db->createCommand($sql2)->execute() != 0){
+                    Yii::app()->request->cookies['language'] = new CHttpCookie('language', 'en');
+                    echo '<script> alert("'.Yii::t('rec', $lang.' : '.Yii::t('rec','Language deleted successfull')).'");</script>';}
             }catch (Exception $exc){
                 echo '<script>'.$exc->getTraceAsString().'</script>';
             }
@@ -60,15 +65,23 @@ class LanguageInterphace extends CFormModel {
     }
     public function showTranslation(){
                 if(isset($_POST['lang'])){
-                $this->lang = $_POST['lang'];
+                    $this->lang = $_POST['lang'];
+                }else 
+                    if(isset($_COOKIE['language'])){
+                        $this->lang = (string)Yii::app()->request->cookies['language'];
+                }else{
+                    return 0;
+                }
+                if($this->lang == 'en'){
+                    return 0;
+                }
                 $sql = "SELECT sm.id, sm.message, m.translation FROM SourceMessage sm
-                        LEFT JOIN Message m ON sm.id = m.id AND m.language = :lang
-                        WHERE m.language = :lang OR m.language IS NULL";
-                $command = Yii::app()->db->createCommand($sql);
-                $command->bindParam(':lang', $this->lang, PDO::PARAM_STR);
-                $res = $command->query()->readAll();
-                $this->translateList = $res;
-            }
+                          LEFT JOIN Message m ON sm.id = m.id AND m.language = :lang
+                          WHERE m.language = :lang OR m.language IS NULL";
+                  $command = Yii::app()->db->createCommand($sql);
+                  $command->bindParam(':lang', $this->lang, PDO::PARAM_STR);
+                  $res = $command->query()->readAll();
+                  $this->translateList = $res;
     }
     public function prepareTranslation(){
         if(!empty($this->translateList) && !is_null($this->lang)){
@@ -97,7 +110,7 @@ class LanguageInterphace extends CFormModel {
               $sql .= ' WHERE id='.(int)$number.' AND language="'.$_POST['lang'].'";';
               Yii::app()->db->createCommand($sql)->execute();
           }
-              echo 'Edition completed';
+              echo Yii::t('rec','Edition completed');
                 
       }
    }

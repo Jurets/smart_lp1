@@ -15,6 +15,7 @@ class DefaultController extends EMController
             $model = new LanguageInterphace();
                 $model->addLanguage();
                 $model->renderLanguages();
+                $model->showTranslation();
             $this->render('index', array('model'=>$model, 'locale_list'=>$model->localeList()));
 	}
         public function actionAddLanguage(){
