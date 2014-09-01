@@ -14,6 +14,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
     'rowCssClassExpression'=>'$data->color',
+    'htmlOptions'=>array('style'=>'font-size: 12px'),
 	'columns'=>array(
 		array(
 			'name' => 'id',
@@ -27,23 +28,25 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'name' => 'tariff_id',
             'type'=>'html',
             'filter'=>TbHtml::activeDropDownList($model, 'tariff_id', $listData, array(
-                'style'=>'width: 90px',
+                'style'=>'width: 70px',
                 'displaySize'=>'1',
                 'prompt'=>'<выбор>',
             )),
             'value' => '$data->tariffShortValue',
-            'htmlOptions'=>array('style'=>'width: 90px'),
+            'htmlOptions'=>array('style'=>'width: 70px'),
+            'filterInputOptions'=>array('style'=>'width: 70px'),
         ),
         array(
             'name' => 'create_at',
             'type'=>'date',
-            'filterInputOptions'=>array('style'=>'width: 70px'),
+            'filterInputOptions'=>array('style'=>'width: 60px'),
         ),
 		array(
 			'name' => 'username',
 			'type'=>'raw',
             'filter'=>TbHtml::activeTextField($model, 'username', array('style'=>'width: 100px')),
 			'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->id))',
+            'filterInputOptions'=>array('style'=>'width: 60px'),
 		),
         array(
             'name' => 'first_name',
@@ -76,6 +79,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'name'=>'email',
 			'type'=>'raw',
 			'value'=>'TbHtml::link(UHtml::markSearch($data,"email"), "mailto:".$data->email)',
+            'filterInputOptions'=>array('style'=>'width: 140px'),
+            'htmlOptions'=>array('style'=>'width: 140px'),
 		),
       /*  array(
             'name'=>'structure',
@@ -103,16 +108,20 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'income',
             'type'=>'raw',
-            'filter'=>TbHtml::activeTextField($model, 'income', array('style'=>'width: 100px')),
+            //'filter'=>TbHtml::activeTextField($model, 'income', array('style'=>'width: 100px')),
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
-            'value' => 'TbHtml::link(UHtml::markSearch($data,"income"),array("admin/view","id"=>$data->id))',
+            //'value' => 'TbHtml::link(UHtml::markSearch($data,"income"),array("admin/view","id"=>$data->id))',
+            'filterInputOptions'=>array('style'=>'width: 50px'),
+            'htmlOptions'=>array('style'=>'width: 50px'),
         ),
         array(
             'name' => 'transfer_fund',
             'type'=>'raw',
-            'filter'=>TbHtml::activeTextField($model, 'transfer_fund', array('style'=>'width: 100px')),
+            //'filter'=>TbHtml::activeTextField($model, 'transfer_fund', array('style'=>'width: 100px')),
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
-            'value' => 'TbHtml::link(UHtml::markSearch($data,"transfer_fund"),array("admin/view","id"=>$data->id))',
+            //'value' => 'TbHtml::link(UHtml::markSearch($data,"transfer_fund"),array("admin/view","id"=>$data->id))',
+            'filterInputOptions'=>array('style'=>'width: 50px'),
+            'htmlOptions'=>array('style'=>'width: 50px'),
         ),
       /*  array(
             'name'=>'checks',
