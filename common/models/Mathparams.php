@@ -14,6 +14,15 @@
  */
 class Mathparams extends CActiveRecord
 {
+    public static $parameters = array(
+        0=>'price of activation', //price_activation  стоимость активации
+        1=>'price of start', //price_start стоимость старта
+        2=>'accural purse A', //percent_to_A начисление на кошелек A
+        3=>'random to one B1', //percent_pot_B1 рандомально одному B1
+        4=>'random to one B2', //percent_pot_B2 рандомально одному B2
+        5=>'random to one B3', //percent_pot_B3 рандомально одному B3
+        6=>'accural purse F', //percent_to_F начисление на кошелек F
+    );
 	/**
 	 * @return string the associated database table name
 	 */
@@ -37,7 +46,7 @@ class Mathparams extends CActiveRecord
                         array('value', 'type', 'type'=>'float'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, value, verid', 'safe', 'on'=>'search'),
+			array('id, name, value, verid, parameters', 'safe', 'on'=>'search'),
 		);
 	}
 

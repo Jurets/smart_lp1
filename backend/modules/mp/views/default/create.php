@@ -5,8 +5,8 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Mpversions'=>array('index'),
-	'Create',
+	Yii::t('rec','Mpversions')=>array('index'),
+	Yii::t('rec','Create'),
 );
 
     $this->menu=array(
@@ -17,4 +17,4 @@ $this->breadcrumbs=array(
 
 <h1><?php echo Yii::t('rec','Create Mpversions'); ?></h1>
 <?php //$this->renderPartial('_addparams', array()); // добавление параметров посредством js выключено, количество математических параметров фиксировано ?>
-<?php $this->renderPartial('_form2', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form3', array('model'=>$model)); ?>

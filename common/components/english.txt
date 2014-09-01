@@ -418,4 +418,11 @@ Version id
 Sliderlist
 leader
 Descriptio
+price of activation
+price of start
+accural purse A
+random to one B1
+random to one B2
+random to one B3
+accural purse F
 
