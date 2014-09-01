@@ -74,6 +74,7 @@
                 success: function(resource){
                     $('.langblock').html(resource);
                     $('.translationBar').html('&nbsp;');
+                    location.reload();
                 }
             });
         }
@@ -90,6 +91,7 @@
              success: function(resource){
                  $('.langblock').html(resource);
                  langName.val('<?php echo Yii::t('rec', 'Language name (en)')?>');
+                 location.reload();
              }
         });
         });
