@@ -37,7 +37,7 @@ $this->beginContent('//layouts/common');
                     <style type="text/css">
                         .moveRight1 {
                             background-image: url("../images/profil.png");
-                            background-position: 162px 4px;
+                            background-position: 162px 3px;
                             background-repeat: no-repeat;
                             height: 27px;
                             padding-right: 30px;
@@ -51,7 +51,7 @@ $this->beginContent('//layouts/common');
                         }
                         .moveRight2 {
                             background-image: url("../images/settings.png");
-                            background-position: 82px 1px;
+                            background-position: 100px 0px;
                             background-repeat: no-repeat;
                             height: 27px;
                             left: 748px;
@@ -64,7 +64,7 @@ $this->beginContent('//layouts/common');
                         }
                         .moveRight3 {
                             background-image: url("../images/in.png");
-                            background-position: 58px 4px;
+                            background-position: 66px 2px;
                             background-repeat: no-repeat;
                             height: 56px;
                             left: 862px;
@@ -83,8 +83,8 @@ $this->beginContent('//layouts/common');
                         }
                     </style>                
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/index')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
-                    <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;Настройки </a> </li>
-                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('site/logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Exit'); ?></a> </li>
+                    <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;Настройки </a> </li>
+                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('site/logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Exit'); ?></a> </li>
                 <?php } ?>
             </ul>
         </div>
