@@ -27,6 +27,7 @@ class m140819_110207_languages_database extends CDbMigration
                     );
             Yii::import('common.components.LangDefaultInstall');
             LangDefaultInstall::install();
+            
 	}
 
 	public function down()
