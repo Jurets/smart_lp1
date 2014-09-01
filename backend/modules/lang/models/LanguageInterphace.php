@@ -20,6 +20,10 @@ class LanguageInterphace extends CFormModel {
                Yii::app()->db->createCommand($sql)->execute();
                $sql2 = 'INSERT INTO SourceMessage (message) VALUES("'.$name.'");';
                Yii::app()->db->createCommand($sql2)->execute();
+               $lastInsertId = Yii::app()->db->getLastInsertID();
+               $sql3 = 'INSERT INTO Message (id, language) VALUES('.$lastInsertId.', '.'"ru"'. ')';
+               Yii::app()->db->createCommand($sql3)->execute();
+               $this->addNewMatrix($lang);
                 echo '<script> alert("'.Yii::t('rec','New Language added successfull').'");</script>';
                } catch (Exception $exc) {
                 echo '<script> alert("'.Yii::t('rec', 'This Language alredy present').'");</script>';
@@ -27,6 +31,18 @@ class LanguageInterphace extends CFormModel {
         }
     }
     
+    private function addNewMatrix($lang){
+        $addMatrixPrepare = Yii::app()->db->createCommand('SELECT id FROM SourceMessage')->query()->readAll();
+        if(is_null($addMatrixPrepare)){
+            throw new CHttpException('500', 'Inglish matrix absent');          
+        }
+        $sql = 'INSERT INTO Message (id, language) VALUES ';
+        foreach($addMatrixPrepare as $item){
+            $sql .= '('.(int)$item['id'].', '.'"'.$lang.'"'.'),';
+        }
+        $sql = substr_replace($sql, ';', strrpos($sql, ','));
+        Yii::app()->db->createCommand($sql)->execute();
+    }
     public function deleteLanguage(){
        
         if(isset($_POST['lang']) && isset($_POST['langName'])){
