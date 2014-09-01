@@ -39,7 +39,8 @@ class OfficeController extends EController
      */
     public function actionIndex()
     {
-        $this->render('cap', array('service_msg' => 'Заглушка'));
+//        $this->render('cap', array('service_msg' => 'Заглушка'));
+        $this->redirect('/office/statistics');
     }
 
     /**
@@ -308,6 +309,12 @@ class OfficeController extends EController
     public function actionCountry()
     {
         echo json_encode(Countries::getCountriesList(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function actionCity()
+    {
+        $countryId = $_GET['countryId'];
+        echo json_encode(Cities::getCitiesListByCountry($countryId), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionPlace()

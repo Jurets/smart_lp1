@@ -58,7 +58,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option1text"> <?php echo Yii::t('common', 'COUNTRY') ?>*:</p>
         <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" <?php if($participant->country_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG51" class="css-label1" style="width: 40px; height: 40px; padding: 0"></label>
+        <label for="checkboxG51" class="css-label1"></label>
 
         <a href="#" name="label-1" class="vopros1"></a>
 
@@ -321,5 +321,8 @@ $form = $this->beginWidget('CActiveForm', array(
     /* newPurse */
     .em-14{ top: 575px; left:625px; }
 
+    select {
+       width: 246px!important;
+    }
 
 </style>
