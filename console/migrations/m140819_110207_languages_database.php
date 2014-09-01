@@ -23,7 +23,7 @@ class m140819_110207_languages_database extends CDbMigration
                 'CONSTRAINT FK_Message_SourceMessage FOREIGN KEY(id) REFERENCES SourceMessage (id) ON DELETE CASCADE ON UPDATE RESTRICT',
                 'CONSTRAINT FK_Message_Languages FOREIGN KEY(language) REFERENCES Languages (lang) ON DELETE CASCADE ON UPDATE RESTRICT',
             )
-                    ,'ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1'
+                    //,'ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1'
                     );
             Yii::import('common.components.LangDefaultInstall');
             LangDefaultInstall::install();
