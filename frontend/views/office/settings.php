@@ -194,18 +194,18 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <div id="popup-1"  class="p-6-popup"><span><?php echo Yii::t('common', 'show country to everyone user') ?></span><img class="stick"
-                                                                                src="images/popupstick.png" width="1">
+                                                                                src="/images/popupstick.png" width="1">
         </div>
 
         <div id="popup-2"  class="p-6-popup"><span><?php echo Yii::t('common', 'show city to everyone user') ?></span><img class="stick"
-                                                                                        src="images/popupstick.png"
+                                                                                        src="/images/popupstick.png"
                                                                                         width="1"></div>
 
         <div id="popup-3"  class="p-6-popup"><span><?php echo Yii::t('common', 'show skype to everyone user') ?></span><img class="stick"
-                                                                                           src="images/popupstick.png"
+                                                                                           src="/images/popupstick.png"
                                                                                            width="1"></div>
         <div id="popup-4"  class="p-6-popup"><span><?php echo Yii::t('common', 'show email to everyone user') ?></span><img class="stick"
-                                                                                        src="images/popupstick.png"
+                                                                                        src="/images/popupstick.png"
                                                                                         width="1"></div>
 
     </div>
