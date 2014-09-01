@@ -72,7 +72,6 @@
         if(isset($model->image)) {
             echo $this->module->uploadUrl .'resized-'. $model->image;
         }else{
-            var_dump($model);
         }
         ?>') no-repeat;">
         </div>
