@@ -9,12 +9,16 @@ class m140819_110207_languages_database extends CDbMigration
                 'category' => "VARCHAR(32) DEFAULT 'rec' COMMENT 'категория'",
                 'message' => "TEXT DEFAULT NULL COMMENT 'оригинал сообщения'",
                 'PRIMARY KEY (id)',
-            ));
+            )
+                    ,'ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1'
+                    );
             $this->createTable('Languages', array(
                 'lang' => "VARCHAR(32) NOT NULL COMMENT'аббревиатура языка'",
                 'name' => "VARCHAR(35) DEFAULT NULL COMMENT 'название языка'",
                 'PRIMARY KEY (lang)',
-            ));
+            )
+                    ,'ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1'
+                    );
             $this->createTable('Message', array(
                 'id' => "INT(11) NOT NULL COMMENT 'для связи с оригиналами сообщений'",
                 'language' => "VARCHAR(32) NOT NULL COMMENT 'аббревиатура языка'",
@@ -22,9 +26,12 @@ class m140819_110207_languages_database extends CDbMigration
                 'PRIMARY KEY (id, language)',
                 'CONSTRAINT FK_Message_SourceMessage FOREIGN KEY(id) REFERENCES SourceMessage (id) ON DELETE CASCADE ON UPDATE RESTRICT',
                 'CONSTRAINT FK_Message_Languages FOREIGN KEY(language) REFERENCES Languages (lang) ON DELETE CASCADE ON UPDATE RESTRICT',
-            ));
+            )
+                    ,'ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1'
+                    );
             Yii::import('common.components.LangDefaultInstall');
             LangDefaultInstall::install();
+            
 	}
 
 	public function down()
