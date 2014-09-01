@@ -20,8 +20,8 @@ class m140819_110207_languages_database extends CDbMigration
                 'language' => "VARCHAR(32) NOT NULL COMMENT 'аббревиатура языка'",
                 'translation' => "TEXT DEFAULT NULL COMMENT 'перевод сообщения'",
                 'PRIMARY KEY (id, language)',
-                'CONSTRAINT FK_Message_SourceMessage FOREIGN KEY(id) REFERENCES SourceMessage (id) ON DELETE CASCADE ON UPDATE RESTRICT',
-                'CONSTRAINT FK_Message_Languages FOREIGN KEY(language) REFERENCES Languages (lang) ON DELETE CASCADE ON UPDATE RESTRICT',
+//                'CONSTRAINT FK_Message_SourceMessage FOREIGN KEY(id) REFERENCES SourceMessage (id) ON DELETE CASCADE ON UPDATE RESTRICT',
+//                'CONSTRAINT FK_Message_Languages FOREIGN KEY(language) REFERENCES Languages (lang) ON DELETE CASCADE ON UPDATE RESTRICT',
             )
                     //,'ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1'
                     );
