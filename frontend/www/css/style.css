@@ -436,7 +436,7 @@ input {
     height: 371px;
     position: absolute;
     left: 91px;
-    top: 58px;
+    top: 30px;
 }
 
 #photo #photoIn{
@@ -489,7 +489,7 @@ input {
 
 
 
-
+    width: 530px;
     line-height: 23px;
     margin-bottom: 32px;
     color: #6c816d;
@@ -512,7 +512,7 @@ input {
 
 #ap2{
     position: absolute;
-    top: 243px;
+    top: 225px;
     height: 43px;
     left: 457px;
     color: #72806d;
