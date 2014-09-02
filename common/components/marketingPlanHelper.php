@@ -25,6 +25,7 @@ class marketingPlanHelper {
        );
        Yii::import('common.models.Mpversions');
        $model = Mpversions::activeVersion();
+       if(!isset($model->mathparams)){ throw new CHttpException ('500', 'Marketing plan version is failure. Set just one active version of marketing plan'); }
        foreach($model->mathparams as $item){
            $this->structure[$item->name] = (float)$item->value;
        }
