@@ -1,6 +1,6 @@
 <?php
 
-class RequisitesController extends EMController
+class DefaultController extends EMController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -8,6 +8,8 @@ class RequisitesController extends EMController
 	 */
 	public $layout='//layouts/column2';
 
+    public $defaultAction = 'update';
+    
 	/**
 	 * @return array action filters
 	 */
