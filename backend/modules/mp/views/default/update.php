@@ -20,4 +20,4 @@ $this->breadcrumbs=array(
 
     <h1><?php echo Yii::t('rec','Update Mpversions'); ?> <?php echo $model->id; ?></h1>
 <?php //$this->renderPartial('_addparams', array()); // отключено, см view create ?>
-<?php $this->renderPartial('_form2', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form3', array('model'=>$model)); ?>
