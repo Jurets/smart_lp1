@@ -41,8 +41,17 @@
         
         //echo $form->textFieldControlGroup($model, 'purse_investor', array('class'=>'span3'));
         echo $form->textFieldControlGroup($model, 'purse_fdl', array('class'=>'span3'));
+                    
+        //выбор супер-рефера
+        $user = Participant::model()->findByPk(Yii::app()->user->id);
+        echo $form->dropDownListControlGroup($model, 'superrefer_id', $user->getListForSuperReferalSelect(), array(
+                //'id'=>'Participant_city_id',
+                'class'=>'span5',
+                'displaySize'=>'1',
+                'prompt'=>ViewHelper::getPrompt('select super referal'),
+        ));
                        
-      //кнопка сохранения
+        //кнопка сохранения
         echo TbHtml::submitButton($model->isNewRecord ? Yii::t('rec', 'Create') : Yii::t('rec', 'Save'), array('class'=>'primary'));
         
 $this->endWidget();                           

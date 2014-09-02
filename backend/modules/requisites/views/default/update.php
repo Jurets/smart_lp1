@@ -3,9 +3,9 @@
 /* @var $model Requisites */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Requisites') => array('index'),
-    $model->id => array('view', 'id' => $model->id),
-    Yii::t('common', 'Update'),
+    //Yii::t('common', 'Requisites') => array('index'),
+    //$model->id => array('view', 'id' => $model->id),
+    Yii::t('common', 'Requisites'),
 );
 
 $this->menu = array(
