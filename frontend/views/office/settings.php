@@ -46,14 +46,36 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->textField($participant, 'last_name', array('class' => 'textbox2-1')); //ФАМИЛИЯ ?>
         <?php echo $form->error($participant, 'last_name', array('class' => 'error-message em-3')); //ФАМИЛИЯ ?>
 
+        <?php
+        foreach(range(1,31) as $d){
+        $arrayDay[$d] =  $d;}
 
+        foreach(range(1,12) as $m){
+        $arrayMonth[$m] =  $m;}
 
+        foreach(range(1900,1996) as $y){
+            $arrayYear[$y] =  $y;}
+
+        if($day{0} === "0"){
+            $day = $day{1};
+        }
+
+        if($month{0} === "0"){
+            $month = $month{1};
+        }
+        ?>
 
         <p class="sub3-1"><?php echo Yii::t('common', 'DATE OF BIRTH') ?>*:</p>
-        <?php echo CHtml::textField('date_ofb',$day, array('class' => 'textbox3-1')); //День рождения ?>
-        <?php echo CHtml::textField('month_ofb',$month, array('class' => 'textbox3-2')); //Месяц рождения ?>
-        <?php echo CHtml::textField('year_ofb',$year, array('class' => 'textbox3-3')); //Год рождения ?>
+        <?php echo Chtml::dropDownList('date_ofb', $day, $arrayMonth, array('class' => 'textbox3-2'))?>
+        <?php echo Chtml::dropDownList('month_ofb', $month, $arrayDay, array('class' => 'textbox3-1'))?>
+        <?php echo Chtml::dropDownList('year_ofb', $year, $arrayYear, array('class' => 'textbox3-3'))?>
         <?php echo $form->error($participant, 'dob' , array('class' => 'error-message em-4')); //День рождения ?>
+
+<!--        <p class="sub3-1">--><?php //echo Yii::t('common', 'DATE OF BIRTH') ?><!--*:</p>-->
+<!--        --><?php //echo CHtml::textField('date_ofb',$day, array('class' => 'textbox3-1')); //День рождения ?>
+<!--        --><?php //echo CHtml::textField('month_ofb',$month, array('class' => 'textbox3-2')); //Месяц рождения ?>
+<!--        --><?php //echo CHtml::textField('year_ofb',$year, array('class' => 'textbox3-3')); //Год рождения ?>
+<!--        --><?php //echo $form->error($participant, 'dob' , array('class' => 'error-message em-4')); //День рождения ?>
 
 
         <p class="shag-1-1-option1text"> <?php echo Yii::t('common', 'COUNTRY') ?>*:</p>
@@ -323,6 +345,14 @@ $form = $this->beginWidget('CActiveForm', array(
 
     select {
        width: 246px!important;
+    }
+
+    select.textbox3-1, select.textbox3-2{
+        width: 60px!important;
+    }
+
+    select.textbox3-3{
+        width: 120px!important;
     }
 
 </style>
