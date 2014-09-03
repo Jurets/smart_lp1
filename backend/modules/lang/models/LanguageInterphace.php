@@ -20,14 +20,13 @@ class LanguageInterphace extends CFormModel {
           try {
                $sql = 'INSERT INTO Languages (lang, name) VALUES("'.$lang.'","'.$name.'");';
                Yii::app()->db->createCommand($sql)->execute();
-               $sql2 = 'INSERT INTO SourceMessage (message) VALUES("'.$name.'");';
-               Yii::app()->db->createCommand($sql2)->execute();
-               $lastInsertId = Yii::app()->db->getLastInsertID();
-               $sql3 = 'INSERT INTO Message (id, language) VALUES('.$lastInsertId.', '.'"ru"'. ')';
-               Yii::app()->db->createCommand($sql3)->execute();
+//               $sql2 = 'INSERT INTO SourceMessage (message) VALUES("'.$name.'");';
+//               Yii::app()->db->createCommand($sql2)->execute();
+               // language was add but not bind for translate in russian SWITCH OFF
+//               $lastInsertId = Yii::app()->db->getLastInsertID();
+//               $sql3 = 'INSERT INTO Message (id, language) VALUES('.$lastInsertId.', '.'"ru"'. ')';
+//               Yii::app()->db->createCommand($sql3)->execute();
                $this->addNewMatrix($lang);
-               //Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
-               //Yii::app()->request->cookies['language'] = new CHttpCookie('language', 'ru');
                 echo '<script> alert("'.Yii::t('rec',Yii::t('rec','New Language added successfull')).'");</script>';
                 $this->showTranslation();
                } catch (Exception $exc) {
@@ -58,8 +57,9 @@ class LanguageInterphace extends CFormModel {
             $lang = $_POST['lang'];
             $langName = $_POST['langName'];
             
-            $stolenId = Yii::app()->db->createCommand('SELECT id FROM SourceMessage WHERE message="'.$langName.'";')->query()->read()['id'];
-            Yii::app()->db->createCommand('DELETE FROM Message WHERE id='.$stolenId.' AND language="ru";')->execute();
+            // Switch off for delete translation added language
+//            $stolenId = Yii::app()->db->createCommand('SELECT id FROM SourceMessage WHERE message="'.$langName.'";')->query()->read()['id'];
+//            Yii::app()->db->createCommand('DELETE FROM Message WHERE id='.$stolenId.' AND language="ru";')->execute();
             try {
                 $sql = 'DELETE FROM Languages WHERE lang="'.$lang.'";';
                 $sql2 = 'DELETE FROM SourceMessage WHERE message="'.$langName.'";';

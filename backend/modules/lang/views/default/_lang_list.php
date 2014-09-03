@@ -1,9 +1,11 @@
-<?php if(!empty($model->languages)) {
-    if(isset($_COOKIE['language'])){
-        $langsamm =  Yii::app()->language = (string)Yii::app()->request->cookies['language'];
-    }else{
-        $langsamm = 'ru';
-    }
+<?php 
+if(!empty($model->languages)) {
+//    if(isset($_COOKIE['language'])){
+//        $langsamm =  Yii::app()->language = (string)Yii::app()->request->cookies['language'];
+//    }else{
+//        $langsamm = 'ru';
+//    }
+    $langsamm = Yii::app()->language;
     ?>
 <select id="select_lang" onchange="changeLang()">
             

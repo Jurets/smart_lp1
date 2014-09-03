@@ -11,6 +11,8 @@
     </div>
 </div>
     <form id="mainform">
+        <div class="clearBoth"></div>
+        <input id="save_helper_1100" type="button" value="<?php echo Yii::t('rec', 'Edit')?>">
         <div class="translationBar">
            <?php $this->renderPartial('_form_partial', array('model'=>$model))?>       
         </div>
@@ -20,6 +22,9 @@
 </div>
 </div>
 <style>
+    .clearBoth {
+        clear: both;
+    }
     .Table{
         padding: 5px;
         width: 940px;
@@ -79,6 +84,10 @@
             });
         }
     
+    function deleteCookie(name) {
+        setCookie(name, "", { expires: -1 })
+    }
+    
     $(function(){
         $('#lang_create').click(function(){
             var langSign = $(this).parent().find('option[name=lang]').filter(':selected');
@@ -91,6 +100,8 @@
              success: function(resource){
                  $('.langblock').html(resource);
                  langName.val('<?php echo yii::t('rec','LANGUAGE')?>');
+                 document.cookie = "language="+langSign.val();
+                 location.reload();
              }
         });
         });
@@ -107,6 +118,9 @@
                  alert(resource);
              }
             });
+        });
+        $('#save_helper_1100').click(function(){
+            $('#save_1100').click();
         });
         
     });
