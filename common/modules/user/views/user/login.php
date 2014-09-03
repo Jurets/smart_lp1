@@ -35,10 +35,10 @@ $this->breadcrumbs=array(
 	
 	<?php echo CHtml::errorSummary($model); ?>
     
-    <div class="row">
-        <?php echo CHtml::activeLabelEx($model,'role'); ?>
-        <?php echo CHtml::activeDropDownList($model,'role',array( 'суперадмин', 'админ', 'модератор')) ?>
-    </div>
+    <!--<div class="row">
+        <?php //echo CHtml::activeLabelEx($model,'role'); ?>
+        <?php //echo CHtml::activeDropDownList($model,'role',array( 'суперадмин', 'админ', 'модератор')) ?>
+    </div>-->
     	
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'username'); ?>
@@ -68,14 +68,14 @@ $this->breadcrumbs=array(
         <?=CHtml::activeTextField($model, 'verifyCode')?>
 	</div>
 	
-	<div class="row">
+	<!--<div class="row">
 		<p class="hint">
-		<?php echo CHtml::link(Yii::t('rec',"Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(Yii::t('rec',"Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
+		<?php //echo CHtml::link(Yii::t('rec',"Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(Yii::t('rec',"Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
 		</p>
-	</div>
+	</div>-->
 	
 	<div class="row rememberMe">
-		<?php echo CHtml::activeCheckBox($model,'rememberMe'); ?>
+		<?php echo CHtml::activeCheckBox($model,'rememberMe', array('style' => 'float: left; margin-right: 10px;')); ?>
 		<?php echo CHtml::activeLabelEx($model,'rememberMe'); ?>
 	</div>
 
