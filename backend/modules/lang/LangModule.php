@@ -1,13 +1,14 @@
 <?php
 
-class LangModule extends CWebModule
+class LangModule extends BaseModule
 {
     public $langShow = array('/lang');
+    
 	public function init()
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 			'lang.models.*',

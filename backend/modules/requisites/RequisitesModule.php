@@ -1,6 +1,6 @@
 <?php
 
-class RequisitesModule extends CWebModule
+class RequisitesModule extends BaseModule
 {
     public $requisitesShow = array('/requisites');
 
@@ -8,26 +8,13 @@ class RequisitesModule extends CWebModule
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 			'requisites.models.*',
 			'requisites.components.*',
 		));
 	}
-
-    /**
-     * @param $str
-     * @param $params
-     * @param $dic
-     * @return string
-     */
-    public static function t($str='',$params=array(),$dic='Requisites') {
-        if (Yii::t("RequisitesModule", $str)==$str)
-            return Yii::t("RequisitesModule.".$dic, $str, $params);
-        else
-            return Yii::t("RequisitesModule", $str, $params);
-    }
 
 	public function beforeControllerAction($controller, $action)
 	{

@@ -1,13 +1,14 @@
 <?php
 
-class FaqmModule extends CWebModule
+class FaqmModule extends BaseModule
 {
-        public $faqmShow = array('/faqm'); //для связи с главным меню
+    public $faqmShow = array('/faqm'); //для связи с главным меню
+    
 	public function init()
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 			'faqm.models.*',
@@ -15,14 +16,6 @@ class FaqmModule extends CWebModule
 		));
 	}
 
-        /* localisation`s element */
-        public static function t($str='',$params=array(),$dic='faqm') {
-		if (Yii::t("faqm", $str)==$str)
-			return Yii::t("faqmModule.".$dic, $str, $params);
-		else
-			return Yii::t("faqmModule", $str, $params);
-	}
-        
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

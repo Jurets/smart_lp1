@@ -1,13 +1,14 @@
 <?php
 
-class MpModule extends CWebModule
+class MpModule extends BaseModule
 {
-        public $mpShow = array('/mp');
+    public $mpShow = array('/mp');
+        
 	public function init()
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 			'mp.models.*',
@@ -15,14 +16,6 @@ class MpModule extends CWebModule
 		));
 	}
 
-        /* localisation`s element */
-        public static function t($str='',$params=array(),$dic='mp') {
-		if (Yii::t("mp", $str)==$str)
-			return Yii::t("mpModule.".$dic, $str, $params);
-		else
-			return Yii::t("mpModule", $str, $params);
-	}
-        
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

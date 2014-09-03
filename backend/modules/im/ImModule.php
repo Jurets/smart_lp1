@@ -1,13 +1,14 @@
 <?php
 
-class ImModule extends CWebModule
+class ImModule extends BaseModule
 {
-        public $imShow = array('/im'); //для связи с главным меню 
+    public $imShow = array('/im'); //для связи с главным меню 
+    
 	public function init()
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 			'im.models.*',
@@ -15,14 +16,6 @@ class ImModule extends CWebModule
 		));
 	}
 
-        /* localisation`s element */
-        public static function t($str='',$params=array(),$dic='im') {
-		if (Yii::t("im", $str)==$str)
-			return Yii::t("imModule.".$dic, $str, $params);
-		else
-			return Yii::t("imModule", $str, $params);
-	}
-        
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

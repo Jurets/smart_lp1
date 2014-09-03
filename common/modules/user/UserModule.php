@@ -8,7 +8,7 @@
  * @version $Id: UserModule.php 132 2011-10-30 10:45:01Z mishamx $
  */
 
-class UserModule extends CWebModule
+class UserModule extends BaseModule
 {
 	/**
 	 * @var int
@@ -121,7 +121,7 @@ class UserModule extends CWebModule
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 			'user.models.*',
@@ -155,12 +155,12 @@ class UserModule extends CWebModule
 	 * @param $dic
 	 * @return string
 	 */
-	public static function t($str='',$params=array(),$dic='user') {
+	/*public static function t($str='',$params=array(),$dic='user') {
 		if (Yii::t("UserModule", $str)==$str)
 		    return Yii::t("UserModule.".$dic, $str, $params);
         else
             return Yii::t("UserModule", $str, $params);
-	}
+	}*/
 	
 	/**
 	 * @return hash string.

@@ -18,18 +18,4 @@ class NewsModule extends BaseModule
         ));
     }
 
-    /**
-     * @param $str
-     * @param $params
-     * @param $dic
-     * @return string
-     */
-    public static function t($str = '', $params = array(), $dic = 'news')
-    {
-        if (Yii::t("NewsModule", $str) == $str)
-            return Yii::t("NewsModule." . $dic, $str, $params);
-        else
-            return Yii::t("NewsModule", $str, $params);
-    }
-
 }

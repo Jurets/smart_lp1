@@ -1,5 +1,5 @@
 <?php
-class CountriesModule extends CWebModule
+class CountriesModule extends BaseModule
 {
 	// path
 	public $countriesShow = array('/countries/countries');
@@ -7,7 +7,7 @@ class CountriesModule extends CWebModule
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 				'countries.models.*',
@@ -15,19 +15,6 @@ class CountriesModule extends CWebModule
 		));
 	}
 
-	/**
-	 * @param $str
-	 * @param $params
-	 * @param $dic
-	 * @return string
-	 */
-	public static function t($str='',$params=array(),$dic='countries') {
-		if (Yii::t("CountriesModule", $str)==$str)
-			return Yii::t("CountriesModule.".$dic, $str, $params);
-		else
-			return Yii::t("CountriesModule", $str, $params);
-	}
-	
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))
