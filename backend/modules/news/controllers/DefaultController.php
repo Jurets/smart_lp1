@@ -153,10 +153,16 @@ class DefaultController extends EMController
 	public function actionDelete($id)
 	{
 		$model=$this->loadModel($id);
-		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image))
-			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image);
-		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR .'resized-'. $model->image))
-			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . 'resized-' .$model->image);
+//		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image))
+//			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image);
+//		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR .'resized-'. $model->image))
+//			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . 'resized-' .$model->image);
+                if(is_file(Yii::app()->params['upload.path'] . $model->image))
+			unlink(Yii::app()->params['upload.path'] . $model->image);
+		if(is_file(Yii::app()->params['upload.path'] .'resized-'. $model->image))
+			unlink(Yii::app()->params['upload.path']. 'resized-' . $model->image);
+                if(is_file(Yii::app()->params['upload.path'] .'origin-'. $model->image))
+			unlink(Yii::app()->params['upload.path']. 'origin-' . $model->image);
 			
 		$model->delete();
 

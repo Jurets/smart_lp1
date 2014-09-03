@@ -6,7 +6,7 @@
     </div>
     <div class="createLanguage">
         <?php echo $locale_list ?>
-        <input type="text" name="name" value="<?php echo Yii::t('rec', yii::t('rec','LANGUAGE'))?>" onfocus="this.value=''">
+        <input type="text" name="name" value="<?php echo yii::t('rec','LANGUAGE')?>" onfocus="this.value=''">
         <input id="lang_create" style="margin-bottom:10px;" type="button" value="<?php echo Yii::t('rec', 'Create')?>"
     </div>
 </div>

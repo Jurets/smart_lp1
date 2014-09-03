@@ -18,6 +18,7 @@ class News extends CActiveRecord
 {
     /* Image upload by standard equipment */
 
+    public $lang;
     public $illustration;
     public $attended = 'attended'; // сигнатура (имя класса) непрочитанной статьи
 
