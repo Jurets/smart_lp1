@@ -44,8 +44,9 @@ class News extends CActiveRecord
             array('title', 'length', 'max' => 75),
             //array('announcement', 'length', 'max'=>255),
             array('image', 'length', 'max' => 255),
+            array('lng', 'length', 'max' => 2),
             array('illustration', 'file', 'types' => 'jpg, jpeg, gif, png', 'allowEmpty' => true),
-            array('activated, title,content', 'safe'),
+            array('activated, title, content', 'safe'),
                 // The following rule is used by search().
                 // @todo Please remove those attributes that should not be searched.
                 //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
@@ -71,6 +72,7 @@ class News extends CActiveRecord
     {
         return array(
             'id' => 'ID',
+            'lng' => BaseModule::t('rec','LANGUAGE'),
             'author' => BaseModule::t("rec", "Author"),
             'created' => BaseModule::t('rec', 'Created'),
             'activated' => BaseModule::t('rec', 'Activated'),
@@ -195,5 +197,23 @@ class News extends CActiveRecord
         }
         return $models;
     }
-
+    // заменяет собой стандартный save в экшне update. В create достаточно лишь перезаписи атрибута lng значением Yii::app()->language
+    public function saveDependLanguage() {
+        if($this->lng == Yii::app()->language){ // обновление
+            $a = $this->save();
+        }else{ // добавление
+            $record = new News;
+            $record->attributes = $this->attributes;
+            $record->lng = Yii::app()->language;
+            $record->activated = strtotime($this->activated);
+            $record->activated = date('Y-m-d H:i:s', $record->activated);
+            $record->created = strtotime($this->created);
+            $record->created = date('Y-m-d H:i:s', $record->created);
+            $a = $record->save();
+        }
+        if(!$a)
+            return false;
+        else
+            return true;
+    }
 }
