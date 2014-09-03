@@ -44,7 +44,7 @@ $this->beginContent('//layouts/common');
                 <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark">ПОДНЯТЬ СТАТУС</a>
                 <li> <a href="#"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
                 <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Settings'); ?></a> </li>
-                <li> <a href="<?= Yii::app()->createAbsoluteUrl('site/logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Exit'); ?></a> </li>
+                <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Exit'); ?></a> </li>
             </ul>
         </div>
 

@@ -179,4 +179,15 @@ class Requisites extends CActiveRecord
                 ->execute();
     }
 
+    /**
+     *  получить кошелёк бизнес-клуба
+     */
+    public static function superReferId()
+    {
+        if ($instance = self::getInstance())
+            return $instance->superrefer_id;
+        else
+            return false;
+    }
+
 }

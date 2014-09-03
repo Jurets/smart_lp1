@@ -34,9 +34,14 @@ class RegisterController extends EController
     * Регистрация в системе
     */
     public function actionIndex($user = '') {
-        if (empty($user)) {
-            throw New CHttpException(404, "Регистрация разрешена только с личной страницы реферала");
-        } else if (!$inviter = Participant::model()->with('inviteCount')->findByAttributes(array('username'=>$user))) {
+        if (empty($user)) {  //если юзер не задан
+            if ($superrefer = Participant::model()->findByPk(Requisites::superReferId())) { //получить из реквизитов ид супер-рефера
+                $user = $superrefer->username;
+                $this->redirect(Yii::app()->createAbsoluteUrl('register/'.$user));
+            } else
+                throw New CHttpException(404, "Регистрация разрешена только с личной страницы реферала");
+        }
+        if (!$inviter = Participant::model()->with('inviteCount')->findByAttributes(array('username'=>$user))) {
             throw New CHttpException(404, "Не найден реферал с именем $user");
         }
         
