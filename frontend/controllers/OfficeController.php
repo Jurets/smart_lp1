@@ -104,7 +104,12 @@ class OfficeController extends EController
 
         $places = Countries::getCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
-        $gmtZone = Gmt::getTimezonesList();
+
+        foreach( Gmt::getTimezonesList() as $key=>$timezone){
+            $t = time() + DataHelper::get_timezone_offset($timezone);
+            $gmtZone[$key] = sprintf('%s  %s', date('H:i', $t), $timezone);
+        }
+
         $participant->newPurse = $participant->purse;
         // путь для сохранения файла
         $path = Yii::app()->params['upload.path'];
@@ -189,7 +194,7 @@ class OfficeController extends EController
             } else {
                 $participant->photo = $oldPhoto;
             }
-            
+
            if(!$participant->hasErrors()){
                 Yii::app()->user->setFlash('settings saved', "Data saved successfull");
             }

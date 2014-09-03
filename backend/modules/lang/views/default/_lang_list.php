@@ -2,11 +2,11 @@
     if(isset($_COOKIE['language'])){
         $langsamm =  Yii::app()->language = (string)Yii::app()->request->cookies['language'];
     }else{
-        $langsamm = 'en';
+        $langsamm = 'ru';
     }
     ?>
 <select id="select_lang" onchange="changeLang()">
-            <option name="lang" value="en">english</option>
+            
         <?php foreach($model->languages as $lang) { var_dump($lang['lang']) ?>
             <option <?php echo ($lang['lang']==$langsamm) ?'selected' : ''?> name="lang" value="<?php echo $lang['lang']?>"><?php echo Yii::t('rec',$lang['name'])?></option>
         <?php } ?>
@@ -15,6 +15,6 @@
         <?php }else{ ?>
         <!--<div><?php //echo Yii::t('rec','Missing Languages') ?></div>-->
         <select id="select_lang" onchange="changeLang()">
-            <option name="lang" value="en">english</option>
+            
         </select>
         <?php } ?>

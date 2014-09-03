@@ -6,7 +6,7 @@
     </div>
     <div class="createLanguage">
         <?php echo $locale_list ?>
-        <input type="text" name="name" value="<?php echo Yii::t('rec', 'Language name (in english)')?>" onfocus="this.value=''">
+        <input type="text" name="name" value="<?php echo Yii::t('rec', yii::t('rec','LANGUAGE'))?>" onfocus="this.value=''">
         <input id="lang_create" style="margin-bottom:10px;" type="button" value="<?php echo Yii::t('rec', 'Create')?>"
     </div>
 </div>
@@ -53,7 +53,6 @@
 <script>
     function changeLang(){
         var thisLang = $('#select_lang option:selected');
-        if(thisLang.val() === '-') return 0;
         $.ajax({
             type: "POST",
             url: "<?php echo $this->createAbsoluteUrl('/lang/default/showTranslation')?>",
@@ -74,6 +73,7 @@
                 success: function(resource){
                     $('.langblock').html(resource);
                     $('.translationBar').html('&nbsp;');
+                    document.cookie = "language=ru";
                     location.reload();
                 }
             });
@@ -90,15 +90,13 @@
              data: {'lang':langSign.val(), 'name':langName.val()},
              success: function(resource){
                  $('.langblock').html(resource);
-                 langName.val('<?php echo Yii::t('rec', 'Language name (en)')?>');
-                 location.reload();
+                 langName.val('<?php echo yii::t('rec','LANGUAGE')?>');
              }
         });
         });
         
         $('#save_1100').click(function(){
             var lang = $('#select_lang option:selected').val();
-            if(lang === '-'){return 0;}
             $('#lang').val(lang);
             $.ajax({
              type: "POST",
