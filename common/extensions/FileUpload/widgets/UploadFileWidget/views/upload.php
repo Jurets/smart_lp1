@@ -2,7 +2,7 @@
     <?php //echo $form->hiddenField($model, 'image'); ?>
     <?php echo CHtml::activeHiddenField($model, 'image'); ?>
     <?php //$form->label($model, 'Upload illustration') ?>
-    <?php echo CHtml::activeLabel($model, Yii::t('rec','Upload Illustration')) ?>
+    <?php echo CHtml::activeLabel($model, BaseModule::t('rec','Upload Illustration')) ?>
 
     <div class="news-image-preview" id="news-image-preview" style="width: <?php echo $params['width'];?>px; height: <?php echo $params['height'];?>px; border: 1px solid gray; background: url('<?php
             echo (isset($model->image)) ? '/admin'.$model->UploadImage : '' /*/admin/img/img-gate.png';*/

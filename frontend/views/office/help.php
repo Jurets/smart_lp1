@@ -11,7 +11,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
 </div>
 
 <div id="accordion">
-    <h3><?php echo Yii::t('common', 'Finance') ?></h3>
+    <h3><?php echo BaseModule::t('common', 'Finance') ?></h3>
     <div class="accordionContent">
         <?php
         if(isset($arrCategories['finance'])){
@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
         }else{ echo 'Нет данных.'; }
         ?>
     </div>
-    <h3><?php echo Yii::t('common', 'Offers') ?></h3>
+    <h3><?php echo BaseModule::t('common', 'Offers') ?></h3>
     <div class="accordionContent">
 
         <?php if(isset($arrCategories['offer'])){
@@ -37,7 +37,7 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
         }else{ echo 'Нет данных.'; }
         ?>
     </div>
-    <h3><?php echo Yii::t('common', 'Site work') ?></h3>
+    <h3><?php echo BaseModule::t('common', 'Site work') ?></h3>
     <div class="accordionContent">
         <?php
         if(isset($arrCategories['site'])){

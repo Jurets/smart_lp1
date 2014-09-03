@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	Yii::t('rec','Users')=>array('/user'),
-	Yii::t('rec', 'Manage'),
+	BaseModule::t('rec','Users')=>array('/user'),
+	BaseModule::t('rec', 'Manage'),
 );
 
 $this->menu=array(
@@ -9,9 +9,9 @@ $this->menu=array(
     array('label'=>UserModule::t('Manage Users'), 'url'=>array('admin')),
     array('label'=>UserModule::t('Manage Profile Field'), 'url'=>array('profileField/admin')),
     array('label'=>UserModule::t('List User'), 'url'=>array('/user')),*/
-    array('label'=>Yii::t('rec','Create User'), 'url'=>array('create')),
-    array('label'=>Yii::t('rec','Participants structure'), 'url'=>array('admin/structure/')),
-    array('label'=>Yii::t('rec','BusinessClub structure'), 'url'=>array('admin/bcstructure/')),
+    array('label'=>BaseModule::t('rec','Create User'), 'url'=>array('create')),
+    array('label'=>BaseModule::t('rec','Participants structure'), 'url'=>array('admin/structure/')),
+    array('label'=>BaseModule::t('rec','BusinessClub structure'), 'url'=>array('admin/bcstructure/')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -29,10 +29,10 @@ $('.search-form form').submit(function(){
 
 ?>
 
-<h1><?php echo Yii::t('rec',"Participants structure"); ?></h1>
+<h1><?php echo BaseModule::t('rec',"Participants structure"); ?></h1>
 
 
-<p><?php echo htmlspecialchars_decode(Yii::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done."))); ?></p>
+<p><?php echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done."))); ?></p>
 <?php //echo CHtml::link(UserModule::t('Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display: block;">
 <?php $this->renderPartial('_search',array(
@@ -118,7 +118,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     'options' => array(
                         'class'=>'icon-th-list',
                         'rel' => 'nofollow',
-                        'title' => Yii::t('rec',"See structure", array(), 'participant'),
+                        'title' => BaseModule::t('rec',"See structure", array(), 'participant'),
                     ),
                     'visible' => '($data->superuser != 1) && ($data->subCount > 0)',
                 ),

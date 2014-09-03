@@ -29,7 +29,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ));
 ?>
 
-<p class="sub1"><?php echo Yii::t('common', 'USERNAME') ?>:</p>
+<p class="sub1"><?php echo BaseModule::t('common', 'USERNAME') ?>:</p>
 <?php echo $form->textField($participant, 'username', array('class'=>'textbox1')); //логин ?>
 <?php echo $form->error($participant, 'username', array('class'=>'error-message em-1')); //логин ?>
 
@@ -37,7 +37,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo $form->textField($participant, 'email', array('class'=>'textbox2')); //email ?>
 <?php echo $form->error($participant, 'email', array('class'=>'error-message em-2')); //логин ?>
 
-<p class="shag-1-1-option2text"><?php echo Yii::t('common', 'COUNTRY') ?>: </p>
+<p class="shag-1-1-option2text"><?php echo BaseModule::t('common', 'COUNTRY') ?>: </p>
 <?php echo $form->dropDownList($participant, 'country_id', Countries::getCountriesList(), array(
     'id'=>'Participant_country_id',
     'class'=>'shag-1-1-option2',
@@ -53,7 +53,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo $form->error($participant, 'country_id', array('class'=>'error-message em-3')); //логин ?>
 
 
-<p class="shag-1-1-option1text">  <?php echo Yii::t('common', 'CITY') ?>:</p>
+<p class="shag-1-1-option1text">  <?php echo BaseModule::t('common', 'CITY') ?>:</p>
 <?php echo $form->dropDownList($participant, 'city_id', Cities::getCitiesListByCountry($participant->country_id), array(
     'id'=>'Participant_city_id',
     'class'=>'shag-1-1-option1',
@@ -62,17 +62,17 @@ $form = $this->beginWidget('CActiveForm', array(
 )); ?>
 <?php echo $form->error($participant, 'city_id', array('class'=>'error-message em-4')); //логин ?>
 
-<p class="shag-1-1-option3text">  <?php echo Yii::t('common', 'LANGUAGE') ?>:</p>
+<p class="shag-1-1-option3text">  <?php echo BaseModule::t('common', 'LANGUAGE') ?>:</p>
 <select class="shag-1-1-option3">
-    <option value="volvo"><?php echo Yii::t('common', 'RUSSIAN') ?></option>
-    <option value="saab"><?php echo Yii::t('common', 'RUSSIAN2') ?></option>
+    <option value="volvo"><?php echo BaseModule::t('common', 'RUSSIAN') ?></option>
+    <option value="saab"><?php echo BaseModule::t('common', 'RUSSIAN2') ?></option>
 </select>                          
 
-<p class="shag-1-1-option4text">  <?php echo Yii::t('common', 'AVATAR') ?>:</p>
+<p class="shag-1-1-option4text">  <?php echo BaseModule::t('common', 'AVATAR') ?>:</p>
 
 
 <!--<div id="shag-1-1-avatar"></div>-->
-<!--<a href="#"><span id="shag-1-1-vibrat">--><?php //echo Yii::t('common', 'SELECT IMAGE') ?><!--</span></a>-->
+<!--<a href="#"><span id="shag-1-1-vibrat">--><?php //echo BaseModule::t('common', 'SELECT IMAGE') ?><!--</span></a>-->
 
 
 <?php //$this->widget('common.extensions.FileUpload.widgets.UploadFileWidget.UploadFileWidget',
@@ -87,7 +87,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php } else{ ?>
     <div id="shag-1-1-avatar"></div>
 <?php } ?>
-<div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo Yii::t('common', 'SELECT IMAGE') ?></span>
+<div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo BaseModule::t('common', 'SELECT IMAGE') ?></span>
     <?php echo $form->fileField($participant, 'photo',array('class'=>'shag-fileFiled')); ?>
     <?php //echo CHtml::fileField('photo[]','',array('class'=>'shag-fileFiled')); ?>
 </div>
@@ -97,7 +97,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 <p class="sub3">
-    <?php echo Yii::t('common', 'I agree with the rules and accept') ?>
+    <?php echo BaseModule::t('common', 'I agree with the rules and accept') ?>
     <?php 
    /* echo TbHtml::linkButton('пользовательское соглашение', array(
 //'style' => TbHtml::BUTTON_COLOR_PRIMARY,
@@ -106,13 +106,13 @@ $form = $this->beginWidget('CActiveForm', array(
 //'data-target' => '#sogloshenie',
     'onclick'=>'js:$("sogloshenie").show',
 ));*/ ?>
-    <a id="open-btn" href="#"><?php echo Yii::t('common', 'Terms and conditions') ?></a>
+    <a id="open-btn" href="#"><?php echo BaseModule::t('common', 'Terms and conditions') ?></a>
 </p>
 <?php echo $form->checkBox($participant, 'rulesAgree', array('class'=>'css-checkbox', 'readonly'=>true)); //согласие с ПользСоглашением ?>
 <label for="Participant_rulesAgree" class="css-label"></label>
 <?php echo $form->error($participant, 'rulesAgree', array('class'=>'error-message em-5')); //логин ?>
 
-<?php echo CHtml::submitButton(Yii::t('common', 'Next'), array('class'=>'btn-style-green')); ?>
+<?php echo CHtml::submitButton(BaseModule::t('common', 'Next'), array('class'=>'btn-style-green')); ?>
 
 <?php $this->endWidget(); ?>
 
@@ -134,7 +134,7 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
    
 <div id='sogloshenie' style="display: none;">
     <p id='shag-1-2-textArea' > 
-        <span><?php echo Yii::t('common', 'Terms and conditions') ?></span><br><br>
+        <span><?php echo BaseModule::t('common', 'Terms and conditions') ?></span><br><br>
 
         Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для  текстов на латинице с начала XVI века. В то время некий
         безымянный печатник со<br>здал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изм<br>енений пять

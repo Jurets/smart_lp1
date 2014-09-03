@@ -27,10 +27,10 @@ $this->beginContent('//layouts/common');
         <ul id="nav">
             <li> <a href="#" class="flag">  </a> </li>
             <li> <a href="#" class="in">  </a> </li>
-            <li> <a href="#"> <?php echo Yii::t('common', 'OPPORTUNITIES'); ?> </a> </li>
-            <li> <a href="#"> <?php echo Yii::t('common', 'RULES'); ?> </a> </li>
-            <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
-            <li> <a href="#" class="moveRight open-login"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
+            <li> <a href="#"> <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?> </a> </li>
+            <li> <a href="#"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
+            <li> <a href="#"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+            <li> <a href="#" class="moveRight open-login"> <?php echo BaseModule::t('common', 'LOGIN'); ?> </a> </li>
             
         </ul>
     </div>
@@ -47,12 +47,12 @@ $this->beginContent('//layouts/common');
 
     <div id="content">
 
-        <h2 id="shag-1-1-h3" ><?php echo Yii::t('common', 'NEW MEMBER REGISTRATION') ?></h2>
+        <h2 id="shag-1-1-h3" ><?php echo BaseModule::t('common', 'NEW MEMBER REGISTRATION') ?></h2>
         <div id="topShagLine"></div>
-        <div class="btn-style1 <?= ($this->step == 1) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 1'); ?></div>
-        <div class="btn-style2 <?= ($this->step == 2) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 2'); ?></div>
-        <div class="btn-style3 <?= ($this->step == 3) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 3'); ?></div>
-        <div class="btn-style4 <?= ($this->step == 4) ? 'active-step' : '' ?>"> <?php echo Yii::t('common', 'STEP 4'); ?></div>
+        <div class="btn-style1 <?= ($this->step == 1) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 1'); ?></div>
+        <div class="btn-style2 <?= ($this->step == 2) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 2'); ?></div>
+        <div class="btn-style3 <?= ($this->step == 3) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 3'); ?></div>
+        <div class="btn-style4 <?= ($this->step == 4) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 4'); ?></div>
         <?php
 //            //модель для авторизации юзера
         $userLogin = New UserLogin();

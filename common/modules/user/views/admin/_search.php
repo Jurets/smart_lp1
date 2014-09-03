@@ -22,7 +22,7 @@
             echo $form->textFieldControlGroup($model, 'email', array('class'=>'span5'));
             //здесь будут рефер
 
-            echo TbHtml::submitButton(Yii::t('rec', 'Search'));
+            echo TbHtml::submitButton(BaseModule::t('rec', 'Search'));
 
         $this->endWidget(); 
     ?>

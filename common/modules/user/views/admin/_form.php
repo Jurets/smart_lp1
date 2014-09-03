@@ -97,7 +97,7 @@
         )); 
         
       //кнопка сохранения
-        echo TbHtml::submitButton($model->isNewRecord ? Yii::t('rec', 'Create') : Yii::t('rec', 'Save'), array('class'=>'primary'));
+        echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec', 'Create') : BaseModule::t('rec', 'Save'), array('class'=>'primary'));
         
 $this->endWidget(); ?>
 

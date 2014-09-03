@@ -138,22 +138,22 @@ class Participant extends User
     public function attributeLabels()
     {
         return CMap::mergeArray(parent::attributeLabels(), array(
-                    'create_at' => Yii::t('rec',"Created"),
-                    'username' => Yii::t('rec',"Domain"),
-                    'first_name' => Yii::t('rec',"Firstname"),
-                    'last_name' => Yii::t('rec',"Lastname"),
-                    'city_id' => Yii::t('rec',"City"),
-                    'country_id' => Yii::t('rec',"Country"),
-                    'structure' => Yii::t('rec',"Structure"),
-                    'business' => Yii::t('rec',"Business Club"),
-                    'refer_id' => Yii::t('rec',"Referal"),
-                    'tariff_id' => Yii::t('rec',"Tariff"),
-                    'phone' => Yii::t('rec',"Phone"),
-                    'skype' => Yii::t('rec',"Skype"),
-                    'dob' => Yii::t('rec',"Birthday"),
-                    'gmt_id' => Yii::t('rec',"Gmt"),
-                    'income' => Yii::t('rec',"Income"),
-                    'transfer_fund' => Yii::t('rec',"Transfer to the Fund"),
+                    'create_at' => BaseModule::t('rec',"Created"),
+                    'username' => BaseModule::t('rec',"Domain"),
+                    'first_name' => BaseModule::t('rec',"Firstname"),
+                    'last_name' => BaseModule::t('rec',"Lastname"),
+                    'city_id' => BaseModule::t('rec',"City"),
+                    'country_id' => BaseModule::t('rec',"Country"),
+                    'structure' => BaseModule::t('rec',"Structure"),
+                    'business' => BaseModule::t('rec',"Business Club"),
+                    'refer_id' => BaseModule::t('rec',"Referal"),
+                    'tariff_id' => BaseModule::t('rec',"Tariff"),
+                    'phone' => BaseModule::t('rec',"Phone"),
+                    'skype' => BaseModule::t('rec',"Skype"),
+                    'dob' => BaseModule::t('rec',"Birthday"),
+                    'gmt_id' => BaseModule::t('rec',"Gmt"),
+                    'income' => BaseModule::t('rec',"Income"),
+                    'transfer_fund' => BaseModule::t('rec',"Transfer to the Fund"),
         ));
     }
 
@@ -604,7 +604,7 @@ class Participant extends User
         if ($id === $id_user_invited) {
             return array(
                 'result' => false,
-                'description' => Yii::t('common', "You can't add yourself")
+                'description' => BaseModule::t('common', "You can't add yourself")
             );
         }
 
@@ -620,7 +620,7 @@ class Participant extends User
         if (!empty($res)) {
             return array(
                 'result' => false,
-                'description' => Yii::t('common', 'The User has already been added')
+                'description' => BaseModule::t('common', 'The User has already been added')
             );
         }
         $res = $command->insert('yiichat_list', array(
@@ -630,12 +630,12 @@ class Participant extends User
         if ($res) {
             return array(
                 'result' => true,
-                'description' => Yii::t('common', 'The User has been added successfuly')
+                'description' => BaseModule::t('common', 'The User has been added successfuly')
             );
         } else {
             return array(
                 'result' => false,
-                'description' => Yii::t('common', 'The User has not been added')
+                'description' => BaseModule::t('common', 'The User has not been added')
             );
         }
     }

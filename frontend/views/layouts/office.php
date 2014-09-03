@@ -38,13 +38,13 @@ $this->beginContent('//layouts/common');
                 <div id="bgIn"></div>
                 <li> <a href="#" class="flag">  </a> </li>
                 <li> <a class="in" style="cursor: pointer;">  </a> </li>
-                <li> <a href="#"> &nbsp; <?php echo Yii::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
-                <li> <a href="#">  <?php echo Yii::t('common', 'RULES'); ?>  </a> </li>
-                <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?> </a> </li>
+                <li> <a href="#"> &nbsp; <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
+                <li> <a href="#">  <?php echo BaseModule::t('common', 'RULES'); ?>  </a> </li>
+                <li> <a href="#"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?> </a> </li>
                 <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark">ПОДНЯТЬ СТАТУС</a>
                 <li> <a href="#"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
-                <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Settings'); ?></a> </li>
-                <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Exit'); ?></a> </li>
+                <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Settings'); ?></a> </li>
+                <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
             </ul>
         </div>
 
@@ -56,14 +56,14 @@ $this->beginContent('//layouts/common');
                     'id' => 'nav2',
                     'activeCssClass' => 'myitem-active',
                     'items' => array(
-                        array('label' => Yii::t('common', 'STATISTICS'), 'url' => array('office/statistics'), 'itemOptions' => array('class' => 'btn-style btn-style1 ')),
-                        array('label' => Yii::t('common', 'STRUCTURE'), 'url' => array('office/structure'), 'itemOptions' => array('class' => 'btn-style btn-style2')),
-                        array('label' => Yii::t('common', 'NEWS'), 'url' => array('office/news'), 'itemOptions' => array('class' => 'btn-style btn-style3')),
-                        array('label' => Yii::t('common', 'CHAT'), 'url' => array('office/chat'), 'itemOptions' => array('class' => 'btn-style btn-style4')),
-                        array('label' => Yii::t('common', 'INVITATION'), 'url' => array('office/invitation'), 'itemOptions' => array('class' => 'btn-style btn-style5')),
-                        array('label' => Yii::t('common', 'SETTINGS'), 'url' => array('office/settings'), 'itemOptions' => array('class' => 'btn-style btn-style6')),
-                        array('label' => Yii::t('common', 'HELP'), 'url' => array('office/help'), 'itemOptions' => array('class' => 'btn-style btn-style7')),
-                        array('label' => Yii::t('common', 'RULES'), 'url' => array('office/specification'), 'itemOptions' => array('class' => 'btn-style btn-style8'))
+                        array('label' => BaseModule::t('common', 'STATISTICS'), 'url' => array('office/statistics'), 'itemOptions' => array('class' => 'btn-style btn-style1 ')),
+                        array('label' => BaseModule::t('common', 'STRUCTURE'), 'url' => array('office/structure'), 'itemOptions' => array('class' => 'btn-style btn-style2')),
+                        array('label' => BaseModule::t('common', 'NEWS'), 'url' => array('office/news'), 'itemOptions' => array('class' => 'btn-style btn-style3')),
+                        array('label' => BaseModule::t('common', 'CHAT'), 'url' => array('office/chat'), 'itemOptions' => array('class' => 'btn-style btn-style4')),
+                        array('label' => BaseModule::t('common', 'INVITATION'), 'url' => array('office/invitation'), 'itemOptions' => array('class' => 'btn-style btn-style5')),
+                        array('label' => BaseModule::t('common', 'SETTINGS'), 'url' => array('office/settings'), 'itemOptions' => array('class' => 'btn-style btn-style6')),
+                        array('label' => BaseModule::t('common', 'HELP'), 'url' => array('office/help'), 'itemOptions' => array('class' => 'btn-style btn-style7')),
+                        array('label' => BaseModule::t('common', 'RULES'), 'url' => array('office/specification'), 'itemOptions' => array('class' => 'btn-style btn-style8'))
                     ,)
                 ));
                 ?>

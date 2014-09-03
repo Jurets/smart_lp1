@@ -27,13 +27,22 @@ class BaseModule extends CWebModule
 	 * @param $dic
 	 * @return string
 	 */
-	public static function t($str='', $params=array(), $dic='default') {//DebugBreak();
+    //public static function t($dic, $str='', $params=array(), $dic='default') {DebugBreak();
+	public static function t($dic='rec', $str='', $params=array()) {//DebugBreak();
 		//$dic = !empty($dic) ? $dic : $this->dictionary;
-        $moduleName = get_called_class(); //__CLASS__; $this->name
+        /*$moduleName = get_called_class(); //__CLASS__; $this->name
         if (Yii::t($moduleName, $str)==$str)
 			return Yii::t($moduleName.".".$dic, $str, $params);
 		else
-			return Yii::t($moduleName, $str, $params);
+			return Yii::t($moduleName, $str, $params);*/
+            
+        $trans = Yii::t($dic, $str, $params);
+        if ($trans == $str) {
+            $res = Yii::t('rec', $str, $params, null /*Yii::app()->messages*/, 'ru');
+        } else {
+            $res = $trans;
+        }
+        return $res;
 	}
 	
 	public function beforeControllerAction($controller, $action)

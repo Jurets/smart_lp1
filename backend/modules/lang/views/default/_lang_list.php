@@ -10,12 +10,12 @@ if(!empty($model->languages)) {
 <select id="select_lang" onchange="changeLang()">
             
         <?php foreach($model->languages as $lang) { var_dump($lang['lang']) ?>
-            <option <?php echo ($lang['lang']==$langsamm) ?'selected' : ''?> name="lang" value="<?php echo $lang['lang']?>"><?php echo Yii::t('rec',$lang['name'])?></option>
+            <option <?php echo ($lang['lang']==$langsamm) ?'selected' : ''?> name="lang" value="<?php echo $lang['lang']?>"><?php echo BaseModule::t('rec',$lang['name'])?></option>
         <?php } ?>
 </select>
-        <input type="button" id="lang_delete" style="margin-bottom:10px;" value="<?php echo Yii::t('rec', 'Delete')?>" onclick="deleteLang()">
+        <input type="button" id="lang_delete" style="margin-bottom:10px;" value="<?php echo BaseModule::t('rec', 'Delete')?>" onclick="deleteLang()">
         <?php }else{ ?>
-        <!--<div><?php //echo Yii::t('rec','Missing Languages') ?></div>-->
+        <!--<div><?php //echo BaseModule::t('rec','Missing Languages') ?></div>-->
         <select id="select_lang" onchange="changeLang()">
             
         </select>

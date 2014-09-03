@@ -43,7 +43,7 @@
 </div>
 
 <a href="">
-    <?php echo CHtml::submitButton(Yii::t('common', 'Next'), array(
+    <?php echo CHtml::submitButton(BaseModule::t('common', 'Next'), array(
             'name'=>'pay',
             'class'=>($participant->tariff_id >= $tariff ? 'btn-style-green btn-style-green-2-1' : 'btn-style-gray'),
             'style'=>'cursor: pointer;',

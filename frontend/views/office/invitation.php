@@ -22,10 +22,10 @@
         </div>
             <div id="office-5-bannerSettingsDiv">
                 <?php
-                    echo CHtml::label(Yii::t('common', 'Width: '),'widthBanner');
+                    echo CHtml::label(BaseModule::t('common', 'Width: '),'widthBanner');
                     echo CHtml::numberField('widthBanner','150',array('class'=>'handler'));
 
-                    echo CHtml::label(Yii::t('common', 'Height: '),'heightBanner');
+                    echo CHtml::label(BaseModule::t('common', 'Height: '),'heightBanner');
                     echo CHtml::numberField('heightBanner','100',array('class'=>'handler'));
 
                     echo '<br>';
@@ -35,13 +35,13 @@
                 <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/>
             </div>
 
-            <?php }else{ echo Yii::t('common', 'Add banners to admin panel.');
+            <?php }else{ echo BaseModule::t('common', 'Add banners to admin panel.');
             ?> <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/> <?php
         }?>
     </div>
-    <h2 class="h2ContentOffice5"><?php echo Yii::t('common', 'INVITATION'); ?></h2>
-    <a href="<?php echo $downloadFile; ?>"><input type="button" name="btn"  class="btn-style-green1" value="<?php echo Yii::t('common', 'DOWNLOAD') ?>" /></a>
-    <a href="#"><input type="button" name="btn"  class="btn-style-green2" value="<?php echo Yii::t('common', 'INTERNET ADVERTISING') ?>" onclick="showBannerDiv();"/></a>
+    <h2 class="h2ContentOffice5"><?php echo BaseModule::t('common', 'INVITATION'); ?></h2>
+    <a href="<?php echo $downloadFile; ?>"><input type="button" name="btn"  class="btn-style-green1" value="<?php echo BaseModule::t('common', 'DOWNLOAD') ?>" /></a>
+    <a href="#"><input type="button" name="btn"  class="btn-style-green2" value="<?php echo BaseModule::t('common', 'INTERNET ADVERTISING') ?>" onclick="showBannerDiv();"/></a>
 
 
     <div id="office-5-post1">

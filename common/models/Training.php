@@ -60,12 +60,12 @@ class Training extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'title' => Yii::t('rec', 'Title'),
-            'description' => Yii::t('rec', 'Description'),
-            'image' => Yii::t('rec', 'Image'),
-            'videolink' => Yii::t('rec', 'Videolink'),
-            'date' => Yii::t('rec', 'Date'),
-            'number' => Yii::t('rec', 'Number'),
+            'title' => BaseModule::t('rec', 'Title'),
+            'description' => BaseModule::t('rec', 'Description'),
+            'image' => BaseModule::t('rec', 'Image'),
+            'videolink' => BaseModule::t('rec', 'Videolink'),
+            'date' => BaseModule::t('rec', 'Date'),
+            'number' => BaseModule::t('rec', 'Number'),
         );
     }
 

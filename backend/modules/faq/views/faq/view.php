@@ -8,15 +8,15 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'List FAQ'), 'url' => array('index')),
-    array('label' => Yii::t('common', 'Create FAQ'), 'url' => array('create')),
-    array('label' => Yii::t('common', 'Update FAQ'), 'url' => array('update', 'id' => $model->id)),
-    array('label' => Yii::t('common', 'Delete FAQ'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => Yii::t('common', 'Manage FAQ'), 'url' => array('admin')),
+    array('label' => BaseModule::t('common', 'List FAQ'), 'url' => array('index')),
+    array('label' => BaseModule::t('common', 'Create FAQ'), 'url' => array('create')),
+    array('label' => BaseModule::t('common', 'Update FAQ'), 'url' => array('update', 'id' => $model->id)),
+    array('label' => BaseModule::t('common', 'Delete FAQ'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
+    array('label' => BaseModule::t('common', 'Manage FAQ'), 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo Yii::t('common', 'View FAQ') ?> #<?php echo $model->id; ?></h1>
+<h1><?php echo BaseModule::t('common', 'View FAQ') ?> #<?php echo $model->id; ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbDetailView', array(

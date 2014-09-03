@@ -61,12 +61,12 @@ class Countries extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => Yii::t('rec','Id'),
-            'name' => Yii::t('rec', 'Name'),
-            'code' => Yii::t('rec', 'Code'),
-            'code_num' => Yii::t('rec', 'Code Num'),
-            'phone_code' => Yii::t('rec', 'Phone Code'),
-            'gmt_id' => Yii::t('rec', 'Gmt'),
+            'id' => BaseModule::t('rec','Id'),
+            'name' => BaseModule::t('rec', 'Name'),
+            'code' => BaseModule::t('rec', 'Code'),
+            'code_num' => BaseModule::t('rec', 'Code Num'),
+            'phone_code' => BaseModule::t('rec', 'Phone Code'),
+            'gmt_id' => BaseModule::t('rec', 'Gmt'),
         );
     }
 

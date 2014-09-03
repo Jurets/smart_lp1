@@ -3,13 +3,13 @@
 /* @var $model News */
 
 $this->breadcrumbs = array(
-    Yii::t('rec', 'News') => array('index'),
-    Yii::t('rec', 'Manage'),
+    BaseModule::t('rec', 'News') => array('index'),
+    BaseModule::t('rec', 'Manage'),
 );
 
 $this->menu = array(
-    //array('label' => Yii::t('rec', 'List News'), 'url' => array('index')),
-    array('label' => Yii::t('rec', 'Create News'), 'url' => array('create')),
+    //array('label' => BaseModule::t('rec', 'List News'), 'url' => array('index')),
+    array('label' => BaseModule::t('rec', 'Create News'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,10 +26,10 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo Yii::t('rec', 'Manage News') ?></h1>
+<h1><?php echo BaseModule::t('rec', 'Manage News') ?></h1>
 
 
-<?php echo CHtml::link(Yii::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
+<?php echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form" style="display:none">
     <?php
     $this->renderPartial('_search', array(

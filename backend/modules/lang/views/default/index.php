@@ -1,4 +1,4 @@
-<h1><?php echo Yii::t('rec', 'Language Management')?></h1>
+<h1><?php echo BaseModule::t('rec', 'Language Management')?></h1>
 <div class="Table">
 <div>
     <div class="langblock">
@@ -6,18 +6,18 @@
     </div>
     <div class="createLanguage">
         <?php echo $locale_list ?>
-        <input type="text" name="name" value="<?php echo yii::t('rec','LANGUAGE')?>" onfocus="this.value=''">
-        <input id="lang_create" style="margin-bottom:10px;" type="button" value="<?php echo Yii::t('rec', 'Create')?>"
+        <input type="text" name="name" value="<?php echo BaseModule::t('rec','LANGUAGE')?>" onfocus="this.value=''">
+        <input id="lang_create" style="margin-bottom:10px;" type="button" value="<?php echo BaseModule::t('rec', 'Create')?>"
     </div>
 </div>
     <form id="mainform">
         <div class="clearBoth"></div>
-        <input id="save_helper_1100" type="button" value="<?php echo Yii::t('rec', 'Edit')?>">
+        <input id="save_helper_1100" type="button" value="<?php echo BaseModule::t('rec', 'Edit')?>">
         <div class="translationBar">
            <?php $this->renderPartial('_form_partial', array('model'=>$model))?>       
         </div>
         <input id="lang" type="hidden" value="" name='lang'>
-        <input id="save_1100" type="button" value="<?php echo Yii::t('rec', 'Edit')?>">
+        <input id="save_1100" type="button" value="<?php echo BaseModule::t('rec', 'Edit')?>">
     </form>
 </div>
 </div>
@@ -99,7 +99,7 @@
              data: {'lang':langSign.val(), 'name':langName.val()},
              success: function(resource){
                  $('.langblock').html(resource);
-                 langName.val('<?php echo yii::t('rec','LANGUAGE')?>');
+                 langName.val('<?php echo BaseModule::t('rec','LANGUAGE')?>');
                  document.cookie = "language="+langSign.val();
                  location.reload();
              }

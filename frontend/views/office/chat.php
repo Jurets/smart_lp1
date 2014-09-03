@@ -196,7 +196,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
 
             </div>
             <div id="hidden-user-info">
-                <p> <span><?php echo Yii::t('common', 'Information') ?>:</span></p>
+                <p> <span><?php echo BaseModule::t('common', 'Information') ?>:</span></p>
                 <div id="for-avatar"></div>
                 <p><span>phone:<span id="phone"></span></p>
                 <p><span>skype:</span><span id="skype"></span></p>
@@ -213,7 +213,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
 
         <div id="chat-log-wrapper" class="chat-log-wrapper">
         </div>
-<!--        <input type="text" class="search-users" placeholder="<?php // echo Yii::t('common', 'Find users')              ?>" >-->
+<!--        <input type="text" class="search-users" placeholder="<?php // echo BaseModule::t('common', 'Find users')              ?>" >-->
         <?php
 //        $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
         $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
@@ -224,7 +224,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                 'showAnim' => 'fold',
             ),
             'htmlOptions' => array(
-                'placeholder' => Yii::t('common', 'Find users'),
+                'placeholder' => BaseModule::t('common', 'Find users'),
                 'class' => 'search-users'
             ),
         ));
@@ -474,7 +474,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                         $('#skype').text(data.skype);
                     }
 //                    $('#link-send-message').append
-//                            ('<a href="<?php // echo Yii::app()->createAbsoluteUrl('office/chat/')                   ?>' + '?interlocutor=' + id + ' "><?php // echo Yii::t('common', 'Send message')                   ?></a>');
+//                            ('<a href="<?php // echo Yii::app()->createAbsoluteUrl('office/chat/')                   ?>' + '?interlocutor=' + id + ' "><?php // echo BaseModule::t('common', 'Send message')                   ?></a>');
                     $('#hidden-user-info').show();
                     return false;
                 }

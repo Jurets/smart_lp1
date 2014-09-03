@@ -158,11 +158,11 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                         'options' => array(
                             'class'=>'icon-ok',
                             'rel' => 'nofollow',
-                            'title' => Yii::t("rec", 'participant'),
+                            'title' => BaseModule::t("rec", 'participant'),
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
-                                'beforeSend' => 'js: function() {return confirm("' . Yii::t('rec', 'Are you sure to activate this user') . '?");}',
+                                'beforeSend' => 'js: function() {return confirm("' . BaseModule::t('rec', 'Are you sure to activate this user') . '?");}',
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
@@ -174,11 +174,11 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                         'options' => array(
                             'class'=>'icon-off',
                             'rel' => 'nofollow',
-                            'title' => Yii::t("rec", 'participant'),
+                            'title' => BaseModule::t("rec", 'participant'),
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
-                                'beforeSend' => 'js: function() {return confirm("' . Yii::t('rec', 'Are you sure to deactivate this user') . '?");}',
+                                'beforeSend' => 'js: function() {return confirm("' . BaseModule::t('rec', 'Are you sure to deactivate this user') . '?");}',
                                 'success' => 'js:function(data) { $.fn.yiiGridView.update("user-grid")}'
                             ),
                         ),
@@ -190,14 +190,14 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                         'options' => array(
                             'class'=>'icon-ban-circle',
                             'rel' => 'nofollow',
-                            'title' => Yii::t("rec", 'participant'),
+                            'title' => BaseModule::t("rec", 'participant'),
                             'ajax' => array(
                                 'type' => 'get',
                                 'url'=>'js:$(this).attr("href")',
                                 'beforeSend' => 'js:
                                          function() {
                                                 //$("#div-loading").addClass("grid-loading");
-                                                isDel = confirm("' . Yii::t('rec', 'Are you sure to ban this user') . '?");
+                                                isDel = confirm("' . BaseModule::t('rec', 'Are you sure to ban this user') . '?");
                                                 //if (!isDel)
                                                 //    $("#div-loading").removeClass("grid-loading");
                                                 return isDel;

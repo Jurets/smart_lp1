@@ -44,7 +44,7 @@ class Faqm extends CFormModel {
             $command = ($this->checkInstance() == false) ? $variant1 : $variant2;
             $saveCommand = Yii::app()->db->createCommand($saveKind . $command . ';');
             $saveCommand->execute();
-        }else Yii::app()->user->setFlash('wrong_form', Yii::t('rec', 'Error filling in the form'));
+        }else Yii::app()->user->setFlash('wrong_form', BaseModule::t('rec', 'Error filling in the form'));
     }
     private function checkInstance(){
         $checkCommand = Yii::app()->db->createCommand('SELECT content FROM itemsstorage WHERE item="'.self::ITEM.'"');
@@ -53,15 +53,15 @@ class Faqm extends CFormModel {
     }
 
     public function getTypeOfCategories(){
-        return array('financial'=> Yii::t('rec', 'financial'),
-            'offer'=> Yii::t('rec', 'offer'), 'performance' => Yii::t('rec', 'performance'));
+        return array('financial'=> BaseModule::t('rec', 'financial'),
+            'offer'=> BaseModule::t('rec', 'offer'), 'performance' => BaseModule::t('rec', 'performance'));
     }
     public function attributeLabels()
     {
         return array(
-            'financialMail' => Yii::t('rec','Financial Mail'),
-            'offerMail' => Yii::t('rec','Offer Mail'),
-            'performanceMail' => Yii::t('rec','Performance Mail'),
+            'financialMail' => BaseModule::t('rec','Financial Mail'),
+            'offerMail' => BaseModule::t('rec','Offer Mail'),
+            'performanceMail' => BaseModule::t('rec','Performance Mail'),
         );
     }
 }

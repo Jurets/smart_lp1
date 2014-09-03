@@ -3,16 +3,16 @@
 /* @var $model Faq */
 
 $this->breadcrumbs = array(
-    Yii::t('rec','FAQ') => array('index'),
-    Yii::t('rec', 'Create'),
+    BaseModule::t('rec','FAQ') => array('index'),
+    BaseModule::t('rec', 'Create'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('rec', Yii::t('rec', 'List FAQ')), 'url' => array('index')),
-    array('label' => Yii::t('rec', Yii::t('rec', 'Manage FAQ')), 'url' => array('admin')),
+    array('label' => BaseModule::t('rec', BaseModule::t('rec', 'List FAQ')), 'url' => array('index')),
+    array('label' => BaseModule::t('rec', BaseModule::t('rec', 'Manage FAQ')), 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo Yii::t('rec', 'Create FAQ') ?></h1>
+<h1><?php echo BaseModule::t('rec', 'Create FAQ') ?></h1>
 
 <?php $this->renderPartial('_form', array('model' => $model)); ?>

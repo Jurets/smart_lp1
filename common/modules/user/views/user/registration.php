@@ -1,10 +1,10 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.Yii::t('rec',"Registration");
+<?php $this->pageTitle=Yii::app()->name . ' - '.BaseModule::t('rec',"Registration");
 $this->breadcrumbs=array(
 	UserModule::t("Registration"),
 );
 ?>
 
-<h1><?php echo Yii::t('rec',"Registration"); ?></h1>
+<h1><?php echo BaseModule::t('rec',"Registration"); ?></h1>
 
 <?php if(Yii::app()->user->hasFlash('registration')): ?>
 <div class="success">
@@ -23,7 +23,7 @@ $this->breadcrumbs=array(
 	'htmlOptions' => array('enctype'=>'multipart/form-data'),
 )); ?>
 
-	<p class="note"><?php echo Yii::t('rec','Fields with <span class="required">*</span> are required.'); ?></p>
+	<p class="note"><?php echo BaseModule::t('rec','Fields with <span class="required">*</span> are required.'); ?></p>
 	
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
 	
@@ -38,7 +38,7 @@ $this->breadcrumbs=array(
 	<?php echo $form->passwordField($model,'password'); ?>
 	<?php echo $form->error($model,'password'); ?>
 	<p class="hint">
-	<?php echo Yii::t('rec',"Minimal password length 4 symbols."); ?>
+	<?php echo BaseModule::t('rec',"Minimal password length 4 symbols."); ?>
 	</p>
 	</div>
 	
@@ -86,13 +86,13 @@ $this->breadcrumbs=array(
 		<?php echo $form->textField($model,'verifyCode'); ?>
 		<?php echo $form->error($model,'verifyCode'); ?>
 		
-		<p class="hint"><?php echo Yii::t('rec',"Please enter the letters as they are shown in the image above."); ?>
-		<br/><?php echo Yii::t('rec',"Letters are not case-sensitive."); ?></p>
+		<p class="hint"><?php echo BaseModule::t('rec',"Please enter the letters as they are shown in the image above."); ?>
+		<br/><?php echo BaseModule::t('rec',"Letters are not case-sensitive."); ?></p>
 	</div>
 	<?php endif; ?>
 	
 	<div class="row submit">
-		<?php echo CHtml::submitButton(Yii::t('rec',"Register")); ?>
+		<?php echo CHtml::submitButton(BaseModule::t('rec',"Register")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

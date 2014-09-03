@@ -26,13 +26,13 @@ $this->beginContent('//layouts/common');
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <?php } ?>
-                <li> <a href="#">  <?php echo Yii::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
-                <li> <a href="#"> <?php echo Yii::t('common', 'RULES'); ?> </a> </li>
-                <li> <a href="#"> <?php echo Yii::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+                <li> <a href="#">  <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
+                <li> <a href="#"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
+                <li> <a href="#"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
 <!--                <li> <a href="--><?php //echo $this->createUrl('site/status'); ?><!--" class="mark">ПОДНЯТЬ СТАТУС</a>-->
                 <?php if (Yii::app()->user->isGuest) { ?>
-                    <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo Yii::t('common', 'SIGN UP'); ?> </a> </li>
-                    <li> <a class="moveRight2 open-login" style="cursor: pointer;" href="#"> <?php echo Yii::t('common', 'LOGIN'); ?> </a> </li>
+                    <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo BaseModule::t('common', 'SIGN UP'); ?> </a> </li>
+                    <li> <a class="moveRight2 open-login" style="cursor: pointer;" href="#"> <?php echo BaseModule::t('common', 'LOGIN'); ?> </a> </li>
                 <?php } else { ?>
                     <style type="text/css">
                         .moveRight1 {
@@ -84,7 +84,7 @@ $this->beginContent('//layouts/common');
                     </style>                
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/index')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
                     <li> <a href="#"  class="moveRight2"> |&nbsp;&nbsp;Настройки </a> </li>
-                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::t('common', 'Exit'); ?></a> </li>
+                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
                 <?php } ?>
             </ul>
         </div>

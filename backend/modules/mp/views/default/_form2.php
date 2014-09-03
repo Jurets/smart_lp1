@@ -30,10 +30,10 @@
             <?php if(is_array($model->mathparams) && count($model->mathparams) > 0) { ?>
             <?php foreach ($model->mathparams as $key=>$mathparam){ ?>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name') ; ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name') ; ?></span>
             <?php echo $form->textField($mathparam, 'name', array('name'=>'Mathparams[name][]', 'id'=>false, 'readonly'=>"readonly")); ?>
             <?php echo $form->error($mathparam, 'name'); ?>
-            <span class="mr"><?php echo Yii::t('rec','nalue') ; ?></span>
+            <span class="mr"><?php echo BaseModule::t('rec','nalue') ; ?></span>
             <?php echo $form->textField($mathparam, 'value', array('name'=>'Mathparams[value][]', 'id'=>false)); ?>
             <?php echo $form->error($mathparam, 'value'); ?>
             <?php echo $form->hiddenField($mathparam, 'id', array('name'=>'Mathparams[id][]', 'id'=>false)); ?>
@@ -42,57 +42,57 @@
         <?php } ?>
             <?php }else{ ?>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','price_activation',array('maxlength'=>255, 'readonly'=>"readonly")); ?>
-                <span class="mr"><?php echo Yii::t('rec','value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
             </div>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','price_start',array('maxlength'=>255, 'readonly'=>"readonly")); ?>
-                <span class="mr"><?php echo Yii::t('rec','value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
             </div>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','percent_to_A',array('maxlength'=>255, 'readonly'=>"readonly")); ?>
-                <span class="mr"><?php echo Yii::t('rec','value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
             </div>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','percent_pot_B1',array('maxlength'=>255, 'readonly'=>"readonly")); ?>
-                <span class="mr"><?php echo Yii::t('rec','value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
             </div>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','percent_pot_B2',array('maxlength'=>255, 'readonly'=>"readonly")); ?>
-                <span class="mr"><?php echo Yii::t('rec','value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
             </div>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','percent_pot_B3',array('maxlength'=>255, 'readonly'=>"readonly")); ?>
-                <span class="mr"><?php echo Yii::t('rec','value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
             </div>
             <div class="copy">
-                <span class="mr"><?php echo Yii::t('rec','name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','percent_to_F',array('maxlength'=>255, 'readonly'=>"readonly")); ?>
-                <span class="mr"><?php echo Yii::t('rec','value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec','value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
             </div>
             <?php } ?>
         <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? Yii::t('rec','Create') : MpModule::t('Save'),array(
+        <?php echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec','Create') : MpModule::t('Save'),array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>

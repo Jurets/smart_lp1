@@ -22,12 +22,12 @@
     <?php if(!isset($slider['leader'])) {echo '-==- '.$ind; continue;} ?>
     <div class="copy">
         <div>
-        <span class="mr"><?php echo Yii::t('rec','leader')?></span><?php echo CHtml::textField("sliderlist[$ind][leader]", $slider['leader']);?>
-        <span class="mr"><?php echo Yii::t('rec','Photo')?></span><?php echo CHtml::textField("sliderlist[$ind][photo]", $slider['photo'], array('readonly'=>1)); ?>
+        <span class="mr"><?php echo BaseModule::t('rec','leader')?></span><?php echo CHtml::textField("sliderlist[$ind][leader]", $slider['leader']);?>
+        <span class="mr"><?php echo BaseModule::t('rec','Photo')?></span><?php echo CHtml::textField("sliderlist[$ind][photo]", $slider['photo'], array('readonly'=>1)); ?>
         <?php echo CHtml::fileField("sliderlist[$ind][photo_source]"); ?>
-        <?php echo CHtml::label(Yii::t('rec','Descriptio'), NULL); ?>
+        <?php echo CHtml::label(BaseModule::t('rec','Descriptio'), NULL); ?>
         <?php echo CHtml::textArea("sliderlist[$ind][descriptio]", $model->sliderlist[$ind]['descriptio'], array('style'=>"width:600px;height:100px;")); ?>
-        <span class="icon-trash" title="<?php echo Yii::t('rec','Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
+        <span class="icon-trash" title="<?php echo BaseModule::t('rec','Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
         </div>
         <div></div>
     </div>
@@ -37,26 +37,26 @@
     
     <div class="copy">
         <div>
-        <span class="mr"><?php echo Yii::t('rec','leader')?></span><?php echo CHtml::textField("sliderlist[0][leader]"); ?>
-        <span class="mr"><?php echo Yii::t('rec','Photo')?></span><?php echo CHtml::textField("sliderlist[0][photo]", '', array('readonly'=>1)); ?>
+        <span class="mr"><?php echo BaseModule::t('rec','leader')?></span><?php echo CHtml::textField("sliderlist[0][leader]"); ?>
+        <span class="mr"><?php echo BaseModule::t('rec','Photo')?></span><?php echo CHtml::textField("sliderlist[0][photo]", '', array('readonly'=>1)); ?>
         <?php echo CHtml::fileField("sliderlist[0][photo_source]"); ?>
-        <?php echo CHtml::label(Yii::t('rec','Descriptio'), NULL); ?>
+        <?php echo CHtml::label(BaseModule::t('rec','Descriptio'), NULL); ?>
         <?php echo CHtml::textArea("sliderlist[0][descriptio]",'', array('style'=>"width:600px;height:100px;")); ?>
-        <span class="icon-trash" title="<?php echo Yii::t('rec','Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
+        <span class="icon-trash" title="<?php echo BaseModule::t('rec','Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
         </div>
         <div></div>
     </div>
     
   <?php } ?>
     <div></div>
-   <?php echo TbHtml::button(Yii::t('rec','Add'), array(
+   <?php echo TbHtml::button(BaseModule::t('rec','Add'), array(
                     'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
 		    'size'=>TbHtml::BUTTON_SIZE_SMALL,
                     'rel'=>'.copy',
                     'id'=>'addSlider',
                 )); ?>
     <div class="form-actions">
-        <?php echo TbHtml::submitButton(Yii::t('rec','Create'), array(
+        <?php echo TbHtml::submitButton(BaseModule::t('rec','Create'), array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>

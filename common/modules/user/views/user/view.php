@@ -1,14 +1,14 @@
 <?php
 $this->breadcrumbs=array(
-	Yii::t('rec','Users')=>array('index'),
+	BaseModule::t('rec','Users')=>array('index'),
 	$model->username,
 );
 //$this->layout='//layouts/column2';
 $this->menu=array(
-    array('label'=>Yii::t('rec','List User'), 'url'=>array('index')),
+    array('label'=>BaseModule::t('rec','List User'), 'url'=>array('index')),
 );
 ?>
-<h1><?php echo Yii::t('rec','View User').' "'.$model->username.'"'; ?></h1>
+<h1><?php echo BaseModule::t('rec','View User').' "'.$model->username.'"'; ?></h1>
 <?php 
 
 // For all users
@@ -31,7 +31,7 @@ $this->menu=array(
 		'create_at',
 		array(
 			'name' => 'lastvisit_at',
-			'value' => (($model->lastvisit_at!='0000-00-00 00:00:00')?$model->lastvisit_at:Yii::t('rec','Not visited')),
+			'value' => (($model->lastvisit_at!='0000-00-00 00:00:00')?$model->lastvisit_at:BaseModule::t('rec','Not visited')),
 		)
 	);
 			

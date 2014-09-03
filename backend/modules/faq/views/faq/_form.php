@@ -17,7 +17,7 @@
     ));
     ?>
 
-    <p class="note"><?php echo htmlspecialchars_decode(Yii::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));?>.</p>
+    <p class="note"><?php echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));?>.</p>
 
     <?php echo $form->errorSummary($model); ?>
 

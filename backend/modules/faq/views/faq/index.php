@@ -3,13 +3,13 @@
 /* @var $model Faq */
 
 $this->breadcrumbs = array(
-    Yii::t('rec','FAQ') => array('index'),
-    Yii::t('rec', 'Manage'),
+    BaseModule::t('rec','FAQ') => array('index'),
+    BaseModule::t('rec', 'Manage'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('rec', 'List FAQ'), 'url' => array('admin')),
-    array('label' => Yii::t('rec', 'Create FAQ'), 'url' => array('create')),
+    array('label' => BaseModule::t('rec', 'List FAQ'), 'url' => array('admin')),
+    array('label' => BaseModule::t('rec', 'Create FAQ'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -28,7 +28,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo Yii::t('rec', 'Manage FAQ') ?></h1>
+<h1><?php echo BaseModule::t('rec', 'Manage FAQ') ?></h1>
 
 
 <?php
@@ -41,7 +41,7 @@ $this->renderPartial('_form_email', array('modelEmail' => $modelEmail));
 
 <p>
     <?php
-    echo htmlspecialchars_decode(Yii::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));
+    echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));
     ?>
 </p>
 

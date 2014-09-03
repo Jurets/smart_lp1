@@ -61,11 +61,11 @@ class Faq extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'question' => Yii::t('rec', 'Question'),
-            'answer' => Yii::t('rec', 'Answer'),
-            'created' => Yii::t('rec', 'Created'),
-            'id_user' => Yii::t('rec', 'Id User'),
-            'category' => Yii::t('rec', 'Category'),
+            'question' => BaseModule::t('rec', 'Question'),
+            'answer' => BaseModule::t('rec', 'Answer'),
+            'created' => BaseModule::t('rec', 'Created'),
+            'id_user' => BaseModule::t('rec', 'Id User'),
+            'category' => BaseModule::t('rec', 'Category'),
         );
     }
 

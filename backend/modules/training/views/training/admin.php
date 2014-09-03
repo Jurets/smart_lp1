@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs = array(
-    Yii::t('rec', 'Training'),
+    BaseModule::t('rec', 'Training'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('rec', 'Create Training'), 'url' => array('create')),
-    array('label' => Yii::t('rec', 'Manage Trainings'), 'url' => array('index')),
+    array('label' => BaseModule::t('rec', 'Create Training'), 'url' => array('create')),
+    array('label' => BaseModule::t('rec', 'Manage Trainings'), 'url' => array('index')),
 );
 ?>
 
-<h1><?php echo Yii::t('rec', 'Training') ?></h1>
+<h1><?php echo BaseModule::t('rec', 'Training') ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbListView', array(
