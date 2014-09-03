@@ -78,14 +78,14 @@
                 success: function(resource){
                     $('.langblock').html(resource);
                     $('.translationBar').html('&nbsp;');
-                    document.cookie = "language=ru";
+                    deleteCookie('language');
                     location.reload();
                 }
             });
         }
     
     function deleteCookie(name) {
-        setCookie(name, "", { expires: -1 })
+        document.cookie = name+"=;path=/;expires=Mon, 01-Jan-1970 00:00:00 GMT";
     }
     
     $(function(){
@@ -100,7 +100,7 @@
              success: function(resource){
                  $('.langblock').html(resource);
                  langName.val('<?php echo BaseModule::t('rec','LANGUAGE')?>');
-                 document.cookie = "language="+langSign.val();
+                 document.cookie = "language="+langSign.val()+';path=/';
                  location.reload();
              }
         });
