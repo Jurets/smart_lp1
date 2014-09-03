@@ -29,6 +29,7 @@
     .commonstat div ul li:hover  {
         color: #FFFFFF;
         background: #777777;
+        cursor: pointer;
     }
     #v:hover{
         color: #FFFFFF;

@@ -171,6 +171,10 @@ class Participant extends User
                         'condition' => 'id <> :self_id',
                         'params' => array(':self_id' => $this->id)
                     ),
+                    'superrefer' => array(
+                        'condition' => 'superuser = 0 AND status = :status AND tariff_id >= :tariff_id',
+                        'params' => array(':status' => self::STATUS_ACTIVE, ':tariff_id' => self::TARIFF_BC),
+                    ),
         ));
     }
 
@@ -354,7 +358,7 @@ class Participant extends User
      *
      */
     public function getListForReferalSelect()
-    { //DebugBreak();
+    {
         $criteria = New CDbCriteria(array(
             'select' => array('id', 'username'),
             'scopes' => 'participant',
@@ -367,6 +371,24 @@ class Participant extends User
         return CHtml::listData($models, 'id', 'username');
     }
 
+    /**
+     * выдать список для выбора реферала
+     *
+     */
+    public function getListForSuperReferalSelect()
+    {
+        $criteria = New CDbCriteria(array(
+            'select' => array('id', 'username'),
+            'scopes' => 'superrefer',
+        ));
+        if (!empty($this->id)) {
+            $criteria->scopes = 'withoutself';
+            $criteria->params = array(':self_id' => $this->id);
+        }
+        $models = self::model()->findAll($criteria);
+        return CHtml::listData($models, 'id', 'username');
+    }
+    
     /**
      * цвет для юзера в сетке
      */

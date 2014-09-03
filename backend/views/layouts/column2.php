@@ -9,21 +9,21 @@
 		<?php echo $content; ?>
 	</div><!-- content -->
 </div>
-<?php if (isset($this->menu)) { ?>
+<?php if (isset($this->menu) && !empty($this->menu)) { ?>
 <div class="span-5 well" style="float: right; width: 200px; max-width: 200px; margin-top: 40px;">
 	<div id="sidebar">
 	<?php	
-		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Операции',
-		));
 		if (isset($this->menu)) {
+            $this->beginWidget('zii.widgets.CPortlet', array(
+                'title'=>'Операции',
+            ));
             $this->widget('bootstrap.widgets.TbNav', array(
 		    //$this->widget('bootstrap.widgets.TbListView', array(
 			    'items'=>$this->menu,
 			    'htmlOptions'=>array('class'=>'operations'),
 		    ));
+            $this->endWidget();
         }
-		$this->endWidget();
 	?>
 	</div><!-- sidebar -->
 </div>

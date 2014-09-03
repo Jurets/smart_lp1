@@ -40,10 +40,10 @@ class Requisites extends CActiveRecord
             array('id', 'length', 'max' => 50),
             array('pw_supervisor, pw_admin, pw_moderator', 'length', 'max' => 20),
             array('purse_activation, purse_club, purse_investor, purse_fdl', 'length', 'max' => 255),
-            array('details, agreement, marketing, bpm_login, bpm_password', 'safe'),
+            array('details, agreement, marketing, bpm_login, bpm_password, purse_activation, purse_club, purse_investor, purse_fdl, email_faq, superrefer_id', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, details, agreement, marketing, pw_supervisor, pw_admin, pw_moderator, purse_activation, purse_club, purse_investor, purse_fdl, email_faq', 'safe', 'on' => 'search'),
+            array('id, details, agreement, marketing, pw_supervisor, pw_admin, pw_moderator, purse_activation, purse_club, purse_investor, purse_fdl, email_faq, superrefer_id', 'safe', 'on' => 'search'),
         );
     }
 

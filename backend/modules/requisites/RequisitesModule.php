@@ -2,7 +2,7 @@
 
 class RequisitesModule extends CWebModule
 {
-    public $requisitesShow = array('/requisites/requisites');
+    public $requisitesShow = array('/requisites');
 
 	public function init()
 	{

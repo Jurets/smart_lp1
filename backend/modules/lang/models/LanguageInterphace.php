@@ -3,10 +3,12 @@
 class LanguageInterphace extends CFormModel {
     public $languages; // структура для построения языков Массив из массивов структур: array('lang'=>'', name=>'')
     public $translateList; // список переводов для указанного языка: ключ - слово из матрицы, значение - перевод для данного языка
+    public $russian = array(); // подтягиваем русский, чтобы модератор не застрелился и видел служебный контент на русском языке тоже
     public $lang; // сигнатура языка, выбранная как текущая
     public function __construct() {
         $this->languages = array(); 
         $this->translateList = array();
+        $this->russian = array();
         $this->lang = NULL;
     }
     public function renderLanguages(){
@@ -24,8 +26,10 @@ class LanguageInterphace extends CFormModel {
                $sql3 = 'INSERT INTO Message (id, language) VALUES('.$lastInsertId.', '.'"ru"'. ')';
                Yii::app()->db->createCommand($sql3)->execute();
                $this->addNewMatrix($lang);
-               Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
+               //Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
+               //Yii::app()->request->cookies['language'] = new CHttpCookie('language', 'ru');
                 echo '<script> alert("'.Yii::t('rec',Yii::t('rec','New Language added successfull')).'");</script>';
+                $this->showTranslation();
                } catch (Exception $exc) {
                 echo '<script> alert("'.Yii::t('rec', Yii::t('rec','This Language allredy present')).'");</script>';
                }
@@ -42,24 +46,30 @@ class LanguageInterphace extends CFormModel {
             $sql .= '('.(int)$item['id'].', '.'"'.$lang.'"'.'),';
         }
         $sql = substr_replace($sql, ';', strrpos($sql, ','));
-        Yii::app()->db->createCommand($sql)->execute();
+        $t = Yii::app()->db->createCommand($sql)->execute();
+        return $t;
     }
     public function deleteLanguage(){
        
         if(isset($_POST['lang']) && isset($_POST['langName'])){
-            if($_POST['lang'] == 'en' || $_POST['lang'] == 'ru'){
+            if($_POST['lang'] == 'ru'){
                 return 0;
             }
             $lang = $_POST['lang'];
             $langName = $_POST['langName'];
+            
+            $stolenId = Yii::app()->db->createCommand('SELECT id FROM SourceMessage WHERE message="'.$langName.'";')->query()->read()['id'];
+            Yii::app()->db->createCommand('DELETE FROM Message WHERE id='.$stolenId.' AND language="ru";')->execute();
             try {
                 $sql = 'DELETE FROM Languages WHERE lang="'.$lang.'";';
                 $sql2 = 'DELETE FROM SourceMessage WHERE message="'.$langName.'";';
-                if(Yii::app()->db->createCommand($sql)->execute() != 0 && Yii::app()->db->createCommand($sql2)->execute() != 0){
-                    Yii::app()->request->cookies['language'] = new CHttpCookie('language', 'en');
-                    echo '<script> alert("'.Yii::t('rec', $lang.' : '.Yii::t('rec','Language deleted successfull')).'");</script>';}
+                $a = Yii::app()->db->createCommand($sql)->execute();
+                $b = Yii::app()->db->createCommand($sql2)->execute();
+                        if($a !=0 || $b !=0){
+                            echo '<script> alert("'.Yii::t('rec', $lang.' : '.Yii::t('rec','Language deleted successfull')).'");</script>';
+                        }
             }catch (Exception $exc){
-                echo '<script>'.$exc->getTraceAsString().'</script>';
+                echo '<script>alert('.$exc->getTraceAsString().');</script>';
             }
         }
     }
@@ -69,11 +79,9 @@ class LanguageInterphace extends CFormModel {
                 }else 
                     if(isset($_COOKIE['language'])){
                         $this->lang = (string)Yii::app()->request->cookies['language'];
-                }else{
-                    return 0;
                 }
-                if($this->lang == 'en'){
-                    return 0;
+                else{
+                    $this->lang = Yii::app()->language;
                 }
                 $sql = "SELECT sm.id, sm.message, m.translation FROM SourceMessage sm
                           LEFT JOIN Message m ON sm.id = m.id AND m.language = :lang
@@ -82,6 +90,17 @@ class LanguageInterphace extends CFormModel {
                   $command->bindParam(':lang', $this->lang, PDO::PARAM_STR);
                   $res = $command->query()->readAll();
                   $this->translateList = $res;
+                  $this->RussianPatch(); // Закомментируйте, если не хотите выводить русский язык в форму редактирования матрицы
+    }
+    private function RussianPatch(){
+        $buffer = Yii::app()->db->createCommand('SELECT translation from Message WHERE language="ru"')->query()->readAll();
+        if(!is_null($buffer)){
+           foreach($buffer as $record){
+               $this->russian[] = $record['translation'];
+           } 
+        }else{
+            throw new CHttpException ('500', 'В таблице Message нет аналога матрицы на русском языке. Если это не нужно, выключите в модели LanguageInterphace->showTranslation метод RussianPatch');
+        }
     }
     public function prepareTranslation(){
         if(!empty($this->translateList) && !is_null($this->lang)){
@@ -116,12 +135,11 @@ class LanguageInterphace extends CFormModel {
    }
    
    // формирует список существующих локалей в Yii для передачи его во вью
-   // язык по умолчанию - en - из списка локалей должен быть исключен
    public function localeList(){
        $widget = '<select>';
        $buff = CLocale::getLocaleIDs();
        foreach($buff as $locale){
-           if(strpos($locale, '_') != FALSE || $locale == 'en') continue;
+           if(strpos($locale, '_') != FALSE || $locale == 'ru') continue;
            $widget .= '<option name="lang" value="'.$locale.'">'.$locale.'</option>';
        }
        $widget .= '</select>';
