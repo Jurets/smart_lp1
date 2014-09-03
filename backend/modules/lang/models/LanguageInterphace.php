@@ -123,7 +123,7 @@ class LanguageInterphace extends CFormModel {
   public function createTranslation(){
       if(isset($_POST['language']) && isset($_POST['lang']) ){
           foreach($_POST['language']['id'] as $ind=>$number){
-              if(empty($_POST['language']['translation'][$ind])) continue;
+              //if(empty($_POST['language']['translation'][$ind])) continue;
               $buff = $_POST['language']['translation'][$ind];
               $sql = "UPDATE Message SET translation=".'"'.htmlspecialchars($buff).'"';
               $sql .= ' WHERE id='.(int)$number.' AND language="'.$_POST['lang'].'";';
