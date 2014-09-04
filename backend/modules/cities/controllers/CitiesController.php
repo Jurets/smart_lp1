@@ -64,7 +64,8 @@ class CitiesController extends EMController
 		{
 			$model->attributes=$_POST['Cities'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                $this->redirect(array('index'));
+				//$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -88,7 +89,8 @@ class CitiesController extends EMController
 		{
 			$model->attributes=$_POST['Cities'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                $this->redirect(array('index'));
+				//$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
