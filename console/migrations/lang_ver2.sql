@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS message;
-DROP TABLE IF EXISTS sourcemessage;
-DROP TABLE IF EXISTS languages;
+DROP TABLE IF EXISTS Message;
+DROP TABLE IF EXISTS SourceMessage;
+DROP TABLE IF EXISTS Languages;
 
 
-CREATE TABLE languages(
+CREATE TABLE Languages(
   lang VARCHAR(32) NOT NULL COMMENT 'аббревиатура языка',
   name VARCHAR(35) DEFAULT NULL COMMENT 'название языка',
   PRIMARY KEY (lang)
@@ -11,7 +11,7 @@ CREATE TABLE languages(
 ENGINE = INNODB AVG_ROW_LENGTH = 8192 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
-CREATE TABLE sourcemessage(
+CREATE TABLE SourceMessage(
   id INT(11) NOT NULL AUTO_INCREMENT COMMENT 'счетчик записей',
   category VARCHAR(32) DEFAULT 'rec' COMMENT 'категория',
   message TEXT DEFAULT NULL COMMENT 'оригинал сообщения',
@@ -19,15 +19,15 @@ CREATE TABLE sourcemessage(
 )
 ENGINE = INNODB AVG_ROW_LENGTH = 92 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE message(
+CREATE TABLE Message(
   id INT(11) NOT NULL COMMENT 'для связи с оригиналами сообщений',
   language VARCHAR(32) NOT NULL COMMENT 'аббревиатура языка',
   translation TEXT DEFAULT NULL COMMENT 'перевод сообщения',
   PRIMARY KEY (id, language),
   CONSTRAINT FK_Message_Languages FOREIGN KEY (language)
-  REFERENCES languages (lang) ON DELETE CASCADE ON UPDATE RESTRICT,
+  REFERENCES Languages (lang) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT FK_Message_SourceMessage FOREIGN KEY (id)
-  REFERENCES sourcemessage (id) ON DELETE CASCADE ON UPDATE RESTRICT
+  REFERENCES Sourcemessage (id) ON DELETE CASCADE ON UPDATE RESTRICT
 )
 ENGINE = INNODB AVG_ROW_LENGTH = 180 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
