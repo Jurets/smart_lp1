@@ -66,6 +66,7 @@ class DefaultController extends EMController
 		{
 			$model->attributes=$_POST['Requisites'];
                         $model->id = "JVMS";
+                        $model->lng = Yii::app()->language;
 			if($model->save())
                             // вместо view - сразу на update
 				$this->redirect(array('update','id'=>$model->id));

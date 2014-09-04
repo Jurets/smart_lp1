@@ -151,6 +151,7 @@ class Faq extends CActiveRecord
         }else{ // добавление
             $record = new Faq;
             $record->attributes = $this->attributes;
+            $record->lng = Yii::app()->language;
             $a = $record->save();
         }
         if(!$a)

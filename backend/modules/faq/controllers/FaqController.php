@@ -103,9 +103,11 @@ class FaqController extends EMController
 
 		if(isset($_POST['Faq']))
 		{
+                    //var_dump($_POST, Yii::app()->language);die;
 			$model->attributes=$_POST['Faq'];
 			if($model->saveDependLanguage())
-				$this->redirect(array('view','id'=>$model->id));
+				//$this->redirect(array('view','id'=>$model->id));
+                            $this->redirect (array('index'));
 		}
 		$this->render('update',array(
 			'model'=>$model,

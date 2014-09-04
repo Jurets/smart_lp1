@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     array('label' => BaseModule::t('rec', BaseModule::t('rec', 'List FAQ')), 'url' => array('index')),
-    array('label' => BaseModule::t('rec', BaseModule::t('rec', 'Manage FAQ')), 'url' => array('admin')),
+    //array('label' => BaseModule::t('rec', BaseModule::t('rec', 'Manage FAQ')), 'url' => array('admin')),
 );
 ?>
 
