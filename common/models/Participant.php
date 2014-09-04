@@ -96,7 +96,7 @@ class Participant extends User
                     array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     array('photo', 'file', 'safe' => true, 'types' => 'jpg, gif, png',
-                        'allowEmpty' => true, 'maxSize' => 2 * 1024 * 1024, 'tooLarge' => 'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера.', 'on' => array('settings','register')),
+                        'allowEmpty' => true, 'maxSize' => 5 * 2000 * 2000, 'tooLarge' => 'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера.', 'on' => array('settings','register')),
         ));
     }
 
