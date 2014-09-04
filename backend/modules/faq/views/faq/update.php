@@ -3,7 +3,7 @@
 /* @var $model Faq */
 $current_id = $model->id;
 $this->breadcrumbs = array(
-    'FAQ' => array('index'),
+    BaseModule::t('rec','FAQ') => array('index'),
     ' ' . $model->id => array('view', 'id' => $model->id),
     BaseModule::t('common', 'Update'),
 );

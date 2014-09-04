@@ -68,7 +68,7 @@ class Mathparams extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => BaseModule::t('rec','Id'),
+			'id' => BaseModule::t('rec','ID'),
 			'name' => BaseModule::t('rec','Name'),
 			'value' => BaseModule::t('rec','Value'),
 			'verid' => BaseModule::t('rec','Version id'),

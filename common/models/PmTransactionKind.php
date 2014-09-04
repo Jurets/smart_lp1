@@ -51,8 +51,8 @@ class PmTransactionKind extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'kind_id' => 'Kind',
-			'description' => 'Description',
+			'kind_id' => BaseModule::t('dic', 'ID'),
+			'description' => BaseModule::t('dic', 'Description'),
 		);
 	}
 

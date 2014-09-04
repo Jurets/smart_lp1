@@ -5,16 +5,15 @@
 ?>
 <div class="form">
 
-    <?php
-    $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'chat-form',
-        'enableAjaxValidation' => false,
-    ));
-    ?>
+<?php
+$form = $this->beginWidget('CActiveForm', array(
+    'id' => 'chat-form',
+    'enableAjaxValidation' => false,
+));
+    //вьюшка для сообщения о необходимых полях
+    echo $this->renderPartial('backend.views.site.required');
 
-    <p class="note">Поля, помеченные <span class="required">*</span>, являются обязательными.</p>
-
-    <?php echo $form->errorSummary($model); ?>
+    echo $form->errorSummary($model); ?>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'text'); ?>
@@ -53,7 +52,7 @@
     </div>
     
     <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить'); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? BaseModule::t('dic', 'Create') : BaseModule::t('dic', 'Save')); ?>
     </div>
 
 <?php $this->endWidget(); ?>

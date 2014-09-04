@@ -64,8 +64,8 @@ class Gmt extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Name',
+			'id' => BaseModule::t('dic', 'ID'),
+			'name' => BaseModule::t('dic', 'Name'),
 		);
 	}
 

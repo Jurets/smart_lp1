@@ -3,14 +3,19 @@
 /* @var $user User */
 /* @var $form TbActiveForm */
 
-$this->breadcrumbs=array(
-    'Чат'=>array('admin'),
-    'Поиск'=>array('search'),
-    $user->username,
+$this->breadcrumbs = array(
+    //BaseModule::t('rec', 'Chat')=>array('admin'),
+    BaseModule::t('rec', 'Chat') . BaseModule::t('rec', 'Blocking') => array('search'),
+    //BaseModule::t('rec', 'Search')=>array('search'),
+    //$user->username,
 );
 
+if (isset($user->username)) {
+    $this->breadcrumbs[] = $user->username;
+}
+
 $this->menu=array(
-    array('label'=>'Сообщения', 'url'=>array('admin')),
+    array('label'=>BaseModule::t('rec', 'Chat messages'), 'url'=>array('admin')),
     //array('label'=>'Поиск', 'url'=>array('search')),
 );
 ?>
@@ -19,11 +24,7 @@ $this->menu=array(
     'block'=>true,
 )); ?>
 
-<?php if (isset($chatban->id)) { ?>
-    <h1>Участник заблокирован</h1>
-<?php } else { ?>
-    <h1>Заблокировать участника <?php //echo $user->id; ?></h1>
-<?php } ?>
+<h1><?php echo BaseModule::t('rec', isset($chatban->id) ? 'Participant is blocked' : 'Block participant'); ?></h1>
     
 <?php $this->widget('yiiwheels.widgets.detail.WhDetailView', array(
     'data'=>$user,
@@ -51,13 +52,13 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             ),
         ));
         echo $form->hiddenField($chatban, 'id');
-        echo TbHtml::submitButton('Разблокировать', array('name'=>'submit_unban', 'color' => TbHtml::BUTTON_COLOR_PRIMARY));
+        echo TbHtml::submitButton(BaseModule::t('rec', 'Unlock'), array('name'=>'submit_unban', 'color' => TbHtml::BUTTON_COLOR_PRIMARY));
     } else {
         //выбрать тип бана
-        echo $form->dropDownListControlGroup($chatban, 'bantype_id', TbHtml::listData(BanType::getBanTypes(), 'id', 'name'), array('class'=>'span5', 'displaySize'=>'1', 'prompt'=>'<выбор>'));
+        echo $form->dropDownListControlGroup($chatban, 'bantype_id', TbHtml::listData(BanType::getBanTypes(), 'id', 'name'), array('class'=>'span5', 'displaySize'=>'1', 'prompt'=>'<' . BaseModule::t('rec', 'select') . '>'));
         //информация о причине бана
         echo $form->textFieldControlGroup($chatban, 'comment', array('class'=>'span8'));
-        echo TbHtml::submitButton('Заблокировать', array('name'=>'submit_ban', 'color' => TbHtml::BUTTON_COLOR_PRIMARY));
+        echo TbHtml::submitButton(BaseModule::t('rec', 'Block'), array('name'=>'submit_ban', 'color' => TbHtml::BUTTON_COLOR_PRIMARY));
     }
 $this->endWidget();
 ?>

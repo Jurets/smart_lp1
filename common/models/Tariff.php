@@ -58,9 +58,9 @@ class Tariff extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'shortname' => 'Shortname',
+			'id' => BaseModule::t('dic', 'ID'),
+			'name' => BaseModule::t('dic', 'Name'),
+			'shortname' => BaseModule::t('dic', 'Shortname'),
 		);
 	}
 

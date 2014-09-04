@@ -65,12 +65,12 @@ class Chatmessage extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'text' => 'Текст',
-            'created' => 'Создано',
-            'owner' => 'Автор',
-            'post_identity' => 'ИД юзера',
-            'is_alert' => 'Важн',
+            'id' => BaseModule::t('dic', 'ID'),
+            'text' => BaseModule::t('dic', 'Text'),
+            'created' => BaseModule::t('dic', 'Created'),
+            'owner' => BaseModule::t('dic', 'Author'),
+            'post_identity' => BaseModule::t('dic', 'User ID'),
+            'is_alert' => BaseModule::t('dic', 'Importance'),
         );
     }
 

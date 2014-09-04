@@ -3,13 +3,14 @@
 /* @var $model Chatmessage */
 
 $this->breadcrumbs=array(
-    'Чат'=>array('admin'),
-    'Сообщения',
+    //'Чат'=>array('admin'),
+    BaseModule::t('rec', 'Chat messages')//=>array('admin'),
+    //'Сообщения',
 );
 
 $this->menu=array(
 	//array('label'=>'Создать', 'url'=>array('create')),
-    array('label'=>'Блокировка', 'url'=>array('search')),
+    array('label' => BaseModule::t('rec', 'Chat') . ' ' . BaseModule::t('dic', 'Blocking'), 'url'=>array('search')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Сообщения чата</h1>
+<h1><?php echo BaseModule::t('dic', 'Chat messages'); ?></h1>
 
 <?php // echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -42,7 +43,7 @@ $date = empty($model->filterDate) ? null : Yii::app()->dateFormatter->format("dd
 $dateFilter = $this->widget('zii.widgets.jui.CJuiDatePicker',array(
     'name'=>'Chatmessage[filterDate]',
     'value'=>$date, 
-    'language'=>'ru',
+    'language'=>Yii::app()->language,
     'options'=>array(
         'showAnim'=>'fold',
         'dateFormat'=>'yy-mm-dd',
@@ -98,7 +99,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name' => 'is_alert',
-            'value' => '$data->is_alert ? "Р”Р°" : ""',
+            'value' => '$data->is_alert ? BaseModule::t("dic", "Yes") : ""',
             'htmlOptions'=>array(
                 'nowrap'=>'nowrap', 
                 'width'=>'40px',
