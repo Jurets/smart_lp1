@@ -12,7 +12,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Cities</h1>
+<h1><?php echo BaseModule::t('common', 'Cities'); ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbListView', array(

@@ -67,7 +67,7 @@ $dateFilter = $this->widget('yiiwheels.widgets.datepicker.WhDatePicker', array(
         'id' => 'created',
     ),
         ), true);
-//$this->widget('zii.widgets.grid.CGridView', array(
+
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'faq-grid',
     'dataProvider' => $model->search(),
@@ -98,7 +98,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'category',
             'type' => 'raw',
-            'filter' => array('finance' => 'финансы', 'offer' => 'предложения', 'site' => 'работа сайта'),
+            'filter' => array('finance' => BaseModule::t('dic', 'Finance'), 'offer' => BaseModule::t('dic', 'Offers'), 'site' => BaseModule::t('dic', 'Site work')),
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',

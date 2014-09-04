@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'FAQ',
+	BaseModule::t('rec','FAQ'),
 );
 
 $this->menu=array(

@@ -3,7 +3,7 @@
 /* @var $model Faq */
 
 $this->breadcrumbs = array(
-    "FAQ" => array('index'),
+    BaseModule::t('rec','FAQ') => array('index'),
     $model->id,
 );
 

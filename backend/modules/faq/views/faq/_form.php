@@ -57,12 +57,12 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'category'); ?>
-        <?php echo $form->dropDownList($model, 'category', array('finance' => 'финансы', 'offer' => 'предложения', 'site' => 'работа сайта')); ?>
+        <?php echo $form->dropDownList($model, 'category', array('finance' => BaseModule::t('dic', 'Finance'), 'offer' => BaseModule::t('dic', 'Offers'), 'site' => BaseModule::t('dic', 'Site work'))); ?>
         <?php echo $form->error($model, 'category'); ?>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? BaseModule::t('dic', 'Create') : BaseModule::t('dic', 'Save')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

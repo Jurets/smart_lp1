@@ -28,11 +28,7 @@ $('.search-form form').submit(function(){
 
 <h1><?php echo BaseModule::t('rec', 'Manage Cities') ?></h1>
 
-<p>
-    <?php
- echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));
-    ?>.
-</p>
+<!--<p><?php //echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));?>.</p>-->
 
 <?php //echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <!--<div class="search-form" style="display:none">
