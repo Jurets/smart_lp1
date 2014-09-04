@@ -34,10 +34,10 @@
 
 <div id="pm_settings">
     <?php 
-        echo CHtml::label('Введите данные из Perfect Money', '');
-        echo CHtml::label('Аккаунт:','account');
+        echo CHtml::label(BaseModule::t('rec', 'Enter your Perfect Money data'), '');
+        echo CHtml::label(BaseModule::t('rec', 'Account') . ':','account', '');
         echo CHtml::textField('account');
-        echo CHtml::label('Пароль:','password');
+        echo CHtml::label(BaseModule::t('rec', 'password') . ':','password', '');
         echo CHtml::passwordField('password');
     ?>
 </div>

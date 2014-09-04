@@ -27,7 +27,7 @@
             <li> <a href="#"> <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?> </a> </li>
             <li> <a href="#"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
             <li> <a href="#"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
-            <li> <a href="<?php $this->createUrl('site/status'); ?>" class="mark">ПОДНЯТЬ СТАТУС</a>
+            <li> <a href="<?php $this->createUrl('site/status'); ?>" class="mark"><?php echo strtoupper(BaseModule::t('rec', 'Raise status')); ?></a>
             <li> <a  href="#" class="moveRight"> <?php echo BaseModule::t('common', 'LOGIN'); ?> </a> </li>
         </ul>
     </div>

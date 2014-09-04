@@ -30,9 +30,9 @@ class PerfectMoney extends CFormModel {
       $this->API->onSuccess = array($this, 'successBusinessLogic');
       $this->API->onFailure = array($this, 'failureBusinessLogic');
       /*Соглашение о выводе информации пользователю - умолчание*/
-      $this->message['success'] = 'Оплата произведена успешно';
-      $this->message['failure'] = 'В процессе оплаты произошла ошибка. Для разъяснений обратитесь к администратору сайта';
-      $this->message['empty_purse'] = BaseModule::t('common',"Recipient's or Sender's purse absent");
+      $this->message['success'] = BaseModule::t('rec', 'Payment was successful');
+      $this->message['failure'] = BaseModule::t('rec', 'An error occurred during the payment process. For details, contact the site administrator');
+      $this->message['empty_purse'] = BaseModule::t('rec', "Recipient's or Sender's purse absent");
       $this->message['errorText'] = '';
       $this->payerId = NULL;
       $this->payeeId = NULL;
@@ -93,7 +93,7 @@ class PerfectMoney extends CFormModel {
        // U - доллар E - евро G - золото
        $checked = $this->$attribute;
        if(substr($checked, 0, 1) !== 'U'){
-          $this->addError($attribute, 'Purse must be a dollar context');
+          $this->addError($attribute, BaseModule::t('rec','Purse must have dollar prefix'));
        }
        if(empty($this->payeeAccount)){
           $this->addError('paymentTransactionStatus',$this->message['empty_purse']);

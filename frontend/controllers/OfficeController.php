@@ -82,7 +82,7 @@ class OfficeController extends EMController
 //            $this->refresh();
             if($_POST['category']){
                 $category = $_POST['category'];
-                EmailHelper::send(array($objFaqManager[$category.'Mail']), 'Question from faq', 'questionFromFaq', array('question'=>$_POST['question']));
+                EmailHelper::send(array($objFaqManager[$category.'Mail']), BaseModule::t('rec','Question from FAQ'), 'questionFromFaq', array('question'=>$_POST['question']));
             }
         }
         $this->render('help', array('arrCategories' => $categories, 'availableCategories'=>$availableCategories));
@@ -189,7 +189,7 @@ class OfficeController extends EMController
 
                 if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
-                    EmailHelper::send($participant->new_email, 'Подтверждение почты', 'updateEmail', array('participant' => $participant));
+                    EmailHelper::send($participant->new_email, BaseModule::t('rec', 'Mail confirmation'), 'updateEmail', array('participant' => $participant));
                 }
             } else {
                 $participant->photo = $oldPhoto;

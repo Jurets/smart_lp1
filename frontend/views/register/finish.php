@@ -1,4 +1,4 @@
-<p id="shag-4-2-text" > <?php echo BaseModule::t('common', 'Congratulations! You became a full member of the system.') ?></p>
+<p id="shag-4-2-text" > <?php echo BaseModule::t('rec', 'Congratulations! You became a full member of the system.') ?></p>
 <!--<div>
     <input type="button" name="login" class="btn-style-green btn-style-green-4-2" value="ВОЙТИ В ОФИС" />
 </div>-->
