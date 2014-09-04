@@ -5,7 +5,7 @@
  * Created: 04/06/2014
  * Class OfficeController
  */
-class OfficeController extends EController
+class OfficeController extends EMController
 {
 
     /**
@@ -236,6 +236,8 @@ class OfficeController extends EController
         } else {
             $criteria = new CDbCriteria();
             $criteria->addCondition('activity = 1');
+            $criteria->addCondition('lng = :lng');
+            $criteria->params = array('lng'=>Yii::app()->language);
             $count = News::model()->count($criteria); // количество активных записей новостей
             if($count!=0){
                 $pages = new CPagination($count);
