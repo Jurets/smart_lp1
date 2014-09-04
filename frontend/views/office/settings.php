@@ -56,11 +56,11 @@ $form = $this->beginWidget('CActiveForm', array(
         foreach(range(1900,1996) as $y){
             $arrayYear[$y] =  $y;}
 
-        if($day{0} === "0"){
+        if($day!=='' and $day{0} === "0"){
             $day = $day{1};
         }
 
-        if($month{0} === "0"){
+        if($day!=='' and $month{0} === "0"){
             $month = $month{1};
         }
         ?>
@@ -164,6 +164,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <!--       <p class="shag-1-1-option3text"> МОЕ ВРЕМЯ:</p>-->
         <p class="shag-1-1-option3text"> <?php echo BaseModule::t('common', 'MY TIME') ?>:</p>
             <select name="timeZoneSelect" class="shag-1-1-option3">
+                <option value=""></option>
             <?php foreach($gmtZone as $key=>$currentGmt) {?>
                 <?php if($participant->gmt_id == $key) {?>
                     <option value="<?php echo $key; ?>" selected ><?php echo $currentGmt; ?></option>

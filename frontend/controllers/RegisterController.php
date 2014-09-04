@@ -67,7 +67,7 @@ class RegisterController extends EController
             //Начало обработки, валидация
             if ($participant->validate()) {
                 /* Работа с аватаром */
-                if (isset($_FILES['photo'])) {
+                if ($_FILES['Participant']['name']!=='') {
                     // путь для сохранения файла
                     $path = Yii::app()->params['upload.path'];
                     Yii::import('common.extensions.FileUpload.UploadAction');
@@ -79,8 +79,8 @@ class RegisterController extends EController
                     $upload->prefixResized = 'avatar-settings-';
                     $images = $upload->run();
 
-                    if (isset($images[0]['name'])) {
-                        $participant->photo = $images[0]['name'];
+                    if (isset($images['photo']['name'])) {
+                        $participant->photo = $images['photo']['name'];
                     } else {
                         $participant->photo = '';
                     }

@@ -2,7 +2,7 @@
 <?php
 //CSS-file for main page
 
-Yii::app()->clientScript->registerCssFile('css/style.css');
+Yii::app()->clientScript->registerCssFile('/css/style.css');
 Yii::app()->clientScript->registerCssFile('/css/style-shags.css');
 Yii::app()->clientScript->registerCssFile('/css/login.css');
 
