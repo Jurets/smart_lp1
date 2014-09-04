@@ -29,15 +29,19 @@ class Indexmanager extends CFormModel {
         $data = $load->query();
         $dump = $data->read();
         $decodedObject = json_decode($dump['content'], true);
-        $this->videolink = (isset($decodedObject['videolink'])) ? $decodedObject['videolink'] : '';
+        $this->videolink = (isset($decodedObject['videolink'])) ? trim($decodedObject['videolink']) : '';
         $this->title = (isset($decodedObject['title'])) ? $decodedObject['title'] : '';
         $this->about = (isset($decodedObject['about'])) ? $decodedObject['about'] : '';
+        $this->about = str_replace(array("\r","\n"),'<br>',$this->about);
+        $this->about = str_replace('<br><br>','<br>',$this->about); 
         $this->sliderlist = $decodedObject['sliderlist'];
     }
     public function SaveIndexManager(){
         /*модуль приведения к нормальному виду - будущий вспомогательный метод модели -> bgiin */
         $reorg_buffer = array();
         foreach ($this->sliderlist as $reorganisation){
+            $reorganisation['descriptio'] = str_replace(array("\r","\n"),'<br>',$reorganisation['descriptio']);
+            $reorganisation['descriptio'] = str_replace('<br><br>','<br>',$reorganisation['descriptio']);
             $reorg_buffer[] = $reorganisation;
         }
         $this->sliderlist = $reorg_buffer;
