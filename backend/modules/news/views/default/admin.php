@@ -67,6 +67,7 @@ $this->widget('yiiwheels.widgets.grid.WhGridView', array(
     'columns' => array(
         //'id',
         //'author',
+        'lng',
         'created',
         'activated',
         'title',

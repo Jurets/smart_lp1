@@ -7,7 +7,7 @@ class EMController extends EController {
         if(isset($_COOKIE['language'])){
             Yii::app()->language = (string)Yii::app()->request->cookies['language'];
         }else{
-            Yii::app()->language = 'ru'; // языком по умолчанию принимается русский
+            Yii::app()->language = Yii::app()->params['default.language']; // языком по умолчанию принимается русский
         }
     }
 }

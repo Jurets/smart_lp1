@@ -97,6 +97,7 @@ class DefaultController extends EMController
                         if($model->getAttribute('activated') == false)
                             $model->setAttribute ('activated', date('H:i:s d-m-Y', time()));
                             $model->setAttribute ('created', date('H:i:s d-m-Y', time()));
+                        $model->lng = Yii::app()->language;
 			if($model->save()){
 				//$this->redirect(array('view','id'=>$model->id));
                                 $this->redirect(array('admin'));
@@ -133,7 +134,7 @@ class DefaultController extends EMController
 				//$model->image = $this->path;
 			//}
 			
-			if($model->save())
+			if($model->saveDependLanguage())
 				//$this->redirect(array('view','id'=>$model->id));
                                 $this->redirect(array('admin'));
 			else
@@ -153,16 +154,12 @@ class DefaultController extends EMController
 	public function actionDelete($id)
 	{
 		$model=$this->loadModel($id);
-//		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image))
-//			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . $model->image);
-//		if(is_file(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR .'resized-'. $model->image))
-//			unlink(Yii::getPathOfAlias('news.uploads') . DIRECTORY_SEPARATOR . 'resized-' .$model->image);
-                if(is_file(Yii::app()->params['upload.path'] . $model->image))
-			unlink(Yii::app()->params['upload.path'] . $model->image);
-		if(is_file(Yii::app()->params['upload.path'] .'resized-'. $model->image))
-			unlink(Yii::app()->params['upload.path']. 'resized-' . $model->image);
-                if(is_file(Yii::app()->params['upload.path'] .'origin-'. $model->image))
-			unlink(Yii::app()->params['upload.path']. 'origin-' . $model->image);
+//                if(is_file(Yii::app()->params['upload.path'] . $model->image))
+//			unlink(Yii::app()->params['upload.path'] . $model->image);
+//		if(is_file(Yii::app()->params['upload.path'] .'resized-'. $model->image))
+//			unlink(Yii::app()->params['upload.path']. 'resized-' . $model->image);
+//                if(is_file(Yii::app()->params['upload.path'] .'origin-'. $model->image))
+//			unlink(Yii::app()->params['upload.path']. 'origin-' . $model->image);
 			
 		$model->delete();
 
@@ -212,7 +209,7 @@ class DefaultController extends EMController
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
-
+        
 	/**
 	 * Performs the AJAX validation.
 	 * @param News $model the model to be validated
@@ -225,4 +222,5 @@ class DefaultController extends EMController
 			Yii::app()->end();
 		}
 	}
+        
 }

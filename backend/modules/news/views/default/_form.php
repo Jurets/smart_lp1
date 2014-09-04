@@ -28,6 +28,7 @@
 	</div>  -->
 
 	<div class="row">
+                <?php echo $form->hiddenField($model, 'lng')?>
 		<?php echo $form->labelEx($model,BaseModule::t("rec", "Created")); ?>
 		<?php echo $form->textField($model,'created', array('readonly'=>1)); ?>
 		<?php echo $form->error($model,'created'); ?>
