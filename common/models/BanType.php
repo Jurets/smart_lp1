@@ -56,9 +56,9 @@ class BanType extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'название',
-			'period' => 'период бана (в секундах)',
+			'id' => BaseModule::t('dic', 'ID'),
+			'name' => BaseModule::t('dic', 'name'),
+			'period' => BaseModule::t('dic', 'ban period (in seconds)'),
 		);
 	}
 

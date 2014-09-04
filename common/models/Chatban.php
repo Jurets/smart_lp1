@@ -65,12 +65,12 @@ class Chatban extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ИД',
-			'user_id' => 'ИД юзера',
-			'create_at' => 'Создан',
-			'bantype_id' => 'Тип бана',
-			'active' => 'Активность',
-			'comment' => 'Причина',
+			'id' => BaseModule::t('dic', 'ID'),
+			'user_id' => BaseModule::t('dic', 'User ID'),
+			'create_at' => BaseModule::t('dic', 'Created'),
+			'bantype_id' => BaseModule::t('dic', 'Ban type'),
+			'active' => BaseModule::t('dic', 'Activity'),
+			'comment' => BaseModule::t('dic', 'Reason'),
 		);
 	}
 

@@ -26,15 +26,15 @@ class MPlan extends CModel
         /* необязательные параметры */
         $pm->payerId = $participant->id;
         $pm->transactionId = PmTransactionLog::TRANSACTION_REGISTRATION;
-        $pm->notation = 'Оплата регистрации 20$';
+        $pm->notation = BaseModule::t('dic', 'Registration payment') . $pm->amount . '$';
         $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
 
-        if (!$pm->hasErrors()) {//DebugBreak();  //если успешно -
+        if (!$pm->hasErrors()) {//если успешно -
             $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
             Yii::app()->user->setState('pw_original', $pw_original);
             $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
             Requisites::depositActivation($pm->amount); //увеличить баланс кошелька активаций
-            EmailHelper::send(array($participant->email), 'Активация в системе', 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
+            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
             return true;
         } else {
             $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
@@ -71,7 +71,7 @@ class MPlan extends CModel
         /* необязательные параметры */
         $pm->payerId = $participant->id;
         $pm->transactionId = PmTransactionLog::TRANSACTION_ENTER_BC;
-        $pm->notation = 'Вступление в бизнес-клуб';
+        $pm->notation = BaseModule::t('dic', 'Entry into the business club');
         $pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
 
         if (!$pm->hasErrors()) {  //если успешно -
@@ -87,7 +87,7 @@ class MPlan extends CModel
                 $participant->referal->depositPurse($pm->amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
             }
             //отослать письмо про вступление в бизнес-участие
-            EmailHelper::send(array($participant->email), 'Вы стали бизнес-участником', 'businessstart', array('participant'=>$participant));
+            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'You have become a business party'), 'businessstart', array('participant'=>$participant));
             /////                        $this->step = 4;
             /////                        $this->render('finish', array('participant'=>$participant));
             /////                        Yii::app()->end();
@@ -118,7 +118,7 @@ class MPlan extends CModel
         $pm->payerId = $participant->id;
         $pm->payeeId = null;
         $pm->transactionId = Tariff::getTransactionKindTariff($type_amount);
-        $pm->notation = 'Изменение статсуса в бизнес клубе';
+        $pm->notation = BaseModule::t('dic', 'Changing the status of a business club');
         $pm->Run('confirm');   //запуск процесса платежа в PerfectMoney
         if (!$pm->hasErrors()) {  //если успешно -
             Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба

@@ -104,17 +104,17 @@ class PmTransactionLog extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'tr_id' => 'Tr',
-			'date' => 'Date',
-			'from_user_id' => 'From User',
-			'from_purse' => 'From Purse',
-			'to_user_id' => 'To User',
-			'to_purse' => 'To Purse',
-			'notation' => 'Notation',
-			'amount' => 'Amount',
-			'currency' => 'Currency',
-			'tr_kind_id' => 'Tr Kind',
-			'tr_err_code' => 'Tr Err Code',
+			'tr_id' => BaseModule::t('dic', 'ID'),
+			'date' => BaseModule::t('dic', 'Date'),
+			'from_user_id' => BaseModule::t('dic', 'From User'),
+			'from_purse' => BaseModule::t('dic', 'From Purse'),
+			'to_user_id' => BaseModule::t('dic', 'To User'),
+			'to_purse' => BaseModule::t('dic', 'To Purse'),
+			'notation' => BaseModule::t('dic', 'Notation'),
+			'amount' => BaseModule::t('dic', 'Amount'),
+			'currency' => BaseModule::t('dic', 'Currency'),
+			'tr_kind_id' => BaseModule::t('dic', 'Tr Kind'),
+			'tr_err_code' => BaseModule::t('dic', 'Tr Err Code'),
 		);
 	}
 
