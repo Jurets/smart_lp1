@@ -82,7 +82,7 @@ class OfficeController extends EMController
 //            $this->refresh();
             if($_POST['category']){
                 $category = $_POST['category'];
-                EmailHelper::send(array($objFaqManager[$category.'Mail']), $_POST['question'], 'question from faq', array());
+                EmailHelper::send(array($objFaqManager[$category.'Mail']), 'Question from faq', 'test', $_POST['question']);
             }
         }
         $this->render('help', array('arrCategories' => $categories, 'availableCategories'=>$availableCategories));
