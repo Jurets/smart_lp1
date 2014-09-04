@@ -3,20 +3,20 @@
 /* @var $model Countries */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Countries') => array('index'),
+    BaseModule::t('common', 'Countries') => array('index'),
     $model->name,
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'List Countries'), 'url' => array('index')),
-    array('label' => Yii::t('common', 'Create Countries'), 'url' => array('create')),
-    array('label' => Yii::t('common', 'Update Countries'), 'url' => array('update', 'id' => $model->id)),
-    array('label' => Yii::t('common', 'Delete Countries'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => Yii::t('common', 'Manage Countries'), 'url' => array('admin')),
+    array('label' => BaseModule::t('common', 'List Countries'), 'url' => array('index')),
+    array('label' => BaseModule::t('common', 'Create Countries'), 'url' => array('create')),
+    array('label' => BaseModule::t('common', 'Update Countries'), 'url' => array('update', 'id' => $model->id)),
+    array('label' => BaseModule::t('common', 'Delete Countries'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
+    array('label' => BaseModule::t('common', 'Manage Countries'), 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo Yii::t('common', 'View Countries') ?>#<?php echo $model->id; ?></h1>
+<h1><?php echo BaseModule::t('common', 'View Countries') ?>#<?php echo $model->id; ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbDetailView', array(

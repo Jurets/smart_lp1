@@ -13,13 +13,7 @@ class InvitationModule extends BaseModule
 				'invitation.components.*',
 		));
 	}
-    /* localisation`s element */
-    public static function t($str='',$params=array(),$dic='invitation') {
-        if (Yii::t("invitation", $str)==$str)
-            return Yii::t("InvitationModule.".$dic, $str, $params);
-        else
-            return Yii::t("InvitationModule", $str, $params);
-    }
+
     public function beforeControllerAction($controller, $action)
     {
         if(parent::beforeControllerAction($controller, $action))

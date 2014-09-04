@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=> Yii::t('common', 'Create Faq'), 'url'=>array('create')),
-	array('label'=> Yii::t('common', 'Manage Faq'), 'url'=>array('admin')),
+	array('label'=> BaseModule::t('common', 'Create Faq'), 'url'=>array('create')),
+	array('label'=> BaseModule::t('common', 'Manage Faq'), 'url'=>array('admin')),
 );
 ?>
 

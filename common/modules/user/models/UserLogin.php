@@ -41,7 +41,7 @@ class UserLogin extends CFormModel
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
                         array('password', 'authenticate'),
-/////временно отключаем            array('activekey', 'checkActivekey'),  
+/////временно отключаем  array('activekey', 'checkActivekey'),  
             array('verifyCode', 'captcha',
                 // авторизованным пользователям код можно не вводить
                   'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
@@ -107,9 +107,9 @@ class UserLogin extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'rememberMe'=>UserModule::t("Remember me next time"),
-			'username'=>UserModule::t("username or email"),
-			'password'=>UserModule::t("password"),
+			'rememberMe'=>BaseModule::t('rec', "Remember me next time"),
+			'username'=>BaseModule::t('rec', "username or email"),
+			'password'=>BaseModule::t('rec', "password"),
             'verifyCode' => 'Код проверки',
             'activekey' => 'Код входа',
 		);

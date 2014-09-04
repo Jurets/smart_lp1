@@ -27,10 +27,10 @@ class LanguageInterphace extends CFormModel {
 //               $sql3 = 'INSERT INTO Message (id, language) VALUES('.$lastInsertId.', '.'"ru"'. ')';
 //               Yii::app()->db->createCommand($sql3)->execute();
                $this->addNewMatrix($lang);
-                echo '<script> alert("'.Yii::t('rec',Yii::t('rec','New Language added successfull')).'");</script>';
+                echo '<script> alert("'.BaseModule::t('rec',BaseModule::t('rec','New Language added successfull')).'");</script>';
                 $this->showTranslation();
                } catch (Exception $exc) {
-                echo '<script> alert("'.Yii::t('rec', Yii::t('rec','This Language allredy present')).'");</script>';
+                echo '<script> alert("'.BaseModule::t('rec', BaseModule::t('rec','This Language allredy present')).'");</script>';
                }
         }
     }
@@ -66,7 +66,7 @@ class LanguageInterphace extends CFormModel {
                 $a = Yii::app()->db->createCommand($sql)->execute();
                 $b = Yii::app()->db->createCommand($sql2)->execute();
                         if($a !=0 || $b !=0){
-                            echo '<script> alert("'.Yii::t('rec', $lang.' : '.Yii::t('rec','Language deleted successfull')).'");</script>';
+                            echo '<script> alert("'.BaseModule::t('rec', $lang.' : '.BaseModule::t('rec','Language deleted successfull')).'");</script>';
                         }
             }catch (Exception $exc){
                 echo '<script>alert('.$exc->getTraceAsString().');</script>';
@@ -129,7 +129,7 @@ class LanguageInterphace extends CFormModel {
               $sql .= ' WHERE id='.(int)$number.' AND language="'.$_POST['lang'].'";';
               Yii::app()->db->createCommand($sql)->execute();
           }
-              echo Yii::t('rec','Edition completed');
+              echo BaseModule::t('rec','Edition completed');
                 
       }
    }

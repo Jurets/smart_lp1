@@ -3,13 +3,13 @@
 /* @var $model Requisites */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Requisites') => array('index'),
-    Yii::t('common', 'Manage'),
+    BaseModule::t('common', 'Requisites') => array('index'),
+    BaseModule::t('common', 'Manage'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'List Requisites'), 'url' => array('admin')),
-    //array('label' => Yii::t('common', 'Create Requisites'), 'url' => array('create')),
+    array('label' => BaseModule::t('common', 'List Requisites'), 'url' => array('admin')),
+    //array('label' => BaseModule::t('common', 'Create Requisites'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,11 +26,11 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo Yii::t('common', 'Manage Requisites') ?></h1>
+<h1><?php echo BaseModule::t('common', 'Manage Requisites') ?></h1>
 
 <p>
     <?php
-    echo Yii::t(
+    echo BaseModule::t(
             'common', 'You may optionally enter a comparison operator ({signs}) at the beginning of each of your search values to specify how the comparison should be done', array(
         '{signs}' => '<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>, <b>=</b>')
     );

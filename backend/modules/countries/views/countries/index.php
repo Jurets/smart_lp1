@@ -3,13 +3,13 @@
 /* @var $model Countries */
 
 $this->breadcrumbs = array(
-    Yii::t('rec', 'Countries') => array('index'),
-    Yii::t('rec', 'Manage Countries'),
+    BaseModule::t('rec', 'Countries') => array('index'),
+    BaseModule::t('rec', 'Manage Countries'),
 );
 
 $this->menu = array(
-   // array('label' => Yii::t('rec', 'List Countries'), 'url' => array('admin')),
-    array('label' => Yii::t('rec', 'Create Countries'), 'url' => array('create')),
+   // array('label' => BaseModule::t('rec', 'List Countries'), 'url' => array('admin')),
+    array('label' => BaseModule::t('rec', 'Create Countries'), 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,15 +26,15 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo Yii::t('rec', 'Manage Countries') ?></h1>
+<h1><?php echo BaseModule::t('rec', 'Manage Countries') ?></h1>
 
 <p>
     <?php
-    echo htmlspecialchars_decode(Yii::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));
+    echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));
     ?>
 </p>
 
-<?php echo CHtml::link(Yii::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
+<?php echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form" style="display:none">
     <?php
     $this->renderPartial('_search', array(

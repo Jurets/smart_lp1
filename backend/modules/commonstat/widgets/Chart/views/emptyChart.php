@@ -1,1 +1,1 @@
-<h1 align="center"><?php echo Yii::t('rec','No data for display')?></h1>
+<h1 align="center"><?php echo BaseModule::t('rec','No data for display')?></h1>

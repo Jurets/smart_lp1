@@ -9,7 +9,7 @@
     </div>
 
     <iframe class="video"  src="<?php echo $model->videolink; ?>" frameborder="0" allowfullscreen></iframe>
-    <a id="greenButton" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"><?php echo Yii::t('common', 'JOIN') ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> </span> </a>
+    <a id="greenButton" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"><?php echo BaseModule::t('common', 'JOIN') ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> </span> </a>
 
 </div>
 
@@ -24,7 +24,7 @@
                     <img src="<?php echo UrlHelper::getImageUrl($slider['photo']) ?>" alt="" style="width:266px; height:326px; padding-top:15px; padding-left:25px;">
                 </div>
                 <ul id="slideText">
-                    <li class="slideText1"><?php echo Yii::t('common', 'LEADERS') ?></li>
+                    <li class="slideText1"><?php echo BaseModule::t('common', 'LEADERS') ?></li>
                     <li class="slideText2"><?php echo $model->title ?></li>
                     <li class="slideText3"><?php echo $slider['leader']; ?></li>
                     <li class="slideText4"><?php echo $slider['descriptio']; ?></li>
@@ -45,27 +45,27 @@
 <?php $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array(
         'cssID' => 1,
-        'head' => Yii::t('common', 'REGISTERED MEMBERS'),
-        'title'=> Yii::t('common', 'CURRENT REGISTRATION'),
+        'head' => BaseModule::t('common', 'REGISTERED MEMBERS'),
+        'title'=> BaseModule::t('common', 'CURRENT REGISTRATION'),
     ))); ?>
 </div>
     <?php $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array(
             'cssID' => 2,
-            'head' => Yii::t('common', 'FEE PAID'),
-            'title'=> Yii::t('common', 'CURRENT PAYMENTS'),
+            'head' => BaseModule::t('common', 'FEE PAID'),
+            'title'=> BaseModule::t('common', 'CURRENT PAYMENTS'),
         ))); ?>
 
     <?php $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array(
             'cssID' => 3,
-            'head' => Yii::t('common', 'GIVEN ON CHARITY'),
-            'title'=> Yii::t('common', 'CURRENT FEES'),
+            'head' => BaseModule::t('common', 'GIVEN ON CHARITY'),
+            'title'=> BaseModule::t('common', 'CURRENT FEES'),
         ))); ?>
 <!--    <div id="infoBlok2">-->
-<!--        <p class="reg2">--><?php //echo Yii::t('common', 'FEE PAID') ?><!--</p>-->
+<!--        <p class="reg2">--><?php //echo BaseModule::t('common', 'FEE PAID') ?><!--</p>-->
 <!--        <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>-->
-<!--        <p class="regB">--><?php //echo Yii::t('common', 'CURRENT PAYMENTS') ?><!--</p>-->
+<!--        <p class="regB">--><?php //echo BaseModule::t('common', 'CURRENT PAYMENTS') ?><!--</p>-->
 <!--        <ul class="li">-->
 <!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
 <!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
@@ -78,9 +78,9 @@
 <!--    </div>-->
 
 <!--    <div id="infoBlok3">-->
-<!--        <p class="reg3">--><?php //echo Yii::t('common', 'GIVEN ON CHARITY') ?><!--</p>-->
+<!--        <p class="reg3">--><?php //echo BaseModule::t('common', 'GIVEN ON CHARITY') ?><!--</p>-->
 <!--        <div id="numberDecor3"><p>$00 652 427</p> <div id="test3"></div></div>-->
-<!--        <p class="regB">--><?php //echo Yii::t('common', 'CURRENT fEES') ?><!--</p>-->
+<!--        <p class="regB">--><?php //echo BaseModule::t('common', 'CURRENT fEES') ?><!--</p>-->
 <!--        <ul class="li">-->
 <!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
 <!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->

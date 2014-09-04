@@ -32,7 +32,7 @@ class PerfectMoney extends CFormModel {
       /*Соглашение о выводе информации пользователю - умолчание*/
       $this->message['success'] = 'Оплата произведена успешно';
       $this->message['failure'] = 'В процессе оплаты произошла ошибка. Для разъяснений обратитесь к администратору сайта';
-      $this->message['empty_purse'] = Yii::t('common',"Recipient's or Sender's purse absent");
+      $this->message['empty_purse'] = BaseModule::t('common',"Recipient's or Sender's purse absent");
       $this->message['errorText'] = '';
       $this->payerId = NULL;
       $this->payeeId = NULL;

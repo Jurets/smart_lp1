@@ -19,32 +19,32 @@
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, Yii::t('common', 'Author')); ?>
+        <?php echo $form->label($model, BaseModule::t('common', 'Author')); ?>
         <?php echo $form->textField($model, 'author'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, Yii::t('common', 'Created')); ?>
+        <?php echo $form->label($model, BaseModule::t('common', 'Created')); ?>
         <?php echo $form->textField($model, 'created'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, Yii::t('common', 'Activated')); ?>
+        <?php echo $form->label($model, BaseModule::t('common', 'Activated')); ?>
         <?php echo $form->textField($model, 'activated'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, Yii::t('common', 'Title')); ?>
+        <?php echo $form->label($model, BaseModule::t('common', 'Title')); ?>
         <?php echo $form->textField($model, 'title', array('size' => 60, 'maxlength' => 75)); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, Yii::t('common', 'Announcement')); ?>
+        <?php echo $form->label($model, BaseModule::t('common', 'Announcement')); ?>
         <?php echo $form->textField($model, 'announcement', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, Yii::t('common', 'Сontent')); ?>
+        <?php echo $form->label($model, BaseModule::t('common', 'Сontent')); ?>
         <?php echo $form->textArea($model, 'content', array('rows' => 6, 'cols' => 50)); ?>
     </div>
 
@@ -54,12 +54,12 @@
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, Yii::t('common', 'Activity')); ?>
+        <?php echo $form->label($model, BaseModule::t('common', 'Activity')); ?>
         <?php echo $form->textField($model, 'activity'); ?>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton(Yii::t('common', 'Search')); ?>
+        <?php echo CHtml::submitButton(BaseModule::t('common', 'Search')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

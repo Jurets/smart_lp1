@@ -1,16 +1,16 @@
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
 $this->breadcrumbs=array(
-	Yii::t('rec',"Profile")=>array('profile'),
-	Yii::t('rec',"Edit"),
+	BaseModule::t('rec',"Profile")=>array('profile'),
+	BaseModule::t('rec',"Edit"),
 );
 $this->menu=array(
 	((UserModule::isAdmin())
 		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
 		:array()),
-    array('label'=>Yii::t('rec','List User'), 'url'=>array('/user')),
-    array('label'=>Yii::t('rec','Profile'), 'url'=>array('/user/profile')),
-    array('label'=>Yii::t('rec','Change password'), 'url'=>array('changepassword')),
-    array('label'=>Yii::t('rec','Logout'), 'url'=>array('/user/logout')),
+    array('label'=>BaseModule::t('rec','List User'), 'url'=>array('/user')),
+    array('label'=>BaseModule::t('rec','Profile'), 'url'=>array('/user/profile')),
+    array('label'=>BaseModule::t('rec','Change password'), 'url'=>array('changepassword')),
+    array('label'=>BaseModule::t('rec','Logout'), 'url'=>array('/user/logout')),
 );
 ?><h1><?php echo UserModule::t('Edit profile'); ?></h1>
 
@@ -66,7 +66,7 @@ $this->menu=array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('rec','Create') : Yii::t('rec','Save')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? BaseModule::t('rec','Create') : BaseModule::t('rec','Save')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

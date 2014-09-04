@@ -3,20 +3,20 @@
 /* @var $model Requisites */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Requisites') => array('index'),
+    BaseModule::t('common', 'Requisites') => array('index'),
     $model->id,
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'List Requisites'), 'url' => array('index')),
-   // array('label' => Yii::t('common', 'Create Requisites'), 'url' => array('create')),
-    array('label' => Yii::t('common', 'Update Requisites'), 'url' => array('update', 'id' => $model->id)),
-    array('label' => Yii::t('common', 'Delete Requisites'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => Yii::t('common', 'Manage Requisites'), 'url' => array('admin')),
+    array('label' => BaseModule::t('common', 'List Requisites'), 'url' => array('index')),
+   // array('label' => BaseModule::t('common', 'Create Requisites'), 'url' => array('create')),
+    array('label' => BaseModule::t('common', 'Update Requisites'), 'url' => array('update', 'id' => $model->id)),
+    array('label' => BaseModule::t('common', 'Delete Requisites'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
+    array('label' => BaseModule::t('common', 'Manage Requisites'), 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo Yii::t('common', 'View Requisites') ?>#<?php echo $model->id; ?></h1>
+<h1><?php echo BaseModule::t('common', 'View Requisites') ?>#<?php echo $model->id; ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbDetailView', array(

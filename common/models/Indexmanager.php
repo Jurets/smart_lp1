@@ -64,10 +64,10 @@ class Indexmanager extends CFormModel {
     }
      public function attributeLabels(){
          return array(
-            'videolink' => Yii::t('rec','Video Link'),
-            'title' => Yii::t('rec','Title'),
-            'about' => Yii::t('rec','About Us'),
-            'sliderlist' => Yii::t('rec','Sliderlist'),
+            'videolink' => BaseModule::t('rec','Video Link'),
+            'title' => BaseModule::t('rec','Title'),
+            'about' => BaseModule::t('rec','About Us'),
+            'sliderlist' => BaseModule::t('rec','Sliderlist'),
          );
      }
 }

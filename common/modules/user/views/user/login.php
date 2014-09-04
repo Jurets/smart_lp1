@@ -1,12 +1,12 @@
 <?php
 // TODO Переделать форму
-$this->pageTitle=Yii::app()->name . ' - '.Yii::t('rec',"Login");
+$this->pageTitle=Yii::app()->name . ' - '.BaseModule::t('rec',"Login");
 $this->breadcrumbs=array(
-	Yii::t('rec',"Login"),
+	BaseModule::t('rec',"Login"),
 );
 ?>
 
-<h1><?php echo Yii::t('rec',"Login"); ?></h1>
+<h1><?php echo BaseModule::t('rec',"Login"); ?></h1>
 
 <?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
 
@@ -16,11 +16,13 @@ $this->breadcrumbs=array(
 
 <?php endif; ?>
 
-<p><?php echo Yii::t('rec',"Please fill out the following form with your login credentials:"); ?></p>
+<p><?php echo BaseModule::t('rec',"Please fill out the following form with your login credentials:"); ?></p>
 
 <div class="form">
-<?php $this->beginWidget('CActiveForm', array(
+
+<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id'=>'login',
+    'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
     //'action'=>Yii::app()->createAbsoluteUrl('site/login'),
     'enableAjaxValidation'=>true,
     //'enableClientValidation'=>true,
@@ -29,85 +31,55 @@ $this->breadcrumbs=array(
         'validateOnChange'=>false,
         'validateOnSubmit'=>true,
     ),
-)); ?>
-
-	<p class="note"><?php echo Yii::t('rec','Fields with <span class="required">*</span> are required.'); ?></p>
-	
-	<?php echo CHtml::errorSummary($model); ?>
-    
-    <!--<div class="row">
-        <?php //echo CHtml::activeLabelEx($model,'role'); ?>
-        <?php //echo CHtml::activeDropDownList($model,'role',array( 'суперадмин', 'админ', 'модератор')) ?>
-    </div>-->
-    	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'username'); ?>
-        <?php echo CHtml::activeTextField($model,'username') ?>
-		<?php echo CHtml::error($model,'username') ?>
-	</div>
-    
-    <div class="row">
-        <?php echo CHtml::activeLabelEx($model,'password'); ?>
-        <?php echo CHtml::activePasswordField($model,'password') ?>
+)); 
+    //вьюшка для сообщения о необходимых полях
+    echo $this->renderPartial('backend.views.site.required');
+    echo TbHtml::errorSummary($model);
+?>
+    <div class="control-group">
+        <?php echo CHtml::label(BaseModule::t('rec', 'username') . ' <span class="required">*</span>', 'UserLogin_username', array('class'=>'control-label required')); ?>
+        <div class="controls">
+            <?php echo $form->textField($model, 'username')?>
+        </div>
     </div>
-    
-    <div class="row">
-        <?php echo CHtml::activeLabelEx($model,'activekey'); 
-              $class = empty($model->logincode) ? 'invisible' : ''; 
-              echo CHtml::link(Yii::t('rec','Generate login code'), Yii::t('rec', '#'), array('id'=>'temp_key_link')); 
+
+    <div class="control-group">
+        <?php echo CHtml::label(BaseModule::t('rec', 'password') . ' <span class="required">*</span>', 'UserLogin_password', array('class'=>'control-label required')); ?>
+        <div class="controls">
+            <?php echo $form->passwordField($model, 'password')?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $form->labelEx($model, 'activekey', array('class'=>"control-label")); ?>
+        <div class="controls">
+              <?php $class = empty($model->logincode) ? 'invisible' : ''; 
+              echo TbHtml::link(Yii::t('rec','Generate login code'), Yii::t('rec', '#'), array('id'=>'temp_key_link')); 
         ?>
         <br>
-        <div id="show-errors" class="error"></div>
-        <p class="<?php echo $class; ?>">Код был выслан вам на почту. Введите его в поле ниже:</p>
+        <div id="show-errors" class="alert alert-block alert-error" style="display: none;"></div>
+        <p class="<?php echo $class; ?>"><?php echo BaseModule::t('rec', 'Код был выслан вам на почту. Введите его в поле ниже'); ?>:</p>
         <?php echo CHtml::activeTextField($model,'activekey', array('class'=>$class . ' temp-key')) ?>
+        </div>
     </div>
 	
-	<div class="row">
-        <?=CHtml::activeLabelEx($model, 'verifyCode')?>
-        <?php $this->widget('CCaptcha')?>
-        <?=CHtml::activeTextField($model, 'verifyCode')?>
+    <div class="control-group">
+        <?php echo $form->labelEx($model, 'verifyCode', array('class'=>"control-label required")); ?>
+	    <!--<div class="controls">-->
+            <?php $this->widget('CCaptcha')?>
+            <?php echo CHtml::activeTextField($model, 'verifyCode'); ?>
+        <!--</div>-->
 	</div>
 	
-	<!--<div class="row">
-		<p class="hint">
-		<?php //echo CHtml::link(Yii::t('rec',"Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(Yii::t('rec',"Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
-		</p>
-	</div>-->
-	
-	<div class="row rememberMe">
-		<?php echo CHtml::activeCheckBox($model,'rememberMe', array('style' => 'float: left; margin-right: 10px;')); ?>
-		<?php echo CHtml::activeLabelEx($model,'rememberMe'); ?>
+	<div class="control-group">
+        <?php echo $form->labelEx($model, 'rememberMe', array('class'=>"control-label")); ?>
+        <?php //echo CHtml::label(BaseModule::t('rec', 'Remember me next time'), 'UserLogin_rememberMe', array('class'=>'control-label required')); ?>
+        <div class="controls">
+		    <?php echo TbHtml::activeCheckBox($model,'rememberMe'); ?>
+        </div>
 	</div>
 
-	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Login")); ?>
-	</div>
+	<?php echo TbHtml::submitButton(BaseModule::t('rec', "Login"), array('class'=>'btn btn-primary')); ?>
 	
 <?php $this->endWidget(); ?>
 </div><!-- form -->
-
-
-<?php
-$form = new CForm(array(
-    'elements'=>array(
-        'username'=>array(
-            'type'=>'text',
-            'maxlength'=>32,
-        ),
-        'password'=>array(
-            'type'=>'password',
-            'maxlength'=>32,
-        ),
-        'rememberMe'=>array(
-            'type'=>'checkbox',
-        )
-    ),
-
-    'buttons'=>array(
-        'login'=>array(
-            'type'=>'submit',
-            'label'=>'Login',
-        ),
-    ),
-), $model);
-?>

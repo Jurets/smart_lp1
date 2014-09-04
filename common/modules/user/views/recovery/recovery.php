@@ -1,11 +1,11 @@
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Restore");
 $this->breadcrumbs=array(
-	Yii::t('rec',"Login") => array('/user/login'),
-	Yii::t('rec',"Restore"),
+	BaseModule::t('rec',"Login") => array('/user/login'),
+	BaseModule::t('rec',"Restore"),
 );
 ?>
 
-<h1><?php echo Yii::t('rec',"Restore"); ?></h1>
+<h1><?php echo BaseModule::t('rec',"Restore"); ?></h1>
 
 <?php if(Yii::app()->user->hasFlash('recoveryMessage')): ?>
 <div class="success">

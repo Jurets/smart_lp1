@@ -52,7 +52,7 @@
         ));
                        
         //кнопка сохранения
-        echo TbHtml::submitButton($model->isNewRecord ? Yii::t('rec', 'Create') : Yii::t('rec', 'Save'), array('class'=>'primary'));
+        echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec', 'Create') : BaseModule::t('rec', 'Save'), array('class'=>'primary'));
         
 $this->endWidget();                           
         /*$details = $this->widget('yiiwheels.widgets.redactor.WhRedactor', array(
@@ -91,25 +91,25 @@ $this->endWidget();
         'type' => 'tabs',
         'tabs' => array(
                     array(
-                        'label' => Yii::t('main','О проекте'),
+                        'label' => BaseModule::t('main','О проекте'),
                         'content' => 'ASASAS',// Yii::app()->controller->renderPartial('editor', array('model'=>$model, 'field' => 'details'), true, true), //$details, 
                         'active' => true,
 //                        'linkOptions'=>array('width'=>1455,'class'=>'ddddd'),                        
                         ),
                     array(
-                        'label' => Yii::t('main','Договор оферты'), 
+                        'label' => BaseModule::t('main','Договор оферты'), 
                         'content' => 'asdasdasd', //$agreement,
                         //'id'=>'google_map',
                         //'active'=>true,
                     ),
                     array(
-                        'label' => Yii::t('main','Текст маркетинг-плана'), 
+                        'label' => BaseModule::t('main','Текст маркетинг-плана'), 
                         'content' => 'asdasda5768768678678sd', //$marketing,
                         //'id'=>'google_map',
                         //'active'=>true,
                     ),
                     array(
-                        'label' => Yii::t('main','Безопасность'), 
+                        'label' => BaseModule::t('main','Безопасность'), 
                         'content' => 'asdas123123123123dasd', //$marketing$password,
                         //'id'=>'google_map',
                         //'active'=>true,

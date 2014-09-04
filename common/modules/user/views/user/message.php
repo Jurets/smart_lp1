@@ -1,4 +1,4 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.Yii::t('rec',"Login"); ?>
+<?php $this->pageTitle=Yii::app()->name . ' - '.BaseModule::t('rec',"Login"); ?>
 
 <h1><?php echo $title; ?></h1>
 

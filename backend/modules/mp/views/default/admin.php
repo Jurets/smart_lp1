@@ -4,13 +4,13 @@
 
 
 $this->breadcrumbs=array(
-	Yii::t('rec','Mpversions')=>array('index'),
-	Yii::t('rec','Manage'),
+	BaseModule::t('rec','Mpversions')=>array('index'),
+	BaseModule::t('rec','Manage'),
 );
 
 $this->menu=array(
 //array('label'=>'List Mpversions', 'url'=>array('index')),
-array('label'=>Yii::t('rec','Create Version'), 'url'=>array('create')),
+array('label'=>BaseModule::t('rec','Create Version'), 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -27,9 +27,9 @@ return false;
 ");
 ?>
 
-<h1><?php echo Yii::t('rec','Manage versions of marketings plan'); ?></h1>
+<h1><?php echo BaseModule::t('rec','Manage versions of marketings plan'); ?></h1>
 
-<?php echo CHtml::link(Yii::t('rec','Advanced Search'),'#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link(BaseModule::t('rec','Advanced Search'),'#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
     <?php $this->renderPartial('_search',array(
 	'model'=>$model,

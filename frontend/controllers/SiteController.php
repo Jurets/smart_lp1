@@ -152,7 +152,7 @@ class SiteController extends LoginController
         if (!$user || $user === null) {
             echo CJSON::encode(array(
                 'result' => true,
-                'description' => Yii::t('common', "The User hasn't been found")
+                'description' => BaseModule::t('common', "The User hasn't been found")
             ));
             Yii::app()->end();
         }

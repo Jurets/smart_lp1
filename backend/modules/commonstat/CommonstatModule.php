@@ -1,5 +1,5 @@
 <?php
-class CommonstatModule extends CWebModule {
+class CommonstatModule extends BaseModule {
     
     
     public $commonstatShow = array('/commonstat'); // для связи с главнымм меню
@@ -11,13 +11,6 @@ class CommonstatModule extends CWebModule {
         ));
     }
      
-    public static function t($str='',$params=array(),$dic='commonstat') {
-	if (Yii::t("commonstat", $str)==$str)
-		return Yii::t("commonstatModule.".$dic, $str, $params);
-	else
-		return Yii::t("commonstatModule", $str, $params);
-    }
-    
     public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note"><?php echo Yii::t('rec', 'Fields with * are required.'); ?>.</p>
+	<p class="note"><?php echo BaseModule::t('rec', 'Fields with * are required.'); ?>.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -38,7 +38,7 @@
 <!--	</div>-->
 
 	<div class="row">
-		<?php echo $form->labelEx($model,Yii::t('rec','Video Link')); ?>
+		<?php echo $form->labelEx($model,BaseModule::t('rec','Video Link')); ?>
 		<?php echo $form->textField($model,'videolink',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'videolink'); ?>
 	</div>
@@ -92,7 +92,7 @@
 	</div> -->
     <div class="row">&nbsp;</div>
     <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('rec','Create') : Yii::t('rec','Save')); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? BaseModule::t('rec','Create') : BaseModule::t('rec','Save')); ?>
     </div>
 <?php $this->endWidget(); ?>
 

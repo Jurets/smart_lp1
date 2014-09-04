@@ -3,12 +3,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Cities'),
+    BaseModule::t('common', 'Cities'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('common', 'Create Cities'), 'url' => array('create')),
-    array('label' => Yii::t('common', 'Manage Cities'), 'url' => array('index')),
+    array('label' => BaseModule::t('common', 'Create Cities'), 'url' => array('create')),
+    array('label' => BaseModule::t('common', 'Manage Cities'), 'url' => array('index')),
 );
 ?>
 

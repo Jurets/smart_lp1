@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs = array(
-    Yii::t('common', 'Requisites'),
+    BaseModule::t('common', 'Requisites'),
 );
 
 $this->menu = array(
-//    array('label' => Yii::t('common', 'Create Requisites'), 'url' => array('create')),
-    array('label' => Yii::t('common', 'Manage Requisites'), 'url' => array('index')),
+//    array('label' => BaseModule::t('common', 'Create Requisites'), 'url' => array('create')),
+    array('label' => BaseModule::t('common', 'Manage Requisites'), 'url' => array('index')),
 );
 ?>
 
-<h1><?php echo Yii::t('common', 'Requisites'); ?></h1>
+<h1><?php echo BaseModule::t('common', 'Requisites'); ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbListView', array(

@@ -17,7 +17,7 @@
 	)); 
 ?>
 
-	<p class="note"><?php echo Yii::t('rec', 'Fields with * are required.'); ?>.</p>  
+	<p class="note"><?php echo BaseModule::t('rec', 'Fields with * are required.'); ?>.</p>  
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -28,13 +28,14 @@
 	</div>  -->
 
 	<div class="row">
-		<?php echo $form->labelEx($model,Yii::t("rec", "Created")); ?>
+                <?php echo $form->hiddenField($model, 'lng')?>
+		<?php echo $form->labelEx($model,BaseModule::t("rec", "Created")); ?>
 		<?php echo $form->textField($model,'created', array('readonly'=>1)); ?>
 		<?php echo $form->error($model,'created'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,Yii::t("rec", "Activated")); ?>
+		<?php echo $form->labelEx($model,BaseModule::t("rec", "Activated")); ?>
 		<?php echo $form->textField($model,'activated'); ?>
 		<?php /*$this->widget('yiiwheels.widgets.datetimepicker.WhDateTimePicker', array(
                     'name'=>'News[_activated]',
@@ -53,7 +54,7 @@
 	
 
 	<div class="row">
-		<?php echo $form->labelEx($model,Yii::t("rec","Title")); ?>
+		<?php echo $form->labelEx($model,BaseModule::t("rec","Title")); ?>
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>75)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
@@ -65,7 +66,7 @@
 	</div> -->
 
 	<div class="row">
-		<?php echo $form->labelEx($model,Yii::t("rec", "Content")); ?>
+		<?php echo $form->labelEx($model,BaseModule::t("rec", "Content")); ?>
 		<?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'content'); ?>
 	</div>
@@ -78,7 +79,7 @@
                             )); ?>
     
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t("rec", "Create") : Yii::t("rec", "Save")); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? BaseModule::t("rec", "Create") : BaseModule::t("rec", "Save")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

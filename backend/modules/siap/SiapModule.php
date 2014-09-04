@@ -1,11 +1,12 @@
 <?php
-class SiapModule extends CWebModule {
+class SiapModule extends BaseModule {
     public $imShow = array('/siap'); //для связи с главным меню 
-	public function init()
+	
+    public function init()
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+        parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
 			'siap.models.*',
@@ -13,14 +14,6 @@ class SiapModule extends CWebModule {
 		));
 	}
 
-        /* localisation`s element */
-        public static function t($str='',$params=array(),$dic='im') {
-		if (Yii::t("siap", $str)==$str)
-			return Yii::t("siapModule.".$dic, $str, $params);
-		else
-			return Yii::t("siapModule", $str, $params);
-	}
-        
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

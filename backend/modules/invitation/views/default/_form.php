@@ -37,9 +37,9 @@
         <?php foreach ($model->bannerFiles as $key => $image) { ?>
             <div class="copy">
                 <div>
-                    <span class="mr"><?php echo Yii::t('rec', 'Banner') ?></span><?php echo CHtml::textField("bannerFiles[$key][name]", $image['name'], array('readonly' => 1)); ?>
+                    <span class="mr"><?php echo BaseModule::t('rec', 'Banner') ?></span><?php echo CHtml::textField("bannerFiles[$key][name]", $image['name'], array('readonly' => 1)); ?>
                     <?php echo CHtml::fileField("bannerFiles[$key]['photo_s']"); ?>
-                    <span class="icon-trash" title="<?php echo Yii::t('rec', 'Delete'); ?>" onclick="$(this).parent().remove();
+                    <span class="icon-trash" title="<?php echo BaseModule::t('rec', 'Delete'); ?>" onclick="$(this).parent().remove();
                                     return false;"> </span>
                 </div>
                 <div></div>
@@ -52,9 +52,9 @@
 
         <div class="copy">
             <div>
-                <span class="mr"><?php echo Yii::t('rec', 'Banner') ?></span><?php echo CHtml::textField("bannerFiles[0][name]", '', array('readonly' => 1)); ?>
+                <span class="mr"><?php echo BaseModule::t('rec', 'Banner') ?></span><?php echo CHtml::textField("bannerFiles[0][name]", '', array('readonly' => 1)); ?>
                 <?php echo CHtml::fileField("bannerFiles[0]['photo_s']"); ?>
-                <span class="icon-trash" title="<?php echo Yii::t('rec', 'Delete'); ?>" onclick="$(this).parent().remove();
+                <span class="icon-trash" title="<?php echo BaseModule::t('rec', 'Delete'); ?>" onclick="$(this).parent().remove();
                             return false;"> </span>
             </div>
             <div></div>
@@ -63,7 +63,7 @@
     <?php } ?>
     <div></div>
     <?php
-    echo TbHtml::button(Yii::t('rec', 'Add'), array(
+    echo TbHtml::button(BaseModule::t('rec', 'Add'), array(
         'color' => TbHtml::BUTTON_COLOR_DEFAULT,
         'size' => TbHtml::BUTTON_SIZE_SMALL,
         'rel' => '.copy',
@@ -72,7 +72,7 @@
     ?>
     <div class="form-actions">
         <?php
-        echo TbHtml::submitButton(Yii::t('rec', 'Create'), array(
+        echo TbHtml::submitButton(BaseModule::t('rec', 'Create'), array(
             'color' => TbHtml::BUTTON_COLOR_PRIMARY,
             'size' => TbHtml::BUTTON_SIZE_LARGE,
             'name' => 'invitationSubmit'

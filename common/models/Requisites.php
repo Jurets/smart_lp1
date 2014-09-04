@@ -65,18 +65,18 @@ class Requisites extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'details' => Yii::t('common', 'Details'),
-            'agreement' => Yii::t('common', 'Agreement'),
-            'marketing' => Yii::t('common', 'Marketing'),
-            'pw_supervisor' => Yii::t('common', 'Pw Supervisor'),
-            'pw_admin' => Yii::t('common', 'Pw Admin'),
-            'pw_moderator' => Yii::t('common', 'Pw Moderator'),
-            'purse_activation' => Yii::t('common', 'Purse Activation'),
-            'purse_club' => Yii::t('common', 'Purse Club'),
-            'bpm_login' => Yii::t('common', 'Club Purse Login'),
-            'bpm_password' => Yii::t('common', 'Club Purse Password'),
-            'purse_investor' => Yii::t('common', 'Purse Investor'),
-            'purse_fdl' => Yii::t('common', 'Purse FDL'),
+            'details' => BaseModule::t('common', 'Details'),
+            'agreement' => BaseModule::t('common', 'Agreement'),
+            'marketing' => BaseModule::t('common', 'Marketing'),
+            'pw_supervisor' => BaseModule::t('common', 'Pw Supervisor'),
+            'pw_admin' => BaseModule::t('common', 'Pw Admin'),
+            'pw_moderator' => BaseModule::t('common', 'Pw Moderator'),
+            'purse_activation' => BaseModule::t('common', 'Purse Activation'),
+            'purse_club' => BaseModule::t('common', 'Purse Club'),
+            'bpm_login' => BaseModule::t('common', 'Club Purse Login'),
+            'bpm_password' => BaseModule::t('common', 'Club Purse Password'),
+            'purse_investor' => BaseModule::t('common', 'Purse Investor'),
+            'purse_fdl' => BaseModule::t('common', 'Purse FDL'),
         );
     }
 

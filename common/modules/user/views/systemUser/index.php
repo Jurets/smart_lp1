@@ -3,12 +3,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	Yii::t('rec','System Users'),
+	BaseModule::t('rec','System Users'),
 );
 
 $this->menu=array(
-	array('label'=>Yii::t('rec','Create SystemUser'), 'url'=>array('create')),
-	array('label'=>Yii::t('rec','Manage SystemUser'), 'url'=>array('admin')),
+	array('label'=>BaseModule::t('rec','Create SystemUser'), 'url'=>array('create')),
+	array('label'=>BaseModule::t('rec','Manage SystemUser'), 'url'=>array('admin')),
 );
 ?>
 

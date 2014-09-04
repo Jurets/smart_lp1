@@ -98,13 +98,13 @@ class SystemUser extends CActiveRecord
 	{
 		return array(                   
                         'id' => 'ID',
-                        'username' => Yii::t('rec','username'),
-                        'password' => Yii::t('rec','password'),
-			'first_name' => Yii::t('rec','First Name'),
-			'last_name' => Yii::t('rec','Last Name'),
-                        'email' => Yii::t('rec','Email'),
-                        'status' => Yii::t('rec','Status'),
-                        'roles' => Yii::t('rec','Roles'),
+                        'username' => BaseModule::t('rec','username'),
+                        'password' => BaseModule::t('rec','password'),
+			'first_name' => BaseModule::t('rec','First Name'),
+			'last_name' => BaseModule::t('rec','Last Name'),
+                        'email' => BaseModule::t('rec','Email'),
+                        'status' => BaseModule::t('rec','Status'),
+                        'roles' => BaseModule::t('rec','Roles'),
 		);
 	}
         public function systemUsrCriteria(){

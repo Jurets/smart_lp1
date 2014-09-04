@@ -86,7 +86,7 @@
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton(Yii::t('rec','Search')); ?>
+        <?php echo CHtml::submitButton(BaseModule::t('rec','Search')); ?>
     </div>
 
 <?php $this->endWidget(); ?>
