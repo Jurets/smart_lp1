@@ -10,12 +10,15 @@ $(document).ready(function(){
                 $('#show-errors').empty();
                 var response = $.parseJSON(data);
                 if(response.success){
+                    $('#show-errors').hide();
                     $('#temp_key_link').addClass('invisible');
                     $('#UserLogin_activekey').removeClass('invisible').prev().removeClass('invisible');
-                }else{
+                } else {
                     for(var i in response.errorArr){
-                        $('#show-errors').append("<span>Errors:</span>").append("<br>").append("<span>"+ response.errorArr[i] +"</span>").append("<br>");
+                        //$('#show-errors').append("<span>Errors:</span>").append("<br>").append("<span>"+ response.errorArr[i] +"</span>").append("<br>");
+                        $('#show-errors').append("<span>"+ response.errorArr[i] +"</span>").append("<br>");
                     }
+                    $('#show-errors').show();
                 }
             }
         });
