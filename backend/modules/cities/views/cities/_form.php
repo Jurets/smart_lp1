@@ -6,37 +6,30 @@
 
 <div class="form">
 
-    <?php
-    $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'cities-form',
-        // Please note: When you enable ajax validation, make sure the corresponding
-        // controller action is handling ajax validation correctly.
-        // There is a call to performAjaxValidation() commented in generated controller code.
-        // See class documentation of CActiveForm for details on this.
-        'enableAjaxValidation' => false,
+<?php
+$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    'id' => 'cities-form',
+    // Please note: When you enable ajax validation, make sure the corresponding
+    // controller action is handling ajax validation correctly.
+    // There is a call to performAjaxValidation() commented in generated controller code.
+    // See class documentation of CActiveForm for details on this.
+    'enableAjaxValidation' => false,
+    'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
+));
+    //вьюшка для сообщения о необходимых полях
+    echo $this->renderPartial('backend.views.site.required');
+    //сборник ошибок
+    echo $form->errorSummary(array($model));
+
+    echo $form->dropDownListControlGroup($model, 'country_id', Countries::getCountriesList(), array(
+                'class'=>'span5',
+                'displaySize'=>'1',
+                'prompt'=>ViewHelper::getPrompt('select country'),
     ));
-    ?>
-
-    <p class="note"><?php echo BaseModule::t('rec', 'Fields with * are required.'); ?>.</p>
-
-        <?php echo $form->errorSummary($model); ?>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'country_id'); ?>
-<?php echo $form->textField($model, 'country_id'); ?>
-<?php echo $form->error($model, 'country_id'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'name'); ?>
-<?php echo $form->textField($model, 'name', array('size' => 60, 'maxlength' => 255)); ?>
-<?php echo $form->error($model, 'name'); ?>
-    </div>
-
-    <div class="row buttons">
-    <?php echo CHtml::submitButton($model->isNewRecord ? BaseModule::t('rec', 'Create') : BaseModule::t('common', 'Save')); ?>
-    </div>
-
-<?php $this->endWidget(); ?>
-
+    echo $form->textFieldControlGroup($model, 'name', array('class'=>'span3'));
+    
+    echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec', 'Create') : BaseModule::t('rec', 'Save'), array('class'=>'primary'));
+        
+$this->endWidget();                           
+?>
 </div><!-- form -->

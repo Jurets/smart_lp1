@@ -12,7 +12,7 @@ $this->menu = array(
     array('label' => BaseModule::t('rec', 'Create Cities'), 'url' => array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
+/*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
 	return false;
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 	});
 	return false;
 });
-");
+");*/
 ?>
 
 <h1><?php echo BaseModule::t('rec', 'Manage Cities') ?></h1>
@@ -34,14 +34,14 @@ $('.search-form form').submit(function(){
     ?>.
 </p>
 
-<?php echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
-<div class="search-form" style="display:none">
+<?php //echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
+<!--<div class="search-form" style="display:none">
     <?php
-    $this->renderPartial('_search', array(
+    /*$this->renderPartial('_search', array(
         'model' => $model,
-    ));
+    ));*/
     ?>
-</div><!-- search-form -->
+</div>--><!-- search-form -->
 
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
@@ -66,7 +66,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'htmlOptions' => array('style' => 'width: 50px'),
         ),
         array(
-            'class' => 'bootstrap.widgets.TbButtonColumn',
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+            'template' => '{update} {delete}',
         ),
     ),
 ));
