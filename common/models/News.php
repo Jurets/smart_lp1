@@ -104,6 +104,7 @@ class News extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
+        $criteria->compare('lng', $this->lng);
         $criteria->compare('author', $this->author);
         $criteria->compare('created', $this->created, true);
         $criteria->compare('activated', $this->activated, true);

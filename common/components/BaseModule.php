@@ -37,7 +37,7 @@ class BaseModule extends CWebModule
 			return Yii::t($moduleName, $str, $params);*/
             
         $trans = Yii::t($dic, $str, $params);
-        if ($trans == $str) {
+        if ($trans == $str && Yii::app()->language != 'en') {
             $res = Yii::t('rec', $str, $params, null /*Yii::app()->messages*/, 'ru');
         } else {
             $res = $trans;
