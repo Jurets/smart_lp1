@@ -107,13 +107,13 @@
             dataType: 'json',
             send: function(e, data) {
                 //$("#select-image").hide();
-                $("#uploader-progress").empty().html("Загружается изображение. Пожалуйста, подождите");
+                $("#uploader-progress").empty().html("<?php echo BaseModule::t('rec', 'Loading image. Please wait'); ?>");
             },
             done: function(e, data) {
                 $.each(data.result.files, function(index, file) {
                     showOverlay(file.resized, file.name);
                 });
-                $("#uploader-progress").empty().html("Изображение успешно загружено!");
+                $("#uploader-progress").empty().html("<?php echo BaseModule::t('rec', 'Image uploaded successfully'); ?>!");
             },
         });
     });

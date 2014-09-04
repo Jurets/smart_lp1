@@ -24,7 +24,7 @@
             'model' => $model,
             'attribute' => 'text',
             'pluginOptions' => array(
-                'lang' => 'ru',
+                'lang' => Yii::app()->language,
                 'toolbar' => true,
                 'iframe' => true,
             ),));

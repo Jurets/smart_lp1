@@ -59,7 +59,7 @@ $this->endWidget();
                     'model' => $model,
                     'attribute' => 'details',
                     'pluginOptions' => array(
-                        'lang' => 'ru',
+                        'lang' => Yii::app()->language,
                         'toolbar' => true,
                         'iframe' => true,
                     ),), array(), true);
@@ -68,7 +68,7 @@ $this->endWidget();
                     'model' => $model,
                     'attribute' => 'agreement',
                     'pluginOptions' => array(
-                        'lang' => 'ru',
+                        'lang' => Yii::app()->language,
                         'toolbar' => true,
                         'iframe' => true,
                     ),), array(), false);
@@ -77,7 +77,7 @@ $this->endWidget();
                     'model' => $model,
                     'attribute' => 'marketing',
                     'pluginOptions' => array(
-                        'lang' => 'ru',
+                        'lang' => Yii::app()->language,
                         'toolbar' => true,
                         'iframe' => true,
                     ),), array(), true);*/

@@ -11,7 +11,7 @@ $this->menu = array(
 //	array('label'=>'List Training', 'url'=>array('index')),
     array('label' => BaseModule::t('rec', 'Create Training'), 'url' => array('create')),
     array('label' => BaseModule::t('rec', 'Update Training'), 'url' => array('update', 'id' => $model->id)),
-    array('label' => BaseModule::t('rec', 'Delete Training'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
+    array('label' => BaseModule::t('rec', 'Delete Training'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => BaseModule::t('rec', 'Are you sure you want to delete this item?'))),
     array('label' => BaseModule::t('rec', 'Manage Training'), 'url' => array('index')),
 );
 ?>
