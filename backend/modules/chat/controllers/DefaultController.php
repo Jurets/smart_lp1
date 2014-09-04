@@ -35,7 +35,7 @@ class DefaultController extends EMController
             if ($user = User::model()->findByAttributes(array('username'=>$_GET['User']['username']))) {
                 $this->redirect(array('chatban','id'=>$user->id));
             } else {
-                $model->addError('username', 'Пользователь не найден');
+                $model->addError('username', BaseModule::t('dic', 'The User hasn\'t been found'));
             }
         }
         $this->render('search',array(
@@ -50,7 +50,7 @@ class DefaultController extends EMController
 	public function actionChatban($id)
 	{
         if (!$user = Participant::model()->findByPk($id)) {
-            throw new CHttpException(404, 'Пользователь с таким ID не найден');
+            throw new CHttpException(404, BaseModule::t('dic', 'The User hasn\'t been found'));
         }
         if (!$chatban = $user->chatban) {
             $chatban = New Chatban();
@@ -68,15 +68,15 @@ class DefaultController extends EMController
             } else if ($this->mode == 'unban') {
                 $chatban->active = Chatban::STATUS_NONACTIVE;
             } else
-                throw new CHttpException(404, 'Ошибка при бане юзера');
+                throw new CHttpException(404, BaseModule::t('dic', 'An error occurred while blocking user'));
             //проверка    
             if ($chatban->validate()) {
                 if ($chatban->save()) {
-                    $message = $this->mode == 'ban' ? 'Участник успешно заблокирован в чате' : 'Участник успешно разблокирован';
+                    $message = $this->mode == 'ban' ?  BaseModule::t('dic', 'Participant successfully blocked in chat') : BaseModule::t('dic', 'The participant is successfully unlocked');
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, $message);
                     //$this->redirect(Yii::app()->createUrl('user/admin/view', array('id'=>$id)));
                 } else 
-                    throw new CHttpException(404, 'Ошибка при бане юзера');
+                    throw new CHttpException(404, BaseModule::t('dic', 'An error occurred while blocking user'));
             }
         }
         if ($this->mode == 'unban') {
