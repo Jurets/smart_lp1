@@ -40,7 +40,7 @@ class UserContour extends CWidget {
         $this->operation = 'РЕГИСТРАЦИИ';
         $db_connector = Yii::app()->db;
         $usersDumpCommand = $db_connector->createCommand(
-                'SELECT u.first_name, u.last_name, u.create_at, co.code, co.name
+                'SELECT u.first_name, u.last_name, u.create_at, co.code, co.name, u.username
                  FROM tbl_users u
                  LEFT JOIN cities c
                  ON u.city_id = c.id
@@ -56,7 +56,11 @@ class UserContour extends CWidget {
         
         foreach($usersDump->readAll() as $index=>$li){
            $this->dataPull['userList'][$index]['country'] = $li['code'];
-           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' UTC '. $li['first_name'] .' '. $li['last_name'];
+            if($li['first_name'] and  $li['last_name']){
+                $name =  $li['first_name'] .' '. $li['last_name'];
+            }else $name = $li['username'];
+
+           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' UTC '. $name;
             
         }
        
