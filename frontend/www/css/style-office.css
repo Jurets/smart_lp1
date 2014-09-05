@@ -6283,3 +6283,7 @@ html, body {
 .img-circle {
     border-radius: 500px;
 }
+
+a#logo{
+    z-index: 100!important;
+}
