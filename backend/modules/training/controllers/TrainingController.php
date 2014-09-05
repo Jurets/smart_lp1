@@ -64,6 +64,7 @@ class TrainingController extends EMController
 		if(isset($_POST['Training']))
 		{
 			$model->attributes=$_POST['Training'];
+                        $model->lng = Yii::app()->language;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -88,7 +89,7 @@ class TrainingController extends EMController
 		if(isset($_POST['Training']))
 		{
 			$model->attributes=$_POST['Training'];
-			if($model->save())
+			if($model->saveDependLanguage())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 

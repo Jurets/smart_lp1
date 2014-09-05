@@ -73,10 +73,15 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-        array(
-            'name' => 'id',
-            'filter' => TbHtml::activeTextField($model, 'id', array('style' => 'width: 40px')),
-            'htmlOptions' => array('style' => 'width: 40px'),
+//        array(
+//            'name' => 'id',
+//            'filter' => TbHtml::activeTextField($model, 'id', array('style' => 'width: 40px')),
+//            'htmlOptions' => array('style' => 'width: 40px'),
+//        ),
+         array(
+            'name' => 'lng',
+            'filter' => TbHtml::activeTextField($model, 'lng', array('style' => 'width: 20px')),
+            'htmlOptions' => array('style' => 'width: 20px'),
         ),
         array(
             'name' => 'question',

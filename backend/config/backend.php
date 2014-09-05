@@ -127,5 +127,6 @@ return array(
 	),
         'params'=>array(
             'email_verify_code_enabled' => TRUE,
+            'backendIs' => '',
         ),
 );

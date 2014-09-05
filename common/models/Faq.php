@@ -113,9 +113,16 @@ class Faq extends CActiveRecord
         return parent::model($className);
     }
 
+    public function scopes(){
+        return array(
+            'lngDependence' => array(
+                'condition'=>'lng="'.Yii::app()->language.'"',
+            ),
+        );
+    }
     public function showAllFaq()
     {
-        $arrFaq = $this->model()->findAll();
+        $arrFaq = $this->model()->lngDependence()->findAll();
         $arrSortCategoryFaq = array();
         foreach ($arrFaq as $faq) {
             if ($faq['category'] == 'finance') {
