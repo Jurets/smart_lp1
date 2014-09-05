@@ -59,6 +59,7 @@
 <script>
     $(function(){
         $('a.flag').attr('href', '#').css('opacity', 0.25);
+        $('li a.moveRight2').attr('href', '/office/settings');
     })
 
 </script>
