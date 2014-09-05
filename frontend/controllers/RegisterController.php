@@ -96,8 +96,16 @@ class RegisterController extends EController
                 Yii::app()->end();
             }
         }
+
+        if(isset(Requisites::getInstance()['details']))
+        {
+            $details = Requisites::getInstance()['details'];
+
+        }else $details = '';
+
         $this->render('register', array(
             'participant'=>$participant,
+            'details'=>$details,
             'step'=>1,
         ));
     }
