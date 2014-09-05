@@ -66,9 +66,9 @@ $form = $this->beginWidget('CActiveForm', array(
         ?>
 
         <p class="sub3-1"><?php echo BaseModule::t('common', 'DATE OF BIRTH') ?>*:</p>
-        <?php echo Chtml::dropDownList('date_ofb', $day, $arrayDay, array('class' => 'textbox3-1'))?>
-        <?php echo Chtml::dropDownList('month_ofb', $month, $arrayMonth, array('class' => 'textbox3-2'))?>
-        <?php echo Chtml::dropDownList('year_ofb', $year, $arrayYear, array('class' => 'textbox3-3'))?>
+        <?php echo Chtml::dropDownList('date_ofb', $day, $arrayDay, array('class' => 'textbox3-1', 'empty'=>'-'))?>
+        <?php echo Chtml::dropDownList('month_ofb', $month, $arrayMonth, array('class' => 'textbox3-2', 'empty'=>'-'))?>
+        <?php echo Chtml::dropDownList('year_ofb', $year, $arrayYear, array('class' => 'textbox3-3', 'empty'=>'-'))?>
         <?php echo $form->error($participant, 'dob' , array('class' => 'error-message em-4')); //День рождения ?>
 
 <!--        <p class="sub3-1">--><?php //echo BaseModule::t('common', 'DATE OF BIRTH') ?><!--*:</p>-->
