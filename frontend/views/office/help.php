@@ -9,7 +9,9 @@ Yii::app()->clientScript->registerScriptFile('/js/jquery-ui.min.js');
 <div id="office7-1-content">
     <a href="#" id='popupbtn' ><input type="button" name="btn"  class="btn-style-green-7-1" value="ЗАДАТЬ ВОПРОС" /></a>
 </div>
-
+<?php if(Yii::app()->user->hasFlash('successSendEmailFromHelp')){
+    echo '<div class="alert alert-success">',Yii::app()->user->getFlash('successSendEmailFromHelp'),'</div>';
+}?>
 <div id="accordion">
     <h3><?php echo BaseModule::t('common', 'Finance') ?></h3>
     <div class="accordionContent">
