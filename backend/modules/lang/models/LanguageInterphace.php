@@ -38,7 +38,7 @@ class LanguageInterphace extends CFormModel {
     private function addNewMatrix($lang){
         $addMatrixPrepare = Yii::app()->db->createCommand('SELECT id FROM SourceMessage')->query()->readAll();
         if(is_null($addMatrixPrepare)){
-            throw new CHttpException('500', 'Inglish matrix absent');          
+            throw new CHttpException('500', BaseModule::t('dic', 'Source language (English) is absent'));
         }
         $sql = 'INSERT INTO Message (id, language) VALUES ';
         foreach($addMatrixPrepare as $item){
@@ -99,7 +99,7 @@ class LanguageInterphace extends CFormModel {
                $this->russian[] = $record['translation'];
            } 
         }else{
-            throw new CHttpException ('500', 'В таблице Message нет аналога матрицы на русском языке. Если это не нужно, выключите в модели LanguageInterphace->showTranslation метод RussianPatch');
+            throw new CHttpException ('500', BaseModule::t('rec', 'There is no russian message in message table! If it is need, you will switch off method RussianPatch in model LanguageInterphace->showTranslation'));
         }
     }
     public function prepareTranslation(){
@@ -123,7 +123,7 @@ class LanguageInterphace extends CFormModel {
   public function createTranslation(){
       if(isset($_POST['language']) && isset($_POST['lang']) ){
           foreach($_POST['language']['id'] as $ind=>$number){
-              //if(empty($_POST['language']['translation'][$ind])) continue;
+              if(empty($_POST['language']['translation'][$ind])) continue;
               $buff = $_POST['language']['translation'][$ind];
               $sql = "UPDATE Message SET translation=".'"'.htmlspecialchars($buff).'"';
               $sql .= ' WHERE id='.(int)$number.' AND language="'.$_POST['lang'].'";';

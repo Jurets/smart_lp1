@@ -88,7 +88,7 @@
             <?php } ?>
     </table>
         <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec','Edit') : BaseModule::t('rec','Edit'),array(
+        <?php echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec','Create') : BaseModule::t('rec','Save'),array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>

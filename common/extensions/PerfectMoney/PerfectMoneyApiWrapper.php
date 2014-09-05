@@ -31,7 +31,7 @@
         }
         public function dataLoad($input=array()){ // загрузка исходных данных (должен быть массив для передачи на api постом)
             if(!is_array($input) || empty($input)){
-                throw new Exception("PerfectMoney(...) API -in data must be an array and not empty");
+                throw new Exception(BaseModule::t('rec', "PerfectMoney(...) API in data must be an array and not empty"));
             }else{
                 $this->inputStructure = $input;
             }
@@ -53,7 +53,7 @@
         protected function API_make(){
             $curlHandle = curl_init();
             if (!isset($this->interfaces[$this->choise])){
-                throw new Exception('Perfect Money(...) Parameter choise not exists');
+                throw new Exception(BaseModule::t('rec', 'Perfect Money(...) Parameter choise not exists'));
             }
             curl_setopt($curlHandle, CURLOPT_URL, $this->interfaces[$this->choise]); // задаем url
             curl_setopt($curlHandle, CURLOPT_HEADER, 0); // "прячем" заголовки
@@ -64,7 +64,7 @@
             $apiAnswer =  curl_exec($curlHandle); // выполнение запроса и сохранение ответа в переменную (в случае неуспеха сохранится FALSE и тогда завершить функцию и выбросить какой-нибудь exception)
             curl_close($curlHandle);
             if($apiAnswer === FALSE){
-                $this->outputStructure['ERROR'] = 'Perfect Money service not available';
+                $this->outputStructure['ERROR'] = BaseModule::t('rec', 'Perfect Money service not available');
                 return 0;
             }
             /* Парсим ответ сервера и получаем нужную структуру данных */
@@ -75,7 +75,7 @@
                 $this->outputStructure[$node->getAttribute('name')] = $node->getAttribute('value');
             }
             if(empty($this->outputStructure)){
-                $this->outputStructure['ERROR'] = 'API Connection Wrong';
+                $this->outputStructure['ERROR'] = BaseModule::t('rec', 'API Connection Wrong');
             }
         }
         /* Выбор и генерация нужного события */

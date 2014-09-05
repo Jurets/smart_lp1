@@ -36,6 +36,7 @@ class Training extends CActiveRecord
             array('title, description, image, videolink', 'required'),
             array('number', 'numerical', 'integerOnly' => true),
             array('title, image, videolink', 'length', 'max' => 255),
+            array('lng', 'length', 'max'=>2),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, title, description, image, UploadImage, videolink, date, number', 'safe', 'on' => 'search'),
@@ -60,6 +61,7 @@ class Training extends CActiveRecord
     {
         return array(
             'id' => BaseModule::t('dic', 'ID'),
+            'lng'=>BaseModule::t('rec', 'LANGUAGE'),
             'title' => BaseModule::t('rec', 'Title'),
             'description' => BaseModule::t('rec', 'Description'),
             'image' => BaseModule::t('rec', 'Image'),
@@ -88,6 +90,7 @@ class Training extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
+        $criteria->compare('lng', $this->lng);
         $criteria->compare('title', $this->title, true);
         $criteria->compare('description', $this->description, true);
         $criteria->compare('image', $this->image, true);
@@ -111,4 +114,19 @@ class Training extends CActiveRecord
         return parent::model($className);
     }
 
+    public function saveDependLanguage() {
+        if($this->lng == Yii::app()->language){ // обновление
+            $a = $this->save();
+        }else{ // добавление
+            $record = new Training();
+            $record->attributes = $this->attributes;
+            $record->lng = Yii::app()->language;
+            $a = $record->save();
+        }
+        if(!$a)
+            return false;
+        else
+            return true;
+    }
+    
 }

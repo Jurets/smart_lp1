@@ -80,7 +80,7 @@ class LoginController extends EMController
                 $user = $model->identity->user; //запомнить юзера
                 Yii::app()->user->logout();   //выход юзера, т.к. пока только проверка
                 if (!$success = $this->sendCodeToMail($user)) {
-                    $model->addErrors('Ошибка при отправке почты');
+                    $model->addErrors(BaseModule::t('rec','Sending mail error'));
                 }
             }
             echo CJSON::encode(array('success'=>$success, 'errorArr'=>$model->errors));
@@ -96,7 +96,7 @@ class LoginController extends EMController
         $email = $user->email;
         $logincode = substr(time(),-8); //генерить случайный код (для входа)
         $headers = "From: {$email}\r\nReply-To: {$email}";
-        if ($success = mail($email, 'Код для входа', 'Ваш код для входа: '.$logincode, $headers)) {
+        if ($success = mail($email, BaseModule::t('rec','Code for login'), BaseModule::t('rec', 'Your code for login') . ': ' . $logincode, $headers)) {
             //Yii::app()->user->setState('activationCode', $code);
             //записать код входа в базу
             Yii::app()->db->createCommand()->update(Yii::app()->getModule('user')->tableUsers, array('logincode'=>$logincode), 'id=:id', array(':id'=>$user->id));

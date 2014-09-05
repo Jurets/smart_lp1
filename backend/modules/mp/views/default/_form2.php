@@ -92,7 +92,7 @@
             </div>
             <?php } ?>
         <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec','Create') : MpModule::t('Save'),array(
+        <?php echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec','Create') : BaseModule::t('rec', 'Save'),array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>

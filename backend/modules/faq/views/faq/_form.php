@@ -22,6 +22,9 @@
     <?php echo $form->errorSummary($model); ?>
 
     <div class="row">
+        
+        <?php echo $form->hiddenField($model, 'lng')?>
+        
         <?php echo $form->labelEx($model, 'question'); ?>
         <?php echo $form->textArea($model, 'question', array('rows' => 6, 'cols' => 50)); ?>
         <?php echo $form->error($model, 'question'); ?>
@@ -34,7 +37,7 @@
             'model' => $model,
             'attribute' => 'answer',
             'pluginOptions' => array(
-                'lang' => 'ru',
+                'lang' => Yii::app()->language,
                 'toolbar' => true,
                 'iframe' => true,
             ),));

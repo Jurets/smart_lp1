@@ -30,35 +30,35 @@
             <?php if(is_array($model->mathparams) && count($model->mathparams) > 0) { ?>
             <?php foreach ($model->mathparams as $key=>$mathparam){ ?>
             <div class="copy">
-                <span class="mr"><?php echo MpModule::t('name') ; ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec', 'name') ; ?></span>
             <?php echo $form->textField($mathparam, 'name', array('name'=>'Mathparams[name][]', 'id'=>false)); ?>
             <?php echo $form->error($mathparam, 'name'); ?>
-            <span class="mr"><?php echo MpModule::t('value') ; ?></span>
+            <span class="mr"><?php echo BaseModule::t('rec', 'value') ; ?></span>
             <?php echo $form->textField($mathparam, 'value', array('name'=>'Mathparams[value][]', 'id'=>false)); ?>
             <?php echo $form->error($mathparam, 'value'); ?>
             <?php echo $form->hiddenField($mathparam, 'id', array('name'=>'Mathparams[id][]', 'id'=>false)); ?>
-            <span class="icon-trash" title="<?php echo MpModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
+            <span class="icon-trash" title="<?php echo BaseModule::t('rec', 'Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
             <div></div>
             </div>
         <?php } ?>
             <?php }else{ ?>
             <div class="copy">
-                <span class="mr"><?php echo MpModule::t('name'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec', 'name'); ?></span>
                 <?php echo CHtml::textField('Mathparams[name][]','',array('maxlength'=>255)); ?>
-                <span class="mr"><?php echo MpModule::t('value'); ?></span>
+                <span class="mr"><?php echo BaseModule::t('rec', 'value'); ?></span>
                 <?php echo CHtml::textField('Mathparams[value][]','',array('maxlength'=>255)); ?>
                 <?php echo CHtml::hiddenField('Mathparams[id][]', '', array('id'=>FALSE)); ?>
-                <span class="icon-trash" title="<?php echo MpModule::t('Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
+                <span class="icon-trash" title="<?php echo BaseModule::t('rec', 'Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
             </div>
             <?php } ?>
-    <?php echo TbHtml::button(MpModule::t('Add'), array(
+    <?php echo TbHtml::button(BaseModule::t('rec', 'Add'), array(
                     'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
 		    'size'=>TbHtml::BUTTON_SIZE_SMALL,
                     'rel'=>'.copy',
                     'id'=>'addMathParams',
                 )); ?>
         <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? MpModule::t('Create') : MpModule::t('Save'),array(
+        <?php echo TbHtml::submitButton($model->isNewRecord ? BaseModule::t('rec', 'Create') : BaseModule::t('rec', 'Save'),array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>

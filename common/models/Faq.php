@@ -36,6 +36,7 @@ class Faq extends CActiveRecord
         return array(
             array('id_user', 'numerical', 'integerOnly' => true),
             array('category', 'length', 'max' => 64),
+            array('lng', 'length', 'max' => 2),
             array('question, answer, created, category', 'safe'),
             // The following rule is used by search(). 
             // @todo Please remove those attributes that should not be searched. 
@@ -61,6 +62,7 @@ class Faq extends CActiveRecord
     {
         return array(
             'id' => 'ID',
+            'lng' => BaseModule::t('rec', 'LANGUAGE'),
             'question' => BaseModule::t('rec', 'Question'),
             'answer' => BaseModule::t('rec', 'Answer'),
             'created' => BaseModule::t('rec', 'Created'),
@@ -88,6 +90,7 @@ class Faq extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
+        $criteria->compare('lng', $this->lng);
         $criteria->compare('question', $this->question, true);
         $criteria->compare('answer', $this->answer, true);
         $criteria->compare('created', $this->created, true);
@@ -110,9 +113,16 @@ class Faq extends CActiveRecord
         return parent::model($className);
     }
 
+    public function scopes(){
+        return array(
+            'lngDependence' => array(
+                'condition'=>'lng="'.Yii::app()->language.'"',
+            ),
+        );
+    }
     public function showAllFaq()
     {
-        $arrFaq = $this->model()->findAll();
+        $arrFaq = $this->model()->lngDependence()->findAll();
         $arrSortCategoryFaq = array();
         foreach ($arrFaq as $faq) {
             if ($faq['category'] == 'finance') {
@@ -142,4 +152,18 @@ class Faq extends CActiveRecord
 //        return array('finance' => 'финансы', 'offer' => 'предложения', 'site' => 'работа сайта');
 //    }
 
+    public function saveDependLanguage() {
+        if($this->lng == Yii::app()->language){ // обновление
+            $a = $this->save();
+        }else{ // добавление
+            $record = new Faq;
+            $record->attributes = $this->attributes;
+            $record->lng = Yii::app()->language;
+            $a = $record->save();
+        }
+        if(!$a)
+            return false;
+        else
+            return true;
+    }
 }

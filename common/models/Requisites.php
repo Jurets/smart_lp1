@@ -38,6 +38,7 @@ class Requisites extends CActiveRecord
         // will receive user inputs.
         return array(
             array('id', 'length', 'max' => 50),
+            array('lng', 'length', 'max'=>2),
             array('pw_supervisor, pw_admin, pw_moderator', 'length', 'max' => 20),
             array('purse_activation, purse_club, purse_investor, purse_fdl', 'length', 'max' => 255),
             array('details, agreement, marketing, bpm_login, bpm_password, purse_activation, purse_club, purse_investor, purse_fdl, email_faq, superrefer_id', 'safe'),
@@ -65,6 +66,7 @@ class Requisites extends CActiveRecord
     {
         return array(
             'id' => 'ID',
+            'lng' => BaseModule::t('rec','LANGUAGE'),
             'details' => BaseModule::t('common', 'Details'),
             'agreement' => BaseModule::t('common', 'Agreement'),
             'marketing' => BaseModule::t('common', 'Marketing'),
@@ -99,6 +101,7 @@ class Requisites extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
+        $criteria->compare('lng', $this->lng);
         $criteria->compare('details', $this->details, true);
         $criteria->compare('agreement', $this->agreement, true);
         $criteria->compare('marketing', $this->marketing, true);
@@ -190,4 +193,18 @@ class Requisites extends CActiveRecord
             return false;
     }
 
+    public function saveDependLanguage() {
+        if($this->lng == Yii::app()->language){ // обновление
+            $a = $this->save();
+        }else{ // добавление
+            $record = new Requisites;
+            $record->attributes = $this->attributes;
+            $record->lng = Yii::app()->language;
+            $a = $record->save();
+        }
+        if(!$a)
+            return false;
+        else
+            return true;
+    }
 }

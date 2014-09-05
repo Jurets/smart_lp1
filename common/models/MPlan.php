@@ -87,7 +87,7 @@ class MPlan extends CModel
                 $participant->referal->depositPurse($pm->amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
             }
             //отослать письмо про вступление в бизнес-участие
-            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'You have become a business party'), 'businessstart', array('participant'=>$participant));
+            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'You have become a business participant'), 'businessstart', array('participant'=>$participant));
             /////                        $this->step = 4;
             /////                        $this->render('finish', array('participant'=>$participant));
             /////                        Yii::app()->end();

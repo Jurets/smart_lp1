@@ -5,20 +5,20 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Mpversions'=>array('index'),
+	BaseModule::t('rec','Mpversions')=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-array('label'=>MpModule::t('List Mpversions'), 'url'=>array('index')),
-array('label'=>MpModule::t('Create Mpversions'), 'url'=>array('create')),
-array('label'=>MpModule::t('Update Mpversions'), 'url'=>array('update', 'id'=>$model->id)),
-array('label'=>MpModule::t('Delete Mpversions'), 'url'=>MpModule::t('#'), 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>MpModule::t('Manage Mpversions'), 'url'=>array('admin')),
+    array('label'=>BaseModule::t('rec','List Mpversions'), 'url'=>array('index')),
+    array('label'=>BaseModule::t('rec','Create Mpversions'), 'url'=>array('create')),
+    array('label'=>BaseModule::t('rec','Update Mpversions'), 'url'=>array('update', 'id'=>$model->id)),
+    array('label'=>BaseModule::t('rec','Delete Mpversions'), 'url'=>MpModule::t('#'), 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>BaseModule::t('rec','Are you sure you want to delete this item?'))),
+    array('label'=>BaseModule::t('rec','Manage Mpversions'), 'url'=>array('admin')),
 );
 ?>
 
-<h1><?php echo MpModule::t('View Mpversions'); ?> <?php echo MpModule::t('#'); ?><?php echo $model->id; ?></h1>
+<h1><?php echo BaseModule::t('rec','View Mpversions'); ?> <?php echo BaseModule::t('rec','#'); ?><?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView',array(
 'htmlOptions' => array(

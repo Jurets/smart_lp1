@@ -9,9 +9,9 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => BaseModule::t('common', 'List Faq'), 'url' => array('index')),
+    //array('label' => BaseModule::t('common', 'List Faq'), 'url' => array('index')),
     array('label' => BaseModule::t('common', 'Create Faq'), 'url' => array('create')),
-    array('label' => BaseModule::t('common', 'View Faq'), 'url' => array('view', 'id' => $model->id)),
+    //array('label' => BaseModule::t('common', 'View Faq'), 'url' => array('view', 'id' => $model->id)),
     array('label' => BaseModule::t('common', 'Manage Faq'), 'url' => array('admin')),
 );
 ?>

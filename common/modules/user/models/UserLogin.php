@@ -81,9 +81,9 @@ class UserLogin extends CFormModel
         //$code = Yii::app()->user->getState('checkuser');
         $logincode = $this->logincode;
         if (empty($logincode)) {
-            $this->addError('activekey', UserModule::t("Login code not set"));
+            $this->addError('activekey', BaseModule::t('rec', "Login code not set"));
         } else if ($logincode != $this->activekey) {
-            $this->addError('activekey', UserModule::t("Incorrect login code"));
+            $this->addError('activekey', BaseModule::t('rec', "Incorrect login code"));
         }
     }
     
@@ -110,8 +110,8 @@ class UserLogin extends CFormModel
 			'rememberMe'=>BaseModule::t('rec', "Remember me next time"),
 			'username'=>BaseModule::t('rec', "username or email"),
 			'password'=>BaseModule::t('rec', "password"),
-            'verifyCode' => 'Код проверки',
-            'activekey' => 'Код входа',
+            'verifyCode' => BaseModule::t('rec', 'Verification Code'),
+            'activekey' => BaseModule::t('rec', 'activation key'),
 		);
 	}
 
@@ -134,19 +134,19 @@ class UserLogin extends CFormModel
                     }
 					break;
 				case UserIdentity::ERROR_EMAIL_INVALID:
-					$this->addError("username",UserModule::t("Email is incorrect."));
+					$this->addError("username",BaseModule::t('rec', "Email is incorrect."));
 					break;
 				case UserIdentity::ERROR_USERNAME_INVALID:
-					$this->addError("username",UserModule::t("Username is incorrect."));
+					$this->addError("username",BaseModule::t('rec', "Username is incorrect."));
 					break;
 				case UserIdentity::ERROR_STATUS_NOTACTIV:
-					$this->addError("status",UserModule::t("You account is not activated."));
+					$this->addError("status",BaseModule::t('rec', "You account is not activated."));
 					break;
 				case UserIdentity::ERROR_STATUS_BAN:
-					$this->addError("status",UserModule::t("You account is blocked."));
+					$this->addError("status",BaseModule::t('rec', "You account is blocked."));
 					break;
 				case UserIdentity::ERROR_PASSWORD_INVALID:
-					$this->addError("password",UserModule::t("Password is incorrect."));
+					$this->addError("password",BaseModule::t('rec', "Password is incorrect."));
 					break;
 			}
 		}

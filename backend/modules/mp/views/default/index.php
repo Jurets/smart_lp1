@@ -5,12 +5,12 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Mpversions',
+	BaseModule::t('rec','Mpversions'),
 );
 
 $this->menu=array(
-array('label'=>'Create Mpversions','url'=>array('create')),
-array('label'=>'Manage Mpversions','url'=>array('admin')),
+    array('label'=>BaseModule::t('rec','Create Version'),'url'=>array('create')),
+    array('label'=>BaseModule::t('rec','Manage Mpversions'),'url'=>array('admin')),
 );
 ?>
 

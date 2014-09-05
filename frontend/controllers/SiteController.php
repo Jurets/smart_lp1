@@ -238,10 +238,10 @@ class SiteController extends LoginController
             if ($type_amount == Participant::TARIFF_20) {
                 if (Requisites::purseClub()) {
                     if (MPlan::payParticipation($participant, $account, $password)) {
-                        Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                        Yii::app()->user->setFlash('success', BaseModule::t('rec', 'Your payment was successful'));
                         $this->refresh();
                     } else {
-                        Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+                        Yii::app()->user->setFlash('fail', BaseModule::t('rec', 'Failed to pay. Try again later'));
                         $this->refresh();
                     }
                 } else {
@@ -251,15 +251,15 @@ class SiteController extends LoginController
             } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
                 if (Requisites::purseClub()) {
                     if (MPlan::payForChangeStatus($participant, $account, $password, $type_amount)) {
-                        Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                        Yii::app()->user->setFlash('success', BaseModule::t('rec', 'Your payment was successful'));
                         $this->refresh();
                     } else {
-                        Yii::app()->user->setFlash('fail', "Оплата не прошла.Повторите операцию позже.");
+                        Yii::app()->user->setFlash('fail', BaseModule::t('rec', 'Failed to pay. Try again later'));
                         $this->refresh();
                     }
                 } else {
                     $defective_status = true;
-                    $message = 'Не задан кошелек Бизнес Клуба';
+                    $message = BaseModule::t('rec', 'Business Club purse not set');
                 }
 
             }

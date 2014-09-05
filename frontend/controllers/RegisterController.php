@@ -39,10 +39,10 @@ class RegisterController extends EController
                 $user = $superrefer->username;
                 $this->redirect(Yii::app()->createAbsoluteUrl('register/'.$user));
             } else
-                throw New CHttpException(404, "Регистрация разрешена только с личной страницы реферала");
+                throw New CHttpException(404, BaseModule::t('rec', 'Registration is allowed only with a personal referral page'));
         }
         if (!$inviter = Participant::model()->with('inviteCount')->findByAttributes(array('username'=>$user))) {
-            throw New CHttpException(404, "Не найден реферал с именем $user");
+            throw New CHttpException(404, BaseModule::t('rec', 'Referral with the same name can not be found') . ' ' . $user);
         }
         
         $participant = New Participant('register');
@@ -90,7 +90,7 @@ class RegisterController extends EController
                 //пароль пока не хэшируем (захешируется позже при активации)
                 if ($participant->save(false)) {
                     //отсылка почты для подтверждения регистрации
-                    EmailHelper::send(array($participant->email), 'Подтверждение регистрации', 'regconfirm', array('participant' => $participant));
+                    EmailHelper::send(array($participant->email), BaseModule::t('rec', 'Confirmation of registration'), 'regconfirm', array('participant' => $participant));
                 }
                 $this->render('confirmsended', array('step' => 1));
                 Yii::app()->end();
@@ -115,7 +115,7 @@ class RegisterController extends EController
                 'inviter'=>array('alias'=>'inviter'),
             ))->findByAttributes(array('activkey'=>$activkey));
             if (!isset($participant)) {
-                throw New CHttpException(404, 'Не удается подвердить регистрацию! Код активации не найден. Обратитесь к администратору сайта');
+                throw New CHttpException(404, BaseModule::t('rec', 'Unable to confirm your registration! The activation code is not found. Contact the site administrator'));
             }
             
             if (empty($participant->purse)) {//если пустой кошелёк
@@ -146,7 +146,7 @@ class RegisterController extends EController
                     $participant->attributes = $_POST['Participant'];
                     //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
                     if ($participant->activkey != $participant->postedActivKey) {
-                        throw New CHttpException(405, 'Не удается авторизоваться! Код активации не правильный. Обратитесь к администратору сайта');
+                        throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
                     }
                     $account = $_POST['account'];   //PM-аккаунт  //'u66666';   //тестовый хардкод
                     $password = $_POST['password']; //PM-пароль   //'123456';  //тестовый хардкод
@@ -166,12 +166,12 @@ class RegisterController extends EController
                     $participant->attributes = $_POST['Participant'];
                     //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
                     if ($participant->activkey != $participant->postedActivKey) {
-                        throw New CHttpException(405, 'Не удается авторизоваться! Код активации не правильный. Обратитесь к администратору сайта');
+                        throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
                     }
                     $account = $_POST['account'];   //PM-аккаунт
                     $password = $_POST['password']; //PM-пароль
                     if (MPlan::payParticipation($participant, $account, $password)) {  //--- ОПЛАТА бизнес-участия
-                        Yii::app()->user->setFlash('success', "Ваша оплата прошла успешно!");
+                        Yii::app()->user->setFlash('success', BaseModule::t('rec', 'Your payment was successful') . '!');
                         $this->step = 4;
                         $this->render('finish', array('participant'=>$participant));
                         Yii::app()->end();
@@ -187,7 +187,7 @@ class RegisterController extends EController
                     $participant->attributes = $_POST['Participant'];
                     //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
                     if ($participant->activkey != $participant->postedActivKey) {
-                        throw New CHttpException(405, 'Не удается авторизоваться! Код активации не правильный. Обратитесь к администратору сайта');
+                        throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
                     }
                     
                     $participant->activkey = null;      //убираем ключ активации (он больше не нужен)
@@ -203,7 +203,7 @@ class RegisterController extends EController
                     if (empty($userlogin->errors)) {              //если авторизация успешна -
                         $this->redirect(Yii::app()->createAbsoluteUrl('office/settings'));                  //редирект на офис
                     } else {
-                        throw New CHttpException(405, 'Не удается авторизоваться! Обратитесь к администратору сайта');
+                        throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
                     }
                 }
                 $this->step = 4;

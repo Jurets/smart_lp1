@@ -79,6 +79,7 @@ class FaqController extends EMController
                           $today = date("Y-m-d H:i:s");
                           $model->created = $today;
                       }
+                      $model->lng = Yii::app()->language;
 			if($model->save())
 				$this->redirect('index');
 		}
@@ -102,9 +103,11 @@ class FaqController extends EMController
 
 		if(isset($_POST['Faq']))
 		{
+                    //var_dump($_POST, Yii::app()->language);die;
 			$model->attributes=$_POST['Faq'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->saveDependLanguage())
+				//$this->redirect(array('view','id'=>$model->id));
+                            $this->redirect (array('index'));
 		}
 		$this->render('update',array(
 			'model'=>$model,

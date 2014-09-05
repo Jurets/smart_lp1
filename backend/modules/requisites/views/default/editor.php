@@ -13,7 +13,7 @@
         'model' => $model,
         'attribute' => $field,
         'pluginOptions' => array(
-            'lang' => 'ru',
+            'lang' => Yii::app()->language,
             'toolbar' => true,
             'iframe' => true,
         ),));
