@@ -9,11 +9,14 @@
     echo $form->labelEx($model, $field, array('class'=>"control-label"));
     echo TbHtml::tag('div', array('class'=>'controls'));
     
+    $lang = Yii::app()->language;
+    $lang = in_array($lang, array('ru', 'en')) ?  $lang : 'ru';
+            
     $this->widget('yiiwheels.widgets.redactor.WhRedactor', array(
         'model' => $model,
         'attribute' => $field,
         'pluginOptions' => array(
-            'lang' => Yii::app()->language,
+            'lang' => $lang,
             'toolbar' => true,
             'iframe' => true,
         ),));
