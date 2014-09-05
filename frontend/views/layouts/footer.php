@@ -55,3 +55,10 @@
     </div>
     <div id="footer-bark-bg"></div>
 </div>
+
+<script>
+    $(function(){
+        $('a.flag').attr('href', '#').css('opacity', 0.25);
+    })
+
+</script>
