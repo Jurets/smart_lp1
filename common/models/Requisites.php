@@ -134,9 +134,12 @@ class Requisites extends CActiveRecord
      * получить строку с реквизитами системы
      * 
      */
-    public static function getInstance()
+    public static function getInstance($lng_prefix='')
     {
-        return self::model()->findByPk(self::INSTANCE_NAME);
+        if($lng_prefix == Yii::app()->params['default.language']){
+           return self::model()->findByPk(self::INSTANCE_NAME); 
+        }
+        return self::model()->findByPk(self::INSTANCE_NAME.$lng_prefix);
     }
 
     /**

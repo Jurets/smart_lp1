@@ -37,7 +37,6 @@ $this->beginContent('//layouts/common');
             <ul id="nav">
                 <div id="bgIn"></div>
                 <li> <a href="#" class="flag">  </a> </li>
-                <!--<li><?php $this->widget('application.widgets.LngSwitch.LngSwitch')?></li>-->
                 <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <li> <a href="#"> &nbsp; <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
                 <li> <a href="#">  <?php echo BaseModule::t('common', 'RULES'); ?>  </a> </li>
@@ -47,6 +46,7 @@ $this->beginContent('//layouts/common');
                 <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Settings'); ?></a> </li>
                 <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
             </ul>
+            <!--<?php $this->widget('application.widgets.LngSwitch.LngSwitch')?>-->
         </div>
 
         <div id="content">
