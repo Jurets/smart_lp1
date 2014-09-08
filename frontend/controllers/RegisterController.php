@@ -34,6 +34,11 @@ class RegisterController extends EController
     * Регистрация в системе
     */
     public function actionIndex($user = '') {
+
+        if(!Yii::app()->user->isGuest){
+            throw New CHttpException(404, BaseModule::t('rec', 'Leave the account and re-register '));
+        }
+
         if (empty($user)) {  //если юзер не задан
             if ($superrefer = Participant::model()->findByPk(Requisites::superReferId())) { //получить из реквизитов ид супер-рефера
                 $user = $superrefer->username;
