@@ -37,6 +37,7 @@ $this->beginContent('//layouts/common');
             <ul id="nav">
                 <div id="bgIn"></div>
                 <li> <a href="#" class="flag">  </a> </li>
+                <!--<li><?php $this->widget('application.widgets.LngSwitch.LngSwitch')?></li>-->
                 <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <li> <a href="#"> &nbsp; <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
                 <li> <a href="#">  <?php echo BaseModule::t('common', 'RULES'); ?>  </a> </li>

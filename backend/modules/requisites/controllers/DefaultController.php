@@ -8,7 +8,7 @@ class DefaultController extends EMController
 	 */
 	public $layout='//layouts/column2';
 
-    public $defaultAction = 'update';
+    public $defaultAction = 'index';
     
 	/**
 	 * @return array action filters
@@ -84,6 +84,7 @@ class DefaultController extends EMController
 	 */
 	public function actionUpdate($id="JVMS") // для единственной записи
 	{
+                $id .= Yii::app()->language;
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -132,20 +133,19 @@ class DefaultController extends EMController
 	 */
 	public function actionIndex()
 	{
-                $model = new Requisites;
-                if(is_null( $model->findByAttributes(array('id'=>'JVMS')) )){
-                    $this->redirect(array('create'));
-                }else{
-                    $this->redirect(array('update'));
+            $model = Requisites::checkInstance();
+            if(isset($_POST['Requisites'])){
+                $model->attributes = $_POST['Requisites'];
+                if(Yii::app()->language == Yii::app()->params['default.language']){
+                $model->id = Requisites::INSTANCE_NAME;}
+                else{
+                  $model->id = Requisites::INSTANCE_NAME . Yii::app()->language;}
+                if($model->save()){
+                    $this->redirect(array('index'));
                 }
-		$model=new Requisites('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Requisites']))
-			$model->attributes=$_GET['Requisites'];
-
-		$this->render('index',array(
-			'model'=>$model,
-		));
+            }
+            
+            $this->render('index', array('model'=>$model));
 	}
 
 	/**

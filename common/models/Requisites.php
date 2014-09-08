@@ -29,6 +29,7 @@ class Requisites extends CActiveRecord
         return 'requisites';
     }
 
+    
     /**
      * @return array validation rules for model attributes.
      */
@@ -37,8 +38,8 @@ class Requisites extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
+            array('purse_activation, purse_club, bpm_login, bpm_password, purse_fdl','required'),
             array('id', 'length', 'max' => 50),
-            array('lng', 'length', 'max'=>2),
             array('pw_supervisor, pw_admin, pw_moderator', 'length', 'max' => 20),
             array('purse_activation, purse_club, purse_investor, purse_fdl', 'length', 'max' => 255),
             array('details, agreement, marketing, bpm_login, bpm_password, purse_activation, purse_club, purse_investor, purse_fdl, email_faq, superrefer_id', 'safe'),
@@ -192,19 +193,20 @@ class Requisites extends CActiveRecord
         else
             return false;
     }
-
-    public function saveDependLanguage() {
-        if($this->lng == Yii::app()->language){ // обновление
-            $a = $this->save();
-        }else{ // добавление
-            $record = new Requisites;
-            $record->attributes = $this->attributes;
-            $record->lng = Yii::app()->language;
-            $a = $record->save();
+    public static function checkInstance(){
+        if(Yii::app()->language == Yii::app()->params['default.language']){
+        $model = Requisites::model()->findByPk(self::INSTANCE_NAME);}
+        else{
+        $model = Requisites::model()->findByPk(self::INSTANCE_NAME.Yii::app()->language);}
+        if(is_null($model)){
+            $model = new Requisites;
+            $model->getDefaults();
         }
-        if(!$a)
-            return false;
-        else
-            return true;
+        return $model;
+    }
+    private function getDefaults(){
+        if($temp = Requisites::model()->findByPk(self::INSTANCE_NAME)){
+            $this->attributes = $temp->attributes;
+        }
     }
 }
