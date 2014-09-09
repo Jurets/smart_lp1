@@ -12,7 +12,7 @@
  * var Participant @participant 
  * 
  */
-class RegisterController extends EController
+class RegisterController extends EMController
 {
     public $layout='//layouts/register';
     
@@ -102,9 +102,9 @@ class RegisterController extends EController
             }
         }
 
-        if(isset(Requisites::getInstance()['details']))
+        if(isset(Requisites::getInstance(Yii::app()->language)['details']))
         {
-            $details = Requisites::getInstance()['details'];
+            $details = Requisites::getInstance(Yii::app()->language)['details'];
 
         }else $details = '';
 

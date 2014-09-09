@@ -24,9 +24,9 @@
         echo $form->errorSummary(array($model/*,$profile*/));
 
         //поля
-        $this->renderPartial('editor', array('form'=>$form, 'model'=>$model, 'field' => 'details'), false, true);
-        $this->renderPartial('editor', array('form'=>$form, 'model'=>$model, 'field' => 'agreement'), false, true);
-        $this->renderPartial('editor', array('form'=>$form, 'model'=>$model, 'field' => 'marketing'), false, true);
+        $this->renderPartial('application.views.site.editor', array('form'=>$form, 'model'=>$model, 'field' => 'details'), false, true);
+        $this->renderPartial('application.views.site.editor', array('form'=>$form, 'model'=>$model, 'field' => 'agreement'), false, true);
+        $this->renderPartial('application.views.site.editor', array('form'=>$form, 'model'=>$model, 'field' => 'marketing'), false, true);
         
 
         echo $form->textFieldControlGroup($model, 'pw_supervisor', array('class'=>'span3'));

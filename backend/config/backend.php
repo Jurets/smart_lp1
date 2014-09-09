@@ -71,6 +71,9 @@ return array(
         'lang' => array(
             'class' => 'backend.modules.lang.LangModule',
         ),
+        'info' => array(
+            'class' => 'backend.modules.info.InfoModule',
+        ),
     ),
     
     'import'=>array(

@@ -60,6 +60,8 @@ return array(
 			'showScriptName' => false,
 
 			'rules' => array(
+                'info/<id>' => 'site/info/id/<id>',
+                
                 'register/dynamiccities' => 'register/dynamiccities',
                 'register/activate' => 'register/activate',
                 'register/<username:\w+>' => 'register/index/user/<username>',

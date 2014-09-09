@@ -27,9 +27,9 @@ $this->beginContent('//layouts/common');
         <ul id="nav">
             <li> <a href="#" class="flag">  </a> </li>
             <li> <a href="#" class="in">  </a> </li>
-            <li> <a href="#"> <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?> </a> </li>
-            <li> <a href="#"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
-            <li> <a href="#"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+            <li> <a href="/info/possibilities"> <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?> </a> </li>
+            <li> <a href="/info/rules"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
+            <li> <a href="/info/questions"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
             <li> <a href="#" class="moveRight open-login"> <?php echo BaseModule::t('common', 'LOGIN'); ?> </a> </li>
             
         </ul>

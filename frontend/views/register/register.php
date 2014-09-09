@@ -97,7 +97,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 <p class="sub3">
-    <?php echo BaseModule::t('common', 'I agree with the rules and accept') ?>
+    <?php echo BaseModule::t('rec', 'I agree with the rules and accept') ?>
     <?php 
    /* echo TbHtml::linkButton('пользовательское соглашение', array(
 //'style' => TbHtml::BUTTON_COLOR_PRIMARY,
@@ -106,13 +106,13 @@ $form = $this->beginWidget('CActiveForm', array(
 //'data-target' => '#sogloshenie',
     'onclick'=>'js:$("sogloshenie").show',
 ));*/ ?>
-    <a id="open-btn" href="#"><?php echo BaseModule::t('common', 'Terms and conditions') ?></a>
+    <a id="open-btn" href="#"><?php echo BaseModule::t('rec', 'Terms and conditions') ?></a>
 </p>
 <?php echo $form->checkBox($participant, 'rulesAgree', array('class'=>'css-checkbox', 'readonly'=>true)); //согласие с ПользСоглашением ?>
 <label for="Participant_rulesAgree" class="css-label"></label>
 <?php echo $form->error($participant, 'rulesAgree', array('class'=>'error-message em-5')); //логин ?>
 
-<?php echo CHtml::submitButton(BaseModule::t('common', 'Next'), array('class'=>'btn-style-green')); ?>
+<?php echo CHtml::submitButton(BaseModule::t('rec', 'Next'), array('class'=>'btn-style-green')); ?>
 
 <?php $this->endWidget(); ?>
 
@@ -134,7 +134,7 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
    
 <div id='sogloshenie' style="display: none;">
     <div id='shag-1-2-textArea' >
-        <span><?php echo BaseModule::t('common', 'Terms and conditions') ?></span><br><br>
+        <span><?php echo BaseModule::t('rec', 'Terms and conditions') ?></span><br><br>
          <?php echo($details)?>
     </div>
     <a href="#">

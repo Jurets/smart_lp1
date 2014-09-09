@@ -91,6 +91,7 @@
                                 array('url' => Yii::app()->getModule('requisites')->requisitesShow, 'label' => BaseModule::t('rec', "Requisites"), 'visible' => !$isGuest),
                                 array('url' => Yii::app()->getModule('mp')->mpShow, 'label' => BaseModule::t('rec', 'Marketings Plan')),
                                 array('url' => Yii::app()->getModule('im')->imShow, 'label' => BaseModule::t('rec', 'Index Management')),
+                                array('url' => Yii::app()->getModule('info')->actionShow, 'label' => BaseModule::t('rec', 'Static Pages')),
                                 //array('url' => Yii::app()->getModule('faqm')->faqmShow, 'label' => BaseModule::t('rec', 'Faq Management')),
                                 array('url' => Yii::app()->getModule('lang')->langShow, 'label'=> BaseModule::t('rec', 'Language Management')),
                             ),

@@ -58,10 +58,11 @@ class OfficeController extends EMController
     }
     public function actionSpecification()
     {
-        $objRequqstes = new Requisites();
-        //$message - form admin panel.  Requqstes->Agreement
-        $message = $objRequqstes->model()->findAll();
-        $message = $message[0]['agreement'];
+//        $objRequqstes = new Requisites();
+//        //$message - form admin panel.  Requqstes->Agreement
+//        $message = $objRequqstes->model()->findAll();
+//        $message = $message[0]['agreement'];
+        $message = Requisites::getInstance(Yii::app()->language)['agreement'];
         $this->render('office-8', array('content' => $message));
     }
 

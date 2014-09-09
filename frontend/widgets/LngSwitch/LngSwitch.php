@@ -5,6 +5,7 @@ class LngSwitch extends CWidget {
         'left'=>'<option>',
         'right'=>'</option>',
     );
+    /* Вариант 1 */
     private function makeFlagList(){
         $this->flags = '<select>'.PHP_EOL;
         $this->flags .= $this->flagsGetter();
@@ -32,8 +33,23 @@ class LngSwitch extends CWidget {
         }
         return $buff;
     }
+    /*------------------------------*/
+    
+    /* Вариант 2 */
+    private function flagsMakeStruct(){
+        $flags = Yii::app()->db->createCommand(
+                'SELECT lang FROM Languages'
+                )->query()->readAll();
+        $buff = array();
+        foreach($flags as $flag){
+            $buff[] = $flag['lang'];
+        }
+        $this->flags = $buff;
+    }
+    /*------------------------------*/
     public function run(){
-        $this->makeFlagList();
+        //$this->makeFlagList();
+        $this->flagsMakeStruct();
         $this->render('LngSwitch', array('flags'=>$this->flags));
     }
 }
