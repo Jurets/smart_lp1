@@ -38,9 +38,9 @@ $this->beginContent('//layouts/common');
                 <div id="bgIn"></div>
                 <li> <a href="#" class="flag">  </a> </li>
                 <li> <a class="in" style="cursor: pointer;">  </a> </li>
-                <li> <a href="#"> &nbsp; <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
-                <li> <a href="#">  <?php echo BaseModule::t('common', 'RULES'); ?>  </a> </li>
-                <li> <a href="#"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?> </a> </li>
+                <li> <a href="/info/possibilities"> &nbsp; <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
+                <li> <a href="/info/rules">  <?php echo BaseModule::t('common', 'RULES'); ?>  </a> </li>
+                <li> <a href="/info/questions"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?> </a> </li>
                 <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark"><?php echo strtoupper(BaseModule::t('rec', 'Raise status')); ?></a>
                 <li> <a href="#"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
                 <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Settings'); ?></a> </li>

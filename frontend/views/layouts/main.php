@@ -26,9 +26,9 @@ $this->beginContent('//layouts/common');
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <?php } ?>
-                <li> <a href="#">  <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
-                <li> <a href="#"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
-                <li> <a href="#"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+                <li> <a href="/info/possibilities">  <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
+                <li> <a href="/info/rules"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
+                <li> <a href="/info/questions"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
 
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo BaseModule::t('common', 'SIGN UP'); ?> </a> </li>

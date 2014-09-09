@@ -279,4 +279,17 @@ class SiteController extends LoginController
             echo '---Ошибка при отсылке';
     }
 
+    /**
+    * вывод статической страницы
+    * 
+    * @param mixed $id
+    */
+    public function actionInfo($id)
+    {
+        if (!$info = Information::model()->findByPk($id)){
+            throw New CHttpException(404, BaseModule::t('rec', 'Page not found'));
+        }
+        //$this->layout = 'cabinet';
+        $this->render('info', array('info'=>$info));
+    }
 }
