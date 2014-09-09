@@ -287,7 +287,7 @@ class SiteController extends LoginController
     public function actionInfo($id)
     {
         if (!$info = Information::model()->findByPk($id)){
-            throw New CHttpException(404, BaseModule::t('rec', 'Page not found'));
+            throw New CHttpException(404, BaseModule::t('rec', 'The requested page does not exist'));
         }
         //$this->layout = 'cabinet';
         $this->render('info', array('info'=>$info));

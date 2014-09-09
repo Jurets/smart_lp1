@@ -246,7 +246,7 @@ class AdminController extends EMController
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 */
-	public function loadModel()
+	public function loadModel($id)
 	{
 		if($this->_model===null) {
 			if(isset($_GET['id']))

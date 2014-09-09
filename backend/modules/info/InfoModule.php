@@ -2,7 +2,7 @@
 
 class InfoModule extends BaseModule
 {
-    public $requisitesShow = array('/info');
+    public $actionShow = array('/info');
 
 	public function init()
 	{

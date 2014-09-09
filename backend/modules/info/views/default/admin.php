@@ -26,10 +26,26 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'requisites-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
+    'htmlOptions'=>array('style'=>'font-size: 12px'),
     'columns' => array(
-        'id',
-        'title',
-        'text',
+        array(
+            'name' => 'id',
+            'type'=>'raw',
+            'filterInputOptions'=>array('style'=>'width: 70px'),
+            'htmlOptions'=>array('style'=>'width: 70px'),
+        ),
+        array(
+            'name' => 'title',
+            'type'=>'raw',
+            'filterInputOptions'=>array('style'=>'width: 150px'),
+            'htmlOptions'=>array('style'=>'width: 150px'),
+        ),
+        array(
+            'name' => 'text',
+            'type'=>'raw',
+            'filterInputOptions'=>array('style'=>'width: 1000px'),
+            'htmlOptions'=>array('style'=>'width: 1000px'),
+        ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
         ),
