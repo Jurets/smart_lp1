@@ -47,8 +47,6 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
     ?>
 </div>
 
-
-
 <style>
 .info{
     position: absolute;
@@ -61,8 +59,9 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 
 #contentBG{
     min-width: 1080px;
-    width: 100% ;
-    height: 872px;
+    width: 100%;
+    min-height: 1100px;
+    height: 100%;
     background-image: url(../images/contentBG.jpg);
     position: absolute;
     top: 40px;
@@ -83,6 +82,22 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
     background-position: 80px;
 }
 
+.footer{
+    position: relative;
+    z-index: 100;
+    margin-top: -2px;
+}
+
+div.blackDownFooter{
+    background-color: #1e1e1e;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    z-index: 105;
+    margin-top: -1px;
+}
+
+
 </style>
 <?php
 Yii::app()->clientScript->registerScript(
@@ -94,4 +109,7 @@ Yii::app()->clientScript->registerScript(
 
 <script>
     $("head link[href='/css/style.css']").attr('href', '');
+    $(function(){
+        $('div.footer').after('<div class="blackDownFooter"></div>');
+    })
 </script>
