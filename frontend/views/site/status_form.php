@@ -58,6 +58,31 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
     position: absolute;
     top:150px;
 }
+
+#contentBG{
+    min-width: 1080px;
+    width: 100% ;
+    height: 872px;
+    background-image: url(../images/contentBG.jpg);
+    position: absolute;
+    top: 40px;
+}
+
+
+#globe{
+    margin-left: auto;
+    height: 487px;
+    width: 782px;
+    background-image: url(../images/globe.png);
+    background-repeat: no-repeat;
+    background-position:right;
+    z-index: 0;
+}
+
+.moveRight2 {
+    background-position: 80px;
+}
+
 </style>
 <?php
 Yii::app()->clientScript->registerScript(
@@ -66,3 +91,7 @@ Yii::app()->clientScript->registerScript(
     CClientScript::POS_READY
 );
 ?>
+
+<script>
+    $("head link[href='/css/style.css']").attr('href', '');
+</script>
