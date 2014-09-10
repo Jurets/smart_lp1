@@ -15,7 +15,7 @@
 	<?php	
 		if (isset($this->menu)) {
             $this->beginWidget('zii.widgets.CPortlet', array(
-                'title'=>'Операции',
+                'title'=>BaseModule::t('rec','Operations'),
             ));
             $this->widget('bootstrap.widgets.TbNav', array(
 		    //$this->widget('bootstrap.widgets.TbListView', array(

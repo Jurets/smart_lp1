@@ -82,7 +82,7 @@ class Participant extends User
                     array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
                     array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
                     array('username, country_id, city_id, email, rulesAgree', 'required', 'on' => array('register')),
-                    array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => 'Необходимо принять Пользовательское Соглашение'),
+                    array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => BaseModule::t('rec','It is necessary to accept the Membership Agreement')),
                     //The following rule is used by search().
                     //@todo Please remove those attributes that should not be searched.
                     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
@@ -96,7 +96,7 @@ class Participant extends User
                     array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     array('photo', 'file', 'safe' => true, 'types' => 'jpg, gif, png',
-                        'allowEmpty' => true, 'maxSize' => 5 * 2000 * 2000, 'tooLarge' => 'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера.', 'on' => array('settings','register')),
+                        'allowEmpty' => true, 'maxSize' => 5 * 2000 * 2000, 'tooLarge' => BaseModule::t('rec','The file weighs more than 2 MB. Please upload a smaller file'), 'on' => array('settings','register')),
         ));
     }
 
@@ -635,7 +635,7 @@ class Participant extends User
         } else {
             return array(
                 'result' => false,
-                'description' => BaseModule::t('common', 'The User has not been added')
+                'description' => BaseModule::t('common', "The User hasn't been added")
             );
         }
     }
