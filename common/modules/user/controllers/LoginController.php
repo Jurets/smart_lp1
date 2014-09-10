@@ -30,7 +30,8 @@ class LoginController extends EMController
 			// display the login form
 			$this->render('/user/login',array('model'=>$model));
 		} else
-			$this->redirect(Yii::app()->controller->module->returnUrl);
+			//$this->redirect(Yii::app()->controller->module->returnUrl);
+                        $this->redirect(Yii::app()->controller->module->returnPatchUrl);
 	}
 	
 	protected function lastViset() {

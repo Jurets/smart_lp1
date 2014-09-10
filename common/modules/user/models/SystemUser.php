@@ -64,7 +64,11 @@ class SystemUser extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('create_at, active', 'required'),
-                        array('username, email', 'required'),
+                        array('username', 'unique', 'message' => BaseModule::t('rec',"This user's name already exists.")),
+			array('email', 'unique', 'message' => BaseModule::t('rec',"This user's email address already exists.")),
+                        array('username, email', 'required', 'on'=>'update'),
+                        array('username, email, password', 'required', 'on'=>'create'),
+                        array('password', 'length', 'max'=>128, 'min' => 4,'message' => BaseModule::t('rec',"Incorrect password (minimal length 4 symbols).")),
 			array('superuser, roles, status, refer_id, inviter_id, invite_num, city_id, gmt_id, income, transfer_fund, active, country_access, city_access, skype_access, email_access', 'numerical', 'integerOnly'=>true),
 			array('balance', 'numerical'),
 			array('username, phone', 'length', 'max'=>20),
@@ -76,7 +80,7 @@ class SystemUser extends CActiveRecord
 			array('lastvisit_at, busy_date, club_date, dob, activated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, email, activkey, superuser, roles, status, create_at, lastvisit_at, logincode, tariff_id, refer_id, inviter_id, invite_num, busy_date, club_date, balance, first_name, last_name, dob, city_id, gmt_id, phone, skype, photo, purse, income, transfer_fund, active, activated, sys_lang, country_access, city_access, skype_access, email_access, new_email', 'safe', 'on'=>'search'),
+			//array('id, username, password, email, activkey, superuser, roles, status, create_at, lastvisit_at, logincode, tariff_id, refer_id, inviter_id, invite_num, busy_date, club_date, balance, first_name, last_name, dob, city_id, gmt_id, phone, skype, photo, purse, income, transfer_fund, active, activated, sys_lang, country_access, city_access, skype_access, email_access, new_email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -152,16 +156,16 @@ class SystemUser extends CActiveRecord
         public function getRole(){
             switch($this->roles){
                 case '1':
-                    return UserModule::t('Superadmin');
+                    return UserModule::t('rec','Superadmin');
                     break;
                 case '2':
-                    return UserModule::t('Admin');
+                    return UserModule::t('rec','Admin');
                     break;
                 case '3':
-                    return UserModule::t('Moderator');
+                    return UserModule::t('rec','Moderator');
                     break;
                 default:
-                    return UserModule::t('Without Role');
+                    return UserModule::t('rec','Without Role');
                     break;
             }
         }
