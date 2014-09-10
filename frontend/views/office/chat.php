@@ -167,21 +167,21 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
         <div id="online-counter"><?= count($onlineusers) ?></div>
 
         <div class="history-controls">
-            показать сообщения:
+            <?php echo BaseModule::t('rec','show messages').':'?>
             <ul class="history-buttons">
-                <li id="mode1" value="1" class="mode active">вчера</li>
+                <li id="mode1" value="1" class="mode active"><?php echo BaseModule::t('rec','tomorrow')?></li>
                 <li>|</li>
-                <li id="mode2" value="2" class="mode">7 дней</li>
+                <li id="mode2" value="2" class="mode">7<?php echo ' '.BaseModule::t('rec','days')?></li>
                 <li>|</li>
-                <li id="mode3" value="3" class="mode">30 дней</li>
+                <li id="mode3" value="3" class="mode">30<?php echo ' '.BaseModule::t('rec','days')?></li>
                 <li>|</li>
-                <li id="mode4" value="4" class="mode">3 месяца</li>
+                <li id="mode4" value="4" class="mode">3<?php echo ' '.BaseModule::t('rec','days')?></li>
                 <li>|</li>
-                <li id="mode5" value="5" class="mode">6 месяцев</li>
+                <li id="mode5" value="5" class="mode">6<?php echo ' '.BaseModule::t('rec','month')?></li>
                 <li>|</li>
-                <li id="mode6" value="6" class="mode">1 год</li>
+                <li id="mode6" value="6" class="mode">1<?php echo ' '.BaseModule::t('rec','year')?></li>
                 <li>|</li>
-                <li id="mode7" value="7" class="mode">с самого начала</li>
+                <li id="mode7" value="7" class="mode"><?php echo BaseModule::t('rec','from the first')?></li>
             </ul>
         </div>
 
@@ -196,7 +196,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
 
             </div>
             <div id="hidden-user-info">
-                <p> <span><?php echo BaseModule::t('common', 'Information') ?>:</span></p>
+                <p> <span><?php echo BaseModule::t('rec', 'Information') ?>:</span></p>
                 <div id="for-avatar"></div>
                 <p><span>phone:<span id="phone"></span></p>
                 <p><span>skype:</span><span id="skype"></span></p>
@@ -224,13 +224,13 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                 'showAnim' => 'fold',
             ),
             'htmlOptions' => array(
-                'placeholder' => BaseModule::t('common', 'Find users'),
+                'placeholder' => BaseModule::t('rec', 'Find users'),
                 'class' => 'search-users'
             ),
         ));
         ?>
         </br>
-        <input id="add-user-to-chat" type="button" value="Добавить в список" name="add-user-to-chat" class="search-users add-user-to-chat">
+        <input id="add-user-to-chat" type="button" value="<?php echo BaseModule::t('rec','Add user to list')?>" name="add-user-to-chat" class="search-users add-user-to-chat">
 
         <?php
         if (isset($_GET['interlocutor'])) {

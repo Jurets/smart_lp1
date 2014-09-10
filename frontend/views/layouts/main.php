@@ -26,13 +26,13 @@ $this->beginContent('//layouts/common');
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <?php } ?>
-                <li> <a href="/info/possibilities">  <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
-                <li> <a href="/info/rules"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
-                <li> <a href="/info/questions"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+                <li> <a href="#">  <?php echo BaseModule::t('rec', 'OPPORTUNITIES'); ?>  </a> </li>
+                <li> <a href="#"> <?php echo BaseModule::t('rec', 'RULES'); ?> </a> </li>
+                <li> <a href="#"> <?php echo BaseModule::t('rec', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
 
                 <?php if (Yii::app()->user->isGuest) { ?>
-                    <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo BaseModule::t('common', 'SIGN UP'); ?> </a> </li>
-                    <li> <a class="moveRight2 open-login" style="cursor: pointer;" href="#"> <?php echo BaseModule::t('common', 'LOGIN'); ?> </a> </li>
+                    <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo BaseModule::t('rec', 'SIGN UP'); ?> </a> </li>
+                    <li> <a class="moveRight2 open-login" style="cursor: pointer;" href="#"> <?php echo BaseModule::t('rec', 'LOGIN'); ?> </a> </li>
                 <?php } else { ?>
                     <style type="text/css">
                         .moveRight1 {
@@ -87,6 +87,7 @@ $this->beginContent('//layouts/common');
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
                 <?php } ?>
             </ul>
+            <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
         </div>
 
         <div id="content" style="height: auto !important;">
