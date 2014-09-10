@@ -27,12 +27,12 @@ $this->beginContent('//layouts/common');
         <ul id="nav">
             <li> <a href="#" class="flag">  </a> </li>
             <li> <a href="#" class="in">  </a> </li>
-            <li> <a href="/info/possibilities"> <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?> </a> </li>
-            <li> <a href="/info/rules"> <?php echo BaseModule::t('common', 'RULES'); ?> </a> </li>
-            <li> <a href="/info/questions"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
-            <li> <a href="#" class="moveRight open-login"> <?php echo BaseModule::t('common', 'LOGIN'); ?> </a> </li>
-            
+            <li> <a href="/info/possibilities"> <?php echo BaseModule::t('rec', 'OPPORTUNITIES'); ?> </a> </li>
+            <li> <a href="/info/rules"> <?php echo BaseModule::t('rec', 'RULES'); ?> </a> </li>
+            <li> <a href="/info/questions"> <?php echo BaseModule::t('rec', 'QUESTIONS AND ANSWERS'); ?>  </a> </li>
+            <li> <a href="#" class="moveRight open-login"> <?php echo BaseModule::t('rec', 'LOGIN'); ?> </a> </li>
         </ul>
+        <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
     </div>
     <div id="content" style="height: auto !important;">
         <?php
@@ -47,12 +47,12 @@ $this->beginContent('//layouts/common');
 
     <div id="content">
 
-        <h2 id="shag-1-1-h3" ><?php echo BaseModule::t('common', 'NEW MEMBER REGISTRATION') ?></h2>
+        <h2 id="shag-1-1-h3" ><?php echo BaseModule::t('rec', 'NEW MEMBER REGISTRATION') ?></h2>
         <div id="topShagLine"></div>
-        <div class="btn-style1 <?= ($this->step == 1) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 1'); ?></div>
-        <div class="btn-style2 <?= ($this->step == 2) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 2'); ?></div>
-        <div class="btn-style3 <?= ($this->step == 3) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 3'); ?></div>
-        <div class="btn-style4 <?= ($this->step == 4) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('common', 'STEP 4'); ?></div>
+        <div class="btn-style1 <?= ($this->step == 1) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('rec', 'STEP').'1'; ?></div>
+        <div class="btn-style2 <?= ($this->step == 2) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('rec', 'STEP').'2'; ?></div>
+        <div class="btn-style3 <?= ($this->step == 3) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('rec', 'STEP').'3'; ?></div>
+        <div class="btn-style4 <?= ($this->step == 4) ? 'active-step' : '' ?>"> <?php echo BaseModule::t('rec', 'STEP').'4'; ?></div>
         <?php
 //            //модель для авторизации юзера
         $userLogin = New UserLogin();

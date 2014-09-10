@@ -36,17 +36,17 @@ $this->beginContent('//layouts/common');
 
             <ul id="nav">
                 <div id="bgIn"></div>
-                <li> <a href="#" class="flag">  </a> </li>
+               <li> <a href="#" class="flag">  </a> </li>
                 <li> <a class="in" style="cursor: pointer;">  </a> </li>
-                <li> <a href="/info/possibilities"> &nbsp; <?php echo BaseModule::t('common', 'OPPORTUNITIES'); ?>  </a> </li>
-                <li> <a href="/info/rules">  <?php echo BaseModule::t('common', 'RULES'); ?>  </a> </li>
-                <li> <a href="/info/questions"> <?php echo BaseModule::t('common', 'QUESTIONS AND ANSWERS'); ?> </a> </li>
+                <li> <a href="/info/possibilities"> &nbsp; <?php echo BaseModule::t('rec', 'OPPORTUNITIES'); ?>  </a> </li>
+                <li> <a href="/info/rules">  <?php echo BaseModule::t('rec', 'RULES'); ?>  </a> </li>
+                <li> <a href="/info/questions"> <?php echo BaseModule::t('rec', 'QUESTIONS AND ANSWERS'); ?> </a> </li>
                 <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark"><?php echo strtoupper(BaseModule::t('rec', 'Raise status')); ?></a>
                 <li> <a href="#"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
-                <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Settings'); ?></a> </li>
+                <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('rec', 'Settings'); ?></a> </li>
                 <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
             </ul>
-            <!--<?php $this->widget('application.widgets.LngSwitch.LngSwitch')?>-->
+            <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
         </div>
 
         <div id="content">
@@ -57,14 +57,14 @@ $this->beginContent('//layouts/common');
                     'id' => 'nav2',
                     'activeCssClass' => 'myitem-active',
                     'items' => array(
-                        array('label' => BaseModule::t('common', 'STATISTICS'), 'url' => array('office/statistics'), 'itemOptions' => array('class' => 'btn-style btn-style1 ')),
-                        array('label' => BaseModule::t('common', 'STRUCTURE'), 'url' => array('office/structure'), 'itemOptions' => array('class' => 'btn-style btn-style2')),
-                        array('label' => BaseModule::t('common', 'NEWS'), 'url' => array('office/news'), 'itemOptions' => array('class' => 'btn-style btn-style3')),
-                        array('label' => BaseModule::t('common', 'CHAT'), 'url' => array('office/chat'), 'itemOptions' => array('class' => 'btn-style btn-style4')),
-                        array('label' => BaseModule::t('common', 'INVITATION'), 'url' => array('office/invitation'), 'itemOptions' => array('class' => 'btn-style btn-style5')),
-                        array('label' => BaseModule::t('common', 'SETTINGS'), 'url' => array('office/settings'), 'itemOptions' => array('class' => 'btn-style btn-style6')),
-                        array('label' => BaseModule::t('common', 'HELP'), 'url' => array('office/help'), 'itemOptions' => array('class' => 'btn-style btn-style7')),
-                        array('label' => BaseModule::t('common', 'RULES'), 'url' => array('office/specification'), 'itemOptions' => array('class' => 'btn-style btn-style8'))
+                        array('label' => BaseModule::t('rec', 'STATISTICS'), 'url' => array('office/statistics'), 'itemOptions' => array('class' => 'btn-style btn-style1 ')),
+                        array('label' => BaseModule::t('rec', 'STRUCTURE'), 'url' => array('office/structure'), 'itemOptions' => array('class' => 'btn-style btn-style2')),
+                        array('label' => BaseModule::t('rec', 'NEWS'), 'url' => array('office/news'), 'itemOptions' => array('class' => 'btn-style btn-style3')),
+                        array('label' => BaseModule::t('rec', 'CHAT'), 'url' => array('office/chat'), 'itemOptions' => array('class' => 'btn-style btn-style4')),
+                        array('label' => BaseModule::t('rec', 'INVITATION'), 'url' => array('office/invitation'), 'itemOptions' => array('class' => 'btn-style btn-style5')),
+                        array('label' => BaseModule::t('rec', 'SETTINGS'), 'url' => array('office/settings'), 'itemOptions' => array('class' => 'btn-style btn-style6')),
+                        array('label' => BaseModule::t('rec', 'HELP'), 'url' => array('office/help'), 'itemOptions' => array('class' => 'btn-style btn-style7')),
+                        array('label' => BaseModule::t('rec', 'RULES'), 'url' => array('office/specification'), 'itemOptions' => array('class' => 'btn-style btn-style8'))
                     ,)
                 ));
                 ?>

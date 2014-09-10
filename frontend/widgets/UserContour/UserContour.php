@@ -37,7 +37,7 @@ class UserContour extends CWidget {
     /**/
     private function registeredPartipiants(){
         // TO DO - получить, отформатировать и записать в dataPull ответ для ЗАРЕГИСТРИРОВАНО УЧАСТНИКОВ
-        $this->operation = 'РЕГИСТРАЦИИ';
+        $this->operation = BaseModule::t('rec','REGISTRATIONS');
         $db_connector = Yii::app()->db;
         $usersDumpCommand = $db_connector->createCommand(
                 'SELECT u.first_name, u.last_name, u.create_at, co.code, co.name, u.username
@@ -66,7 +66,7 @@ class UserContour extends CWidget {
        
     }
     private function freePaid(){
-        $this->operation = 'КОМИССИОННЫЕ';
+        $this->operation = BaseModule::t('rec','COMISSION');
         $db_connector = Yii::app()->db;
         $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=2');
         $amountCommissionCount = $amountCommission->query();
@@ -97,7 +97,7 @@ class UserContour extends CWidget {
 
     }
     private function givenOncharity(){
-        $this->operation = 'ОТЧИСЛЕНИЯ';
+        $this->operation = BaseModule::t('rec','DEDUCTIONS');
         $db_connector = Yii::app()->db;
         $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=7');
         $amountCommissionCount = $amountCommission->query();
@@ -105,11 +105,11 @@ class UserContour extends CWidget {
         $list = $db_connector->createCommand(
             'SELECT to_user_id tr_kind_id,date,first_name,last_name,code
              FROM pm_transaction_log
-             JOIN tbl_users
+             LEFT JOIN tbl_users
              ON to_user_id = id
-             JOIN cities c
+             LEFT JOIN cities c
              ON city_id = c.id
-             JOIN countries co
+             LEFT JOIN countries co
              ON co.id = c.country_id
              WHERE tr_kind_id = 7
              LIMIT 6  ');

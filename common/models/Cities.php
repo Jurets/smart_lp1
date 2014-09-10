@@ -81,10 +81,13 @@ class Cities extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
+        $criteria->with = array('country');
 
         $criteria->compare('id', $this->id);
-        $criteria->compare('country_id', $this->country_id);
-        $criteria->compare('name', $this->name, true);
+        $criteria->compare('t.name', $this->name, true);
+        if (!empty($this->country_id)) {
+            $criteria->compare('country.name', $this->country_id, true); //поиск по стране
+        }
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
