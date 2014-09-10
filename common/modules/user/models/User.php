@@ -166,17 +166,17 @@ class User extends CActiveRecord
 				self::STATUS_BANNED => UserModule::t('Banned'),
 			),
 			'AdminStatus' => array(
-				'0' => UserModule::t('No'),
-				'1' => UserModule::t('Yes'),
+				'0' => BaseModule::t('rec','No'),
+				'1' => BaseModule::t('rec','Yes'),
 			),
                         'RoleStatus' => array(
-                                '2' => UserModule::t('Admin'),
-                                '3' => UserModule::t('Moderator'),
-                                '1' => UserModule::t('Superadmin'),
+                                '2' => BaseModule::t('rec','Admin'),
+                                '3' => BaseModule::t('rec','Moderator'),
+                                '1' => BaseModule::t('rec','Superadmin'),
                         ),
                         'SystemUserStatus' => array(
-                            '1' => UserModule::t('Active'),
-                            '0' => UserModule::t('Not active'),
+                            '1' => BaseModule::t('rec','Active'),
+                            '0' => BaseModule::t('rec','Not active'),
                         ),
 		);
 		if (isset($code))
