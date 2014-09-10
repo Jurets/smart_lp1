@@ -61,6 +61,7 @@ class UserModule extends BaseModule
 	public $logoutUrl = array("/user/logout");
 	public $profileUrl = array("/user/profile");
 	public $returnUrl = array("/user/profile");
+        public $returnPatchUrl = array('invitation');
     public $returnLogoutUrl = array("/user/login");
 	
     public $indexUrl = array("/user/admin");

@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-    <p class="note"><?php echo htmlspecialchars_decode(BaseModule::t('rec',htmlspecialchars('Fields with * are required.')))?></p>
+    <p class="note"><?php echo htmlspecialchars_decode(BaseModule::t('rec',htmlspecialchars('Fields with * are required')))?></p>
 
 	<?php echo $form->errorSummary($model); ?>
 	
