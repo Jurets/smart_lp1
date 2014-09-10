@@ -32,7 +32,7 @@ class LoginController extends EMController
 		} else
 			//$this->redirect(Yii::app()->controller->module->returnUrl);
                         //$this->redirect(Yii::app()->controller->module->returnPatchUrl);
-                        $this->redirect(array(Yii::app()->createAbsoluteUrl('invitation')));
+                        $this->redirect(array('/invitation'));
 	}
 	
 	protected function lastViset() {
