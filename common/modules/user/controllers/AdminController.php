@@ -131,7 +131,7 @@ class AdminController extends EMController
 	 */
 	public function actionView()
 	{
-		$model = $this->loadModel();
+		$model = $this->loadModel($_GET['id']);
 		$this->render('view',array(
 			'model'=>$model,
 		));
@@ -169,7 +169,7 @@ class AdminController extends EMController
 	 */
 	public function actionUpdate()
 	{
-		$model = $this->loadModel();
+		$model = $this->loadModel($_GET['id']);
 		$this->performAjaxValidation(array($model));
 		if(isset($_POST['Participant']))
 		{
@@ -200,7 +200,7 @@ class AdminController extends EMController
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$model = $this->loadModel();
+			$model = $this->loadModel($_GET['id']);
                         if($model->tariff_id == '0'){
                             foreach($model->pmfromuser as $tr_log){
                                 if(is_null($tr_log->tr_err_code)){
@@ -262,6 +262,6 @@ class AdminController extends EMController
     * 
     */
     public function actionStatus($id, $status) {
-        $this->loadModel()->setStatus($status);
+        $this->loadModel($_GET['id'])->setStatus($status);
     }
 }
