@@ -44,9 +44,10 @@ class FaqController extends EMController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+//		$this->render('view',array(
+//			'model'=>$this->loadModel($id),
+//		));
+            $this->actionIndex();
 	}
 
 	/**
@@ -154,10 +155,11 @@ class FaqController extends EMController
 	 */
 	public function actionAdmin()
 	{
-			$dataProvider=new CActiveDataProvider('Faq');
-		$this->render('admin',array(
-			'dataProvider'=>$dataProvider,
-		));
+//			$dataProvider=new CActiveDataProvider('Faq');
+//		$this->render('admin',array(
+//			'dataProvider'=>$dataProvider,
+//		));
+            $this->actionIndex();
 	}
 
 	/**

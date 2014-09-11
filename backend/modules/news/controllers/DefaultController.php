@@ -74,9 +74,10 @@ class DefaultController extends EMController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+//		$this->render('view',array(
+//			'model'=>$this->loadModel($id),
+//		));
+            $this->actionUpdate($id);
 	}
 
 	/**

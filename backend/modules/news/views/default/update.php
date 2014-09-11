@@ -4,7 +4,7 @@
 
 $this->breadcrumbs = array(
     BaseModule::t('rec','News') => array('index'),
-    $model->title => array('view', 'id' => $model->id),
+    ' '.$model->title => array('view', 'id' => $model->id),
     BaseModule::t('rec','Update News'),
 );
 

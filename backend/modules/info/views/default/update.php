@@ -5,7 +5,7 @@
 $this->breadcrumbs = array(
     //BaseModule::t('common', 'Requisites') => array('index'),
     //$model->id => array('view', 'id' => $model->id),
-    BaseModule::t('common', 'Information'),
+    BaseModule::t('rec', 'Information'),
 );
 
 $this->menu = array(
