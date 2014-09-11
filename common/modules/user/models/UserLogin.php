@@ -39,14 +39,15 @@ class UserLogin extends CFormModel
 			array('username', 'email'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
-			// password needs to be authenticated
-                        array('password', 'authenticate'),
 /////временно отключаем  array('activekey', 'checkActivekey'),  
             array('verifyCode', 'captcha',
                 // авторизованным пользователям код можно не вводить
                   'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
                 
-                )
+                ),
+            // password needs to be authenticated
+                //!!!'authenticate' должна быть в списке самой последней иначе проверка не работает!!!
+            array('password', 'authenticate'),
             );
             if(isset(Yii::app()->params['email_verify_code_enabled']) && Yii::app()->params['email_verify_code_enabled'] == true){
                 $rules[] = array('activekey', 'checkActivekey'); // временно включаем ))
