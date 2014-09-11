@@ -12,7 +12,7 @@ $this->menu = array(
     array('label' => BaseModule::t('rec', 'Create Countries'), 'url' => array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
+/*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
 	return false;
@@ -23,25 +23,17 @@ $('.search-form form').submit(function(){
 	});
 	return false;
 });
-");
+");*/
 ?>
 
 <h1><?php echo BaseModule::t('rec', 'Manage Countries') ?></h1>
 
-<p>
-    <?php
-    echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));
-    ?>
-</p>
+<p><?php echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done."))); ?></p>
 
-<?php echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
-<div class="search-form" style="display:none">
-    <?php
-    $this->renderPartial('_search', array(
-        'model' => $model,
-    ));
-    ?>
-</div><!-- search-form -->
+<?php //echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
+<!--<div class="search-form" style="display:none">
+    <?php //$this->renderPartial('_search', array('model' => $model,)); ?>
+</div>--><!-- search-form -->
 
 <!--// $this->widget('zii.widgets.grid.CGridView', array(-->
 <?php
@@ -57,8 +49,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name' => 'name',
-            'filter' => TbHtml::activeTextField($model, 'name', array('style' => 'width: 100px')),
-            'htmlOptions' => array('style' => 'width: 100px'),
+            'filter' => TbHtml::activeTextField($model, 'name', array('style' => 'width: 500px')),
+            'htmlOptions' => array('style' => 'width: 500px'),
         ),
         array(
             'name' => 'code',
@@ -82,6 +74,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
+            'template' => '{update} {delete}',
         ),
     ),
 ));
