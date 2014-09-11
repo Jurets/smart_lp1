@@ -46,7 +46,7 @@ class ProfileController extends EMController
 			if($model->validate()&&$profile->validate()) {
 				$model->save();
 				$profile->save();
-				Yii::app()->user->setFlash('profileMessage',UserModule::t("Changes is saved."));
+				Yii::app()->user->setFlash('profileMessage',UserModule::t('rec',"Changes is saved."));
 				$this->redirect(array('/user/profile'));
 			} else $profile->validate();
 		}

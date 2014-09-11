@@ -1,64 +1,21 @@
 <?php
-Yii::app()->clientScript->registerCssFile('/css/style-office.css');
   echo $info->text;
 ?>
 
 <style>
-    .info{
-        position: absolute;
-        top:110px;
-    }
-    #main-div{
-        position: absolute;
-        top:150px;
+    div#darkBGG{
+        display: none;
     }
 
-    #contentBG{
-        min-width: 1080px;
-        width: 100%;
-        min-height: 1100px;
-        height: 100%;
-        background-image: url(../images/contentBG.jpg);
-        position: absolute;
-        top: 40px;
+    div#whiteBG{
+        display: none;
     }
 
-
-    #globe{
-        margin-left: auto;
-        height: 487px;
-        width: 782px;
-        background-image: url(../images/globe.png);
-        background-repeat: no-repeat;
-        background-position:right;
-        z-index: 0;
+    div.footer{
+        margin-top: -50px;
     }
 
-    .moveRight2 {
-        background-position: 80px;
+    div#contentBG{
+        height: 930px;
     }
-
-    .footer{
-        position: relative;
-        z-index: 100;
-        margin-top: -2px;
-    }
-
-    div.blackDownFooter{
-        background-color: #1e1e1e;
-        height: 100px;
-        width: 100%;
-        position: absolute;
-        z-index: 105;
-        margin-top: -1px;
-    }
-
-
 </style>
-
-<script>
-    $("head link[href='/css/style.css']").attr('href', '');
-    $(function(){
-        $('div.footer').after('<div class="blackDownFooter"></div>');
-    })
-</script>

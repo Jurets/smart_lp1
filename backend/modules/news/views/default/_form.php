@@ -17,7 +17,7 @@
 	)); 
 ?>
 
-	<p class="note"><?php echo BaseModule::t('rec', 'Fields with * are required.'); ?>.</p>  
+	<p class="note"><?php echo BaseModule::t('rec', 'Fields with * are required'); ?>.</p>  
 
 	<?php echo $form->errorSummary($model); ?>
 

@@ -59,13 +59,14 @@ class SystemUserController extends EMController
 	public function actionCreate()
 	{
 		$model=new SystemUser;
-
+                $model->setScenario('create');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['SystemUser']))
 		{
 			$model->attributes=$_POST['SystemUser'];
+                        if(!empty($model->password))
                         $model->password = Yii::app()->controller->module->encrypting($model->password);
 			if($model->save())
 				//$this->redirect(array('view','id'=>$model->id));
@@ -85,7 +86,7 @@ class SystemUserController extends EMController
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+                $model->setScenario('update');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

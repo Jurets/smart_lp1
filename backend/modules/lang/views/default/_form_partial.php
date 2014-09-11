@@ -1,8 +1,8 @@
 <?php
 foreach($model->translateList as $index => $elem){
-    //if($index == 498) break;
     echo '<input type="hidden" name="language[id][]" value="'.$elem['id'].'">';
-//echo '<div style="color:navy;">'.$elem['message'].'</div>';
+if(isset(Yii::app()->params['email_verify_code_enabled']) && Yii::app()->params['email_verify_code_enabled'] == FALSE ){
+echo '<div style="color:navy;">'.$elem['message'].'</div>';}
     //echo '<div>'./*$elem['message']*/$elem['translation'].'</div>';
     if(isset($model->russian[$index])){
     echo '<div>'.$model->russian[$index].'</div>';
