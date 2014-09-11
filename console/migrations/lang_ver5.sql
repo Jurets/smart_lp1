@@ -218,7 +218,7 @@ INSERT INTO `SourceMessage` VALUES
 (183,'rec','Not visited'),
 (184,'rec','Search'),
 (185,'rec','Advanced Search'),
-(186,'rec','You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.'),
+(186,'rec','You may optionally enter a comparison operator'),
 (187,'rec','Photo'),
 (188,'rec','select city'),
 (189,'rec','OPPORTUNITIES'),
@@ -572,7 +572,8 @@ INSERT INTO `SourceMessage` VALUES
 (537, 'rec', 'select timezone'),
 (538, 'rec', 'It is necessary to accept the Membership Agreement'),
 (539, 'rec', 'The file weighs more than 2 MB. Please upload a smaller file'),
-(540, 'rec', 'Please fill out the following form with your login credentials:');
+(540, 'rec', 'Please fill out the following form with your login credentials:'),
+(541, 'rec', 'at the beginning of each of your search values to specify how the comparison should be done.');
 
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
@@ -759,7 +760,7 @@ INSERT INTO `Message` VALUES
 (183,'ru','Не входил'),
 (184,'ru','Искать'),
 (185,'ru','Расширенный поиск'),
-(186,'ru','Вы можете использовать операторы сравнения ( &lt;, &lt;=, &gt;, &gt;=, &lt;&gt; or = ) установив их перед значением.'),
+(186,'ru','Вы можете использовать операторы сравнения'),
 (187,'ru','Фотография'),
 (188,'ru','выбрать город'),
 (189,'ru','ВОЗМОЖНОСТИ'),
@@ -1113,4 +1114,5 @@ INSERT INTO `Message` VALUES
 (537,'ru', 'Выбрать часовой пояс'),
 (538,'ru', 'Необходимо принять Пользовательское Соглашение'),
 (539,'ru', 'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера'),
-(540,'ru', 'Пожалуйста, заполните следующую форму с вашими учетными данными для входа:');
+(540,'ru', 'Пожалуйста, заполните следующую форму с вашими учетными данными для входа:'),
+(541, 'ru', 'установив их перед значением.');

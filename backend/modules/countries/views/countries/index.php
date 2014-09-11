@@ -28,11 +28,7 @@ $('.search-form form').submit(function(){
 
 <h1><?php echo BaseModule::t('rec', 'Manage Countries') ?></h1>
 
-<p>
-    <?php
-    echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));
-    ?>
-</p>
+<p><?php echo BaseModule::t('rec',"You may optionally enter a comparison operator").' (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) '.BaseModule::t('rec', "at the beginning of each of your search values to specify how the comparison should be done."); ?></p>
 
 <?php echo CHtml::link(BaseModule::t('rec', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form" style="display:none">
