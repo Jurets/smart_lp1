@@ -46,7 +46,7 @@ class Information extends CActiveRecord
     {
         return array(
             'id' => BaseModule::t('rec','Id'),
-            'Title' => BaseModule::t('rec', 'Title'),
+            'title' => BaseModule::t('rec', 'Title'),
             'text' => BaseModule::t('rec', 'Text'),
         );
     }

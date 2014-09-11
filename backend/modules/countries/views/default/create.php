@@ -8,7 +8,6 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    //array('label' => BaseModule::t('common', 'List Countries'), 'url' => array('index')),
     array('label' => BaseModule::t('rec', 'Manage Countries'), 'url' => array('index')),
 );
 ?>

@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    UserModule::t('rec','Unified database participants'),
+    BaseModule::t('rec','Unified database participants'),
     ''=>'&nbsp;',
     $model->username,
 );

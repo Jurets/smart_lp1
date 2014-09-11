@@ -15,7 +15,7 @@ $this->menu = array(
 
 <h1><?php echo BaseModule::t('rec', 'Manage Cities') ?></h1>
 
-<p><?php echo htmlspecialchars_decode(BaseModule::t('rec',  htmlspecialchars("You may optionally enter a comparison operator ( <, <=, >, >=, <> or = ) at the beginning of each of your search values to specify how the comparison should be done.")));?>.</p>
+<p><?php echo BaseModule::t('rec',"You may optionally enter a comparison operator").' (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) '.BaseModule::t('rec', "at the beginning of each of your search values to specify how the comparison should be done."); ?></p>
 
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
