@@ -3,7 +3,7 @@
 class CitiesModule extends BaseModule
 {
     //public $citiesShow = array('/cities/cities');
-    public $citiesShow = array('/cities'); // исправил, поскольку используется в коде DefaultController а не CitiesController
+    public $citiesShow = array('/cities/default'); // исправил, поскольку используется в коде DefaultController а не CitiesController
 
 	public function init()
 	{

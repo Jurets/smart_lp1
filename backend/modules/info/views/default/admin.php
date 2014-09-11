@@ -3,23 +3,20 @@
 /* @var $model Information */
 
 $this->breadcrumbs = array(
-    BaseModule::t('common', 'Information') => array('index'),
-    BaseModule::t('common', 'Manage'),
+    BaseModule::t('rec', 'Information') => array('index'),
+    BaseModule::t('rec', 'Manage'),
 );
 
 $this->menu = array(
     //array('label' => BaseModule::t('common', 'List Requisites'), 'url' => array('admin')),
-    array('label' => BaseModule::t('common', 'Create'), 'url' => array('create')),
+    array('label' => BaseModule::t('rec', 'Create'), 'url' => array('create')),
 );
 
 ?>
 
-<h1><?php echo BaseModule::t('common', 'Manage') ?></h1>
+<h1><?php echo BaseModule::t('rec', 'Manage') ?></h1>
 
-<p><?php echo BaseModule::t(
-        'common', 'You may optionally enter a comparison operator ({signs}) at the beginning of each of your search values to specify how the comparison should be done', array(
-        '{signs}' => '<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>, <b>=</b>')); ?>.
-</p>
+<p><?php echo BaseModule::t('rec',"You may optionally enter a comparison operator").' (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) '.BaseModule::t('rec', "at the beginning of each of your search values to specify how the comparison should be done."); ?></p>
 
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(

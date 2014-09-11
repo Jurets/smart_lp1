@@ -32,5 +32,4 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     
 $this->endWidget(); 
 ?>
-
 </div><!-- form -->
