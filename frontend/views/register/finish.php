@@ -5,7 +5,7 @@
 
 <?php $form = $this->beginWidget('CActiveForm', array('id'=>'login-form', 'enableAjaxValidation'=>false)); 
     echo CHtml::activeHiddenField($participant, 'postedActivKey', array('value'=>$participant->activkey)); 
-    echo CHtml::submitButton('ВОЙТИ В ОФИС', array(
+    echo CHtml::submitButton(BaseModule::t('rec','ENTER TO OFFICE'), array(
             'name'=>'login',
             'class'=>'btn-style-green btn-style-green-4-2',
             'style'=>'cursor: pointer;',

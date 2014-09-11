@@ -22,26 +22,26 @@
         </div>
             <div id="office-5-bannerSettingsDiv">
                 <?php
-                    echo CHtml::label(BaseModule::t('common', 'Width: '),'widthBanner');
+                    echo CHtml::label(BaseModule::t('rec', 'Width:').' ','widthBanner');
                     echo CHtml::numberField('widthBanner','150',array('class'=>'handler'));
 
-                    echo CHtml::label(BaseModule::t('common', 'Height: '),'heightBanner');
+                    echo CHtml::label(BaseModule::t('rec', 'Height:').' ','heightBanner');
                     echo CHtml::numberField('heightBanner','100',array('class'=>'handler'));
 
                     echo '<br>';
                     echo CHtml::textArea('iframeText','',array('readonly'=>true));
 
                 ?>
-                <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/>
+                <input class="settings-buttons" type="button" value="<?php echo BaseModule::t('rec','Close')?>" onclick="hideBannerDiv();"/>
             </div>
 
-            <?php }else{ echo BaseModule::t('common', 'Add banners to admin panel.');
-            ?> <input class="settings-buttons" type="button" value="Закрыть" onclick="hideBannerDiv();"/> <?php
+            <?php }else{ echo BaseModule::t('rec', 'Add banners to admin panel.');
+            ?> <input class="settings-buttons" type="button" value="<?php echo BaseModule::t('rec','Close')?>" onclick="hideBannerDiv();"/> <?php
         }?>
     </div>
     <h2 class="h2ContentOffice5"><?php echo BaseModule::t('common', 'INVITATION'); ?></h2>
-    <a href="<?php echo $downloadFile; ?>"><input type="button" name="btn"  class="btn-style-green1" value="<?php echo BaseModule::t('common', 'DOWNLOAD') ?>" /></a>
-    <a href="#"><input type="button" name="btn"  class="btn-style-green2" value="<?php echo BaseModule::t('common', 'INTERNET ADVERTISING') ?>" onclick="showBannerDiv();"/></a>
+    <a href="<?php echo $downloadFile; ?>"><input type="button" name="btn"  class="btn-style-green1" value="<?php echo BaseModule::t('rec', 'DOWNLOAD') ?>" /></a>
+    <a href="#"><input type="button" name="btn"  class="btn-style-green2" value="<?php echo BaseModule::t('rec', 'INTERNET ADVERTISING') ?>" onclick="showBannerDiv();"/></a>
 
 
     <div id="office-5-post1">

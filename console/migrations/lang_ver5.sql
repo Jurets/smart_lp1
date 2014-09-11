@@ -573,7 +573,10 @@ INSERT INTO `SourceMessage` VALUES
 (538, 'rec', 'It is necessary to accept the Membership Agreement'),
 (539, 'rec', 'The file weighs more than 2 MB. Please upload a smaller file'),
 (540, 'rec', 'Please fill out the following form with your login credentials:'),
-(541, 'rec', 'at the beginning of each of your search values to specify how the comparison should be done.');
+(541, 'rec', 'at the beginning of each of your search values to specify how the comparison should be done.'),
+(542, 'rec', 'ENTER TO OFFICE'),
+(543, 'rec', 'Close'),
+(544, 'rec', 'SKYPE:');
 
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
@@ -1115,4 +1118,7 @@ INSERT INTO `Message` VALUES
 (538,'ru', 'Необходимо принять Пользовательское Соглашение'),
 (539,'ru', 'Файл весит больше 2 MB. Пожалуйста, загрузите файл меньшего размера'),
 (540,'ru', 'Пожалуйста, заполните следующую форму с вашими учетными данными для входа:'),
-(541, 'ru', 'установив их перед значением.');
+(541, 'ru', 'установив их перед значением.'),
+(542, 'ru', 'ВОЙТИ В ОФФИС'),
+(543, 'ru', 'Закрыть'),
+(544, 'ru', 'СКАЙП:');
