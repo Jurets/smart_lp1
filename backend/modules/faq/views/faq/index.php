@@ -86,15 +86,17 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name' => 'answer',
-            'filter' => TbHtml::activeTelField($model, 'answer', array('style' => 'width: 200px')),
-            'htmlOptions' => array('style' => 'width: 200px'),
+            'type'=>'html',
+            //'filter' => TbHtml::activeTelField($model, 'answer', array('style' => 'width: 300px')),
+            'filterInputOptions' => array('style' => 'width: 500px'),
+            'htmlOptions' => array('style' => 'width: 500px'),
         ),
         array(
             'name' => 'created',
             'filter' => $dateFilter,
-//            'filterInputOptions' => array('style' => 'width: 150px'),
+            'filterInputOptions' => array('style' => 'width: 50px'),
             'value' => '$data->created',
-//            'htmlOptions'=>array('style'=>'width: 50px'),
+            'htmlOptions'=>array('style'=>'width: 50px'),
         ),
         array(
             'name' => 'category',
@@ -103,11 +105,9 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => '{view}{update}{delete}{ban}',
-            'buttons' => array
-                (
-                'ban' => array
-                    (
+            'template' => '{update}{delete}{ban}',
+            'buttons' => array(
+                'ban' => array(
                     'label' => 'Ban',
                     'icon' => 'lock',
                     'url' => 'Yii::app()->createUrl("users/ban", array("id"=>$data->id))',

@@ -8,6 +8,8 @@ class FaqController extends EMController
 	 */
 	public $layout='//layouts/column2';
 
+    public $modelClass = 'Faq';
+    
 	/**
 	 * @return array action filters
 	 */
@@ -57,34 +59,28 @@ class FaqController extends EMController
 
 	public function actionCreate()
 	{
-		$model=new Faq;
-
+		$model = new Faq;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Faq']))
-		{
+		if(isset($_POST['Faq'])) {
 			$model->attributes=$_POST['Faq'];
-                      if($_POST['Faq']['created']!= '')
-                      {
-                       //Converting "Creation time when FAQ was made" into MySQL format data https://dev.mysql.com/doc/refman/5.0/en/datetime.html
-                       $str = str_replace('.', '-',$model->created);
-                       $year = substr($str, 6, 4).'-';
-                       $day = substr($str, 0, 2);
-                       $month = substr($str, 3, 3);
-                       $time = substr($str, 10);
-                       $model->created = $year.$month.$day.$time;
-                      }else
-                      {
-                          //MySQL format DATETIME
-                          $today = date("Y-m-d H:i:s");
-                          $model->created = $today;
-                      }
-                      $model->lng = Yii::app()->language;
+            if($_POST['Faq']['created']!= '') {
+                //Converting "Creation time when FAQ was made" into MySQL format data https://dev.mysql.com/doc/refman/5.0/en/datetime.html
+                $str = str_replace('.', '-',$model->created);
+                $year = substr($str, 6, 4).'-';
+                $day = substr($str, 0, 2);
+                $month = substr($str, 3, 3);
+                $time = substr($str, 10);
+                $model->created = $year.$month.$day.$time;
+            } else {
+                //MySQL format DATETIME
+                $today = date("Y-m-d H:i:s");
+                $model->created = $today;
+            }
+            $model->lng = Yii::app()->language;
 			if($model->save())
 				$this->redirect('index');
 		}
-
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -98,17 +94,12 @@ class FaqController extends EMController
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Faq']))
-		{
-                    //var_dump($_POST, Yii::app()->language);die;
+		if(isset($_POST['Faq'])) {
 			$model->attributes=$_POST['Faq'];
-			if($model->saveDependLanguage())
-				//$this->redirect(array('view','id'=>$model->id));
-                            $this->redirect (array('index'));
+			if ($model->saveDependLanguage())
+                $this->redirect (array('index'));
 		}
 		$this->render('update',array(
 			'model'=>$model,
@@ -123,7 +114,6 @@ class FaqController extends EMController
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
-
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
@@ -135,10 +125,10 @@ class FaqController extends EMController
 	public function actionIndex()
 	{
 
-            $model=new Faq('search');
+        $model = new Faq('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Faq']))
-			$model->attributes=$_GET['Faq'];
+			$model->attributes = $_GET['Faq'];
 
         $modelEmail = new Faqm;
         $modelEmail->LoadFaqManager(); // запрос к itemsstorage по параметру FAQ_MANAGER
@@ -153,14 +143,14 @@ class FaqController extends EMController
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	/*public function actionAdmin()
 	{
 //			$dataProvider=new CActiveDataProvider('Faq');
 //		$this->render('admin',array(
 //			'dataProvider'=>$dataProvider,
 //		));
             $this->actionIndex();
-	}
+	}*/
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -169,26 +159,26 @@ class FaqController extends EMController
 	 * @return Faq the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadModel($id)
+	/*public function loadModel($id)
 	{
 		$model=Faq::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
-	}
+	}*/
 
 	/**
 	 * Performs the AJAX validation.
 	 * @param Faq $model the model to be validated
 	 */
-	protected function performAjaxValidation($model)
+	/*protected function performAjaxValidation($model)
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='faq-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
-	}
+	}*/
 
     //TODO: bun for user
     //test comment

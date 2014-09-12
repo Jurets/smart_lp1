@@ -18,10 +18,11 @@
     
 
     <div class="form">
-        <?php echo TbHtml::submitButton( BaseModule::t('rec', 'Create'), array(
+        <?php echo TbHtml::submitButton( BaseModule::t('rec', 'Save'), array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_DEFAULT,
 		)); ?>
     </div>
 <?php $this->endWidget(); ?>
 </div>
+<hr>
