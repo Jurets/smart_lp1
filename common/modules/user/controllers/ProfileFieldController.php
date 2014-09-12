@@ -1,7 +1,14 @@
 <?php
 
-class ProfileFieldController extends EMController
+class ProfileFieldController extends EController
 {
+    public function init(){
+        if(isset($_COOKIE['language'])){
+            Yii::app()->language = (string)Yii::app()->request->cookies['language'];
+        }else{
+            Yii::app()->language = Yii::app()->params['default.language']; // языком по умолчанию принимается русский
+        }
+    }
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
