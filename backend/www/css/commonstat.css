@@ -1,5 +1,5 @@
     .commonstat {
-        width: 900px;
+        width: 1960px;
         padding: 10px 20px 10px 20px;
     }
     .commonstat div {
@@ -43,7 +43,7 @@
     .dataGraph{
         border:1px solid #777777;
         float:left;
-        width:630px;
+        width:1700px;
         height:370px;
         margin-left:20px;
         display: none;
