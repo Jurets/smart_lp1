@@ -1,6 +1,6 @@
 <?php
 
-class FaqController extends EMController
+class DefaultController extends EMController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -46,9 +46,10 @@ class FaqController extends EMController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+//		$this->render('view',array(
+//			'model'=>$this->loadModel($id),
+//		));
+            $this->actionIndex();
 	}
 
 	/**
