@@ -2,7 +2,7 @@
 class FaqModule extends BaseModule
 {
 	// path
-	public $faqShow = array('/faq/faq');
+	public $faqShow = array('/faq');
 	public function init()
 	{
 		// this method is called when the module is being created

@@ -8,24 +8,8 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    //array('label' => BaseModule::t('rec', 'List FAQ'), 'url' => array('admin')),
     array('label' => BaseModule::t('rec', 'Create FAQ'), 'url' => array('create')),
 );
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#faq-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-
-
-");
 ?>
 
 <h1><?php echo BaseModule::t('rec', 'Manage FAQ') ?></h1>
@@ -38,19 +22,7 @@ if(Yii::app()->user->hasFlash('wrong_form')){
 $this->renderPartial('_form_email', array('modelEmail' => $modelEmail));
 ?>
 
-
 <p><?php echo BaseModule::t('rec',"You may optionally enter a comparison operator").' (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) '.BaseModule::t('rec', "at the beginning of each of your search values to specify how the comparison should be done."); ?></p>
-
-
-
-
-<div class="search-form">
-<?php
-$this->renderPartial('_search', array(
-    'model' => $model,
-));
-?>
-</div><!-- search-form -->
 
 <?php
 $dateFilter = $this->widget('yiiwheels.widgets.datepicker.WhDatePicker', array(
@@ -105,7 +77,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => '{update}{delete}{ban}',
+            'template' => '{update} {delete} {ban}',
             'buttons' => array(
                 'ban' => array(
                     'label' => 'Ban',
