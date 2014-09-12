@@ -92,7 +92,7 @@ class DefaultController extends EMController
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdate($id)
-	{DebugBreak();
+	{
 		$model=$this->loadModel($id);
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
