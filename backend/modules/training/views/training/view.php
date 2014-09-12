@@ -16,7 +16,7 @@ $this->menu = array(
 );
 ?>
 
-<h1><?php echo BaseModule::t('common','View Training') ?>#<?php echo $model->id; ?></h1>
+<h1><?php echo BaseModule::t('rec','View').' '.BaseModule::t('rec','Training').' ' ?><?php echo BaseModule::t('rec','#')?><?php echo $model->id; ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbDetailView', array(

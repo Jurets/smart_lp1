@@ -23,7 +23,18 @@ class Mathparams extends CActiveRecord
         5=>'random to one B3', //percent_pot_B3 рандомально одному B3
         6=>'accural purse F', //percent_to_F начисление на кошелек F
     );
-	/**
+    public $lng_name = array();
+    public function init(){
+        $this->lng_name['price_activation'] = BaseModule::t('rec','price of activation');
+        $this->lng_name['price_start'] = BaseModule::t('rec','price of start');
+        $this->lng_name['percent_to_A'] = BaseModule::t('rec','accural purse A');
+        $this->lng_name['percent_pot_B1'] = BaseModule::t('rec','random to one B1');
+        $this->lng_name['percent_pot_B2'] = BaseModule::t('rec','random to one B2');
+        $this->lng_name['percent_pot_B3'] = BaseModule::t('rec','random to one B3');
+        $this->lng_name['percent_to_F'] = BaseModule::t('rec', 'accural purse F');
+    }
+
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()

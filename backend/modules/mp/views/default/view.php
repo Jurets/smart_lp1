@@ -36,6 +36,9 @@ $this->menu=array(
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider'=>$model->attachDataProvider(),
-    'columns'=>array('name', 'value'),
+    'columns'=>array(
+        array('name'=>'name', 'value'=>'$data->lng_name[$data->name]'),
+        array('name'=>'value', 'value'=>'$data->value'),
+        ),
 ));
 ?>

@@ -61,7 +61,7 @@ class Faq extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
+            'id' => BaseModule::t('rec','Id'),
             'lng' => BaseModule::t('rec', 'LANGUAGE'),
             'question' => BaseModule::t('rec', 'Question'),
             'answer' => BaseModule::t('rec', 'Answer'),

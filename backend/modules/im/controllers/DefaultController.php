@@ -3,7 +3,7 @@
 class DefaultController extends EMController
 {
     public $layout='//layouts/column2';
-    
+    public $defaultAction = 'index';
     public function filters()
 	{
 		return array(

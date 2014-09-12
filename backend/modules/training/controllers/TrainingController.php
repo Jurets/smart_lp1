@@ -44,7 +44,6 @@ class TrainingController extends EMController
 	 */
 	public function actionView($id)
 	{
-            $this->redirect(array('index'));
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
