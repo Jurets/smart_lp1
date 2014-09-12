@@ -23,5 +23,6 @@
         
     echo $form->error($model, $field);
     echo TbHtml::closeTag('div');
+    echo TbHtml::closeTag('div');
 ?>
 <hr>

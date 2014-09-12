@@ -41,17 +41,6 @@ class DefaultController extends EMController
         }
 
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	/*public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}*/
-
-	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
@@ -83,7 +72,6 @@ class DefaultController extends EMController
 		if(isset($_POST['Countries'])) {
 			$model->attributes = $_POST['Countries'];
 			if($model->save())
-				//$this->redirect(array('view','id'=>$model->id));
                 $this->redirect('index');
 		}
 		$this->render('update',array(
@@ -130,32 +118,4 @@ class DefaultController extends EMController
 			'dataProvider'=>$dataProvider,
 		));
 	}
-
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return Countries the loaded model
-	 * @throws CHttpException
-	 */
-	/*public function loadModel($id)
-	{
-		$model=Countries::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}*/
-
-	/**
-	 * Performs the AJAX validation.
-	 * @param Countries $model the model to be validated
-	 */
-	/*protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='countries-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}*/
 }
