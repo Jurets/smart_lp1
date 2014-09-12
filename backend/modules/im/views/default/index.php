@@ -2,7 +2,7 @@
 /* @var $this DefaultController */
 
 $this->breadcrumbs=array(
-	BaseModule::t('rec','Index Management')=>$this->module->id,
+	BaseModule::t('rec','Index Management'),
 );
 ?>
 <h1><?php echo BaseModule::t('rec','Index Management'); ?></h1>

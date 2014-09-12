@@ -577,7 +577,10 @@ INSERT INTO `SourceMessage` VALUES
 (542, 'rec', 'ENTER TO OFFICE'),
 (543, 'rec', 'Close'),
 (544, 'rec', 'SKYPE:'),
-(545, 'rec', 'Update');
+(545, 'rec', 'Update'),
+(546, 'rec', 'View'),
+(547, 'rec', 'Delete Training'),
+(548, 'rec', 'Manage Training');
 
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
@@ -1123,4 +1126,7 @@ INSERT INTO `Message` VALUES
 (542, 'ru', 'ВОЙТИ В ОФФИС'),
 (543, 'ru', 'Закрыть'),
 (544, 'ru', 'СКАЙП:'),
-(545, 'ru', 'Обновить');
+(545, 'ru', 'Обновить'),
+(546, 'ru', 'Просмотреть'),
+(547, 'ru', 'Удалить обучение'),
+(548, 'ru', 'Управление обучениями');

@@ -60,7 +60,7 @@ class Training extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => BaseModule::t('dic', 'ID'),
+            'id' => BaseModule::t('rec', 'Id'),
             'lng'=>BaseModule::t('rec', 'LANGUAGE'),
             'title' => BaseModule::t('rec', 'Title'),
             'description' => BaseModule::t('rec', 'Description'),

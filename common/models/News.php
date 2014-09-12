@@ -157,8 +157,9 @@ class News extends CActiveRecord
 
     /* resized- & /upload/ can be changed this, if you wish */
 
-    public function getUploadImage($pathToUploadDir = '/uploads/', $resizePrefix = 'resized-', $resized = TRUE)
+    public function getUploadImage($pathToUploadDir = '/admin/uploads/', $resizePrefix = 'resized-', $resized = TRUE)
     {
+        $pathToUploadDir = Yii::app()->params['upload.url'];
         return ($resized) ? $pathToUploadDir . $resizePrefix . $this->image : $pathToUploadDir . $this->image;
     }
 
