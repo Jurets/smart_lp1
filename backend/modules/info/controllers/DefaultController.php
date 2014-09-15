@@ -64,7 +64,7 @@ class DefaultController extends EMController
 		// $this->performAjaxValidation($model);
 		if(isset($_POST[$this->modelClass])) {
 			$model->attributes = $_POST[$this->modelClass];
-			if($model->save())
+			if($model->saveDependLanguage())
 				$this->redirect('index');
 		}
 		$this->render('create',array(
@@ -79,12 +79,12 @@ class DefaultController extends EMController
 	 */
 	public function actionUpdate($id) // для единственной записи
 	{
-		$model = $this->loadModel($id);
+		$model = $this->loadModel(array('id'=>$id, 'lng'=>Yii::app()->language));
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		if(isset($_POST[$this->modelClass])) {
 			$model->attributes = $_POST[$this->modelClass];
-			if($model->save())
+            if($model->saveDependLanguage())
 				$this->redirect(array('index'));
 		}
 		$this->render('update',array(
@@ -110,11 +110,6 @@ class DefaultController extends EMController
 	 */
 	public function actionAdmin()
 	{
-		/*$dataProvider = new CActiveDataProvider($this->modelClass);
-		$this->render('admin',array(
-			'dataProvider'=>$dataProvider,
-		));*/
-        
         $class = $this->modelClass;
         $model = new $class('search');
         $model->unsetAttributes();  // clear any default values
@@ -130,20 +125,6 @@ class DefaultController extends EMController
 	 */
 	public function actionIndex()
 	{
-                /*$model = new Requisites;
-                if(is_null( $model->findByAttributes(array('id'=>'JVMS')) )){
-                    $this->redirect(array('create'));
-                }else{
-                    $this->redirect(array('update'));
-                }
-		$model=new Requisites('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Requisites']))
-			$model->attributes=$_GET['Requisites'];
-
-		$this->render('index',array(
-			'model'=>$model,
-		));*/
         $this->actionAdmin();
 	}
 
