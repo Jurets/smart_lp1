@@ -31,8 +31,8 @@ class Information extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id, title, text', 'required'),
-            array('id, title', 'length', 'max' => 255),
+            array('name, title, text', 'required'),
+            array('name, title', 'length', 'max' => 255),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, title, text', 'safe', 'on' => 'search'),
@@ -92,4 +92,41 @@ class Information extends CActiveRecord
         return parent::model($className);
     }
 
+    /**
+    * запись модели в БД в зависимости от выбранного языка
+    * 
+    */
+    public function saveDependLanguage() {
+        if($this->lng == Yii::app()->language){ // обновление
+            $isSave = $this->save();
+        } else { // добавление
+            $record = new self;
+            $record->attributes = $this->attributes;
+            $record->unsetAttributes(array('id'));
+            $record->lng = Yii::app()->language;
+            $isSave = $record->save();
+        }
+        return $isSave ? true : false;
+    }
+    
+    
+    /**
+    * выбрать все заголовки статических страниц в массив
+    * 
+    */
+    public static function getAllTitles() {
+        $result = array();
+        $rows = Yii::app()->db->createCommand()
+            ->select(array('name', 'title', 'lng'))
+            ->from('info')
+            ->queryAll();
+        foreach($rows as $row) {
+            if (!isset($result[$row['name']]) /*&& $row['lng'] == Yii::app()->params['default.language']*/) {
+                $result[$row['name']] = $row['title'];
+            } else if ($row['lng'] == Yii::app()->language) {
+                $result[$row['name']] = $row['title'];
+            }
+        }
+        return $result;
+    }
 }

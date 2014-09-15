@@ -6,6 +6,10 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 
 //components for main page
 $this->beginContent('//layouts/common');
+
+//выборка заголовков стат-страниц: вначале выбранного языка, затем того, что по умолчанию
+$titles = Information::getAllTitles();
+
 ?>
 
 <style type="text/css">
@@ -36,11 +40,13 @@ $this->beginContent('//layouts/common');
 
             <ul id="nav">
                 <div id="bgIn"></div>
-               <li> <a href="#" class="flag">  </a> </li>
+                <li> <a href="#" class="flag">  </a> </li>
                 <li> <a class="in" style="cursor: pointer;">  </a> </li>
-                <li> <a href="/info/possibilities"> &nbsp; <?php echo BaseModule::t('rec', 'OPPORTUNITIES'); ?>  </a> </li>
-                <li> <a href="/info/rules">  <?php echo BaseModule::t('rec', 'RULES'); ?>  </a> </li>
-                <li> <a href="/info/questions"> <?php echo BaseModule::t('rec', 'QUESTIONS AND ANSWERS'); ?> </a> </li>
+
+                <li> <a href="/info/possibilities">  <?php echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
+                <li> <a href="/info/rules"> <?php echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
+                <li> <a href="/info/questions"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
+
                 <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark"><?php echo strtoupper(BaseModule::t('rec', 'Raise status')); ?></a>
                 <li> <a href="#"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
                 <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('rec', 'Settings'); ?></a> </li>

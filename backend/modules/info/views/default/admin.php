@@ -28,6 +28,17 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'id',
             'type'=>'raw',
+            'filterInputOptions'=>array('style'=>'width: 30px'),
+            'htmlOptions'=>array('style'=>'width: 30px'),
+        ),
+        array(
+            'name' => 'lng',
+            'filterInputOptions'=>array('style'=>'width: 30px'),
+            'htmlOptions'=>array('style'=>'width: 30px'),
+        ),
+        array(
+            'name' => 'name',
+            'type'=>'raw',
             'filterInputOptions'=>array('style'=>'width: 70px'),
             'htmlOptions'=>array('style'=>'width: 70px'),
         ),
@@ -40,8 +51,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'text',
             'type'=>'raw',
-            'filterInputOptions'=>array('style'=>'width: 1000px'),
-            'htmlOptions'=>array('style'=>'width: 1000px'),
+            'filterInputOptions'=>array('style'=>'width: 900px'),
+            'htmlOptions'=>array('style'=>'width: 900px'),
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
