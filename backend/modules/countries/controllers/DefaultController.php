@@ -52,7 +52,7 @@ class DefaultController extends EMController
 		if(isset($_POST['Countries'])) {
 			$model->attributes = $_POST['Countries'];
 			if($model->save())
-				$this->redirect('index');
+				$this->redirect(array('index'));
 		}
 		$this->render('create',array(
 			'model'=>$model,
@@ -72,7 +72,7 @@ class DefaultController extends EMController
 		if(isset($_POST['Countries'])) {
 			$model->attributes = $_POST['Countries'];
 			if($model->save())
-                $this->redirect('index');
+                $this->redirect(array('index'));
 		}
 		$this->render('update',array(
 			'model'=>$model,
@@ -89,7 +89,7 @@ class DefaultController extends EMController
 		$this->loadModel($id)->delete();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 	}
 
 	/**
