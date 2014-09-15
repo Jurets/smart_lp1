@@ -580,7 +580,8 @@ INSERT INTO `SourceMessage` VALUES
 (545, 'rec', 'Update'),
 (546, 'rec', 'View'),
 (547, 'rec', 'Delete Training'),
-(548, 'rec', 'Manage Training');
+(548, 'rec', 'Manage Training'),
+(549, 'rec', 'Announcement');
 
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
@@ -1129,4 +1130,5 @@ INSERT INTO `Message` VALUES
 (545, 'ru', 'Обновить'),
 (546, 'ru', 'Просмотреть'),
 (547, 'ru', 'Удалить обучение'),
-(548, 'ru', 'Управление обучениями');
+(548, 'ru', 'Управление обучениями'),
+(549, 'ru', 'Объявление');
