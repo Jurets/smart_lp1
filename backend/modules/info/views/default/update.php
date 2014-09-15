@@ -18,6 +18,6 @@ $this->menu = array(
 );
 ?>
 
-<h1><?php echo BaseModule::t('rec', 'Update Information') ?> #<?php echo $model->id; ?></h1>
+<h1><?php echo BaseModule::t('rec', 'Update Information') ?> <?php echo ' '.BaseModule::t('rec', '#')?><?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model' => $model));?>
