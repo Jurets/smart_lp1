@@ -65,7 +65,7 @@ class Training extends CActiveRecord
             'title' => BaseModule::t('rec', 'Title'),
             'description' => BaseModule::t('rec', 'Description'),
             'image' => BaseModule::t('rec', 'Image'),
-            'videolink' => BaseModule::t('rec', 'Videolink'),
+            'videolink' => BaseModule::t('rec', 'Video Link'),
             'date' => BaseModule::t('rec', 'Date'),
             'number' => BaseModule::t('rec', 'Number'),
         );
