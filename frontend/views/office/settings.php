@@ -160,9 +160,11 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
         <?php echo $form->error($participant, 'email',array('class' => 'error-message em-11')); //Email ?>
 
-
-<!--       <p class="shag-1-1-option3text"> МОЕ ВРЕМЯ:</p>-->
-        <p class="shag-1-1-option3text"> <?php echo BaseModule::t('rec', 'MY TIME') ?>:</p>
+        <p class="shag-1-1-option3text"> <?php echo BaseModule::t('rec', 'MY TIME') .'*' ?>:</p>
+        <?php
+            if(isset($participant->getErrors()['gmt_id']))
+            echo '<div class="error-message em-6and5">'. $participant->getErrors()['gmt_id'][0] .'</div>' 
+        ?>
             <select name="timeZoneSelect" class="shag-1-1-option3">
                 <option value=""></option>
             <?php foreach($gmtZone as $key=>$currentGmt) {?>
@@ -325,6 +327,10 @@ $form = $this->beginWidget('CActiveForm', array(
     .em-5{ top: 655px; left:135px; }
     /* city */
     .em-6{ top: 750px; left:135px; }
+    /* gmt */
+    .em-6and5 {
+        top: 854px; left:135px;
+    }
     /* skype */
     .em-7{ top: 665px; left:625px; }
     /* phone */
