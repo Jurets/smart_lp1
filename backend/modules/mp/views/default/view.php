@@ -6,7 +6,7 @@
 <?php
 $this->breadcrumbs=array(
 	BaseModule::t('rec','Mpversions')=>array('index'),
-	$model->id,
+	$model->description,
 );
 
 $this->menu=array(

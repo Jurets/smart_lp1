@@ -6,7 +6,7 @@
 <?php
 $this->breadcrumbs=array(
 	BaseModule::t('rec','Mpversions')=>array('index'),
-	" ".$model->id=>array('view','id'=>$model->id),
+	$model->description => array('view','id'=>$model->id),
 	BaseModule::t('rec','Update'),
 );
 
@@ -16,8 +16,8 @@ $this->breadcrumbs=array(
 //    array('label'=>MpModule::t('View Mpversions'), 'url'=>array('view', 'id'=>$model->id)),
     array('label'=>BaseModule::t('rec','Manage Mpversions'), 'url'=>array('admin')),
     );
-    ?>
+?>
 
-    <h1><?php echo BaseModule::t('rec','Update Mpversions'); ?> <?php echo $model->id; ?></h1>
+<h1><?php echo BaseModule::t('rec','Update Mpversions'); ?> <?php echo $model->description; ?></h1>
 <?php //$this->renderPartial('_addparams', array()); // отключено, см view create ?>
 <?php $this->renderPartial('_form3', array('model'=>$model)); ?>

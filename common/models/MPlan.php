@@ -21,8 +21,7 @@ class MPlan extends CModel
         $pm->payerAccount = $participant->purse;
         $pm->payeeAccount = Requisites::purseActivation();
         //поставить сумму платежа
-        //$pm->amount = Tariff::getTariffAmount(Participant::TARIFF_20); //'50.00';
-        $pm->amount = marketingPlanHelper::init()->getMpParam('price_activation');
+        $pm->amount = marketingPlanHelper::init()->getMpParam('price_activation'); //20$;
         /* необязательные параметры */
         $pm->payerId = $participant->id;
         $pm->transactionId = PmTransactionLog::TRANSACTION_REGISTRATION;
@@ -66,8 +65,7 @@ class MPlan extends CModel
         }
 
         //поставить сумму платежа
-        //$pm->amount = Tariff::getTariffAmount(Participant::TARIFF_50); //'50.00';   
-        $pm->amount = marketingPlanHelper::init()->getMpParam('price_start');
+        $pm->amount = marketingPlanHelper::init()->getMpParam('price_start'); //50$
         /* необязательные параметры */
         $pm->payerId = $participant->id;
         $pm->transactionId = PmTransactionLog::TRANSACTION_ENTER_BC;
@@ -124,7 +122,7 @@ class MPlan extends CModel
             Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба
             $participant->tariff_id = $type_amount;
             $participant->save();
-        }else{
+        } else {
             $participant->addError('tariff_id', $pm->getError('Can\'t change status.Transaction fail.'));
         }
     }

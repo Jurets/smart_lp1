@@ -22,6 +22,9 @@ class Mathparams extends CActiveRecord
         4=>'random to one B2', //percent_pot_B2 рандомально одному B2
         5=>'random to one B3', //percent_pot_B3 рандомально одному B3
         6=>'accural purse F', //percent_to_F начисление на кошелек F
+        7=>'cost of status B1', //cost_B1 стоимость статуса B1
+        8=>'cost of status B2', //cost_B2 стоимость статуса B2
+        9=>'cost of status B3', //cost_B3 стоимость статуса B3
     );
     public $lng_name = array();
     public function init(){
@@ -32,6 +35,9 @@ class Mathparams extends CActiveRecord
         $this->lng_name['percent_pot_B2'] = BaseModule::t('rec','random to one B2');
         $this->lng_name['percent_pot_B3'] = BaseModule::t('rec','random to one B3');
         $this->lng_name['percent_to_F'] = BaseModule::t('rec', 'accural purse F');
+        $this->lng_name['cost_B1'] = BaseModule::t('rec', 'cost of status B1');
+        $this->lng_name['cost_B2'] = BaseModule::t('rec', 'cost of status B2');
+        $this->lng_name['cost_B3'] = BaseModule::t('rec', 'cost of status B3');
     }
 
     /**

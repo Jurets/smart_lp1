@@ -107,7 +107,7 @@ class Tariff extends CActiveRecord
     */
     public static function getTariffAmount($id) {
         if ($tariff = self::model()->findByPk($id)) {
-            return $tariff->shortname;
+            return marketingPlanHelper::init()->getMpParam($tariff->mathparam); //return $tariff->shortname;
         } else {
             return 0;
         }

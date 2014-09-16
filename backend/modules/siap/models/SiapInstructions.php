@@ -330,7 +330,7 @@ class SiapInstructions extends CActiveRecord{
            /* divizion by zero protection */
            if($AllB1 == 0){$this->club_users['B1']['amount'] = 0; return 0;}
            $newB1 = (int)$this->club_users['B1']['countNew'];
-           $this->club_users['B1']['amount'] = $B0 + $newB1 * 100 / $AllB1 * 0.7;
+           $this->club_users['B1']['amount'] = $B0 + $newB1 * marketingPlanHelper::init()->getMpParam('cost_B1') / $AllB1 * 0.7;
        };
        
        $this->formules['calc_B2_Amount'] = function(){
@@ -340,7 +340,7 @@ class SiapInstructions extends CActiveRecord{
            /* divizion by zero protection */
            if($AllB2 == 0){$this->club_users['B2']['amount'] = 0; return 0;}
            $newB2 = (int)$this->club_users['B2']['countNew'];
-           $this->club_users['B2']['amount'] = $B0 + $newB2 * 500 / $AllB2 * 0.7;
+           $this->club_users['B2']['amount'] = $B0 + $newB2 * marketingPlanHelper::init()->getMpParam('cost_B2') / $AllB2 * 0.7;
        };
        
        $this->formules['calc_B3_Amount'] = function(){
@@ -350,7 +350,7 @@ class SiapInstructions extends CActiveRecord{
            /* divizion by zero protection */
            if($AllB3 == 0){$this->club_users['B3']['amount'] = 0; return 0;}
            $newB3 = (int)$this->club_users['B3']['countNew'];
-           $this->club_users['B3']['amount'] = $B0 + $newB3 * 1000 / $AllB3 * 0.7;
+           $this->club_users['B3']['amount'] = $B0 + $newB3 * marketingPlanHelper::init()->getMpParam('cost_B3') / $AllB3 * 0.7;
        };
    }
    protected function calculateClub(){

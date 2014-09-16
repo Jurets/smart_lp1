@@ -55,7 +55,7 @@ array(
         'label'=>  TbHtml::icon(TbHtml::ICON_REPEAT),
         'options'=>array(
             'class'=>'set_current',
-            'title'=>Yii::app()->getModule('mp')->t('set current'),
+            'title'=>BaseModule::t('rec','set current'),
         ),
     ),
  ),

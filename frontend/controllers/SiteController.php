@@ -210,19 +210,24 @@ class SiteController extends LoginController
         if ($participant->tariff_id == 6) {
             $max_status = true;
         }
-
+        
         // Возможные варианты поднятия статуса(пример:мы не можем купить статус ниже текущего)
-        if ($participant->tariff_id >= 3 && $participant->tariff_id < 6) {
-            $criteria = new CDbCriteria();
-            $criteria->addCondition('id >  :id');
-            $criteria->params[':id'] = $participant->tariff_id;
-            $tariffListData = Tariff::model()->findAll($criteria);
+        if ($participant->tariff_id >= Participant::TARIFF_BC && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
+            $id = $participant->tariff_id;
         } else {
-            $criteria = new CDbCriteria();
-            $criteria->addCondition('id >  :id');
-            $criteria->params[':id'] = Participant::TARIFF_BC;
-            $tariffListData = Tariff::model()->findAll($criteria);
+            $id = Participant::TARIFF_BC;
         }
+        $cmd = Yii::app()->db->createCommand()
+            ->select(array('tariff.id', 'mathparams.value'))
+            ->from('tariff')
+            ->leftJoin('mathparams', 'tariff.mathparam = mathparams.name')
+            ->where('tariff.id > :id')
+            ->queryAll(true, array(':id'=>$id));
+        $tariffListData = array();
+        foreach ($cmd as $row) {
+            $tariffListData[$row['id']] = $row['value'];
+        }
+        
         /* завершение форм.данных */
         if (isset($_POST)) {
             /* Определяем статус,тип операции,изменям статус после удачной оплаты */
@@ -232,7 +237,6 @@ class SiteController extends LoginController
             // данные для Perfect Money (account&password) обязательны
             $account = Yii::app()->getRequest()->getPost('account');
             $password = Yii::app()->getRequest()->getPost('password');
-
 
             //если статус "оплачен 20$"
             if ($type_amount == Participant::TARIFF_20) {

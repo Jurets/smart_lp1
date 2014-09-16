@@ -25,8 +25,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
                 ?>
                 <p>Чтобы поднять ваш статус необходимо сделать взнос.</p>
                 <?php echo CHtml::label('Сумма: ', 'listData');
-                $list = CHtml::listData($tariffListData, 'id', 'shortname');
-                echo CHtml::dropDownList('listData', 100, $list, array('id' => 'dropDownId'));
+                echo CHtml::dropDownList('listData', 100, $tariffListData, array('id' => 'dropDownId'));
             } elseif ($model->tariff_id < 2) {
                 ?>
                 <p>Сначала вы должны оплатить за регистрацию 50$ после этого вам будет доступен 'Бизнес Клуб'</p>

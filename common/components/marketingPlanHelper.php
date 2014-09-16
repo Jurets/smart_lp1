@@ -9,6 +9,9 @@
  * percent_pot_B2   - 1.5%  - default   процент призового фонда для B2
  * percent_pot_B3   - 3%    - default   процент призового фонда для B3
  * percent_to_F     - 5%    - default   процент   вывода  на кошелек F
+ * cost_B1          - 100   - default   стоимость статуса B1
+ * cost_B2          - 500   - default   стоимость статуса B2
+ * cost_B3          - 1000  - default   стоимость статуса B3
  * ................ ................ ................ ................
  */
 class marketingPlanHelper {
@@ -22,6 +25,9 @@ class marketingPlanHelper {
            'percent_pot_B2' => 0.00,
            'percent_pot_B3' => 0.00,
            'percent_to_F' => 0.00,
+           'cost_B1' => 0.00,
+           'cost_B2' => 0.00,
+           'cost_B3' => 0.00,
        );
        Yii::import('common.models.Mpversions');
        $model = Mpversions::activeVersion();
@@ -39,14 +45,14 @@ class marketingPlanHelper {
       if(isset($this->structure[$whatGet]) && $this->structure[$whatGet] != 0){
           return $this->structure[$whatGet];
       }else{
-          throw new CHttpException('500', 'Unknown MP parametr');
+          throw new CHttpException('500', 'Unknown MP parameter');
       }
    }
    public function getMpParams(){
        if($buff = array_search(0, $this->structure) == FALSE){
            return $this->structure;
-       }else{
-           throw new CHttpException('500', 'Undefined MP parametrs has');
+       } else {
+           throw new CHttpException('500', 'Undefined MP parameters has');
        }
    }
 }

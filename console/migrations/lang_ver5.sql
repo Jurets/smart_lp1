@@ -586,7 +586,11 @@ INSERT INTO `SourceMessage` VALUES
 (551, 'rec', 'List Information'),
 (552, 'rec', 'Create Information'),
 (553, 'rec','View Information'),
-(554, 'rec', 'Delete Information');
+(554, 'rec', 'Delete Information'),
+(555, 'rec', 'cost of status B1'),
+(556, 'rec', 'cost of status B2'),
+(557, 'rec', 'cost of status B3')
+;
 
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
@@ -1141,4 +1145,8 @@ INSERT INTO `Message` VALUES
 (551, 'ru', 'Список информации'),
 (552, 'ru', 'Создать информацию'),
 (553, 'ru', 'Просмотр информации'),
-(554, 'ru', 'Удалить информацию');
+(554, 'ru', 'Удалить информацию'),
+(555, 'ru', 'стоимость статуса B1'),
+(556, 'ru', 'стоимость статуса B2'),
+(557, 'ru', 'стоимость статуса B3')
+;
