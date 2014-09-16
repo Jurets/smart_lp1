@@ -110,10 +110,12 @@ class Information extends CActiveRecord
     
     /**
     * выбрать все заголовки статических страниц в массив
-    * 
+    *  - выбираются заголовки на текущем языке
+    *  - при нескольких на одном и том же языке берётся первый
     */
     public static function getAllTitles() {
         $result = array();
+        $overs = array();
         $rows = Yii::app()->db->createCommand()
             ->select(array('name', 'title', 'lng'))
             ->from('info')
@@ -121,8 +123,12 @@ class Information extends CActiveRecord
         foreach($rows as $row) {
             if (!isset($result[$row['name']]) /*&& $row['lng'] == Yii::app()->params['default.language']*/) {
                 $result[$row['name']] = $row['title'];
-            } else if ($row['lng'] == Yii::app()->language) {
+                if ($row['lng'] == Yii::app()->language) {
+                    $overs[$row['name']] = $row['lng'];
+                }
+            } else if (($row['lng'] == Yii::app()->language) && !isset($overs[$row['name']])) {
                 $result[$row['name']] = $row['title'];
+                $overs[$row['name']] = $row['lng'];
             }
         }
         return $result;
