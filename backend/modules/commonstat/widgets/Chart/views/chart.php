@@ -2,7 +2,7 @@
 $this->widget(
             'chartjs.widgets.ChLine', 
             array(
-                'width' => 1700,
+                'width' => 1420,
                 'height' => 300,
                 'htmlOptions' => array(),
                 'labels' => $x,
