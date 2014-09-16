@@ -35,7 +35,7 @@ class Information extends CActiveRecord
             array('name, title', 'length', 'max' => 255),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, title, text', 'safe', 'on' => 'search'),
+            array('id, lng, name, title, text', 'safe', 'on' => 'search'),
         );
     }
 
@@ -66,13 +66,11 @@ class Information extends CActiveRecord
     public function search()
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
-
         $criteria = new CDbCriteria;
-
         $criteria->compare('id', $this->id);
         $criteria->compare('title', $this->title);
-        //$criteria->compare('name', $this->name, true);
-
+        $criteria->compare('name', $this->name, true);
+        $criteria->compare('lng', $this->lng);
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
             'pagination'=>array(
@@ -101,9 +99,9 @@ class Information extends CActiveRecord
             $isSave = $this->save();
         } else { // добавление
             $record = new self;
-            $record->attributes = $this->attributes;
-            $record->unsetAttributes(array('id'));
-            $record->lng = Yii::app()->language;
+            $record->attributes = $this->attributes; //занести атрибуты
+            $record->unsetAttributes(array('id'));   //обнулить ИД
+            $record->lng = Yii::app()->language;     //установить текущий язык
             $isSave = $record->save();
         }
         return $isSave ? true : false;
@@ -112,10 +110,12 @@ class Information extends CActiveRecord
     
     /**
     * выбрать все заголовки статических страниц в массив
-    * 
+    *  - выбираются заголовки на текущем языке
+    *  - при нескольких на одном и том же языке берётся первый
     */
     public static function getAllTitles() {
         $result = array();
+        $overs = array();
         $rows = Yii::app()->db->createCommand()
             ->select(array('name', 'title', 'lng'))
             ->from('info')
@@ -123,8 +123,12 @@ class Information extends CActiveRecord
         foreach($rows as $row) {
             if (!isset($result[$row['name']]) /*&& $row['lng'] == Yii::app()->params['default.language']*/) {
                 $result[$row['name']] = $row['title'];
-            } else if ($row['lng'] == Yii::app()->language) {
+                if ($row['lng'] == Yii::app()->language) {
+                    $overs[$row['name']] = $row['lng'];
+                }
+            } else if (($row['lng'] == Yii::app()->language) && !isset($overs[$row['name']])) {
                 $result[$row['name']] = $row['title'];
+                $overs[$row['name']] = $row['lng'];
             }
         }
         return $result;
