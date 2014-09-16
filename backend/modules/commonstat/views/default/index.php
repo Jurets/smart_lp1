@@ -1,6 +1,8 @@
 <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl.'/css/commonstat.css'); ?>
 <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/commonstat.js'); ?>
-
+<?php $this->breadcrumbs = array(
+    BaseModule::t('rec','General statistics')
+)?>
 <h1><?php echo BaseModule::t('rec','General statistics')?></h1>
 <div class="commonstat">
     <div class="greedElem" id="Participiants">
