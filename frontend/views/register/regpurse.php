@@ -28,7 +28,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
     <!--<a href="#"><input type="button" name="btn"  class="btn-style-green btn-style-green-2-1" value="ДАЛЕЕ" /></a>-->
 
-    <?php echo CHtml::submitButton(BaseModule::t('common', 'Next'), array(
+    <?php echo CHtml::submitButton(BaseModule::t('rec', 'Next'), array(
         'name'=>'regpurse',
         'class'=>'btn-style-green btn-style-green-2-1',
     )); ?>

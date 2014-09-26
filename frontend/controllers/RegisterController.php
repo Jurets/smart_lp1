@@ -140,12 +140,21 @@ class RegisterController extends EMController
                     $this->render('confirmed', array('step'=>1, 'urlNext'=>$urlNext));
                 } else {
                     if (isset($_POST['regpurse'])) {//DebugBreak();
-                        $participant->setScenario('setpurse');
-                        $participant->attributes = $_POST['Participant'];
-                        if ($participant->save(true, array('purse'))) {
-                            $this->step = 3;
-                            $this->render('firstpay', array('participant'=>$participant));
-                            Yii::app()->end();
+                        // запросим проверку формата кошелька у perfectMoney
+                        $userPurseTest = new PerfectMoney;
+                        $userPurseTest->setScenario('purseTest');
+                        $userPurseTest->payerAccount = $_POST['Participant']['purse'];
+                        if($userPurseTest->validate()){
+                          $participant->setScenario('setpurse');
+                          $participant->attributes = $_POST['Participant'];
+                          if ($participant->save(true, array('purse'))) {
+                              $this->step = 3;
+                              $this->render('firstpay', array('participant'=>$participant));
+                              Yii::app()->end();
+                          }
+                        }else{
+                            $error = $userPurseTest->getError('paymentTransactionStatus');
+                            $participant->addError('purse', $error);
                         }
                     }
                     $this->step = 2;
