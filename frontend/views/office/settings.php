@@ -80,7 +80,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option1text"> <?php echo BaseModule::t('rec', 'COUNTRY') ?>*:</p>
         <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" <?php if($participant->country_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG51" class="css-label1"></label>
+        <label for="checkboxG51" class="css-label1" style="width: 38px; height: 38px;"></label>
 
         <a href="#" name="label-1" class="vopros1"></a>
 
@@ -97,7 +97,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" <?php if($participant->city_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG52" class="css-label2" style="width: 40px; height: 40px; padding: 0"></label>
+        <label for="checkboxG52" class="css-label2" style="width: 38px; height: 38px; padding: 0"></label>
 
 
         <p class="shag-1-1-option2text"><?php echo BaseModule::t('rec', 'CITY') ?>*: </p>
@@ -117,7 +117,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
             <p class="shag-1-1-option1-1text"> <?php echo BaseModule::t('rec','SKYPE:')?></p>
             <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3"  <?php if($participant->skype_access == 1){echo 'checked="checked"';} ?> />
-            <label for="checkboxG53" class="css-label3" style="width: 40px; height: 40px; padding: 0"></label>
+            <label for="checkboxG53" class="css-label3" style="width: 38px; height: 38px; padding: 0"></label>
 
 <!--       <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>-->
         <a href="#" name="label-3" class="vopros1-1"></a>
@@ -154,7 +154,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option2-1text">EMAIL*: </p>
         <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" <?php if($participant->email_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG54" class="css-label4" style="width: 40px; height: 40px; padding: 0"></label>
+        <label for="checkboxG54" class="css-label4" style="width: 38px; height: 38px; padding: 0"></label>
 
         <a href="#" name="label-4" class="vopros2-1"></a>
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
@@ -351,15 +351,23 @@ $form = $this->beginWidget('CActiveForm', array(
     .em-14{ top: 575px; left:625px; }
 
     select {
-       width: 246px!important;
+       width: 246px;
     }
-
+   
+  
+   
+    
+    
     select.textbox3-1, select.textbox3-2{
         width: 60px!important;
     }
 
     select.textbox3-3{
         width: 120px!important;
+    }
+    
+    #office-6-content {
+        
     }
 
 </style>
