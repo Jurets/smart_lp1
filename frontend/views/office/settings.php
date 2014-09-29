@@ -85,11 +85,11 @@ $form = $this->beginWidget('CActiveForm', array(
         <a href="#" name="label-1" class="vopros1"></a>
 
         <select name="countrySelect" class="shag-1-1-option1">
-            <?php foreach($places as $key=>$place) {?>
-                <?php if($participant->country_id == $key) {?>
-                <option value="<?php echo $key; ?>" selected ><?php echo $place; ?></option>
+            <?php foreach($places as $place) {?>
+                <?php if($participant->country_id == $place['id']) {?>
+                <option value="<?php echo $place['id']; ?>" selected ><?php echo ' +( ' . $place['phone_code'] . " ) " . $place['name']; ?></option>
                 <?php }else{?>
-                <option value="<?php echo $key; ?>" ><?php echo $place; ?></option>
+                <option value="<?php echo $place['id']; ?>" ><?php echo ' +( ' . $place['phone_code'] . " ) " . $place['name']; ?></option>
                 <?php } ?>
             <?php } ?>
         <?php echo $form->error($participant, 'country' , array('class' => 'error-message em-5')); //Страна ?>
@@ -131,10 +131,10 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
 
 
-        <p class="sub2-3"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>*:</p>
+        <p class="sub2-3" style="font-size: 20px"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>*:</p>
 
 
-        <?php echo CHtml::passwordField('currentPassword','', array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
+        <?php echo CHtml::textField('currentPassword',$participant->password, array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'currentPassword', array('class' => 'error-message em-12')); //ТЕКУЩИЙ ПАРОЛЬ ?>
 
         <p class="sub2-4"><?php echo BaseModule::t('rec', 'NEW PASSWORD') ?>*:</p>
@@ -152,7 +152,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <a href="#" class="pm1"></a>
 
 
-        <p class="shag-1-1-option2-1text">EMAIL*: </p>
+        <p class="shag-1-1-option2-1text" style="font-size: 20px">EMAIL*: </p>
         <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" <?php if($participant->email_access == 1){echo 'checked="checked"';} ?>/>
         <label for="checkboxG54" class="css-label4" style="width: 38px; height: 38px; padding: 0"></label>
 
@@ -160,7 +160,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
         <?php echo $form->error($participant, 'email',array('class' => 'error-message em-11')); //Email ?>
 
-        <p class="shag-1-1-option3text"> <?php echo BaseModule::t('rec', 'MY TIME') .'*' ?>:</p>
+        <p class="shag-1-1-option3text" style="font-size: 20px;"> <?php echo BaseModule::t('rec', 'MY TIME') .'*' ?>:</p>
         <?php
             if(isset($participant->getErrors()['gmt_id']))
             echo '<div class="error-message em-6and5">'. $participant->getErrors()['gmt_id'][0] .'</div>' 
@@ -187,7 +187,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
         </select>
 
-        <p class="shag-1-1-option5text"><?php echo BaseModule::t('common', 'YOUR PURSE') ?></p>
+        <p class="shag-1-1-option5text" style="font-size: 20px;"><?php echo BaseModule::t('common', 'YOUR PURSE') ?></p>
 
 
         <p class="dannie"> <?php echo BaseModule::t('rec', 'PAYMENT DETAILS') ?>:</p>
@@ -197,7 +197,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 
-        <p class="shag-1-1-option4text"> <?php echo BaseModule::t('rec', 'AVATAR') ?>:</p>
+        <p class="shag-1-1-option4text" style="font-size: 20px"> <?php echo BaseModule::t('rec', 'AVATAR') ?>:</p>
         <?php if($participant->photo != '') { ?>
             <div id="shag-1-1-photo-db">
 
@@ -371,3 +371,17 @@ $form = $this->beginWidget('CActiveForm', array(
     }
 
 </style>
+
+<?php
+  $user_agent = $_SERVER["HTTP_USER_AGENT"];
+  if (strpos($user_agent, "Firefox") == true) {
+      ?>
+<style>
+    select {
+       background-image: none;
+    }
+</style>
+          <?php
+  };
+  
+?>
