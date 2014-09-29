@@ -34,6 +34,7 @@ class PerfectMoney extends CFormModel {
       $this->message['failure'] = BaseModule::t('rec', 'An error occurred during the payment process. For details, contact the site administrator');
       $this->message['empty_purse'] = BaseModule::t('rec', "Recipient's or Sender's purse absent");
       $this->message['errorText'] = '';
+      $this->message['nodollar_purse'] = BaseModule::t('rec','Purse must have dollar prefix');
       $this->payerId = NULL;
       $this->payeeId = NULL;
   }
@@ -74,14 +75,16 @@ class PerfectMoney extends CFormModel {
         $this->API->dataProcess();
         return true;
       }
+      $errors = $this->getErrors();
         return false;
   }
    
   public function rules(){
        return array(
-           array('login, password', 'required'),
+           array('login, password', 'required', 'except'=>'purseTest'),
            array('payerId, payeeId, transactionId', 'type', 'type'=>'integer'),
-           array('payerAccount, payeeAccount', 'checkPurseFormat'),
+           array('payerAccount, payeeAccount', 'isEmptyPayeeAccount', 'except'=>'purseTest'),
+           array('payerAccount', 'checkPurseFormat', 'on'=>'purseTest'),
            array('notation', 'length', 'max'=>255),
            //array('transactionKind', 'length', 'max'=>255), // параметр запрещен к использованию
        );
@@ -93,8 +96,10 @@ class PerfectMoney extends CFormModel {
        // U - доллар E - евро G - золото
        $checked = $this->$attribute;
        if(substr($checked, 0, 1) !== 'U'){
-          $this->addError($attribute, BaseModule::t('rec','Purse must have dollar prefix'));
+           $this->addError('paymentTransactionStatus', $this->message['nodollar_purse']);
        }
+   }
+   public function isEmptyPayeeAccount($attribute, $params){
        if(empty($this->payeeAccount)){
           $this->addError('paymentTransactionStatus',$this->message['empty_purse']);
           
