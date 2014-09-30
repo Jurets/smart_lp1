@@ -129,7 +129,15 @@ class Countries extends CActiveRecord
      */
     public static function getCountriesList()
     {
-        //return CHtml::listData(self::model()->findAll(array('order' => 'name ASC')), 'id', 'name');
+        return CHtml::listData(self::model()->findAll(array('order' => 'name ASC')), 'id', 'name');
+        
+    }
+    
+    /*
+     * 
+     */
+    public static function getFullCountriesList()
+    {
         $rows = Yii::app()->db->createCommand()
             ->select(array('id', 'name', 'phone_code'))
             ->from('countries')
@@ -138,7 +146,6 @@ class Countries extends CActiveRecord
         
         return $rows;
 
-        
     }
 
 }

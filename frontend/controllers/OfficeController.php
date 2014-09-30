@@ -106,7 +106,7 @@ class OfficeController extends EMController
         $month = $participant->dob != '' ? $date[1] : '';
         $year = $participant->dob != '' ? $date[0] : '';
 
-        $places = Countries::getCountriesList();
+        $places = Countries::getFullCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
 
         foreach( Gmt::getTimezonesList() as $key=>$timezone){
