@@ -85,12 +85,6 @@ $titles = Information::getAllTitles();
                             top: -9px;
                             width: 387px;
                         }
-                        #contentBG, #globe{
-                            background-image: none;
-                        }
-                         body div.footer{
-                            margin-top: 0;
-                        }
                     </style>                
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/index')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
                     <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;Настройки </a> </li>
