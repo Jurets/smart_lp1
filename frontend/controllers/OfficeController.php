@@ -147,8 +147,8 @@ class OfficeController extends EMController
             $participant->attributes = $_POST['Participant'];
             $newEmail = $participant->email;
             if ($participant->validate()) {
-                if ($participant->password == md5($participant->currentPassword) && $newPassword != '') {
-                    $participant->password = md5($newPassword);
+                if ($participant->password == $participant->currentPassword) {
+                    $participant->password = $newPassword;
                 }
                 if ($_FILES['Participant']['name']['photo'] != '') {
 

@@ -122,7 +122,7 @@ return array(
         'user'=>array(
             'class' => 'common.modules.user.UserModule',
             # encrypting method (php hash function)
-            'hash' => 'md5',
+            'hash' => '',
 
             # send activation email
             'sendActivationMail' => true,
