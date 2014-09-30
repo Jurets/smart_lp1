@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ));
 ?>
 <div id="office-6-content">
-    <div><a id="logo" href="#"> </a></div>
+<!--    <div><a id="logo" href="#"> </a></div>-->
     <div id="FORMA">
         
         <p class="zagolovok"><?php echo BaseModule::t('rec', 'ACCOUNT SETTINGS') ?></p>
@@ -235,7 +235,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
     </div>
 
-    <div><a id="logo" href="/"> </a></div>
+<!--    <div><a id="logo" href="/"> </a></div>-->
 
 </div>
 

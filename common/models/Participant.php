@@ -183,12 +183,16 @@ class Participant extends User
         if (!empty($this->currentPassword) && $this->password != UserModule::encrypting($this->currentPassword)) {
             $this->addError('currentPassword', 'Неправильно введен текущий пароль.');
         }
+        
     }
 
     public function newPasswordRule()
     {
         if (!empty($this->currentPassword) && empty($this->newPassword)) {
             $this->addError('newPassword', 'Введите новый пароль.');
+        }
+        if(strlen($this->newPassword) < 4){
+            $this->addError('newPassword', 'Пароль должен быть минимум 4 символа.');
         }
     }
 
