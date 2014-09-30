@@ -421,13 +421,16 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
     $(document).ready(function() {
 
         $("#add-user-to-chat").click(function() {
+          var fullNickName = $("#search-users").val();
+          var start = fullNickName.indexOf('(') + 1;
+          var nickname = fullNickName.substr(start).slice(0,-1);
             $.ajax({
                 url: '<?= Yii::app()->createAbsoluteUrl('site/addUserToList') ?>',
                 dataType: 'json', //'text',
                 type: 'POST',
                 data: {
                     'id': <?php echo Yii::app()->user->id ?>,
-                    'username': $("#search-users").val(),
+                    'username': nickname,
                 },
                 success: function(data) {
                     if (data.description) {

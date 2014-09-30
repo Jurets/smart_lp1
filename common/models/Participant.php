@@ -631,6 +631,10 @@ class Participant extends User
             'id_user' => $id,
             'id_user_invited' => $id_user_invited
         ));
+        $res = $command->insert('yiichat_list', array(
+            'id_user' => $id_user_invited,
+            'id_user_invited' => $id
+        ));
         if ($res) {
             return array(
                 'result' => true,

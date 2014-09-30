@@ -115,10 +115,17 @@ class UserController extends EController
             $command->bindValue(":username", '%' . $_GET['term'] . '%', PDO::PARAM_STR);
             $command->bindValue(":first_name", '%' . $_GET['term'] . '%', PDO::PARAM_STR);
             $command->bindValue(":last_name", '%' . $_GET['term'] . '%', PDO::PARAM_STR);
-            $res = $command->queryColumn();
+            $res = $command->queryAll();
+        }
+        
+        $array = array();
+        foreach ($res as $key => $value) {
+            //generate nickname
+            $nickname = $value['first_name']. ' ' . $value['last_name']. ' (' . $value['username'] . ')';
+            $array[$key] = $nickname;
         }
 
-        echo CJSON::encode($res);
+        echo CJSON::encode($array);
         Yii::app()->end();
     }
 
