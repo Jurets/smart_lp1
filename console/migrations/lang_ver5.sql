@@ -589,7 +589,8 @@ INSERT INTO `SourceMessage` VALUES
 (554, 'rec', 'Delete Information'),
 (555, 'rec', 'cost of status B1'),
 (556, 'rec', 'cost of status B2'),
-(557, 'rec', 'cost of status B3')
+(557, 'rec', 'cost of status B3'),
+(558, 'rec', 'Your message has been sent. You will get an answer soon')
 ;
 
 INSERT INTO `Message` VALUES 
@@ -1148,5 +1149,6 @@ INSERT INTO `Message` VALUES
 (554, 'ru', 'Удалить информацию'),
 (555, 'ru', 'стоимость статуса B1'),
 (556, 'ru', 'стоимость статуса B2'),
-(557, 'ru', 'стоимость статуса B3')
+(557, 'ru', 'стоимость статуса B3'),
+(558, 'ru', 'Ваше сообщение отправлено. Вы получите ответ в ближайшее время')
 ;
