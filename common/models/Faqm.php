@@ -53,8 +53,8 @@ class Faqm extends CFormModel {
     }
 
     public function getTypeOfCategories(){
-        return array('financial'=> BaseModule::t('rec', 'financial'),
-            'offer'=> BaseModule::t('rec', 'offer'), 'performance' => BaseModule::t('rec', 'performance'));
+        return array('financial'=> BaseModule::t('rec', 'Finance'),
+            'offer'=> BaseModule::t('rec', 'Offers'), 'performance' => BaseModule::t('rec', 'Site work'));
     }
     public function attributeLabels()
     {
