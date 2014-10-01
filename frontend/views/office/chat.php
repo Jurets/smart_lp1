@@ -262,7 +262,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
             'isActivated' => $isActivated,
             //'isWebinar'=>$isWebinar,
             //'messageWebinar'=>$module->messageBlockWeb,
-            'messageNonActive' => 'Пользователь не активен',
+            'messageNonActive' => 'Выбрать пользователя для общения.',
         ));
         ?>
         <?php if ($isActivated) { ?>

@@ -298,7 +298,7 @@ class OfficeController extends EMController
             $chat_id = $interlocutor . "_" . $user_id;
         }
         //команда
-        $onlineusers = Participant::getTeamUsers(true); //true - не показывать себя
+        $onlineusers = Participant::getTeamUsers(false); //true - не показывать себя
         //текущий юзер
         $user = Participant::model()->findByPk(Yii::app()->user->id);
         //юзеры онлайн

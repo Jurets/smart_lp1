@@ -576,7 +576,9 @@ class Participant extends User
             $command->where = 'onlineusers.userid <> :self_id';
             $command->params = array(':self_id' => Yii::app()->user->id->id);
         }
-
+        if($withoutSelf === false && isset(Yii::app()->user->id)){
+            $command->orWhere("{{users}}.id = ". Yii::app()->user->id);
+        }
         $rows = $command->queryAll();
 
 
