@@ -25,7 +25,7 @@
             echo Yii::app()->createAbsoluteUrl('office/chat/', array(
                 'interlocutor' => $item['id']
             ))
-            ?>"><?= $item['username'] ?></a>
+            ?> "style='width:150px;height:25px;display: block;'><?= $item['username'] ?></a>
 
         </div>
         <div class="info-image"> 

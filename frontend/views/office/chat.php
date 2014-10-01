@@ -419,8 +419,8 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
 
     //Процедура при загрузке страницы
     $(document).ready(function() {
-
-        $("#add-user-to-chat").click(function() {
+        
+        $("#add-user-to-chat").live('click',function() {
           var fullNickName = $("#search-users").val();
           var start = fullNickName.indexOf('(') + 1;
           var nickname = fullNickName.substr(start).slice(0,-1);
@@ -493,7 +493,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
         buildSmilePopoverContent();
 
         //событие при нажатии кнопка показа панели со смайликами
-        $("#chat-smile-button").click(function() {
+        $("#chat-smile-button").live('click',(function() {
             $("#chat-smilesbg-block").toggle();
             var isVisible = $('#chat-smilesbg-block').is(':visible');
             if (isVisible) {
@@ -501,7 +501,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
             } else {
                 $("#chat-smile-button").removeClass("highlighted");
             }
-        });
+        }));
 
         //расширение функционала jQuery - вставка текста в textarea в позицию курсора
         jQuery.fn.extend({
