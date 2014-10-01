@@ -590,7 +590,12 @@ INSERT INTO `SourceMessage` VALUES
 (555, 'rec', 'cost of status B1'),
 (556, 'rec', 'cost of status B2'),
 (557, 'rec', 'cost of status B3'),
-(558, 'rec', 'Your message has been sent. You will get an answer soon')
+(558, 'rec', 'Your message has been sent. You will get an answer soon'),
+(559, 'rec', 'You have reached the maximum status in the Business Club'),
+(560, 'rec', 'Your status'),
+(561, 'rec', 'To raise your status you must pay payment'),
+(562, 'rec', 'First you have to pay $ 50 for registration after that you will be available to Business Club'),
+(563, 'rec', 'The payment system is not available now')
 ;
 
 INSERT INTO `Message` VALUES 
@@ -1150,5 +1155,10 @@ INSERT INTO `Message` VALUES
 (555, 'ru', 'стоимость статуса B1'),
 (556, 'ru', 'стоимость статуса B2'),
 (557, 'ru', 'стоимость статуса B3'),
-(558, 'ru', 'Ваше сообщение отправлено. Вы получите ответ в ближайшее время')
+(558, 'ru', 'Ваше сообщение отправлено. Вы получите ответ в ближайшее время'),
+(559, 'ru', 'Вы достигли максимального статуса в Бизнес Клубе'),
+(560, 'ru', 'Ваш статус'),
+(561, 'ru', 'Чтобы поднять ваш статус необходимо сделать взнос'),
+(562, 'ru', 'Сначала вы должны оплатить за регистрацию 50$ после этого вам будет доступен Бизнес Клуб'),
+(563, 'ru', 'Платежная система на данный момент недоступна. Приносим наши извинения')
 ;
