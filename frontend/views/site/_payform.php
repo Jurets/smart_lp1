@@ -1,19 +1,19 @@
 <div id="div-status-form">
     <?php
         echo CHtml::beginForm('','post');
-        echo CHtml::label('Введите данные из Perfect Money','');
+        echo CHtml::label(BaseModule::t('rec', 'Enter your Perfect Money data'),'');
         echo '<br>';
-        echo CHtml::label('Аккаунт: ','account');
+        echo CHtml::label(BaseModule::t('rec', 'Account').':','account');
         echo CHtml::textField('account');
         echo '<br>';
-        echo CHtml::label('Пароль: ','password');
+        echo CHtml::label(BaseModule::t('rec', 'Password').':','password');
         echo CHtml::passwordField('password');
         echo '<br>';?>
     <input type="hidden" name="amount" id="amount" value="">
     <input type="hidden" name="purse_from" value="<?php //От куда пересылаем ?>">
     <input type="hidden" name="recipient_purse" value="<?php //Куда пересылаем ?>">
     <?php 
-        echo CHtml::submitButton('Оплатить');
+        echo CHtml::submitButton(BaseModule::t('rec', 'Pay'));
         echo CHtml::endForm();
     ?>
 </div>

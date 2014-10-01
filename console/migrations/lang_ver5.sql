@@ -595,7 +595,9 @@ INSERT INTO `SourceMessage` VALUES
 (560, 'rec', 'Your status'),
 (561, 'rec', 'To raise your status you must pay payment'),
 (562, 'rec', 'First you have to pay $ 50 for registration after that you will be available to Business Club'),
-(563, 'rec', 'The payment system is not available now')
+(563, 'rec', 'The payment system is not available now'),
+(564, 'rec', 'Password'),
+(565, 'rec', 'Pay')
 ;
 
 INSERT INTO `Message` VALUES 
@@ -1160,5 +1162,7 @@ INSERT INTO `Message` VALUES
 (560, 'ru', 'Ваш статус'),
 (561, 'ru', 'Чтобы поднять ваш статус необходимо сделать взнос'),
 (562, 'ru', 'Сначала вы должны оплатить за регистрацию 50$ после этого вам будет доступен Бизнес Клуб'),
-(563, 'ru', 'Платежная система на данный момент недоступна. Приносим наши извинения')
+(563, 'ru', 'Платежная система на данный момент недоступна. Приносим наши извинения'),
+(564, 'ru', 'Пароль'),
+(565, 'ru', 'Оплатить')
 ;
