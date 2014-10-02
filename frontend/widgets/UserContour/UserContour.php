@@ -60,7 +60,7 @@ class UserContour extends CWidget {
                 $name =  $li['first_name'] .' '. $li['last_name'];
             }else $name = $li['username'];
 
-           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' UTC '. $name;
+           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' '. $name;
             
         }
        
@@ -89,7 +89,7 @@ class UserContour extends CWidget {
         $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
         foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
-            $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
+            $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' '. $listCommission['first_name'] .' '. $listCommission['last_name'];
         }
         }else{
             $this->dataPull['numberField'] = '$00 000 000';
@@ -120,7 +120,7 @@ class UserContour extends CWidget {
         $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
         foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
-            $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' UTC '. $listCommission['first_name'] .' '. $listCommission['last_name'];
+            $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). $listCommission['first_name'] .' '. $listCommission['last_name'];
         }
         }else
         {
