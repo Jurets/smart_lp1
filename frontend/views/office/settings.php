@@ -32,17 +32,17 @@ $form = $this->beginWidget('CActiveForm', array(
              </div>
         <?php } ?>   
 
-        <p class="sub1"><?php echo BaseModule::t('rec', 'USERNAME') ?>:</p>
+        <p class="sub1"><?php echo BaseModule::t('rec', 'USERNAME') ?>*:</p>
         <?php echo $form->textField($participant, 'username', array('class' => 'textbox1')); //ИМЯ ПОЛЬЗОВАТЕЛЯ ?>
         <?php echo $form->error($participant, 'username', array('class' => 'error-message em-1')); //ИМЯ ПОЛЬЗОВАТЕЛЯ ?>
 
 
-        <p class="sub2"><?php echo BaseModule::t('rec', 'NAME') ?>*:</p>
+        <p class="sub2"><?php echo BaseModule::t('rec', 'NAME') ?>:</p>
         <?php echo $form->textField($participant, 'first_name', array('class' => 'textbox2')); //ИМЯ ?>
         <?php echo $form->error($participant, 'first_name', array('class' => 'error-message em-2')); //ИМЯ ?>
 
 
-        <p class="sub2-1"><?php echo BaseModule::t('rec', 'SURNAME') ?>*:</p>
+        <p class="sub2-1"><?php echo BaseModule::t('rec', 'SURNAME') ?>:</p>
         <?php echo $form->textField($participant, 'last_name', array('class' => 'textbox2-1')); //ФАМИЛИЯ ?>
         <?php echo $form->error($participant, 'last_name', array('class' => 'error-message em-3')); //ФАМИЛИЯ ?>
 
@@ -126,18 +126,18 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 
-        <p class="sub1-1"><?php echo BaseModule::t('rec', 'VIBER / MOBILE') ?>*:</p>
+        <p class="sub1-1"><?php echo BaseModule::t('rec', 'VIBER / MOBILE') ?>:</p>
         <?php echo $form->textField($participant, 'phone', array('class' => 'textbox1-1')); //VIBER / МОБИЛЬНЫЙ ?>
         <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
 
 
-        <p class="sub2-3" style="font-size: 20px"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>*:</p>
+        <p class="sub2-3" style="font-size: 20px"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>:</p>
 
 
         <?php echo CHtml::textField('currentPassword',$participant->password, array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'currentPassword', array('class' => 'error-message em-12')); //ТЕКУЩИЙ ПАРОЛЬ ?>
 
-        <p class="sub2-4"><?php echo BaseModule::t('rec', 'NEW PASSWORD') ?>*:</p>
+        <p class="sub2-4"><?php echo BaseModule::t('rec', 'NEW PASSWORD') ?>:</p>
 
 
         <?php echo CHtml::textField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
