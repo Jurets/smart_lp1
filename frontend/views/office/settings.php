@@ -179,13 +179,16 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <p class="shag-1-1-option3-1text">  <?php echo BaseModule::t('rec', 'LANGUAGE') ?>:</p>
-        <select class="shag-1-1-option3-1">
+        <select class="shag-1-1-option3-1" name="language">
 
-
-            <option value="volvo"><?php echo BaseModule::t('rec', 'RUSSIAN') ?></option>
-<!--            <option value="saab"><?php // echo BaseModule::t('rec', 'RUSSIAN2') ?></option>-->
-
+            <?php foreach ($languages as $language) { ?>
+                    
+               
+            <option value="<?php echo $language['lang']?>"> <?php echo BaseModule::t('rec', $language['name']) ?></option>
+            
+ <?php }?>
         </select>
+       
 
         <p class="shag-1-1-option5text" style="font-size: 20px;"><?php echo BaseModule::t('common', 'YOUR PURSE') ?></p>
 
