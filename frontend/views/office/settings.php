@@ -183,7 +183,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
             <option value="volvo"><?php echo BaseModule::t('rec', 'RUSSIAN') ?></option>
-            <option value="saab"><?php echo BaseModule::t('rec', 'RUSSIAN2') ?></option>
+<!--            <option value="saab"><?php // echo BaseModule::t('rec', 'RUSSIAN2') ?></option>-->
 
         </select>
 
@@ -197,7 +197,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 
-        <p class="shag-1-1-option4text" style="font-size: 20px"> <?php echo BaseModule::t('rec', 'AVATAR') ?>:</p>
+        <p class="shag-1-1-option4text" style="font-size: 20px"> <?php echo BaseModule::t('rec', 'AVATAR') ?>*:</p>
         <?php if($participant->photo != '') { ?>
             <div id="shag-1-1-photo-db">
 
