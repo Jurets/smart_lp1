@@ -163,6 +163,10 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
     });
 </script>
 <style>
+    div#shag-1-1-vibrat{
+        overflow: hidden;
+    }
+
     #shag-1-1-vibrat input{
         padding: 0;
         margin: 0;
@@ -197,4 +201,16 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
     }
     /* photo */
     .em-9{ top: 590px; left:422px; }
+
+    div#topLine{
+        height: 39px;
+    }
+
+    a#logo{
+        left: 0;
+    }
+
+    div.footer div#footer-bark-bg{
+        display: none;
+    }
 </style>
