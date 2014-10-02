@@ -7,7 +7,8 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 
 ?>
 <div class="info">
-    <?php echo Yii::app()->user->getFlash('success'); ?>
+    <?php echo Yii::app()->user->getFlash('success');?>
+    <?php echo Yii::app()->user->getFlash('fail'); ?>
 </div>
 <div id="main-div">
     <!-- current status -->
