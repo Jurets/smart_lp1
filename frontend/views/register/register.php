@@ -63,10 +63,16 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo $form->error($participant, 'city_id', array('class'=>'error-message em-4')); //логин ?>
 
 <p class="shag-1-1-option3text">  <?php echo BaseModule::t('common', 'LANGUAGE') ?>:</p>
-<select class="shag-1-1-option3">
-    <option value="volvo"><?php echo BaseModule::t('common', 'RUSSIAN') ?></option>
-    <option value="saab"><?php echo BaseModule::t('common', 'RUSSIAN2') ?></option>
-</select>                          
+<!--<select class="shag-1-1-option3">
+    <option value="volvo"><?php // echo BaseModule::t('common', 'RUSSIAN') ?></option>
+    <option value="saab"><?php // echo BaseModule::t('common', 'RUSSIAN2') ?></option>
+</select> 
+-->
+   <select class="shag-1-1-option3" name="language">
+ <?php foreach ($languages as $language) { ?>
+         <option value="<?php echo $language['lang']?>"> <?php echo BaseModule::t('rec', $language['name']) ?></option>
+ <?php }?>
+   </select>
 
 <p class="shag-1-1-option4text">  <?php echo BaseModule::t('common', 'AVATAR') ?>:</p>
 

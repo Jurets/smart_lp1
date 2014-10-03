@@ -38,7 +38,7 @@ $attributes = array(
 if(empty($model->photo)){
     $photo = '';
 }else{
-    $photo = CHtml::image(Yii::app()->createAbsoluteUrl( "/uploads/" . $model->photo));
+    $photo = CHtml::image(Yii::app()->createAbsoluteUrl( "/uploads/" . $model->photo), ' ', array('width'=>'180px;') );
 }
 array_push($attributes, 'password', 'first_name', 'last_name', 'skype', 'phone', 'email', 'activkey', 'create_at', 'lastvisit_at', 'username', 'income','transfer_fund',  array(
     'name' => UserModule::t('Photo'),

@@ -126,6 +126,7 @@ class OfficeController extends EMController
             $country_id = Yii::app()->getRequest()->getPost('countrySelect');
             $currentPassword = Yii::app()->getRequest()->getPost('currentPassword');
             $newPassword = Yii::app()->getRequest()->getPost('newPassword');
+            $lang = Yii::app()->getRequest()->getPost('language');
             $participant->currentPassword = $currentPassword;
             $participant->newPassword = $newPassword;
             $participant->gmt_id = $timeZone;
@@ -147,7 +148,10 @@ class OfficeController extends EMController
             $participant->attributes = $_POST['Participant'];
             $newEmail = $participant->email;
             if ($participant->validate()) {
-                if ($participant->password == $participant->currentPassword) {
+                if ($participant->password == $participant->currentPassword 
+                        && !empty($participant->newPassword)
+                        && strlen($participant->newPassword) > 3
+                        ) {
                     $participant->password = $newPassword;
                 }
                 if ($_FILES['Participant']['name']['photo'] != '') {
@@ -189,6 +193,10 @@ class OfficeController extends EMController
                 $participant->email = $currentEmail;
                 $participant->new_email = $newEmail;
                 $participant->activkey = UserModule::encrypting(microtime() . $participant->password);
+                if(!empty($lang)){
+                    $participant->sys_lang = $lang;
+                }
+                
                 $participant->save(false);
 
                 if ($currentEmail != $_POST['Participant']['email']) {
@@ -204,8 +212,13 @@ class OfficeController extends EMController
             }
             
         }
+        $sql = 'SELECT * FROM languages';
+        $connection=Yii::app()->db; 
+        $command=$connection->createCommand($sql);
+        $languages=$command->queryAll(); 
+        
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
-            'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
+            'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year, 'languages' => $languages));
     }
 
     /**

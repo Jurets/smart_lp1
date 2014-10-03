@@ -92,9 +92,9 @@ class Participant extends User
                     // Scenario for settings(update information)
                     array('username,newPurse,password,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype ', 'safe', 'on' => array('settings')),
                     array('email', 'email', 'on' => array('settings')),
-                    array('username,city_id, first_name, last_name, country_id, gmt_id, dob', 'required', 'on' => array('settings')),
-                    array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
-                    array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
+                    array('username,city_id, country_id, gmt_id, dob', 'required', 'on' => array('settings')),
+                    //array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
+                    //array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     array('photo', 'file', 'safe' => true, 'types' => 'jpg, gif, png',
                         'allowEmpty' => true, 'maxSize' => 5 * 2000 * 2000, 'tooLarge' => BaseModule::t('rec','The file weighs more than 2 MB. Please upload a smaller file'), 'on' => array('settings','register')),
         ));
