@@ -201,10 +201,10 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php if($participant->photo != '') { ?>
             <div id="shag-1-1-photo-db">
 
-        <?php echo CHtml::image(UrlHelper::getImageUrl('resized-'.$participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
+        <?php echo CHtml::image(UrlHelper::getImageUrl('resized-'.$participant->photo),'',array('style' => 'width:250px; height: 175px', 'id'=>'thumbnil')); ?>
             </div>
         <?php } else{ ?>
-            <div id="shag-1-1-avatar"></div>
+            <div id="shag-1-1-avatar"><img id="thumbnil" style="width:100%; height: 100%; border: none;"  src="" alt=""/></div>
         <?php } ?>
 
         <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo BaseModule::t('rec', 'SELECT IMAGE') ?></span>
@@ -270,14 +270,34 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
     $('.shag-fileFiled').change(function() {
-        var fileName = $(this).val();
-        if(fileName.length > 30) {
-            fileName = fileName.substr(0, 29) + '...';
-        }
-        $('#shag-1-1-vibrat-image').html(fileName);
+//        var fileName = $(this).val();
+//        if(fileName.length > 30) {
+//            fileName = fileName.substr(0, 29) + '...';
+//        }
+//        $('#shag-1-1-vibrat-image').html(fileName);
+        showMyImage(this);
     });
 
-
+    function showMyImage(fileInput) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img=document.getElementById("thumbnil");
+            img.file = file;
+            var reader = new FileReader();
+            reader.onload = (function(aImg) {
+                return function(e) {
+                    aImg.src = e.target.result;
+                };
+            })(img);
+            $('#shag-1-1-vibrat-image').html(file.name);
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 
 <style>
