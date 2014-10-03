@@ -36,7 +36,7 @@
     <?php 
         echo CHtml::label(BaseModule::t('rec', 'Enter your Perfect Money data'), '');
         echo CHtml::label(BaseModule::t('rec', 'Account') . ':','account', '');
-        echo CHtml::textField('account');
+        echo CHtml::textField('account','',array('style'=>'width:130px'));
         echo CHtml::label(BaseModule::t('rec', 'password') . ':','password', '');
         echo CHtml::passwordField('password');
     ?>
