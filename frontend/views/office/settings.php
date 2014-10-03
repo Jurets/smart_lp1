@@ -297,7 +297,11 @@ $form = $this->beginWidget('CActiveForm', array(
                     aImg.src = e.target.result;
                 };
             })(img);
-            $('#shag-1-1-vibrat-image').html(file.name);
+            var fileName = file.name;
+            if(fileName.length > 30) {
+                fileName = fileName.substr(0, 29) + '...';
+            }
+            $('#shag-1-1-vibrat-image').html(fileName);
             reader.readAsDataURL(file);
         }
     }
