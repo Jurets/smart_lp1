@@ -113,7 +113,7 @@ class RegisterController extends EMController
 
         }else $details = '';
         
-        $sql = 'SELECT * FROM languages';
+        $sql = 'SELECT * FROM Languages';
         $connection=Yii::app()->db; 
         $command=$connection->createCommand($sql);
         $languages=$command->queryAll(); 
