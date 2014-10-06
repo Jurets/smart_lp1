@@ -212,11 +212,16 @@ class OfficeController extends EMController
             }
             
         }
-        $sql = 'SELECT * FROM languages';
-        $connection=Yii::app()->db; 
-        $command=$connection->createCommand($sql);
-        $languages=$command->queryAll(); 
-        
+        $sql = 'SELECT * FROM Languages';
+        $connection = Yii::app()->db; 
+        $command = $connection->createCommand($sql);
+        $languages = $command->queryAll(); 
+        if(empty($languages)){
+            $languages = array(array(
+                'lang' => 'ru',
+                'name' => 'Russian'
+                ));
+        }
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
             'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year, 'languages' => $languages));
     }
