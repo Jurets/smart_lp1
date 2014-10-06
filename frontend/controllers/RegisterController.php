@@ -66,7 +66,7 @@ class RegisterController extends EMController
             $participant->refer_id = $referal->id;
             //поставить номер в списке приглашенных
             $participant->invite_num = $inviter->inviteCount + 1;
-
+            
             //сгенерить временный ключ
             $participant->activkey = Yii::app()->getModule('user')->encrypting(microtime() . $participant->password);
             //Начало обработки, валидация
@@ -92,6 +92,11 @@ class RegisterController extends EMController
                 } else {
                     $participant->photo = '';
                 }
+                $lang = Yii::app()->getRequest()->getPost('language');
+                if(!empty($lang)){
+                    $participant->sys_lang = $lang;
+                }
+                
                 //пароль пока не хэшируем (захешируется позже при активации)
                 if ($participant->save(false)) {
                     //отсылка почты для подтверждения регистрации
@@ -107,11 +112,17 @@ class RegisterController extends EMController
             $details = Requisites::getInstance(Yii::app()->language)['details'];
 
         }else $details = '';
+        
+        $sql = 'SELECT * FROM Languages';
+        $connection=Yii::app()->db; 
+        $command=$connection->createCommand($sql);
+        $languages=$command->queryAll(); 
 
         $this->render('register', array(
             'participant'=>$participant,
             'details'=>$details,
             'step'=>1,
+            'languages' => $languages
         ));
     }
     

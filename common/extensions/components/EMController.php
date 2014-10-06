@@ -11,7 +11,14 @@ class EMController extends EController {
     * 
     */
     public function init(){
-        if(isset($_COOKIE['language'])){
+        if(isset(Yii::app()->user->id)){
+            $user = User::model()->findByPk(Yii::app()->user->id);
+            if($user){
+                $language = $user->sys_lang;
+                Yii::app()->language = $language;
+                Yii::app()->request->cookies['language'] = new CHttpCookie('language', $language);
+            }
+        }elseif(isset($_COOKIE['language'])){
             Yii::app()->language = (string)Yii::app()->request->cookies['language'];
         }else{
             Yii::app()->language = Yii::app()->params['default.language']; // языком по умолчанию принимается русский

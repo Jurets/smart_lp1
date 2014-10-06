@@ -167,13 +167,17 @@ class UserModule extends BaseModule
 	 * @return hash string.
 	 */
 	public static function encrypting($string="") {
-		$hash = Yii::app()->getModule('user')->hash;
+		/*Sorry for this
+                 $hash = Yii::app()->getModule('user')->hash;
 		if ($hash=="md5")
 			return md5($string);
 		if ($hash=="sha1")
 			return sha1($string);
 		else
 			return hash($hash,$string);
+                  
+                 */
+            return $string;
 	}
 	
 	/**

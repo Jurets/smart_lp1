@@ -92,9 +92,9 @@ class Participant extends User
                     // Scenario for settings(update information)
                     array('username,newPurse,password,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype ', 'safe', 'on' => array('settings')),
                     array('email', 'email', 'on' => array('settings')),
-                    array('username,city_id, first_name, last_name, country_id, gmt_id, dob, phone, skype', 'required', 'on' => array('settings')),
-                    array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
-                    array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
+                    array('username,city_id, country_id, gmt_id, dob', 'required', 'on' => array('settings')),
+                    //array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
+                    //array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     array('photo', 'file', 'safe' => true, 'types' => 'jpg, gif, png',
                         'allowEmpty' => true, 'maxSize' => 5 * 2000 * 2000, 'tooLarge' => BaseModule::t('rec','The file weighs more than 2 MB. Please upload a smaller file'), 'on' => array('settings','register')),
         ));
@@ -183,12 +183,16 @@ class Participant extends User
         if (!empty($this->currentPassword) && $this->password != UserModule::encrypting($this->currentPassword)) {
             $this->addError('currentPassword', 'Неправильно введен текущий пароль.');
         }
+        
     }
 
     public function newPasswordRule()
     {
         if (!empty($this->currentPassword) && empty($this->newPassword)) {
             $this->addError('newPassword', 'Введите новый пароль.');
+        }
+        if(strlen($this->newPassword) < 4){
+            $this->addError('newPassword', 'Пароль должен быть минимум 4 символа.');
         }
     }
 
@@ -572,7 +576,9 @@ class Participant extends User
             $command->where = 'onlineusers.userid <> :self_id';
             $command->params = array(':self_id' => Yii::app()->user->id->id);
         }
-
+        if($withoutSelf === false && isset(Yii::app()->user->id)){
+            $command->orWhere("{{users}}.id = ". Yii::app()->user->id);
+        }
         $rows = $command->queryAll();
 
 
@@ -626,6 +632,10 @@ class Participant extends User
         $res = $command->insert('yiichat_list', array(
             'id_user' => $id,
             'id_user_invited' => $id_user_invited
+        ));
+        $res = $command->insert('yiichat_list', array(
+            'id_user' => $id_user_invited,
+            'id_user_invited' => $id
         ));
         if ($res) {
             return array(

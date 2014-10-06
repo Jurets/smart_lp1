@@ -7,28 +7,29 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 
 ?>
 <div class="info">
-    <?php echo Yii::app()->user->getFlash('success'); ?>
+    <?php echo Yii::app()->user->getFlash('success');?>
+    <?php echo Yii::app()->user->getFlash('fail'); ?>
 </div>
 <div id="main-div">
     <!-- current status -->
-    <p>Ваш статус : <?php echo $status['name'];?></p>
+    <p><?php echo BaseModule::t('rec', 'Your status').' : '. $status['name'];?></p>
 
     <?php
     if (!$defective_status) {
         if ($max_status) {
             ?>
             <br>
-            <p>Вы достигли максимального статуса в Бизнес Клубе!</p>
+            <p><?php echo BaseModule::t('rec', 'You have reached the maximum status in the Business Club')?>!</p>
         <?php
         } else {
             if ($model->tariff_id >= 2) {
                 ?>
-                <p>Чтобы поднять ваш статус необходимо сделать взнос.</p>
+                <p><?php echo BaseModule::t('rec', 'To raise your status you must pay payment')?></p>
                 <?php echo CHtml::label('Сумма: ', 'listData');
                 echo CHtml::dropDownList('listData', 100, $tariffListData, array('id' => 'dropDownId'));
             } elseif ($model->tariff_id < 2) {
                 ?>
-                <p>Сначала вы должны оплатить за регистрацию 50$ после этого вам будет доступен 'Бизнес Клуб'</p>
+                <p><?php echo BaseModule::t('rec', 'First you have to pay $ 50 for registration after that you will be available to Business Club')?></p>
                 <input id="sum" type="hidden" value="1">
 
             <?php
@@ -40,7 +41,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
         ?>
         <p><?php if($message != ''){echo $message;}?></p>
         <br>
-        <p>Платежная система на данный момент не доступна.Приносим наши извинения.</p>
+        <p><?php echo BaseModule::t('rec', 'The payment system is not available now')?></p>
     <?php
     }
     ?>

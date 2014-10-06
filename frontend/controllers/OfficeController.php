@@ -106,7 +106,7 @@ class OfficeController extends EMController
         $month = $participant->dob != '' ? $date[1] : '';
         $year = $participant->dob != '' ? $date[0] : '';
 
-        $places = Countries::getCountriesList();
+        $places = Countries::getFullCountriesList();
         $citesByCountryId = Cities::getCitiesListByCountry($participant->country_id);
 
         foreach( Gmt::getTimezonesList() as $key=>$timezone){
@@ -126,6 +126,7 @@ class OfficeController extends EMController
             $country_id = Yii::app()->getRequest()->getPost('countrySelect');
             $currentPassword = Yii::app()->getRequest()->getPost('currentPassword');
             $newPassword = Yii::app()->getRequest()->getPost('newPassword');
+            $lang = Yii::app()->getRequest()->getPost('language');
             $participant->currentPassword = $currentPassword;
             $participant->newPassword = $newPassword;
             $participant->gmt_id = $timeZone;
@@ -147,8 +148,11 @@ class OfficeController extends EMController
             $participant->attributes = $_POST['Participant'];
             $newEmail = $participant->email;
             if ($participant->validate()) {
-                if ($participant->password == md5($participant->currentPassword) && $newPassword != '') {
-                    $participant->password = md5($newPassword);
+                if ($participant->password == $participant->currentPassword 
+                        && !empty($participant->newPassword)
+                        && strlen($participant->newPassword) > 3
+                        ) {
+                    $participant->password = $newPassword;
                 }
                 if ($_FILES['Participant']['name']['photo'] != '') {
 
@@ -189,6 +193,10 @@ class OfficeController extends EMController
                 $participant->email = $currentEmail;
                 $participant->new_email = $newEmail;
                 $participant->activkey = UserModule::encrypting(microtime() . $participant->password);
+                if(!empty($lang)){
+                    $participant->sys_lang = $lang;
+                }
+                
                 $participant->save(false);
 
                 if ($currentEmail != $_POST['Participant']['email']) {
@@ -204,8 +212,18 @@ class OfficeController extends EMController
             }
             
         }
+        $sql = 'SELECT * FROM Languages';
+        $connection = Yii::app()->db; 
+        $command = $connection->createCommand($sql);
+        $languages = $command->queryAll(); 
+        if(empty($languages)){
+            $languages = array(array(
+                'lang' => 'ru',
+                'name' => 'Russian'
+                ));
+        }
         $this->render('settings', array('participant' => $participant, 'places' => $places, 'citesByCountryId' => $citesByCountryId,
-            'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year));
+            'gmtZone' => $gmtZone, 'day' => $day, 'month' => $month, 'year' => $year, 'languages' => $languages));
     }
 
     /**
@@ -298,7 +316,7 @@ class OfficeController extends EMController
             $chat_id = $interlocutor . "_" . $user_id;
         }
         //команда
-        $onlineusers = Participant::getTeamUsers(true); //true - не показывать себя
+        $onlineusers = Participant::getTeamUsers(false); //true - не показывать себя
         //текущий юзер
         $user = Participant::model()->findByPk(Yii::app()->user->id);
         //юзеры онлайн

@@ -22,10 +22,27 @@
         </div>
         <div class="username">
             <a href="<?php
-            echo Yii::app()->createAbsoluteUrl('office/chat/', array(
+            if(Yii::app()->user->id !== $item['id']){
+               echo Yii::app()->createAbsoluteUrl('office/chat/', array(
                 'interlocutor' => $item['id']
-            ))
-            ?>"><?= $item['username'] ?></a>
+            ));
+            }else{
+                echo "#";
+            }
+            
+            ?> "style='width:150px;height:25px;display: block;'><?php 
+            $_username = $item['username'];
+            $start = 17;
+            if($_username === null){
+                $_username = 'Noname';
+            }
+            if(mb_strlen($_username) > $start){
+               $_username = mb_substr($_username, 0, $start, 'UTF-8');
+            }
+            
+            echo $_username;
+            
+                    ?></a>
 
         </div>
         <div class="info-image"> 

@@ -250,7 +250,7 @@ class SiteController extends LoginController
                     }
                 } else {
                     $defective_status = true;
-                    $message = 'Не задан кошелек Бизнес Клуба';
+                    $message = BaseModule::t('rec', 'Business Club purse not set');
                 }
             } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
                 if (Requisites::purseClub()) {

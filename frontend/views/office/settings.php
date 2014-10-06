@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ));
 ?>
 <div id="office-6-content">
-    <div><a id="logo" href="#"> </a></div>
+<!--    <div><a id="logo" href="#"> </a></div>-->
     <div id="FORMA">
         
         <p class="zagolovok"><?php echo BaseModule::t('rec', 'ACCOUNT SETTINGS') ?></p>
@@ -32,17 +32,17 @@ $form = $this->beginWidget('CActiveForm', array(
              </div>
         <?php } ?>   
 
-        <p class="sub1"><?php echo BaseModule::t('rec', 'USERNAME') ?>:</p>
+        <p class="sub1"><?php echo BaseModule::t('rec', 'USERNAME') ?>*:</p>
         <?php echo $form->textField($participant, 'username', array('class' => 'textbox1')); //ИМЯ ПОЛЬЗОВАТЕЛЯ ?>
         <?php echo $form->error($participant, 'username', array('class' => 'error-message em-1')); //ИМЯ ПОЛЬЗОВАТЕЛЯ ?>
 
 
-        <p class="sub2"><?php echo BaseModule::t('rec', 'NAME') ?>*:</p>
+        <p class="sub2"><?php echo BaseModule::t('rec', 'NAME') ?>:</p>
         <?php echo $form->textField($participant, 'first_name', array('class' => 'textbox2')); //ИМЯ ?>
         <?php echo $form->error($participant, 'first_name', array('class' => 'error-message em-2')); //ИМЯ ?>
 
 
-        <p class="sub2-1"><?php echo BaseModule::t('rec', 'SURNAME') ?>*:</p>
+        <p class="sub2-1"><?php echo BaseModule::t('rec', 'SURNAME') ?>:</p>
         <?php echo $form->textField($participant, 'last_name', array('class' => 'textbox2-1')); //ФАМИЛИЯ ?>
         <?php echo $form->error($participant, 'last_name', array('class' => 'error-message em-3')); //ФАМИЛИЯ ?>
 
@@ -80,16 +80,16 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option1text"> <?php echo BaseModule::t('rec', 'COUNTRY') ?>*:</p>
         <input type="checkbox" name="country_access" id="checkboxG51" value="1" class="css-checkbox1" <?php if($participant->country_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG51" class="css-label1"></label>
+        <label for="checkboxG51" class="css-label1" style="width: 38px; height: 38px;"></label>
 
         <a href="#" name="label-1" class="vopros1"></a>
 
         <select name="countrySelect" class="shag-1-1-option1">
-            <?php foreach($places as $key=>$place) {?>
-                <?php if($participant->country_id == $key) {?>
-                <option value="<?php echo $key; ?>" selected ><?php echo $place; ?></option>
+            <?php foreach($places as $place) {?>
+                <?php if($participant->country_id == $place['id']) {?>
+                <option value="<?php echo $place['id']; ?>" selected ><?php echo ' +( ' . $place['phone_code'] . " ) " . $place['name']; ?></option>
                 <?php }else{?>
-                <option value="<?php echo $key; ?>" ><?php echo $place; ?></option>
+                <option value="<?php echo $place['id']; ?>" ><?php echo ' +( ' . $place['phone_code'] . " ) " . $place['name']; ?></option>
                 <?php } ?>
             <?php } ?>
         <?php echo $form->error($participant, 'country' , array('class' => 'error-message em-5')); //Страна ?>
@@ -97,7 +97,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <input type="checkbox" name="city_access" id="checkboxG52"  value="1" class="css-checkbox2" <?php if($participant->city_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG52" class="css-label2" style="width: 40px; height: 40px; padding: 0"></label>
+        <label for="checkboxG52" class="css-label2" style="width: 38px; height: 38px; padding: 0"></label>
 
 
         <p class="shag-1-1-option2text"><?php echo BaseModule::t('rec', 'CITY') ?>*: </p>
@@ -117,7 +117,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
             <p class="shag-1-1-option1-1text"> <?php echo BaseModule::t('rec','SKYPE:')?></p>
             <input type="checkbox" name="skype_access" id="checkboxG53" value="1" class="css-checkbox3"  <?php if($participant->skype_access == 1){echo 'checked="checked"';} ?> />
-            <label for="checkboxG53" class="css-label3" style="width: 40px; height: 40px; padding: 0"></label>
+            <label for="checkboxG53" class="css-label3" style="width: 38px; height: 38px; padding: 0"></label>
 
 <!--       <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>-->
         <a href="#" name="label-3" class="vopros1-1"></a>
@@ -126,21 +126,21 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 
-        <p class="sub1-1"><?php echo BaseModule::t('rec', 'VIBER / MOBILE') ?>*:</p>
+        <p class="sub1-1"><?php echo BaseModule::t('rec', 'VIBER / MOBILE') ?>:</p>
         <?php echo $form->textField($participant, 'phone', array('class' => 'textbox1-1')); //VIBER / МОБИЛЬНЫЙ ?>
         <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
 
 
-        <p class="sub2-3"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>*:</p>
+        <p class="sub2-3" style="font-size: 20px"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>:</p>
 
 
-        <?php echo CHtml::passwordField('currentPassword','', array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
+        <?php echo CHtml::textField('currentPassword',$participant->password, array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'currentPassword', array('class' => 'error-message em-12')); //ТЕКУЩИЙ ПАРОЛЬ ?>
 
-        <p class="sub2-4"><?php echo BaseModule::t('rec', 'NEW PASSWORD') ?>*:</p>
+        <p class="sub2-4"><?php echo BaseModule::t('rec', 'NEW PASSWORD') ?>:</p>
 
 
-        <?php echo CHtml::passwordField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
+        <?php echo CHtml::textField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'newPassword', array('class' => 'error-message em-13')); //НОВЫЙ ПАРОЛЬ ?>
 
 
@@ -152,15 +152,15 @@ $form = $this->beginWidget('CActiveForm', array(
         <a href="#" class="pm1"></a>
 
 
-        <p class="shag-1-1-option2-1text">EMAIL*: </p>
+        <p class="shag-1-1-option2-1text" style="font-size: 20px">EMAIL*: </p>
         <input type="checkbox" name="email_access" value="1" id="checkboxG54" class="css-checkbox4" <?php if($participant->email_access == 1){echo 'checked="checked"';} ?>/>
-        <label for="checkboxG54" class="css-label4" style="width: 40px; height: 40px; padding: 0"></label>
+        <label for="checkboxG54" class="css-label4" style="width: 38px; height: 38px; padding: 0"></label>
 
         <a href="#" name="label-4" class="vopros2-1"></a>
         <?php echo $form->textField($participant, 'email', array('class' => 'shag-1-1-option2-1')); //Email ?>
         <?php echo $form->error($participant, 'email',array('class' => 'error-message em-11')); //Email ?>
 
-        <p class="shag-1-1-option3text"> <?php echo BaseModule::t('rec', 'MY TIME') .'*' ?>:</p>
+        <p class="shag-1-1-option3text" style="font-size: 20px;"> <?php echo BaseModule::t('rec', 'MY TIME') .'*' ?>:</p>
         <?php
             if(isset($participant->getErrors()['gmt_id']))
             echo '<div class="error-message em-6and5">'. $participant->getErrors()['gmt_id'][0] .'</div>' 
@@ -179,15 +179,18 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
         <p class="shag-1-1-option3-1text">  <?php echo BaseModule::t('rec', 'LANGUAGE') ?>:</p>
-        <select class="shag-1-1-option3-1">
+        <select class="shag-1-1-option3-1" name="language">
 
-
-            <option value="volvo"><?php echo BaseModule::t('rec', 'RUSSIAN') ?></option>
-            <option value="saab"><?php echo BaseModule::t('rec', 'RUSSIAN2') ?></option>
-
+            <?php foreach ($languages as $language) { ?>
+                    
+               
+            <option value="<?php echo $language['lang']?>"> <?php echo BaseModule::t('rec', $language['name']) ?></option>
+            
+ <?php }?>
         </select>
+       
 
-        <p class="shag-1-1-option5text"><?php echo BaseModule::t('common', 'YOUR PURSE') ?></p>
+        <p class="shag-1-1-option5text" style="font-size: 20px;"><?php echo BaseModule::t('common', 'YOUR PURSE') ?></p>
 
 
         <p class="dannie"> <?php echo BaseModule::t('rec', 'PAYMENT DETAILS') ?>:</p>
@@ -197,14 +200,14 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 
-        <p class="shag-1-1-option4text"> <?php echo BaseModule::t('rec', 'AVATAR') ?>:</p>
+        <p class="shag-1-1-option4text" style="font-size: 20px"> <?php echo BaseModule::t('rec', 'AVATAR') ?>*:</p>
         <?php if($participant->photo != '') { ?>
             <div id="shag-1-1-photo-db">
 
-        <?php echo CHtml::image(UrlHelper::getImageUrl('resized-'.$participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
+        <?php echo CHtml::image(UrlHelper::getImageUrl('resized-'.$participant->photo),'',array('style' => 'width:250px; height: 175px', 'id'=>'thumbnil')); ?>
             </div>
         <?php } else{ ?>
-            <div id="shag-1-1-avatar"></div>
+            <div id="shag-1-1-avatar"><img id="thumbnil" style="width:100%; height: 100%; border: none;"  src="" alt=""/></div>
         <?php } ?>
 
         <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo BaseModule::t('rec', 'SELECT IMAGE') ?></span>
@@ -235,7 +238,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
     </div>
 
-    <div><a id="logo" href="/"> </a></div>
+<!--    <div><a id="logo" href="/"> </a></div>-->
 
 </div>
 
@@ -270,14 +273,38 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
     $('.shag-fileFiled').change(function() {
-        var fileName = $(this).val();
-        if(fileName.length > 30) {
-            fileName = fileName.substr(0, 29) + '...';
-        }
-        $('#shag-1-1-vibrat-image').html(fileName);
+//        var fileName = $(this).val();
+//        if(fileName.length > 30) {
+//            fileName = fileName.substr(0, 29) + '...';
+//        }
+//        $('#shag-1-1-vibrat-image').html(fileName);
+        showMyImage(this);
     });
 
-
+    function showMyImage(fileInput) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img=document.getElementById("thumbnil");
+            img.file = file;
+            var reader = new FileReader();
+            reader.onload = (function(aImg) {
+                return function(e) {
+                    aImg.src = e.target.result;
+                };
+            })(img);
+            var fileName = file.name;
+            if(fileName.length > 30) {
+                fileName = fileName.substr(0, 29) + '...';
+            }
+            $('#shag-1-1-vibrat-image').html(fileName);
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 
 <style>
@@ -351,9 +378,13 @@ $form = $this->beginWidget('CActiveForm', array(
     .em-14{ top: 575px; left:625px; }
 
     select {
-       width: 246px!important;
+       width: 246px;
     }
-
+   
+  
+   
+    
+    
     select.textbox3-1, select.textbox3-2{
         width: 60px!important;
     }
@@ -361,5 +392,23 @@ $form = $this->beginWidget('CActiveForm', array(
     select.textbox3-3{
         width: 120px!important;
     }
+    
+    #office-6-content {
+        
+    }
 
 </style>
+
+<?php
+  $user_agent = $_SERVER["HTTP_USER_AGENT"];
+  if (strpos($user_agent, "Firefox") == true) {
+      ?>
+<style>
+    select {
+       background-image: none;
+    }
+</style>
+          <?php
+  };
+  
+?>

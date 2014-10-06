@@ -63,10 +63,16 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo $form->error($participant, 'city_id', array('class'=>'error-message em-4')); //логин ?>
 
 <p class="shag-1-1-option3text">  <?php echo BaseModule::t('common', 'LANGUAGE') ?>:</p>
-<select class="shag-1-1-option3">
-    <option value="volvo"><?php echo BaseModule::t('common', 'RUSSIAN') ?></option>
-    <option value="saab"><?php echo BaseModule::t('common', 'RUSSIAN2') ?></option>
-</select>                          
+<!--<select class="shag-1-1-option3">
+    <option value="volvo"><?php // echo BaseModule::t('common', 'RUSSIAN') ?></option>
+    <option value="saab"><?php // echo BaseModule::t('common', 'RUSSIAN2') ?></option>
+</select> 
+-->
+   <select class="shag-1-1-option3" name="language">
+ <?php foreach ($languages as $language) { ?>
+         <option value="<?php echo $language['lang']?>"> <?php echo BaseModule::t('rec', $language['name']) ?></option>
+ <?php }?>
+   </select>
 
 <p class="shag-1-1-option4text">  <?php echo BaseModule::t('common', 'AVATAR') ?>:</p>
 
@@ -85,7 +91,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo CHtml::image(UrlHelper::getImageUrl('resized-'.$participant->photo),'',array('style' => 'width:250px; height: 175px')); ?>
     </div>
 <?php } else{ ?>
-    <div id="shag-1-1-avatar"></div>
+    <div id="shag-1-1-avatar"><img id="thumbnil" style="width:100%; height: 100%; border: none;"  src="" alt=""/></div>
 <?php } ?>
 <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo BaseModule::t('common', 'SELECT IMAGE') ?></span>
     <?php echo $form->fileField($participant, 'photo',array('class'=>'shag-fileFiled')); ?>
@@ -140,7 +146,7 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
     <a href="#">
         <img id="close-btn" src="/images/Х.png" width="22">
     </a>
-</div>           
+</div>
               
 <script>
     $(document).ready(function() {
@@ -155,14 +161,44 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
     });
 
     $('.shag-fileFiled').change(function() {
-        var fileName = $(this).val();
-        if(fileName.length > 30) {
+//        var fileName = $(this).val();
+//        if(fileName.length > 30) {
+//            fileName = fileName.substr(0, 29) + '...';
+//        }
+//        $('#shag-1-1-vibrat-image').html(fileName);
+        showMyImage(this);
+    });
+
+    function showMyImage(fileInput) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img=document.getElementById("thumbnil");
+            img.file = file;
+            var reader = new FileReader();
+            reader.onload = (function(aImg) {
+                return function(e) {
+                    aImg.src = e.target.result;
+                };
+            })(img);
+            var fileName = file.name;
+            if(fileName.length > 30) {
             fileName = fileName.substr(0, 29) + '...';
         }
-        $('#shag-1-1-vibrat-image').html(fileName);
-    });
+            $('#shag-1-1-vibrat-image').html(fileName);
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 <style>
+    div#shag-1-1-vibrat{
+        overflow: hidden;
+    }
+
     #shag-1-1-vibrat input{
         padding: 0;
         margin: 0;
@@ -197,4 +233,16 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
     }
     /* photo */
     .em-9{ top: 590px; left:422px; }
+
+    div#topLine{
+        height: 39px;
+    }
+
+    a#logo{
+        left: 0;
+    }
+
+    div.footer div#footer-bark-bg{
+        display: none;
+    }
 </style>
