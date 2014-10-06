@@ -18,5 +18,5 @@ $urlLogin = Yii::app()->createAbsoluteUrl('/');
     <?php echo BaseModule::t('rec', 'This link is unique and will operate until you pass all registration steps') ?>
 </p>
 <p><?php echo BaseModule::t('rec', 'Best Regards') ?>,<br/>
-    <?php echo BaseModule::t('rec', 'administration site') ?> <br/>
+    <?php echo BaseModule::t('rec', 'administration') ?> <br/>
     <a target="_blank" href=""><?= CHtml::encode(Yii::app()->name) ?></a></p>
