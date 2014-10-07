@@ -56,7 +56,7 @@
         <p> <a   id="endText"  href="#">© 2014 <?php echo BaseModule::t('rec', 'World Charity System JMWS LLC POLAND') ?></a></p>
 
     </div>
-    <div id="footer-bark-bg"></div>
+<!--    <div id="footer-bark-bg"></div>-->
 </div>
 
 <script>

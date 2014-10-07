@@ -38,7 +38,7 @@
         echo CHtml::label(BaseModule::t('rec', 'Account') . ':','account', '');
         echo CHtml::textField('account','',array('style'=>'width:130px'));
         echo CHtml::label(BaseModule::t('rec', 'password') . ':','password', '');
-        echo CHtml::passwordField('password');
+        echo CHtml::passwordField('password','',array('style'=>'width:130px'));
     ?>
 </div>
 
