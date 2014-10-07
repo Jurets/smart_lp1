@@ -1,8 +1,8 @@
 <?php
 $this->breadcrumbs=array(
   BaseModule::t('rec', 'Unified database participants', array(), 'participant') => array('admin'),
-	$model->username=>array('view','id'=>$model->id),
-	(BaseModule::t('common', 'Update')),
+    ucfirst(BaseModule::t('rec', 'user')).': '.$model->username=>array('view','id'=>$model->id),
+	BaseModule::t('common', 'Update'),
 );
 $this->menu=array(
     array('label'=>BaseModule::t('rec','Create User'), 'url'=>array('create')),
