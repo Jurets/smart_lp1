@@ -108,6 +108,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'income',
             'type'=>'raw',
+            'value' => 'PmTransactionLog::getIncomeById($data->id)',
             //'filter'=>TbHtml::activeTextField($model, 'income', array('style'=>'width: 100px')),
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"income"),array("admin/view","id"=>$data->id))',
@@ -117,6 +118,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'transfer_fund',
             'type'=>'raw',
+            'value' => 'PmTransactionLog::getTransferFundById($data->id)',
             //'filter'=>TbHtml::activeTextField($model, 'transfer_fund', array('style'=>'width: 100px')),
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"transfer_fund"),array("admin/view","id"=>$data->id))',
