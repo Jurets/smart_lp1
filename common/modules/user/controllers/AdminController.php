@@ -131,9 +131,17 @@ class AdminController extends EMController
 	 */
 	public function actionView()
 	{
-		$model = $this->loadModel($_GET['id']);
+            $id = $_GET['id'];
+		$model = $this->loadModel($id);
+                //Доход
+                $income = PmTransactionLog::getIncomeById($id);
+                //Отчисления
+                $transferFund = PmTransactionLog::getTransferFundById($id);
+                
 		$this->render('view',array(
 			'model'=>$model,
+                        'income' => $income,
+                        'transferFund' => $transferFund
 		));
 	}
 

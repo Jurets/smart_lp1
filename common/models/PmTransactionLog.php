@@ -428,4 +428,30 @@ class PmTransactionLog extends CActiveRecord
             $date = implode('.', $buff);
             return $date;
        }
+       
+       /*
+        * Доход пользователя
+        */
+       public static function getIncomeById($id){
+            $db = Yii::app()->db;
+            $incomeCommand = $db->createCommand('select  sum(amount) sum from pm_transaction_log where to_user_id = '. $id);
+            $income = $incomeCommand->query()->read();
+            if(!isset($income['sum'])){
+                return '0';
+            }
+            return $income['sum'];
+       }
+       
+       /*
+        * Отчисления пользователя
+        */
+       public static function getTransferFundById($id){
+            $db = Yii::app()->db;
+            $incomeCommand = $db->createCommand('select  sum(amount) sum from pm_transaction_log where from_user_id = '. $id );
+            $transferFund = $incomeCommand->query()->read();
+            if(!isset($transferFund['sum'])){
+                return '0';
+            }
+           return $transferFund['sum'];
+       }
 }
