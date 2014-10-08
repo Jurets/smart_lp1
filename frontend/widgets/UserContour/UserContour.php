@@ -72,24 +72,34 @@ class UserContour extends CWidget {
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read();
         $list = $db_connector->createCommand(
-            'SELECT to_user_id tr_kind_id,date,first_name,last_name,code
+            'SELECT to_user_id tr_kind_id,date,first_name,last_name,u.create_at,code,u.username
              FROM pm_transaction_log
-             JOIN tbl_users
+             JOIN tbl_users u
              ON to_user_id = id
              LEFT JOIN cities c
              ON city_id = c.id
              LEFT JOIN countries co
              ON co.id = c.country_id
              WHERE tr_kind_id = 2
+             ORDER BY u.create_at DESC
              LIMIT 6  ');
         $listCommission = $list->query();
-        $listCommission = $listCommission->read();
+        $listCommission = $listCommission->readAll();
         if($amountCommissionCount['sum(amount)'] != null){
         $finalCount = floor($amountCommissionCount['sum(amount)']);
         $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
-        foreach ($listCommission as $commision) {
+       /* foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
             $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). ' '. $listCommission['first_name'] .' '. $listCommission['last_name'];
+        }*/
+        foreach($listCommission as $index=>$li){
+           $this->dataPull['userList'][$index]['country'] = $li['code'];
+            if($li['first_name'] &&  $li['last_name']){
+                $name =  $li['first_name'] .' '. $li['last_name'];
+            }else $name = $li['username'];
+
+           $this->dataPull['userList'][$index]['content'] =  ' '. $name;
+            
         }
         }else{
             $this->dataPull['numberField'] = '$00 000 000';
