@@ -424,6 +424,10 @@ class Participant extends User
             $criteria->addInCondition('tariff_id', $this->_businessclubIDs);
             $criteria->addCondition('id <>  :id');
             $criteria->params[':id'] = $this->id;
+            /* ограничиваем вывод тоько теми, кто пришел в бизнес-клуб после текущего пользователя */
+            // получим дату вступления в бизнес-клуб для текущего пользователя [':busy_date']
+            $criteria->addCondition('busy_date > :busy_date');
+            $criteria->params[':busy_date'] = $this->busy_date;
             $this->clubMembers = $this->findAll($criteria);
         }
     }
