@@ -66,7 +66,7 @@ div#whiteBG{
 
 div.footer{
     margin-top: 0px;
-    height: 290px;
+    height: 240px;
     padding-top: 58px;
 }
 div.footer #footer{
