@@ -65,8 +65,12 @@ div#whiteBG{
 }
 
 div.footer{
-    margin-top: -50px;
-    height: 230px;
+    margin-top: 0px;
+    height: 290px;
+    padding-top: 58px;
+}
+div.footer #footer{
+    top: 0;
 }
 
 div#contentBG{

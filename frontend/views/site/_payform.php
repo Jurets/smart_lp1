@@ -26,12 +26,17 @@
         margin-left:30px;
     }
     #password{
-        margin-left:35px;
+        margin-left:36px;
     }
     #div-status-form input{
         margin-top : 10px;
         margin-bottom : 10px;
         height: 35px !important;
+    }
+    #div-status-form input[type='submit']{
+        height: 25px !important;
+        padding-top: 0px;
+        padding-bottom: 35px;
     }
 </style>
 <script>
