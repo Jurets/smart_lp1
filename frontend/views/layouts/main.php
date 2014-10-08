@@ -67,24 +67,24 @@ $titles = Information::getAllTitles();
                             color: #ababab;
                         }
                         .moveRight3 {
-                            background-image: url("../images/in.png");
-                            background-position: 66px 2px;
-                            background-repeat: no-repeat;
-                            height: 56px;
-                            left: 862px;
-                            padding-top: 4px;
-                            position: absolute;
-                            top: -6px;
-                            width: 80px;
-                        }
+							background-image: url("../images/in.png");
+							background-position: 70px 2px;
+							background-repeat: no-repeat;
+							height: 56px;
+							left: 860px;
+							padding-top: 4px;
+							position: absolute;
+							top: -6px;
+							width: 82px;
+						}
                         #bgIn {
-                            background-color: #383838;
-                            height: 38px;
-                            left: 555px;
-                            position: absolute;
-                            top: -9px;
-                            width: 387px;
-                        }
+							background-color: #383838;
+							height: 38px;
+							left: 556px;
+							position: absolute;
+							top: -9px;
+							width: 393px;
+						}
                     </style>                
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/index')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
                     <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;Настройки </a> </li>

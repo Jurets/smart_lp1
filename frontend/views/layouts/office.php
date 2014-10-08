@@ -47,7 +47,10 @@ $titles = Information::getAllTitles();
                 <li> <a href="/info/rules"> <?php echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
                 <li> <a href="/info/questions"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
 
-                <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark"><?php echo strtoupper(BaseModule::t('rec', 'Raise status')); ?></a>
+                <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark"><?php
+                // echo strtoupper(BaseModule::t('rec', 'Raise status'));
+                echo (Yii::app()->user->tariff_id >= 3)? strtoupper(BaseModule::t('rec', 'Raise status')) : '';  
+                ?></a>
                 <li> <a href="#"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
                 <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('rec', 'Settings'); ?></a> </li>
                 <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
