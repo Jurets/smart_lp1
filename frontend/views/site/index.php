@@ -48,20 +48,20 @@
         'head' => BaseModule::t('common', 'REGISTERED MEMBERS'),
         'title'=> BaseModule::t('common', 'CURRENT REGISTRATION'),
     ))); ?>
-</div>
-    <?php $this->widget('application.widgets.UserContour.UserContour',
+<?php $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array(
             'cssID' => 2,
             'head' => BaseModule::t('common', 'FEE PAID'),
             'title'=> BaseModule::t('common', 'CURRENT PAYMENTS'),
         ))); ?>
-
-    <?php $this->widget('application.widgets.UserContour.UserContour',
+<?php $this->widget('application.widgets.UserContour.UserContour',
         array( 'params' => array(
             'cssID' => 3,
             'head' => BaseModule::t('common', 'GIVEN ON CHARITY'),
             'title'=> BaseModule::t('common', 'CURRENT FEES'),
         ))); ?>
+</div>
+
 <!--    <div id="infoBlok2">-->
 <!--        <p class="reg2">--><?php //echo BaseModule::t('common', 'FEE PAID') ?><!--</p>-->
 <!--        <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>-->
