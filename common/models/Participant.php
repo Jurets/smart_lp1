@@ -76,8 +76,8 @@ class Participant extends User
         //NOTE: you should only define rules for those attributes that
         //will receive user inputs.
         return CMap::mergeArray(parent::rules(), array(
-                    array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id,income,transfer_fund', 'safe'),
-                    array('id', 'safe', 'on' => array('search', 'seestructure')),
+                    array('tariff_id, city_id, first_name, last_name, country_id, city_id, gmt_id, dob, phone, skype, refer_id,income,transfer_fund, create_at', 'safe'),
+                    array('id', 'safe', 'on' => array('search', 'seestructure', 'structure')),
                     //регистрация 'required'
                     array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
                     array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
@@ -122,6 +122,7 @@ class Participant extends User
                     'tariff' => array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
                     //город
                     'city' => array(self::BELONGS_TO, 'Cities', 'city_id'),
+
                     //текущий бан в чате (его может и не быть!)
                     'chatban' => array(self::HAS_ONE, 'Chatban', 'user_id', 'condition' => 'active = 1' /* , 'limit'=>1 */),
                     //массив истории забанивания в чате
@@ -242,8 +243,13 @@ class Participant extends User
         $criteria->compare('user.first_name', $this->first_name, true); //поиск по фамилии
         $criteria->compare('user.last_name', $this->last_name, true); //поиск по имени
         $criteria->compare('user.tariff_id', $this->tariff_id); //поиск по тарифу
+        $criteria->compare('create_at', $this->create_at); //поиск по тарифу
+
         if (!empty($this->country_id)) {
-            $criteria->compare('country.name', $this->country_id, true); //поиск по стране
+            if ($this->scenario == 'structure')
+                $criteria->compare('country.id', $this->country_id, true);
+            else
+                $criteria->compare('country.name', $this->country_id, true); //поиск по стране
         }
         if (!empty($this->city_id)) {
             $criteria->compare('city.name', $this->city_id, true); //поиск по городу
@@ -424,6 +430,10 @@ class Participant extends User
             $criteria->addInCondition('tariff_id', $this->_businessclubIDs);
             $criteria->addCondition('id <>  :id');
             $criteria->params[':id'] = $this->id;
+            /* ограничиваем вывод тоько теми, кто пришел в бизнес-клуб после текущего пользователя */
+            // получим дату вступления в бизнес-клуб для текущего пользователя [':busy_date']
+            $criteria->addCondition('busy_date > :busy_date');
+            $criteria->params[':busy_date'] = $this->busy_date;
             $this->clubMembers = $this->findAll($criteria);
         }
     }

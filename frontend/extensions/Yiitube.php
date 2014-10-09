@@ -172,7 +172,7 @@ class Yiitube extends CWidget {
 	{
 		return <<<YOUTUBE
 		<iframe title="YouTube video player" width="{$this->_width[self::YOUTUBE][$this->size]}" height="{$this->_height[self::YOUTUBE][$this->size]}" 
-		src="{$this->youtubeVideoURL()}" frameborder="0" allowfullscreen></iframe>
+		src="{$this->youtubeVideoURL()}&wmode=transparent" frameborder="0" allowfullscreen wmode="Opaque"></iframe>
 YOUTUBE;
 	}
 	
