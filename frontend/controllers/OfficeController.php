@@ -28,6 +28,8 @@ class OfficeController extends EMController
                 $user->id = Yii::app()->user->id;
                 //добавить юзера в список онлайн  - любая активность юзера (обращение к контроллеру) 
                 $user->putUserToOnline();
+            } else {
+                $this->redirect('/');
             }
             return true;
         }
