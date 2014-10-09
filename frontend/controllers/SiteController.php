@@ -221,7 +221,8 @@ class SiteController extends LoginController
             ->select(array('tariff.id', 'mathparams.value'))
             ->from('tariff')
             ->leftJoin('mathparams', 'tariff.mathparam = mathparams.name')
-            ->where('tariff.id > :id')
+            ->leftJoin('mpversions', 'mathparams.verid = mpversions.id')
+            ->where('tariff.id > :id AND mpversions.activity = 1')
             ->queryAll(true, array(':id'=>$id));
         $tariffListData = array();
         foreach ($cmd as $row) {

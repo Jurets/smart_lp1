@@ -82,7 +82,7 @@ class UserContour extends CWidget {
              ON co.id = c.country_id
              WHERE tr_kind_id = 2 AND to_user_id IS NOT NULL
              ORDER BY date DESC
-             LIMIT 16  ');
+             LIMIT 6  ');
         $listCommission = $list->query();
         $listCommission = $listCommission->readAll();
         if($amountCommissionCount != null){
