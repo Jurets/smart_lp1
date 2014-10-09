@@ -597,9 +597,14 @@ INSERT INTO `SourceMessage` VALUES
 (562, 'rec', 'First you have to pay $ 50 for registration after that you will be available to Business Club'),
 (563, 'rec', 'The payment system is not available now'),
 (564, 'rec', 'Password'),
-(565, 'rec', 'Pay')
+(565, 'rec', 'Pay'),
+(566, 'rec', 'Your new password is: '),
+(567, 'rec', 'New password has not been sent'),
+(568, 'rec', 'Recovery password'),
+(569, 'rec', 'New password has been sent, check your e-mail'),
+(570, 'rec', 'Incorrect e-mail'),
+(571, 'rec', 'Enter your email'),
 ;
-
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
 (2,'ru','Выбрать страну'),
@@ -1164,5 +1169,11 @@ INSERT INTO `Message` VALUES
 (562, 'ru', 'Сначала вы должны оплатить за регистрацию 50$ после этого вам будет доступен Бизнес Клуб'),
 (563, 'ru', 'Платежная система на данный момент недоступна. Приносим наши извинения'),
 (564, 'ru', 'Пароль'),
-(565, 'ru', 'Оплатить')
+(565, 'ru', 'Оплатить'),
+(566, 'ru', 'Ваш новый пароль: '),
+(567, 'ru', 'Новый пароль не был выслан'),
+(568, 'ru', 'Восстановление пароля'),
+(569, 'ru', 'Новый пароль выслан на почту, проверьте свой email'),
+(570, 'ru', 'Неверный email'),
+(571, 'ru', 'Введите email'),
 ;

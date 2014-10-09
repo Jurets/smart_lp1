@@ -4,7 +4,7 @@
  */
 ?>
 
-<style type="text/css">
+<style type="text/css" id="style-login">
     .errorMessage {
         background-color: red;/*background-color: #F2DEDE;*/
         border-color: #EED3D7;
