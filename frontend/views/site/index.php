@@ -108,11 +108,9 @@ $(document).ready(function () {
         var form = $('#login').clone(true, true);
         $('#login').hide();
         var text = form.find('#sub1-login').html('ВВЕДИТЕ EMAIL, </br> УКАЗАННЫЙ ПРИ РЕГИСТРАЦИИ :');
-//        var text = form.find('#sub1-login').html('ВВЕДИТЕ EMAIL, </br> УКАЗАННЫЙ ПРИ РЕГИСТРАЦИИ :').attr('id', 'recovery-enter-email');
         var field = form.find('#UserLogin_username').attr('value', '').css('top', '50px').addClass('recovery-email');
         var message = form.find('#sub3-login').addClass('recovery-message').css({'top':100,'color':'red','text-align':'left'}).html('');
-//        var field = form.find('#UserLogin_username').attr('value', '').css('top', '50px').attr('id', 'recovery-email-text');
-        var button = form.find('#btn-submit').attr('value', 'Отправить').css('top', '125px').addClass('recovery-send');
+        var button = form.find('#btn-submit').attr({'value':'Отправить','id':'fake-button'}).css('top', '125px').addClass('recovery-send').prop('type', 'button');;
         
         $('.recovery-send').live('click', function(){
             var email = $('.recovery-form').find('.recovery-email').val();
@@ -129,7 +127,7 @@ $(document).ready(function () {
                     }
                     if(data.message){
                         $('.recovery-email').attr("disabled","disabled");
-                        $('.recovery-send').off('click');
+                        $('.recovery-send').die('click');
                         $('.recovery-message').html(data.message);
                     }
                         
@@ -144,7 +142,7 @@ $(document).ready(function () {
 //        form.attr('id', 'recovery-form').empty().css('height', 149);
         form.append(text, field, message, button);
         $('#style-login').after(form);
-        $('.in').live('click', function () {
+        $('.in, .moveRight2').live('click', function () {
             $('.recovery-form').hide().attr('id', 'new-recovery-form');
         });
     });
