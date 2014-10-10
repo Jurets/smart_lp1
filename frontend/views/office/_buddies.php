@@ -33,8 +33,8 @@
             ?> "style='width:150px;height:25px;display: block;'><?php 
             $_username = $item['username'];
             $start = 17;
-            if($_username === null){
-                $_username = 'Noname';
+            if($_username === null || empty($_username) || $_username = ' '){
+                $_username = $item['erzats'];
             }
             if(mb_strlen($_username) > $start){
                $_username = mb_substr($_username, 0, $start, 'UTF-8');

@@ -572,7 +572,7 @@ class Participant extends User
 //                 ->queryAll();
 //         return $command;
         $command = Yii::app()->db->createCommand()
-                ->select('{{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
+                ->select('{{users}}.username as erzats, {{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
                 ->from('{{users}}')
                 ->leftJoin('cities', 'cities.id = {{users}}.city_id')
                 ->leftJoin('countries', 'countries.id = cities.country_id');
