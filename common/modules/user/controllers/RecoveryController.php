@@ -18,7 +18,7 @@ class RecoveryController extends EMController
             if (!empty($email)) {
 
                 $user = User::model()->notsafe()->findByAttributes(array('email' => $email));
-                if (isset($user)) {
+                if (isset($user->email) && $user->email == $email) {
                     //Generate new password
                     $password = $this->_getNewPassword();
                     $user->password = $password;
