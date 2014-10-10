@@ -11,18 +11,42 @@ class EMController extends EController {
     * 
     */
     public function init(){
-        if(isset(Yii::app()->user->id)){
-            $user = User::model()->findByPk(Yii::app()->user->id);
-            if($user){
-                $language = $user->sys_lang;
-                Yii::app()->language = $language;
-                Yii::app()->request->cookies['language'] = new CHttpCookie('language', $language);
-            }
-        }elseif(isset($_COOKIE['language'])){
-            Yii::app()->language = (string)Yii::app()->request->cookies['language'];
-        }else{
-            Yii::app()->language = Yii::app()->params['default.language']; // языком по умолчанию принимается русский
-        }
+        
+//        if(isset(Yii::app()->user->id)){
+//            $user = User::model()->findByPk(Yii::app()->user->id);
+//            if($user){
+//                $language = $user->sys_lang;
+//                Yii::app()->language = $language;
+//                Yii::app()->request->cookies['language'] = new CHttpCookie('language', $language);
+//            }
+//        }elseif(isset($_COOKIE['language'])){
+//            Yii::app()->language = (string)Yii::app()->request->cookies['language'];
+//        }else{
+//            Yii::app()->language = Yii::app()->params['default.language']; // языком по умолчанию принимается русский
+//        }
+       
+//      if(!Yii::app()->user->isGuest){
+//          $user = User::model()->findByPk(Yii::app()->user->id);
+//          if($user && $user->superuser == 0){
+//            Yii::app()->language = $user->sys_lang;
+//            Yii::app()->request->cookies['language'] = new ChttpCookie('language', Yii::app()->language);
+//            return true;
+//          }
+//      }
+      if(isset($_COOKIE['language'])){
+          Yii::app()->language = (string)Yii::app()->request->cookies['language'];
+      }else{
+          //проверим пользователя, если он не суперюзер, запросим его язык из бд и применим
+          if(!Yii::app()->user->isGuest){
+              $user = User::model()->findByPk(Yii::app()->user->id);
+              if($user && (int)$user->superuser == 0){
+                  Yii::app()->language = $user->sys_lang;
+                  Yii::app()->request->cookies['language'] = new CHttpCookie('language', Yii::app()->language);
+                  return true;
+              }
+          }
+          Yii::app()->language = Yii::app()->params['default.language']; // языком по умолчанию принимается язык, указанный в конфигурации
+      }
     }
     
     /**
