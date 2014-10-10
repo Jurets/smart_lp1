@@ -33,7 +33,7 @@
             ?> "style='width:150px;height:25px;display: block;'><?php 
             $_username = $item['username'];
             $start = 17;
-            if($_username === null || empty($_username) || $_username = ' '){
+            if($_username === null || $_username == ' ' || empty($_username)){
                 $_username = $item['erzats'];
             }
             if(mb_strlen($_username) > $start){
