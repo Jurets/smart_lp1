@@ -26,7 +26,7 @@ $titles = Information::getAllTitles();
         <div id="topLine">
             <ul id="nav">
                 <div id="bgIn"></div>
-                <li> <a href="#" class="flag">  </a> </li>
+               <!-- <li> <a href="#" class="flag">  </a> </li> -->
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <?php } ?>
@@ -91,7 +91,7 @@ $titles = Information::getAllTitles();
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
                 <?php } ?>
             </ul>
-            <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
+            <?php $this->widget('application.widgets.LngSwitch.LngSwitch')?>
         </div>
 
         <div id="content" style="height: auto !important;">
