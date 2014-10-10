@@ -180,11 +180,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
         <p class="shag-1-1-option3-1text">  <?php echo BaseModule::t('rec', 'LANGUAGE') ?>:</p>
         <select class="shag-1-1-option3-1" name="language">
-
+            
             <?php foreach ($languages as $language) { ?>
-                    
-               
-            <option value="<?php echo $language['lang']?>"> <?php echo BaseModule::t('rec', $language['name']) ?></option>
+             
+            <option <?php echo ($language['lang'] == Yii::app()->language)? "selected" : ""?> value="<?php echo $language['lang']?>"> <?php echo BaseModule::t('rec', $language['name']) ?></option>
             
  <?php }?>
         </select>

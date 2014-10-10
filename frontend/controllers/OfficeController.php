@@ -197,6 +197,7 @@ class OfficeController extends EMController
                 $participant->activkey = UserModule::encrypting(microtime() . $participant->password);
                 if(!empty($lang)){
                     $participant->sys_lang = $lang;
+                    Yii::app()->request->cookies['language'] = new CHttpCookie('language', $lang);
                 }
                 
                 $participant->save(false);
