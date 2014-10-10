@@ -68,25 +68,26 @@ class UserContour extends CWidget {
     private function freePaid(){
         $this->operation = BaseModule::t('rec','COMISSION');
         $db_connector = Yii::app()->db;
-        $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=2');
+        $amountCommission = $db_connector->createCommand('SELECT sum(amount) as summ FROM pm_transaction_log WHERE tr_kind_id=2');
         $amountCommissionCount = $amountCommission->query();
-        $amountCommissionCount = $amountCommissionCount->read();
+        $amountCommissionCount = $amountCommissionCount->read()['summ'];
         $list = $db_connector->createCommand(
-            'SELECT to_user_id tr_kind_id,date,first_name,last_name,u.create_at,code,u.username
+            'SELECT to_user_id tr_kind_id, date, u.first_name, u.last_name,u.create_at,code,u.username
              FROM pm_transaction_log
-             JOIN tbl_users u
+             LEFT JOIN tbl_users u
              ON to_user_id = id
              LEFT JOIN cities c
              ON city_id = c.id
              LEFT JOIN countries co
              ON co.id = c.country_id
-             WHERE tr_kind_id = 2
-             ORDER BY u.create_at DESC
+             WHERE tr_kind_id = 2 AND to_user_id IS NOT NULL
+             ORDER BY date DESC
              LIMIT 6  ');
         $listCommission = $list->query();
         $listCommission = $listCommission->readAll();
-        if($amountCommissionCount['sum(amount)'] != null){
-        $finalCount = floor($amountCommissionCount['sum(amount)']);
+        if($amountCommissionCount != null){
+        //$finalCount = floor($amountCommissionCount['sum(amount)']);
+        $finalCount = $amountCommissionCount;
         $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
        /* foreach ($listCommission as $commision) {
             $this->dataPull['userList'][0]['country'] = $listCommission['code'];
