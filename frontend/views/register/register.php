@@ -243,6 +243,7 @@ TbHtml::button('Close', array('data-dismiss' => 'modal')),
     }
 
     div.footer div#footer-bark-bg{
-        display: none;
+        position: absolute;
+        top: 1437px;
     }
 </style>

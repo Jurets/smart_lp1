@@ -6134,6 +6134,7 @@ html, body {
     /*margin-top: -260px; */
     margin-top: 0;
     background: #232323;
+    position: relative;
 }
 #BGDivs {
     position: absolute;
@@ -6268,8 +6269,8 @@ html, body {
 #footer-bark-bg {
     height: 67px;
     width: 100%;
-    position: relative;
-    top: -67px;
+    position: absolute;
+    top: 192px;
     background: #1e1e1e;
 }
 
