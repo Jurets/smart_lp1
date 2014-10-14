@@ -12,7 +12,11 @@ class LoginController extends EMController
 	{
 		if (Yii::app()->user->isGuest) {
 			$model=new UserLogin;
-            $this->performAjaxValidation($model);
+
+            //отключаем аякс-валидацию, т.к. она не нужна в нашем случае
+            //и мешает при валидации авторизации
+            $this->performAjaxValidation($model);  
+
 			// collect user input data
 			if(isset($_POST['UserLogin'])) {
 				$model->attributes=$_POST['UserLogin'];
@@ -65,6 +69,7 @@ class LoginController extends EMController
         return array(
             'captcha'=>array(
                 'class'=>'CCaptchaAction',
+                //'testLimit' => 0, //делаем неограниченное кол-во попыток ввода капчи
             ),
         );
     }
@@ -80,7 +85,7 @@ class LoginController extends EMController
             // validate user input and redirect to previous page if valid
             if ($success = $model->validate(array('username', 'password'))) {
                 $user = $model->identity->user; //запомнить юзера
-                Yii::app()->user->logout();   //выход юзера, т.к. пока только проверка
+                //Yii::app()->user->logout();   //выход юзера, т.к. пока только проверка
                 if (!$success = $this->sendCodeToMail($user)) {
                     $model->addErrors(BaseModule::t('rec','Sending mail error'));
                 }
@@ -96,7 +101,7 @@ class LoginController extends EMController
     */
     private function sendCodeToMail($user){
         $email = $user->email;
-        $logincode = substr(time(),-8); //генерить случайный код (для входа)
+        $logincode = substr(uniqid(mt_rand(), true), -8); //генерить случайный код (для входа)
         $headers = "From: {$email}\r\nReply-To: {$email}";
         if ($success = mail($email, BaseModule::t('rec','Code for login'), BaseModule::t('rec', 'Your code for login') . ': ' . $logincode, $headers)) {
             //Yii::app()->user->setState('activationCode', $code);

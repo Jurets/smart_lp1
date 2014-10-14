@@ -31,46 +31,29 @@ class UserLogin extends CFormModel
 	 * The rules state that username and password are required,
 	 * and password needs to be authenticated.
 	 */
-	public function rules()
-	{
-            $rules = array(
-                // username and password are required
-            array('username, password', 'required'),
-			array('username', 'email'),
-			// rememberMe needs to be a boolean
-			array('rememberMe', 'boolean'),
-/////временно отключаем  array('activekey', 'checkActivekey'),  
-            array('verifyCode', 'captcha',
-                // авторизованным пользователям код можно не вводить
-                  'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
-                
-                ),
-            // password needs to be authenticated
-                //!!!'authenticate' должна быть в списке самой последней иначе проверка не работает!!!
-            array('password', 'authenticate'),
-            );
-            if(isset(Yii::app()->params['email_verify_code_enabled']) && Yii::app()->params['email_verify_code_enabled'] == true){
-                $rules[] = array('activekey', 'checkActivekey'); // временно включаем ))
-            }
-            return $rules;
- // Исходник begin
-//		return array(
-//			// username and password are required
-//            array('username, password', 'required'),
-//			array('username', 'email'),
-//			// rememberMe needs to be a boolean
-//			array('rememberMe', 'boolean'),
-//			// password needs to be authenticated
-///////временно отключаем            array('activekey', 'checkActivekey'),  
-//                    array('activekey', 'checkActivekey'), // временно включаем ))
-//            array('verifyCode', 'captcha',
-//                // авторизованным пользователям код можно не вводить
-//                'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
-//            ),
-//			array('password', 'authenticate'),
-//		);
-// Исходник end
-	}
+     public function rules()
+     {
+         $rules = array(
+             // username and password are required
+             array('username, password', 'required'),
+             array('username', 'email'),
+             // rememberMe needs to be a boolean
+             array('rememberMe', 'boolean'),
+             // проверка капчи
+             array('verifyCode', 'captcha',
+                 // авторизованным пользователям код можно не вводить
+                 'allowEmpty'=>!Yii::app()->user->isGuest || !CCaptcha::checkRequirements(),
+             ),
+         );
+         //если установлен флаг "проверять", то добавляем правило проверки доп. кода, который высылается на емейл
+         if(isset(Yii::app()->params['email_verify_code_enabled']) && Yii::app()->params['email_verify_code_enabled'] == true){
+             $rules[] = array('activekey', 'checkActivekey'); // чтобы отключить, поставьте email_verify_code_enabled=false
+         }
+         //!!! правило 'authenticate' должна быть в списке самой последней иначе проверка не работает!!!
+         $rules[] = array('password', 'authenticate');
+         //возвращаем массив правил
+         return $rules;
+     }
 
     /**
     * проверка кода логина
