@@ -2,7 +2,7 @@
 
     #pm_settings {
         position: absolute;
-        top: 400px;
+        top: 432px;
         display: none;
     }
 
