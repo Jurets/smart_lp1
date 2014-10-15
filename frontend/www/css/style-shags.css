@@ -1349,7 +1349,7 @@ html, body {
     height: 260px;
     margin-top: -260px;
     background: #232323;
-
+    position: relative;
     min-width: 1000px;
 }
 
@@ -1362,7 +1362,7 @@ html, body {
 #footer-bark-bg {
     height: 67px;
     width: 100%;
-    position: relative;
-    top: -67px;
+    position: absolute;
+    top: 192px;
     background: #1e1e1e;
 }
