@@ -50,3 +50,7 @@ index
 
 # uploads
 /backend/www/uploads
+
+# the cron
+CRONTEST
+*.sh
