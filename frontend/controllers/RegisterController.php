@@ -38,13 +38,11 @@ class RegisterController extends EMController
         if(!Yii::app()->user->isGuest){
             throw New CHttpException(404, BaseModule::t('rec', 'Leave the account and re-register '));
         }
-        //DebugBreak();
-        if (empty($user)) {  //если юзер не задан
+        //если юзер не задан
+        if (empty($user)) {  
             if ($superrefer = Participant::model()->findByPk(Requisites::superReferId())) { //получить из реквизитов ид супер-рефера
                 $user = $superrefer->username;
-                //$this->redirect(Yii::app()->createAbsoluteUrl('register/'.$user));
                 $this->redirect(Yii::app()->createAbsoluteUrl('register/index/user/'.$user));
-                //$this->redirect(Yii::app()->createAbsoluteUrl('register', array($user)));
             } else
                 throw New CHttpException(404, BaseModule::t('rec', 'Registration is allowed only with a personal referral page'));
         }
@@ -54,6 +52,7 @@ class RegisterController extends EMController
         
         $participant = New Participant('register');
 
+        
         if (isset($_POST['Participant'])) {
             $participant->attributes = $_POST['Participant'];
             //ставим ид пригласившего
