@@ -40,57 +40,28 @@
 </div>
 
 <div id="darkBG">
-     
-<div id="usrcontour">
-<?php $this->widget('application.widgets.UserContour.UserContour',
-        array( 'params' => array(
-        'cssID' => 1,
-        'head' => BaseModule::t('common', 'REGISTERED MEMBERS'),
-        'title'=> BaseModule::t('common', 'CURRENT REGISTRATION'),
-    ))); ?>
-<?php $this->widget('application.widgets.UserContour.UserContour',
-        array( 'params' => array(
-            'cssID' => 2,
-            'head' => BaseModule::t('common', 'FEE PAID'),
-            'title'=> BaseModule::t('common', 'CURRENT PAYMENTS'),
-        ))); ?>
-<?php $this->widget('application.widgets.UserContour.UserContour',
-        array( 'params' => array(
-            'cssID' => 3,
-            'head' => BaseModule::t('common', 'GIVEN ON CHARITY'),
-            'title'=> BaseModule::t('common', 'CURRENT FEES'),
-        ))); ?>
-</div>
-
-<!--    <div id="infoBlok2">-->
-<!--        <p class="reg2">--><?php //echo BaseModule::t('common', 'FEE PAID') ?><!--</p>-->
-<!--        <div id="numberDecor2"><p>$00 652 427</p> <div id="test2"></div></div>-->
-<!--        <p class="regB">--><?php //echo BaseModule::t('common', 'CURRENT PAYMENTS') ?><!--</p>-->
-<!--        <ul class="li">-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--        </ul>-->
-<!---->
-<!--    </div>-->
-
-<!--    <div id="infoBlok3">-->
-<!--        <p class="reg3">--><?php //echo BaseModule::t('common', 'GIVEN ON CHARITY') ?><!--</p>-->
-<!--        <div id="numberDecor3"><p>$00 652 427</p> <div id="test3"></div></div>-->
-<!--        <p class="regB">--><?php //echo BaseModule::t('common', 'CURRENT fEES') ?><!--</p>-->
-<!--        <ul class="li">-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--            <li id="tailand" >12:45 UTC Sergey Menshov</li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
+    <div id="usrcontour">
+        <?php 
+        $this->widget('application.widgets.UserContour.UserContour',
+            array( 'params' => array(
+            'cssID' => 1,
+            'head' => BaseModule::t('common', 'REGISTERED MEMBERS'),
+            'title'=> BaseModule::t('common', 'CURRENT REGISTRATION'),
+        ))); 
+        $this->widget('application.widgets.UserContour.UserContour',
+            array( 'params' => array(
+                'cssID' => 2,
+                'head' => BaseModule::t('common', 'FEE PAID'),
+                'title'=> BaseModule::t('common', 'CURRENT PAYMENTS'),
+        ))); 
+        $this->widget('application.widgets.UserContour.UserContour',
+            array( 'params' => array(
+                'cssID' => 3,
+                'head' => BaseModule::t('common', 'GIVEN ON CHARITY'),
+                'title'=> BaseModule::t('common', 'CURRENT FEES'),
+        ))); 
+        ?>
+    </div>
 </div>
 
 
