@@ -42,7 +42,9 @@ class RegisterController extends EMController
         if (empty($user)) {  //если юзер не задан
             if ($superrefer = Participant::model()->findByPk(Requisites::superReferId())) { //получить из реквизитов ид супер-рефера
                 $user = $superrefer->username;
-                $this->redirect(Yii::app()->createAbsoluteUrl('register/'.$user));
+                //$this->redirect(Yii::app()->createAbsoluteUrl('register/'.$user));
+                $this->redirect(Yii::app()->createAbsoluteUrl('register/index/user'.$user));
+                //$this->redirect(Yii::app()->createAbsoluteUrl('register', array($user)));
             } else
                 throw New CHttpException(404, BaseModule::t('rec', 'Registration is allowed only with a personal referral page'));
         }
