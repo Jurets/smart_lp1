@@ -82,6 +82,7 @@ class Participant extends User
                     array('password', 'default', 'value' => $this->_generatePassword(), 'on' => array('activate')),
                     array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
                     array('username, country_id, city_id, email, rulesAgree', 'required', 'on' => array('register')),
+                    array('username', 'filter', 'filter' => 'strtolower', 'on' => array('register')),
                     array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => BaseModule::t('rec','It is necessary to accept the Membership Agreement')),
                     //The following rule is used by search().
                     //@todo Please remove those attributes that should not be searched.
