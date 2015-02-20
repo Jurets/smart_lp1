@@ -103,7 +103,12 @@ class RegisterController extends EMController
                     //отсылка почты для подтверждения регистрации
                     EmailHelper::send(array($participant->email), BaseModule::t('rec', 'Confirmation of registration'), 'regconfirm', array('participant' => $participant));
                 }
-                $this->render('confirmsended', array('step' => 1));
+                $message = BaseModule::t('rec', 'On your mail has been sent. In the letter you will find a link Click on it.');
+                $this->render('confirmsended', array(
+                    'step'=>1, 
+                    'participant'=>$participant,
+                    'message'=>$message,
+                ));
                 Yii::app()->end();
             }
         }
@@ -151,7 +156,7 @@ class RegisterController extends EMController
                     $participant->generatePassword(); //генерация пароля
                     $this->render('confirmed', array('step'=>1, 'urlNext'=>$urlNext));
                 } else {
-                    if (isset($_POST['regpurse'])) {//DebugBreak();
+                    if (isset($_POST['regpurse'])) {
                         // запросим проверку формата кошелька у perfectMoney
                         $userPurseTest = new PerfectMoney;
                         $userPurseTest->setScenario('purseTest');
@@ -246,4 +251,19 @@ class RegisterController extends EMController
         }
     }
     
+    /**
+    * Отправка письма (повторного)
+    * 
+    */
+    public function actionSendmail($userid = null) {
+        if (isset($userid) && $participant = Participant::model()->findByPk($userid)) {
+            $message = BaseModule::t('rec', 'On your mail has been sent again. In the letter you will find a link Click on it.');
+            EmailHelper::send(array($participant->email), BaseModule::t('rec', 'Confirmation of registration'), 'regconfirm', array('participant' => $participant));
+            $this->render('confirmsended', array(
+                'step'=>1, 
+                'participant'=>$participant,
+                'message'=>$message,
+            ));
+        }
+    }
 }

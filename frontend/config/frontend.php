@@ -64,7 +64,7 @@ return array(
                 
                 'register/dynamiccities' => 'register/dynamiccities',
                 'register/activate' => 'register/activate',
-                //'register/<username:\w+>' => 'register/index/user/<username>',
+                'register/sendmail/<userid:\d+>' => 'register/sendmail/userid/<userid>',
                 'register/<username:\w+>' => 'register/index/user/<username>',
                 'register' => 'register/index',
                 

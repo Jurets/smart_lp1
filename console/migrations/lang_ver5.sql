@@ -603,7 +603,8 @@ INSERT INTO `SourceMessage` VALUES
 (568, 'rec', 'Recovery password'),
 (569, 'rec', 'New password has been sent, check your e-mail'),
 (570, 'rec', 'Incorrect e-mail'),
-(571, 'rec', 'Enter your email')
+(571, 'rec', 'Enter your email'),
+(572, 'rec', 'On your mail has been sent again. In the letter you will find a link Click on it.')
 ;
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
@@ -1175,5 +1176,6 @@ INSERT INTO `Message` VALUES
 (568, 'ru', 'Восстановление пароля'),
 (569, 'ru', 'Новый пароль выслан на почту, проверьте свой email'),
 (570, 'ru', 'Неверный email'),
-(571, 'ru', 'Введите email')
+(571, 'ru', 'Введите email'),
+(572, 'ru', 'На вашу почту повторно было отправлено письмо. В письме перейдите, пожалуйста, по ссылке')
 ;
