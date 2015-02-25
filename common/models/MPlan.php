@@ -74,14 +74,6 @@ class MPlan extends CModel
         /// комментируем запуск оплаты с помощью API !!!!!!!!!  //$pm->Run('confirm'); 
         $pm->Accept('confirm');    //меняем его на другой метод
         
-        /*if (!$pm->hasErrors()) {//если успешно -
-            $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
-            Yii::app()->user->setState('pw_original', $pw_original);
-            $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
-            Requisites::depositActivation($pm->amount); //увеличить баланс кошелька активаций
-            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
-            return true;
-        } else {*/
         if ($pm->hasErrors()) {//если были ошибки - занести ошибку в модель участника
             $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
             return false;
@@ -90,16 +82,6 @@ class MPlan extends CModel
         }
     }
 
-    /*public static function paymentActivate($participant) {
-        $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
-        Yii::app()->user->setState('pw_original', $pw_original);
-        $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
-        Requisites::depositActivation(marketingPlanHelper::init()->getMpParam('price_activation')); //увеличить баланс кошелька активаций
-        // убираем привязку к компоненту отсылки почты (для пущей независимости компонентов)
-        //EmailHelper::send(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
-        return true;
-    }*/
-    
     /**
      * @param $participant
      * @param $account

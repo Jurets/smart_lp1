@@ -49,13 +49,8 @@
 
         // ТОЛЬКО СОХРАНЕНИЕ данных в БД
         public function dataStore(){ 
-            //if ($this->testMode) {
-            //    $this->API_analyse_test();
-            //} else
-             {
-                ////////////$this->API_make();
-                $this->API_analyse();
-            }
+            ////////////$this->API_make();
+            $this->API_analyse();
         }
 
         public function dataOut($param=NULL){ // выгрузка массива ответа api либо конкретно указанного значения

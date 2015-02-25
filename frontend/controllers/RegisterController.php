@@ -193,18 +193,14 @@ class RegisterController extends EMController
                     $participant->setScenario('register');
                     //$participant->attributes = $_POST['Participant'];
                     // проведение процесса регистрации в системе
-                    if (MPlan::paymentSCI($participant)){ //    if(MPlan::payRegistration($participant, $account, $password)){
+                    if (MPlan::paymentSCI($participant)){ //
                         $paysuccess = true;
                         $message = BaseModule::t('rec', 'Your payment was successful');
                     }
                 }  //если совпал код активации из формы с кодом из базы и нажали кнопку ДАЛЕЕ- перейти на следующий шаг
                 else if (isset($_POST['pay']) /*&& $participant->activkey == $participant->postedActivKey*/) {
-                    //проверить: есть ли запись в БД о транзакции
-                    /*$transaction = PmTransactionLog::model()->find('from_user_id = :user_id AND tr_kind_id = :kind_id', array(
-                        ':user_id'=>$participant->id, 
-                        ':kind_id'=>PmTransactionLog::TRANSACTION_REGISTRATION));
-                    $trans_success = isset($transaction) && !isser($transaction->tr_err_code);*/
                     if ($trans_success) {
+                        // ---------- !TODO Перенести в MPlan ???
                         $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
                         Yii::app()->user->setState('pw_original', $pw_original);
                         $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
@@ -212,7 +208,7 @@ class RegisterController extends EMController
                         EmailHelper::send(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array(
                             'participant'=>$participant, 
                             'pw_original'=>$pw_original
-                        )); //отослать емейл
+                        )); //отослать емейл --------------
                         // увеличиваем шаг и рендерим вьюшку по второй оплате 50$
                         $this->step = 4;
                         $this->render('secondpay', array('participant'=>$participant)); //и вывести форму оплаты 50$
