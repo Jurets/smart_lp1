@@ -36,11 +36,24 @@
                 $this->inputStructure = $input;
             }
         }
-        public function dataProcess(){ // проведение процесса передачи данных на api и получение ответных даннных
+        
+        // проведение процесса передачи данных на api и получение ответных даннных
+        public function dataProcess(){ 
             if ($this->testMode) {
                 $this->API_analyse_test();
             } else {
                 $this->API_make();
+                $this->API_analyse();
+            }
+        }
+
+        // ТОЛЬКО СОХРАНЕНИЕ данных в БД
+        public function dataStore(){ 
+            //if ($this->testMode) {
+            //    $this->API_analyse_test();
+            //} else
+             {
+                ////////////$this->API_make();
                 $this->API_analyse();
             }
         }

@@ -179,27 +179,53 @@ class RegisterController extends EMController
                 }
             } else  
             //если аккаунт не активен ЗАПУСКАЕМ ОПЛАТУ 20$
-            if (!$participant->status) {
-                if (isset($_POST['pay'])) {//DebugBreak();     //если пришёл ПОСТ с нажатой кнопкой "оплатить 20", то
+            if (!$participant->status) {DebugBreak();
+                $paysuccess = false;
+                $message = '';
+                //если пришёл ПОСТ ответа от PerfectMoney:
+                if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0) {  // пришёл ненулевой код транзакции (PAYMENT_BATCH_NUM)
                     $participant->setScenario('register');
-                    $participant->attributes = $_POST['Participant'];
+                    //$participant->attributes = $_POST['Participant'];
+                    
                     //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
-                    if ($participant->activkey != $participant->postedActivKey) {
-                        throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
+                    //if ($participant->activkey != $participant->postedActivKey) {
+                    //    throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
+                    //}
+                    
+                    //$account = $_POST['account'];   //PM-аккаунт  //'u66666';   //тестовый хардкод
+                    //$password = $_POST['password']; //PM-пароль   //'123456';  //тестовый хардкод
+                    
+                    //if(MPlan::payRegistration($participant, $account, $password)){    //--- ОПЛАТА регистрации
+                    if(MPlan::paySCIRegistration($participant)){    // проведение процесса регистрации в системе
+                        //$this->step = 3;
+                        //$this->render('firstpay', array(
+                        //    'participant'=>$participant,
+                        //    'paysuccess'=>true,          //флаг успешной оплаты
+                        //    'message'=>BaseModule::t('rec', 'Your payment was successful'), // и сообщение
+                        //)); //и вывести форму оплаты 50$
+                        //Yii::app()->end();
+                        $paysuccess = true;
+                        $message = BaseModule::t('rec', 'Your payment was successful');
                     }
-                    $account = $_POST['account'];   //PM-аккаунт  //'u66666';   //тестовый хардкод
-                    $password = $_POST['password']; //PM-пароль   //'123456';  //тестовый хардкод
-                    if(MPlan::payRegistration($participant, $account, $password)){    //--- ОПЛАТА регистрации
-                        $this->step = 4;
-                        $this->render('secondpay', array('participant'=>$participant)); //и вывести форму оплаты 50$
-                        Yii::app()->end();
-                    }
+                }  //если совпал код активации из формы с кодом из базы - перейти на следующий шаг
+                else if ($participant->activkey == $participant->postedActivKey) {
+                    $this->step = 4;
+                    $this->render('secondpay', array('participant'=>$participant)); //и вывести форму оплаты 50$
+                    Yii::app()->end();
+                } else {
+                    //определить - была ли оплата, делаем это по тарифу (статусу)
+                    $paysuccess = $participant->tariff_id >= Participant::TARIFF_20;
+                    $message = $paysuccess ? BaseModule::t('rec', 'Your payment was successful') : '';
                 }
                 $this->step = 3;                  //вывести форму оплаты 20$
-                $this->render('firstpay', array('participant'=>$participant));
-            } else 
+                $this->render('firstpay', array(
+                    'participant'=>$participant,
+                    'paysuccess'=>$paysuccess,          //флаг успешной оплаты
+                    'message'=>$message, // и сообщение
+                ));
+            } 
             //если статус "оплачен 20$"
-            if ($participant->tariff_id == Participant::TARIFF_20) {  
+            else if ($participant->tariff_id == Participant::TARIFF_20) {   
                 if (isset($_POST['pay'])) {//DebugBreak();   //если пришёл ПОСТ с нажатой кнопкой "оплатить 50", то
                     $participant->setScenario('register');
                     $participant->attributes = $_POST['Participant'];

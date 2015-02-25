@@ -47,6 +47,61 @@ class MPlan extends CModel
      * @param $password
      * @return bool
      *
+     * Function: pay for participation 20$
+     */
+    public static function paySCIRegistration($participant) {
+        $pm = new PerfectMoney();              //Попытаться сделать платёж
+        /* обязательные параметры */
+        $pm->login = 'login';       //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
+        $pm->password = 'password'; //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
+        //$pm->login = $account;                //временно хардкод
+        //$pm->password = $password;      //временно хардкод
+        $pm->payerAccount = $participant->purse;
+        $pm->payeeAccount = Requisites::purseActivation();
+        //определить - на какой кошелёк пойдёт оплата
+        if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
+            $pm->payeeAccount = Requisites::purseClub();   //поставить кошелёк активаций системы!!!!!!!!!!!
+            $pm->payeeId = null;
+        } else {
+            $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
+            $pm->payeeId = $participant->referal->id;
+        }
+        //поставить сумму платежа
+        $pm->amount = marketingPlanHelper::init()->getMpParam('price_activation'); //20$;
+        /* необязательные параметры */
+        $pm->payerId = $participant->id;
+        $pm->transactionId = PmTransactionLog::TRANSACTION_REGISTRATION;
+        $pm->notation = BaseModule::t('dic', 'Registration payment') . $pm->amount . '$';
+        
+        /// комментируем запуск оплаты с помощью API !!!!!!!!!
+        //$pm->Run('confirm');    //запуск процесса платежа в PerfectMoney
+        $pm->Accept('confirm');    //запуск процесса платежа в PerfectMoney
+        // и вручную производим те действия, которые делались методом "PerfectMoney->Run('confirm')"
+        //$pm->API->choise = 'confirm';
+        //$pm->confirmSuccessHelper(null/*$pm->API->eventSuccess*/);
+        //$pm->API->API_analyse();
+        //$pm->API->onSuccess($pm->API->eventSuccess);
+
+        
+        if (!$pm->hasErrors()) {//если успешно -
+            $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
+            Yii::app()->user->setState('pw_original', $pw_original);
+            $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
+            Requisites::depositActivation($pm->amount); //увеличить баланс кошелька активаций
+            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
+            return true;
+        } else {
+            $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
+            return false;
+        }
+    }
+
+    /**
+     * @param $participant
+     * @param $account
+     * @param $password
+     * @return bool
+     *
      * Function: pay for participation 50$
      */
     public static function payParticipation($participant,$account,$password) {

@@ -58,7 +58,14 @@ class PerfectMoney extends CFormModel {
       $this->addError('errorText', $this->message['errorText']);
   }
 
-  /* Сердце Модели */
+  /* ----------------------- Сердце Модели ------------------ */
+  
+  /**
+  * Запуск процесса оплаты через API-интерфейс 
+  *   (с помощью команд CURL)
+  * 
+  * @param mixed $choise
+  */
   public function Run($choise=NULL){
       if($this->validate()){
        if(!is_null($choise)){
@@ -78,6 +85,34 @@ class PerfectMoney extends CFormModel {
       $errors = $this->getErrors();
         return false;
   }
+
+  /**
+  *  Обработка: выполнение действий в БД системы
+  *   (НО БЕЗ запуска API-запроса на сайт PerfectMoney) 
+  * 
+  * @param mixed $choise
+  */
+  public function Accept($choise = NULL){
+      if($this->validate()) {
+          if(!is_null($choise)){
+              $this->API->choise = $choise;
+          }
+          /*$params = array(
+          'AccountID'=>$this->login,
+          'PassPhrase'=>$this->password,
+          'Payer_Account'=>$this->payerAccount,
+          'Payee_Account'=>$this->payeeAccount,
+          'Amount'=>$this->amount,
+          );
+          $this->API->dataLoad($params);*/
+          $this->API->dataStore();
+          return true;
+      }
+      $errors = $this->getErrors();
+      return false;
+  }
+   
+  /* ----------------------------------------- */ 
    
   public function rules(){
        return array(
@@ -106,49 +141,51 @@ class PerfectMoney extends CFormModel {
        }
    }
   /* Служебные вспомогательные методы */
-  private function confirmSuccessHelper($event){
+  public function confirmSuccessHelper($event){
+  //private function confirmSuccessHelper($event){
       $dbObject = Yii::app()->db;
       $transaction = $dbObject->beginTransaction();
       try {
-        $kind_id = false;
-        if(isset($this->transactionId)){ //установка поля tr_kind_id вручную
-            $act_id = (int)$this->transactionId;
-        }else{ // установка поля tr_kind_id автоматически
+          $kind_id = false;
+          if(isset($this->transactionId)){ //установка поля tr_kind_id вручную
+              $act_id = (int)$this->transactionId;
+          } else { // установка поля tr_kind_id автоматически
               $isExist = $dbObject->createCommand()
               ->select('kind_id')
               ->from('pm_transaction_kind')
-             ->where('description=:desc', array(':desc'=>$this->transactionKind))
-              ;
-          $read = $isExist->query();
-          $kind_id = $read->read();
-          if($kind_id == false){
-               $dbObject->createCommand()
-               ->insert('pm_transaction_kind', array('description'=>$this->transactionKind));
-               $act_id = Yii::app()->db->getLastInsertID();
-          }else{
-               $act_id = $kind_id['kind_id'];
+              ->where('description=:desc', array(':desc'=>$this->transactionKind));
+              $read = $isExist->query();
+              $kind_id = $read->read();
+              if($kind_id == false){
+                  $dbObject->createCommand()->insert('pm_transaction_kind', array('description'=>$this->transactionKind));
+                  $act_id = Yii::app()->db->getLastInsertID();
+              } else {
+                  $act_id = $kind_id['kind_id'];
+              }
           }
-
-        }
-        $dbObject->createCommand()
-          ->insert('pm_transaction_log', array(
-             'from_user_id'=>$this->payerId,
-             'from_purse'=>$this->payerAccount,
-             'to_user_id'=>$this->payeeId,
-             'to_purse'=>$this->payeeAccount,
-             'notation'=>$this->notation,
-             'amount'=>$this->amount,
-             'currency'=>'USD',
-             'tr_kind_id'=>$act_id,
+          $dbObject->createCommand()->insert('pm_transaction_log', array(
+              'from_user_id'=>$this->payerId,
+              'from_purse'=>$this->payerAccount,
+              'to_user_id'=>$this->payeeId,
+              'to_purse'=>$this->payeeAccount,
+              'notation'=>$this->notation,
+              'amount'=>$this->amount,
+              'currency'=>'USD',
+              'tr_kind_id'=>$act_id,
           ));
-            $transaction->commit();
-          } catch (Exception $exception) {
-              // Действия по логированию в файл
-              // TO DO
-              
-              $transaction->rollback();
-          }  
-    }
+          $transaction->commit();
+      } catch (Exception $exception) {
+          // Действия по логированию в файл
+          // TO DO
+          $transaction->rollback();
+      }  
+  }
+  
+  /**
+  * put your comment there...
+  * 
+  * @param mixed $event
+  */
   private function confirmFailureHelper($event){
       $dbObject = Yii::app()->db;
       $transaction = $dbObject->beginTransaction();
