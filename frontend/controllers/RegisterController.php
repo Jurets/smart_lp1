@@ -167,7 +167,13 @@ class RegisterController extends EMController
                           $participant->attributes = $_POST['Participant'];
                           if ($participant->save(true, array('purse'))) {
                               $this->step = 3;
-                              $this->render('firstpay', array('participant'=>$participant));
+                              $this->render('firstpay', array(
+                                'participant'=>$participant,
+                                'tariff'=>Participant::TARIFF_20,   //флаг успешной оплаты
+                                'amount'=>marketingPlanHelper::init()->getMpParam('price_activation'), //сумма для активации 20$
+                                'paysuccess'=>false,          //флаг успешной оплаты
+                                'message'=>'',                // и сообщение
+                              ));
                               Yii::app()->end();
                           }
                         } else {
