@@ -144,6 +144,7 @@ class RegisterController extends EMController
                 'referal'=>array('alias'=>'referal'),
                 'inviter'=>array('alias'=>'inviter'),
             ))->findByAttributes(array('activkey'=>$activkey));
+            ///  ПРОВЕРКИ!
             if (!isset($participant)) {
                 throw New CHttpException(404, BaseModule::t('rec', 'Unable to confirm your registration! The activation code is not found. Contact the site administrator'));
             }
@@ -167,12 +168,15 @@ class RegisterController extends EMController
                           $participant->attributes = $_POST['Participant'];
                           if ($participant->save(true, array('purse'))) {
                               $this->step = 3;
+                              $amount = marketingPlanHelper::init()->getMpParam('price_activation');
+                              $instruction = CHtml::tag('p', array('id'=>"shag-3-1-text"), BaseModule::t('rec', 'To activate your account, you must make the participation fee of $').' '.$amount);
                               $this->render('firstpay', array(
                                 'participant'=>$participant,
                                 'tariff'=>Participant::TARIFF_20,   //флаг успешной оплаты
                                 'amount'=>marketingPlanHelper::init()->getMpParam('price_activation'), //сумма для активации 20$
-                                'paysuccess'=>false,          //флаг успешной оплаты
-                                'message'=>'',                // и сообщение
+                                'instruction'=>$instruction,        // текст-инструкция
+                                'paysuccess'=>false,                //флаг успешной оплаты
+                                'message'=>'',                      // и сообщение
                               ));
                               Yii::app()->end();
                           }
@@ -185,27 +189,38 @@ class RegisterController extends EMController
                     $this->render('regpurse', array('participant'=>$participant));
                 }
             }   
+            
             //если аккаунт не активен ЗАПУСКАЕМ ОПЛАТУ 20$
-            else if ($participant->tariff_id <> Participant::TARIFF_20 /*!$participant->status*/) {
+            else if ($participant->tariff_id < Participant::TARIFF_20 /*!$participant->status*/) {
+                $this->step = 3;
+                $tariff = Participant::TARIFF_20;
+                $amount = marketingPlanHelper::init()->getMpParam('price_activation');
                 $paysuccess = false;
+                $instruction = CHtml::tag('p', array('id'=>"shag-3-1-text"), BaseModule::t('rec', 'To activate your account, you must make the participation fee of $').' '.$amount);
                 $message = '';
                 //проверить: есть ли запись в БД о транзакции
                 $transaction = PmTransactionLog::model()->find('from_user_id = :user_id AND tr_kind_id = :kind_id', array(
                     ':user_id'=>$participant->id, 
                     ':kind_id'=>PmTransactionLog::TRANSACTION_REGISTRATION));
                 $trans_success = isset($transaction) && !isset($transaction->tr_err_code);
+                // установить сценарий "регистрация"
+                $participant->setScenario('register');
                 //если пришёл ПОСТ ответа от PerfectMoney:
                 if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0) {  // пришёл ненулевой код транзакции (PAYMENT_BATCH_NUM)
-                    $participant->setScenario('register');
-                    //$participant->attributes = $_POST['Participant'];
                     // проведение процесса регистрации в системе
                     if (MPlan::paymentSCI($participant)){ //
                         $paysuccess = true;
                         $message = BaseModule::t('rec', 'Your payment was successful');
                     }
-                }  //если совпал код активации из формы с кодом из базы и нажали кнопку ДАЛЕЕ- перейти на следующий шаг
-                else if (isset($_POST['pay']) /*&& $participant->activkey == $participant->postedActivKey*/) {
-                    if ($trans_success) {
+                }  
+                //если совпал код активации из формы с кодом из базы и нажали кнопку ДАЛЕЕ- перейти на следующий шаг
+                else if (isset($_POST['pay'])) {
+                    $participant->attributes = $_POST['Participant'];
+                    //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
+                    if ($participant->activkey != $participant->postedActivKey) {
+                        throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
+                    }
+                    if ($trans_success) {  ///// оплату завершено УСПЕШНО!
                         // ---------- !TODO Перенести в MPlan ???
                         $pw_original = $participant->password; //сохраняем исходный пароль, чтобы нехэшированным отослать его в письме
                         Yii::app()->user->setState('pw_original', $pw_original);
@@ -215,48 +230,107 @@ class RegisterController extends EMController
                             'participant'=>$participant, 
                             'pw_original'=>$pw_original
                         )); //отослать емейл --------------
-                        // увеличиваем шаг и рендерим вьюшку по второй оплате 50$
-                        $this->step = 4;
-                        $this->render('secondpay', array('participant'=>$participant)); //и вывести форму оплаты 50$
-                        Yii::app()->end();
+                        // переход ко второй оплате 50$
+                        $this->step = 4;                   // увеличиваем шаг
+                        $amount = marketingPlanHelper::init()->getMpParam('price_start'); //ставим сумму оплаты $50
+                        $instruction = CHtml::tag('p', array('id'=>"shag-4-1-text"), 
+                            BaseModule::t('common', 'Congratulations! You are already logged in!') . '<br><br>' .
+                            BaseModule::t('common', 'Now, to become a party to a business, you must pass the final step.') . '<br>' .
+                            BaseModule::t('common', 'Business participation will allow you to get so many things and so many things! Do not waste time!')
+                        );
+                        $tariff = Participant::TARIFF_50;  // ставим тариф 50$
                     }
                 } else {
                     //определить - была ли оплата, делаем это по тарифу (статусу)
                     $paysuccess = $trans_success || ($participant->tariff_id >= Participant::TARIFF_20);
                     $message = $paysuccess ? BaseModule::t('rec', 'Your payment was successful') : '';
                 }
-                $this->step = 3;                  //вывести форму оплаты 20$
+                //вывести форму оплаты 20$
                 $this->render('firstpay', array(
                     'participant'=>$participant,
-                    'tariff'=>Participant::TARIFF_20,   //флаг успешной оплаты
-                    'amount'=>marketingPlanHelper::init()->getMpParam('price_activation'), //сумма для активации 20$
+                    'tariff'=>$tariff,                  //флаг успешной оплаты
+                    'amount'=>$amount,                  //сумма для активации 20$
                     'paysuccess'=>$paysuccess,          //флаг успешной оплаты
+                    'instruction'=>$instruction,        // текст-инструкция
                     'message'=>$message,                // и сообщение
                 ));
             } 
-            //если статус "оплачен 20$"
-            else if ($participant->tariff_id == Participant::TARIFF_20) {   
-                if (isset($_POST['pay'])) {//DebugBreak();   //если пришёл ПОСТ с нажатой кнопкой "оплатить 50", то
-                    $participant->setScenario('register');
+            
+            // -------- если статус "оплачен 20$"
+            else if ($participant->tariff_id == Participant::TARIFF_20) {
+                $this->step = 4;
+                $tariff = Participant::TARIFF_50;  // ставим тариф 50$
+                $amount = marketingPlanHelper::init()->getMpParam('price_start');
+                $paysuccess = false;
+                $instruction = CHtml::tag('p', array('id'=>"shag-4-1-text"), 
+                    BaseModule::t('common', 'Congratulations! You are already logged in!') . '<br><br>' .
+                    BaseModule::t('common', 'Now, to become a party to a business, you must pass the final step.') . '<br>' .
+                    BaseModule::t('common', 'Business participation will allow you to get so many things and so many things! Do not waste time!')
+                );
+                $message = '';
+                //проверить: есть ли запись в БД о транзакции
+                $transaction = PmTransactionLog::model()->find('from_user_id = :user_id AND tr_kind_id = :kind_id', array(
+                    ':user_id'=>$participant->id, 
+                    ':kind_id'=>PmTransactionLog::TRANSACTION_ENTER_BC));
+                $trans_success = isset($transaction) && !isset($transaction->tr_err_code);
+                // установить сценарий "регистрация"
+                $participant->setScenario('register');
+
+                //если пришёл ПОСТ ответа от PerfectMoney: ненулевой код транзакции (PAYMENT_BATCH_NUM)
+                if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0) {
+                    if (MPlan::participationSCI($participant)) {  //--- ОПЛАТА бизнес-участия
+                        $paysuccess = true;
+                        $message = BaseModule::t('rec', 'Your payment was successful');
+                    }
+                }  
+                //если совпал код активации из формы с кодом из базы и нажали кнопку ДАЛЕЕ- перейти на следующий шаг
+                else if (isset($_POST['pay'])) {
                     $participant->attributes = $_POST['Participant'];
                     //если не совпал код активации из формы с кодом из базы - выкинуть ошибку
                     if ($participant->activkey != $participant->postedActivKey) {
                         throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
                     }
-                    $account = $_POST['account'];   //PM-аккаунт
-                    $password = $_POST['password']; //PM-пароль
-                    if (MPlan::payParticipation($participant, $account, $password)) {  //--- ОПЛАТА бизнес-участия
+                    if ($trans_success) {
+                        //стать бизнес-участником
+                        $participant->activateParticipation();
+                        //перевести взнос на нужный кошелёк
+                        if ($participant->invite_num == 3 || $participant->invite_num == 4)  {  //если приглашённый 3 или 4
+                            Requisites::depositClub($amount);                //увеличить баланс кошелька клуба
+                            if ($participant->invite_num == 4) {                 //если это четвёртый приглашённый
+                                $participant->referal->activateBusiness();         //активировать Бизнес-клуб у реферала
+                            }
+                        } else {                                                 //иначе
+                            $participant->referal->depositPurse($amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
+                        }
+                        //отослать письмо про вступление в бизнес-участие
+                        EmailHelper::send(array($participant->email), BaseModule::t('dic', 'You have become a business participant'), 'businessstart', array('participant'=>$participant));
                         Yii::app()->user->setFlash('success', BaseModule::t('rec', 'Your payment was successful') . '!');
+                        // увеличиваем шаг и рендерим вьюшку по второй оплате 50$
                         $this->step = 4;
-                        $this->render('finish', array('participant'=>$participant));
+                        // и выводится финальная форма
+                        $this->render('finish', array(
+                            'participant'=>$participant
+                        ));  
                         Yii::app()->end();
                     }
+                } else {
+                    //определить - была ли оплата, делаем это по тарифу (статусу)
+                    $paysuccess = $trans_success || ($participant->tariff_id >= $tariff);
+                    $message = $paysuccess ? BaseModule::t('rec', 'Your payment was successful') : '';
                 }
-                $this->step = 4;
-                $this->render('secondpay', array('participant'=>$participant));
-            } else  
+                //вывести форму оплаты 50$
+                $this->render('firstpay', array(
+                    'participant'=>$participant,
+                    'tariff'=>$tariff,             //флаг успешной оплаты
+                    'amount'=>$amount,             //сумма для активации 20$
+                    'paysuccess'=>$paysuccess,     //флаг успешной оплаты
+                    'instruction'=>$instruction,   // текст-инструкция
+                    'message'=>$message,           // и текст-сообщение о результате
+                ));
+            } 
+            
             //Если уже есть статус 50$
-            if ($participant->tariff_id == Participant::TARIFF_50) {
+            else if ($participant->tariff_id == Participant::TARIFF_50) {
                 if (isset($_POST['login'])) {
                     $participant->setScenario('register');
                     $participant->attributes = $_POST['Participant'];
@@ -264,11 +338,10 @@ class RegisterController extends EMController
                     if ($participant->activkey != $participant->postedActivKey) {
                         throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
                     }
-                    
                     $participant->activkey = null;      //убираем ключ активации (он больше не нужен)
                     $participant->save(false, array('activkey')); //сохраняем модель
                     //осуществляем вход
-                    $userlogin = New UserLogin();//DebugBreak();                   
+                    $userlogin = New UserLogin();
                     $userlogin->username = $participant->email;     //авторизация по емейлу!
                     $userlogin->password = Yii::app()->user->getState('pw_original');//$password;
                     //!!!здесь надо отослать пароль по почте (??????)

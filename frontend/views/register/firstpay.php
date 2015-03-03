@@ -16,14 +16,24 @@
         position: absolute;
         top: 400px;
     }
+    
+    .btn-style-blue-4-1 {
+        top: 400px;
+    }    
+
+    .btn-style-blue-4-1:hover {
+        top: 400px;
+    }    
 </style>
 
 <?php //$ammount_buff = marketingPlanHelper::init()->getMpParam('price_activation'); ?>
 
 <?php if (isset($paysuccess) && $paysuccess == true) { 
     echo CHtml::tag('p', array('id'=>"shag-3-1-text"), $message);
-} else { ?>
-    <p id="shag-3-1-text"> <?php echo BaseModule::t('rec', 'To activate your account, you must make the participation fee of $').' '.$amount ?></p>
+} else { 
+    echo $instruction;
+?>
+    <!--<p id="shag-3-1-text"> <?php echo BaseModule::t('rec', 'To activate your account, you must make the participation fee of $').' '.$amount ?></p>-->
     <p class="shag-3-1-sub4"><?php echo BaseModule::t('rec', 'Click this button to login to the PerfectMoney site') ?></p>
 
     <?php $form = $this->beginWidget('CActiveForm', array(
@@ -48,7 +58,7 @@
         <input type="hidden" name="CUST_NUM" value="2067609">
         <input type="hidden" name="FORCED_PAYER_ACCOUNT" value="<?php echo $participant->purse; ?>">-->
 
-        <button type="submit" name="PAYMENT_METHOD" value="PerfectMoney account" class="btn-style-blue btn-style-blue-3-1">
+        <button type="submit" name="PAYMENT_METHOD" value="PerfectMoney account" class="btn-style-blue btn-style-blue-<?php echo $this->step; ?>-1">
             <?php echo BaseModule::t('common', 'PAY $').' '.$amount ?>
         </button>
     <?php $this->endWidget(); ?>

@@ -84,6 +84,42 @@ class MPlan extends CModel
 
     /**
      * @param $participant
+     * @return bool
+     *
+     * Function: pay for participation 50$
+     */
+    public static function participationSCI($participant) {
+        $pm = new PerfectMoney();              //Попытаться сделать платёж
+        /* обязательные параметры */
+        $pm->login = 'login';       //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
+        $pm->password = 'password'; //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
+        $pm->payerAccount = $participant->purse;
+        //определить - на какой кошелёк пойдёт оплата
+        if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
+            $pm->payeeAccount = Requisites::purseClub();   //поставить кошелёк активаций системы!!!!!!!!!!!
+            $pm->payeeId = null;
+        } else {
+            $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
+            $pm->payeeId = $participant->referal->id;
+        }
+        //поставить сумму платежа
+        $pm->amount = marketingPlanHelper::init()->getMpParam('price_start'); //50$
+        /* необязательные параметры */
+        $pm->payerId = $participant->id;
+        $pm->transactionId = PmTransactionLog::TRANSACTION_ENTER_BC;
+        $pm->notation = BaseModule::t('dic', 'Entry into the business club');
+        $pm->Accept('confirm');    //запуск процесса платежа в PerfectMoney
+
+        if ($pm->hasErrors()) {//если были ошибки - занести ошибку в модель участника
+            $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * @param $participant
      * @param $account
      * @param $password
      * @return bool
