@@ -41,8 +41,9 @@
             'enableAjaxValidation'=>false,
             'action'=>'https://perfectmoney.is/api/step1.asp',
             'method'=>'POST',
-        )); 
-        $return_url = Yii::app()->request->hostInfo . Yii::app()->request->url;
+        ));
+        $return_url = urldecode(Yii::app()->request->hostInfo . Yii::app()->request->url);
+        $return_url = str_replace(' ', '+', $return_url);
     ?>
         <input type="hidden" name="PAYEE_ACCOUNT" value="<?php echo Requisites::purseActivation(); ?>">
         <input type="hidden" name="PAYEE_NAME" value="JustMoney">
