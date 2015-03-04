@@ -1,3 +1,10 @@
+<style type="text/css">
+#tg2 td span, #tg2 td #green {
+    left: 220px;
+}
+
+</style>
+
 <div id="content">
     
     <a href="https://perfectmoney.is/login.html"><input type="button" name="btn"  class="office-1-btn-style-green" value="<?php echo BaseModule::t('rec','WITHDROAW FUNDS')?>" /></a>
@@ -55,7 +62,7 @@
   </tr>
 </table>
         </div>
-        
+      
       <table id="tg2">
     <tr>
         <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec','Today').':'?> <span><?php echo $model->statisticsStructure['Charity']['today'] ?> $</span></td>

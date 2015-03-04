@@ -269,7 +269,7 @@ class PmTransactionLog extends CActiveRecord
             $commonSumm = $dbh->createCommand($commonSQL);
             $commonSumm->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $commonSumm->query()->read()['summ'];
-            $this->statisticsStructure['IncomeCommon'] = (!is_null($param)) ? $param : '0';
+            $this->statisticsStructure['IncomeCommon'] = (!is_null($param)) ? round($param, 4) : '0';
                                            
         }
         /* Благотворительность */
@@ -290,7 +290,7 @@ class PmTransactionLog extends CActiveRecord
             $today->bindParam(':date', $date, PDO::PARAM_STR);
             $today->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $today->query()->read()['summ'];
-            $this->statisticsStructure['Charity']['today'] = (!is_null($param)) ? $param : '0';
+            $this->statisticsStructure['Charity']['today'] = (!is_null($param)) ? round($param, 4) : '0';
             
             $date = $this->dateConvertToDb($this->date, TRUE);
             $permonthSQL = "SELECT
@@ -305,7 +305,7 @@ class PmTransactionLog extends CActiveRecord
             $permonth->bindParam(':date', $date, PDO::PARAM_STR);
             $permonth->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $permonth->query()->read()['summ'];
-            $this->statisticsStructure['Charity']['permonth'] = (!is_null($param))? $param : '0';
+            $this->statisticsStructure['Charity']['permonth'] = (!is_null($param))? round($param, 4) : '0';
                         
             $commonSQL = "SELECT
                             sum((amount*0.05)) summ
@@ -316,7 +316,7 @@ class PmTransactionLog extends CActiveRecord
             $common = $dbh->createCommand($commonSQL);
             $common->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $common->query()->read()['summ'];
-            $this->statisticsStructure['Charity']['common'] = (!is_null($param)) ? $param : '0';
+            $this->statisticsStructure['Charity']['common'] = (!is_null($param)) ? round($param, 4) : '0';
         }
         /* Structure */
         protected function structureFormer(){
@@ -349,7 +349,7 @@ class PmTransactionLog extends CActiveRecord
             $club->bindParam(':date', $date, PDO::PARAM_STR);
             $club->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $club->query()->read()['count'];
-            $this->statisticsStructure['Staff']['businessClub'] = (!is_null($param)) ? $param : '0';            
+            $this->statisticsStructure['Staff']['businessClub'] = (!is_null($param)) ? round($param, 4) : '0';            
         }
         /* Visits Former */
         protected function visitsFormer(){
@@ -364,7 +364,7 @@ class PmTransactionLog extends CActiveRecord
             $today->bindParam(':id', $this->id, PDO::PARAM_INT);
             $today->bindParam(':date', $date, PDO::PARAM_STR);
             $param = $today->query()->read()['summ'];
-            $this->statisticsStructure['Visitors']['today'] = (!is_null($param)) ? $param : '0';
+            $this->statisticsStructure['Visitors']['today'] = (!is_null($param)) ? round($param, 4) : '0';
             
             $tomorrowSQL = "SELECT sum(visits_count) as summ
                                 FROM tbl_visits
@@ -374,7 +374,7 @@ class PmTransactionLog extends CActiveRecord
             $tomorrow->bindParam(':id', $this->id, PDO::PARAM_INT);
             $tomorrow->bindParam(':date', $date, PDO::PARAM_STR);
             $param = $tomorrow->query()->read()['summ'];
-            $this->statisticsStructure['Visitors']['tomorrow'] = (!is_null($param)) ? $param : '0';
+            $this->statisticsStructure['Visitors']['tomorrow'] = (!is_null($param)) ? round($param, 4) : '0';
             
             $date = $this->dateConvertToDb($this->date, TRUE);
             $permonthSQL = "SELECT sum(visits_count) as summ
@@ -386,7 +386,7 @@ class PmTransactionLog extends CActiveRecord
             $permonth->bindParam(':id', $this->id, PDO::PARAM_INT);
             $permonth->bindParam(':date', $date, PDO::PARAM_STR);
             $param = $permonth->query()->read()['summ'];
-            $this->statisticsStructure['Visitors']['permonth'] = (!is_null($param)) ? $param : '0';
+            $this->statisticsStructure['Visitors']['permonth'] = (!is_null($param)) ? round($param, 4) : '0';
             
             $commonSQL = "SELECT sum(visits_count) as summ
                                 FROM tbl_visits
@@ -394,7 +394,7 @@ class PmTransactionLog extends CActiveRecord
             $common = $dbh->createCommand($commonSQL);
             $common->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $common->query()->read()['summ'];
-            $this->statisticsStructure['Visitors']['common'] = (!is_null($param)) ? $param : '0';
+            $this->statisticsStructure['Visitors']['common'] = (!is_null($param)) ? round($param, 4) : '0';
         }
         /* Преобразование даты к формату для базы данных */
         public function dateConvertToSite($date_from_db, $choise='short'){
