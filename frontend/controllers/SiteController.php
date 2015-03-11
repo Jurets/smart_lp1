@@ -82,6 +82,20 @@ class SiteController extends LoginController
                 $this->redirect(Yii::app()->createAbsoluteUrl('office'));
         }
     }
+    /*
+     * AJAX проверка субдомена
+     */
+    public function actionCheckDomain(){
+        $model = User::model()->find('email=:email', array(':email'=>$_POST['email']));
+        if(!is_null($model)){
+            $domain = $model->username;
+            $url = Yii::app()->createAbsoluteUrl('site/login');
+            $url = str_replace('http://', 'http://'.$domain.'.', $url);
+            echo $url;
+            return TRUE;
+        }
+        echo 'NONE';
+    }
 
     /**
      * выход юзера

@@ -82,7 +82,28 @@ $this->widget('CCaptcha', array(
             } else {
                 $('#login').show();
             }
-        })
+        });
+        $('#UserLogin_username').focusout(function(){
+            var action = $('#login').attr('action');
+            if(action.indexOf('.justmoney') === -1){
+                checkDomainName($(this).val());
+            }
+        });
         return false;
     });
+    
+ function checkDomainName(email){
+     $.post(
+        '<?php echo Yii::app()->createAbsoluteUrl('site/checkdomain')?>',
+        {
+            email: email
+        },
+        checkDomainSuccess
+     );
+ }
+ function checkDomainSuccess(data){
+     if (data !== 'NONE'){
+        $('#login').attr('action', data);
+     }
+ }
 </script>
