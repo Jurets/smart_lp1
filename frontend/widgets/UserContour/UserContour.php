@@ -117,22 +117,24 @@ class UserContour extends CWidget {
         $amountCommission = $db_connector->createCommand('SELECT sum(amount) FROM pm_transaction_log WHERE tr_kind_id=7');
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read();
-        $list = $db_connector->createCommand(
-            'SELECT to_user_id tr_kind_id,date,first_name,last_name,code
-             FROM pm_transaction_log
-                  LEFT JOIN tbl_users ON to_user_id = id
-                  LEFT JOIN cities c ON city_id = c.id
-                  LEFT JOIN countries co ON co.id = c.country_id
-             WHERE tr_kind_id = 7
-             LIMIT 6  ');
+        $list = $db_connector->createCommand('
+            SELECT tl.to_user_id, tl.tr_kind_id, tl.date, COALESCE(CONCAT(u.first_name, " ", u.last_name), u.username) as username, co.code
+             FROM pm_transaction_log tl
+                 LEFT JOIN tbl_users u ON tl.from_user_id = u.id
+                 LEFT JOIN cities c ON u.city_id = c.id
+                 LEFT JOIN countries co ON co.id = c.country_id
+             WHERE tl.tr_err_code IS NULL AND tl.tr_kind_id IN (2,3,4,5)
+             ORDER BY tl.`date` DESC
+             LIMIT 6
+        ');
         $listCommission = $list->query();
-        $listCommission = $listCommission->read();
+        $listCommission = $listCommission->readAll();
         if($amountCommissionCount['sum(amount)'] != null){
             $finalCount = floor($amountCommissionCount['sum(amount)']);
             $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
-            foreach ($listCommission as $commision) {
-                $this->dataPull['userList'][0]['country'] = $listCommission['code'];
-                $this->dataPull['userList'][0]['content'] = date('H:i', strtotime($listCommission['date'])). $listCommission['first_name'] .' '. $listCommission['last_name'];
+            foreach ($listCommission as $index=>$commision) {
+                $this->dataPull['userList'][$index]['country'] = $commision['code'];
+                $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($commision['date'])). ' '. $commision['username'];
             }
         } else {
             $this->dataPull['numberField'] = '$00 000 000';
