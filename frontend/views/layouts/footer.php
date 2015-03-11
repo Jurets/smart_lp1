@@ -6,9 +6,7 @@
     <div id="footer">
         <div id="footerUL" > 
             <ul id="footerUL1">
-                <?php if (isset($titles['live'])) {?>
-                    <li> <a href="/info/live" id="zagolovok"> <?php echo $titles['live'] ?> </a> </li>
-                <?php } ?>
+                <li> <a href="/info/live" id="zagolovok"> <?php echo (isset($titles['live'])) ? $titles['live'] : '&nbsp;' ?> </a> </li>
                 <?php if (isset($titles['news'])) {?>
                     <li> <a href="/info/news"> <?php echo $titles['news'] ?> </a> </li>
                 <?php } ?>
@@ -21,9 +19,7 @@
             </ul>
 
             <ul id="footerUL2">
-                <?php if (isset($titles['aboutus'])) {?>
-                    <li> <a href="/info/aboutus" id="zagolovok"> <?php echo $titles['aboutus'] ?> </a> </li>
-                <?php } ?>
+                <li> <a href="/info/aboutus" id="zagolovok"> <?php echo (isset($titles['aboutus']) ? $titles['aboutus'] : '&nbsp;') ?> </a> </li>
                 <?php if (isset($titles['aboutproject'])) {?>
                     <li> <a href="/info/aboutproject"> <?php echo $titles['aboutproject'] ?> </a> </li>
                 <?php } ?>
@@ -35,9 +31,7 @@
                 <?php } ?>
             </ul>
             <ul id="footerUL3">
-                <?php if (isset($titles['service'])) {?>
-                    <li> <a href="/info/service" id="zagolovok"> <?php echo $titles['service'] ?> </a> </li>
-                <?php } ?>
+                <li> <a href="/info/service" id="zagolovok"> <?php echo (isset($titles['service']) ? $titles['service'] : '&nbsp;') ?> </a> </li>
                 <?php if (isset($titles['financial'])) {?>
                     <li> <a href="/info/financial"> <?php echo $titles['financial'] ?> </a> </li>
                 <?php } ?>
@@ -56,9 +50,7 @@
             </ul>
 
             <ul id="footerUL4">
-                <?php if (isset($titles['rules'])) {?>
-                    <li> <a href="/info/rules" id="zagolovok"> <?php echo $titles['rules'] ?> </a> </li>
-                <?php } ?>
+                <li> <a href="/info/rules" id="zagolovok"> <?php echo (isset($titles['rules']) ? $titles['rules'] : '&nbsp;') ?> </a> </li>
                 <?php if (isset($titles['agreement'])) {?>
                     <li> <a href="/info/agreement"> <?php echo $titles['agreement'] ?> </a> </li>
                 <?php } ?>
@@ -71,9 +63,7 @@
             </ul>
 
             <ul id="footerUL5">
-                <?php if (isset($titles['cooperation'])) {?>
-                    <li> <a href="/info/cooperation" id="zagolovok"> <?php echo $titles['cooperation'] ?></a> </li>
-                <?php } ?>
+                <li> <a href="/info/cooperation" id="zagolovok"> <?php echo (isset($titles['cooperation']) ? $titles['cooperation'] : '&nbsp;') ?></a> </li>
                 <?php if (isset($titles['participants'])) {?>
                     <li> <a href="/info/participants"> <?php echo $titles['participants'] ?> </a> </li>
                 <?php } ?>
@@ -92,9 +82,7 @@
             </ul>
 
             <ul id="footerUL6">
-                <?php if (isset($titles['support'])) {?>
-                    <li> <a href="/info/support" id="zagolovok"> <?php echo $titles['support'] ?></a> </li>
-                <?php } ?>
+                <li> <a href="/info/support" id="zagolovok"> <?php echo (isset($titles['support']) ? $titles['support'] : '&nbsp;') ?></a> </li>
                 <?php if (isset($titles['instructions'])) {?>
                     <li> <a href="/info/instructions"> <?php echo $titles['instructions'] ?> </a> </li>
                 <?php } ?>
