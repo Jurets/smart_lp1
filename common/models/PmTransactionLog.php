@@ -272,20 +272,20 @@ class PmTransactionLog extends CActiveRecord
             $this->statisticsStructure['IncomeCommon'] = (!is_null($param)) ? round($param, 4) : '0';
                                            
         }
-        /* Благотворительность */
+        
+        /**
+        * Благотворительность
+        * 
+        */
         protected function charityFormer(){
             // today permonth common
             $dbh = Yii::app()->db;
             
             $date = $this->dateConvertToDb($this->date);
-            $todaySQL = "SELECT
-                            sum((amount*0.05)) summ
-                            FROM pm_transaction_log
-                            WHERE from_user_id = :id
-                            AND tr_err_code IS NULL
-                            AND tr_kind_id IN (2,3,4,5)
-                            AND date >= DATE(:date)
-                            AND date < DATE_ADD(:date, INTERVAL 1 DAY)";
+            $todaySQL = "SELECT sum((amount*0.05)) summ 
+                         FROM pm_transaction_log
+                         WHERE from_user_id = :id AND tr_err_code IS NULL AND tr_kind_id IN (2,3,4,5)
+                               AND date >= DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 DAY)";
             $today = $dbh->createCommand($todaySQL);
             $today->bindParam(':date', $date, PDO::PARAM_STR);
             $today->bindParam(':id', $this->id, PDO::PARAM_INT);
@@ -293,58 +293,44 @@ class PmTransactionLog extends CActiveRecord
             $this->statisticsStructure['Charity']['today'] = (!is_null($param)) ? round($param, 4) : '0';
             
             $date = $this->dateConvertToDb($this->date, TRUE);
-            $permonthSQL = "SELECT
-                                sum((amount*0.05)) summ
-                                FROM pm_transaction_log
-                                WHERE from_user_id = :id
-                                AND tr_err_code IS NULL
-                                AND tr_kind_id IN (2,3,4,5)
-                                AND date >= DATE(:date)
-                                AND date < DATE_ADD(:date, INTERVAL 1 MONTH)";
+            $permonthSQL = "SELECT sum((amount*0.05)) summ
+                            FROM pm_transaction_log
+                            WHERE from_user_id = :id AND tr_err_code IS NULL AND tr_kind_id IN (2,3,4,5) 
+                                  AND date >= DATE(:date) AND date < DATE_ADD(:date, INTERVAL 1 MONTH)";
             $permonth = $dbh->createCommand($permonthSQL);
             $permonth->bindParam(':date', $date, PDO::PARAM_STR);
             $permonth->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $permonth->query()->read()['summ'];
             $this->statisticsStructure['Charity']['permonth'] = (!is_null($param))? round($param, 4) : '0';
                         
-            $commonSQL = "SELECT
-                            sum((amount*0.05)) summ
-                            FROM pm_transaction_log
-                            WHERE from_user_id = :id
-                            AND tr_err_code IS NULL
-                            AND tr_kind_id IN (2,3,4,5)";
+            $commonSQL = "SELECT sum((amount*0.05)) summ
+                          FROM pm_transaction_log
+                          WHERE from_user_id = :id AND tr_err_code IS NULL AND tr_kind_id IN (2,3,4,5)";
             $common = $dbh->createCommand($commonSQL);
             $common->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $common->query()->read()['summ'];
             $this->statisticsStructure['Charity']['common'] = (!is_null($param)) ? round($param, 4) : '0';
         }
+        
         /* Structure */
         protected function structureFormer(){
             $dbh = Yii::app()->db;
             
             $date = $this->dateConvertToDb($this->date);
             
-            $privateSQL = "SELECT
-                                count(id) count
-                                FROM tbl_users
-                                WHERE refer_id = :id
-                                AND status = 1
-                                AND busy_date >= DATE(:date)
-                                AND busy_date < DATE_ADD(:date, INTERVAL 1 DAY)";          
+            $privateSQL = "SELECT count(id) count
+                           FROM tbl_users
+                           WHERE refer_id = :id AND status = 1 AND busy_date >= DATE(:date) AND busy_date < DATE_ADD(:date, INTERVAL 1 DAY)";          
             $private = $dbh->createCommand($privateSQL);
             $private->bindParam(':date', $date, PDO::PARAM_STR);
             $private->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $private->query()->read()['count'];
             $this->statisticsStructure['Staff']['privateStructure'] = (!is_null($param)) ? $param : '0';
             
-            $clubSQL = "SELECT
-                         count(id) count 
-                         FROM tbl_users
-                         WHERE refer_id = :id
-                         AND status = 1
-                         AND club_date >= DATE(:date)
-                         AND club_date < DATE_ADD(:date, INTERVAL 1 DAY)
-                         AND tariff_id >= 3";
+            $clubSQL = "SELECT count(id) count 
+                        FROM tbl_users
+                        WHERE refer_id = :id AND status = 1 AND club_date >= DATE(:date) AND club_date < DATE_ADD(:date, INTERVAL 1 DAY)
+                              AND tariff_id >= 3";
             $club = $dbh->createCommand($clubSQL);
             $club->bindParam(':date', $date, PDO::PARAM_STR);
             $club->bindParam(':id', $this->id, PDO::PARAM_INT);
@@ -357,9 +343,8 @@ class PmTransactionLog extends CActiveRecord
             $date = $this->dateConvertToDb($this->date);
             
             $todaySQL = "SELECT sum(visits_count) as summ
-                            FROM tbl_visits
-                            WHERE user_id = :id
-                            AND date_visit = :date";
+                         FROM tbl_visits
+                         WHERE user_id = :id AND date_visit = :date";
             $today = $dbh->createCommand($todaySQL);
             $today->bindParam(':id', $this->id, PDO::PARAM_INT);
             $today->bindParam(':date', $date, PDO::PARAM_STR);
@@ -367,9 +352,8 @@ class PmTransactionLog extends CActiveRecord
             $this->statisticsStructure['Visitors']['today'] = (!is_null($param)) ? round($param, 4) : '0';
             
             $tomorrowSQL = "SELECT sum(visits_count) as summ
-                                FROM tbl_visits
-                                WHERE user_id = :id
-                                AND date_visit = DATE_ADD(:date, INTERVAL -1 DAY)";
+                            FROM tbl_visits
+                            WHERE user_id = :id AND date_visit = DATE_ADD(:date, INTERVAL -1 DAY)";
             $tomorrow = $dbh->createCommand($tomorrowSQL);
             $tomorrow->bindParam(':id', $this->id, PDO::PARAM_INT);
             $tomorrow->bindParam(':date', $date, PDO::PARAM_STR);
@@ -378,10 +362,8 @@ class PmTransactionLog extends CActiveRecord
             
             $date = $this->dateConvertToDb($this->date, TRUE);
             $permonthSQL = "SELECT sum(visits_count) as summ
-                                FROM tbl_visits
-                                WHERE user_id = :id
-                                AND date_visit >= DATE(:date)
-                                AND date_visit < DATE_ADD(:date, INTERVAL 1 MONTH)";
+                            FROM tbl_visits
+                            WHERE user_id = :id AND date_visit >= DATE(:date) AND date_visit < DATE_ADD(:date, INTERVAL 1 MONTH)";
             $permonth = $dbh->createCommand($permonthSQL);
             $permonth->bindParam(':id', $this->id, PDO::PARAM_INT);
             $permonth->bindParam(':date', $date, PDO::PARAM_STR);
@@ -389,8 +371,8 @@ class PmTransactionLog extends CActiveRecord
             $this->statisticsStructure['Visitors']['permonth'] = (!is_null($param)) ? round($param, 4) : '0';
             
             $commonSQL = "SELECT sum(visits_count) as summ
-                                FROM tbl_visits
-                                WHERE user_id = :id";
+                          FROM tbl_visits
+                          WHERE user_id = :id";
             $common = $dbh->createCommand($commonSQL);
             $common->bindParam(':id', $this->id, PDO::PARAM_INT);
             $param = $common->query()->read()['summ'];
