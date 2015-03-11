@@ -76,9 +76,10 @@ class SiteController extends LoginController
             // display the login form
             $this->render('//layouts/login', array('userLogin' => $model));
         } else {
-            if (Yii::app()->request->urlReferrer != Yii::app()->request->url)
-                $this->redirect(Yii::app()->request->urlReferrer);
-            else
+            // test cross subdomain
+            #if (Yii::app()->request->urlReferrer != Yii::app()->request->url)
+            #    $this->redirect(Yii::app()->request->urlReferrer);
+            # else
                 $this->redirect(Yii::app()->createAbsoluteUrl('office'));
         }
     }
