@@ -90,8 +90,8 @@ class SiteController extends LoginController
         $model = User::model()->find('email=:email', array(':email'=>$_POST['email']));
         if(!is_null($model)){
             $domain = $model->username;
-            $url = Yii::app()->createAbsoluteUrl('site/login');
-            $url = str_replace('http://', 'http://'.$domain.'.', $url);
+            $url_tail = Yii::app()->createUrl('site/login');
+            $url = $this->createAssembledUrl($domain) . $url_tail;
             echo $url;
             return TRUE;
         }
@@ -100,6 +100,12 @@ class SiteController extends LoginController
     /*
      * тестовичек
      */
+    protected function createAssembledUrl($domain){
+        $host = $_SERVER['HTTP_HOST'];
+        $protocol = $_SERVER['SERVER_PROTOCOL'];
+        $protocolPrefix = strtolower(explode('/', $protocol)[0]) . '://';
+        return $protocolPrefix . $host;
+    }
     public function actionTest(){
         var_dump($_SERVER);
     }
