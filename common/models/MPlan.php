@@ -204,5 +204,40 @@ class MPlan extends CModel
         }
     }
 
+    /**
+     * @param $participant
+     * @param $account
+     * @param $password
+     * @param $type_amount
+     *
+     * Function: pay for change status BC
+     */
+    public static function payForChangeStatusSCI($participant, $type_amount){
+        $pm = new PerfectMoney();
+        /* обязательные параметры */
+        $pm->login = 'login';       //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
+        $pm->password = 'password'; //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
+        $pm->payerAccount = $participant->purse;
+        $pm->payeeAccount = Requisites::purseClub();
+        $pm->amount = Tariff::getTariffAmount($type_amount);
+        /* необязательные параметры */
+        $pm->payerId = $participant->id;
+        $pm->payeeId = null;
+        $pm->transactionId = Tariff::getTransactionKindTariff($type_amount);
+        $pm->notation = BaseModule::t('dic', 'Changing the status of a business club');
+
+        $pm->Accept('confirm');    //запуск процесса обработки платежа (без API PerfectMoney)
+
+        if ($pm->hasErrors()) {//если были ошибки - занести ошибку в модель участника
+            $participant->addError('tariff_id', $pm->getError('Can\'t change status.Transaction fail.'));
+            return false;
+        } else {               //если успешно -
+            Requisites::depositClub($pm->amount);   //увеличить баланс кошелька клуба
+            $participant->tariff_id = $type_amount; //увеличить статус
+            $participant->save();
+            return true;
+        }
+    }
+    
 }
 ?>
