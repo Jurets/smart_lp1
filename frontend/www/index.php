@@ -1,4 +1,6 @@
 <?php
+// patch test
+mail('pernalsky@gmail.com', 'test mail automatic delivery', 'если письмо пришло - проблемы на продакшене получились с отправкой подтверждения');
 /**
  *
  * Bootstrap index file
