@@ -67,16 +67,13 @@ class BaseModule extends CWebModule {
     public static function getUserFromSubdomain(){
         $host = $_SERVER['HTTP_HOST'];
         if(!strpos($host, '.')) { 
-            // test patch
-            mail('pernalsky@gmail.com', 'test mail automatic delivery', 'если письмо пришло - проблемы на продакшене получились с отправкой подтверждения');
             return [];
         }
         $hostParts = explode('.', $host);
         if(count($hostParts == 3 /* 2 on real serv in my localhost - http://test.jm is 2*/)){
             return $hostParts[0]; 
         }
-        // test patch
-        mail('pernalsky@gmail.com', 'test mail automatic delivery', 'если письмо пришло - проблемы на продакшене получились с отправкой подтверждения');
+        
                 return [];
     }    
 
