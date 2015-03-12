@@ -85,9 +85,9 @@ $this->widget('CCaptcha', array(
         });
         $('#UserLogin_username').focusout(function(){
             var action = $('#login').attr('action');
-            if(action.indexOf('.justmoney') === -1){
+           // if(action.indexOf('.justmoney') === -1){
                 checkDomainName($(this).val());
-            }
+           // }
         });
         return false;
     });
