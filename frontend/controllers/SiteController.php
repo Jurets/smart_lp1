@@ -97,18 +97,14 @@ class SiteController extends LoginController
         }
         echo 'NONE';
     }
-    /*
-     * тестовичек
-     */
+   
     protected function createAssembledUrl($domain){
         $host = $_SERVER['HTTP_HOST'];
         $protocol = $_SERVER['SERVER_PROTOCOL'];
         $protocolPrefix = strtolower(explode('/', $protocol)[0]) . '://';
-        return $protocolPrefix . $host;
+        return $protocolPrefix . $domain .'.'. $host;
     }
-    public function actionTest(){
-        var_dump($_SERVER);
-    }
+    
     /**
      * выход юзера
      * 
