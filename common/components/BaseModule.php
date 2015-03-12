@@ -70,7 +70,7 @@ class BaseModule extends CWebModule {
             return [];
         }
         $hostParts = explode('.', $host);
-        if(count($hostParts == 3 /* 2 on real serv in my localhost - http://test.jm is 2*/)){
+        if(count($hostParts) == 3){ /* 2 on real serv in my localhost - http://test.jm is 2*/
             return $hostParts[0]; 
         }
         
