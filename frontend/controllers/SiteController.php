@@ -232,8 +232,7 @@ class SiteController extends LoginController
         if ($participant->tariff_id == 6) {
             $max_status = true;
         }
-        
-        // Возможные варианты поднятия статуса(пример:мы не можем купить статус ниже текущего)
+        // Возможные варианты поднятия статуса(пример: мы не можем купить статус ниже текущего)
         if ($participant->tariff_id >= Participant::TARIFF_BC && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
             $id = $participant->tariff_id;
         } else {
@@ -252,11 +251,14 @@ class SiteController extends LoginController
         }
         
         /* завершение форм.данных */
-        if (isset($_POST)) {
+        /////if (isset($_POST)) {
+        //if (isset($_GET['response']) && $_GET['response'] == 'success') {
+        if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0 && isset($_POST['tariffid'])) {
             /* Определяем статус,тип операции,изменям статус после удачной оплаты */
             /* безопасно извлекаем данные из $_POST */
             // $type_amount - id операции(TARIFF_50 = 2,TARIFF_BC_BRONZE(100$) = 4)
-            $type_amount = Yii::app()->getRequest()->getPost('amount');
+            $type_amount = Yii::app()->getRequest()->getPost('tariffid');
+            ////$type_amount = Yii::app()->getRequest()->getPost('amount');
             // данные для Perfect Money (account&password) обязательны
             $account = Yii::app()->getRequest()->getPost('account');
             $password = Yii::app()->getRequest()->getPost('password');
@@ -275,9 +277,10 @@ class SiteController extends LoginController
                     $defective_status = true;
                     $message = BaseModule::t('rec', 'Business Club purse not set');
                 }
-            } elseif ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
+            } else if ($type_amount > Participant::TARIFF_20 && $participant->tariff_id < Participant::TARIFF_BC_GOLD) {
                 if (Requisites::purseClub()) {
-                    if (MPlan::payForChangeStatus($participant, $account, $password, $type_amount)) {
+                    //if (MPlan::payForChangeStatus($participant, $account, $password, $type_amount)) {
+                    if (MPlan::payForChangeStatusSCI($participant, $type_amount)) {
                         Yii::app()->user->setFlash('success', BaseModule::t('rec', 'Your payment was successful'));
                         $this->refresh();
                     } else {
@@ -291,13 +294,20 @@ class SiteController extends LoginController
 
             }
         }
-
-        $this->render('status_form', array('model' => $participant, 'status' => $status,
-            'tariffListData' => $tariffListData, 'max_status' => $max_status,
-            'defective_status' => $defective_status, 'message' => $message));
-
+        // вывести вьюшку для повышения статуса (оплаты), включая форму шопинкарт SCI PerfectMoney
+        $this->render('status_form', array(
+            'model' => $participant, 
+            'status' => $status,
+            'tariffListData' => $tariffListData, 
+            'max_status' => $max_status,
+            'defective_status' => $defective_status, 
+            'message' => $message
+        ));
     }
 
+    /**
+    * тестовая отпрака почты
+    */
     public function actionTestmail()
     {
         if (EmailHelper::send(array('jurets75@rambler.ru'), 'Это из frontend (SiteCOntroller/actionTestmail)', 'test', array()))
