@@ -114,6 +114,7 @@ return array(
         'upload.path' => '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR .'www'.DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR,
         'upload.url' => '/admin/uploads/',
         'photo.default' => '/img/default.jpg',
+        'host.name' => 'justmoney.pro',
         'default.language' => 'ru', // Здесь указывается язык по умолчанию для всей системы
     ),
 

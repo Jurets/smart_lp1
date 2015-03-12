@@ -91,18 +91,15 @@ class SiteController extends LoginController
         if(!is_null($model)){
             $domain = $model->username;
             $url_tail = Yii::app()->createUrl('site/login');
-            $url = $this->createAssembledUrl($domain) . $url_tail;
+            $url = BaseModule::createAssembledUrl($domain) . $url_tail;
             echo $url;
             return TRUE;
         }
         echo 'NONE';
     }
-   
-    protected function createAssembledUrl($domain){
-        $host = $_SERVER['HTTP_HOST'];
-        $protocol = $_SERVER['SERVER_PROTOCOL'];
-        $protocolPrefix = strtolower(explode('/', $protocol)[0]) . '://';
-        return $protocolPrefix . $domain .'.'. $host;
+       
+    public function actionTest(){
+        var_dump($_SERVER);
     }
     
     /**

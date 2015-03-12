@@ -1,5 +1,6 @@
 <?php
-$url = Yii::app()->createAbsoluteUrl('register/activate?activkey=' . $participant->activkey);
+//$url = Yii::app()->createAbsoluteUrl('register/activate?activkey=' . $participant->activkey);
+$url = BaseModule::createAssembledUrl($participant->username) . Yii::app()->createUrl('register/activate', array('activkey'=>$participant->activkey));
 ?>
 <p style="color: #000; font-size: medium;">
     <?php echo BaseModule::t('rec', 'Hello!') ?><br/>
