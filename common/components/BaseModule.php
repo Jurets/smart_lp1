@@ -68,7 +68,7 @@ class BaseModule extends CWebModule {
         $host = $_SERVER['HTTP_HOST'];
         if(!strpos($host, '.')) return [];
         $hostParts = explode('.', $host);
-        if(count($hostParts == 2 /* 2 on real serv in my localhost - http://jm is 1*/)){
+        if(count($hostParts == 3 /* 2 on real serv in my localhost - http://test.jm is 2*/)){
             return $hostParts[0]; 
         }
                 return [];
