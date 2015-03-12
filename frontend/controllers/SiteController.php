@@ -97,7 +97,12 @@ class SiteController extends LoginController
         }
         echo 'NONE';
     }
-
+    /*
+     * тестовичек
+     */
+    public function actionTest(){
+        var_dump($_SERVER);
+    }
     /**
      * выход юзера
      * 
