@@ -155,7 +155,7 @@ class MPlan extends CModel
             //перевести взнос на нужный кошелёк
             if ($participant->invite_num == 3 || $participant->invite_num == 4)  {  //если приглашённый 3 или 4
                 Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба
-                if ($participant->invite_num == 4) {                 //если это четвёртый приглашённый
+                if ($participant->invite_num == 3) {                 //если это четвёртый приглашённый
                     $participant->referal->activateBusiness();         //активировать Бизнес-клуб у реферала
                 }
             } else {                                                 //иначе
