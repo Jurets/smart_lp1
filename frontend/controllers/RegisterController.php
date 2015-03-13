@@ -175,6 +175,7 @@ class RegisterController extends EMController
                               $this->render('firstpay', array(
                                 'participant'=>$participant,
                                 'tariff'=>Participant::TARIFF_20,   //флаг успешной оплаты
+                                'purse'=>Requisites::purseActivation(), //кошелёк
                                 'amount'=>marketingPlanHelper::init()->getMpParam('price_activation'), //сумма для активации 20$
                                 'instruction'=>$instruction,        // текст-инструкция
                                 'paysuccess'=>false,                //флаг успешной оплаты
@@ -196,7 +197,6 @@ class RegisterController extends EMController
             else if ($participant->tariff_id < Participant::TARIFF_20 /*!$participant->status*/) {
                 $this->step = 3;
                 $tariff = Participant::TARIFF_20;
-                $purse = Requisites::purseActivation();
                 $amount = marketingPlanHelper::init()->getMpParam('price_activation');
                 $paysuccess = false;
                 $instruction = CHtml::tag('p', array('id'=>"shag-3-1-text"), BaseModule::t('rec', 'To activate your account, you must make the participation fee of $').' '.$amount);
@@ -252,7 +252,7 @@ class RegisterController extends EMController
                 $this->render('firstpay', array(
                     'participant'=>$participant,
                     'tariff'=>$tariff,                  //флаг успешной оплаты
-                    'purse'=>$purse,                    //кошелёк
+                    'purse'=>Requisites::purseActivation(), //кошелёк А
                     'amount'=>$amount,                  //сумма для активации 20$
                     'paysuccess'=>$paysuccess,          //флаг успешной оплаты
                     'instruction'=>$instruction,        // текст-инструкция
