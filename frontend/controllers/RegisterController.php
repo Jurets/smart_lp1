@@ -243,7 +243,12 @@ class RegisterController extends EMController
                             BaseModule::t('common', 'Business participation will allow you to get so many things and so many things! Do not waste time!')
                         );
                         $tariff = Participant::TARIFF_50;  // ставим тариф 50$
-                        $purse = Requisites::purseClub();
+                        // выбрать кошелек для оплаты
+                        if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
+                            $purse = Requisites::purseClub();   //кошелёк клуба!
+                        } else {
+                            $purse = $participant->referal->purse;    // то платёж на кошелёк данного реферала
+                        }
                     }
                 } else {
                     //определить - была ли оплата, делаем это по тарифу (статусу)
