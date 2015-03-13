@@ -264,7 +264,13 @@ class RegisterController extends EMController
             else if ($participant->tariff_id == Participant::TARIFF_20) {
                 $this->step = 4;
                 $tariff = Participant::TARIFF_50;  // ставим тариф 50$
-                $purse = Requisites::purseClub();
+
+                if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
+                    $purse = Requisites::purseClub();   //кошелёк клуба!
+                } else {
+                    $purse = $participant->referal->purse;    // то платёж на кошелёк данного реферала
+                }
+                
                 $amount = marketingPlanHelper::init()->getMpParam('price_start');
                 $paysuccess = false;
                 $instruction = CHtml::tag('p', array('id'=>"shag-4-1-text"), 
