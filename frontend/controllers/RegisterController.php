@@ -196,6 +196,7 @@ class RegisterController extends EMController
             else if ($participant->tariff_id < Participant::TARIFF_20 /*!$participant->status*/) {
                 $this->step = 3;
                 $tariff = Participant::TARIFF_20;
+                $purse = Requisites::purseActivation();
                 $amount = marketingPlanHelper::init()->getMpParam('price_activation');
                 $paysuccess = false;
                 $instruction = CHtml::tag('p', array('id'=>"shag-3-1-text"), BaseModule::t('rec', 'To activate your account, you must make the participation fee of $').' '.$amount);
@@ -251,6 +252,7 @@ class RegisterController extends EMController
                 $this->render('firstpay', array(
                     'participant'=>$participant,
                     'tariff'=>$tariff,                  //флаг успешной оплаты
+                    'purse'=>$purse,                    //кошелёк
                     'amount'=>$amount,                  //сумма для активации 20$
                     'paysuccess'=>$paysuccess,          //флаг успешной оплаты
                     'instruction'=>$instruction,        // текст-инструкция
@@ -262,6 +264,7 @@ class RegisterController extends EMController
             else if ($participant->tariff_id == Participant::TARIFF_20) {
                 $this->step = 4;
                 $tariff = Participant::TARIFF_50;  // ставим тариф 50$
+                $purse = Requisites::purseClub();
                 $amount = marketingPlanHelper::init()->getMpParam('price_start');
                 $paysuccess = false;
                 $instruction = CHtml::tag('p', array('id'=>"shag-4-1-text"), 
@@ -324,6 +327,7 @@ class RegisterController extends EMController
                 $this->render('firstpay', array(
                     'participant'=>$participant,
                     'tariff'=>$tariff,             //флаг успешной оплаты
+                    'purse'=>$purse,             //сумма для активации 20$
                     'amount'=>$amount,             //сумма для активации 20$
                     'paysuccess'=>$paysuccess,     //флаг успешной оплаты
                     'instruction'=>$instruction,   // текст-инструкция

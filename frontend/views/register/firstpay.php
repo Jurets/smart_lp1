@@ -45,7 +45,7 @@
         $return_url = urldecode(Yii::app()->request->hostInfo . Yii::app()->request->url);
         $return_url = str_replace(' ', '+', $return_url);
     ?>
-        <input type="hidden" name="PAYEE_ACCOUNT" value="<?php echo Requisites::purseActivation(); ?>">
+        <input type="hidden" name="PAYEE_ACCOUNT" value="<?php echo $purse; ?>">
         <input type="hidden" name="PAYEE_NAME" value="JustMoney">
         <input type="hidden" name="PAYMENT_AMOUNT" value="<?php echo $amount; ?>">
         <input type="hidden" name="PAYMENT_UNITS" value="USD">

@@ -56,14 +56,19 @@ class MPlan extends CModel
         $pm->password = 'password'; //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
         $pm->payerAccount = $participant->purse;
         $pm->payeeAccount = Requisites::purseActivation();
+        
+        ///////// ДАЛЕЕ ОШИБОЧНЫЙ код
         //определить - на какой кошелёк пойдёт оплата
-        if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
+        /*if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
             $pm->payeeAccount = Requisites::purseClub();   //поставить кошелёк активаций системы!!!!!!!!!!!
             $pm->payeeId = null;
         } else {
             $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
             $pm->payeeId = $participant->referal->id;
-        }
+        }*/
+        ////////////////
+        
+        
         //поставить сумму платежа
         $pm->amount = marketingPlanHelper::init()->getMpParam('price_activation'); //20$;
         /* необязательные параметры */
