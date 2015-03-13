@@ -38,11 +38,13 @@ class RegisterController extends EMController
         if(!Yii::app()->user->isGuest){
             throw New CHttpException(404, BaseModule::t('rec', 'Leave the account and re-register '));
         }
+        $user = BaseModule::getUserFromSubdomain();
         //если юзер не задан
         if (empty($user)) {  
             if ($superrefer = Participant::model()->findByPk(Requisites::superReferId())) { //получить из реквизитов ид супер-рефера
                 $user = $superrefer->username;
-                $this->redirect(Yii::app()->createAbsoluteUrl('register/index/user/'.$user));
+                //$this->redirect(Yii::app()->createAbsoluteUrl('register/index/user/'.$user));
+                $this->redirect(BaseModule::createAssembledUrl($user) . Yii::app()->createUrl('register'));
             } else
                 throw New CHttpException(404, BaseModule::t('rec', 'Registration is allowed only with a personal referral page'));
         }
