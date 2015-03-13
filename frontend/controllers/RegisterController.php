@@ -197,6 +197,7 @@ class RegisterController extends EMController
             else if ($participant->tariff_id < Participant::TARIFF_20 /*!$participant->status*/) {
                 $this->step = 3;
                 $tariff = Participant::TARIFF_20;
+                $purse = Requisites::purseActivation();
                 $amount = marketingPlanHelper::init()->getMpParam('price_activation');
                 $paysuccess = false;
                 $instruction = CHtml::tag('p', array('id'=>"shag-3-1-text"), BaseModule::t('rec', 'To activate your account, you must make the participation fee of $').' '.$amount);
@@ -242,6 +243,7 @@ class RegisterController extends EMController
                             BaseModule::t('common', 'Business participation will allow you to get so many things and so many things! Do not waste time!')
                         );
                         $tariff = Participant::TARIFF_50;  // ставим тариф 50$
+                        $purse = Requisites::purseClub();
                     }
                 } else {
                     //определить - была ли оплата, делаем это по тарифу (статусу)
@@ -252,7 +254,7 @@ class RegisterController extends EMController
                 $this->render('firstpay', array(
                     'participant'=>$participant,
                     'tariff'=>$tariff,                  //флаг успешной оплаты
-                    'purse'=>Requisites::purseActivation(), //кошелёк А
+                    'purse'=>$purse, //кошелёк А
                     'amount'=>$amount,                  //сумма для активации 20$
                     'paysuccess'=>$paysuccess,          //флаг успешной оплаты
                     'instruction'=>$instruction,        // текст-инструкция
