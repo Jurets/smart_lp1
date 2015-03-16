@@ -33,7 +33,7 @@
                     <tr>
                         <div class="copy">
                             <td id="mr">
-                                <span class="mr"><?php echo BaseModule::t('rec',  Mathparams::$parameters[$key]) ; ?></span>
+                                <span class="mr"><?php echo BaseModule::t('rec',  Mathparams::$parameters[$key]); echo ($key>=2 && $key <=6)? ' %' : ''; ?></span>
                             </td>
                             <td>
                                 <?php echo $form->hiddenField($mathparam, 'name', array('name'=>'Mathparams[name][]', 'id'=>false, 'readonly'=>"readonly")); ?>
