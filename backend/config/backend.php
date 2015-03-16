@@ -114,7 +114,7 @@ return array(
 			),
 		),
         'request' => array(
-            'baseUrl' => '/admin',
+            'baseUrl' => '/superjust',
         ),
         'user'=>array(
             // enable cookie-based authentication
