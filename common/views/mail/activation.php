@@ -9,8 +9,7 @@ $urlLogin = Yii::app()->createAbsoluteUrl('/');
     <?php echo BaseModule::t('rec', 'enter') ?> 
     <strong><?php echo BaseModule::t('rec', 'Login') ?></strong>
     <?php echo BaseModule::t('rec', 'and enter your login information') ?><br>
-    <?php echo BaseModule::t('rec', 'login') ?> - <strong><?php echo $participant->email; ?></strong><br>
-    <?php echo BaseModule::t('rec', 'password') ?> - <strong><?php echo $pw_original; ?></strong><br>
+    
     <br>
     <?php echo BaseModule::t('rec', 'In order to proceedfollow the link') ?> 
     <a href="<?php echo $urlRegister; ?>" target="_blank"><?php echo $urlRegister; ?></a><br/>
