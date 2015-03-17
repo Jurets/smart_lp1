@@ -130,3 +130,4 @@ The following extensions are part of YIInitializr-basic template:
 
 Тест!!!!
 тест2
+test commit after repo crush
