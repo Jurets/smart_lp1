@@ -79,8 +79,9 @@ class BaseModule extends CWebModule {
     // проверка на существование поддомена пользователя
     public static function checkSubdomainExistence(){
         $host = $_SERVER['HTTP_HOST'];
-        if( count(explode('.', $host)) === 3) { // subdomain exists
-            $model = Participant::model()->find('username=:username', array(':username'=>$host[0]));
+        $host_pieces = explode('.', $host);
+        if( count($host_pieces) === 3) { // subdomain exists
+            $model = Participant::model()->find('username=:username', array(':username'=>$host_pieces[0]));
             if(empty($model)) {
                 $redirectUrl = "http://".Yii::app()->params['host.name'];
                 Yii::app()->getRequest()->redirect($redirectUrl);
