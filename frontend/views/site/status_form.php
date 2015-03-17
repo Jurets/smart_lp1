@@ -106,9 +106,13 @@ a#endText {
 }
 
 input[type='submit']{
-    height: 25px !important;
+    background-image: url("../images/up-status-button.png");
+    height: 40px !important;
+    font-weight: bold !important;
     padding-top: 0px;
     padding-bottom: 35px;
+    border: 0px;
+    color: #ffffff;
 }
 
 </style>
