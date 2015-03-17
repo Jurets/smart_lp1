@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
             if ($model->tariff_id >= 2) {
                 ?>
                 <p><?php echo BaseModule::t('rec', 'To raise your status you must pay payment')?></p>
-                <?php echo CHtml::label('Сумма: ', 'listData');
+                <?php echo CHtml::label(BaseModule::t('rec', 'Amount').': ', 'listData');
                 $amount = current($tariffListData);
                 echo CHtml::dropDownList('listData', 100, $tariffListData, array('id' => 'dropDownId'));
             } elseif ($model->tariff_id < 2) {
