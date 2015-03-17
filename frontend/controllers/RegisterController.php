@@ -30,11 +30,17 @@ class RegisterController extends EMController
             ),
         );
     }
+    
+    public function beforeAction($action) {
+        parent::beforeAction($action);
+        BaseModule::checkSubdomainExistence();
+        return TRUE;
+    }
+    
     /**
     * Регистрация в системе
     */
     public function actionIndex($user = '') {
-
         if(!Yii::app()->user->isGuest){
             throw New CHttpException(404, BaseModule::t('rec', 'Leave the account and re-register '));
         }

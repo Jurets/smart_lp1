@@ -34,6 +34,13 @@ class SiteController extends LoginController
         );
     }
 
+    public function beforeAction($action) {
+        parent::beforeAction($action);
+        BaseModule::checkSubdomainExistence();
+        return TRUE;
+    }
+    
+    
     /**
      * Главная страница
      * 

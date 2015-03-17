@@ -31,6 +31,7 @@ class OfficeController extends EMController
             } else {
                 $this->redirect('/');
             }
+            BaseModule::checkSubdomainExistence();
             return true;
         }
     }
