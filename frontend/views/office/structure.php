@@ -28,7 +28,7 @@
                     <a style="background: none" href="">
                         <div class="photo_wrap">
                     <div>
-                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': Yii::app()->params['upload.url'].'/origin-'.$member->photo?>">
+                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': Yii::app()->params['upload.url'].'origin-'.$member->photo?>">
                         <img class="right_arrow" src="/images/witharrow.png">
                     </div>
                         <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
@@ -66,7 +66,7 @@
                     <a style="background: none" href="">
                         <div class="photo_wrap">
                     <div>
-                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': '/admin/uploads/origin-'.$member->photo?>">
+                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': Yii::app()->params['upload.url'].'origin-'.$member->photo?>">
                         <img class="right_arrow" src="/images/witharrow.png">
                     </div>
                         <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
