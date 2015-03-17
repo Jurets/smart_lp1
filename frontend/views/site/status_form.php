@@ -115,8 +115,10 @@ input[type='submit']{
 <?php
     $sc = '$(".info").animate({opacity: 1.0}, 3000).fadeOut("slow");
            $("#dropDownId").change(function(){
-                amount = $("#dropDownId option:selected").text();;
+                amount = $("#dropDownId option:selected").text();
                 $("input[name=\'PAYMENT_AMOUNT\']").val(amount);
+                tariffId = $("#dropDownId option:selected").val();
+                $("input[name=\'tariffid\']").val(tariffId);
            })
     ';
 
