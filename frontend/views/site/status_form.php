@@ -12,7 +12,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 </div>
 <div id="main-div">
     <!-- current status -->
-    <p><?php echo BaseModule::t('rec', 'Your status').' : '. $status['name'];?></p>
+    <p><?php echo BaseModule::t('rec', 'Your status').' : '. BaseModule::t('rec', $status['name']);?></p>
 
     <?php
     if (!$defective_status) {
