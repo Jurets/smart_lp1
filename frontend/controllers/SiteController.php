@@ -316,6 +316,7 @@ class SiteController extends LoginController
     */
     public function actionInfo($id)
     {
+        $this->layout = '//layouts/info';
         if (!$info = Information::model()->findByAttributes(array('name'=>$id, 'lng'=>Yii::app()->language))){
             throw New CHttpException(404, BaseModule::t('rec', 'The requested page does not exist'));
         }

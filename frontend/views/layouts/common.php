@@ -50,7 +50,7 @@
             //---------- ОСНОВНОЙ КОНТЕНТ
             echo $content; 
             ?>
-            <div class="wrap"></div>
+            <!--<div class="wrap"></div>-->
         </div>
         
         <?php 

@@ -21,7 +21,7 @@ $titles = Information::getAllTitles();
         <div id="darkBGG"></div>
     </BGDivs>
 
-    <div id="wrapper">
+    <div id="wrapper" style="height: 840px;">
 
         <div id="topLine">
             <ul id="nav">
@@ -94,7 +94,7 @@ $titles = Information::getAllTitles();
             <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
         </div>
 
-        <div id="content" style="height: auto !important;">
+        <div id="content" style="height: 100%;">
             <?php 
             //модель для авторизации юзера
             $userLogin = New UserLogin();
@@ -106,5 +106,4 @@ $titles = Information::getAllTitles();
         </div>
 
     </div>
-    <div class="wrap"></div>
 <?php $this->endContent(); ?>
