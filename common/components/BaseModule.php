@@ -70,11 +70,24 @@ class BaseModule extends CWebModule {
             return [];
         }
         $hostParts = explode('.', $host);
-        if(count($hostParts) == 3){ /* 2 on real serv in my localhost - http://test.jm is 2*/
+        if(count($hostParts) === 3){ /* 2 on real serv in my localhost - http://test.jm is 2*/
             return $hostParts[0]; 
         }
         
                 return [];
     }    
-
+    // проверка на существование поддомена пользователя
+    public static function checkSubdomainExistence(){
+        $host = $_SERVER['HTTP_HOST'];
+        $host_pieces = explode('.', $host);
+        if( count($host_pieces) === 3) { // subdomain exists
+            $model = Participant::model()->find('username=:username', array(':username'=>$host_pieces[0]));
+            if(empty($model)) {
+                $redirectUrl = "http://".Yii::app()->params['host.name'];
+                Yii::app()->getRequest()->redirect($redirectUrl);
+            }
+            return TRUE;
+        }
+        return TRUE;
+    }
 }

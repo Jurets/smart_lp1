@@ -34,6 +34,13 @@ class SiteController extends LoginController
         );
     }
 
+    public function beforeAction($action) {
+        parent::beforeAction($action);
+        BaseModule::checkSubdomainExistence();
+        return TRUE;
+    }
+    
+    
     /**
      * Главная страница
      * 
@@ -215,6 +222,9 @@ class SiteController extends LoginController
     {
         /* Формирование данных для отображения */
         $participant = Participant::model()->findByPk(Yii::app()->user->id);
+        if(is_null($participant)) {
+            $this->redirect('/');
+        }
         $status = Tariff::model()->findByPk($participant->tariff_id);
         // Переменная($max_status) для определения максимального уровня в бизнес клубе
         $max_status = false;

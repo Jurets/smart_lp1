@@ -12,7 +12,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 </div>
 <div id="main-div">
     <!-- current status -->
-    <p><?php echo BaseModule::t('rec', 'Your status').' : '. $status['name'];?></p>
+    <p><?php echo BaseModule::t('rec', 'Your status').' : '. BaseModule::t('rec', $status['name']);?></p>
 
     <?php
     if (!$defective_status) {
@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
             if ($model->tariff_id >= 2) {
                 ?>
                 <p><?php echo BaseModule::t('rec', 'To raise your status you must pay payment')?></p>
-                <?php echo CHtml::label('Сумма: ', 'listData');
+                <?php echo CHtml::label(BaseModule::t('rec', 'Amount').': ', 'listData');
                 $amount = current($tariffListData);
                 echo CHtml::dropDownList('listData', 100, $tariffListData, array('id' => 'dropDownId'));
             } elseif ($model->tariff_id < 2) {
@@ -106,17 +106,23 @@ a#endText {
 }
 
 input[type='submit']{
-    height: 25px !important;
+    background-image: url("../images/up-status-button.png");
+    height: 40px !important;
+    font-weight: bold !important;
     padding-top: 0px;
     padding-bottom: 35px;
+    border: 0px;
+    color: #ffffff;
 }
 
 </style>
 <?php
     $sc = '$(".info").animate({opacity: 1.0}, 3000).fadeOut("slow");
            $("#dropDownId").change(function(){
-                amount = $("#dropDownId option:selected").text();;
+                amount = $("#dropDownId option:selected").text();
                 $("input[name=\'PAYMENT_AMOUNT\']").val(amount);
+                tariffId = $("#dropDownId option:selected").val();
+                $("input[name=\'tariffid\']").val(tariffId);
            })
     ';
 

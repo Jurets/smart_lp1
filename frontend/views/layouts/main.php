@@ -30,9 +30,9 @@ $titles = Information::getAllTitles();
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <?php } ?>
-                <li> <a href="/info/possibilities">  <?php echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
-                <li> <a href="/info/rules"> <?php echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
-                <li> <a href="/info/questions"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
+                <li> <a href="/info/possibilities">  <?php echo BaseModule::t('rec', 'OPPORTUNITIES')//echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
+                <li> <a href="/info/rules"> <?php echo BaseModule::t('rec', 'RULES')//echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
+                <li> <a href="/info/questions"> <?php echo BaseModule::t('rec', 'QUESTIONS AND ANSWERS')//echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
 
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo BaseModule::t('rec', 'SIGN UP'); ?> </a> </li>
@@ -86,7 +86,7 @@ $titles = Information::getAllTitles();
 							width: 393px;
 						}
                     </style>                
-                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/index')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
+                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/statistics')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
                     <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;Настройки </a> </li>
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
                 <?php } ?>

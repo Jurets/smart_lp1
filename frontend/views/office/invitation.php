@@ -14,7 +14,7 @@
         <div id="office-5-bannerListDiv">
             <?php foreach($arrBannerFiles as $bannerPath){ ?>
             <div class="office-5-eachBannerDiv">
-                <img src="/admin/uploads/<?php echo $bannerPath['name'];?>"  width="150" height="100"  />
+                <img src="/superjust/uploads/<?php echo $bannerPath['name'];?>"  width="150" height="100"  />
                 <?php echo CHtml::radioButton('bannerRadioButton',false,array('class'=>'handler', 'value'=>$bannerPath['name'])); ?>
 
             </div>
@@ -63,7 +63,7 @@ $(".handler").change(function() {
     var path = $("input:radio:checked").val();
     var width =  $("#widthBanner").val();
     var height = $("#heightBanner").val();
-    $('#iframeText').html('<iframe src="' + url  + 'admin/uploads/' + path +
+    $('#iframeText').html('<iframe src="' + url  + 'superjust/uploads/' + path +
         '" width="' + width + '" height="' + height +
         '" align="center"></iframe>');
     $('#iframeText').select();

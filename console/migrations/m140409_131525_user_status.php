@@ -17,10 +17,10 @@ class m140409_131525_user_status extends ProjectMigration
         $this->insert('tariff', array('id'=>0, 'name'=>'Старт начальный', 'shortname'=>'0'));
         $this->insert('tariff', array('id'=>1, 'name'=>'Старт 20$', 'shortname'=>'20'));
         $this->insert('tariff', array('id'=>2, 'name'=>'Старт 50$', 'shortname'=>'50'));
-        $this->insert('tariff', array('id'=>3, 'name'=>'Бизнес-клуб', 'shortname'=>'BC'));
-        $this->insert('tariff', array('id'=>4, 'name'=>'Бронзовый инвестор бизнес-клуба', 'shortname'=>'100'));
-        $this->insert('tariff', array('id'=>5, 'name'=>'Серебряный инвестор бизнес-клуба', 'shortname'=>'500'));
-        $this->insert('tariff', array('id'=>6, 'name'=>'Золотой инвестор бизнес-клуба', 'shortname'=>'1000'));
+        $this->insert('tariff', array('id'=>3, 'name'=>'investor B1', 'shortname'=>'BC'));
+        $this->insert('tariff', array('id'=>4, 'name'=>'investor B2', 'shortname'=>'100'));
+        $this->insert('tariff', array('id'=>5, 'name'=>'investor B3', 'shortname'=>'500'));
+        $this->insert('tariff', array('id'=>6, 'name'=>'investor B4', 'shortname'=>'1000'));
         
         //добавить новые поля в табл юзеров
         $this->addColumn('tbl_users', 'tariff_id', 'INT(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT "имя"');

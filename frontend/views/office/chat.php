@@ -468,7 +468,7 @@ Yii::app()->clientScript->registerCssFile('/css/chat.css');
                     $('#skype').empty();
                     $('#link-send-message').empty();
                     if (data && data.photo) {
-                        $('#for-avatar').append('<img src="/admin/uploads/' + data.photo + '" alt="" width="67px" height="67px">');
+                        $('#for-avatar').append('<img src="/superjust/uploads/' + data.photo + '" alt="" width="67px" height="67px">');
                     }
                     if (data && data.phone) {
                         $('#phone').text(data.phone);

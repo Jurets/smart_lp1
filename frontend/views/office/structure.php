@@ -11,7 +11,7 @@
         <div class='segmentate module2'>
             <a style="background: none;" href="#">
             <div class="photo_wrap">
-              <img class="img-circle" src="<?=(!$model->photo)? '/images/profilLogo.png': '/admin/uploads/origin-'.$model->photo?>">
+              <img class="img-circle" src="<?=(!$model->photo)? '/images/profilLogo.png': Yii::app()->params['upload.url'].'origin-'.$model->photo?>">
               <img class="right_arrow" src="/images/witharrow.png">
             </div>
             <div class="phototext_wrap">
@@ -28,7 +28,7 @@
                     <a style="background: none" href="">
                         <div class="photo_wrap">
                     <div>
-                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': '/admin/uploads/origin-'.$member->photo?>">
+                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': Yii::app()->params['upload.url'].'origin-'.$member->photo?>">
                         <img class="right_arrow" src="/images/witharrow.png">
                     </div>
                         <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
@@ -49,7 +49,7 @@
             <a style="background: none;" href="#">
             <div class="photo_wrap">
 <!--              --><?php //CHtml::image('/admin/uploads/'.$model->photo,'',array('width'=>'100', 'height'=>'100')) ?>
-              <img class="img-circle" src="<?=(!$model->photo)? '/images/profilLogo.png': '/admin/uploads/origin-'.$model->photo?>?>" >
+              <img class="img-circle" src="<?=(!$model->photo)? '/images/profilLogo.png': Yii::app()->params['upload.url'].'origin-'.$model->photo?>?>" >
               <img class="right_arrow" src="/images/witharrow.png">
             </div>
             <div class="phototext_wrap">
@@ -66,7 +66,7 @@
                     <a style="background: none" href="">
                         <div class="photo_wrap">
                     <div>
-                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': '/admin/uploads/origin-'.$member->photo?>">
+                        <img class="img-circle" src="<?=(is_null($member->photo) || empty($member->photo))? '/images/profilLogo.png': Yii::app()->params['upload.url'].'origin-'.$member->photo?>">
                         <img class="right_arrow" src="/images/witharrow.png">
                     </div>
                         <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>

@@ -51,7 +51,7 @@ $titles = Information::getAllTitles();
                 // echo strtoupper(BaseModule::t('rec', 'Raise status'));
                 echo (Yii::app()->user->tariff_id >= 3)? strtoupper(BaseModule::t('rec', 'Raise status')) : '';  
                 ?></a>
-                <li> <a href="#"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
+                <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/statistics')?>"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
                 <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('rec', 'Settings'); ?></a> </li>
                 <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
             </ul>
