@@ -143,6 +143,9 @@ class SiapInstructions extends CActiveRecord{
        $B->bindParam(':end', $this->end, PDO::PARAM_STR);
        $param = $B->query()->read()['summ'];
        $this->AmountSummB = (!is_null($param)) ? (float)$param : '0';
+       /* Test Suite */
+       echo PHP_EOL.'Begin= '.$this->begin . PHP_EOL.'End= '.$this->end.PHP_EOL;
+       echo 'weekly summ in purse B = '.$this->AmountSummB.PHP_EOL;
    }
    protected function fillInvoices(){       
        $payments = marketingPlanHelper::init()->getMpParams(); // получаем все настройки платежейs
@@ -320,7 +323,8 @@ class SiapInstructions extends CActiveRecord{
                // Возможно, залогировать
                return 0;
            }
-           $this->club_users['B0']['amount'] = $AllNewClubMembers * 100 / $AllClubMembers * 0.7;
+           //$this->club_users['B0']['amount'] = $AllNewClubMembers * 100 / $AllClubMembers * 0.7;
+           $this->club_users['B0']['amount'] = $AllNewClubMembers * (marketingPlanHelper::init()->getMpParam('price_start')*2) / $AllClubMembers * 0.7;
        };
        
        $this->formules['calc_B1_Amount'] = function(){
