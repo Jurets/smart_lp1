@@ -26,7 +26,10 @@
         <span class="mr"><?php echo BaseModule::t('rec','Photo')?></span><?php echo CHtml::textField("sliderlist[$ind][photo]", $slider['photo'], array('readonly'=>1)); ?>
         <?php echo CHtml::fileField("sliderlist[$ind][photo_source]"); ?>
         <?php echo CHtml::label(BaseModule::t('rec','Descriptio'), NULL); ?>
-        <?php echo CHtml::textArea("sliderlist[$ind][descriptio]", $model->sliderlist[$ind]['descriptio'], array('style'=>"width:600px;height:100px;")); ?>
+        <?php echo CHtml::textArea("sliderlist[$ind][descriptio]", $model->sliderlist[$ind]['descriptio'], array(
+            'maxlength'=>350,
+            'style'=>"width:600px;height:100px;"
+        )); ?>
         <span class="icon-trash" title="<?php echo BaseModule::t('rec','Delete') ; ?>" onclick="$(this).parent().remove(); return false;"> </span>
         </div>
         <div></div>

@@ -1,3 +1,32 @@
+<style type="text/css">
+
+    .ap {
+        color: #72806d;
+        font-family: "Segoe UI",sans-serif;
+        font-size: 85px;
+        font-weight: normal;
+        height: 20px;
+    }
+    
+    /* ниже резерв */
+    /*#ap3 {
+        color: #72806d;
+        font-family: "Segoe UI",sans-serif;
+        font-size: 85px;
+        font-weight: normal;
+        height: 43px;
+    }
+
+    .slideText4 p:before {
+        content: '“';
+        color: #72806d;
+        font-family: "Segoe UI",sans-serif;
+        font-size: 85px;
+        font-weight: normal;
+    }*/
+
+</style>
+
 <?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.min.js"); ?>
 <?php Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.js"); ?>
 <?php Yii::app()->getClientScript()->registerCssFile("/css/jquery.bxslider.css"); ?>
@@ -27,9 +56,11 @@
                     <li class="slideText1"><?php echo BaseModule::t('common', 'LEADERS') ?></li>
                     <li class="slideText2"><?php echo $model->title ?></li>
                     <li class="slideText3"><?php echo $slider['leader']; ?></li>
-                    <li class="slideText4"><?php echo $slider['descriptio']; ?></li>
-                    <div id="ap">“</div>
-                    <div id="ap2">“</div>
+                    <li class="slideText4">
+                        <div class="ap" style="float: left; margin-right: 10px;">“</div>
+                        <div><?php echo $slider['descriptio']; ?></div>
+                        <div class="ap" style="float: right; margin-left: 10px;">“</div>
+                    </li>
                 </ul>
             </div>
         </li>
