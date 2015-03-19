@@ -1,4 +1,14 @@
 <?php
+  /* Вместо желтого квадрата  */
+  $subdomainCheck = BaseModule::getUserFromSubdomain();
+  if(is_array($subdomainCheck)){
+    $redirectUrl = "http://".Yii::app()->params['host.name']; // редирект
+  }else{
+    $redirectUrl = "http://".$subdomainCheck.'.'.Yii::app()->params['host.name'];
+  }
+  Yii::app()->getRequest()->redirect($redirectUrl);
+  /*_*/
+
 /* @var $this SiteController */
 /* @var $error array */
 
