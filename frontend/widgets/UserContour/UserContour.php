@@ -73,7 +73,7 @@ class UserContour extends CWidget {
     private function freePaid(){
         $this->operation = BaseModule::t('rec','COMISSION');
         $db_connector = Yii::app()->db;
-        $amountCommission = $db_connector->createCommand('SELECT sum(amount) as summ FROM pm_transaction_log WHERE tr_kind_id=2');
+        $amountCommission = $db_connector->createCommand('SELECT sum(amount) as summ FROM pm_transaction_log WHERE tr_kind_id IN(2, 6, 8)');
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read()['summ'];
         $list = $db_connector->createCommand(
@@ -82,7 +82,7 @@ class UserContour extends CWidget {
                   LEFT JOIN tbl_users u ON to_user_id = id
                   LEFT JOIN cities c ON city_id = c.id
                   LEFT JOIN countries co ON co.id = c.country_id
-             WHERE tr_kind_id = 2 AND to_user_id IS NOT NULL
+             WHERE tr_kind_id IN (2,6,8) AND to_user_id IS NOT NULL
              ORDER BY date DESC
              LIMIT 6');
         $listCommission = $list->query();
