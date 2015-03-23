@@ -3,6 +3,9 @@
         margin-top: 200px;
         color: #007e97 !important;
     }
+	
+	
+	
     .nextm a {
         color: #007e97 !important;
         border: 0 none !important;

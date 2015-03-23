@@ -208,10 +208,11 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php } else{ ?>
             <div id="shag-1-1-avatar"><img id="thumbnil" style="width:100%; height: 100%; border: none;"  src="" alt=""/></div>
         <?php } ?>
-
-        <div id="shag-1-1-vibrat"><span id="shag-1-1-vibrat-image"><?php echo BaseModule::t('rec', 'SELECT IMAGE') ?></span>
+ <div style="cursor:pointer; background-color:#3F3; z-index:99;">
+       <div id="shag-1-1-vibrat" style="cursor:pointer;"><span id="shag-1-1-vibrat-image"><?php echo BaseModule::t('rec', 'SELECT IMAGE') ?></span>
             <?php echo $form->fileField($participant, 'photo',array('class'=>'shag-fileFiled')); ?>
-        </div>
+        </div></div>
+
         <?php echo $form->error($participant, 'photo',array('class'=>'error-message em-9')); ?>
 
         <?php echo CHTML::submitButton(BaseModule::t('rec', 'SAVE'), array('class' => 'btn-style-green', 'name' => 'btn')) ?>
