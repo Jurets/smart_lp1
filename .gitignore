@@ -55,7 +55,4 @@ index
 CRONTEST
 *.sh
 
-# all pictures
-/frontend/www/images
-/frontend/www/images/*
 
