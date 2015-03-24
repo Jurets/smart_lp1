@@ -1,46 +1,36 @@
 <?php
-  /* Вместо желтого квадрата  */
-  $subdomainCheck = BaseModule::getUserFromSubdomain();
+    $subdomainCheck = BaseModule::getUserFromSubdomain();
   if(is_array($subdomainCheck)){
     $redirectUrl = "http://".Yii::app()->params['host.name']; // редирект
   }else{
     $redirectUrl = "http://".$subdomainCheck.'.'.Yii::app()->params['host.name'];
   }
-  Yii::app()->getRequest()->redirect($redirectUrl);
+?>
+<form method="post" action="<?=$redirectUrl?>" id="about404">
+    <input type="hidden" name="error404">
+</form>
+<?php
+  /* Вместо желтого квадрата версия 1 - не дружит со статистикой - не используется  */
+//  $subdomainCheck = BaseModule::getUserFromSubdomain();
+//  if(is_array($subdomainCheck)){
+//    $redirectUrl = "http://".Yii::app()->params['host.name']; // редирект
+//  }else{
+//    $redirectUrl = "http://".$subdomainCheck.'.'.Yii::app()->params['host.name'];
+//  }
+//  Yii::app()->getRequest()->redirect($redirectUrl);
   /*_*/
 
 /* @var $this SiteController */
 /* @var $error array */
 
-$this->pageTitle=Yii::app()->name . ' - Error';
-$this->breadcrumbs=array(
-	BaseModule::t('common', 'Error'),
-);
+//$this->pageTitle=Yii::app()->name . ' - Error';
+//$this->breadcrumbs=array(
+//	BaseModule::t('common', 'Error'),
+//);
 ?>
 
-<!--<div class="error alert alert-error">-->
-<!--<div class="error" style="color: #ffa3a1; margin-top: 50px; margin-bottom: 50px; font-size: 24px;">-->
-<!--    <h2>Ошибка --><?php //echo $code; ?><!--</h2>-->
-<!--    --><?php //echo CHtml::encode($message); ?>
-<!--</div>-->
-
-    <div class="error" style="background-color: #ffff5f; width: 700px; height: 500px"></div>
-
-
-<style>
-    div#darkBGG{
-        display: none;
-    }
-
-    div#whiteBG{
-        display: none;
-    }
-
-    div.footer{
-        margin-top: 0px;
-    }
-
-    div#contentBG{
-        height: 930px;
-    }
-</style>
+<script>
+    $(function(){
+        $('#about404').submit();
+    });
+</script>

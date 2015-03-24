@@ -12,8 +12,7 @@
  */
 Yii::import('common.modules.user.controllers.LoginController');
 
-class SiteController extends LoginController
-{
+class SiteController extends LoginController {
 
     public $layout = '//layouts/main';
     public $defaultAction = 'index';
@@ -21,8 +20,7 @@ class SiteController extends LoginController
     /**
      * Добавлить действие для капчи
      */
-    public function actions()
-    {
+    public function actions() {
         return array(
             'captcha' => array(
                 'class' => 'CCaptchaAction',
@@ -39,21 +37,39 @@ class SiteController extends LoginController
         BaseModule::checkSubdomainExistence();
         return TRUE;
     }
-    
-    
+
     /**
      * Главная страница
      * 
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
+      
         $model = new Indexmanager;
         $model->LoadIndexManager();
-        if(isset($_GET['user'])){
+        
+        $checkDomain = BaseModule::getUserFromSubdomain();
+        /* определение логики статистики по домену */
+        if (is_array($checkDomain)) {
+            $superrefer = Participant::model()->findByPk(Requisites::superReferId());
+            $domain = $superrefer->username; // берем домен суперреферера
+        } else {
+            if (Yii::app()->user->isGuest) {
+                $domain = $checkDomain; // все и неавторизованный юзер этого домена
+            } else {
+                if (Yii::app()->user->username !== $checkDomain) {
+                    $domain = $checkDomain;
+                } else {
+                    $domain = NULL;  // проверка если пользователь зашел сам  к себе - его заход в статистике не считается
+                }
+            }
+        }
+        /* если домен определен то работает статистика */
+        if (!is_null($domain)) {
             PmTransactionLog::model()->date = date('d.m.Y');
-            PmTransactionLog::model()->domain = $_GET['user'];
+            PmTransactionLog::model()->domain = $domain;
             PmTransactionLog::model()->statisticaVisitesCreation();
         }
+
         $this->render('index', array('model' => $model));
     }
 
@@ -61,8 +77,7 @@ class SiteController extends LoginController
      * Авторизация (ФРОНТЕНД)
      * 
      */
-    public function actionLogin()
-    {
+    public function actionLogin() {
         if (Yii::app()->user->isGuest) {
             $model = new UserLogin();
             $this->performAjaxValidation($model);  //аякс-валидация 
@@ -87,15 +102,17 @@ class SiteController extends LoginController
             #if (Yii::app()->request->urlReferrer != Yii::app()->request->url)
             #    $this->redirect(Yii::app()->request->urlReferrer);
             # else
-                $this->redirect(Yii::app()->createAbsoluteUrl('office'));
+            $this->redirect(Yii::app()->createAbsoluteUrl('office'));
         }
     }
+
     /*
      * AJAX проверка субдомена
      */
-    public function actionCheckDomain(){
-        $model = User::model()->find('email=:email', array(':email'=>$_POST['email']));
-        if(!is_null($model)){
+
+    public function actionCheckDomain() {
+        $model = User::model()->find('email=:email', array(':email' => $_POST['email']));
+        if (!is_null($model)) {
             $domain = $model->username;
             $url_tail = Yii::app()->createUrl('site/login');
             $url = BaseModule::createAssembledUrl($domain) . $url_tail;
@@ -104,13 +121,12 @@ class SiteController extends LoginController
         }
         echo 'NONE';
     }
-        
+
     /**
      * выход юзера
      * 
      */
-    public function actionLogout()
-    {
+    public function actionLogout() {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->createAbsoluteUrl('/'));
     }
@@ -118,8 +134,7 @@ class SiteController extends LoginController
     /**
      * This is the action to handle external exceptions.
      */
-    public function actionError()
-    {
+    public function actionError() {
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
@@ -128,14 +143,12 @@ class SiteController extends LoginController
         }
     }
 
-    public function actionUsrcontour()
-    {
+    public function actionUsrcontour() {
         $this->renderPartial('_usrcontour');
     }
 
     // возврат кол-ва онлайн-юзеров (для главной страницы)
-    public function actionGetonlineuserscount()
-    {
+    public function actionGetonlineuserscount() {
         $count = Yii::app()->cache->get('cache_common_usersonline');
         if ($count === false) {
             $count = Participant::getOnlineUsersCount();
@@ -147,8 +160,7 @@ class SiteController extends LoginController
     }
 
     // возврат списка онлайн-юзеров
-    public function actionGetonlineusers()
-    {
+    public function actionGetonlineusers() {
         $onlineusers = Participant::getOnlineUsers(false); //true - не показывать себя
 
         $response = array();
@@ -158,8 +170,7 @@ class SiteController extends LoginController
     }
 
     // добавить к себе в список
-    public function actionAddUserToList()
-    {
+    public function actionAddUserToList() {
 
         if (isset($_POST['id']) && isset($_POST['username'])) {
             if (!preg_match('/^\d+$/', $_POST['id'])) {
@@ -187,14 +198,12 @@ class SiteController extends LoginController
     }
 
     //личное сообщение (начать личный чат).
-    public function actionSendMessage()
-    {
+    public function actionSendMessage() {
         
     }
 
     //вернуть информацию о пользователе по id
-    public function actionGetUserInfo()
-    {
+    public function actionGetUserInfo() {
         $id = Yii::app()->request->getPost('id');
         $user = Participant::model()->findByPk($id);
         echo CJSON::encode(array(
@@ -205,8 +214,7 @@ class SiteController extends LoginController
     }
 
     // возврат списка онлайн-юзеров
-    public function actionGetTeamUsers()
-    {
+    public function actionGetTeamUsers() {
         $onlineusers = Participant::getTeamUsers(false); //true - не показывать себя
 
         $response = array();
@@ -218,11 +226,10 @@ class SiteController extends LoginController
     /**
      *  Change up status
      */
-    public function actionStatus()
-    {
+    public function actionStatus() {
         /* Формирование данных для отображения */
         $participant = Participant::model()->findByPk(Yii::app()->user->id);
-        if(is_null($participant)) {
+        if (is_null($participant)) {
             $this->redirect('/');
         }
         $status = Tariff::model()->findByPk($participant->tariff_id);
@@ -242,17 +249,17 @@ class SiteController extends LoginController
             $id = Participant::TARIFF_BC;
         }
         $cmd = Yii::app()->db->createCommand()
-            ->select(array('tariff.id', 'mathparams.value'))
-            ->from('tariff')
-            ->leftJoin('mathparams', 'tariff.mathparam = mathparams.name')
-            ->leftJoin('mpversions', 'mathparams.verid = mpversions.id')
-            ->where('tariff.id > :id AND mpversions.activity = 1')
-            ->queryAll(true, array(':id'=>$id));
+                ->select(array('tariff.id', 'mathparams.value'))
+                ->from('tariff')
+                ->leftJoin('mathparams', 'tariff.mathparam = mathparams.name')
+                ->leftJoin('mpversions', 'mathparams.verid = mpversions.id')
+                ->where('tariff.id > :id AND mpversions.activity = 1')
+                ->queryAll(true, array(':id' => $id));
         $tariffListData = array();
         foreach ($cmd as $row) {
             $tariffListData[$row['id']] = $row['value'];
         }
-        
+
         /* завершение форм.данных */
         /////if (isset($_POST)) {
         //if (isset($_GET['response']) && $_GET['response'] == 'success') {
@@ -294,25 +301,23 @@ class SiteController extends LoginController
                     $defective_status = true;
                     $message = BaseModule::t('rec', 'Business Club purse not set');
                 }
-
             }
         }
         // вывести вьюшку для повышения статуса (оплаты), включая форму шопинкарт SCI PerfectMoney
         $this->render('status_form', array(
-            'model' => $participant, 
+            'model' => $participant,
             'status' => $status,
-            'tariffListData' => $tariffListData, 
+            'tariffListData' => $tariffListData,
             'max_status' => $max_status,
-            'defective_status' => $defective_status, 
+            'defective_status' => $defective_status,
             'message' => $message
         ));
     }
 
     /**
-    * тестовая отпрака почты
-    */
-    public function actionTestmail()
-    {
+     * тестовая отпрака почты
+     */
+    public function actionTestmail() {
         if (EmailHelper::send(array('jurets75@rambler.ru'), 'Это из frontend (SiteCOntroller/actionTestmail)', 'test', array()))
             echo 'Успешная отсылка!';
         else
@@ -320,17 +325,17 @@ class SiteController extends LoginController
     }
 
     /**
-    * вывод статической страницы
-    * 
-    * @param mixed $id
-    */
-    public function actionInfo($id)
-    {
+     * вывод статической страницы
+     * 
+     * @param mixed $id
+     */
+    public function actionInfo($id) {
         $this->layout = '//layouts/info';
-        if (!$info = Information::model()->findByAttributes(array('name'=>$id, 'lng'=>Yii::app()->language))){
+        if (!$info = Information::model()->findByAttributes(array('name' => $id, 'lng' => Yii::app()->language))) {
             throw New CHttpException(404, BaseModule::t('rec', 'The requested page does not exist'));
         }
         //$this->layout = 'cabinet';
-        $this->render('info', array('info'=>$info));
+        $this->render('info', array('info' => $info));
     }
+
 }
