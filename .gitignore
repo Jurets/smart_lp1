@@ -57,4 +57,5 @@ CRONTEST
 
 # all pictures
 /frontend/www/images
+/frontend/www/images/*
 
