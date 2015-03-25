@@ -127,6 +127,9 @@ class SiteController extends LoginController {
      * 
      */
     public function actionLogout() {
+        if ($user = Participant::model()->findByPk(Yii::app()->user->id)) {
+            $user->deleteUserFromOnline();
+        }
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->createAbsoluteUrl('/'));
     }

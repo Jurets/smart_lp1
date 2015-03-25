@@ -543,6 +543,15 @@ class Participant extends User
     }
 
     /**
+    * удалить юзера из списка ОНЛАЙН
+    * 
+    */
+    public function deleteUserFromOnline() {
+        $command = Yii::app()->db->createCommand();
+        return $command->delete('onlineusers', 'userid = :userid', array(':userid'=>$this->id));
+    }
+    
+    /**
      * получить список юзеров которые ОНЛАЙН
      * 
      */
