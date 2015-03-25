@@ -215,7 +215,7 @@ class SiteController extends LoginController {
 
     // возврат списка онлайн-юзеров
     public function actionGetTeamUsers() {
-        $onlineusers = Participant::getTeamUsers(false); //true - не показывать себя
+        $onlineusers = Participant::getTeamUsers(true); //true - не показывать себя
 
         $response = array();
         $response['onlinecount'] = count($onlineusers);

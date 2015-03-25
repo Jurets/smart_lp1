@@ -524,6 +524,25 @@ class Participant extends User
     }
 
     /**
+     * добавить юзера в список ОНЛАЙН
+     * 
+     */
+    public function putUserToOnline()
+    {
+        $command = Yii::app()->db->createCommand();
+        $user_id = $command  //сначала проверить: не занесён ли он уже в онлайн-список
+                ->select('userid')
+                ->from('onlineusers')
+                ->where('userid = :userid', array(':userid' => $this->id))
+                ->queryScalar();
+        if ($user_id) {   //если да - обновить дату/время последнего действия
+            return $command->update('onlineusers', array('lastvisit' => time()), 'userid = :userid', array(':userid' => $this->id));
+        } else {          //если нет - добавить строку в таблицу
+            return $command->insert('onlineusers', array('userid' => $this->id, 'lastvisit' => time()));
+        }
+    }
+
+    /**
      * получить список юзеров которые ОНЛАЙН
      * 
      */
@@ -544,37 +563,13 @@ class Participant extends User
         return $rows;
     }
 
-    /**
-     * добавить юзера в список ОНЛАЙН
-     * 
-     */
-    public function putUserToOnline()
-    {
-        $command = Yii::app()->db->createCommand();
-        $user_id = $command  //сначала проверить: не занесён ли он уже в онлайн-список
-                ->select('userid')
-                ->from('onlineusers')
-                ->where('userid = :userid', array(':userid' => $this->id))
-                ->queryScalar();
-        if ($user_id) {   //если да - обновить дату/время последнего действия
-            return $command->update('onlineusers', array('lastvisit' => time()), 'userid = :userid', array(':userid' => $this->id));
-        } else {          //если нет - добавить строку в таблицу
-            return $command->insert('onlineusers', array('userid' => $this->id, 'lastvisit' => time()));
-        }
-    }
-
     //Получить всех юзеров, кто в твоей команде
     public static function getTeamUsers($withoutSelf = false)
     {
-//         $command = Yii::app()->db->createCommand()
-//                 ->select('id,username')
-//                 ->from('tbl_users')
-//                 ->where("refer_id =". Yii::app()->user->id)
-//                 ->queryAll();
-//         return $command;
         $command = Yii::app()->db->createCommand()
                 ->select('{{users}}.username as erzats, {{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
-                ->from('{{users}}')
+                ->from('onlineusers')
+                ->leftJoin('{{users}}', '{{users}}.id = onlineusers.userid')
                 ->leftJoin('cities', 'cities.id = {{users}}.city_id')
                 ->leftJoin('countries', 'countries.id = cities.country_id');
         if (isset(Yii::app()->user->id)) {
@@ -583,15 +578,15 @@ class Participant extends User
         if (isset(Yii::app()->user->refer_id)) {
             $command->orWhere("{{users}}.id = " . Yii::app()->user->refer_id . " and " . Yii::app()->user->refer_id . " is not null");
         }
-        if ($withoutSelf && isset(Yii::app()->user->id->id)) {
+        if ($withoutSelf && isset(Yii::app()->user->id)) {
             $command->where = 'onlineusers.userid <> :self_id';
-            $command->params = array(':self_id' => Yii::app()->user->id->id);
+            $command->params = array(':self_id' => Yii::app()->user->id);
         }
         if($withoutSelf === false && isset(Yii::app()->user->id)){
             $command->orWhere("{{users}}.id = ". Yii::app()->user->id);
         }
         $rows = $command->queryAll();
-
+        
 
         $command2 = Yii::app()->db->createCommand()
                 ->select('{{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
@@ -600,8 +595,6 @@ class Participant extends User
                 ->leftJoin('cities', 'cities.id = {{users}}.city_id')
                 ->leftJoin('countries', 'countries.id = cities.country_id')
                 ->where('yiichat_list.id_user = ' . Yii::app()->user->id);
-
-
 
         $rows2 = $command2->queryAll();
         $res = array_merge($rows, $rows2);
@@ -614,6 +607,12 @@ class Participant extends User
         }
 
         return $result;
+//         $command = Yii::app()->db->createCommand()
+//                 ->select('id,username')
+//                 ->from('tbl_users')
+//                 ->where("refer_id =". Yii::app()->user->id)
+//                 ->queryAll();
+//         return $command;
     }
 
     public static function addUserToList($id, $id_user_invited)
