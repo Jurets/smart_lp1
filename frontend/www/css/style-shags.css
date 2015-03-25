@@ -95,9 +95,13 @@ select {
 #nav li a{
     text-decoration: none;
     font-size: 14px;
-    color: #ababab;
-    font-weight: normal;
+    color: #ccc;
+    font-weight: 900;
 }
+
+#nav li a:hover {
+    color: #fff; /* Цвет ссылки */ 
+   } 
 
 #nav .flag{
     background-image: url(../images/flag.png);
@@ -558,7 +562,7 @@ label.css-label {
 .sub3{ 
 
     height:38px; 
-    width: 851px;
+    width: 800px;
     top:645px;
     left: 53px;
     color:  #848484;
@@ -1305,14 +1309,14 @@ li #zagolovok{
     width:731px ;
 
 
-    top: 225px;
+    top: 228px;
     color: #4b4646;
 
 
-    left: 139px;
+    left: 210px;
     font-size: 15px;
     font-weight: 100;
-
+    margin-left: 65px;
 
     font-family: 'Open Sans Condensed';
 

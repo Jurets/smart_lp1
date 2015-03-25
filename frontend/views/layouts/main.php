@@ -36,7 +36,7 @@ $titles = Information::getAllTitles();
 
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo BaseModule::t('rec', 'SIGN UP'); ?> </a> </li>
-                    <li> <a class="moveRight2 open-login" style="cursor: pointer;" href="#"> <?php echo BaseModule::t('rec', 'LOGIN'); ?> </a> </li>
+                    <li> <a class="moveRight2 open-login" style="cursor: pointer; text-decoration:none;" href="#"> <?php echo BaseModule::t('rec', 'LOGIN'); ?> </a> </li>
                 <?php } else { ?>
                     <style type="text/css">
                         .moveRight1 {
@@ -87,8 +87,8 @@ $titles = Information::getAllTitles();
 						}
                     </style>                
                     <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/statistics')?>"  class="moveRight1"> <?=Yii::app()->user->name?></a> </li>
-                    <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;Настройки </a> </li>
-                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('logout')?>"  class="moveRight3"> |&nbsp;&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
+                    <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;настройки </a> </li>
+                    <li> <a href="<?=Yii::app()->createAbsoluteUrl('logout')?>"  class="moveRight3"> |&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
                 <?php } ?>
             </ul>
             <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>

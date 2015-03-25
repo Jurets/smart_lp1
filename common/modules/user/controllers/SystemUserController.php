@@ -70,7 +70,7 @@ class SystemUserController extends EMController
                         $model->password = Yii::app()->controller->module->encrypting($model->password);
 			if($model->save())
 				//$this->redirect(array('view','id'=>$model->id));
-                            $this->redirect('/admin/user/systemUser/admin');
+                            $this->redirect(['admin']);
 		}
 
 		$this->render('create',array(
@@ -96,8 +96,7 @@ class SystemUserController extends EMController
 			$model->attributes=$_POST['SystemUser'];
                         $model->password = $buff_pass;
 			if($model->save())
-			//	$this->redirect(array('view','id'=>$model->id));
-                        $this->redirect('/admin/user/systemUser/admin');
+                        $this->redirect(['admin']);
 		}
 
 		$this->render('update',array(
@@ -124,7 +123,7 @@ class SystemUserController extends EMController
 	 */
 	public function actionIndex()
 	{
-            $this->redirect('/admin/user/systemUser/admin');
+            $this->redirect(['admin']);
 	}
 
 	/**

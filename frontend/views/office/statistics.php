@@ -7,7 +7,7 @@
 
 <div id="content">
     
-    <a href="https://perfectmoney.is/login.html"><input type="button" name="btn"  class="office-1-btn-style-green" value="<?php echo BaseModule::t('rec','WITHDROAW FUNDS')?>" /></a>
+    <a href="https://perfectmoney.is/login.html" target="_blank"><input type="button" name="btn"  class="office-1-btn-style-green" value="<?php echo BaseModule::t('rec','WITHDROAW FUNDS')?>" /></a>
              
              
               <p class="office-1-text-1"><?php echo BaseModule::t('rec','INCOME')?></p>
@@ -58,14 +58,14 @@
       <td class="tg-auz7" colspan="3"><p><?php echo BaseModule::t('rec','Total in today').':'?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span><?php echo $model->statisticsStructure['IncomeToday'] ?> $</span></p></td>
   </tr>
   <tr class="last-rows">
-    <td class="tg-auz7" colspan="3"><p id='last-value'><?php echo BaseModule::t('rec','Total income received').':'?> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<span id="green"><?php echo $model->statisticsStructure['IncomeCommon'] ?> $</span></p></td>
+    <td class="tg-auz7" colspan="3"><p id='last-value'><?php echo BaseModule::t('rec','Total income received').':'?> &nbsp;&nbsp;&nbsp; <span id="green"><?php echo $model->statisticsStructure['IncomeCommon'] ?> $</span></p></td>
   </tr>
 </table>
         </div>
       
       <table id="tg2">
     <tr>
-        <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec','Today').':'?> <span><?php echo $model->statisticsStructure['Charity']['today'] ?> $</span></td>
+        <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec','Today').':'?><span><?php echo $model->statisticsStructure['Charity']['today'] ?> $</span></td>
       </tr>
       <tr>
           <td class="tg-ll2" colspan="3"><?php echo BaseModule::t('rec','In this month').':'?> <span><?php echo $model->statisticsStructure['Charity']['permonth'] ?> $</span></td>
@@ -89,16 +89,16 @@
     
     <table id="tg4">
     <tr>
-        <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec', 'Today').':'?><span>+<?php echo $model->statisticsStructure['Visitors']['today'] ?></span></td>
+        <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec', 'Today').':'?><span><?php echo $model->statisticsStructure['Visitors']['today'] ?></span></td>
     </tr>
     <tr>
-    <td class="tg-ll2" colspan="3"><?php echo BaseModule::t('rec', 'Yesterday').':'?><span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['tomorrow'] ?></span></td>
+    <td class="tg-ll2" colspan="3"><?php echo BaseModule::t('rec', 'Yesterday').':'?><span><?php echo $model->statisticsStructure['Visitors']['tomorrow'] ?></span></td>
      </tr>
      <tr>
-         <td class="tg-ll3" colspan="3"><?php echo BaseModule::t('rec', 'Month').':'?><span>&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['permonth'] ?></span></td>
+         <td class="tg-ll3" colspan="3"><?php echo BaseModule::t('rec', 'Month').':'?><span><?php echo $model->statisticsStructure['Visitors']['permonth'] ?></span></td>
      </tr>
     <tr>
-    <td class="tg-ll4" colspan="3"><?php echo BaseModule::t('rec', 'Total').':'?><span  style="color: #12be25;" >&nbsp;&nbsp;<?php echo $model->statisticsStructure['Visitors']['common'] ?></span></td>
+    <td class="tg-ll4" colspan="3"><?php echo BaseModule::t('rec', 'Total').':'?><span  style="color: #12be25;" ><?php echo $model->statisticsStructure['Visitors']['common'] ?></span></td>
      </tr>
     </table>   
  </div>  
