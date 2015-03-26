@@ -4,7 +4,7 @@
 
 <div class="main_wrapper">
    
-<div class='structure_title'><?php echo BaseModule::t('rec', 'PERSONAL TEAM STRUCTURE') ?></div>
+<div class='structure_title'><?php echo BaseModule::t('rec', 'PERSONAL TEAM STRUCTURE') ?> (<?php echo BaseModule::t('rec', 'Total') ?>:&nbsp;<?php echo count($model->structureMembers) ?>)</div>
     
     <div class="slider_wrapper">
         <div class='segmentate module1' id="prev1"></div>
@@ -42,7 +42,7 @@
         <div class='segmentate module4' id="next1" onclick="cl_del(this);"></div>
     </div>
 <div style="height:100px;">&nbsp;</div>
-<div class='structure_title'><?php echo BaseModule::t('rec', 'GLOBAL STRUCTURE OF BUSINESS CLUB') ?></div>
+<div class='structure_title'><?php echo BaseModule::t('rec', 'GLOBAL STRUCTURE OF BUSINESS CLUB') ?> (<?php echo BaseModule::t('rec', 'Total') ?>:&nbsp;<?php echo count($model->clubMembers) ?>)</div>
     <div class="test-green">
         <div class='segmentate module1' id="prev2"></div>
         <div class='segmentate module2'>

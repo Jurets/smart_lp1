@@ -127,6 +127,9 @@ class SiteController extends LoginController {
      * 
      */
     public function actionLogout() {
+        if ($user = Participant::model()->findByPk(Yii::app()->user->id)) {
+            $user->deleteUserFromOnline();
+        }
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->createAbsoluteUrl('/'));
     }
@@ -215,7 +218,7 @@ class SiteController extends LoginController {
 
     // возврат списка онлайн-юзеров
     public function actionGetTeamUsers() {
-        $onlineusers = Participant::getTeamUsers(false); //true - не показывать себя
+        $onlineusers = Participant::getTeamUsers(true); //true - не показывать себя
 
         $response = array();
         $response['onlinecount'] = count($onlineusers);
