@@ -50,7 +50,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.CConsoleApplication
 		return ((get_class(Yii::app())=='CConsoleApplication' || (get_class(Yii::app())!='CConsoleApplication' && Yii::app()->getModule('user')->isAdmin()))?array(
-			array('username', 'length', 'max'=>20, 'min' => 3,'message' => BaseModule::t('rec',"Incorrect username (length between 3 and 20 characters).")),
+			array('username', 'length', 'max'=>20, 'min' => 2,'message' => BaseModule::t('rec',"Incorrect username (length between 3 and 20 characters).")),
 			array('password', 'length', 'max'=>128, 'min' => 4,'message' => BaseModule::t('rec',"Incorrect password (minimal length 4 symbols).")),
 			array('email', 'email'),
 			array('username', 'unique', 'message' => BaseModule::t('rec',"This user's name already exists.")),
@@ -66,7 +66,7 @@ class User extends CActiveRecord
             array('logincode', 'safe'),
 		):((Yii::app()->user->id==$this->id)?array(
 			array('username, email', 'required'),
-			array('username', 'length', 'max'=>20, 'min' => 3,'message' => BaseModule::t('rec',"Incorrect username (length between 3 and 20 characters).")),
+			array('username', 'length', 'max'=>20, 'min' => 2,'message' => BaseModule::t('rec',"Incorrect username (length between 3 and 20 characters).")),
 			array('email', 'email'),
 			array('username', 'unique', 'message' => BaseModule::t('rec',"This user's name already exists.")),
 			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => BaseModule::t('rec',"Incorrect symbols (A-z0-9).")),
