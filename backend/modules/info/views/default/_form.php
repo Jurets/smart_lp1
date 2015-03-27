@@ -20,7 +20,7 @@
         //сборник ошибок
         echo $form->errorSummary(array($model));
         //поля
-        echo $form->textFieldControlGroup($model, 'id', array('class'=>'span3'));
+        echo $form->textFieldControlGroup($model, 'name', array('class'=>'span3'));
         echo $form->textFieldControlGroup($model, 'title', array('class'=>'span3'));
         $this->renderPartial('application.views.site.editor', array('form'=>$form, 'model'=>$model, 'field' => 'text'), false, true);
         
