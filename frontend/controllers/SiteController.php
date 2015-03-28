@@ -16,6 +16,9 @@ class SiteController extends LoginController {
 
     public $layout = '//layouts/main';
     public $defaultAction = 'index';
+    
+    /* userLoginPatch */
+    public $userLoginPatch;
 
     /**
      * Добавлить действие для капчи
@@ -96,7 +99,14 @@ class SiteController extends LoginController {
                 }
             }
             // display the login form
-            $this->render('//layouts/login', array('userLogin' => $model, 'actionLoginWindowDisplayPatch'=>TRUE));
+//            $this->render('//layouts/login', array('userLogin' => $model));
+            
+             $model_ind = new Indexmanager;
+             $model_ind->LoadIndexManager();
+             $this->userLoginPatch = $model;
+             $this->render('index', array('model' => $model_ind));
+            
+            
         } else {
             // test cross subdomain
             #if (Yii::app()->request->urlReferrer != Yii::app()->request->url)

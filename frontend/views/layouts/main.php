@@ -97,9 +97,15 @@ $titles = Information::getAllTitles();
         <div id="content" style="height: auto !important;">
             <?php 
             //модель для авторизации юзера
-            $userLogin = New UserLogin();
+            if(isset($this->userLoginPatch) && $this->userLoginPatch !== NULL){
+                $userLogin = $this->userLoginPatch;
+                $display = 1;
+            }else{
+                $userLogin = New UserLogin();
+                $display = 0;
+            }
             // вывести част. вьюшку для входа 
-            $this->renderPartial('//layouts/login', array('userLogin'=>$userLogin), false, false);
+            $this->renderPartial('//layouts/login', array('userLogin'=>$userLogin, 'actionLoginWindowDisplayPatch'=>$display), false, false);
             // вывести основной контент
             echo $content; 
             ?>
