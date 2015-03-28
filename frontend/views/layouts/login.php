@@ -72,11 +72,19 @@ $this->widget('CCaptcha', array(
 
 <a href="#" id="sub4"><?php echo BaseModule::t('rec', 'FORGOT YOUR PASSWORD?') ?></a>
 <?php $this->endWidget(); ?>
+<?php if(isset($actionLoginWindowDisplayPatch)) {?>
+<style>
+    #login {
+        display: block;
+    }
+</style>
+<?php } else { ?>
 <style>
     #login {
         display: none;
     }
 </style>
+<?php } ?>
 <script type="text/javascript">
     $(document).ready(function() {
         //$('#login').hide();

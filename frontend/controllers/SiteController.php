@@ -96,7 +96,7 @@ class SiteController extends LoginController {
                 }
             }
             // display the login form
-            $this->render('//layouts/login', array('userLogin' => $model));
+            $this->render('//layouts/login', array('userLogin' => $model, 'actionLoginWindowDisplayPatch'=>TRUE));
         } else {
             // test cross subdomain
             #if (Yii::app()->request->urlReferrer != Yii::app()->request->url)
