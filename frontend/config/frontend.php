@@ -67,6 +67,8 @@ return array(
                 'register/sendmail/<userid:\d+>' => 'register/sendmail/userid/<userid>',
                 'register/<username:\w+>' => 'register/index/user/<username>',
                 'register' => 'register/index',
+                            /*   */
+                'login' => 'site/login',
                 
                 'news' => 'office/news',
                 'logout' => 'site/logout',
