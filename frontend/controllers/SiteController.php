@@ -87,6 +87,7 @@ class SiteController extends LoginController {
             // collect user input data
             if (isset($_POST['UserLogin'])) {
                 $model->attributes = $_POST['UserLogin'];
+                $test = $model->verifyCode;
                 // validate user input and redirect to previous page if valid
                 if ($model->validate()) {
                     $this->lastViset();
