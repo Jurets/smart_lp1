@@ -704,12 +704,12 @@ select {
 }
 
 
-#tg2 .tg-ll1, .tg-ll2, .tg-ll3{padding: 17px 120px 14px 0px ; border: 0px solid #ccc; font: bold 20px 'Open Sans Condensed'; background-color:#ffffff;text-align:right}
+#tg2 .tg-ll1, .tg-ll2, .tg-ll3{padding: 17px 120px 14px 0px ; border: 0px solid #ccc; font: bold 20px 'Open Sans Condensed'; background-color:#ffffff;text-align:right;}
 
 #tg2 td span{
     font: bold 27px 'Open Sans Condensed';
     color: #167A91;
-    text-align: right;
+    text-align: left;
     position: absolute;
     left: 249px;
     margin-top: -7px;
@@ -6005,13 +6005,31 @@ a{
 }
 
 
-#footerUL1 a, #footerUL2 a, #footerUL3 a, #footerUL4 a, #footerUL5  a,#footerUL6 a{
+#footerUL1 a, #footerUL2 a, #footerUL3 a, #footerUL4 a, #footerUL5 a, #footerUL6 a{
     text-decoration: none;
     color: #959292;
     font-size: 15px;
     font-weight: 100;
 
 }
+
+#footerUL1ahref {
+    text-decoration: none;
+    color: #959292;
+    font-size: 15px;
+    font-weight: 100;
+
+}
+
+#footerUL1ahref:hover {
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 100;
+
+}
+
+
 
 #footerUL1, #footerUL2, #footerUL3, #footerUL4, #footerUL5, #footerUL6   li{
     line-height: 15px;

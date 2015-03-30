@@ -31,7 +31,21 @@ select {
     font:20px 'Open Sans Condensed' !important;
 }
 
+#footerUL1ahref {
+    text-decoration: none;
+    color: #959292;
+    font-size: 15px;
+    font-weight: 100;
 
+}
+
+#footerUL1ahref:hover {
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 100;
+
+}
 
 
 /*HEADER START*/
@@ -563,7 +577,7 @@ label.css-label {
 
     height:38px; 
     width: 800px;
-    top:645px;
+    top:630px;
     left: 53px;
     color:  #848484;
     display: block; 

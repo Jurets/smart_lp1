@@ -46,7 +46,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<p class="sub1" id ="sub1-login"><?php echo BaseModule::t('rec', 'USERNAME') ?>:</p>
+<p class="sub1" id ="sub1-login"><?php echo BaseModule::t('rec', 'EMAIL') ?>:</p>
 <?php echo CHtml::activeTextField($userLogin, 'username', array('class' => 'textbox1 textbox1-login')); ?>
 <?php echo $form->error($userLogin, 'username', array('style' => 'top: 15px;')); ?>
 

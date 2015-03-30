@@ -79,26 +79,26 @@
         
         <table id="tg3">
     <tr>
-    <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec','private team today').':'?> <span><?php echo $model->statisticsStructure['Staff']['privateStructure'] ?></span></td>
+    <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec','private team today').':'?> <span style=" margin-left:-10px;"><?php echo $model->statisticsStructure['Staff']['privateStructure'] ?></span></td>
       </tr>
       <tr>
-          <td class="tg-ll2" colspan="3"><?php echo BaseModule::t('rec','Business Club today').':'?> <span><?php echo $model->statisticsStructure['Staff']['businessClub'] ?></span></td>
+          <td class="tg-ll2" colspan="3"><?php echo BaseModule::t('rec','Business Club today').':'?> <span style=" margin-left:-10px;"><?php echo $model->statisticsStructure['Staff']['businessClub'] ?></span></td>
       </tr>
      
     </table> 
     
     <table id="tg4">
     <tr>
-        <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec', 'Today').':'?><span><?php echo $model->statisticsStructure['Visitors']['today'] ?></span></td>
+        <td class="tg-ll1" colspan="3"><?php echo BaseModule::t('rec', 'Today').':'?><span style=" margin-left:-90px;"><?php echo $model->statisticsStructure['Visitors']['today'] ?></span></td>
     </tr>
     <tr>
-    <td class="tg-ll2" colspan="3"><?php echo BaseModule::t('rec', 'Yesterday').':'?><span><?php echo $model->statisticsStructure['Visitors']['tomorrow'] ?></span></td>
+    <td class="tg-ll2" colspan="3"><?php echo BaseModule::t('rec', 'Yesterday').':'?><span style=" margin-left:-90px;"><?php echo $model->statisticsStructure['Visitors']['tomorrow'] ?></span></td>
      </tr>
      <tr>
-         <td class="tg-ll3" colspan="3"><?php echo BaseModule::t('rec', 'Month').':'?><span><?php echo $model->statisticsStructure['Visitors']['permonth'] ?></span></td>
+         <td class="tg-ll3" colspan="3"><?php echo BaseModule::t('rec', 'Month').':'?><span style=" margin-left:-90px;"><?php echo $model->statisticsStructure['Visitors']['permonth'] ?></span></td>
      </tr>
     <tr>
-    <td class="tg-ll4" colspan="3"><?php echo BaseModule::t('rec', 'Total').':'?><span  style="color: #12be25;" ><?php echo $model->statisticsStructure['Visitors']['common'] ?></span></td>
+    <td class="tg-ll4" colspan="3"><?php echo BaseModule::t('rec', 'Total').':'?><span style="color: #12be25; margin-left:-90px;" ><?php echo $model->statisticsStructure['Visitors']['common'] ?></span></td>
      </tr>
     </table>   
  </div>  

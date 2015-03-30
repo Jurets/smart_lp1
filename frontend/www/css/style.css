@@ -54,7 +54,21 @@ input {
 } 
 
 
+#footerUL1ahref {
+    text-decoration: none;
+    color: #959292;
+    font-size: 15px;
+    font-weight: 100;
 
+}
+
+#footerUL1ahref:hover {
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 100;
+
+}
 
 
 .textbox1 { 
