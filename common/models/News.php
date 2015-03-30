@@ -167,6 +167,9 @@ class News extends CActiveRecord
     {
         $first = strpos($this->content, '.');
         $first += 1;
+        if(empty($this->content)){
+            return NULL;
+        }
         return substr($this->content, 0, strpos($this->content, '.', $first)) . '.';
     }
 
