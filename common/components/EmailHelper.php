@@ -5,7 +5,55 @@
 */
 class EmailHelper {
 
-    public static function send($emails, $subject, $view, $data, $file = '')
+    const DEFAULT_FROM = 'noreply@justmoney.pro';
+    
+    /**
+    * Отправить почту (от юзера) 
+    */
+    public static function sendFromUser($from = null, $emails = array(), $subject = '', $view = '', $data = array(), $file = '')
+    {
+        self::send($emails, $subject, $view, $data, $from);
+    }
+    
+    /**
+    * Отправить почту (от админа, нореплай) 
+    */
+    public static function sendFromAdmin($emails, $subject, $view, $data)
+    {
+        $from = isset(Yii::app()->params['adminEmail']) ? Yii::app()->params['adminEmail'] : self::DEFAULT_FROM;
+        self::send($emails, $subject, $view, $data, $from);
+    }
+    
+    /**
+    * Отправить почту 
+    * 
+    * @param mixed $emails - кому (массив)
+    * @param mixed $subject - тема
+    * @param mixed $view - вью
+    * @param mixed $data - данные (массив)
+    * @param mixed $from - от кого 
+    * @param mixed $file
+    */
+    public static function send($emails, $subject, $view, $data = array(), $from = '', $file = '')
+    {
+        if(empty($emails)) {
+            return FALSE;
+        }
+        $message = new YiiMailMessage;
+        $message->subject = $subject;
+        $message->view = $view;
+        $message->setBody($data, 'text/html');
+        $message->setTo($emails);
+        //$message->setFrom(array(Yii::app()->params['adminEmail'] => 'Fnetwork.ru'));
+        Yii::log(Yii::app()->params['adminEmail'], 'trace', 'mail');
+        $message->from = $from;
+        if( !empty($file) ) {
+            $message->attach(Swift_Attachment::fromPath($_SERVER['DOCUMENT_ROOT'].$file));
+        }
+        return Yii::app()->mail->send($message);
+    }
+    
+    /*public static function send($emails, $subject, $view, $data, $file = '')
     {
         ////////// ЗАГЛУШКА для предотвращения отсылки емейла -- <
         //        if (is_file(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'noemailsending')) { //наличие файла - признак того, чтобы емейл не отсылать
@@ -46,6 +94,7 @@ class EmailHelper {
         }
         return Yii::app()->mail->send($message);
 
-    }
+    }*/
+    
 }
 ?>

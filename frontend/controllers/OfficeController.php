@@ -86,7 +86,7 @@ class OfficeController extends EMController
 //            $this->refresh();
             if($_POST['category']){
                 $category = $_POST['category'];
-                $send = EmailHelper::send(array($objFaqManager[$category.'Mail']), BaseModule::t('rec','Question from FAQ'), 'questionFromFaq', array('question'=>$_POST['question']));
+                $send = EmailHelper::sendFromUser(Yii::app()->user->email, array($objFaqManager[$category.'Mail']), BaseModule::t('rec','Question from FAQ'), 'questionFromFaq', array('question'=>$_POST['question']));
                 if($send){
                     Yii::app()->user->setFlash('successSendEmailFromHelp', BaseModule::t('rec', 'Your message has been sent. You will get an answer soon'));
                 }
