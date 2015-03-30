@@ -5,7 +5,7 @@
     <?php echo CHtml::activeLabel($model, BaseModule::t('rec','Upload Illustration')) ?>
 
     <div class="news-image-preview" id="news-image-preview" style="width: <?php echo $params['width'];?>px; height: <?php echo $params['height'];?>px; border: 1px solid gray; background: url('<?php
-            echo (isset($model->image)) ? '/admin'.$model->UploadImage : '' /*/admin/img/img-gate.png';*/
+            echo (isset($model->image)) ? $model->UploadImage : '' /*/admin/img/img-gate.png';*/
         ?>') no-repeat;">
     </div>
     <br/>
