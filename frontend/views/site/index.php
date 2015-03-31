@@ -164,7 +164,7 @@
 
 </div>
 
-<div id="white">
+<div id="white" style="margin-top:7px;">
     
     <ul class="bxslider">
         <?php if(isset($model->sliderlist)){ ?>
