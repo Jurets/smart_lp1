@@ -21,7 +21,7 @@ class EmailHelper {
     public static function sendFromAdmin($emails, $subject, $view, $data)
     {
         $from = isset(Yii::app()->params['adminEmail']) ? Yii::app()->params['adminEmail'] : self::DEFAULT_FROM;
-        self::send($emails, $subject, $view, $data, $from);
+        return self::send($emails, $subject, $view, $data, $from);
     }
     
     /**
@@ -73,27 +73,6 @@ class EmailHelper {
         //            return false;
         //        }
         ////////// >-- 
-        //DebugBreak();
-        if(empty($emails)) {
-            return FALSE;
-        }
-        $message = new YiiMailMessage;
-        $message->subject = $subject;
-        $message->view = $view;
-        $message->setBody($data, 'text/html');
-        $message->setTo($emails);
-        //$message->setFrom(array(Yii::app()->params['adminEmail'] => 'Fnetwork.ru'));
-        Yii::log(Yii::app()->params['adminEmail'], 'trace', 'mail');
-        //var_dump($emails);
-        //var_dump(Yii::app()->params['adminEmail']);
-        //Yii::app()->end();
-        $message->from = ($from = Yii::app()->params['adminEmail']) ? $from : 'noreply@jwms.pro';
-        //Yii::log($message->from, 'trace', 'mail');
-        if( !empty($file) ) {
-            $message->attach(Swift_Attachment::fromPath($_SERVER['DOCUMENT_ROOT'].$file));
-        }
-        return Yii::app()->mail->send($message);
-
     }*/
     
 }
