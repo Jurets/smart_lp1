@@ -45,6 +45,24 @@
     a#logo{
         left: 0;
     }
+    
+    form#login {
+        left: 769px;
+    }
+   
+   #sub1-login {
+       top: 15px;
+   }
+   
+   /*#UserLogin_username {
+       margin-top: 5px;
+       top: 50px !important;
+   }*/
+   
+   #fake-button {
+       top: 112px;
+   }
+   
 </style>
 
 <?php 

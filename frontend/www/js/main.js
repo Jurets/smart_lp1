@@ -13,7 +13,7 @@ $(document).ready(function () {
         var text = form.find('#sub1-login').html('ВВЕДИТЕ EMAIL, </br> УКАЗАННЫЙ ПРИ РЕГИСТРАЦИИ :');
         var field = form.find('#UserLogin_username').attr('value', '').css('top', '50px').addClass('recovery-email');
         var message = form.find('#sub3-login').addClass('recovery-message').css({'top':100,'color':'red','text-align':'left'}).html('');
-        var button = form.find('#btn-submit').attr({'value':'Отправить','id':'fake-button'}).css('top', '125px').addClass('recovery-send').prop('type', 'button');;
+        var button = form.find('#btn-submit').attr({'value':'Отправить','id':'fake-button'}).addClass('recovery-send').prop('type', 'button');;
         
         $('.recovery-send').live('click', function(){
             var email = $('.recovery-form').find('.recovery-email').val();

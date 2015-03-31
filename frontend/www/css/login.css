@@ -6,7 +6,8 @@
     border-radius: 1px;
     height:26px !important;
     width: 190px;
-    top:29px !important;
+    /*top:29px !important;*/
+    top:29px;
     left: 24px;
     display: block;
     position: absolute;
@@ -125,7 +126,7 @@
 
 
 #sub3-login{
-    color: #879092 !important;
+    color: #879092;
     height:0px; 
     position: absolute;
     font-weight: bold;

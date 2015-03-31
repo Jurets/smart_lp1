@@ -119,7 +119,16 @@
     color: #fff; /* Цвет ссылки */ 
 	
    } 
+   
+   #fake-button {
+       top: 110px;
+   }
 
+   /*#UserLogin_username {
+       margin-top: 5px;
+       top: 50px !important;
+   }*/
+   
 </style>
 <link rel="icon" href="http://newuser.justmoney.pro/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="http://newuser.justmoney.pro/favicon.ico" type="image/x-icon">
