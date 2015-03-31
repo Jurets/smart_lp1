@@ -26,10 +26,7 @@ class RecoveryController extends EMController
                         $this->_handlerError("New password has not been sent");
                     } else {
                         //send email
-                        $res = EmailHelper::send(array($user->email), BaseModule::t('rec', 'Recovery password'), 'recoveryPassword', array(
-                                    '$user' => $user,
-                                    'password' => $password
-                        ));
+                        $res = EmailHelper::sendFromAdmin($user->email, BaseModule::t('rec', 'Recovery password'), 'recoveryPassword', array('$user' => $user, 'password' => $password));
                         if ($res) {
                             $this->_handlerError("New password has been sent, check your e-mail",true);
                         } else {

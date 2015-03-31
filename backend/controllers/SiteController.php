@@ -44,7 +44,7 @@
             //$message->from = Yii::app()->params['adminEmail'];
             $message->from = 'noreply@jwms.pro';
             Yii::app()->mail->send($message);*/
-            if (EmailHelper::send(array('jurets75@rambler.ru'), 'Это из backend (SiteCOntroller/actionTestmail)', 'test', array()))
+            if (EmailHelper::sendFromAdmin(array('jurets75@rambler.ru'), 'Это из backend (SiteCOntroller/actionTestmail)', 'test', array()))
                 echo 'Успешная отсылка!';
             else
                 echo '---Ошибка при отсылке';

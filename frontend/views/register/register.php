@@ -48,6 +48,8 @@
 </style>
 
 <?php 
+    Yii::app()->getClientScript()->registerScriptFile("/js/main.js");
+
     $form = $this->beginWidget('CActiveForm', array(
         'id'=>'register-form',
         'enableAjaxValidation'=>false,

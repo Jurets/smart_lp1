@@ -205,7 +205,7 @@ class OfficeController extends EMController
 
                 if ($currentEmail != $_POST['Participant']['email']) {
                     //отсылка почты для повторного подтверждения почты
-                    EmailHelper::send($participant->new_email, BaseModule::t('rec', 'Mail confirmation'), 'updateEmail', array('participant' => $participant));
+                    EmailHelper::sendFromAdmin($participant->new_email, BaseModule::t('rec', 'Mail confirmation'), 'updateEmail', array('participant' => $participant));
                 }
             } else {
                 $participant->photo = $oldPhoto;

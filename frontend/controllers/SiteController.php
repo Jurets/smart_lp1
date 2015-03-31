@@ -332,7 +332,7 @@ class SiteController extends LoginController {
      * тестовая отпрака почты
      */
     public function actionTestmail() {
-        if (EmailHelper::send(array('jurets75@rambler.ru'), 'Это из frontend (SiteCOntroller/actionTestmail)', 'test', array()))
+        if (EmailHelper::sendFromAdmin(array('jurets75@rambler.ru'), 'Это из frontend (SiteCOntroller/actionTestmail)', 'test', array()))
             echo 'Успешная отсылка!';
         else
             echo '---Ошибка при отсылке';

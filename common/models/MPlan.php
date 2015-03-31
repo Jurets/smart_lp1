@@ -33,7 +33,7 @@ class MPlan extends CModel
             Yii::app()->user->setState('pw_original', $pw_original);
             $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
             Requisites::depositActivation($pm->amount); //увеличить баланс кошелька активаций
-            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
+            EmailHelper::sendFromAdmin(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array('participant'=>$participant, 'pw_original'=>$pw_original)); //отослать емейл
             return true;
         } else {
             $participant->addError('tariff_id', $pm->getError('paymentTransactionStatus'));
@@ -167,7 +167,7 @@ class MPlan extends CModel
                 $participant->referal->depositPurse($pm->amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
             }
             //отослать письмо про вступление в бизнес-участие
-            EmailHelper::send(array($participant->email), BaseModule::t('dic', 'You have become a business participant'), 'businessstart', array('participant'=>$participant));
+            EmailHelper::sendFromAdmin(array($participant->email), BaseModule::t('dic', 'You have become a business participant'), 'businessstart', array('participant'=>$participant));
             /////                        $this->step = 4;
             /////                        $this->render('finish', array('participant'=>$participant));
             /////                        Yii::app()->end();

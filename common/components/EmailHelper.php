@@ -34,7 +34,7 @@ class EmailHelper {
     * @param mixed $from - от кого 
     * @param mixed $file
     */
-    public static function send($emails, $subject, $view, $data = array(), $from = '', $file = '')
+    private static function send($emails, $subject, $view, $data = array(), $from = '', $file = '')
     {
         if(empty($emails)) {
             return FALSE;

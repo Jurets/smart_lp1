@@ -109,7 +109,7 @@ class RegisterController extends EMController
                 //пароль пока не хэшируем (захешируется позже при активации)
                 if ($participant->save(false)) {
                     //отсылка почты для подтверждения регистрации
-                    EmailHelper::send(array($participant->email), BaseModule::t('rec', 'Confirmation of registration'), 'regconfirm', array('participant' => $participant));
+                    EmailHelper::sendFromAdmin(array($participant->email), BaseModule::t('rec', 'Confirmation of registration'), 'regconfirm', array('participant' => $participant));
                 }
                 $message = BaseModule::t('rec', 'On your mail has been sent. In the letter you will find a link Click on it.');
                 $this->render('confirmsended', array(
@@ -236,7 +236,7 @@ class RegisterController extends EMController
                         Yii::app()->user->setState('pw_original', $pw_original);
                         $participant->activateStart(); //активировать (там же хэш пароля и стереть активкод)
                         Requisites::depositActivation(marketingPlanHelper::init()->getMpParam('price_activation')); //увеличить баланс кошелька активаций
-                        EmailHelper::send(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array(
+                        EmailHelper::sendFromAdmin(array($participant->email), BaseModule::t('dic', 'Activation in system'), 'activation', array(
                             'participant'=>$participant, 
                             'pw_original'=>$pw_original
                         )); //отослать емейл --------------
@@ -327,7 +327,7 @@ class RegisterController extends EMController
                             $participant->referal->depositPurse($amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
                         }
                         //отослать письмо про вступление в бизнес-участие
-                        EmailHelper::send(array($participant->email), BaseModule::t('dic', 'You have become a business participant'), 'businessstart', array('participant'=>$participant));
+                        EmailHelper::sendFromAdmin(array($participant->email), BaseModule::t('dic', 'You have become a business participant'), 'businessstart', array('participant'=>$participant));
                         Yii::app()->user->setFlash('success', BaseModule::t('rec', 'Your payment was successful') . '!');
                         // увеличиваем шаг и рендерим вьюшку по второй оплате 50$
                         $this->step = 4;
@@ -370,7 +370,7 @@ class RegisterController extends EMController
                     $userlogin->username = $participant->email;     //авторизация по емейлу!
                     $userlogin->password = Yii::app()->user->getState('pw_original');//$password;
                     //!!!здесь надо отослать пароль по почте (??????)
-                    ///////EmailHelper::send(array($participant->email), 'Активация в системе', 'businessstart', array('participant'=>$participant));
+                    ///////EmailHelper::sendFromAdmin(array($participant->email), 'Активация в системе', 'businessstart', array('participant'=>$participant));
                     //авторизация
                     $userlogin->authenticate(null, null);
                     if (empty($userlogin->errors)) {              //если авторизация успешна -
@@ -392,7 +392,7 @@ class RegisterController extends EMController
     public function actionSendmail($userid = null) {
         if (isset($userid) && $participant = Participant::model()->findByPk($userid)) {
             $message = BaseModule::t('rec', 'On your mail has been sent again. In the letter you will find a link Click on it.');
-            EmailHelper::send(array($participant->email), BaseModule::t('rec', 'Confirmation of registration'), 'regconfirm', array('participant' => $participant));
+            EmailHelper::sendFromAdmin(array($participant->email), BaseModule::t('rec', 'Confirmation of registration'), 'regconfirm', array('participant' => $participant));
             $this->render('confirmsended', array(
                 'step'=>1, 
                 'participant'=>$participant,
