@@ -121,9 +121,16 @@
    } 
    
    #fake-button {
-       top: 110px;
+       top: 125px;
    }
 
+   
+   .recovery-sub {
+       color: #879092 !important;
+       font-size: 14px;
+       font-weight: bold;
+       margin-top: 12px;
+   }
    /*#UserLogin_username {
        margin-top: 5px;
        top: 50px !important;

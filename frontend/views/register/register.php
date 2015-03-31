@@ -59,8 +59,18 @@
        top: 50px !important;
    }*/
    
+   .recovery-email {
+       top: 50px !important;
+   }
+   
    #fake-button {
-       top: 112px;
+       top: 132px;
+   }
+   
+   .recovery-sub {
+       text-align: center;
+       line-height: 1;
+       left: 0 !important;
    }
    
 </style>

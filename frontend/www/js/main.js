@@ -10,9 +10,11 @@ $(document).ready(function () {
 
         var form = $('#login').clone(true, true);
         $('#login').hide();
-        var text = form.find('#sub1-login').html('ВВЕДИТЕ EMAIL, </br> УКАЗАННЫЙ ПРИ РЕГИСТРАЦИИ :');
+        //var text = form.find('#sub1-login').css({'text-align':'center', 'line-height': '1'}).html('ВВЕДИТЕ EMAIL, </br> УКАЗАННЫЙ ПРИ РЕГИСТРАЦИИ :');
+        var text = form.find('#sub1-login').removeClass('sub1').addClass('recovery-sub').html('ВВЕДИТЕ EMAIL, </br> УКАЗАННЫЙ ПРИ РЕГИСТРАЦИИ :');
+        //var field = form.find('#UserLogin_username').attr('value', '').css('top', '50px').addClass('recovery-email');
         var field = form.find('#UserLogin_username').attr('value', '').css('top', '50px').addClass('recovery-email');
-        var message = form.find('#sub3-login').addClass('recovery-message').css({'top':100,'color':'red','text-align':'left'}).html('');
+        var message = form.find('#sub3-login').addClass('recovery-message').css({'top':100,'color':'red','text-align':'left', 'width': 'auto', 'line-height': '1'}).html('');
         var button = form.find('#btn-submit').attr({'value':'Отправить','id':'fake-button'}).addClass('recovery-send').prop('type', 'button');;
         
         $('.recovery-send').live('click', function(){
