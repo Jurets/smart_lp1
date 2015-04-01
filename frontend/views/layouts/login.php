@@ -13,7 +13,7 @@
         border-width: 6px;
         font-size: medium;
         height: 37px;
-        left: 238px;
+        right: 180px;
         padding-top: 0;
         position: relative;
         /*top: 33px;*/
