@@ -263,6 +263,7 @@ class OfficeController extends EMController
             $criteria = new CDbCriteria();
             $criteria->addCondition('activity = 1');
             $criteria->addCondition('lng = :lng');
+            $criteria->order = 'activated DESC';
             $criteria->params = array('lng'=>Yii::app()->language);
             $count = News::model()->count($criteria); // количество активных записей новостей
             if($count!=0){
