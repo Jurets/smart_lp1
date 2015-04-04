@@ -52,7 +52,7 @@ class UserContour extends CWidget {
                  FROM tbl_users u
                       LEFT JOIN cities c ON u.city_id = c.id
                       LEFT JOIN countries co ON co.id = c.country_id
-                 WHERE superuser = 0 AND status = 1
+                 WHERE superuser = 0 AND status = 1 AND tariff_id NOT IN(22,23,24,25,26)
                  ORDER BY u.create_at DESC
                  LIMIT 6');
         $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 AND status = 1 ');
@@ -214,6 +214,7 @@ class UserContour extends CWidget {
         $summ = 0;
         foreach ($struct as $elem) {
             switch ($elem['tariff']) {
+                // люди
                 case '3' :
                     $summ += 10;
                     break;
@@ -226,6 +227,20 @@ class UserContour extends CWidget {
                 case '6' :
                     $summ += 100;
                     break;
+                
+                // роботы
+//                case '23' :
+//                    $summ += 10;
+//                    break;
+//                case '24' :
+//                    $summ += 10;
+//                    break;
+//                case '25' :
+//                    $summ += 50;
+//                    break;
+//                case '26' :
+//                    $summ += 100;
+//                    break;
             }
         }
         return $summ;

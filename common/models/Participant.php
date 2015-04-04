@@ -29,8 +29,7 @@
  * @var timestamp $lastvisit_at
  * @var string $logincode
  */
-class Participant extends User
-{
+class Participant extends User {
 
     //константы для обозначения тарифа участника
     const TARIFF_START = 0;
@@ -40,10 +39,27 @@ class Participant extends User
     const TARIFF_BC_BRONZE = 4;
     const TARIFF_BC_SILVER = 5;
     const TARIFF_BC_GOLD = 6;
+    // константы для обозначения тарифа бота
+    const BOT_50 = 22; // рядовой бот
+    const BOT_BC = 23; // бот - рядовой член бизнес-клуба
+    const BOT_BC_BRONZE = 24; // бронзовый бот
+    const BOT_BC_SILVER = 25; // серебряный бот
+    const BOT_BC_GOLD = 26; // золотой бот
 
     //масив для бизнес-тарифов 
     // * термин "тарифы" (вместо "статусы" как в ТЗ) здесь и далее применяется для того, чтобы отличить их от статуса активности/неактивности
-    private $_businessclubIDs = array(self::TARIFF_BC, self::TARIFF_BC_BRONZE, self::TARIFF_BC_SILVER, self::TARIFF_BC_GOLD);
+    private $_businessclubIDs = array(
+        self::TARIFF_BC,
+        self::TARIFF_BC_BRONZE,
+        self::TARIFF_BC_SILVER,
+        self::TARIFF_BC_GOLD,
+        
+        self::BOT_50,
+        self::BOT_BC,
+        self::BOT_BC_BRONZE,
+        self::BOT_BC_SILVER,
+        self::BOT_BC_GOLD
+    );
     //поле страны - нужно для помощи при выборе города (т.к. у юзера поля страны нет, а поле города - есть)
     public $country_id;
     //поле (логическое) согласия регистрируемого участника
@@ -58,6 +74,8 @@ class Participant extends User
     public $newPassword;
     //переданный постом код активации (используетсяна формах регистрации для контроля)
     public $postedActivKey = null;
+    // поле статуса пользователя, если он - бот
+    public $bot = array();
     //ниже идут загрушки для отображения колонок, смысл которых пока неясен ))
     public $structure = null;
     public $business = null;
@@ -68,11 +86,22 @@ class Participant extends User
     public $clubMembers = null; // здесь лежат пользователи, которые попали в куб
     private $dict_participant = 'participant';
 
+    
+    public function init() {
+        parent::init();
+        $this->bot = array(
+            self::BOT_50 => BaseModule::t('rec', '$50').' - bot',
+            self::BOT_BC => BaseModule::t('rec', 'investor B1').' - bot',
+            self::BOT_BC_BRONZE => BaseModule::t('rec', 'investor B2').' - bot',
+            self::BOT_BC_SILVER => BaseModule::t('rec', 'investor B3').' - bot',
+            self::BOT_BC_GOLD => BaseModule::t('rec', 'investor B4').' - bot'
+        );
+    }
+    
     /**
      * @return array validation rules for model attributes.
      */
-    public function rules()
-    {
+    public function rules() {
         //NOTE: you should only define rules for those attributes that
         //will receive user inputs.
         return CMap::mergeArray(parent::rules(), array(
@@ -83,7 +112,7 @@ class Participant extends User
                     array('username, country_id, city_id, email, rulesAgree, newTariff, postedActivKey', 'safe', 'on' => array('register')),
                     array('username, country_id, city_id, email, rulesAgree', 'required', 'on' => array('register')),
                     array('username', 'filter', 'filter' => 'strtolower', 'on' => array('register')),
-                    array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => BaseModule::t('rec','It is necessary to accept the Membership Agreement')),
+                    array('rulesAgree', 'compare', 'compareValue' => true, 'on' => array('register'), 'message' => BaseModule::t('rec', 'It is necessary to accept the Membership Agreement')),
                     //The following rule is used by search().
                     //@todo Please remove those attributes that should not be searched.
                     //array('id, author, created, activated, title, announcement, content, image, activity', 'safe', 'on'=>'search'),
@@ -97,15 +126,14 @@ class Participant extends User
                     //array('currentPassword', 'passwordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     //array('newPassword', 'newPasswordRule', 'allowEmpty' => true, 'on' => array('settings')),
                     array('photo', 'file', 'safe' => true, 'types' => 'jpg, gif, png',
-                        'allowEmpty' => true, 'maxSize' => 5 * 2000 * 2000, 'tooLarge' => BaseModule::t('rec','The file weighs more than 2 MB. Please upload a smaller file'), 'on' => array('settings','register')),
+                        'allowEmpty' => true, 'maxSize' => 5 * 2000 * 2000, 'tooLarge' => BaseModule::t('rec', 'The file weighs more than 2 MB. Please upload a smaller file'), 'on' => array('settings', 'register')),
         ));
     }
 
     /**
      * @return array relational rules.
      */
-    public function relations()
-    {
+    public function relations() {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return CMap::mergeArray(parent::relations(), array(
@@ -123,7 +151,6 @@ class Participant extends User
                     'tariff' => array(self::BELONGS_TO, 'Tariff', 'tariff_id'),
                     //город
                     'city' => array(self::BELONGS_TO, 'Cities', 'city_id'),
-
                     //текущий бан в чате (его может и не быть!)
                     'chatban' => array(self::HAS_ONE, 'Chatban', 'user_id', 'condition' => 'active = 1' /* , 'limit'=>1 */),
                     //массив истории забанивания в чате
@@ -137,25 +164,24 @@ class Participant extends User
     /**
      * @return array customized attribute labels (name=>label)
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return CMap::mergeArray(parent::attributeLabels(), array(
-                    'create_at' => BaseModule::t('rec',"Created"),
-                    'username' => BaseModule::t('rec',"Domain"),
-                    'first_name' => BaseModule::t('rec',"Firstname"),
-                    'last_name' => BaseModule::t('rec',"Lastname"),
-                    'city_id' => BaseModule::t('rec',"City"),
-                    'country_id' => BaseModule::t('rec',"Country"),
-                    'structure' => BaseModule::t('rec',"Structure"),
-                    'business' => BaseModule::t('rec',"Business Club"),
-                    'refer_id' => BaseModule::t('rec',"Referal"),
-                    'tariff_id' => BaseModule::t('rec',"Tariff"),
-                    'phone' => BaseModule::t('rec',"Phone"),
-                    'skype' => BaseModule::t('rec',"Skype"),
-                    'dob' => BaseModule::t('rec',"Birthday"),
-                    'gmt_id' => BaseModule::t('rec',"Gmt"),
-                    'income' => BaseModule::t('rec',"Income"),
-                    'transfer_fund' => BaseModule::t('rec',"Transfer to the Fund"),
+                    'create_at' => BaseModule::t('rec', "Created"),
+                    'username' => BaseModule::t('rec', "Domain"),
+                    'first_name' => BaseModule::t('rec', "Firstname"),
+                    'last_name' => BaseModule::t('rec', "Lastname"),
+                    'city_id' => BaseModule::t('rec', "City"),
+                    'country_id' => BaseModule::t('rec', "Country"),
+                    'structure' => BaseModule::t('rec', "Structure"),
+                    'business' => BaseModule::t('rec', "Business Club"),
+                    'refer_id' => BaseModule::t('rec', "Referal"),
+                    'tariff_id' => BaseModule::t('rec', "Tariff"),
+                    'phone' => BaseModule::t('rec', "Phone"),
+                    'skype' => BaseModule::t('rec', "Skype"),
+                    'dob' => BaseModule::t('rec', "Birthday"),
+                    'gmt_id' => BaseModule::t('rec', "Gmt"),
+                    'income' => BaseModule::t('rec', "Income"),
+                    'transfer_fund' => BaseModule::t('rec', "Transfer to the Fund"),
         ));
     }
 
@@ -163,8 +189,7 @@ class Participant extends User
      * скоупы
      *
      */
-    public function scopes()
-    {
+    public function scopes() {
         return CMap::mergeArray(parent::scopes(), array(
                     'participant' => array(
                         'condition' => 'superuser = 0',
@@ -180,20 +205,17 @@ class Participant extends User
         ));
     }
 
-    public function passwordRule()
-    {
+    public function passwordRule() {
         if (!empty($this->currentPassword) && $this->password != UserModule::encrypting($this->currentPassword)) {
             $this->addError('currentPassword', 'Неправильно введен текущий пароль.');
         }
-        
     }
 
-    public function newPasswordRule()
-    {
+    public function newPasswordRule() {
         if (!empty($this->currentPassword) && empty($this->newPassword)) {
             $this->addError('newPassword', 'Введите новый пароль.');
         }
-        if(strlen($this->newPassword) < 4){
+        if (strlen($this->newPassword) < 4) {
             $this->addError('newPassword', 'Пароль должен быть минимум 4 символа.');
         }
     }
@@ -202,8 +224,7 @@ class Participant extends User
      * геттер для массива бизнес-тарифов
      *
      */
-    public function getBusinessclubIDs()
-    {
+    public function getBusinessclubIDs() {
         return $this->_businessclubIDs;
     }
 
@@ -219,8 +240,7 @@ class Participant extends User
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search()
-    {
+    public function search() {
         // @todo Please modify the following code to remove attributes that should not be searched.
         $dataProvider = parent::search();
         if (!isset($dataProvider))
@@ -260,10 +280,10 @@ class Participant extends User
             $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id' => $this->refer_id));
         }
         if (isset($this->income)) {
-        $criteria->compare('user.income', $this->income); //поиск по доходу
+            $criteria->compare('user.income', $this->income); //поиск по доходу
         }
         if (isset($this->transfer_fund)) {
-        $criteria->compare('user.transfer_fund', $this->transfer_fund); //поиск по отчислениям в фонд
+            $criteria->compare('user.transfer_fund', $this->transfer_fund); //поиск по отчислениям в фонд
         }
         //мержим критерию с родительской и возвращаем набор данных 
         $dataProvider->criteria->mergeWith($criteria);
@@ -276,8 +296,7 @@ class Participant extends User
      * @param string $className active record class name.
      * @return News the static model class
      */
-    public static function model($className = __CLASS__)
-    {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -296,8 +315,7 @@ class Participant extends User
      * процедура при выборке записи из БД
      *
      */
-    public function afterFind()
-    {
+    public function afterFind() {
         //присвоить значение полю "ид страны"
         $this->country_id = isset($this->city) ? $this->city->country_id : null;
         //если сценарий не активация
@@ -310,14 +328,12 @@ class Participant extends User
      * Сгенерировать пароль (числовой)
      *
      */
-    private static function _generatePassword()
-    {
+    private static function _generatePassword() {
         return rand(10000000, 99999999);
     }
 
     //глобальная функция для присвоения пароля (не хешируем пока что)
-    public function generatePassword()
-    {
+    public function generatePassword() {
         $this->password = $this->_generatePassword(); //сгенерить
         //$this->password = Yii::app()->getModule('user')->encrypting($this->password);
         $this->save(false, array('password')); //сохранить (без валидации)
@@ -327,40 +343,35 @@ class Participant extends User
      * Выдаёт значение Тарифа
      *
      */
-    public function getTariffShortValue()
-    {
+    public function getTariffShortValue() {
         return isset($this->tariff) ? $this->tariff->shortname : null;
     }
 
     /**
      * Выдаёт название города
      */
-    public function getCityName()
-    {
+    public function getCityName() {
         return isset($this->city) ? $this->city->name : null;
     }
 
     /**
      * Выдаёт название страны
      */
-    public function getCountryName()
-    {
+    public function getCountryName() {
         return isset($this->city) && isset($this->city->country) ? $this->city->country->name : null;
     }
 
     /**
      * Выдаёт значение имени реферала
      */
-    public function getReferalName()
-    {
+    public function getReferalName() {
         return isset($this->referal) ? $this->referal->username : null;
     }
 
     /**
      * Выдаёт значение ИД реферала
      */
-    public function getReferalId()
-    {
+    public function getReferalId() {
         return isset($this->referal) ? $this->referal->id : null;
     }
 
@@ -368,8 +379,7 @@ class Participant extends User
      * выдать список для выбора реферала
      *
      */
-    public function getListForReferalSelect()
-    {
+    public function getListForReferalSelect() {
         $criteria = New CDbCriteria(array(
             'select' => array('id', 'username'),
             'scopes' => 'participant',
@@ -386,8 +396,7 @@ class Participant extends User
      * выдать список для выбора реферала
      *
      */
-    public function getListForSuperReferalSelect()
-    {
+    public function getListForSuperReferalSelect() {
         $criteria = New CDbCriteria(array(
             'select' => array('id', 'username'),
             'scopes' => 'superrefer',
@@ -399,12 +408,11 @@ class Participant extends User
         $models = self::model()->findAll($criteria);
         return CHtml::listData($models, 'id', 'username');
     }
-    
+
     /**
      * цвет для юзера в сетке
      */
-    public function getColor()
-    {
+    public function getColor() {
         $statuscolor = 'white';
         //switch ($this->isBanned()) {//здесь указываете ваш аттрибут
         switch ($this->status) { //здесь указываете ваш аттрибут
@@ -421,8 +429,7 @@ class Participant extends User
         return $statuscolor;
     }
 
-    public function userStructureProcess()
-    {
+    public function userStructureProcess() {
 
         $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id', array(':refer_id' => $this->id, ':id' => $this->id));
         $isBusinessClub = $this->isBusinessclub();
@@ -442,8 +449,7 @@ class Participant extends User
     /**
      * активация стартового тарифа
      */
-    public function activateStart()
-    {
+    public function activateStart() {
         $this->tariff_id = self::TARIFF_20;       //ставим статус 20$
         $this->status = parent::STATUS_ACTIVE;    //ставим активность
         $this->password = Yii::app()->getModule('user')->encrypting($this->password); //хэшируем пароль
@@ -454,8 +460,7 @@ class Participant extends User
     /**
      * активация участия в клубе
      */
-    public function activateParticipation()
-    {
+    public function activateParticipation() {
         $this->tariff_id = self::TARIFF_50;
         $this->busy_date = new CDbExpression('NOW()');
         $this->save(false, array('tariff_id', 'busy_date'));
@@ -464,8 +469,7 @@ class Participant extends User
     /**
      * активация бизнес-участия
      */
-    public function activateBusiness()
-    {
+    public function activateBusiness() {
         $this->tariff_id = self::TARIFF_BC;
         $this->club_date = new CDbExpression('NOW()');
         $this->save(false, array('tariff_id', 'club_date'));
@@ -474,8 +478,7 @@ class Participant extends User
     /**
      *  пополнить кошелёк
      */
-    public function depositPurse($amount = 0)
-    {
+    public function depositPurse($amount = 0) {
         /* $count = Yii::app()->db
           ->createCommand('UPDATE ' . $this->tableName() . ' SET balance = balance + :amount WHERE id = :id')
           ->bindValues(array(':id' => $this->id, ':amount' => $amount))
@@ -489,8 +492,7 @@ class Participant extends User
      * построить полное имя (ФИО)
      * 
      */
-    public static function getFullname()
-    {
+    public static function getFullname() {
         return implode(' ', array($this->first_name, $this->last_name));
     }
 
@@ -498,13 +500,11 @@ class Participant extends User
      * получить ссылку на аватар (или плашка - если нет)
      * 
      */
-    public function getUrlAvatar()
-    {
+    public function getUrlAvatar() {
         return self::buildUrlAvatar($this->ava);
     }
 
-    public static function buildUrlAvatar($ava)
-    {
+    public static function buildUrlAvatar($ava) {
         $file = Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $ava;
         if (!is_file($file)) { //если нет файла аватарки - определяем плашку (по полу)
             $file = Yii::app()->baseUrl . '/img/nophotom.jpg';
@@ -518,8 +518,7 @@ class Participant extends User
      * состоит ли участник в бизнес-клубе
      */
 
-    public function isBusinessclub()
-    {
+    public function isBusinessclub() {
         return in_array($this->tariff_id, $this->_businessclubIDs);
     }
 
@@ -527,8 +526,7 @@ class Participant extends User
      * добавить юзера в список ОНЛАЙН
      * 
      */
-    public function putUserToOnline()
-    {
+    public function putUserToOnline() {
         $command = Yii::app()->db->createCommand();
         $user_id = $command  //сначала проверить: не занесён ли он уже в онлайн-список
                 ->select('userid')
@@ -543,20 +541,19 @@ class Participant extends User
     }
 
     /**
-    * удалить юзера из списка ОНЛАЙН
-    * 
-    */
+     * удалить юзера из списка ОНЛАЙН
+     * 
+     */
     public function deleteUserFromOnline() {
         $command = Yii::app()->db->createCommand();
-        return $command->delete('onlineusers', 'userid = :userid', array(':userid'=>$this->id));
+        return $command->delete('onlineusers', 'userid = :userid', array(':userid' => $this->id));
     }
-    
+
     /**
      * получить список юзеров которые ОНЛАЙН
      * 
      */
-    public static function getOnlineUsers($withoutSelf = false)
-    {
+    public static function getOnlineUsers($withoutSelf = false) {
         $command = Yii::app()->db->createCommand()
                 ->select('onlineusers.userid, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
                 ->from('onlineusers')
@@ -573,8 +570,7 @@ class Participant extends User
     }
 
     //Получить всех юзеров, кто в твоей команде
-    public static function getTeamUsers($withoutSelf = false)
-    {
+    public static function getTeamUsers($withoutSelf = false) {
         $command = Yii::app()->db->createCommand()
                 ->select('{{users}}.username as erzats, {{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
                 ->from('onlineusers')
@@ -591,11 +587,11 @@ class Participant extends User
             $command->where = 'onlineusers.userid <> :self_id';
             $command->params = array(':self_id' => Yii::app()->user->id);
         }
-        if($withoutSelf === false && isset(Yii::app()->user->id)){
-            $command->orWhere("{{users}}.id = ". Yii::app()->user->id);
+        if ($withoutSelf === false && isset(Yii::app()->user->id)) {
+            $command->orWhere("{{users}}.id = " . Yii::app()->user->id);
         }
         $rows = $command->queryAll();
-        
+
 
         $command2 = Yii::app()->db->createCommand()
                 ->select('{{users}}.id, countries.code as country_code, concat({{users}}.first_name, coalesce(concat(" ", {{users}}.last_name), "")) as username')
@@ -624,8 +620,7 @@ class Participant extends User
 //         return $command;
     }
 
-    public static function addUserToList($id, $id_user_invited)
-    {
+    public static function addUserToList($id, $id_user_invited) {
         if ($id === $id_user_invited) {
             return array(
                 'result' => false,

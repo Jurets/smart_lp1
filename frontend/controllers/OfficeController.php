@@ -24,6 +24,14 @@ class OfficeController extends EMController
     {
         if (parent::beforeAction($action)) {
             if (!Yii::app()->user->isGuest) { //если юзер не гость
+                
+                /* автоматический разлогин при отмене статуса активности */
+                $locker = Participant::model()->findByPk(yii::app()->user->id);
+                if($locker->status != 1){ 
+                    Yii::app()->user->logout();
+                    $this->redirect('/');
+                }
+                //////////////////////////////                
                 $user = New Participant('update');
                 $user->id = Yii::app()->user->id;
                 //добавить юзера в список онлайн  - любая активность юзера (обращение к контроллеру) 
@@ -360,24 +368,27 @@ class OfficeController extends EMController
 
     public function actionTest()
     {
-        $model = new PerfectMoney();
-        /* обязательные параметры */
-        $model->login = '6416431';
-        $model->password = 'uhaha322re423e';
-        $model->payerAccount = 'U6840713';
-        $model->payeeAccount = 'U3627324';
-        $model->amount = '0.01';
+//        $model = new PerfectMoney();
+//        /* обязательные параметры */
+//        $model->login = '6416431';
+//        $model->password = 'uhaha322re423e';
+//        $model->payerAccount = 'U6840713';
+//        $model->payeeAccount = 'U3627324';
+//        $model->amount = '0.01';
         /* необязательные параметры */
 //        $model->payerId = '3';
 //        $model->payeeId = '4';
-        $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
-        $model->notation = 'Дополнительные сведения.';
-        //$model->Run('balance');
-        $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
-        echo $model->getError('paymentTransactionStatus') . '<br>';
-        echo $model->notation . '<br>';
-        var_dump('Сообщения', $model->getErrors());
-        var_dump('Данные от perfectmoney.is как есть', $model->getOutput());
+//        $model->transactionId = 3; // установка номера tr_kind_id вручную. При наличии этого параметра  использование transactionKind бессмысленно.
+//        $model->notation = 'Дополнительные сведения.';
+//        //$model->Run('balance');
+//        $model->Run(); // аналогично confirm ибо умолчание в main.php прописано в конфигурации
+//        echo $model->getError('paymentTransactionStatus') . '<br>';
+//        echo $model->notation . '<br>';
+//        var_dump('Сообщения', $model->getErrors());
+//        var_dump('Данные от perfectmoney.is как есть', $model->getOutput());
+//        if(!Yii::app()->user->isGuest){
+//            Yii::app()->user->logout();
+//        }
     }
 
     /**

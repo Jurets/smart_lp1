@@ -18,6 +18,8 @@ $this->menu = array(
 ?>
 <h1><?php echo BaseModule::t('rec', 'View User') . ' "' . $model->username . '"'; ?></h1>
 
+<h3><?php if(isset($model->bot[$model->tariff_id])) echo $model->bot[$model->tariff_id];?></h3>
+
 <?php
 $attributes = array(
     'id',

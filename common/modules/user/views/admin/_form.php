@@ -22,7 +22,20 @@
       //поля модели
         echo $form->dropDownListControlGroup($model, 'status', User::itemAlias('UserStatus'), array('displaySize'=>'1', 'prompt'=>'<выбор>',));  //активность
        // echo $form->dropDownListControlGroup($model, 'superuser', User::itemAlias('AdminStatus'), array('displaySize'=>'1', 'prompt'=>'<выбор>',)); //суперадмин
-
+        
+        //выпадающий список выбора статуса пользователя если он - бот.
+        echo $form->dropDownListControlGroup($model, 'bot', $model->bot, 
+                array(
+                        'displaySize'=>'1','class'=>'span3',
+                        'prompt'=>  BaseModule::t('rec', 'Yes'),
+                        'options' => array(
+                            $model->tariff_id => array(
+                                'selected'=>'true'
+                            )
+                        )
+                    )
+                ); // на самом деле это Нет - при переводе перепутали
+        
         echo $form->textFieldControlGroup($model, 'username', array('class'=>'span3')); //логин
         echo $form->textFieldControlGroup($model, 'password', array('class'=>'span3')); //пароль
         echo $form->textFieldControlGroup($model, 'email', array('class'=>'span3'));    //эл.почта
