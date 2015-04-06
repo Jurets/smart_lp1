@@ -52,10 +52,10 @@ class UserContour extends CWidget {
                  FROM tbl_users u
                       LEFT JOIN cities c ON u.city_id = c.id
                       LEFT JOIN countries co ON co.id = c.country_id
-                 WHERE superuser = 0 AND status = 1 AND tariff_id NOT IN(22,23,24,25,26)
+                 WHERE superuser = 0 AND status = 1
                  ORDER BY u.create_at DESC
                  LIMIT 6');
-        $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 AND status = 1 ');
+        $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 AND status = 1');
         $usersDump = $usersDumpCommand->query();
         $usersCount = $usersCountCommand->query();
         $this->dataPull['numberField'] = $this->jmws_money_converter(($usersCount->read()['count(id)']));
@@ -79,6 +79,7 @@ class UserContour extends CWidget {
         $this->operation = BaseModule::t('rec', 'COMISSION');
         $db_connector = Yii::app()->db;
         $amountCommission = $db_connector->createCommand('SELECT sum(amount) as summ FROM pm_transaction_log WHERE tr_kind_id IN(2, 6, 8) AND tr_err_code IS NULL');
+        $amountFromRobots = $this->getAmountFromRobots();
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read()['summ'];
         $list = $db_connector->createCommand(
@@ -260,5 +261,27 @@ class UserContour extends CWidget {
         }
         return $buff;
         
+    }
+    
+    private function getAmountFromRobots(){
+        $db_connector = Yii::app()->db;
+        $sqlRobots =  '
+            SELECT tariff_id FROM tbl_users 
+            WHERE status = 1 AND tariff_id IN(22,23,24,25,26)
+                ';
+        $amountRobots = $db_connector->createCommand($sqlRobots);
+        $amountRobotsResult = $amountRobots->query();
+        $amountRobotsStruct = $amountRobotsResult->readAll();
+        if(!$amountRobotsStruct){
+            return 0;
+        }else{ // набираем нужную сумму и возвращаем
+            $roboSumm = 0;
+            foreach($amountRobotsStruct as $item){
+                switch($item['tariff_id']){
+                    case '22':
+                        break;
+                }
+            }
+        }
     }
 }

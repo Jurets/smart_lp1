@@ -23,6 +23,14 @@ class SiapInstructions extends CActiveRecord {
     // [p_70] 70% - фонд выплат B0, B1, B2, B3 - яамая нагруженная часть. Вызывать последней.
     // [create_new_interval] - создается новый интервал на следующую неделю. [WARNING!]Вызов метода строго в транзакции и в самом конце.[*]
     protected $systemPurses; // A, B, F - по этим ключам записываются соответствующие системные кошельки
+    
+    // хранилище выплат видам юзера B0, B1, B2, B3 (B1,B2,B3,B4)
+    protected $currentPayments = array(
+        'b1' => 0.00,
+        'b2' => 0.00,
+        'b3' => 0.00,
+        'b4' => 0.00
+    );
 
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -350,6 +358,7 @@ class SiapInstructions extends CActiveRecord {
             }
             //$this->club_users['B0']['amount'] = $AllNewClubMembers * 100 / $AllClubMembers * 0.7;
             $this->club_users['B0']['amount'] = $AllNewClubMembers * (marketingPlanHelper::init()->getMpParam('price_start') * 2) / $AllClubMembers * 0.7;
+            $this->currentPayments['b1'] = $this->club_users['B0']['amount'];
             echo "На одного юзера B1 : ".$AllNewClubMembers." * ".marketingPlanHelper::init()->getMpParam('price_start') * 2 .' / '. $AllClubMembers .' * 0.7 = '.$this->club_users['B0']['amount'].PHP_EOL;
         };
 
@@ -364,6 +373,7 @@ class SiapInstructions extends CActiveRecord {
             }
             $newB1 = (int) $this->club_users['B1']['countNew'];
             $this->club_users['B1']['amount'] = $B0 + $newB1 * marketingPlanHelper::init()->getMpParam('cost_B1') / $AllB1 * 0.7;
+            $this->currentPayments['b2'] = $this->club_users['B1']['amount'];
             echo "На одного юзера B2 : ".$B0.'+'.$newB1.' * '.marketingPlanHelper::init()->getMpParam('cost_B1').' / '.$AllB1.' * 0.7 = '.$this->club_users['B1']['amount'].PHP_EOL;
         };
 
@@ -378,6 +388,7 @@ class SiapInstructions extends CActiveRecord {
             }
             $newB2 = (int) $this->club_users['B2']['countNew'];
             $this->club_users['B2']['amount'] = $B0 + $newB2 * marketingPlanHelper::init()->getMpParam('cost_B2') / $AllB2 * 0.7;
+            $this->currentPayments['b3'] = $this->club_users['B2']['amount'];
             echo "На одного юзера B3 : ".$B0.'+'.$newB2.' * '.marketingPlanHelper::init()->getMpParam('cost_B2').' / '.$AllB2.' * 0.7 = '.$this->club_users['B2']['amount'].PHP_EOL;
         };
 
@@ -392,6 +403,7 @@ class SiapInstructions extends CActiveRecord {
             }
             $newB3 = (int) $this->club_users['B3']['countNew'];
             $this->club_users['B3']['amount'] = $B0 + $newB3 * marketingPlanHelper::init()->getMpParam('cost_B3') / $AllB3 * 0.7;
+            $this->currentPayments['b4'] = $this->club_users['B3']['amount'];
             echo "На одного юзера B4 : ".$B0.'+'.$newB3.' * '.marketingPlanHelper::init()->getMpParam('cost_B3').' / '.$AllB3.' * 0.7 = '.$this->club_users['B3']['amount'].PHP_EOL;
         };
     }
@@ -413,8 +425,13 @@ class SiapInstructions extends CActiveRecord {
 //            echo 'Юзеры B4' . PHP_EOL;
 //            var_dump($this->club_users['B3']);
 //        
-        
-        
+        /* блок сохранения платежей периода по видам клубов (на одного: B1,B2,B3,B4) */
+        $paymentsSave = CurrentClubmembersPayment::model()->findByPk('curr');
+        $paymentsSave->b1 = (double)$this->currentPayments['b1'];
+        $paymentsSave->b2 = (double)$this->currentPayments['b2'];
+        $paymentsSave->b3 = (double)$this->currentPayments['b3'];
+        $paymentsSave->b4 = (double)$this->currentPayments['b4'];
+        $paymentsSave->save();
     }
 
     protected function instructionsCreate() {

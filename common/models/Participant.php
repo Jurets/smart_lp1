@@ -90,11 +90,11 @@ class Participant extends User {
     public function init() {
         parent::init();
         $this->bot = array(
-            self::BOT_50 => BaseModule::t('rec', '$50').' - bot',
-            self::BOT_BC => BaseModule::t('rec', 'investor B1').' - bot',
-            self::BOT_BC_BRONZE => BaseModule::t('rec', 'investor B2').' - bot',
-            self::BOT_BC_SILVER => BaseModule::t('rec', 'investor B3').' - bot',
-            self::BOT_BC_GOLD => BaseModule::t('rec', 'investor B4').' - bot'
+            self::BOT_50 => BaseModule::t('rec', '$50').' - fake user',
+          //  self::BOT_BC => BaseModule::t('rec', 'investor B1').' - bot',
+            self::BOT_BC_BRONZE => BaseModule::t('rec', 'investor B0'),
+          //  self::BOT_BC_SILVER => BaseModule::t('rec', 'investor B3').' - bot',
+          //  self::BOT_BC_GOLD => BaseModule::t('rec', 'investor B4').' - bot'
         );
     }
     
@@ -431,7 +431,7 @@ class Participant extends User {
 
     public function userStructureProcess() {
 
-        $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id', array(':refer_id' => $this->id, ':id' => $this->id));
+        $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id AND tariff_id NOT IN(22,23,24,25,26)', array(':refer_id' => $this->id, ':id' => $this->id));
         $isBusinessClub = $this->isBusinessclub();
         if ($isBusinessClub) {
             $criteria = new CDbCriteria();
