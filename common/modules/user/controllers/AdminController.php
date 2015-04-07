@@ -158,8 +158,14 @@ class AdminController extends EMController {
             $model->activkey = Yii::app()->controller->module->encrypting(microtime() . $model->password);
             if ($model->validate()) {
                 $model->password = Yii::app()->controller->module->encrypting($model->password);
-                if ($model->save()) {
-                    //
+                if ($model->save()) {                  
+                    $fakeTransaction = new PmTransactionLog();
+                        $fakeTransaction->from_user_id = $model->id;
+                        $fakeTransaction->to_user_id = $_POST['Participant']['refer_id'];
+                        $fakeTransaction->amount = marketingPlanHelper::init()->getMpParam('price_start');
+                        $fakeTransaction->tr_kind_id = $fakeTransaction::BOT_REGISTRATION;
+                        $fakeTransaction->save();
+                        
                 }
                 $this->redirect(array('view', 'id' => $model->id));
             }

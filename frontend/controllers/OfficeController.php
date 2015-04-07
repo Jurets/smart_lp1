@@ -389,10 +389,11 @@ class OfficeController extends EMController
 //        if(!Yii::app()->user->isGuest){
 //            Yii::app()->user->logout();
 //        }
-        $mp_test = marketingPlanHelper::init()->getMpParams();
-        var_dump($mp_test);
-        $model = CurrentClubmembersPayment::model()->findByPk('curr');
-        var_dump($model->attributes);
+//        $mp_test = marketingPlanHelper::init()->getMpParams();
+//        var_dump($mp_test);
+//        $model = CurrentClubmembersPayment::model()->findByPk('curr');
+//        var_dump($model->attributes);
+        //var_dump(marketingPlanHelper::init()->getMpParam('cost_B2'));
     }
 
     /**

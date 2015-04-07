@@ -6,7 +6,6 @@
 
 
 <div class="wide form">
-
     <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'id'=>'user-form',
             'enableAjaxValidation'=>true,
@@ -14,8 +13,9 @@
             'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
         ));
       //вьюшка для сообщения о необходимых полях
-        echo $this->renderPartial('backend.views.site.required');
-        
+        echo $this->renderPartial('backend.views.site.required');?>
+        <input name="dateInitOff" type="hidden" value="1">
+        <?php
       //сборник ошибок
         echo $form->errorSummary(array($model/*,$profile*/));
         

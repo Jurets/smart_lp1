@@ -426,12 +426,12 @@ class SiapInstructions extends CActiveRecord {
 //            var_dump($this->club_users['B3']);
 //        
         /* блок сохранения платежей периода по видам клубов (на одного: B1,B2,B3,B4) */
-        $paymentsSave = CurrentClubmembersPayment::model()->findByPk('curr');
-        $paymentsSave->b1 = (double)$this->currentPayments['b1'];
-        $paymentsSave->b2 = (double)$this->currentPayments['b2'];
-        $paymentsSave->b3 = (double)$this->currentPayments['b3'];
-        $paymentsSave->b4 = (double)$this->currentPayments['b4'];
-        $paymentsSave->save();
+//        $paymentsSave = CurrentClubmembersPayment::model()->findByPk('curr');
+//        $paymentsSave->b1 = (double)$this->currentPayments['b1'];
+//        $paymentsSave->b2 = (double)$this->currentPayments['b2'];
+//        $paymentsSave->b3 = (double)$this->currentPayments['b3'];
+//        $paymentsSave->b4 = (double)$this->currentPayments['b4'];
+//        $paymentsSave->save();
     }
 
     protected function instructionsCreate() {

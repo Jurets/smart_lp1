@@ -78,17 +78,18 @@ class UserContour extends CWidget {
     private function freePaid() {
         $this->operation = BaseModule::t('rec', 'COMISSION');
         $db_connector = Yii::app()->db;
-        $amountCommission = $db_connector->createCommand('SELECT sum(amount) as summ FROM pm_transaction_log WHERE tr_kind_id IN(2, 6, 8) AND tr_err_code IS NULL');
+        $amountCommission = $db_connector->createCommand('SELECT sum(amount) as summ FROM pm_transaction_log WHERE tr_kind_id IN(2, 6, 8, 21) AND tr_err_code IS NULL');
         $amountFromRobots = $this->getAmountFromRobots();
         $amountCommissionCount = $amountCommission->query();
         $amountCommissionCount = $amountCommissionCount->read()['summ'];
+        $amountCommissionCount += $amountFromRobots;
         $list = $db_connector->createCommand(
                 'SELECT to_user_id tr_kind_id, date, u.first_name, u.last_name,u.create_at,code,u.username
              FROM pm_transaction_log
                   LEFT JOIN tbl_users u ON to_user_id = id
                   LEFT JOIN cities c ON city_id = c.id
                   LEFT JOIN countries co ON co.id = c.country_id
-             WHERE tr_kind_id IN (2,6,8) AND to_user_id IS NOT NULL
+             WHERE tr_kind_id IN (2,6,8,21) AND to_user_id IS NOT NULL
              AND tr_err_code IS NULL
              ORDER BY date DESC
              LIMIT 6');
@@ -278,10 +279,13 @@ class UserContour extends CWidget {
             $roboSumm = 0;
             foreach($amountRobotsStruct as $item){
                 switch($item['tariff_id']){
-                    case '22':
+                    case '24':
+                        $roboSumm += marketingPlanHelper::init()->getMpParam('cost_B1');
                         break;
                 }
             }
+            return $roboSumm;
         }
+        
     }
 }

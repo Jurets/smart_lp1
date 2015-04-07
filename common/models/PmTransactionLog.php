@@ -27,6 +27,7 @@ class PmTransactionLog extends CActiveRecord
     const TRANSACTION_COMMISSION = 6;
     const TRANSACTION_CHARITY = 7;
     const TRANSACTION_PRIZE = 8;
+    const BOT_REGISTRATION = 21;
         public $statisticsStructure;
         public $id;
         public $domain;
@@ -44,7 +45,12 @@ class PmTransactionLog extends CActiveRecord
         
         public function init() {
             parent::init();
-            $this->dateInit();
+            if(isset($_POST['dateInitOff'])){
+                
+            }else{
+                $this->dateInit();
+            }   
+            
             $this->statisticsStructure = array(
                 'Checks'=>'', // формирутеся полоса по всем чекам для данного пользователя
                 'IncomeToday' => 0, // Чеки - все доходы за день 
