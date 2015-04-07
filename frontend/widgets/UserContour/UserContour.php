@@ -170,7 +170,7 @@ class UserContour extends CWidget {
                       LEFT JOIN cities c ON u.city_id = c.id
                       LEFT JOIN countries co ON co.id = c.country_id
                  WHERE superuser = 0 AND status = 1
-                 AND tariff_id IN (3,4,5,6)
+                 AND tariff_id IN (3,4,5,6,24)
                  ORDER BY u.create_at DESC');
         $usersDump = $usersDumpCommand->query();
         foreach($usersDump->readAll() as $index=>$li){
@@ -234,9 +234,9 @@ class UserContour extends CWidget {
 //                case '23' :
 //                    $summ += 10;
 //                    break;
-//                case '24' :
-//                    $summ += 10;
-//                    break;
+                case '24' :
+                    $summ += 10;
+                    break;
 //                case '25' :
 //                    $summ += 50;
 //                    break;
