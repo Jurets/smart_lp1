@@ -84,8 +84,8 @@ class UserContour extends CWidget {
         $amountCommissionCount = $amountCommissionCount->read()['summ'];
         $amountCommissionCount += $amountFromRobots;
         $list = $db_connector->createCommand(
-                'SELECT to_user_id tr_kind_id, date, u.first_name, u.last_name,u.create_at,code,u.username
-             FROM pm_transaction_log
+                'SELECT to_user_id tr_kind_id, date, u.first_name, u.last_name, ptl.date, code,u.username
+             FROM pm_transaction_log ptl
                   LEFT JOIN tbl_users u ON to_user_id = id
                   LEFT JOIN cities c ON city_id = c.id
                   LEFT JOIN countries co ON co.id = c.country_id
@@ -107,7 +107,7 @@ class UserContour extends CWidget {
                     $name = $li['username'];
                 }
                 //$this->dataPull['userList'][$index]['content'] =  ' '. $name;
-                $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])) . ' ' . $name;
+                $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['date'])) . ' ' . $name;
             }
         } else {
             $this->dataPull['numberField'] = '$00 000 000';
