@@ -10,7 +10,7 @@
 	</div><!-- content -->
 </div>
 <?php if (isset($this->menu) && !empty($this->menu)) { ?>
-<div class="span-5 well" style="float: right; width: 200px; max-width: 200px; margin-top: 40px;">
+<div class="span-5 well" style="float: right; width: 200px; max-width: 200px; margin-top: -50px;">
 	<div id="sidebar">
 	<?php	
 		if (isset($this->menu)) {

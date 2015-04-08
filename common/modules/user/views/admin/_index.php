@@ -101,7 +101,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'refer_id',
             'type'=>'raw',
-            'filter'=>true,
+            //'filter'=>true,
             //'value' => 'TbHtml::link(UHtml::markSearch($data,"username"),array("admin/view","id"=>$data->referalId))',
             'value' => 'TbHtml::link($data->referalName, array("admin/view","id"=>$data->referalId))',
         ),

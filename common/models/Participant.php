@@ -247,8 +247,8 @@ class Participant extends User {
             $dataProvider = New CActiveDataProvider($this);
 
         $criteria = new CDbCriteria;
-        $criteria->with = array('city', 'city.country'); //добавить страну и город (для поиска)
-        $criteria->addCondition('superuser <> 1'); //исключаем суперпользователя
+        $criteria->with = array('city', 'city.country', 'referal'=>array('alias'=>'referal')); //добавить страну и город (для поиска)
+        $criteria->addCondition('user.superuser <> 1'); //исключаем суперпользователя
 
         if ($this->scenario == 'empty') { //пустой
             //нужно получить заведомо пустой набор данных
@@ -264,7 +264,13 @@ class Participant extends User {
         $criteria->compare('user.first_name', $this->first_name, true); //поиск по фамилии
         $criteria->compare('user.last_name', $this->last_name, true); //поиск по имени
         $criteria->compare('user.tariff_id', $this->tariff_id); //поиск по тарифу
-        $criteria->compare('create_at', $this->create_at); //поиск по тарифу
+        //$criteria->compare('user.create_at', $this->create_at); //поиск по тарифу
+        if (isset($this->create_at) && !empty($this->create_at)) {
+            $criteria->addCondition ('user.create_at >= :data1 AND user.create_at < :data2');
+            $sdiap = $this->makeSearchDateDiapasone();
+            $criteria->params[':data1'] = $sdiap['begin'];
+            $criteria->params[':data2'] = $sdiap['end'];
+        }
 
         if (!empty($this->country_id)) {
             if ($this->scenario == 'structure')
@@ -276,8 +282,9 @@ class Participant extends User {
             $criteria->compare('city.name', $this->city_id, true); //поиск по городу
         }
         if (isset($this->refer_id)) {
-            $criteria->addCondition('refer_id = :refer_id');
-            $criteria->params = CMap::mergeArray($criteria->params, array(':refer_id' => $this->refer_id));
+            //$criteria->addCondition('refer_id = :refer_id');
+            //$criteria->params = CMap::mergeArray($criteria->params, array(':refer_id' => $this->refer_id));
+            $criteria->compare('referal.username', $this->refer_id, true);
         }
         if (isset($this->income)) {
             $criteria->compare('user.income', $this->income); //поиск по доходу
@@ -288,6 +295,18 @@ class Participant extends User {
         //мержим критерию с родительской и возвращаем набор данных 
         $dataProvider->criteria->mergeWith($criteria);
         return $dataProvider;
+    }
+    protected function makeSearchDateDiapasone(){
+        $diapasone = array(
+            'begin' => NULL,
+            'end' => NULL,
+        );
+        $seconds = strtotime($this->create_at);
+        $begin = date('Y-m-d', $seconds);
+        $end = date('Y-m-d', $seconds+86400); // + 24 hours
+        $diapasone['begin']=$begin .' 00:00:00';
+        $diapasone['end']=$end.' 00:00:00';
+        return $diapasone;
     }
 
     /**
