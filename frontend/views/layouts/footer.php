@@ -48,10 +48,10 @@
             <ul id="footerUL4" style="margin-left: -55px;">
                 <li> <a id="zagolovok" style="cursor:default;"><?php echo (isset($titles['rules']) ? $titles['rules'] : '&nbsp;') ?> </a> </li>
                 <?php if (isset($titles['possibilities'])) {?>
-                    <li style="padding-bottom:5px;"> <a href="/info/possibilities" id="footerUL1ahref"> <?php echo $titles['possibilities'] ?> </a> </li>
+                    <li style="padding-bottom:5px;"> <a href="/mp.pdf" target="_blank" id="footerUL1ahref"> <?php echo $titles['possibilities'] ?> </a> </li>
                 <?php } ?>
                 <?php if (isset($titles['rulespo'])) {?>
-                    <li> <a href="/info/rules" id="footerUL1ahref"> <?php echo $titles['rulespo'] ?> </a> </li>
+                    <li> <a href="/rules.just" target="_blank" id="footerUL1ahref"> <?php echo $titles['rulespo'] ?> </a> </li>
                 <?php } ?>
                
             </ul>
@@ -73,7 +73,7 @@
                     <li style="padding-bottom:5px;"> <a href="/info/instructions" id="footerUL1ahref"> <?php echo $titles['instructions'] ?> </a> </li>
                 <?php } ?>
                 <?php if (isset($titles['questions'])) {?>
-                    <li> <a href="/info/questions" id="footerUL1ahref"> <?php echo $titles['questions'] ?></a> </li>
+                    <li> <a href="/vio.just" target="_blank" id="footerUL1ahref"> <?php echo $titles['questions'] ?></a> </li>
                 <?php } ?>
             </ul>
 

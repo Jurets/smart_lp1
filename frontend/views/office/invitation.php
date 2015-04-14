@@ -10,18 +10,14 @@
 
 <div id="office-5-content">
    
-    <h2 class="h2ContentOffice5"><?php echo BaseModule::t('common', 'INVITATION'); ?></h2>
+  <!--   <h2 class="h2ContentOffice5"><?php echo BaseModule::t('common', 'INVITATION'); ?></h2>
     <a href="<?php echo $downloadFile; ?>"><input type="button" name="btn"  class="btn-style-green1" value="<?php echo BaseModule::t('rec', 'DOWNLOAD') ?>" /></a>
- <!--   <a href="#"><input type="button" name="btn"  class="btn-style-green2" value="<?php echo BaseModule::t('rec', 'INTERNET ADVERTISING') ?>" onclick="showBannerDiv();"/></a>-->
+   <a href="#"><input type="button" name="btn"  class="btn-style-green2" value="<?php echo BaseModule::t('rec', 'INTERNET ADVERTISING') ?>" onclick="showBannerDiv();"/></a>
+ -->
 
+    <div id="office-5-post1" style="margin-top:-20px;">
 
-    <div id="office-5-post1">
-        <div id="blogImg5">
-        <?PHP
-        $this->widget('ext.Yiitube', array('v' => $youTubeUrlUniqueId,'size'=>'mine'));
-        ?>
-        </div>
-  
+ 
         <p class="office-3-text"><?php echo $content ?></p>
 
     </div>

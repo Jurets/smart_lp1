@@ -43,9 +43,9 @@ $titles = Information::getAllTitles();
                 <li> <a href="#" class="flag">  </a> </li>
                 <li> <a class="in" style="cursor: pointer;">  </a> </li>
 
-                <li> <a href="/info/possibilities">  <?php echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
-                <li> <a href="/info/rules"> <?php echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
-                <li> <a href="/info/questions"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
+                <li> <a href="/mp.pdf" target="_blank">  <?php echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
+                <li> <a href="/rules.just" target="_blank"> <?php echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
+                <li> <a href="/vio.just" target="_blank"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
 
                 <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark"><?php
                 // echo strtoupper(BaseModule::t('rec', 'Raise status'));
