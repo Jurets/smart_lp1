@@ -23,11 +23,46 @@
         echo $form->dropDownListControlGroup($model, 'status', User::itemAlias('UserStatus'), array('displaySize'=>'1', 'prompt'=>'<выбор>',));  //активность
        // echo $form->dropDownListControlGroup($model, 'superuser', User::itemAlias('AdminStatus'), array('displaySize'=>'1', 'prompt'=>'<выбор>',)); //суперадмин
         
-        //выпадающий список выбора статуса пользователя если он - бот.
+        //выпадающий список выбора статуса пользователя.
+        
+        // create section
+        if( $model->tariff_id == 0 ){ // неизвестный вид пользователя - create
+            echo $form->dropDownListControlGroup($model, 'bot', $model->bot, 
+                array(
+                        'displaySize'=>'1','class'=>'span3',
+                        'prompt'=>  BaseModule::t('rec', '--'),
+                        'options' => array(
+                            $model->tariff_id => array(
+                                'selected'=>'true'
+                            )
+                        )
+                    )
+                );
+        }
+        
+        // edit section
+        
+        if($model->tariff_id > 0 && $model->tariff_id < Participant::BOT_50) { // это живой юзер - никаких ботов
+            echo $form->dropDownListControlGroup($model, 'bot', [], 
+                array(
+                        'displaySize'=>'1','class'=>'span3',
+                        'prompt'=>  BaseModule::t('rec', '--'),
+                        'options' => array(
+                            $model->tariff_id => array(
+                                'selected'=>'true'
+                            )
+                        )
+                    )
+                );
+        } else if($model->tariff_id > 0 && $model->tariff_id >= Participant::BOT_50) { // тут уже боты, unset задает необратимость изменения статусов
+            // add any bot statuses - here
+            if($model->tariff_id == Participant::BOT_BC_BRONZE){
+                unset($model->bot[Participant::BOT_50]);
+            }
         echo $form->dropDownListControlGroup($model, 'bot', $model->bot, 
                 array(
                         'displaySize'=>'1','class'=>'span3',
-                        'prompt'=>  BaseModule::t('rec', 'Yes'),
+                        //'prompt'=>  BaseModule::t('rec', 'Yes'),
                         'options' => array(
                             $model->tariff_id => array(
                                 'selected'=>'true'
@@ -35,6 +70,7 @@
                         )
                     )
                 ); // на самом деле это Нет - при переводе перепутали
+        }
         
         echo $form->textFieldControlGroup($model, 'username', array('class'=>'span3')); //логин
         echo $form->textFieldControlGroup($model, 'password', array('class'=>'span3')); //пароль

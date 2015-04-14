@@ -158,14 +158,15 @@ class AdminController extends EMController {
             $model->activkey = Yii::app()->controller->module->encrypting(microtime() . $model->password);
             if ($model->validate()) {
                 $model->password = Yii::app()->controller->module->encrypting($model->password);
-                if ($model->save()) {                  
-                    $fakeTransaction = new PmTransactionLog();
+                if ($model->save()) {
+                    if ($model->tariff_id == Participant::BOT_50) { // в случае создания бота bot-50 создаем ему фейковую транзакцию проплаты
+                        $fakeTransaction = new PmTransactionLog();
                         $fakeTransaction->from_user_id = $model->id;
                         $fakeTransaction->to_user_id = $_POST['Participant']['refer_id'];
                         $fakeTransaction->amount = marketingPlanHelper::init()->getMpParam('price_start');
                         $fakeTransaction->tr_kind_id = $fakeTransaction::BOT_REGISTRATION;
                         $fakeTransaction->save();
-                        
+                    }
                 }
                 $this->redirect(array('view', 'id' => $model->id));
             }
@@ -194,10 +195,6 @@ class AdminController extends EMController {
                     $model->club_date = date('0000-00-00 00:00:00');
                     $model->busy_date = date('0000-00-00 00:00:00');
                 }
-            } else {
-                $model->tariff_id = 0;
-                $model->club_date = date('0000-00-00 00:00:00');
-                $model->busy_date = date('0000-00-00 00:00:00');
             }
             if ($model->validate()) {
                 $old_password = Participant::model()->notsafe()->findByPk($model->id);
