@@ -45,6 +45,18 @@ class RegisterController extends EMController
             throw New CHttpException(404, BaseModule::t('rec', 'Leave the account and re-register '));
         }
         $user = BaseModule::getUserFromSubdomain();
+        /* проверка: если юзер не активен - то перекинем его регистрацию на его реферера либо на корневой домен */
+        $testUserActive = Participant::model()->find('username = :username', [':username'=>$user]);
+        if(!is_null($testUserActive)){
+            if($testUserActive->status != '1'){
+                if(!is_null($testUserActive->refer_id)){
+                    $referRedirect = $testUserActive->referal->username;
+                    $this->redirect(BaseModule::createAssembledUrl($referRedirect) . Yii::app()->createUrl('register'));
+                }else{
+                    $user = '';
+                }
+            }
+        }
         //если юзер не задан
         if (empty($user)) {  
             if ($superrefer = Participant::model()->findByPk(Requisites::superReferId())) { //получить из реквизитов ид супер-рефера
