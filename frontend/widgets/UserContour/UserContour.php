@@ -53,7 +53,7 @@ class UserContour extends CWidget {
                       LEFT JOIN cities c ON u.city_id = c.id
                       LEFT JOIN countries co ON co.id = c.country_id
                  WHERE superuser = 0 AND status = 1
-                 ORDER BY u.create_at DESC
+                 ORDER BY u.busy_date DESC
                  LIMIT 6');
         $usersCountCommand = $db_connector->createCommand('SELECT count(id) FROM tbl_users WHERE superuser = 0 AND status = 1');
         $usersDump = $usersDumpCommand->query();
