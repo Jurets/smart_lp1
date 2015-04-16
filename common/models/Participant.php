@@ -144,7 +144,7 @@ class Participant extends User {
                     //кол-во подчинённых (т.е. тех, у которых сабж является рефером)
                     'subCount' => array(self::STAT, 'Participant', 'refer_id'),
                     //кол-во приглашенных (т.е. тех, кто начинал регистрацию под данным сабжем)
-                    'inviteCount' => array(self::STAT, 'Participant', 'inviter_id'),
+                    'inviteCount' => array(self::STAT, 'Participant', 'inviter_id', 'condition' => 'tariff_id >='.self::TARIFF_50),
                     //структура (?????)
                     'structure' => array(self::STAT, 'Participant', 'id'),
                     //тариф (статус по ТЗ)
@@ -470,10 +470,10 @@ class Participant extends User {
      */
     public function activateStart() {
         $this->tariff_id = self::TARIFF_20;       //ставим статус 20$
-        $this->status = parent::STATUS_ACTIVE;    //ставим активность
+        //$this->status = parent::STATUS_ACTIVE;    //ставим активность
         $this->password = Yii::app()->getModule('user')->encrypting($this->password); //хэшируем пароль
         //$this->activkey = null;      //убираем ключ активации (он больше не нужен)
-        $this->save(false, array('tariff_id', 'status', 'password', 'activkey'));
+        $this->save(false, array('tariff_id', /*'status',*/ 'password', 'activkey'));
     }
 
     /**
@@ -482,7 +482,8 @@ class Participant extends User {
     public function activateParticipation() {
         $this->tariff_id = self::TARIFF_50;
         $this->busy_date = new CDbExpression('NOW()');
-        $this->save(false, array('tariff_id', 'busy_date'));
+        $this->status = parent::STATUS_ACTIVE;    //ставим активность (метод вызывается в случае успеха "оплата 50")
+        $this->save(false, array('tariff_id', 'busy_date', 'invite_num', 'status', 'refer_id'));
     }
 
     /**

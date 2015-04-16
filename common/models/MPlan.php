@@ -104,8 +104,14 @@ class MPlan extends CModel
             $pm->payeeAccount = Requisites::purseClub();   //поставить кошелёк активаций системы!!!!!!!!!!!
             $pm->payeeId = null;
         } else {
-            $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
-            $pm->payeeId = $participant->referal->id;
+            // дополнительное условие для папа-дедушка
+            if ($participant->invite_num == 2 && isset($participant->referal->referal)) {
+                $pm->payeeAccount = $participant->referal->referal->purse;    //   то платёж на кошелёк дедушки
+                $pm->payeeId = $participant->referal->referal->id;
+            } else {
+                $pm->payeeAccount = $participant->referal->purse;    //   то платёж на кошелёк данного реферала
+                $pm->payeeId = $participant->referal->id;
+            }
         }
         //поставить сумму платежа
         $pm->amount = marketingPlanHelper::init()->getMpParam('price_start'); //50$
