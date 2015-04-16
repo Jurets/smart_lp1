@@ -45,6 +45,14 @@ class RegisterController extends EMController {
             throw New CHttpException(404, BaseModule::t('rec', 'Leave the account and re-register '));
         }
         $user = BaseModule::getUserFromSubdomain();
+        if (empty($user)) {
+            if ($superrefer = Participant::model()->findByPk(Requisites::superReferId())) { //получить из реквизитов ид супер-рефера
+                $user = $superrefer->username;
+                //$this->redirect(Yii::app()->createAbsoluteUrl('register/index/user/'.$user));
+                $this->redirect(BaseModule::createAssembledUrl($user) . Yii::app()->createUrl('register'));
+            } else
+                throw New CHttpException(404, BaseModule::t('rec', 'Registration is allowed superreferer not found'));
+        }
         /* проверка: если юзер не активен - то перекинем его регистрацию на его реферера либо на корневой домен */
         $testUserActive = Participant::model()->find('username = :username', [':username' => $user]);
         if (!is_null($testUserActive)) {
