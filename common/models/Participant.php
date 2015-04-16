@@ -450,7 +450,7 @@ class Participant extends User {
 
     public function userStructureProcess() {
 
-        $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id AND tariff_id NOT IN(22,23,24,25,26)', array(':refer_id' => $this->id, ':id' => $this->id));
+        $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id AND tariff_id NOT IN(0,22,23,24,25,26)', array(':refer_id' => $this->id, ':id' => $this->id));
         $isBusinessClub = $this->isBusinessclub();
         if ($isBusinessClub) {
             $criteria = new CDbCriteria();
