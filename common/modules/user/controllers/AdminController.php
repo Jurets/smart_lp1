@@ -157,6 +157,10 @@ class AdminController extends EMController {
             }
             $model->activkey = Yii::app()->controller->module->encrypting(microtime() . $model->password);
             if ($model->validate()) {
+                // дополнительное условие "имитация оплаты 20+50"
+                if ($model->tariff_id == Participant::BOT_50){
+                    $model->busy_date = date('Y-m-d H:i:s');
+                }
                 $model->password = Yii::app()->controller->module->encrypting($model->password);
                 if ($model->save()) {
                     if ($model->tariff_id == Participant::BOT_50) { // в случае создания бота bot-50 создаем ему фейковую транзакцию проплаты
@@ -192,8 +196,8 @@ class AdminController extends EMController {
                     $model->club_date = date('Y-m-d H:i:s');
                     $model->busy_date = date('Y-m-d H:i:s');
                 } else {
-                    $model->club_date = date('0000-00-00 00:00:00');
-                    $model->busy_date = date('0000-00-00 00:00:00');
+//                    $model->club_date = date('0000-00-00 00:00:00');
+//                    $model->busy_date = date('0000-00-00 00:00:00');
                 }
             }
             if ($model->validate()) {
