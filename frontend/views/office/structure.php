@@ -34,7 +34,7 @@
                         <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
                         </div>
                     </a>
-<?php if($penta == 5){ $penta = 0; echo '</li><li>';}?>    
+<?php if($penta == 5){ $penta = 0; echo '</li><li>&nbsp;';}?>    
 <?php $penta ++; } ?>
                </li>
             </ul>
@@ -72,7 +72,7 @@
                         <div class="phototext_wrap"><p><?=$member->first_name.' '.$member->last_name?></p></div>
                         </div>
                     </a>
-<?php if($penta == 5){ $penta = 0; echo '</li><li>';}?>    
+<?php if($penta == 5){ $penta = 0; echo '</li><li>&nbsp;';}?>    
 <?php $penta ++; } }?>
                </li>
             </ul>
