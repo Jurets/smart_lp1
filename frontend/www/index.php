@@ -27,7 +27,7 @@
 </style>
 <div class="logo"><img src="itemp/logoindex.png" width="400" height="98"></div>
 <div class="timer" style="font-family: 'Open Sans Condensed', 'sans-serif'; font-weight: 900; color:#eee; font-size:19px;">
-ПРОВОДЯТСЯ ТЕХНИЧЕСКИЕ РАБОТЫ <BR> ПРОЕКТ БУДЕТ ДОСТУПЕН 16 АПРЕЛЯ 22:00 МСК
+ПРОВОДЯТСЯ ТЕХНИЧЕСКИЕ РАБОТЫ <BR> ПРОЕКТ БУДЕТ ДОСТУПЕН 19 АПРЕЛЯ 19:00 МСК
 
 
 </div>	
