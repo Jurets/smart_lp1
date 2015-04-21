@@ -1,9 +1,9 @@
 <?php
     $subdomainCheck = BaseModule::getUserFromSubdomain();
   if(is_array($subdomainCheck)){
-    $redirectUrl = "http://".Yii::app()->params['host.name']; // редирект
+    $redirectUrl = Yii::app()->params['server.protocol'].Yii::app()->params['host.name']; // редирект
   }else{
-    $redirectUrl = "http://".$subdomainCheck.'.'.Yii::app()->params['host.name'];
+    $redirectUrl = Yii::app()->params['server.protocol'].$subdomainCheck.'.'.Yii::app()->params['host.name'];
   }
 ?>
 <form method="post" action="<?=$redirectUrl?>" id="about404">

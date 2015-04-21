@@ -55,12 +55,16 @@ class BaseModule extends CWebModule {
     }
 
     /* Коррекция работы по субдоменам */
-    /* получение субдоменного url - домен передаетсфя параметром */
+    /* получение субдоменного url - домен передается параметром */
     public static function createAssembledUrl($domain) {
         //$host = $_SERVER['HTTP_HOST'];
         $host = Yii::app()->params['host.name'];
         $protocol = $_SERVER['SERVER_PROTOCOL'];
-        $protocolPrefix = strtolower(explode('/', $protocol)[0]) . '://';
+        //$protocolPrefix = strtolower(explode('/', $protocol)[0]) . '://'; // автоматика определения протокола
+        
+        // автоматика определения протокола не тестировалась, пока будет задаваться через параметр в настройках 
+        $protocolPrefix = Yii::app()->params['server.protocol'];
+        
         return $protocolPrefix . $domain . '.' . $host;
     }
     // вычисление юзера по его поддомену - проверка субдомена - по empty()
@@ -83,7 +87,8 @@ class BaseModule extends CWebModule {
         if( count($host_pieces) === 3) { // subdomain exists
             $model = Participant::model()->find('username=:username', array(':username'=>$host_pieces[0]));
             if(empty($model)) {
-                $redirectUrl = "http://".Yii::app()->params['host.name'];
+                $protocolPrefix = Yii::app()->params['server.protocol'];
+                $redirectUrl = $protocolPrefix.Yii::app()->params['host.name'];
                 Yii::app()->getRequest()->redirect($redirectUrl);
             }
             return TRUE;
