@@ -268,10 +268,21 @@ class RegisterController extends EMController {
                         );
                         $tariff = Participant::TARIFF_50;  // ставим тариф 50$
                         // выбрать кошелек для оплаты
+                        // номер приглашенного
+                        $num = $participant->inviter->inviteCount() + 1;
+                        $participant->invite_num = $num;
                         if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
                             $purse = Requisites::purseClub();   //кошелёк клуба!
                         } else {
-                            $purse = $participant->referal->purse;    // то платёж на кошелёк данного реферала
+                            // дополнительное условие для корреции $purse (папа-дедушка)
+                            //$inviter = $participant->referal;
+                            $inviter = $participant->inviter;
+                            if ($inviter->inviteCount == 1 && isset($inviter->referal)) { //если это второй приглашённый
+                                $referal = $inviter->referal; //то перекинуть участника на реферала реферала (дедушку)
+                            } else { //иначе
+                                $referal = $inviter; //рефер - это пригласивший
+                            }
+                            $purse = $referal->purse;    // то платёж на кошелёк данного реферала
                         }
                     }
                 } else {
@@ -295,7 +306,6 @@ class RegisterController extends EMController {
             else if ($participant->tariff_id == Participant::TARIFF_20) {
                 $this->step = 4;
                 $tariff = Participant::TARIFF_50;  // ставим тариф 50$
-                
                 // задается количество приглашенных
                 $num = $participant->inviter->inviteCount() + 1;
                 $participant->invite_num = $num;
@@ -314,7 +324,7 @@ class RegisterController extends EMController {
                     $purse = $referal->purse;    // то платёж на кошелёк данного реферала
                 }
                 //var_dump('стадия до:',$referal->id, $participant->invite_num);
-                               
+
                 $amount = marketingPlanHelper::init()->getMpParam('price_start');
                 $paysuccess = false;
                 $instruction = CHtml::tag('p', array('id' => "shag-4-1-text"), BaseModule::t('common', 'Congratulations! You are already logged in!') . '<br><br>' .
@@ -332,7 +342,7 @@ class RegisterController extends EMController {
 
                 //если пришёл ПОСТ ответа от PerfectMoney: ненулевой код транзакции (PAYMENT_BATCH_NUM)
                 if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0) {
-                    
+
                     if (MPlan::participationSCI($participant)) {  //--- ОПЛАТА бизнес-участия
                         $paysuccess = true;
                         $message = BaseModule::t('rec', 'Your payment was successful');
@@ -346,27 +356,23 @@ class RegisterController extends EMController {
                         throw New CHttpException(405, BaseModule::t('rec', 'Can not log in! Activation code is not valid. Contact the site administrator'));
                     }
                     if ($trans_success) {
-                        
+
                         //$count = $participant->referal->inviteCount; // релейшн модифицирован - считаем только активных членов структуры
                         $count = $participant->inviter->inviteCount; // то же что и в предидущем случае но опираемся на именно приглашенных
                         $participant->invite_num = $count + 1; // сразу увеличиваем счетчик приглашенных на 1
-                        
-                        
-
                         // получаем $inviter
                         $inviter = $participant->inviter;
-                        
-                        
-                        
+
+
+
                         if ($count == 1 && isset($inviter->referal)) { //если это второй приглашённый
                             $referal = $inviter->referal; //то перекинуть участника на реферала реферала (дедушку)
                         } else { //иначе
                             $referal = $inviter; //рефер - это пригласивший
                         }
-                        
+
                         //var_dump('стадия 2:', $referal->id);
                         //die;
-                        
                         //перевести взнос на нужный кошелёк
                         if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если приглашённый 3 или 4
                             Requisites::depositClub($amount);                //увеличить баланс кошелька клуба
@@ -378,12 +384,12 @@ class RegisterController extends EMController {
                             // передача суммы на кошелек реферера (папа или дедушка)
                             $referal->depositPurse($amount);     //кинуть сумму в кошелёк рефера (папа или дедушка)
                         }
-                        
+
                         //стать бизнес-участником
                         $participant->refer_id = $referal->id;
                         $participant->activateParticipation();
-                        
-                        
+
+
                         //отослать письмо про вступление в бизнес-участие
                         EmailHelper::sendFromAdmin(array($participant->email), BaseModule::t('dic', 'You have become a business participant'), 'businessstart', array('participant' => $participant));
                         Yii::app()->user->setFlash('success', BaseModule::t('rec', 'Your payment was successful') . '!');
