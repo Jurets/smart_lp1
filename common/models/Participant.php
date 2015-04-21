@@ -459,7 +459,7 @@ class Participant extends User {
             $criteria->params[':id'] = $this->id;
             /* ограничиваем вывод тоько теми, кто пришел в бизнес-клуб после текущего пользователя */
             // получим дату вступления в бизнес-клуб для текущего пользователя [':busy_date']
-            $criteria->addCondition('busy_date > :club_date');
+            $criteria->addCondition('club_date > :club_date');
             $criteria->params[':club_date'] = $this->club_date;
             $criteria->order = 'club_date asc';
             $this->clubMembers = $this->findAll($criteria);
