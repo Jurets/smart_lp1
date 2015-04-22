@@ -255,7 +255,7 @@ class Participant extends User {
             $criteria->condition = '1=2'; //костыль!!!!
             //$dataProvider = New CArrayDataProvider(array()); //тоже костыль!!!
         } else if ($this->scenario == 'bcstructure') {
-            $criteria->addInCondition('tariff_id', $this->businessclubIDs); //структура Бизнес Клуба
+            $criteria->addInCondition('user.tariff_id', $this->businessclubIDs); //структура Бизнес Клуба
         } else if ($this->scenario == 'structure') { //поиск для структуры
             $criteria->compare('user.phone', $this->phone);
             $criteria->compare('user.skype', $this->skype);
