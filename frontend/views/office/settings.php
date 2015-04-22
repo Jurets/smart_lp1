@@ -134,13 +134,13 @@ $form = $this->beginWidget('CActiveForm', array(
         <p class="sub2-3" style="font-size: 20px"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>:</p>
 
 
-        <?php echo CHtml::textField('currentPassword',$participant->password, array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
+        <?php echo CHtml::passwordField('currentPassword',$participant->password, array('class' => 'textbox2-3')); //ТЕКУЩИЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'currentPassword', array('class' => 'error-message em-12')); //ТЕКУЩИЙ ПАРОЛЬ ?>
 
         <p class="sub2-4"><?php echo BaseModule::t('rec', 'NEW PASSWORD') ?>:</p>
 
 
-        <?php echo CHtml::textField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
+        <?php echo CHtml::passwordField('newPassword','', array('class' => 'textbox2-4')); //НОВЫЙ ПАРОЛЬ ?>
         <?php echo $form->error($participant, 'newPassword', array('class' => 'error-message em-13')); //НОВЫЙ ПАРОЛЬ ?>
 
 
