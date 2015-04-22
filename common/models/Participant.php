@@ -450,7 +450,7 @@ class Participant extends User {
 
     public function userStructureProcess() {
 
-        $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id AND tariff_id NOT IN(0,22,23,24,25,26)', array(':refer_id' => $this->id, ':id' => $this->id));
+        $this->structureMembers = $this->findAll('refer_id = :refer_id AND id <> :id AND tariff_id NOT IN(0,22,23,24,25,26) ORDER BY busy_date ASC', array(':refer_id' => $this->id, ':id' => $this->id));
         $isBusinessClub = $this->isBusinessclub();
         if ($isBusinessClub) {
             $criteria = new CDbCriteria();
@@ -459,8 +459,9 @@ class Participant extends User {
             $criteria->params[':id'] = $this->id;
             /* ограничиваем вывод тоько теми, кто пришел в бизнес-клуб после текущего пользователя */
             // получим дату вступления в бизнес-клуб для текущего пользователя [':busy_date']
-            $criteria->addCondition('busy_date > :busy_date');
-            $criteria->params[':busy_date'] = $this->busy_date;
+            $criteria->addCondition('club_date > :club_date');
+            $criteria->params[':club_date'] = $this->club_date;
+            $criteria->order = 'club_date asc';
             $this->clubMembers = $this->findAll($criteria);
         }
     }
