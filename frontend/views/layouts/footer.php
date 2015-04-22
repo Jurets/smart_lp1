@@ -14,7 +14,7 @@
                 <li> <a id="zagolovok" style="cursor:default;"><?php echo (isset($titles['aboutus']) ? $titles['aboutus'] : '&nbsp;') ?> </a></li>
                 
                 <?php if (isset($titles['aboutproject'])) {?>
-                    <li style="padding-bottom:5px;"> <a href="/info/aboutproject" id="footerUL1ahref"> <?php echo $titles['aboutproject'] ?> </a> </li>
+                    <li style="padding-bottom:5px;"> <a href="/project.just" target="_blank" id="footerUL1ahref"> <?php echo $titles['aboutproject'] ?> </a> </li>
                 <?php } ?>
                 
                 <?php if (isset($titles['partners'])) {?>
