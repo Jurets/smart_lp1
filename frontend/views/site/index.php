@@ -11,7 +11,7 @@
 #logo{
     width: 398px;
     height: 110px;
-    background-image: url(http://newuser.justmoney.pro/images/logo.png);
+    background-image: url(../images/logo.png);
     background-repeat: no-repeat;
     position: absolute;
     top: 27px;
