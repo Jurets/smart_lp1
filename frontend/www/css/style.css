@@ -1,7 +1,7 @@
 /*JUSTMONEY*/
 
 @import url(reset.css);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic-ext,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic-ext,cyrillic);
 
 #wrapper{
     width: 1000px;
