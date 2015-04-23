@@ -116,7 +116,7 @@ return array(
         'photo.default' => '/img/default.jpg',
         'host.name' => 'justmoney.pro',
         'default.language' => 'ru', // Здесь указывается язык по умолчанию для всей системы
-        'server.protocol' => 'http://', // указывается протокол работы с проектом: http / https
+        'server.protocol' => 'https://', // указывается протокол работы с проектом: http / https
     ),
 
     // application modules
