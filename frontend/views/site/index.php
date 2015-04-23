@@ -137,8 +137,8 @@
    }*/
    
 </style>
-<link rel="icon" href="http://newuser.justmoney.pro/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="http://newuser.justmoney.pro/favicon.ico" type="image/x-icon">
+<link rel="icon" href="https://newuser.justmoney.pro/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://newuser.justmoney.pro/favicon.ico" type="image/x-icon">
 
 <?php 
     Yii::app()->getClientScript()->registerScriptFile("/js/jquery.bxslider.min.js");
@@ -150,9 +150,9 @@
 
 <div id="content">
 <div style=" position:absolute; z-index:99; width: 130px; height: 40px; left:893px; top: 1855px; border-radius: 5px;">
-	<a href="http://vk.com/justmoney" class="sociconb1" target="_blank"><span></span></a>
-	<a href="http://facebook.com/justmoneypro" class="sociconb2" target="_blank"><span></span></a>
-    <a href="http://ok.ru/justmoney" class="sociconb3" target="_blank"><span></span></a>
+	<a href="https://vk.com/justmoney" class="sociconb1" target="_blank"><span></span></a>
+	<a href="https://facebook.com/justmoneypro" class="sociconb2" target="_blank"><span></span></a>
+    <a href="https://ok.ru/justmoney" class="sociconb3" target="_blank"><span></span></a>
 </div>
     <div id="videoBG"></div>
     <div>
