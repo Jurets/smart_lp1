@@ -39,7 +39,7 @@
                </li>
             </ul>
         </div>
-        <div class='segmentate module4' id="next1" onclick="cl_del(this);"></div>
+        <div class='segmentate module4' id="next1"></div>
     </div>
 <div style="height:100px;">&nbsp;</div>
 <div class='structure_title'><?php echo BaseModule::t('rec', 'GLOBAL STRUCTURE OF BUSINESS CLUB') ?> (<?php echo BaseModule::t('rec', 'Total') ?>:&nbsp;<?php echo count($model->clubMembers) ?>)</div>
@@ -102,6 +102,12 @@ $('.bxslider2').bxSlider({
     pager: false,
 });
 
+
+var autoslider = setInterval(sliderChange, 3000);
+function sliderChange(){
+    $('#next1 > a').trigger('click');
+    $('#next2 > a').trigger('click');
+}
 });
 </script>
 
