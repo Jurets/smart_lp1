@@ -3192,7 +3192,7 @@ select {
 
 
 #logo{
-    width: 199px;
+    width: 170px;
     height: 57px;
     background-image: url(../images/logo.png);
     background-repeat: no-repeat;
@@ -6317,4 +6317,27 @@ html, body {
 
 a#logo{
     z-index: 100!important;
+}
+
+
+#pl-1{
+    width: 300px;
+    height: 30px;
+    position: absolute;
+    top: 47px;
+	left: 191px;
+	z-index: 99;
+	font-family: 'Open Sans Condensed', 'sans-serif';
+	font-size:14px; color: #99d6e2; cursor:default;
+}
+
+#pl-2{
+    width: 300px;
+    height: 30px;
+    position: absolute;
+    top: 63px;
+	left: 191px;
+	z-index: 99;
+	font-family: 'Open Sans Condensed', 'sans-serif';
+	font-size:18px; color: #fff;
 }

@@ -107,6 +107,7 @@ var autoslider = setInterval(sliderChange, 3000);
 function sliderChange(){
     $('#next1 > a').trigger('click');
     $('#next2 > a').trigger('click');
+    
 }
 });
 </script>

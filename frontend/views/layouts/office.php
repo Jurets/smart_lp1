@@ -57,9 +57,16 @@ $titles = Information::getAllTitles();
             </ul>
             <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
         </div>
-
+        
+             <div id="pl-1">ВАША ССЫЛКА ДЛЯ ИНВАЙТИНГА :</div> 
+             <div id="pl-2"><?= Yii::app()->createAbsoluteUrl('') ?></div> 
+                   
+             
         <div id="content">
-            <div><a  id="logo" href="<?= Yii::app()->createAbsoluteUrl('') ?>"> </a></div>
+            <div><a  id="logo" href="<?= Yii::app()->createAbsoluteUrl('') ?>"> </a></div>          
+            
+
+    
             <div id="divMenu">
                 <?php
                 $this->widget('zii.widgets.CMenu', array(

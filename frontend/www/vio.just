@@ -13,7 +13,7 @@
         <![endif]-->
 <style type="text/css">
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic-ext,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic-ext,cyrillic);
 
 
 
@@ -132,13 +132,13 @@
 <b style="color: #111111;">
 © 2014—2015 ПО JUSTMONEY WORLDSYSTEM<br />
 <br />
-<a href="http://justmoney.pro" class="linkvio">www.justmoney.pro</a><br />
+<a href="https://justmoney.pro" class="linkvio">www.justmoney.pro</a><br />
 <a href="mailto:info@justmoney.pro" class="linkvio">info@justmoney.pro</a><br />
 <br />
 официальные группы в соцсетях :<br />
-<a href="http://vk.com/justmoney" class="linkvio" target="_blank">vk.com/justmoney</a><br />
-<a href="http://facebook.com/justmoneypro" class="linkvio" target="_blank">facebook.com/justmoneypro</a><br />
-<a href="http://ok.ru/justmoney" class="linkvio" target="_blank">ok.ru/justmoney</a><br />
+<a href="https://vk.com/justmoney" class="linkvio" target="_blank">vk.com/justmoney</a><br />
+<a href="https://facebook.com/justmoneypro" class="linkvio" target="_blank">facebook.com/justmoneypro</a><br />
+<a href="https://ok.ru/justmoney" class="linkvio" target="_blank">ok.ru/justmoney</a><br />
 </b><br /></p>
 </div>
 </body>
