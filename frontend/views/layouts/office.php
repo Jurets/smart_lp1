@@ -58,7 +58,7 @@ $titles = Information::getAllTitles();
             <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
         </div>
         
-             <div id="pl-1">ВАША ССЫЛКА ДЛЯ ИНВАЙТИНГА :</div> 
+             <div id="pl-1">ВАША ССЫЛКА ДЛЯ ИНВАЙТИНГА</div> 
              <div id="pl-2"><?= Yii::app()->createAbsoluteUrl('') ?></div> 
                    
              

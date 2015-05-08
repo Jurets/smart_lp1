@@ -121,7 +121,7 @@
     } 
 
     #fake-button {
-        top: 125px;
+        top: 115px;
     }
 
 
@@ -223,7 +223,7 @@ Yii::app()->getClientScript()->registerScriptFile("/js/main.js");
             //nextSelector: '#nextS'
         });
 
-        var autoslider = setInterval(sliderChange, 10000);
+        var autoslider = setInterval(sliderChange, 15000);
         function sliderChange() {
             $('.bx-next').trigger('click');
         }

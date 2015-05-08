@@ -6321,23 +6321,25 @@ a#logo{
 
 
 #pl-1{
-    width: 300px;
+    width: 400px;
     height: 30px;
     position: absolute;
     top: 47px;
-	left: 191px;
+	left: 572px;
 	z-index: 99;
 	font-family: 'Open Sans Condensed', 'sans-serif';
 	font-size:14px; color: #99d6e2; cursor:default;
+	text-align: right;
 }
 
 #pl-2{
-    width: 300px;
+    width: 400px;
     height: 30px;
     position: absolute;
     top: 63px;
-	left: 191px;
+	left: 572px;
 	z-index: 99;
 	font-family: 'Open Sans Condensed', 'sans-serif';
 	font-size:18px; color: #fff;
+	text-align: right;
 }

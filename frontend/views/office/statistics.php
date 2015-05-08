@@ -128,10 +128,13 @@
 }
 .strip td{
     background-color: #DFDFDF;
+	font-weight: bold;
+	
 }
 .nostrip td{
      background-color: #F0F0F0;
      color: #007E97;
+	 font-weight: bold;
 }
  </style>
  
