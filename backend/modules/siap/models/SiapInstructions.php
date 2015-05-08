@@ -79,19 +79,21 @@ class SiapInstructions extends CActiveRecord {
             $this->dbh->createCommand('INSERT INTO sip_periodes (begin, end) VALUES (' . '"' . $begin . '"' . ',' . '"' . $end . '"' . ')')->execute();
         };
         $this->formules['p_A'] = function() {
+            $invoice = $this->jmMoneySplitter($this->invoices['p_A']);
             $sql = "INSERT INTO sip_instructions (period_id, user_id, purse, amount, tr_kind_id) VALUES(:period_id, NULL, :purse, :invoice, 9)";
             $command = $this->dbh->createCommand($sql);
             $command->bindParam(':period_id', $this->period_id);
             $command->bindParam(':purse', $this->systemPurses['A']);
-            $command->bindParam(':invoice', $this->invoices['p_A']);
+            $command->bindParam(':invoice', $invoice);
             $command->execute();
         };
         $this->formules['p_F'] = function() {
+            $invoice = $this->jmMoneySplitter($this->invoices['p_F']);
             $sql = "INSERT INTO sip_instructions (period_id, user_id, purse, amount, tr_kind_id) VALUES(:period_id, NULL, :purse, :invoice, 7)";
             $command = $this->dbh->createCommand($sql);
             $command->bindParam(':period_id', $this->period_id);
             $command->bindParam(':purse', $this->systemPurses['F']);
-            $command->bindParam(':invoice', $this->invoices['p_F']);
+            $command->bindParam(':invoice', $invoice);
             $command->execute();
         };
     }
@@ -288,6 +290,7 @@ class SiapInstructions extends CActiveRecord {
     // Формулы производят запросы в базу данных
     protected function dependFormulesInit() {
         $this->formules['p_rnd_b1'] = function() {
+            $invoice = $this->jmMoneySplitter($this->invoices['p_rnd_b1']);
             $buff = array();
             $buff = $this->club_users['B1']['struct'];
             if (empty($buff)) {
@@ -302,10 +305,11 @@ class SiapInstructions extends CActiveRecord {
             $command->bindParam(':period_id', $this->period_id);
             $command->bindParam(':user_id', $buff[0]['id']);
             $command->bindParam(':purse', $buff[0]['purse']);
-            $command->bindParam(':invoice', $this->invoices['p_rnd_b1']);
+            $command->bindParam(':invoice', $invoice);
             $command->execute();
         };
         $this->formules['p_rnd_b2'] = function() {
+            $invoice = $this->jmMoneySplitter($this->invoices['p_rnd_b2']);
             $buff = array();
             $buff = $this->club_users['B2']['struct'];
             if (empty($buff)) {
@@ -318,10 +322,11 @@ class SiapInstructions extends CActiveRecord {
             $command->bindParam(':period_id', $this->period_id);
             $command->bindParam(':user_id', $buff[0]['id']);
             $command->bindParam(':purse', $buff[0]['purse']);
-            $command->bindParam(':invoice', $this->invoices['p_rnd_b2']);
+            $command->bindParam(':invoice', $invoice);
             $command->execute();
         };
         $this->formules['p_rnd_b3'] = function() {
+            $invoice = $this->jmMoneySplitter($this->invoices['p_rnd_b3']);
             $buff = array();
             $buff = $this->club_users['B3']['struct'];
             if (empty($buff)) {
@@ -334,7 +339,7 @@ class SiapInstructions extends CActiveRecord {
             $command->bindParam(':period_id', $this->period_id);
             $command->bindParam(':user_id', $buff[0]['id']);
             $command->bindParam(':purse', $buff[0]['purse']);
-            $command->bindParam(':invoice', $this->invoices['p_rnd_b3']);
+            $command->bindParam(':invoice', $invoice);
             $command->execute();
         };
 
@@ -469,7 +474,7 @@ class SiapInstructions extends CActiveRecord {
     protected function sql_constructio($clubPart) {
         $sql = "INSERT INTO sip_instructions (period_id, user_id, purse, amount, tr_kind_id) VALUES ";
         foreach ($clubPart['struct'] as $one) {
-            $sql .= "(" . $this->period_id . ',' . $one['id'] . ',' . "'" . $one['purse'] . "'" . ',' . $clubPart['amount'] . ',6),';
+            $sql .= "(" . $this->period_id . ',' . $one['id'] . ',' . "'" . $one['purse'] . "'" . ',' . $this->jmMoneySplitter($clubPart['amount']) . ',6),';
         }
         $sql[strrpos($sql, ',')] = ';';
         return $sql;
@@ -513,5 +518,18 @@ class SiapInstructions extends CActiveRecord {
         $this->begin = $periodSource['date_begin'];
         $this->end = $periodSource['date_end'];
     }
-
+    
+    /* добавочная система округления до сотых в меньшую сторону */
+    private function jmMoneySplitter($input){       
+    $str = (string)$input;
+    $tool = explode('.', $str);
+    if(count($tool) == 2){
+        $tail = substr($tool[1],0,2);
+        $resstr = $tool[0] .'.'. $tail;
+        $result = (float)$resstr;
+          return $result;	
+    }
+        return $input;
+    }
+    
 }

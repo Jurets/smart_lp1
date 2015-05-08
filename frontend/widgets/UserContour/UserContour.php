@@ -97,7 +97,7 @@ class UserContour extends CWidget {
         $listCommission = $listCommission->readAll();
         if ($amountCommissionCount != null) {
             //$finalCount = floor($amountCommissionCount['sum(amount)']);
-            $finalCount = $amountCommissionCount;
+            $finalCount = round($amountCommissionCount);
             $this->dataPull['numberField'] = '$' . $this->jmws_money_converter($finalCount);
             foreach ($listCommission as $index => $li) {
                 $this->dataPull['userList'][$index]['country'] = $li['code'];
