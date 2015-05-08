@@ -1,23 +1,35 @@
-<?php
-/**
- *
- * Bootstrap index file
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
- * @copyright 2013 2amigOS! Consultation Group LLC
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-require('./../../common/lib/vendor/autoload.php');
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="itemp/style.css" media="all" >
+	<title>JUSTMONEY WORLDSYSTEM</title>
+</head>
+<body "scrollbar=false bottomMargin=0 leftMargin=0 topMargin=0 rightMargin=0">
+<style type="text/css">
 
-use Yiinitializr\Helpers\Initializer;
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic-ext,cyrillic);
 
-Initializer::create('./../', 'frontend', array(
-	__DIR__ .'/../../common/config/main.php',
-	__DIR__ .'/../../common/config/env.php',
-	__DIR__ .'/../../common/config/local.php',
-	'main',
-	'env',
-	'local'
-))->run();
+
+
+.linkvio{
+    text-decoration: none;
+    color: #0f91ab;
+    font-weight: 900;
+}
+
+.linkvio:hover {
+    color: #66c7da; /* Цвет ссылки */ 
+   } 
+
+
+
+</style>
+<div class="logo"><img src="itemp/logoindex.png" width="400" height="98"></div>
+<div class="timer" style="font-family: 'Open Sans Condensed', 'sans-serif'; font-weight: 900; color:#eee; font-size:19px;">
+ПРОВОДЯТСЯ ТЕХНИЧЕСКИЕ РАБОТЫ <BR> ПРОЕКТ БУДЕТ ДОСТУПЕН 8 МАЯ 22:00 МСК
+
+
+</div>	
+</body>
+</html>
