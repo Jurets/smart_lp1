@@ -16,7 +16,7 @@ class SiteController extends LoginController {
 
     public $layout = '//layouts/main';
     public $defaultAction = 'index';
-    
+
     /* userLoginPatch */
     public $userLoginPatch;
 
@@ -46,10 +46,10 @@ class SiteController extends LoginController {
      * 
      */
     public function actionIndex() {
-      
+
         $model = new Indexmanager;
         $model->LoadIndexManager();
-        
+
         $checkDomain = BaseModule::getUserFromSubdomain();
         /* определение логики статистики по домену */
         if (is_array($checkDomain)) {
@@ -101,13 +101,11 @@ class SiteController extends LoginController {
             }
             // display the login form
 //            $this->render('//layouts/login', array('userLogin' => $model));
-            
-             $model_ind = new Indexmanager;
-             $model_ind->LoadIndexManager();
-             $this->userLoginPatch = $model;
-             $this->render('index', array('model' => $model_ind));
-            
-            
+
+            $model_ind = new Indexmanager;
+            $model_ind->LoadIndexManager();
+            $this->userLoginPatch = $model;
+            $this->render('index', array('model' => $model_ind));
         } else {
             // test cross subdomain
             #if (Yii::app()->request->urlReferrer != Yii::app()->request->url)
@@ -235,6 +233,33 @@ class SiteController extends LoginController {
         $response['onlinecount'] = count($onlineusers);
         $response['html'] = $this->renderPartial('application.views.office._buddies', array('onlineusers' => $onlineusers), true);
         echo CJSON::encode($response);
+    }
+
+    public function actionDirectlyinclub() {
+        $participant = Participant::model()->findByPk(Yii::app()->user->id);
+        if (is_null($participant)) { // защита
+            $this->redirect('/');
+        }
+        // $participant - autoclubHelper работает по всему объекту
+        $data = NULL;
+
+          // наработки по небольшой переделке этапа 3: 
+          // оплату "дедушке" будем проводить в самом конце - главное, чтобы средства сразу поступили на A и B.
+          // непоступление на "дедушку" - маловероятно
+          // шаг1 - если нет записи в таблице об 250-оплате
+          // шаг2 - если запись есть - она анализируется компонентом на предмет "на какой стадии все это находится" и рендерится форма для выплат с буффера по трем путям
+          // шаг3 - если стадия последняя - все транзакции созданы успешно - рендер поздравлений. (на последней стадии 50 - дедушке - юзеру присваивается B1)
+          // пока еще нет стадийной записи и рендерится первый шаг, добавляется проверка успеха проплаты с PM и если все ок - формируется первая запись со стадией 0
+//        if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0){ // оплата после первого шага прошла успешно
+//            
+//        }else{
+//            $helper = autoclubHelper::init($participant)->renderStep1();
+//            $data = $helper->getData();
+//        }
+        
+
+        autoclubHelper::init($participant)->test();
+        $this->render('directly_club', array('data' => $data));
     }
 
     /**

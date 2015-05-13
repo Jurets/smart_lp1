@@ -9,7 +9,6 @@ $this->beginContent('//layouts/common');
 
 //выборка заголовков стат-страниц: вначале выбранного языка, затем того, что по умолчанию
 $titles = Information::getAllTitles();
-
 ?>
 
 <style type="text/css">
@@ -47,26 +46,37 @@ $titles = Information::getAllTitles();
                 <li> <a href="/rules.just" target="_blank"> <?php echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
                 <li> <a href="/vio.just" target="_blank"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
 
-                <li> <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark"><?php
-                // echo strtoupper(BaseModule::t('rec', 'Raise status'));
-                echo (Yii::app()->user->tariff_id >= 3)? strtoupper(BaseModule::t('rec', 'Raise status')) : '';  
-                ?></a>
-                <li> <a href="<?=Yii::app()->createAbsoluteUrl('office/statistics')?>"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
+                <?php if(Yii::app()->user->tariff_id >= 3) { ?>
+                <li>
+                    <a href="<?php echo $this->createUrl('site/status'); ?>" class="mark">
+                        <?php echo strtoupper(BaseModule::t('rec', 'Raise status')) ?>
+                    </a>
+                </li>
+                <?php } ?>
+                
+                <?php if (Yii::app()->user->tariff_id == 2) { ?>
+                    <li>
+                        <a href="<?php echo $this->createUrl('site/directlyinclub'); ?>" class="mark">
+                            <?php echo strtoupper(BaseModule::t('rec', 'join the club')) ?>
+                        </a>
+                    </li>
+                <?php } ?>
+                <li> <a href="<?= Yii::app()->createAbsoluteUrl('office/statistics') ?>"  class="moveRight1"> <?= Yii::app()->user->name ?></a> </li>
                 <li> <a href="/office/settings"  class="moveRight2"> |&nbsp;&nbsp;&nbsp;<?php echo BaseModule::t('rec', 'Settings'); ?></a> </li>
                 <li> <a href="<?= Yii::app()->createAbsoluteUrl('logout') ?>"  class="moveRight3"> |&nbsp;&nbsp;<?php echo BaseModule::t('common', 'Exit'); ?></a> </li>
             </ul>
-            <?php //$this->widget('application.widgets.LngSwitch.LngSwitch')?>
+            <?php //$this->widget('application.widgets.LngSwitch.LngSwitch') ?>
         </div>
-        
-             <div id="pl-1">ВАША ССЫЛКА ДЛЯ ИНВАЙТИНГА</div> 
-             <div id="pl-2"><?= Yii::app()->createAbsoluteUrl('') ?></div> 
-                   
-             
+
+        <div id="pl-1">ВАША ССЫЛКА ДЛЯ ИНВАЙТИНГА</div> 
+        <div id="pl-2"><?= Yii::app()->createAbsoluteUrl('') ?></div> 
+
+
         <div id="content">
             <div><a  id="logo" href="<?= Yii::app()->createAbsoluteUrl('') ?>"> </a></div>          
-            
 
-    
+
+
             <div id="divMenu">
                 <?php
                 $this->widget('zii.widgets.CMenu', array(
@@ -87,7 +97,7 @@ $titles = Information::getAllTitles();
             </div>
             <div id="BottomOfficeLine"></div>
 
-<?php echo $content; ?>
+            <?php echo $content; ?>
         </div>
 
     </div>
