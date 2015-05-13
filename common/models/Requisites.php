@@ -15,6 +15,9 @@
  * @property string $purse_club
  * @property string $purse_investor
  * @property string $purse_fdl
+ * @property string $purse_autoclub
+ * @property string $autoclub_login
+ * @property string $autoclub_password
  */
 class Requisites extends CActiveRecord
 {
@@ -38,14 +41,14 @@ class Requisites extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('purse_activation, purse_club, bpm_login, bpm_password, purse_fdl','required'),
+            array('purse_activation, purse_club, bpm_login, bpm_password, purse_fdl, purse_autoclub, autoclub_login, autoclub_password','required'),
             array('id', 'length', 'max' => 50),
             array('pw_supervisor, pw_admin, pw_moderator', 'length', 'max' => 20),
             array('purse_activation, purse_club, purse_investor, purse_fdl', 'length', 'max' => 255),
-            array('details, agreement, marketing, bpm_login, bpm_password, purse_activation, purse_club, purse_investor, purse_fdl, email_faq, superrefer_id', 'safe'),
+            array('details, agreement, marketing, bpm_login, bpm_password, autoclub_login, autoclub_password, purse_activation, purse_club, purse_investor, purse_fdl, email_faq, superrefer_id', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, details, agreement, marketing, pw_supervisor, pw_admin, pw_moderator, purse_activation, purse_club, purse_investor, purse_fdl, email_faq, superrefer_id', 'safe', 'on' => 'search'),
+            array('id, details, agreement, marketing, pw_supervisor, pw_admin, pw_moderator, purse_activation, purse_club, purse_investor, purse_fdl, purse_autoclub, email_faq, superrefer_id', 'safe', 'on' => 'search'),
         );
     }
 

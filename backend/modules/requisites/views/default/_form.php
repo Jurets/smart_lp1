@@ -42,7 +42,12 @@
         
         //echo $form->textFieldControlGroup($model, 'purse_investor', array('class'=>'span3'));
         echo $form->textFieldControlGroup($model, 'purse_fdl', array('class'=>'span3'));
-                    
+        
+        //кошелек автоклуба - для процесса вступления B1 - без приглашенных
+        echo $form->textFieldControlGroup($model, 'purse_autoclub', array('class'=>'span3'));
+        echo $form->textFieldControlGroup($model, 'autoclub_login', array('class'=>'span3'));
+        echo $form->textFieldControlGroup($model, 'autoclub_password', array('class'=>'span3'));
+        
         //выбор супер-рефера
         $user = Participant::model()->findByPk(Yii::app()->user->id);
         echo $form->dropDownListControlGroup($model, 'superrefer_id', $user->getListForSuperReferalSelect(), array(
