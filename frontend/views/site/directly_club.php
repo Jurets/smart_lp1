@@ -12,7 +12,22 @@ Yii::app()->clientScript->registerCssFile('/css/style-office.css');
 </div>
 
 <div id="main-div">
-        
+    <?php 
+        /* три отдельных партиала в зависимости от метки в $data: 
+         * первая форма оплаты, 
+         * форма "Продолжить" 
+         * текст-поздравление со вступлением в клуб */
+         if($data['sign'] == 'pay'){ // форма на оплату всей суммы
+             $this->renderPartial('_pay', array('data'=>$data));
+         }
+         if($data['sign'] == 'confirm'){ // форма для трех транзакций
+             $this->renderPartial('_confirm', array('data'=>$data));
+         }
+         if($data['sign'] == 'congratulate'){ // текст поздравления
+             $this->renderPartial('_congratulate', array('data'=>$data));
+         }
+    ?>
+    
 </div>
 
 <style>

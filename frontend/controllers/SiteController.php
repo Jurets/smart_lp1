@@ -234,31 +234,46 @@ class SiteController extends LoginController {
         $response['html'] = $this->renderPartial('application.views.office._buddies', array('onlineusers' => $onlineusers), true);
         echo CJSON::encode($response);
     }
-
+    
+    // автоклуб - возможность автоматически попасть в клуб со статусом B1 не приглашая 4-х но заплатив дополнительные деньги
     public function actionDirectlyinclub() {
-        $participant = Participant::model()->findByPk(Yii::app()->user->id);
+        $participant = Participant::model()->findByPk(Yii::app()->user->id);    
         if (is_null($participant)) { // защита
             $this->redirect('/');
         }
-        // $participant - autoclubHelper работает по всему объекту
         $data = NULL;
-
-          // наработки по небольшой переделке этапа 3: 
-          // оплату "дедушке" будем проводить в самом конце - главное, чтобы средства сразу поступили на A и B.
-          // непоступление на "дедушку" - маловероятно
-          // шаг1 - если нет записи в таблице об 250-оплате
-          // шаг2 - если запись есть - она анализируется компонентом на предмет "на какой стадии все это находится" и рендерится форма для выплат с буффера по трем путям
-          // шаг3 - если стадия последняя - все транзакции созданы успешно - рендер поздравлений. (на последней стадии 50 - дедушке - юзеру присваивается B1)
-          // пока еще нет стадийной записи и рендерится первый шаг, добавляется проверка успеха проплаты с PM и если все ок - формируется первая запись со стадией 0
-//        if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0){ // оплата после первого шага прошла успешно
-//            
-//        }else{
-//            $helper = autoclubHelper::init($participant)->renderStep1();
-//            $data = $helper->getData();
-//        }
+          
+        if(!autoclubHelper::checkAutoclubRecord($participant)){
+           // дополнительное условие: прошла ли оплата на ПМ
+           if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0){
+            // оплатили успешно, создать запись и перезапустить экшн
+               $record = new AutoclubPaymentRegister;
+               $record->user_id = $participant->id;
+               $record->save();
+               $this->redirect('directlyinclub');
+           }else{ 
+               // подготовка формы для оплаты на PM
+               $helper = autoclubHelper::init($participant)->renderMainPaymentForm();// готовим начальную форму для оплаты
+               $data = $helper->getData();
+               $data['url'] = $this->createAbsoluteUrl('site/directlyinclub');
+           }
+        }else{
+            if(autoclubHelper::checkAutoclubRecordComplete($participant)) { // проверим, завершены ли операции по данной записи
+                // если да, то поздравим пользователя с успешным вступлением в клуб без приглашения 4-х с помощью дополнительных затрат
+                $helper = autoclubHelper::init($participant)->renderCongratulations();
+                $data = $helper->getData();
+            }else{ // если операции не завершены полностью или частично
+                if(isset($_POST['confirmation'])){ // проверим, отправил ли пользователь подтверждение
+                    autoclubHelper::init($participant)->transferProcess(); // если отправил - выполняем операции
+                    $this->redirect('directlyinclub'); // и выполняем вход на страницу снова
+                }
+                // если пользователь не отправлял подтверждение, дадим ему возможность сделать это
+                $helper = autoclubHelper::init($participant)->renderConfirmForm();
+                $data = $helper->getData();
+                $data['url'] = $this->createAbsoluteUrl('site/directlyinclub');
+            }
+        }
         
-
-        autoclubHelper::init($participant)->test();
         $this->render('directly_club', array('data' => $data));
     }
 

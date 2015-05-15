@@ -223,7 +223,10 @@ class PerfectMoney extends CFormModel {
               'tr_kind_id'=>$act_id,
               'tr_err_code'=>$act2_id,
           ));
+          // ..............................
+          // commit - включить запись транзакций с ошибками в бд rollback - выключить
           $transaction->commit();
+          //$transaction->rollback();
       }catch(Exception $exception){
           // Действия по логированию в файл
           //TO DO
