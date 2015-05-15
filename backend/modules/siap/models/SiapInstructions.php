@@ -254,6 +254,8 @@ class SiapInstructions extends CActiveRecord {
         $c->bindParam(':date_end', $this->end, PDO::PARAM_STR);
         $source = $c->query()->read()['howmuch'];
         $this->club_users['B1']['countNew'] = (!is_null($source)) ? $source : 0;
+        
+        echo 'B2 количество ' . $this->club_users['B1']['countNew'] . "\n";
     }
 
     protected function B2_NEW_Counter() {
@@ -269,6 +271,8 @@ class SiapInstructions extends CActiveRecord {
         $c->bindParam(':date_end', $this->end, PDO::PARAM_STR);
         $source = $c->query()->read()['howmuch'];
         $this->club_users['B2']['countNew'] = (!is_null($source)) ? $source : 0;
+        
+        echo 'B3 количество ' . $this->club_users['B2']['countNew'] . "\n";
     }
 
     protected function B3_NEW_Counter() {
@@ -284,6 +288,8 @@ class SiapInstructions extends CActiveRecord {
         $c->bindParam(':date_end', $this->end, PDO::PARAM_STR);
         $source = $c->query()->read()['howmuch'];
         $this->club_users['B3']['countNew'] = (!is_null($source)) ? $source : 0;
+        
+        echo 'B4 количество ' . $this->club_users['B3']['countNew'] . "\n";
     }
 
     // Зависимые формулы зависят от B_Struct_Creator (вызов формул только после вызова B_Struct_Creator)

@@ -166,6 +166,7 @@ class autoclubHelper {
         // если все три транзакции прошли успешно - переводим пользователя в клуб со статусом B1
         if ($record->st1 == 1 && $record->st2 == 1 && $record->st3 == 1) {
             $this->user->tariff_id = 3;
+            $this->user->autoclub = 1;
             $this->user->club_date = date('Y-m-d H:i:s');
             $this->user->save();
         }

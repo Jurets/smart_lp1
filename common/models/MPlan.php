@@ -100,6 +100,8 @@ class MPlan extends CModel
         $pm->password = 'password'; //ПРОСТО НЕИМОВЕРНЫЙ КОСТЫЛЬ
         $pm->payerAccount = $participant->purse;
         //определить - на какой кошелёк пойдёт оплата
+        // патч с учетом автоклуба
+        if($participant->referal->autoclub == 1){$participant->invite_num = 10;}
         if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
             $pm->payeeAccount = Requisites::purseClub();   //поставить кошелёк активаций системы!!!!!!!!!!!
             $pm->payeeId = null;
@@ -144,6 +146,10 @@ class MPlan extends CModel
         $pm->password = $password;      //временно хардкод
         $pm->payerAccount = $participant->purse;
         //определить - на какой кошелёк пойдёт оплата
+        //
+        // патч с учетом автоклуба
+        if($participant->referal->autoclub == 1){$participant->invite_num = 10;}
+        
         if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
             $pm->payeeAccount = Requisites::purseClub();   //поставить кошелёк активаций системы!!!!!!!!!!!
             $pm->payeeId = null;
@@ -164,6 +170,8 @@ class MPlan extends CModel
             //стать бизнес-участником
             $participant->activateParticipation();
             //перевести взнос на нужный кошелёк
+            // патч с учетом автоклуба
+            if($participant->referal->autoclub == 1){$participant->invite_num = 10;}
             if ($participant->invite_num == 3 || $participant->invite_num == 4)  {  //если приглашённый 3 или 4
                 Requisites::depositClub($pm->amount);                //увеличить баланс кошелька клуба
                 if ($participant->invite_num == 3) {                 //если это четвёртый приглашённый

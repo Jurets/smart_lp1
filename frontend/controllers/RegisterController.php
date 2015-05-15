@@ -175,7 +175,9 @@ class RegisterController extends EMController {
             if (!isset($participant)) {
                 throw New CHttpException(404, BaseModule::t('rec', 'Unable to confirm your registration! The activation code is not found. Contact the site administrator'));
             }
-
+            // условие обхода основного правила при задействовании автоклуба
+            if($participant->referal->autoclub == 1){$participant->invite_num = 10;}
+            // TO DO добавить проверку на автоклуб - пригласивший попал в клуб без приглашения, через 250, значит приглашенный не попадает в четверку первых однозначно.
             ///// ------- Разветвлённая логика пошаговой активации
             if (empty($participant->purse)) {//если пустой кошелёк
                 $urlNext = $this->createAbsoluteUrl('activate', array('activkey' => $participant->activkey));
@@ -271,6 +273,8 @@ class RegisterController extends EMController {
                         // номер приглашенного
                         $num = $participant->inviter->inviteCount() + 1;
                         $participant->invite_num = $num;
+                        // условие обхода основного правила с учетом автоклуба
+                        if($participant->referal->autoclub == 1){$participant->invite_num = 10;}
                         if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
                             $purse = Requisites::purseClub();   //кошелёк клуба!
                         } else {
@@ -282,6 +286,8 @@ class RegisterController extends EMController {
                             } else { //иначе
                                 $referal = $inviter; //рефер - это пригласивший
                             }
+                            // условие обхода основного правила с учетом автоклуба
+                            if($participant->referal->autoclub == 1){$referal = $inviter;}
                             $purse = $referal->purse;    // то платёж на кошелёк данного реферала
                         }
                     }
@@ -309,6 +315,8 @@ class RegisterController extends EMController {
                 // задается количество приглашенных
                 $num = $participant->inviter->inviteCount() + 1;
                 $participant->invite_num = $num;
+                // условие обхода основного правила в случае с автоклубом
+                if($participant->referal->autoclub == 1){$participant->invite_num = 10;}
                 if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если третий или четвёртый,
                     $purse = Requisites::purseClub();   //кошелёк клуба!
                 } else {
@@ -320,7 +328,8 @@ class RegisterController extends EMController {
                     } else { //иначе
                         $referal = $inviter; //рефер - это пригласивший
                     }
-
+                    // условие обхода основного правила в случае с автоклубом
+                    if($participant->referal->autoclub == 1){$referal = $inviter;}
                     $purse = $referal->purse;    // то платёж на кошелёк данного реферала
                 }
                 //var_dump('стадия до:',$referal->id, $participant->invite_num);
@@ -363,16 +372,27 @@ class RegisterController extends EMController {
                         // получаем $inviter
                         $inviter = $participant->inviter;
 
-
+                        // патч-условие обхода основного правила если автоклуб
+                        if($participant->referal->autoclub == 1){
+                           $participant->invite_num = 10;
+                        }
 
                         if ($count == 1 && isset($inviter->referal)) { //если это второй приглашённый
                             $referal = $inviter->referal; //то перекинуть участника на реферала реферала (дедушку)
                         } else { //иначе
                             $referal = $inviter; //рефер - это пригласивший
                         }
-
+                        
+                        //патч 2 дополнительное условие обхода
+                        if($participant->referal->autoclub == 1){
+                            $referal = $inviter;
+                        }
+                        
                         //var_dump('стадия 2:', $referal->id);
                         //die;
+                        
+                        //патч-условие обхода основного правила в случае с автоклубом
+                        if($participant->referal->autoclub == 1){$participant->invite_num = 10;}
                         //перевести взнос на нужный кошелёк
                         if ($participant->invite_num == 3 || $participant->invite_num == 4) {  //если приглашённый 3 или 4
                             Requisites::depositClub($amount);                //увеличить баланс кошелька клуба
