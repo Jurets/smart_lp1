@@ -153,7 +153,7 @@ class SiapInstructions extends CActiveRecord {
         $B_SQL = "SELECT sum(amount) summ
                         FROM pm_transaction_log
                         WHERE tr_err_code IS NULL
-                        AND tr_kind_id IN (2,3,4,5)
+                        AND tr_kind_id IN (2,3,4,5,32)
                         AND to_user_id IS NULL
                         AND date >= :begin
                         AND date < :end";
@@ -242,54 +242,72 @@ class SiapInstructions extends CActiveRecord {
     }
 
     protected function B1_NEW_Counter() {
-        $sql = " SELECT COUNT(from_user_id) howmuch
-                FROM pm_transaction_log
-                WHERE to_user_id IS NULL
-                AND date >= :date_begin
-                AND date < :date_end
-                AND tr_err_code IS NULL
-                AND tr_kind_id = 3 ";
+//        $sql = " SELECT COUNT(from_user_id) howmuch
+//                FROM pm_transaction_log
+//                WHERE to_user_id IS NULL
+//                AND date >= :date_begin
+//                AND date < :date_end
+//                AND tr_err_code IS NULL
+//                AND tr_kind_id = 3 ";
+        $sql = " SELECT COUNT(id) howmuch
+                FROM tbl_users
+                WHERE status = 1
+                AND club_date >= :date_begin
+                AND club_date < :date_end
+                AND tariff_id = 4 ";
         $c = $this->dbh->createCommand($sql);
         $c->bindParam(':date_begin', $this->begin, PDO::PARAM_STR);
         $c->bindParam(':date_end', $this->end, PDO::PARAM_STR);
         $source = $c->query()->read()['howmuch'];
         $this->club_users['B1']['countNew'] = (!is_null($source)) ? $source : 0;
         
-        echo 'B2 количество ' . $this->club_users['B1']['countNew'] . "\n";
+        //echo 'B2 количество ' . $this->club_users['B1']['countNew'] . "\n";
     }
 
     protected function B2_NEW_Counter() {
-        $sql = " SELECT COUNT(from_user_id) howmuch
-                FROM pm_transaction_log
-                WHERE to_user_id IS NULL
-                AND date >= :date_begin
-                AND date < :date_end
-                AND tr_err_code IS NULL
-                AND tr_kind_id = 4 ";
+//        $sql = " SELECT COUNT(from_user_id) howmuch
+//                FROM pm_transaction_log
+//                WHERE to_user_id IS NULL
+//                AND date >= :date_begin
+//                AND date < :date_end
+//                AND tr_err_code IS NULL
+//                AND tr_kind_id = 4 ";
+        $sql = " SELECT COUNT(id) howmuch
+                FROM tbl_users
+                WHERE status = 1
+                AND club_date >= :date_begin
+                AND club_date < :date_end
+                AND tariff_id = 5 ";
         $c = $this->dbh->createCommand($sql);
         $c->bindParam(':date_begin', $this->begin, PDO::PARAM_STR);
         $c->bindParam(':date_end', $this->end, PDO::PARAM_STR);
         $source = $c->query()->read()['howmuch'];
         $this->club_users['B2']['countNew'] = (!is_null($source)) ? $source : 0;
         
-        echo 'B3 количество ' . $this->club_users['B2']['countNew'] . "\n";
+        //echo 'B3 количество ' . $this->club_users['B2']['countNew'] . "\n";
     }
 
     protected function B3_NEW_Counter() {
-        $sql = " SELECT COUNT(from_user_id) howmuch
-                FROM pm_transaction_log
-                WHERE to_user_id IS NULL
-                AND date >= :date_begin
-                AND date < :date_end
-                AND tr_err_code IS NULL
-                AND tr_kind_id = 5 ";
+//        $sql = " SELECT COUNT(from_user_id) howmuch
+//                FROM pm_transaction_log
+//                WHERE to_user_id IS NULL
+//                AND date >= :date_begin
+//                AND date < :date_end
+//                AND tr_err_code IS NULL
+//                AND tr_kind_id = 5 ";
+        $sql = " SELECT COUNT(id) howmuch
+                FROM tbl_users
+                WHERE status = 1
+                AND club_date >= :date_begin
+                AND club_date < :date_end
+                AND tariff_id = 6 ";
         $c = $this->dbh->createCommand($sql);
         $c->bindParam(':date_begin', $this->begin, PDO::PARAM_STR);
         $c->bindParam(':date_end', $this->end, PDO::PARAM_STR);
         $source = $c->query()->read()['howmuch'];
         $this->club_users['B3']['countNew'] = (!is_null($source)) ? $source : 0;
         
-        echo 'B4 количество ' . $this->club_users['B3']['countNew'] . "\n";
+        //echo 'B4 количество ' . $this->club_users['B3']['countNew'] . "\n";
     }
 
     // Зависимые формулы зависят от B_Struct_Creator (вызов формул только после вызова B_Struct_Creator)

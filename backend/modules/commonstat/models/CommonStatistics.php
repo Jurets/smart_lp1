@@ -213,6 +213,9 @@ private function QueryPullInitial(){
         $sql = "SELECT sum(amount) summ FROM pm_transaction_log
                 WHERE tr_err_code IS NULL AND(
                 to_purse = :a OR to_purse = :b OR to_purse = :f OR to_user_id IS NULL)";
+//        $sql = "SELECT sum(amount) summ FROM pm_transaction_log
+//                WHERE tr_err_code IS NULL AND(
+//                to_purse = :a OR to_purse = :b OR to_purse = :f)"; // возможно что так правильней
         $command = Yii::app()->db->createCommand($sql);
         $command->bindParam(':a', $A, PDO::PARAM_STR); $command->bindParam(':b', $B, PDO::PARAM_STR); $command->bindParam(':f', $F, PDO::PARAM_STR);
         $res = $command->query()->read()['summ'];

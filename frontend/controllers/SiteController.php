@@ -319,6 +319,7 @@ class SiteController extends LoginController {
         //if (isset($_GET['response']) && $_GET['response'] == 'success') {
         if (isset($_POST['PAYMENT_BATCH_NUM']) && $_POST['PAYMENT_BATCH_NUM'] <> 0 && isset($_POST['tariffid'])) {
             // TO DO если оплата прошла с успехом, то нужно обновить партисипанту клубную дату
+            $participant->club_date = date('Y-m-d H:i:s');
             /* Определяем статус,тип операции,изменям статус после удачной оплаты */
             /* безопасно извлекаем данные из $_POST */
             // $type_amount - id операции(TARIFF_50 = 2,TARIFF_BC_BRONZE(100$) = 4)
