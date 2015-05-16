@@ -171,7 +171,7 @@ class UserContour extends CWidget {
                       LEFT JOIN countries co ON co.id = c.country_id
                  WHERE superuser = 0 AND status = 1
                  AND tariff_id IN (3,4,5,6,24)
-                 ORDER BY u.create_at DESC');
+                 ORDER BY u.club_date DESC');
         $usersDump = $usersDumpCommand->query();
         foreach($usersDump->readAll() as $index=>$li){
             $this->dataPull['userList'][$index]['country'] = $li['code'];
