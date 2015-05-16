@@ -608,7 +608,15 @@ INSERT INTO `SourceMessage` VALUES
 (573, 'rec', 'investor B1'),
 (574, 'rec', 'investor B2'),
 (575, 'rec', 'investor B3'),
-(576, 'rec', 'investor B4')
+(576, 'rec', 'investor B4'),
+(577, 'rec', 'join the club'),
+(578, 'rec', 'Purse Autoclub'),
+(579, 'rec', 'Autoclub Login'),
+(580, 'rec', 'Autoclub Password'),
+(581, 'rec', 'directly in club invitation'),
+(582, 'rec', 'you need to pay'),
+(583, 'rec', 'join the club confirm message'),
+(584, 'rec', 'auto club congratulations message')
 ;
 INSERT INTO `Message` VALUES 
 (1,'ru','Настройки'),
@@ -1185,5 +1193,13 @@ INSERT INTO `Message` VALUES
 (573, 'ru', 'инвестор B1'),
 (574, 'ru', 'инвестор B2'),
 (575, 'ru', 'инвестор B3'),
-(576, 'ru', 'инвестор B4')
+(576, 'ru', 'инвестор B4'),
+(577, 'ru', 'вступить в клуб'),
+(578, 'ru', 'Кошелек Автоклуба'),
+(579, 'ru', 'Логин кошелька Автоклуба'),
+(580, 'ru', 'Пароль кошелька Автоклуба'),
+(581, 'ru', 'текст приглашения вступления в клуб'),
+(582, 'ru', 'вы должны заплатить'),
+(583, 'ru', 'текст подтверждения вступления в клуб'),
+(584, 'ru', 'текст поздравления со вступлением в клуб')
 ;
