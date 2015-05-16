@@ -165,7 +165,7 @@ class UserContour extends CWidget {
         $this->operation = BaseModule::t('rec', 'DEDUCTIONS');
         $db_connector = Yii::app()->db;
         $usersDumpCommand = $db_connector->createCommand(
-                'SELECT u.tariff_id, u.first_name, u.last_name, u.create_at, co.code, co.name, u.username
+                'SELECT u.tariff_id, u.first_name, u.last_name, u.club_date, co.code, co.name, u.username
                  FROM tbl_users u
                       LEFT JOIN cities c ON u.city_id = c.id
                       LEFT JOIN countries co ON co.id = c.country_id
