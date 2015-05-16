@@ -181,7 +181,7 @@ class UserContour extends CWidget {
             } else {
                 $name = $li['username'];
             }
-           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['create_at'])). ' '. $name;
+           $this->dataPull['userList'][$index]['content'] = date('H:i', strtotime($li['club_date'])). ' '. $name;
         }
         $this->dataPull['numberField'] = '$'.$this->jmws_money_converter($this->summFCounter($this->dataPull['userList']));
         $this->dataPull['userList'] = $this->structSplitter($this->dataPull['userList']);
