@@ -36,8 +36,8 @@
                     <li style="padding-bottom:5px;"> <a href="/info/bmachine" id="footerUL1ahref"> <?php echo $titles['bmachine'] ?> </a> </li>
                 <?php } ?>
                 
-                <?php if (isset($titles['scripts'])) {?>
-                    <li> <a href="/info/scripts" id="footerUL1ahref"> <?php echo $titles['scripts'] ?> </a> </li>
+                <?php if (isset($titles['webinar'])) {?>
+                    <li> <a href="/info/webinar" id="footerUL1ahref"> <?php echo $titles['webinar'] ?> </a> </li>
                 <?php } ?>
                 
                

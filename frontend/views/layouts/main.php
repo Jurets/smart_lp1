@@ -30,9 +30,10 @@ $titles = Information::getAllTitles();
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="in" style="cursor: pointer;">  </a> </li>
                 <?php } ?>
-                <li> <a href="/mp.pdf" target="_blank">  <?php echo BaseModule::t('rec', 'OPPORTUNITIES')//echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
-                <li> <a href="/rules.just" target="_blank"> <?php echo BaseModule::t('rec', 'RULES')//echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
-                <li> <a href="/vio.just" target="_blank"> <?php echo BaseModule::t('rec', 'QUESTIONS AND ANSWERS')//echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
+
+                <li> <a href="/mp.pdf" target="_blank">  <?php echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
+                <li> <a href="/vio.just" target="_blank"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
+                <li> <a href="/info/webinar"> <?php echo mb_strtoupper($titles['webinar'], 'utf8') ?> </a> </li>
 
                 <?php if (Yii::app()->user->isGuest) { ?>
                     <li> <a class="moveRight1" href="<?php echo Yii::app()->createAbsoluteUrl('register'); ?>"> <?php echo BaseModule::t('rec', 'SIGN UP'); ?> </a> </li>

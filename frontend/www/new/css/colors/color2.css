@@ -1,0 +1,94 @@
+.social img,
+.navbar .navbar-nav .active,
+.navbar .navbar-nav li a:hover,
+.ps-container .ps-scrollbar-x,
+.ps-container .ps-scrollbar-x-rail:hover .ps-scrollbar-x,
+.ps-container .ps-scrollbar-x-rail.hover .ps-scrollbar-x,
+.team:hover,
+#portfolio .cat-list .active,
+#portfolio .btn-outline-white:hover,
+.da-dots span.da-dots-current:after,
+#blogpost .btn-outline-white:hover,
+.item-title,
+.popup-nav-top,
+.portfolio-popup .btn-outline-white:hover,
+.btn-black:hover,
+.price_item:hover,
+.portfolio-filters ul li a.active,
+.blog-nav span,
+.widget .widget-tags li h4 a:hover,
+.as-item:hover .horizontal-line,
+.process-step:hover .horizontal-line,
+.spinner:before,
+.gmap-button:hover
+ {
+	background: #f24472;
+}
+
+#portfolio .portfolio-row .portfolio-mix .portfolio-item a .caption-bg {
+	-webkit-box-shadow: inset 0 0 0 6px #f24472, inset 0 0 0 0 #f24472;
+	-moz-box-shadow: inset 0 0 0 6px #f24472, inset 0 0 0 0 #f24472;
+	box-shadow: inset 0 0 0 6px #f24472, inset 0 0 0 0 #f24472;
+}
+#portfolio .portfolio-row .portfolio-mix .portfolio-item a:hover .caption-bg::before {
+	-webkit-box-shadow: inset 0 0 0 160px #f24472;
+	-moz-box-shadow: inset 0 0 0 160px #f24472;
+	box-shadow: inset 0 0 0 160px #f24472;
+}
+a:hover,
+.statistics h1.big:hover,
+.statistics h1.big:hover span.desc,
+#process-slider .step,
+#services .service-icon i,
+#portfolio .btn-outline-white,
+#blogpost ul li.slide hgroup h4 span a,
+#blogpost ul li.slide hgroup h1:hover,
+#blogpost .btn-outline-white,
+#contact form button[type="submit"]:hover,
+.portfolio-popup .btn-outline-white,
+#blogpost ul li.slide article h4 span a,
+#blogpost ul li.slide article h1:hover,
+.scrolltotop:hover,
+.service:hover .circle .fa,
+#contactshort li a:hover,
+.twitter_author .fa,
+.as-item:hover h4,
+.as-item:hover i,
+.process-step:hover h4,
+.process-step:hover i,
+.blog-nav a:hover,
+.projects h4,
+.prftl-det p.prtfl-cat {
+	color: #f24472;
+}
+.service .circle .fa,
+.price_item:hover .pi-title,
+.price_item:hover .pi-cost,
+.price_item:hover a,
+.widget .widget-tags li h4 a:hover,
+.gmap-button:hover {
+	color: #fff
+}
+.blog-nav a:hover {
+	border-color: #f24472
+}
+#portfolio .btn-outline-white,
+.da-slide .da-img .square-outline,
+#blogpost .btn-outline-white,
+.portfolio-popup .btn-outline-white {
+	border: 2px solid #f24472;
+}
+
+#portfolio .cat-list .active,
+#portfolio .btn-outline-white:hover,
+#blogpost .btn-outline-white:hover,
+.portfolio-popup .btn-outline-white:hover {
+	color: #fff !important;
+}
+.footer a {
+	color: #fff;
+}
+*::-moz-selection {
+background:#f24472;
+color:#fff;
+}

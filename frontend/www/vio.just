@@ -139,6 +139,7 @@
 <a href="https://vk.com/justmoney" class="linkvio" target="_blank">vk.com/justmoney</a><br />
 <a href="https://facebook.com/justmoneypro" class="linkvio" target="_blank">facebook.com/justmoneypro</a><br />
 <a href="https://ok.ru/justmoney" class="linkvio" target="_blank">ok.ru/justmoney</a><br />
+<a href="https://instagram.com/justmoney.pro" class="linkvio" target="_blank">instagram.com/justmoney.pro</a><br />
 </b><br /></p>
 </div>
 </body>

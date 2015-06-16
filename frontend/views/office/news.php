@@ -4,7 +4,14 @@
         color: #007e97 !important;
     }
 	
-	
+.page {
+min-height: 1000px;
+
+  height: auto !important;
+    background: #e6e6e6;
+
+    text-align: left;
+}	
 	
     .nextm a {
         color: #007e97 !important;

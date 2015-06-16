@@ -121,14 +121,14 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <!--       <a href="#" name="label-3" class="vopros1-1" title="разрешить показывать всемпользователям"></a>-->
         <a href="#" name="label-3" class="vopros1-1"></a>
-        <?php echo $form->textField($participant, 'skype', array('class' => 'shag-1-1-option1-1')); //skype ?>
-        <?php echo $form->error($participant, 'skype', array('class' => 'error-message em-7')); //skype ?>
+        <?php echo $form->textField($participant, 'phone', array('class' => 'shag-1-1-option1-1')); //skype ?>
+        <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-7')); //skype ?>
 
 
 
         <p class="sub1-1"><?php echo BaseModule::t('rec', 'VIBER / MOBILE') ?>:</p>
-        <?php echo $form->textField($participant, 'phone', array('class' => 'textbox1-1')); //VIBER / МОБИЛЬНЫЙ ?>
-        <?php echo $form->error($participant, 'phone', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
+        <?php echo $form->textField($participant, 'skype', array('class' => 'textbox1-1')); //VIBER / МОБИЛЬНЫЙ ?>
+        <?php echo $form->error($participant, 'skype', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
 
 
         <p class="sub2-3" style="font-size: 20px"><?php echo BaseModule::t('rec', 'CURRENT PASSWORD') ?>:</p>

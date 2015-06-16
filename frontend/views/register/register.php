@@ -37,6 +37,8 @@
     }
     /* photo */
     .em-9{ top: 590px; left:422px; }
+	.em-3-1 { top: 404px; left: 429px; }  
+    .em-4-1 { top: 501px; left: 429px; } 
 
     div#topLine{
         height: 39px;
@@ -45,39 +47,9 @@
     a#logo{
         left: 0;
     }
-    
-    form#login {
-        left: 769px;
-    }
-   
-   #sub1-login {
-       top: 15px;
-   }
-   
-   /*#UserLogin_username {
-       margin-top: 5px;
-       top: 50px !important;
-   }*/
-   
-   .recovery-email {
-       top: 50px !important;
-   }
-   
-   #fake-button {
-       top: 132px;
-   }
-   
-   .recovery-sub {
-       text-align: center;
-       line-height: 1;
-       left: 0 !important;
-   }
-   
 </style>
 
 <?php 
-    Yii::app()->getClientScript()->registerScriptFile("/js/main.js");
-
     $form = $this->beginWidget('CActiveForm', array(
         'id'=>'register-form',
         'enableAjaxValidation'=>false,
@@ -93,6 +65,11 @@
 <?php echo $form->textField($participant, 'email', array('class'=>'textbox2')); //email ?>
 <?php echo $form->error($participant, 'email', array('class'=>'error-message em-2')); //логин ?>
 
+<p class="sub2-2"><?php echo BaseModule::t('rec', 'VIBER / MOBILE') ?>:</p>
+<?php echo $form->textField($participant, 'skype', array('class' => 'textbox2-2')); //VIBER / МОБИЛЬНЫЙ ?>
+<?php echo $form->error($participant, 'skype', array('class' => 'error-message em-8')); //VIBER / МОБИЛЬНЫЙ ?>
+
+
 <p class="shag-1-1-option2text"><?php echo BaseModule::t('common', 'COUNTRY') ?>: </p>
 <?php echo $form->dropDownList($participant, 'country_id', Countries::getCountriesList(), array(
         'id'=>'Participant_country_id',
@@ -106,7 +83,7 @@
             'update'=>'#Participant_city_id',
         ),
     )); ?>
-<?php echo $form->error($participant, 'country_id', array('class'=>'error-message em-3')); //логин ?>
+<?php echo $form->error($participant, 'country_id', array('class'=>'error-message em-3-1')); //логин ?>
 
 
 <p class="shag-1-1-option1text">  <?php echo BaseModule::t('common', 'CITY') ?>:</p>
@@ -116,7 +93,7 @@
         'displaySize'=>'1',
         'prompt'=>ViewHelper::getPrompt('select city'),
     )); ?>
-<?php echo $form->error($participant, 'city_id', array('class'=>'error-message em-4')); //логин ?>
+<?php echo $form->error($participant, 'city_id', array('class'=>'error-message em-4-1')); //логин ?>
 
 <p class="shag-1-1-option3text">  <?php echo BaseModule::t('common', 'LANGUAGE') ?>:</p>
 <select class="shag-1-1-option3" name="language">

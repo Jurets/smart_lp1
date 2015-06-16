@@ -422,7 +422,6 @@ select {
     height:38px; 
     width: 251px;
     top:277px;
-
     left: 1px;
     display: block; 
     position: absolute;
@@ -440,6 +439,18 @@ select {
     font: bold 19px 'Open Sans Condensed';
 } 
 
+.sub2-2{ 
+
+    height:38px; 
+    width: 251px;
+    top:435px;
+    left: 1px;
+    color:  #007e97;
+    display: block; 
+    position: absolute;
+    font: bold 19px 'Open Sans Condensed';
+} 
+
 
 
 
@@ -449,19 +460,29 @@ select {
     height:38px; 
     width: 251px;
     top:370px;
-
     left: 1px;
     display: block; 
     position: absolute;
 } 
+
+.textbox2-2 { 
+    border: 1px solid #d8d8d8; 
+    border-radius: 1px; 
+    height:38px; 
+    width: 251px;
+    top:464px;
+    left: 1px;
+    display: block; 
+    position: absolute;
+}
 
 
 .shag-1-1-option2text { 
 
     height:38px; 
     width: 251px;
-    top:434px;
-    left: 1px;
+    top:341px;
+    left: 426px;
     color:  #007e97;
     display: block; 
     position: absolute;
@@ -474,9 +495,8 @@ select {
     border-radius: 1px; 
     height:38px; 
     width: 251px;
-    top:464px;
-
-    left: 1px;
+	top: 368px;
+	left: 426px;
     display: block; 
     position: absolute;
     font-size: 13px;
@@ -516,8 +536,8 @@ select {
 
     height:38px; 
     width: 251px;
-    top:530px;
-    left: 1px;
+    top:438px;
+    left: 426px;
     color:  #007e97;
     display: block; 
     position: absolute;
@@ -530,9 +550,8 @@ select {
     border-radius: 1px; 
     height:38px; 
     width: 251px;
-    top:557px;
-
-    left: 1px;
+	top: 465px;
+	left: 426px;
     display: block; 
     position: absolute;
     font-size: 17px;
@@ -599,8 +618,8 @@ label.css-label {
 
     height:38px; 
     width: 251px;
-    top: 341px;
-    left: 423px;
+    top: 251px;
+    left: 749px;
     color:  #007e97;
     display: block; 
     position: absolute;
@@ -613,8 +632,8 @@ label.css-label {
     position: absolute;
     height:180px; 
     width: 251px;
-    top:368px;
-    left: 422px;
+    top:278px;
+    left: 749px;
 }
 
 #shag-1-1-vibrat{
@@ -623,8 +642,8 @@ label.css-label {
     position: absolute;
     height:40px; 
     width: 251px;
-    top:551px;
-    left: 422px;
+    top:461px;
+    left: 749px;
     padding-top: 10px;
     padding-left: 19px;
     font-size: 14px;

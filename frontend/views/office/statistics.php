@@ -7,7 +7,7 @@
 
 <div id="content">
     
-    <a href="https://perfectmoney.is/login.html" target="_blank"><input type="button" name="btn"  class="office-1-btn-style-green" value="<?php echo BaseModule::t('rec','WITHDROAW FUNDS')?>" /></a>
+<!--    <a href="https://perfectmoney.is/login.html" target="_blank"><input type="button" name="btn"  class="office-1-btn-style-green" value="<?php echo BaseModule::t('rec','WITHDROAW FUNDS')?>" /></a> -->
              
              
               <p class="office-1-text-1"><?php echo BaseModule::t('rec','INCOME')?></p>

@@ -32,9 +32,9 @@ $titles = Information::getAllTitles();
             <li> <a href="#" class="flag">  </a> </li>
             <li> <a href="#" class="in">  </a> </li>
             
-            <li> <a href="/mp.pdf" target="_blank">  <?php echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
-            <li> <a href="/rules.just" target="_blank"> <?php echo mb_strtoupper($titles['rules'], 'utf8') ?> </a> </li>
-            <li> <a href="/vio.just" target="_blank"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
+                <li> <a href="/mp.pdf" target="_blank">  <?php echo mb_strtoupper($titles['possibilities'], 'utf8') ?>  </a> </li>
+                <li> <a href="/vio.just" target="_blank"> <?php echo mb_strtoupper($titles['questions'], 'utf8') ?>  </a> </li>
+                <li> <a href="/info/webinar"> <?php echo mb_strtoupper($titles['webinar'], 'utf8') ?> </a> </li>
             
             <li> <a href="#" class="moveRight open-login"> <?php echo BaseModule::t('rec', 'LOGIN'); ?> </a> </li>
         </ul>
