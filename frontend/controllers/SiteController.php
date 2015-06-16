@@ -398,7 +398,11 @@ class SiteController extends LoginController {
      * простой тестовый экшн
      */
     public function actionTest(){
-        
+//        Yii::import("backend.modules.siap.models.SiapPeriodes");
+//        Yii::import("backend.modules.siap.models.SiapExecute");
+//        set_time_limit(28800); // время жизни скрипта установлено 
+//        $periodSource = SiapPeriodes::dateIntervalAutomate();
+//        SiapExecute::executeInstructions(/*$periodSource['period_id']*/);
     }
 
 }
