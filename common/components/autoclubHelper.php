@@ -48,10 +48,10 @@ class autoclubHelper {
     private function returnCommonAmount() {
         $stA = $this->actAmount;
         $st = $this->startAmount;
-        $tr1 = $stA * 5;
-        $tr2 = $st;
+       // $tr1 = $stA * 5;
+        //$tr2 = $st;
         $tr3 = $st * 2;
-        return $tr1 + $tr2 + $tr3;
+        return /*$tr1 + $tr2 +*/ $tr3;
     }
 
     public static function init($participant) {
@@ -70,7 +70,7 @@ class autoclubHelper {
     // проверка записи на завершенность для использования в контроллере - все три стадии - 1
     public static function checkAutoclubRecordComplete($participant) {
         $model = AutoclubPaymentRegister::model()->findByPk($participant->id);
-        if ($model->st1 == 1 && $model->st2 == 1 && $model->st3 == 1) {
+        if (/*$model->st1 == 1 && $model->st2 == 1 &&*/ $model->st3 == 1) {
             return TRUE;
         }
         return FALSE;
@@ -112,40 +112,40 @@ class autoclubHelper {
         $this->initABPurses();
         // записываем те параметры API которые неизменны для трех видов транзакций
         $record = AutoclubPaymentRegister::model()->findByPk($this->user->id);
-        if ($record->st1 == 0) { // первая транзакция - оплата идет на счет кошелька активации
-            $attrAPI = array(
-            'payerAccount' => $this->autoclubPurse['autoclub_account'],
-            'login' => $this->autoclubPurse['autoclub_login'],
-            'password' => $this->autoclubPurse['autoclub_password'],
-        );
-            $stA = $this->actAmount;
-            $st = $this->startAmount;
-            $tr1 = $stA * 5 - ($stA * 5 + $st) * 0.02; // расчет суммы для первой транзакции
-            $attrAPI['payeeAccount'] = $this->purseA;
-            $attrAPI['amount'] = $tr1;
-            $attrAPI['payeeId'] = NULL;
-            $attrAPI['payerId'] = $this->user->id;
-            $attrAPI['transactionId'] = 31;
-            $attrAPI['notation'] = 'autoclub step1 Activation';
-            $this->paymentByAPI($attrAPI, $record, 1);
-        }
-        if ($record->st2 == 0) { // расчет суммы для второй транзакции  - "дедушкина" транзакция
-            $attrAPI = array(
-            'payerAccount' => $this->autoclubPurse['autoclub_account'],
-            'login' => $this->autoclubPurse['autoclub_login'],
-            'password' => $this->autoclubPurse['autoclub_password'],
-        );
-            $st = $this->startAmount;
-            $tr2 = $st;
-            $grandfather = $this->user->referal;
-            $attrAPI['payeeAccount'] = $grandfather->purse;
-            $attrAPI['amount'] = $tr2;
-            $attrAPI['payeeId'] = $grandfather->id;
-            $attrAPI['payerId'] = $this->user->id;
-            $attrAPI['transactionId'] = 2;
-            $attrAPI['notation'] = 'autoclub step2 Second Invitate';
-            $this->paymentByAPI($attrAPI, $record, 2);
-        }
+//        if ($record->st1 == 0) { // первая транзакция - оплата идет на счет кошелька активации
+//            $attrAPI = array(
+//            'payerAccount' => $this->autoclubPurse['autoclub_account'],
+//            'login' => $this->autoclubPurse['autoclub_login'],
+//            'password' => $this->autoclubPurse['autoclub_password'],
+//        );
+//            $stA = $this->actAmount;
+//            $st = $this->startAmount;
+//            $tr1 = $stA * 5 - ($stA * 5 + $st) * 0.02; // расчет суммы для первой транзакции
+//            $attrAPI['payeeAccount'] = $this->purseA;
+//            $attrAPI['amount'] = $tr1;
+//            $attrAPI['payeeId'] = NULL;
+//            $attrAPI['payerId'] = $this->user->id;
+//            $attrAPI['transactionId'] = 31;
+//            $attrAPI['notation'] = 'autoclub step1 Activation';
+//            $this->paymentByAPI($attrAPI, $record, 1);
+//        }
+//        if ($record->st2 == 0) { // расчет суммы для второй транзакции  - "дедушкина" транзакция
+//            $attrAPI = array(
+//            'payerAccount' => $this->autoclubPurse['autoclub_account'],
+//            'login' => $this->autoclubPurse['autoclub_login'],
+//            'password' => $this->autoclubPurse['autoclub_password'],
+//        );
+//            $st = $this->startAmount;
+//            $tr2 = $st;
+//            $grandfather = $this->user->referal;
+//            $attrAPI['payeeAccount'] = $grandfather->purse;
+//            $attrAPI['amount'] = $tr2;
+//            $attrAPI['payeeId'] = $grandfather->id;
+//            $attrAPI['payerId'] = $this->user->id;
+//            $attrAPI['transactionId'] = 2;
+//            $attrAPI['notation'] = 'autoclub step2 Second Invitate';
+//            $this->paymentByAPI($attrAPI, $record, 2);
+//        }
         if ($record->st3 == 0) {
             $attrAPI = array(
             'payerAccount' => $this->autoclubPurse['autoclub_account'],
@@ -164,7 +164,7 @@ class autoclubHelper {
             $this->paymentByAPI($attrAPI, $record, 3);
         }
         // если все три транзакции прошли успешно - переводим пользователя в клуб со статусом B1
-        if ($record->st1 == 1 && $record->st2 == 1 && $record->st3 == 1) {
+        if (/*$record->st1 == 1 && $record->st2 == 1 &&*/ $record->st3 == 1) {
             $this->user->tariff_id = 3;
             $this->user->autoclub = 1;
             $this->user->club_date = date('Y-m-d H:i:s');
